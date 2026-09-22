@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Kth largest/smallest element in  Binary Search Tree</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Kth largest/smallest element in  Binary Search Tree</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/kth-largest-smallest-element-in-binary-search-tree/</code></div>
+  <p><strong>Problem Statement: </strong>
+Given the root node of a binary search tree (BST) and an integer k.
+<br/>
+Return the kth smallest and largest value (1-indexed) of all values of the nodes in the tree.
+<br/><br/>
+Return the 1st integer as kth smallest and 2nd integer as kth largest in the returned array.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>  
+<strong>Input:</strong> root = [3, 1, 4, null, 2], k = 1  
+<strong>Output:</strong> [1, 4]  
+<strong>Explanation:</strong> 
+The 1st smallest value in the given BST is 1.  
+The 1st largest value in the given BST is 4.
+
+<strong>Example 2:</strong> 
+<strong>Input:</strong> root = [5, 3, 6, 2, null, null, null, 1], k = 3  
+<strong>Output:</strong> [3, 3]  
+<strong>Explanation:</strong>  
+The 3rd smallest value in the given BST is 3.  
+The 3rd largest value in the given BST is 3.</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/kth-smallest-and-largest-element-in-bst" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Brute Force 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Begin by creating a list or vector to store the values of the nodes present in the Binary Search Tree (BST).</li>
+<li>Perform an inorder traversal of the BST using the depth-first search (DFS) technique, adding each node's value to the previously initialized array.</li>
+<li>To find the Kth smallest element:
+    <ul>
+<li>Retrieve the element at index <code>k - 1</code> in the sorted array (considering array indexing starts from zero).</li>
+</ul>
+</li>
+<li>To find the Kth largest element:
+    <ul>
+<li>Retrieve the element at index <code>array.length - k</code> in the sorted array.</li>
+</ul>
+</li>
+<li>Finally, return a pair containing the Kth smallest and the Kth largest elements.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/94ae1c57e4da6516.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/0fbe578747d5863d.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/94ae1c57e4da6516.png"/><img alt="Image 2" loading="lazy" src="../assets/img/0fbe578747d5863d.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Definition for a binary tree node.
+ struct TreeNode {
+     int data;
+     TreeNode *left;
+     TreeNode *right;
+     TreeNode(int val) : data(val), left(nullptr), right(nullptr) {}
+ };
+ 
+class Solution {
+public:
+    // Helper function to perform an in-order traversal of the BST
+    void inorderTraversal(TreeNode* node, vector&lt;int&gt;&amp; values) {
+        if (node) {
+            inorderTraversal(node-&gt;left, values);
+            values.push_back(node-&gt;data);
+            inorderTraversal(node-&gt;right, values);
+        }
+    }
+    
+    vector&lt;int&gt; kLargesSmall(TreeNode* root, int k) {
+        // Vector to store the node values
+        vector&lt;int&gt; values;
+        // Perform in-order traversal and collect values
+        inorderTraversal(root, values);
+        
+        // Find the kth smallest and kth largest values
+        int kth_smallest = values[k - 1];
+        int kth_largest = values[values.size() - k];
+        
+        return {kth_smallest, kth_largest};
+    }
+};
+
+// Main method to demonstrate the function
+int main() {
+    // Constructing the tree: [3, 1, 4, null, 2]
+    TreeNode* root = new TreeNode(3);
+    root-&gt;left = new TreeNode(1);
+    root-&gt;left-&gt;right = new TreeNode(2);
+    root-&gt;right = new TreeNode(4);
+    
+    Solution solution;
+    int k = 1;
+    vector&lt;int&gt; result = solution.kLargesSmall(root, k);
+    
+    cout &lt;&lt; "[" &lt;&lt; result[0] &lt;&lt; ", " &lt;&lt; result[1] &lt;&lt; "]" &lt;&lt; endl; // Output: [1, 4]
+    
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Definition for a binary tree node.
+class TreeNode {
+     int data;
+     TreeNode left;
+     TreeNode right;
+     TreeNode(int val) { data = val; left = null; right = null; }
+}
+
+class Solution {
+    // Helper function to perform an in-order traversal of the BST
+    private void inorderTraversal(TreeNode node, List&lt;Integer&gt; values) {
+        if (node != null) {
+            inorderTraversal(node.left, values);
+            values.add(node.data);
+            inorderTraversal(node.right, values);
+        }
+    }
+
+    public List&lt;Integer&gt; kLargesSmall(TreeNode root, int k) {
+        // List to store the node values
+        List&lt;Integer&gt; values = new ArrayList&lt;&gt;();
+        // Perform in-order traversal and collect values
+        inorderTraversal(root, values);
+        
+        // Find the kth smallest and kth largest values
+        int kth_smallest = values.get(k - 1);
+        int kth_largest = values.get(values.size() - k);
+        
+        List&lt;Integer&gt; result = new ArrayList&lt;&gt;();
+        result.add(kth_smallest);
+        result.add(kth_largest);
+        
+        return result;
+    }
+}
+
+class Main {
+    // Main method to demonstrate the function
+    public static void main(String[] args) {
+        // Constructing the tree: [3, 1, 4, null, 2]
+        TreeNode root = new TreeNode(3);
+        root.left = new TreeNode(1);
+        root.left.right = new TreeNode(2);
+        root.right = new TreeNode(4);
+        
+        Solution solution = new Solution();
+        int k = 1;
+        List&lt;Integer&gt; result = solution.kLargesSmall(root, k);
+        
+        System.out.println(result); // Output: [1, 4]
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Definition for a binary tree node.
+class TreeNode(object):
+    def __init__(self, val=0, left=None, right=None):
+        self.data = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    def kLargesSmall(self, root, k):
+        # Helper function to perform an in-order traversal of the BST
+        def inorder_traversal(node, values):
+            if node:
+                inorder_traversal(node.left, values)
+                values.append(node.data)
+                inorder_traversal(node.right, values)
+        
+        # List to store the node values
+        values = []
+        # Perform in-order traversal and collect values
+        inorder_traversal(root, values)
+        
+        # Find the kth smallest and kth largest values
+        kth_smallest = values[k - 1]
+        kth_largest = values[-k]
+        
+        return [kth_smallest, kth_largest]
+
+# Example usage:
+# Constructing the tree: [3,1,4,null,2]
+root = TreeNode(3)
+root.left = TreeNode(1)
+root.left.right = TreeNode(2)
+root.right = TreeNode(4)
+
+solution = Solution()
+k = 1
+print(solution.kLargesSmall(root, k))  # Output: [1, 4]</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Definition for a binary tree node.
+ class TreeNode {
+      constructor(val = 0, left = null, right = null) {
+          this.data = val;
+          this.left = left;
+          this.right = right;
+  }
+ }
+
+class Solution {
+    // Helper function to perform an in-order traversal of the BST
+    inorderTraversal(node, values) {
+        if (node) {
+            this.inorderTraversal(node.left, values);
+            values.push(node.data);
+            this.inorderTraversal(node.right, values);
+        }
+    }
+
+    kLargesSmall(root, k) {
+        // Array to store the node values
+        let values = [];
+        // Perform in-order traversal and collect values
+        this.inorderTraversal(root, values);
+        
+        // Find the kth smallest and kth largest values
+        let kth_smallest = values[k - 1];
+        let kth_largest = values[values.length - k];
+        
+        return [kth_smallest, kth_largest];
+    }
+}
+
+// Main method to demonstrate the function
+function main() {
+    // Constructing the tree: [3, 1, 4, null, 2]
+    let root = new TreeNode(3);
+    root.left = new TreeNode(1);
+    root.left.right = new TreeNode(2);
+    root.right = new TreeNode(4);
+    
+    let solution = new Solution();
+    let k = 1;
+    let result = solution.kLargesSmall(root, k);
+    
+    console.log(result); // Output: [1, 4]
+}
+
+main();</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(N)</strong>, where N is the number of nodes in the BST. Because the code performs an in-order traversal of the BST, which requires O(N) time.<br/><br/>
+<strong>Space Complexity: O(N)</strong>, since the code stores all the node values in a list.
+
+                    </p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Initialize an array to store the values of the nodes within the Binary Search Tree (BST).</li>
+<li>Execute an inorder traversal of the BST, adding each node's value to the array as you visit it. Use a counter to monitor the progress of the traversal, especially focusing on the Kth position. This eliminates the need for an additional data structure.</li>
+<li>To determine the Kth smallest element:
+    <ul>
+<li>Observe the counter during the traversal. Upon reaching the value of K, record the current node's value as the Kth smallest.</li>
+</ul>
+</li>
+<li>To determine the Kth largest element:
+    <ul>
+<li>Conduct a reverse inorder traversal (right subtree first, then the current node, followed by the left subtree).</li>
+<li>Increment a counter as each node is visited. When the counter reaches K, the current node's value is the Kth largest.</li>
+</ul>
+</li>
+<li>Return the values corresponding to the Kth smallest and Kth largest elements, as determined by the above steps.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/26a289e5e02c8bb6.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/7b2ef5c588be045d.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/26a289e5e02c8bb6.png"/><img alt="Image 2" loading="lazy" src="../assets/img/7b2ef5c588be045d.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Definition for a binary tree node.
+  struct TreeNode {
+      int data;
+      TreeNode *left;
+      TreeNode *right;
+      TreeNode(int val) : data(val), left(nullptr), right(nullptr) {}
+ };
+ 
+class Solution {
+public:
+    // Function to find the kth smallest element
+    int kthSmallest(TreeNode* root, int k) {
+        this-&gt;k = k;
+        this-&gt;result = -1;
+        inorder(root);
+        return result;
+    }
+
+    // Function to find the kth largest element
+    int kthLargest(TreeNode* root, int k) {
+        this-&gt;k = k;
+        this-&gt;result = -1;
+        reverse_inorder(root);
+        return result;
+    }
+
+    // Function to return kth smallest and kth largest elements
+    vector&lt;int&gt; kLargesSmall(TreeNode* root, int k) {
+        return {kthSmallest(root, k), kthLargest(root, k)};
+    }
+
+private:
+    int k;
+    int result;
+
+    // Helper function for inorder traversal
+    void inorder(TreeNode* node) {
+        if (node != nullptr) {
+            inorder(node-&gt;left);
+            if (--k == 0) {
+                result = node-&gt;data;
+                return;
+            }
+            inorder(node-&gt;right);
+        }
+    }
+
+    // Helper function for reverse inorder traversal
+    void reverse_inorder(TreeNode* node) {
+        if (node != nullptr) {
+            reverse_inorder(node-&gt;right);
+            if (--k == 0) {
+                result = node-&gt;data;
+                return;
+            }
+            reverse_inorder(node-&gt;left);
+        }
+    }
+};
+
+// Main method to demonstrate the function
+int main() {
+    // Constructing the tree: [3, 1, 4, nullptr, 2]
+    TreeNode* root = new TreeNode(3);
+    root-&gt;left = new TreeNode(1);
+    root-&gt;left-&gt;right = new TreeNode(2);
+    root-&gt;right = new TreeNode(4);
+    
+    Solution solution;
+    int k = 1;
+    vector&lt;int&gt; result = solution.kLargesSmall(root, k);
+    
+    // Output the result
+    cout &lt;&lt; "[" &lt;&lt; result[0] &lt;&lt; ", " &lt;&lt; result[1] &lt;&lt; "]" &lt;&lt; endl; // Output: [1, 4]
+    
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.ArrayList;
+import java.util.List;
+
+// Definition for a binary tree node.
+class TreeNode {
+    int data;
+    TreeNode left;
+    TreeNode right;
+    TreeNode(int val) { data = val; left = null; right = null; }
+}
+
+class Solution {
+    private int k;
+    private int result;
+
+    // Function to find the kth smallest element
+    public int kthSmallest(TreeNode root, int k) {
+        this.k = k;
+        this.result = -1;
+        inorder(root);
+        return result;
+    }
+
+    // Helper function for inorder traversal
+    private void inorder(TreeNode node) {
+        if (node != null) {
+            inorder(node.left);
+            if (--k == 0) {
+                result = node.data;
+                return;
+            }
+            inorder(node.right);
+        }
+    }
+
+    // Function to find the kth largest element
+    public int kthLargest(TreeNode root, int k) {
+        this.k = k;
+        this.result = -1;
+        reverseInorder(root);
+        return result;
+    }
+
+    // Helper function for reverse inorder traversal
+    private void reverseInorder(TreeNode node) {
+        if (node != null) {
+            reverseInorder(node.right);
+            if (--k == 0) {
+                result = node.data;
+                return;
+            }
+            reverseInorder(node.left);
+        }
+    }
+
+    // Function to return kth smallest and kth largest elements
+    public List&lt;Integer&gt; kLargesSmall(TreeNode root, int k) {
+        List&lt;Integer&gt; result = new ArrayList&lt;&gt;();
+        result.add(kthSmallest(root, k));
+        result.add(kthLargest(root, k));
+        return result;
+    }
+}
+
+// Separate main class
+public class Main {
+    public static void main(String[] args) {
+        // Constructing the tree: [3, 1, 4, null, 2]
+        TreeNode root = new TreeNode(3);
+        root.left = new TreeNode(1);
+        root.left.right = new TreeNode(2);
+        root.right = new TreeNode(4);
+
+        Solution solution = new Solution();
+        int k = 1;
+        List&lt;Integer&gt; result = solution.kLargesSmall(root, k);
+
+        // Output the result
+        System.out.println(result); // Output: [1, 4]
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Definition for a binary tree node.
+class TreeNode(object):
+    def __init__(self, val=0, left=None, right=None):
+        self.data = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    # Function to find the kth smallest element
+    def kthSmallest(self, root, k):
+        self.k = k
+        self.result = None
+        self.inorder(root)
+        return self.result
+
+    # Helper function for inorder traversal
+    def inorder(self, node):
+        if node is not None:
+            self.inorder(node.left)
+            self.k -= 1
+            if self.k == 0:
+                self.result = node.data
+                return
+            self.inorder(node.right)
+
+    # Function to find the kth largest element
+    def kthLargest(self, root, k):
+        self.k = k
+        self.result = None
+        self.reverse_inorder(root)
+        return self.result
+
+    # Helper function for reverse inorder traversal
+    def reverse_inorder(self, node):
+        if node is not None:
+            self.reverse_inorder(node.right)
+            self.k -= 1
+            if self.k == 0:
+                self.result = node.data
+                return
+            self.reverse_inorder(node.left)
+
+    # Function to return kth smallest and kth largest elements
+    def kLargesSmall(self, root, k):
+        return [self.kthSmallest(root, k), self.kthLargest(root, k)]
+
+# Example usage
+if __name__ == "__main__":
+    # Constructing the tree: [3, 1, 4, None, 2]
+    root = TreeNode(3)
+    root.left = TreeNode(1)
+    root.left.right = TreeNode(2)
+    root.right = TreeNode(4)
+    
+    solution = Solution()
+    k = 1
+    result = solution.kLargesSmall(root, k)
+    
+    print(result)  # Output: [1, 4]</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Definition for a binary tree node.
+  class TreeNode {
+       constructor(val = 0, left = null, right = null) {
+           this.data = val;
+           this.left = left;
+           this.right = right;
+       }
+  }
+ 
+class Solution {
+    constructor() {
+        this.k = 0;
+        this.result = null;
+    }
+
+    // Function to find the kth smallest element
+    kthSmallest(root, k) {
+        this.k = k;
+        this.result = null;
+        this.inorder(root);
+        return this.result;
+    }
+
+    // Helper function for inorder traversal
+    inorder(node) {
+        if (node !== null) {
+            this.inorder(node.left);
+            this.k -= 1;
+            if (this.k === 0) {
+                this.result = node.data;
+                return;
+            }
+            this.inorder(node.right);
+        }
+    }
+
+    // Function to find the kth largest element
+    kthLargest(root, k) {
+        this.k = k;
+        this.result = null;
+        this.reverseInorder(root);
+        return this.result;
+    }
+
+    // Helper function for reverse inorder traversal
+    reverseInorder(node) {
+        if (node !== null) {
+            this.reverseInorder(node.right);
+            this.k -= 1;
+            if (this.k === 0) {
+                this.result = node.data;
+                return;
+            }
+            this.reverseInorder(node.left);
+        }
+    }
+
+    // Function to return kth smallest and kth largest elements
+    kLargesSmall(root, k) {
+        return [this.kthSmallest(root, k), this.kthLargest(root, k)];
+    }
+}
+
+// Main function to demonstrate the function
+function main() {
+    // Constructing the tree: [3, 1, 4, null, 2]
+    let root = new TreeNode(3);
+    root.left = new TreeNode(1);
+    root.left.right = new TreeNode(2);
+    root.right = new TreeNode(4);
+
+    let solution = new Solution();
+    let k = 1;
+    let result = solution.kLargesSmall(root, k);
+
+    // Output the result
+    console.log(result); // Output: [1, 4]
+}
+
+main();</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(N)</strong>, where N is the number of nodes in the binary tree. The reason is that in the worst-case scenario, the inorder and reverse inorder traversals visit each node exactly once.<br/><br/>
+<strong>Space Complexity: O(H)</strong>, where H is the height of the binary tree.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

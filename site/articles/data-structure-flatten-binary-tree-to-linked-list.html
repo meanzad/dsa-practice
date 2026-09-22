@@ -1,0 +1,1397 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Flatten Binary Tree to Linked List</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Flatten Binary Tree to Linked List</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/flatten-binary-tree-to-linked-list/</code></div>
+  <p><strong>Problem Statement: </strong>
+Given a Binary Tree, convert it to a Linked List where the linked list nodes follow the same order as the pre-order traversal of the binary tree.
+<br/><br/>
+Use the right pointer of the Binary Tree as the ‘next’ pointer for the linked list and set the left pointer to null. Do this in place and do not create extra nodes.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>  
+<strong>Input:</strong> Binary Tree: 1 2 5 3 4 -1 6 -1 -1 -1 -1 7  
+<p><img height="457" loading="lazy" src="../assets/img/267cd8c612a20b2a.png" width="481"/></p>
+<strong>Output:</strong> 1 -1 2 -1 3 -1 4 -1 5 -1 6 -1 7  
+<p><img height="457" loading="lazy" src="../assets/img/56ab86d8bf79dc8b.png" width="481"/></p>
+<strong>Explanation:</strong> The given binary tree has a preorder traversal order of [1, 2, 3, 4, 5, 6, 7]. To flatten the tree, we convert it into a linked list. In this linked list, the nodes follow the same order as the preorder traversal. The right pointer of each node in the linked list serves the function of the 'next' pointer. Additionally, we set the left pointer of each node to null. This process is done in place, modifying the existing binary tree structure to achieve the desired linked list representation.
+
+<strong>Example 2:</strong>  
+<strong>Input:</strong> Binary Tree: 15 40 62 -1 -1 10 20  
+<p><img height="457" loading="lazy" src="../assets/img/3ffdd484db141364.png" width="481"/></p>
+<strong>Output:</strong> 15 -1 40 -1 62 -1 10 -1 20  
+<p><img height="457" loading="lazy" src="../assets/img/55e382b3f00b9977.png" width="481"/></p>
+<strong>Explanation:</strong> The given binary tree has a preorder traversal order of [15, 40, 62, 10, 20]. To flatten the tree, we convert it into a linked list. The nodes follow the same order as the preorder traversal. The right pointer of each node in the linked list serves as the 'next' pointer. The left pointer of each node is set to null. This process modifies the existing binary tree structure to achieve the desired linked list representation.</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>It's highly recommend trying to solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Brute Force 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Initialize a global variable `prev` to keep track of the previously processed node and set it to null at the beginning.</li>
+<li>If the current node is null, return null to end the recursion.</li>
+<li>Recursively flatten the right and left subtrees by calling the flatten function on the current node’s right and left children.</li>
+<li>Set the right child of the current node to `prev`, which points to the rightmost node of the left subtree, thus attaching the right subtree to the right of the left subtree.</li>
+<li>Set the current node’s right child to the flattened left subtree and set its left child to null, as we are flattening the binary tree to a linked list.</li>
+<li>Update `prev` to the current node for the next recursion step.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/07c01c8f07d6b3a9.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/32ea9ed7d442228a.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/76d6fa07b91be3e6.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/1a270db982ed7004.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/98ded70294037e86.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/6499c515a25ec7cb.png"/></div><div class="carousel-image"><img alt="Image 7" loading="lazy" src="../assets/img/0c05bf0287bcc827.png"/></div><div class="carousel-image"><img alt="Image 8" loading="lazy" src="../assets/img/017d33fc0a5bbc5c.png"/></div><div class="carousel-image"><img alt="Image 9" loading="lazy" src="../assets/img/6cbf7b852934699d.png"/></div><div class="carousel-image"><img alt="Image 10" loading="lazy" src="../assets/img/e09cefeb483312f1.png"/></div><div class="carousel-image"><img alt="Image 11" loading="lazy" src="../assets/img/11403ea9ebe0d8e2.png"/></div><div class="carousel-image"><img alt="Image 12" loading="lazy" src="../assets/img/075dfbb6171993c3.png"/></div><div class="carousel-image"><img alt="Image 13" loading="lazy" src="../assets/img/0e18aea331384bb8.png"/></div><div class="carousel-image"><img alt="Image 14" loading="lazy" src="../assets/img/e1b468abc37a4520.png"/></div><div class="carousel-image"><img alt="Image 15" loading="lazy" src="../assets/img/d69dad99e7b52fc7.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/07c01c8f07d6b3a9.png"/><img alt="Image 2" loading="lazy" src="../assets/img/32ea9ed7d442228a.png"/><img alt="Image 3" loading="lazy" src="../assets/img/76d6fa07b91be3e6.png"/><img alt="Image 4" loading="lazy" src="../assets/img/1a270db982ed7004.png"/><img alt="Image 5" loading="lazy" src="../assets/img/98ded70294037e86.png"/><img alt="Image 6" loading="lazy" src="../assets/img/6499c515a25ec7cb.png"/><img alt="Image 7" loading="lazy" src="../assets/img/0c05bf0287bcc827.png"/><img alt="Image 8" loading="lazy" src="../assets/img/017d33fc0a5bbc5c.png"/><img alt="Image 9" loading="lazy" src="../assets/img/6cbf7b852934699d.png"/><img alt="Image 10" loading="lazy" src="../assets/img/e09cefeb483312f1.png"/><img alt="Image 11" loading="lazy" src="../assets/img/11403ea9ebe0d8e2.png"/><img alt="Image 12" loading="lazy" src="../assets/img/075dfbb6171993c3.png"/><img alt="Image 13" loading="lazy" src="../assets/img/0e18aea331384bb8.png"/><img alt="Image 14" loading="lazy" src="../assets/img/e1b468abc37a4520.png"/><img alt="Image 15" loading="lazy" src="../assets/img/d69dad99e7b52fc7.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// define tree node structure
+struct TreeNode {
+    // store value
+    int val;
+    // left child pointer
+    TreeNode *left;
+    // right child pointer
+    TreeNode *right;
+    // constructor to initialize node
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+// solution class holding state
+class Solution {
+public:
+    // previous node pointer for reverse preorder linking
+    TreeNode* prev = nullptr;
+
+    // flatten tree to right-skewed linked list (preorder sequence)
+    void flatten(TreeNode* root) {
+        // return if node is null
+        if (root == nullptr) return;
+        // flatten right subtree first
+        flatten(root-&gt;right);
+        // flatten left subtree next
+        flatten(root-&gt;left);
+        // connect current node's right to previously processed node
+        root-&gt;right = prev;
+        // nullify left pointer
+        root-&gt;left = nullptr;
+        // update previous to current
+        prev = root;
+    }
+};
+
+// print preorder traversal
+void printPreorder(TreeNode* root) {
+    // return on null
+    if (!root) return;
+    // print current node
+    cout &lt;&lt; root-&gt;val &lt;&lt; " ";
+    // traverse left subtree
+    printPreorder(root-&gt;left);
+    // traverse right subtree
+    printPreorder(root-&gt;right);
+}
+
+// print nodes following right pointers
+void printFlattenTree(TreeNode* root) {
+    // return on null
+    if (!root) return;
+    // print current node
+    cout &lt;&lt; root-&gt;val &lt;&lt; " ";
+    // move to right child
+    printFlattenTree(root-&gt;right);
+}
+
+// program entry point
+int main() {
+    // construct sample tree
+    TreeNode* root = new TreeNode(1);
+    root-&gt;left = new TreeNode(2);
+    root-&gt;right = new TreeNode(3);
+    root-&gt;left-&gt;left = new TreeNode(4);
+    root-&gt;left-&gt;right = new TreeNode(5);
+    root-&gt;left-&gt;right-&gt;right = new TreeNode(6);
+    root-&gt;right-&gt;right = new TreeNode(7);
+    root-&gt;right-&gt;left = new TreeNode(8);
+
+    // create solution instance
+    Solution sol;
+
+    // print original tree preorder
+    cout &lt;&lt; "Binary Tree Preorder: ";
+    printPreorder(root);
+    cout &lt;&lt; endl;
+
+    // flatten the tree
+    sol.flatten(root);
+
+    // print flattened tree via right pointers
+    cout &lt;&lt; "Binary Tree After Flatten: ";
+    printFlattenTree(root);
+    cout &lt;&lt; endl;
+
+    // finish program
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// define tree node structure
+class TreeNode {
+    // store value
+    int val;
+    // left child reference
+    TreeNode left;
+    // right child reference
+    TreeNode right;
+    // constructor to initialize node
+    TreeNode(int x) { val = x; }
+}
+
+// solution class holding state
+class Solution {
+    // previous node reference for reverse preorder linking
+    TreeNode prev = null;
+
+    // flatten tree to right-skewed linked list (preorder sequence)
+    public void flatten(TreeNode root) {
+        // return if node is null
+        if (root == null) return;
+        // flatten right subtree first
+        flatten(root.right);
+        // flatten left subtree next
+        flatten(root.left);
+        // connect current node's right to previously processed node
+        root.right = prev;
+        // nullify left pointer
+        root.left = null;
+        // update previous to current
+        prev = root;
+    }
+}
+
+// separate main class (as requested)
+public class Main {
+    // print preorder traversal
+    static void printPreorder(TreeNode root) {
+        // return on null
+        if (root == null) return;
+        // print current node
+        System.out.print(root.val + " ");
+        // traverse left subtree
+        printPreorder(root.left);
+        // traverse right subtree
+        printPreorder(root.right);
+    }
+
+    // print nodes following right pointers
+    static void printFlattenTree(TreeNode root) {
+        // return on null
+        if (root == null) return;
+        // print current node
+        System.out.print(root.val + " ");
+        // move to right child
+        printFlattenTree(root.right);
+    }
+
+    // program entry point
+    public static void main(String[] args) {
+        // construct sample tree
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        root.left.right.right = new TreeNode(6);
+        root.right.right = new TreeNode(7);
+        root.right.left = new TreeNode(8);
+
+        // create solution instance
+        Solution sol = new Solution();
+
+        // print original tree preorder
+        System.out.print("Binary Tree Preorder: ");
+        printPreorder(root);
+        System.out.println();
+
+        // flatten the tree
+        sol.flatten(root);
+
+        // print flattened tree via right pointers
+        System.out.print("Binary Tree After Flatten: ");
+        printFlattenTree(root);
+        System.out.println();
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># define tree node structure
+class TreeNode:
+    # constructor to initialize node
+    def __init__(self, x: int):
+        # store value
+        self.val = x
+        # left child reference
+        self.left = None
+        # right child reference
+        self.right = None
+
+# solution class holding state
+class Solution:
+    # initialize previous node reference
+    def __init__(self):
+        self.prev = None
+
+    # flatten tree to right-skewed linked list (preorder sequence)
+    def flatten(self, root: TreeNode) -&gt; None:
+        # return if node is null
+        if root is None:
+            return
+        # flatten right subtree first
+        self.flatten(root.right)
+        # flatten left subtree next
+        self.flatten(root.left)
+        # connect current node's right to previously processed node
+        root.right = self.prev
+        # nullify left pointer
+        root.left = None
+        # update previous to current
+        self.prev = root
+
+# print preorder traversal
+def print_preorder(root: TreeNode) -&gt; None:
+    # return on null
+    if root is None:
+        return
+    # print current node
+    print(root.val, end=" ")
+    # traverse left subtree
+    print_preorder(root.left)
+    # traverse right subtree
+    print_preorder(root.right)
+
+# print nodes following right pointers
+def print_flatten_tree(root: TreeNode) -&gt; None:
+    # return on null
+    if root is None:
+        return
+    # print current node
+    print(root.val, end=" ")
+    # move to right child
+    print_flatten_tree(root.right)
+
+# program entry point
+def main():
+    # construct sample tree
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.right = TreeNode(3)
+    root.left.left = TreeNode(4)
+    root.left.right = TreeNode(5)
+    root.left.right.right = TreeNode(6)
+    root.right.right = TreeNode(7)
+    root.right.left = TreeNode(8)
+
+    # create solution instance
+    sol = Solution()
+
+    # print original tree preorder
+    print("Binary Tree Preorder: ", end="")
+    print_preorder(root)
+    print()
+
+    # flatten the tree
+    sol.flatten(root)
+
+    # print flattened tree via right pointers
+    print("Binary Tree After Flatten: ", end="")
+    print_flatten_tree(root)
+    print()
+
+# run main
+if __name__ == "__main__":
+    main()
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">/// define tree node structure
+class TreeNode {
+  // constructor to initialize node
+  constructor(x) {
+    // store value
+    this.val = x;
+    // left child reference
+    this.left = null;
+    // right child reference
+    this.right = null;
+  }
+}
+
+// solution class holding state
+class Solution {
+  // initialize previous node reference
+  constructor() {
+    this.prev = null;
+  }
+
+  // flatten tree to right-skewed linked list (preorder sequence)
+  flatten(root) {
+    // return if node is null
+    if (root === null) return;
+    // flatten right subtree first
+    this.flatten(root.right);
+    // flatten left subtree next
+    this.flatten(root.left);
+    // connect current node's right to previously processed node
+    root.right = this.prev;
+    // nullify left pointer
+    root.left = null;
+    // update previous to current
+    this.prev = root;
+  }
+}
+
+// print preorder traversal
+function printPreorder(root) {
+  // return on null
+  if (root === null) return;
+  // print current node
+  process.stdout.write(root.val + " ");
+  // traverse left subtree
+  printPreorder(root.left);
+  // traverse right subtree
+  printPreorder(root.right);
+}
+
+// print nodes following right pointers
+function printFlattenTree(root) {
+  // return on null
+  if (root === null) return;
+  // print current node
+  process.stdout.write(root.val + " ");
+  // move to right child
+  printFlattenTree(root.right);
+}
+
+// program entry point
+function main() {
+  // construct sample tree
+  const root = new TreeNode(1);
+  root.left = new TreeNode(2);
+  root.right = new TreeNode(3);
+  root.left.left = new TreeNode(4);
+  root.left.right = new TreeNode(5);
+  root.left.right.right = new TreeNode(6);
+  root.right.right = new TreeNode(7);
+  root.right.left = new TreeNode(8);
+
+  // create solution instance
+  const sol = new Solution();
+
+  // print original tree preorder
+  process.stdout.write("Binary Tree Preorder: ");
+  printPreorder(root);
+  process.stdout.write("\n");
+
+  // flatten the tree
+  sol.flatten(root);
+
+  // print flattened tree via right pointers
+  process.stdout.write("Binary Tree After Flatten: ");
+  printFlattenTree(root);
+  process.stdout.write("\n");
+}
+
+// run main
+main();
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity:</strong> O(n), where n is the number of nodes in the binary tree. Each node is visited once during the flattening process.
+                        <br/><br/>
+<strong>Space Complexity:</strong> O(log<sub>2</sub>N), where N is the number of nodes in the Binary Tree. There are no additional data structures or space used but the auxiliary stack space is used during recursion. Since the recursion depth can be at most equal to the height to the Binary Tree, the space complexity is O(H) where H is the height of the Binary Tree. In the ideal case, H = log2N and in the worst case H = N (skewed tree).
+                    </p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Better Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Base Case: If the root node is null, return as there is no tree to flatten.</li>
+<li>Initialize Stack: Create a stack to perform an iterative traversal of the binary tree. Push the root node onto the stack to start the traversal.</li>
+<li>Iterative Traversal with Stack:
+    <ul>
+<li>While the stack is not empty, repeat the following steps:</li>
+<li>Pop the top node from the stack.</li>
+<li>If the popped node has a right child, push it onto the stack to process it after the left child nodes.</li>
+<li>If the popped node has a left child, push it onto the stack.</li>
+<li>If the stack is not empty after pushing the left child, connect the right pointer of the current node (popped from the stack) to the top node of the stack. This creates the linked list structure by setting the next pointer.</li>
+<li>Set the left pointer of the current node to null as we need to form a right-skewed linked list.</li>
+</ul>
+</li>
+<li>Once the stack becomes empty, the traversal is complete, and the binary tree is flattened into a right next linked list structure.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/1c85203db7348a50.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/f807d8de7bd1cade.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/1c85203db7348a50.png"/><img alt="Image 2" loading="lazy" src="../assets/img/f807d8de7bd1cade.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// define tree node structure
+struct TreeNode {
+    // value field
+    int val;
+    // left child pointer
+    TreeNode *left;
+    // right child pointer
+    TreeNode *right;
+    // constructor
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+// solution class
+class Solution {
+public:
+    // keep same field as original (unused in iterative version)
+    TreeNode* prev = nullptr;
+
+    // flatten binary tree to right-skewed linked list (iterative)
+    void flatten(TreeNode* root) {
+        // handle empty tree
+        if (root == nullptr) return;
+        // create stack for DFS
+        stack&lt;TreeNode*&gt; st;
+        // push root to start traversal
+        st.push(root);
+        // process while stack has nodes
+        while (!st.empty()) {
+            // take top node
+            TreeNode* cur = st.top();
+            // pop it
+            st.pop();
+            // push right child first (so left is processed first)
+            if (cur-&gt;right != nullptr) st.push(cur-&gt;right);
+            // push left child next
+            if (cur-&gt;left != nullptr) st.push(cur-&gt;left);
+            // if stack not empty, link current's right to next node
+            if (!st.empty()) cur-&gt;right = st.top();
+            // nullify left to form right-only chain
+            cur-&gt;left = nullptr;
+        }
+    }
+};
+
+// print preorder traversal
+void printPreorder(TreeNode* root) {
+    // stop at null
+    if (!root) return;
+    // print current node
+    cout &lt;&lt; root-&gt;val &lt;&lt; " ";
+    // recurse left
+    printPreorder(root-&gt;left);
+    // recurse right
+    printPreorder(root-&gt;right);
+}
+
+// print along right pointers
+void printFlattenTree(TreeNode* root) {
+    // stop at null
+    if (!root) return;
+    // print current node
+    cout &lt;&lt; root-&gt;val &lt;&lt; " ";
+    // move right
+    printFlattenTree(root-&gt;right);
+}
+
+// program entry
+int main() {
+    // build sample tree
+    TreeNode* root = new TreeNode(1);
+    root-&gt;left = new TreeNode(2);
+    root-&gt;right = new TreeNode(3);
+    root-&gt;left-&gt;left = new TreeNode(4);
+    root-&gt;left-&gt;right = new TreeNode(5);
+    root-&gt;left-&gt;right-&gt;right = new TreeNode(6);
+    root-&gt;right-&gt;right = new TreeNode(7);
+    root-&gt;right-&gt;left = new TreeNode(8);
+
+    // create solver
+    Solution sol;
+
+    // show preorder before flatten
+    cout &lt;&lt; "Binary Tree Preorder: ";
+    printPreorder(root);
+    cout &lt;&lt; endl;
+
+    // perform flatten
+    sol.flatten(root);
+
+    // show right-chain after flatten
+    cout &lt;&lt; "Binary Tree After Flatten: ";
+    printFlattenTree(root);
+    cout &lt;&lt; endl;
+
+    // done
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// define tree node structure
+class TreeNode {
+    // value field
+    int val;
+    // left child reference
+    TreeNode left;
+    // right child reference
+    TreeNode right;
+    // constructor
+    TreeNode(int x) { val = x; }
+}
+
+// solution class
+class Solution {
+    // keep same field as original (unused in iterative version)
+    TreeNode prev = null;
+
+    // flatten binary tree to right-skewed linked list (iterative)
+    public void flatten(TreeNode root) {
+        // handle empty tree
+        if (root == null) return;
+        // create stack for DFS
+        Deque&lt;TreeNode&gt; st = new ArrayDeque&lt;&gt;();
+        // push root to start traversal
+        st.push(root);
+        // process while stack has nodes
+        while (!st.isEmpty()) {
+            // take top node
+            TreeNode cur = st.pop();
+            // push right child first (so left is processed first)
+            if (cur.right != null) st.push(cur.right);
+            // push left child next
+            if (cur.left != null) st.push(cur.left);
+            // if stack not empty, link current's right to next node
+            if (!st.isEmpty()) cur.right = st.peek();
+            // nullify left to form right-only chain
+            cur.left = null;
+        }
+    }
+}
+
+// separate main class
+public class Main {
+    // print preorder traversal
+    static void printPreorder(TreeNode root) {
+        // stop at null
+        if (root == null) return;
+        // print current node
+        System.out.print(root.val + " ");
+        // recurse left
+        printPreorder(root.left);
+        // recurse right
+        printPreorder(root.right);
+    }
+
+    // print along right pointers
+    static void printFlattenTree(TreeNode root) {
+        // stop at null
+        if (root == null) return;
+        // print current node
+        System.out.print(root.val + " ");
+        // move right
+        printFlattenTree(root.right);
+    }
+
+    // program entry
+    public static void main(String[] args) {
+        // build sample tree
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        root.left.right.right = new TreeNode(6);
+        root.right.right = new TreeNode(7);
+        root.right.left = new TreeNode(8);
+
+        // create solver
+        Solution sol = new Solution();
+
+        // show preorder before flatten
+        System.out.print("Binary Tree Preorder: ");
+        printPreorder(root);
+        System.out.println();
+
+        // perform flatten
+        sol.flatten(root);
+
+        // show right-chain after flatten
+        System.out.print("Binary Tree After Flatten: ");
+        printFlattenTree(root);
+        System.out.println();
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># define tree node structure
+class TreeNode:
+    # constructor
+    def __init__(self, x: int):
+        # value field
+        self.val = x
+        # left child reference
+        self.left = None
+        # right child reference
+        self.right = None
+
+# solution class
+class Solution:
+    # keep same field as original (unused in iterative version)
+    def __init__(self):
+        self.prev = None
+
+    # flatten binary tree to right-skewed linked list (iterative)
+    def flatten(self, root: 'TreeNode') -&gt; None:
+        # handle empty tree
+        if root is None:
+            return
+        # create stack for DFS
+        st = []
+        # push root to start traversal
+        st.append(root)
+        # process while stack has nodes
+        while st:
+            # take top node
+            cur = st.pop()
+            # push right child first (so left is processed first)
+            if cur.right is not None:
+                st.append(cur.right)
+            # push left child next
+            if cur.left is not None:
+                st.append(cur.left)
+            # if stack not empty, link current's right to next node
+            if st:
+                cur.right = st[-1]
+            # nullify left to form right-only chain
+            cur.left = None
+
+# print preorder traversal
+def print_preorder(root: 'TreeNode') -&gt; None:
+    # stop at null
+    if root is None:
+        return
+    # print current node
+    print(root.val, end=" ")
+    # recurse left
+    print_preorder(root.left)
+    # recurse right
+    print_preorder(root.right)
+
+# print along right pointers
+def print_flatten_tree(root: 'TreeNode') -&gt; None:
+    # stop at null
+    if root is None:
+        return
+    # print current node
+    print(root.val, end=" ")
+    # move right
+    print_flatten_tree(root.right)
+
+# program entry
+def main():
+    # build sample tree
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.right = TreeNode(3)
+    root.left.left = TreeNode(4)
+    root.left.right = TreeNode(5)
+    root.left.right.right = TreeNode(6)
+    root.right.right = TreeNode(7)
+    root.right.left = TreeNode(8)
+
+    # create solver
+    sol = Solution()
+
+    # show preorder before flatten
+    print("Binary Tree Preorder: ", end="")
+    print_preorder(root)
+    print()
+
+    # perform flatten
+    sol.flatten(root)
+
+    # show right-chain after flatten
+    print("Binary Tree After Flatten: ", end="")
+    print_flatten_tree(root)
+    print()
+
+# run main
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// define tree node structure
+class TreeNode {
+  // constructor
+  constructor(x) {
+    // value field
+    this.val = x;
+    // left child reference
+    this.left = null;
+    // right child reference
+    this.right = null;
+  }
+}
+
+// solution class
+class Solution {
+  // keep same field as original (unused in iterative version)
+  constructor() {
+    this.prev = null;
+  }
+
+  // flatten binary tree to right-skewed linked list (iterative)
+  flatten(root) {
+    // handle empty tree
+    if (root === null) return;
+    // create stack for DFS
+    const st = [];
+    // push root to start traversal
+    st.push(root);
+    // process while stack has nodes
+    while (st.length &gt; 0) {
+      // take top node
+      const cur = st.pop();
+      // push right child first (so left is processed first)
+      if (cur.right !== null) st.push(cur.right);
+      // push left child next
+      if (cur.left !== null) st.push(cur.left);
+      // if stack not empty, link current's right to next node
+      if (st.length &gt; 0) cur.right = st[st.length - 1];
+      // nullify left to form right-only chain
+      cur.left = null;
+    }
+  }
+}
+
+// print preorder traversal
+function printPreorder(root) {
+  // stop at null
+  if (root === null) return;
+  // print current node
+  process.stdout.write(root.val + " ");
+  // recurse left
+  printPreorder(root.left);
+  // recurse right
+  printPreorder(root.right);
+}
+
+// print along right pointers
+function printFlattenTree(root) {
+  // stop at null
+  if (root === null) return;
+  // print current node
+  process.stdout.write(root.val + " ");
+  // move right
+  printFlattenTree(root.right);
+}
+
+// program entry
+function main() {
+  // build sample tree
+  const root = new TreeNode(1);
+  root.left = new TreeNode(2);
+  root.right = new TreeNode(3);
+  root.left.left = new TreeNode(4);
+  root.left.right = new TreeNode(5);
+  root.left.right.right = new TreeNode(6);
+  root.right.right = new TreeNode(7);
+  root.right.left = new TreeNode(8);
+
+  // create solver
+  const sol = new Solution();
+
+  // show preorder before flatten
+  process.stdout.write("Binary Tree Preorder: ");
+  printPreorder(root);
+  process.stdout.write("\n");
+
+  // perform flatten
+  sol.flatten(root);
+
+  // show right-chain after flatten
+  process.stdout.write("Binary Tree After Flatten: ");
+  printFlattenTree(root);
+  process.stdout.write("\n");
+}
+
+// run main
+main();</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(n)</strong>, where n is the number of nodes in the binary tree. Each node is visited once during the flattening process.
+                        <br/><br/>
+<strong>Space Complexity: O(log<sub>2</sub>N)</strong> where N is the number of nodes in the Binary Tree. There are no additional data structures or space used but the auxiliary stack space is used during recursion. Since the recursion depth can be at most equal to the height to the Binary Tree, the space complexity is O(H) where H is the height of the Binary Tree. In the ideal case, H = log2N and in the worst case H = N (skewed tree).
+                    </p>
+</details>
+</div>
+</details>
+</div>
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm / Intuition
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Start with the current node as the root of the tree.</li>
+<li>While the current node is not null, traverse the tree in a while loop:
+    <ul>
+<li>If the current node has a left child:</li>
+<ul>
+<li>Find the rightmost node in the left subtree.</li>
+<li>Connect the rightmost node of the left subtree to the current node’s right child.</li>
+<li>Update the current node’s right child to be its left child.</li>
+<li>Set the current node’s left child to null.</li>
+<li>Move to the current node’s right child.</li>
+</ul>
+<li>If the current node has no right child:</li>
+<ul>
+<li>Move to the current node’s left child (if it exists) or null.</li>
+</ul>
+</ul>
+</li>
+<li>Repeat until all nodes are processed.</li>
+</ul>
+<p><img height="457" loading="lazy" src="../assets/img/8a6223f9d6e9a8de.png" width="481"/></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+
+using namespace std;
+
+// TreeNode structure
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+class Solution {
+public:
+    // Function to flatten a binary tree
+    // to a right next Linked List structure
+    void flatten(TreeNode* root) {
+        // Initialize a pointer
+        // 'curr' to the root of the tree
+        TreeNode* curr = root;
+
+        // Iterate until 'curr'
+        // becomes NULL
+        while (curr) {
+            // Check if the current
+            // node has a left child
+            if (curr-&gt;left) {
+                // If yes, find the rightmost
+                // node in the left subtree
+                TreeNode* pre = curr-&gt;left;
+                while (pre-&gt;right) {
+                    pre = pre-&gt;right;
+                }
+
+                // Connect the rightmost node in
+                // the left subtree to the current
+               //  node's right child
+                pre-&gt;right = curr-&gt;right;
+
+                // Move the entire left subtree to the
+                // right child of the current node
+                curr-&gt;right = curr-&gt;left;
+
+                // Set the left child of
+                // the current node to NULL
+                curr-&gt;left = NULL;
+            }
+
+            // Move to the next node
+            // on the right side
+            curr = curr-&gt;right;
+        }
+    }
+};
+
+
+
+// Print the preorder traversal of the
+// Orignal Binary Tree
+void printPreorder(TreeNode* root){
+    if(!root){
+        return;
+    }
+    cout &lt;&lt; root-&gt;val &lt;&lt; " ";
+    printPreorder(root-&gt;left);
+    printPreorder(root-&gt;right);
+}
+
+// Print the Binary Tree along the 
+// Right Pointers after Flattening
+void printFlattenTree(TreeNode* root){
+    if(!root){
+        return;
+    }
+    cout &lt;&lt; root-&gt;val &lt;&lt; " ";
+    printFlattenTree(root-&gt;right);
+}
+
+
+int main() {
+
+    TreeNode* root = new TreeNode(1);
+    root-&gt;left = new TreeNode(2);
+    root-&gt;right = new TreeNode(3);
+    root-&gt;left-&gt;left = new TreeNode(4);
+    root-&gt;left-&gt;right = new TreeNode(5);
+    root-&gt;left-&gt;right-&gt;right = new TreeNode(6);
+    root-&gt;right-&gt;right = new TreeNode(7);
+    root-&gt;right-&gt;left = new TreeNode(8);
+
+    Solution sol;
+    
+    cout &lt;&lt; "Binary Tree Preorder: ";
+    printPreorder(root);
+    cout &lt;&lt; endl;
+    
+    sol.flatten(root);
+    
+    cout &lt;&lt; "Binary Tree After Flatten: ";
+    printFlattenTree(root);
+    cout &lt;&lt; endl;
+    
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// TreeNode structure
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    public TreeNode(int x) {
+        val = x;
+        left = null;
+        right = null;
+    }
+}
+
+class Solution {
+    // Function to flatten a binary tree
+    // to a right next Linked List structure
+    public void flatten(TreeNode root) {
+        // Initialize a pointer
+        // 'curr' to the root of the tree
+        TreeNode curr = root;
+
+        // Iterate until 'curr'
+        // becomes NULL
+        while (curr != null) {
+            // Check if the current
+            // node has a left child
+            if (curr.left != null) {
+                // If yes, find the rightmost
+                // node in the left subtree
+                TreeNode pre = curr.left;
+                while (pre.right != null) {
+                    pre = pre.right;
+                }
+
+                // Connect the rightmost node in
+                // the left subtree to the current
+                // node's right child
+                pre.right = curr.right;
+
+                // Move the entire left subtree to the
+                // right child of the current node
+                curr.right = curr.left;
+
+                // Set the left child of
+                // the current node to NULL
+                curr.left = null;
+            }
+
+            // Move to the next node
+            // on the right side
+            curr = curr.right;
+        }
+    }
+}
+
+// Print the preorder traversal of the
+// Original Binary Tree
+class Main {
+    public static void printPreorder(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        System.out.print(root.val + " ");
+        printPreorder(root.left);
+        printPreorder(root.right);
+    }
+
+    // Print the Binary Tree along the
+    // Right Pointers after Flattening
+    public static void printFlattenTree(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        System.out.print(root.val + " ");
+        printFlattenTree(root.right);
+    }
+
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        root.left.right.right = new TreeNode(6);
+        root.right.right = new TreeNode(7);
+        root.right.left = new TreeNode(8);
+
+        Solution sol = new Solution();
+
+        System.out.print("Binary Tree Preorder: ");
+        printPreorder(root);
+        System.out.println();
+
+        sol.flatten(root);
+
+        System.out.print("Binary Tree After Flatten: ");
+        printFlattenTree(root);
+        System.out.println();
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># TreeNode structure
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
+class Solution:
+    # Function to flatten a binary tree
+    # to a right next Linked List structure
+    def flatten(self, root):
+        # Initialize a pointer
+        # 'curr' to the root of the tree
+        curr = root
+
+        # Iterate until 'curr'
+        # becomes None
+        while curr:
+            # Check if the current
+            # node has a left child
+            if curr.left:
+                # If yes, find the rightmost
+                # node in the left subtree
+                pre = curr.left
+                while pre.right:
+                    pre = pre.right
+
+                # Connect the rightmost node in
+                # the left subtree to the current
+                # node's right child
+                pre.right = curr.right
+
+                # Move the entire left subtree to the
+                # right child of the current node
+                curr.right = curr.left
+
+                # Set the left child of
+                # the current node to None
+                curr.left = None
+
+            # Move to the next node
+            # on the right side
+            curr = curr.right
+
+# Print the preorder traversal of the
+# Original Binary Tree
+def print_preorder(root):
+    if not root:
+        return
+    print(root.val, end=" ")
+    print_preorder(root.left)
+    print_preorder(root.right)
+
+# Print the Binary Tree along the
+# Right Pointers after Flattening
+def print_flatten_tree(root):
+    if not root:
+        return
+    print(root.val, end=" ")
+    print_flatten_tree(root.right)
+
+if __name__ == "__main__":
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.right = TreeNode(3)
+    root.left.left = TreeNode(4)
+    root.left.right = TreeNode(5)
+    root.left.right.right = TreeNode(6)
+    root.right.right = TreeNode(7)
+    root.right.left = TreeNode(8)
+
+    sol = Solution()
+
+    print("Binary Tree Preorder: ", end="")
+    print_preorder(root)
+    print()
+
+    sol.flatten(root)
+
+    print("Binary Tree After Flatten: ", end="")
+    print_flatten_tree(root)
+    print()</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// TreeNode structure
+class TreeNode {
+    constructor(x) {
+        this.val = x;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class Solution {
+    // Function to flatten a binary tree
+    // to a right next Linked List structure
+    flatten(root) {
+        // Initialize a pointer
+        // 'curr' to the root of the tree
+        let curr = root;
+
+        // Iterate until 'curr'
+        // becomes null
+        while (curr) {
+            // Check if the current
+            // node has a left child
+            if (curr.left) {
+                // If yes, find the rightmost
+                // node in the left subtree
+                let pre = curr.left;
+                while (pre.right) {
+                    pre = pre.right;
+                }
+
+                // Connect the rightmost node in
+                // the left subtree to the current
+                // node's right child
+                pre.right = curr.right;
+
+                // Move the entire left subtree to the
+                // right child of the current node
+                curr.right = curr.left;
+
+                // Set the left child of
+                // the current node to null
+                curr.left = null;
+            }
+
+            // Move to the next node
+            // on the right side
+            curr = curr.right;
+        }
+    }
+}
+
+// Print the preorder traversal of the
+// Original Binary Tree
+function printPreorder(root) {
+    if (!root) {
+        return;
+    }
+    console.log(root.val + " ");
+    printPreorder(root.left);
+    printPreorder(root.right);
+}
+
+// Print the Binary Tree along the 
+// Right Pointers after Flattening
+function printFlattenTree(root) {
+    if (!root) {
+        return;
+    }
+    console.log(root.val + " ");
+    printFlattenTree(root.right);
+}
+
+// Main function
+function main() {
+    let root = new TreeNode(1);
+    root.left = new TreeNode(2);
+    root.right = new TreeNode(3);
+    root.left.left = new TreeNode(4);
+    root.left.right = new TreeNode(5);
+    root.left.right.right = new TreeNode(6);
+    root.right.right = new TreeNode(7);
+    root.right.left = new TreeNode(8);
+
+    let sol = new Solution();
+
+    console.log("Binary Tree Preorder: ");
+    printPreorder(root);
+    console.log("\n");
+
+    sol.flatten(root);
+
+    console.log("Binary Tree After Flatten: ");
+    printFlattenTree(root);
+    console.log("\n");
+}
+
+// Run the main function
+main();</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(2N)</strong> where N is the number of nodes in the Binary Tree. The time complexity is linear, as each node is visited at most twice (once for establishing the temporary link and once for reverting it). In each step, we perform constant-time operations, such as moving to the left or right child and updating pointers.<br/><br/>
+<strong>Space Complexity: O(1)</strong> The space complexity is constant, as the algorithm uses only a constant amount of extra space irrespective of the input size. Morris Traversal does not use any additional data structures like stacks or recursion, making it an in-place algorithm. The only space utilised is for a few auxiliary variables, such as pointers to current and in-order predecessor nodes.
+
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

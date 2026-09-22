@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>If-Else Statements</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>If-Else Statements</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/if-else/if-else-statements/</code></div>
+  <p>Conditional statements are a fundamental concept in programming that allows you to make decisions based on certain conditions. These statements enable your code to <strong>execute different blocks of cod</strong>e depending on whether <strong>specific conditions</strong> are met or not. In this blog post, we'll delve into the basics of <strong>conditional statements</strong>, starting with the ubiquitous<strong> if-else</strong> statement and gradually exploring more complex scenarios.</p>
+
+
+<p><strong>The `if-else` Statement</strong></p>
+
+
+<p><img height="457" loading="lazy" src="../assets/img/1664192e0d91116c.png" width="481"/></p>
+
+
+<p><strong>'if statement'</strong> is used to execute a block of code only if a certain condition is met. It allows us to conditionally execute code based on whether the specified condition is true.</p>
+
+
+<p><strong>'else statement'</strong>, on the other hand, is an optional companion to the if statement. It specifies what code to execute if the condition in the if statement is not met (i.e. if it is false).</p>
+
+
+<p>Let's break down the flow of control:</p>
+
+
+<ul><li>If the test condition in the if statement is true, a block of code inside the if block will be executed.</li><li>If the test condition is false, the code inside the else block (if present) will be executed.</li></ul>
+
+
+<p><strong>Code:</strong></p>
+
+
+<div class="code-section secondary-details">
+<div class="code-tabs">
+<button class="code-tab dsa_article_code_active" data-lang="cpp">C++</button>
+<button class="code-tab" data-lang="java">Java</button>
+<button class="code-tab" data-lang="python">Python</button>
+<button class="code-tab" data-lang="javascript">Javascript</button>
+<svg class="copy-btn" fill="none" height="20" viewbox="0 0 17 20" width="17" xmlns="http://www.w3.org/2000/svg">
+<path d="M2 20C1.45 20 0.979002 19.804 0.587002 19.412C0.195002 19.02 -0.000664969 18.5493 1.69779e-06 18V4H2V18H13V20H2ZM6 16C5.45 16 4.979 15.804 4.587 15.412C4.195 15.02 3.99934 14.5493 4 14V2C4 1.45 4.196 0.979002 4.588 0.587002C4.98 0.195002 5.45067 -0.000664969 6 1.69779e-06H15C15.55 1.69779e-06 16.021 0.196002 16.413 0.588002C16.805 0.980002 17.0007 1.45067 17 2V14C17 14.55 16.804 15.021 16.412 15.413C16.02 15.805 15.5493 16.0007 15 16H6ZM6 14H15V2H6V14Z">
+</path>
+</svg>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int main() {
+    // Declare a variable to store the user's age
+    int age;
+
+    // Ask the user to enter their age
+    cout &lt;&lt; "Enter your age: ";
+    cin &gt;&gt; age;  // Take input from the user
+
+    // Check if the user is 18 or older
+    if (age &gt;= 18) {
+        // If true, print that the user is an adult
+        cout &lt;&lt; "You are an adult." &lt;&lt; endl;
+    } else {
+        // Otherwise, print that the user is not an adult
+        cout &lt;&lt; "You are not an adult." &lt;&lt; endl;
+    }
+
+    return 0; // End of program
+}
+
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.Scanner;
+
+// Import Scanner class to take user input
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        // Create a Scanner object to read input from the console
+        Scanner scanner = new Scanner(System.in);
+
+        // Ask the user for their age
+        System.out.print("Enter your age: ");
+        int age = scanner.nextInt();  // Read age from user
+
+        // Check if the user is 18 or older
+        if (age &gt;= 18) {  
+            // If age is 18 or more, they are considered an adult
+            System.out.println("You are an adult.");
+        } else {
+            // Otherwise, they are not an adult
+            System.out.println("You are not an adult.");
+        }
+
+        // Close the Scanner object to avoid resource leaks
+        scanner.close();
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">
+# Ask the user for their age
+age = int(input("Enter your age: "))  # Input is a string, so convert to integer
+
+# Check if the entered age is greater than or equal to 18
+if age &gt;= 18:
+    # If true, print that the user is an adult
+    print("You are an adult.")
+else:
+    # Otherwise, print that the user is not an adult
+    print("You are not an adult.")
+
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">
+// Use prompt() in browser or readline in Node.js
+// Here we use Node.js version with readline for compatibility
+
+// Import readline module to take input from user
+const readline = require("readline");
+
+// Create interface for input/output
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+// Ask the user to enter their age
+rl.question("Enter your age: ", function(age) {
+  // Convert input (string) to number
+  age = parseInt(age);
+
+  // Check if age is &gt;= 18
+  if (age &gt;= 18) {
+    console.log("You are an adult.");
+  } else {
+    console.log("You are not an adult.");
+  }
+
+  // Close input stream
+  rl.close();
+});
+
+</code></pre></div>
+</div>
+
+
+
+
+</div>
+</div>
+
+
+<p><img height="457" loading="lazy" src="../assets/img/3fba3c99219e635c.png" width="481"/></p>
+
+
+<p>In this example, we take the <strong>user's age as input</strong> and use an <strong>if statement</strong> to check if the age is greater than or equal to 18. If the condition is true, it prints "You are an adult," and if it's false ie. the <strong>'else'</strong> condition is satisfied, it prints "You are not an adult."</p>
+
+
+<p><strong>Simplifying Code with "else if"</strong></p>
+
+
+<p>As your code becomes more complex, you'll often encounter scenarios where you need to check multiple conditions. Instead of writing multiple independent if statements, you can streamline your code using else if statements.</p>
+
+
+<p>Let's say we want to grade students based on their marks within specific ranges:</p>
+
+
+<p><strong>Code:</strong></p>
+
+
+<div class="code-section secondary-details">
+<div class="code-tabs">
+<button class="code-tab dsa_article_code_active" data-lang="cpp">C++</button>
+<button class="code-tab" data-lang="java">Java</button>
+<button class="code-tab" data-lang="python">Python</button>
+<button class="code-tab" data-lang="javascript">Javascript</button>
+<svg class="copy-btn" fill="none" height="20" viewbox="0 0 17 20" width="17" xmlns="http://www.w3.org/2000/svg">
+<path d="M2 20C1.45 20 0.979002 19.804 0.587002 19.412C0.195002 19.02 -0.000664969 18.5493 1.69779e-06 18V4H2V18H13V20H2ZM6 16C5.45 16 4.979 15.804 4.587 15.412C4.195 15.02 3.99934 14.5493 4 14V2C4 1.45 4.196 0.979002 4.588 0.587002C4.98 0.195002 5.45067 -0.000664969 6 1.69779e-06H15C15.55 1.69779e-06 16.021 0.196002 16.413 0.588002C16.805 0.980002 17.0007 1.45067 17 2V14C17 14.55 16.804 15.021 16.412 15.413C16.02 15.805 15.5493 16.0007 15 16H6ZM6 14H15V2H6V14Z">
+</path>
+</svg>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    // Declare and initialize marks variable
+    int marks = 54;
+
+    // Check grade conditions using if-else ladder
+    if (marks &lt; 25) {
+        cout &lt;&lt; "Grade: F" &lt;&lt; endl;  // Less than 25 is Grade F
+    } else if (marks &gt;= 25 &amp;&amp; marks &lt;= 44) {
+        cout &lt;&lt; "Grade: E" &lt;&lt; endl;  // Between 25 and 44 is Grade E
+    } else if (marks &gt;= 45 &amp;&amp; marks &lt;= 49) {
+        cout &lt;&lt; "Grade: D" &lt;&lt; endl;  // Between 45 and 49 is Grade D
+    } else if (marks &gt;= 50 &amp;&amp; marks &lt;= 59) {
+        cout &lt;&lt; "Grade: C" &lt;&lt; endl;  // Between 50 and 59 is Grade C
+    } else if (marks &gt;= 60 &amp;&amp; marks &lt;= 69) {
+        cout &lt;&lt; "Grade: B" &lt;&lt; endl;  // Between 60 and 69 is Grade B
+    } else if (marks &gt;= 70) {
+        cout &lt;&lt; "Grade: A" &lt;&lt; endl;  // 70 and above is Grade A
+    } else {
+        cout &lt;&lt; "Invalid marks entered." &lt;&lt; endl;  // Handles unexpected cases
+    }
+
+    return 0;
+}
+
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        // Declare and initialize marks variable
+        int marks = 54;
+
+        // Check grade conditions using if-else ladder
+        if (marks &lt; 25) {
+            System.out.println("Grade: F");  // Less than 25 is Grade F
+        } else if (marks &gt;= 25 &amp;&amp; marks &lt;= 44) {
+            System.out.println("Grade: E");  // Between 25 and 44 is Grade E
+        } else if (marks &gt;= 45 &amp;&amp; marks &lt;= 49) {
+            System.out.println("Grade: D");  // Between 45 and 49 is Grade D
+        } else if (marks &gt;= 50 &amp;&amp; marks &lt;= 59) {
+            System.out.println("Grade: C");  // Between 50 and 59 is Grade C
+        } else if (marks &gt;= 60 &amp;&amp; marks &lt;= 69) {
+            System.out.println("Grade: B");  // Between 60 and 69 is Grade B
+        } else if (marks &gt;= 70) {
+            System.out.println("Grade: A");  // 70 and above is Grade A
+        } else {
+            System.out.println("Invalid marks entered."); // Handles invalid inputs
+        }
+    }
+}
+
+
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">
+# Declare and initialize marks variable
+marks = 54
+
+# Check grade conditions using if-elif-else ladder
+if marks &lt; 25:
+    print("Grade: F")  # Less than 25 is Grade F
+elif marks &gt;= 25 and marks &lt;= 44:
+    print("Grade: E")  # Between 25 and 44 is Grade E
+elif marks &gt;= 45 and marks &lt;= 49:
+    print("Grade: D")  # Between 45 and 49 is Grade D
+elif marks &gt;= 50 and marks &lt;= 59:
+    print("Grade: C")  # Between 50 and 59 is Grade C
+elif marks &gt;= 60 and marks &lt;= 69:
+    print("Grade: B")  # Between 60 and 69 is Grade B
+elif marks &gt;= 70:
+    print("Grade: A")  # 70 and above is Grade A
+else:
+    print("Invalid marks entered.")  # Handles invalid inputs
+
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">
+// Declare and initialize marks variable
+let marks = 54;
+
+// Check grade conditions using if-else ladder
+if (marks &lt; 25) {
+    console.log("Grade: F");  // Less than 25 is Grade F
+} else if (marks &gt;= 25 &amp;&amp; marks &lt;= 44) {
+    console.log("Grade: E");  // Between 25 and 44 is Grade E
+} else if (marks &gt;= 45 &amp;&amp; marks &lt;= 49) {
+    console.log("Grade: D");  // Between 45 and 49 is Grade D
+} else if (marks &gt;= 50 &amp;&amp; marks &lt;= 59) {
+    console.log("Grade: C");  // Between 50 and 59 is Grade C
+} else if (marks &gt;= 60 &amp;&amp; marks &lt;= 69) {
+    console.log("Grade: B");  // Between 60 and 69 is Grade B
+} else if (marks &gt;= 70) {
+    console.log("Grade: A");  // 70 and above is Grade A
+} else {
+    console.log("Invalid marks entered.");  // Handles invalid inputs
+}
+
+</code></pre></div>
+
+</div>
+
+
+
+
+</div>
+</div>
+
+
+<p><img height="457" loading="lazy" src="../assets/img/7b8c0b81168f35e1.png" width="481"/></p>
+
+
+<ul><li>If marks are less than 25, it prints "Grade: F."</li><li>If marks are between 25 and 44 (inclusive), it prints "Grade: E."</li><li>If marks are between 45 and 49 (inclusive), it prints "Grade: D."</li><li>If marks are between 50 and 59 (inclusive), it prints "Grade: C."</li><li>If marks are between 60 and 69 (inclusive), it prints "Grade: B."</li><li>If marks are 70 or higher, it prints "Grade: A."</li><li>If marks are outside the valid range, it prints "Invalid marks entered."</li></ul>
+
+
+<p>The provided code for grading based on marks is functional, but it <strong>can be simplified</strong> for better readability and maintainability. In the current code, there are <strong>several redundant comparisons</strong> of marks with specific values. For example, when checking for grades E, C, B, and A, you have to <strong>repeatedly check</strong> marks &gt;= X &amp;&amp; marks &lt;= Y, which can be error-prone and hard to maintain as the grade ranges change.</p>
+
+
+<p>We can refactor the code, we can <strong>remove the lower bounds</strong> and check only the <strong>upper bounds</strong> for each grade as the code flow is such that we move along the conditions only after satisfying the previous one.</p>
+
+</article>
+<script src="../article.js"></script>
+</body></html>

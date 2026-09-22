@@ -1,0 +1,1455 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Clone Linked List with Random and Next Pointer</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Clone Linked List with Random and Next Pointer</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/clone-linked-list-with-random-and-next-pointer/</code></div>
+  <p><strong>Problem Statement: </strong>Given a linked list where every node in the linked list contains two pointers:
+</p><ol>
+<li>‘next’ which points to the next node in the list.</li>
+<li>‘random’ which points to a random node in the list or ‘null’.</li>
+</ol>
+<p>Create a ‘deep copy’ of the given linked list and return it.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:                
+Input: [[1, -1], [2, 0], [3, 4], [4, 1], [5, 2]]
+Output: 1 2 3 4 5, true
+Explanation: All the nodes in the new list have same corresponding values as original nodes.
+All the random pointers point to their corresponding nodes in the new list.
+'true' represents that the nodes and references were created new.
+
+Example 2: 
+Input: [[5, -1], [3, -1], [2, 1], [1, 1]]
+Output: 5 3 2 1, true
+Explanation: All the nodes in the new list have same corresponding values as original nodes.
+All the random pointers point to their corresponding nodes in the new list.
+'true' represents that the nodes and references were created new.
+[[5, -1], [3, -1], [2, -1], [1, -1]] will be incorrect, although it has the same values.
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/clone-a-ll-with-random-and-next-pointer" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Brute Force Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+<p>To create a deep copy of the original linked list we can use a map to establish a
+                            relationship between original nodes and their copied nodes.</p>
+<p>We traverse the list first to create a copied node for each original node then traverse and
+                            establish the correct connections between the copied nodes similar to the arrangement of
+                            next and random pointers of the original pointers. In the end, return the head of the copied
+                            list obtained from the map.</p>
+<ul>
+<li>Initialise variables ‘temp’ as a pointer to the head of the original linked list to
+                                traverse it. Create an empty unordered_map, to map original nodes to their corresponding
+                                copied nodes.</li>
+<li>Iterate through the original linked list and for each node in the linked list create a
+                                new node with the same data value as the original data. Map the original node to its
+                                copied node in the map.</li>
+<li>
+                                Iterate through the original list again but this time connect the pointers of the copied
+                                nodes in the same arrangement as the original node.
+                                <ol>
+<li>Get the copied node corresponding to the original node using the map.</li>
+<li>Set the next pointer of the copied node to the copied node mapped to the
+                                        original node’s next node.</li>
+<li>Set the random pointer of the copied node to the original node’s next node
+                                        copied from the map.</li>
+</ol>
+</li>
+<li>
+                                Return the head of the deep copied list which is obtained by retrieving the copied nodes
+                                mapped to the original head from the map.</li>
+</ul>
+
+
+
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/e71e044b6650ce8f.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/ca7543eb6ff8f9c7.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/eaa3a121cd0aed50.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/d55993e95374fdd7.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/980bb3686c043eab.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/414eb87a4a55223a.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/e71e044b6650ce8f.png"/><img alt="Image 2" loading="lazy" src="../assets/img/ca7543eb6ff8f9c7.png"/><img alt="Image 3" loading="lazy" src="../assets/img/eaa3a121cd0aed50.png"/><img alt="Image 4" loading="lazy" src="../assets/img/d55993e95374fdd7.png"/><img alt="Image 5" loading="lazy" src="../assets/img/980bb3686c043eab.png"/><img alt="Image 6" loading="lazy" src="../assets/img/414eb87a4a55223a.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Code
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<button class="code-tab dsa_article_code_active" data-lang="cpp">C++</button>
+<button class="code-tab" data-lang="java">Java</button>
+<button class="code-tab" data-lang="python">Python</button>
+<button class="code-tab" data-lang="javascript">JavaScript</button>
+<svg class="copy-btn" fill="none" height="20" viewbox="0 0 17 20" width="17" xmlns="http://www.w3.org/2000/svg">
+<path d="M2 20C1.45 20 0.979002 19.804 0.587002 19.412C0.195002 19.02 -0.000664969 18.5493 1.69779e-06 18V4H2V18H13V20H2ZM6 16C5.45 16 4.979 15.804 4.587 15.412C4.195 15.02 3.99934 14.5493 4 14V2C4 1.45 4.196 0.979002 4.588 0.587002C4.98 0.195002 5.45067 -0.000664969 6 1.69779e-06H15C15.55 1.69779e-06 16.021 0.196002 16.413 0.588002C16.805 0.980002 17.0007 1.45067 17 2V14C17 14.55 16.804 15.021 16.412 15.413C16.02 15.805 15.5493 16.0007 15 16H6ZM6 14H15V2H6V14Z">
+</path>
+</svg>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0">
+                                <code class="language-cpp" lang="cpp">
+#include &lt;iostream&gt;
+using namespace std;
+
+// Node class to represent
+// elements in the linked list
+class Node {
+public:
+    // Data stored in the node
+    int data;           
+     // Pointer to the next node
+    Node *next;        
+    // Pointer to a random
+    // node in the list
+    Node *random;       
+
+    // Constructors for Node class
+    Node() : data(0), next(nullptr), random(nullptr){}; 
+    Node(int x) : data(x), next(nullptr), random(nullptr) {} 
+    // Constructor with data,
+    // next, and random pointers
+    Node(int x, Node *nextNode, Node *randomNode) :
+            data(x), next(nextNode), random(randomNode) {}  
+};
+
+// Function to insert a copy of each
+// node in between the original nodes
+void insertCopyInBetween(Node* head){
+    Node* temp = head;
+    while(temp != NULL){
+        Node* nextElement = temp-&gt;next;
+        // Create a new node with the same data
+        Node* copy = new Node(temp-&gt;data);  
+        
+        // Point the copy's next to
+        // the original node's next
+        copy-&gt;next = nextElement;  
+        
+        // Point the original
+        // node's next to the copy
+        temp-&gt;next = copy;         
+
+        // Move to the next original node
+        temp = nextElement;         
+    }
+}
+
+// Function to connect random
+// pointers of the copied nodes
+void connectRandomPointers(Node* head){
+    Node* temp = head;
+    while(temp != NULL){
+        // Access the copied node
+        Node* copyNode = temp-&gt;next;    
+        
+        // If the original node
+        // has a random pointer
+        if(temp-&gt;random){   
+             // Point the copied node's random to the
+             // corresponding copied random node
+            copyNode-&gt;random = temp-&gt;random-&gt;next; 
+        }
+        else{
+             // Set the copied node's random to
+             // null if the original random is null
+            copyNode-&gt;random = NULL;   
+        }
+        
+         // Move to the next original node
+        temp = temp-&gt;next-&gt;next;   
+    }
+}
+
+// Function to retrieve the
+// deep copy of the linked list
+Node* getDeepCopyList(Node* head){
+    Node* temp = head;
+     // Create a dummy node
+    Node* dummyNode = new Node(-1);   
+    // Initialize a result pointer
+    Node* res = dummyNode;             
+
+    while(temp != NULL){
+        // Creating a new List by
+        // pointing to copied nodes
+        res-&gt;next = temp-&gt;next;
+        res = res-&gt;next;
+
+        // Disconnect and revert back to the
+        // initial state of the original linked list
+        temp-&gt;next = temp-&gt;next-&gt;next;
+        temp = temp-&gt;next;
+    }
+    
+     // Return the deep copy of the
+     // list starting from the dummy node
+    return dummyNode-&gt;next;   
+}
+
+// Function to clone the linked list
+Node *cloneLL(Node *head){
+    // If the original list
+    // is empty, return null
+    if(!head) return nullptr;   
+    
+     // Step 1: Insert copy of
+     // nodes in between
+    insertCopyInBetween(head); 
+    // Step 2: Connect random
+    // pointers of copied nodes
+    connectRandomPointers(head);  
+    // Step 3: Retrieve the deep
+    // copy of the linked list
+    return getDeepCopyList(head); 
+}
+
+// Function to print the cloned linked list
+void printClonedLinkedList(Node *head) {
+    while (head != nullptr) {
+        cout &lt;&lt; "Data: " &lt;&lt; head-&gt;data;
+        if (head-&gt;random != nullptr) {
+            cout &lt;&lt; ", Random: " &lt;&lt; head-&gt;random-&gt;data;
+        } else {
+            cout &lt;&lt; ", Random: nullptr";
+        }
+        cout &lt;&lt; endl;
+         // Move to the next node
+        head = head-&gt;next;  
+    }
+}
+
+// Main function
+int main() {
+    // Example linked list: 7 -&gt; 14 -&gt; 21 -&gt; 28
+    Node* head = new Node(7);
+    head-&gt;next = new Node(14);
+    head-&gt;next-&gt;next = new Node(21);
+    head-&gt;next-&gt;next-&gt;next = new Node(28);
+
+    // Assigning random pointers
+    head-&gt;random = head-&gt;next-&gt;next;
+    head-&gt;next-&gt;random = head;
+    head-&gt;next-&gt;next-&gt;random = head-&gt;next-&gt;next-&gt;next;
+    head-&gt;next-&gt;next-&gt;next-&gt;random = head-&gt;next;
+
+    cout &lt;&lt; "Original Linked List with Random Pointers:" &lt;&lt; endl;
+    printClonedLinkedList(head);
+
+    // Clone the linked list
+    Node* clonedList = cloneLL(head);
+
+    cout &lt;&lt; "\nCloned Linked List with Random Pointers:" &lt;&lt; endl;
+    printClonedLinkedList(clonedList);
+
+    return 0;
+}
+
+                                </code>
+                            </pre><pre class="wp-block-code hidden" data-i="1">
+                                <code class="language-java" lang="java">
+// Node class to represent
+// elements in the linked list
+class Node {
+    // Data stored in the node
+    int data;
+    // Pointer to the next node
+    Node next;
+    // Pointer to a random
+    // node in the list
+    Node random;
+
+    // Constructors for Node class
+    Node() {
+        // Default constructor
+        this.data = 0;
+        this.next = null;
+        this.random = null;
+    }
+
+    Node(int x) {
+        // Constructor with data
+        this.data = x;
+        this.next = null;
+        this.random = null;
+    }
+
+    Node(int x, Node nextNode, Node randomNode) {
+        // Constructor with data,
+        // next, and random pointers
+        this.data = x;
+        this.next = nextNode;
+        this.random = randomNode;
+    }
+}
+
+// Function to insert a copy of each
+// node in between the original nodes
+void insertCopyInBetween(Node head) {
+    Node temp = head;
+    while (temp != null) {
+        Node nextElement = temp.next;
+        // Create a new node with the same data
+        Node copy = new Node(temp.data);
+
+        // Point the copy's next to
+        // the original node's next
+        copy.next = nextElement;
+
+        // Point the original
+        // node's next to the copy
+        temp.next = copy;
+
+        // Move to the next original node
+        temp = nextElement;
+    }
+}
+
+// Function to connect random
+// pointers of the copied nodes
+void connectRandomPointers(Node head) {
+    Node temp = head;
+    while (temp != null) {
+        // Access the copied node
+        Node copyNode = temp.next;
+
+        // If the original node
+        // has a random pointer
+        if (temp.random != null) {
+            // Point the copied node's random to the
+            // corresponding copied random node
+            copyNode.random = temp.random.next;
+        } else {
+            // Set the copied node's random to
+            // null if the original random is null
+            copyNode.random = null;
+        }
+
+        // Move to the next original node
+        temp = temp.next.next;
+    }
+}
+
+// Function to retrieve the
+// deep copy of the linked list
+Node getDeepCopyList(Node head) {
+    Node temp = head;
+    // Create a dummy node
+    Node dummyNode = new Node(-1);
+    // Initialize a result pointer
+    Node res = dummyNode;
+
+    while (temp != null) {
+        // Creating a new List by
+        // pointing to copied nodes
+        res.next = temp.next;
+        res = res.next;
+
+        // Disconnect and revert back to the
+        // initial state of the original linked list
+        temp.next = temp.next.next;
+        temp = temp.next;
+    }
+
+    // Return the deep copy of the
+    // list starting from the dummy node
+    return dummyNode.next;
+}
+
+// Function to clone the linked list
+Node cloneLL(Node head) {
+    // If the original list
+    // is empty, return null
+    if (head == null) return null;
+
+    // Step 1: Insert copy of
+    // nodes in between
+    insertCopyInBetween(head);
+    // Step 2: Connect random
+    // pointers of copied nodes
+    connectRandomPointers(head);
+    // Step 3: Retrieve the deep
+    // copy of the linked list
+    return getDeepCopyList(head);
+}
+
+// Function to print the cloned linked list
+void printClonedLinkedList(Node head) {
+    while (head != null) {
+        System.out.print("Data: " + head.data);
+        if (head.random != null) {
+            System.out.print(", Random: " + head.random.data);
+        } else {
+            System.out.print(", Random: null");
+        }
+        System.out.println();
+        // Move to the next node
+        head = head.next;
+    }
+}
+
+// Main function
+public static void main(String[] args) {
+    // Example linked list: 7 -&gt; 14 -&gt; 21 -&gt; 28
+    Node head = new Node(7);
+    head.next = new Node(14);
+    head.next.next = new Node(21);
+    head.next.next.next = new Node(28);
+
+    // Assigning random pointers
+    head.random = head.next.next;
+    head.next.random = head;
+    head.next.next.random = head.next.next.next;
+    head.next.next.next.random = head.next;
+
+    System.out.println("Original Linked List with Random Pointers:");
+    printClonedLinkedList(head);
+
+    // Clone the linked list
+    Node clonedList = cloneLL(head);
+
+    System.out.println("\nCloned Linked List with Random Pointers:");
+    printClonedLinkedList(clonedList);
+}
+
+                                </code>
+                            </pre><pre class="wp-block-code hidden" data-i="2">
+                                <code class="language-python" lang="python">
+                     
+# Node class to represent
+# elements in the linked list
+class Node:
+    # Data stored in the node
+    def __init__(self, x):
+        self.data = x
+        # Pointer to the next node
+        self.next = None
+        # Pointer to a random
+        # node in the list
+        self.random = None
+
+# Function to insert a copy of each
+# node in between the original nodes
+def insertCopyInBetween(head):
+    temp = head
+    while temp:
+        nextElement = temp.next
+        # Create a new node with the same data
+        copy = Node(temp.data)
+
+        # Point the copy's next to
+        # the original node's next
+        copy.next = nextElement
+
+        # Point the original
+        # node's next to the copy
+        temp.next = copy
+
+        # Move to the next original node
+        temp = nextElement
+
+# Function to connect random
+# pointers of the copied nodes
+def connectRandomPointers(head):
+    temp = head
+    while temp:
+        # Access the copied node
+        copyNode = temp.next
+
+        # If the original node
+        # has a random pointer
+        if temp.random:
+            # Point the copied node's random to the
+            # corresponding copied random node
+            copyNode.random = temp.random.next
+        else:
+            # Set the copied node's random to
+            # null if the original random is null
+            copyNode.random = None
+
+        # Move to the next original node
+        temp = temp.next.next
+
+# Function to retrieve the
+# deep copy of the linked list
+def getDeepCopyList(head):
+    temp = head
+    # Create a dummy node
+    dummyNode = Node(-1)
+    # Initialize a result pointer
+    res = dummyNode
+
+    while temp:
+        # Creating a new List by
+        # pointing to copied nodes
+        res.next = temp.next
+        res = res.next
+
+        # Disconnect and revert back to the
+        # initial state of the original linked list
+        temp.next = temp.next.next
+        temp = temp.next
+
+    # Return the deep copy of the
+    # list starting from the dummy node
+    return dummyNode.next
+
+# Function to clone the linked list
+def cloneLL(head):
+    # If the original list
+    # is empty, return null
+    if not head:
+        return None
+
+    # Step 1: Insert copy of
+    # nodes in between
+    insertCopyInBetween(head)
+    # Step 2: Connect random
+    # pointers of copied nodes
+    connectRandomPointers(head)
+    # Step 3: Retrieve the deep
+    # copy of the linked list
+    return getDeepCopyList(head)
+
+# Function to print the cloned linked list
+def printClonedLinkedList(head):
+    while head:
+        print("Data:", head.data, end="")
+        if head.random:
+            print(", Random:", head.random.data, end="")
+        else:
+            print(", Random: None", end="")
+        print()
+        # Move to the next node
+        head = head.next
+
+# Main function
+if __name__ == "__main__":
+    # Example linked list: 7 -&gt; 14 -&gt; 21 -&gt; 28
+    head = Node(7)
+    head.next = Node(14)
+    head.next.next = Node(21)
+    head.next.next.next = Node(28)
+
+    # Assigning random pointers
+    head.random = head.next.next
+    head.next.random = head
+    head.next.next.random = head.next.next.next
+    head.next.next.next.random = head.next
+
+    print("Original Linked List with Random Pointers:")
+    printClonedLinkedList(head)
+
+    # Clone the linked list
+    clonedList = cloneLL(head)
+
+    print("\nCloned Linked List with Random Pointers:")
+    printClonedLinkedList(clonedList)
+
+                                </code>
+                            </pre><pre class="wp-block-code hidden" data-i="3">
+                            <code class="language-javascript" lang="javascript">
+ // Node class to represent
+// elements in the linked list
+class Node {
+    // Data stored in the node
+    constructor(x, nextNode = null, randomNode = null) {
+        this.data = x;
+        // Pointer to the next node
+        this.next = nextNode;
+        // Pointer to a random
+        // node in the list
+        this.random = randomNode;
+    }
+}
+
+// Function to insert a copy of each
+// node in between the original nodes
+function insertCopyInBetween(head) {
+    let temp = head;
+    while (temp !== null) {
+        let nextElement = temp.next;
+        // Create a new node with the same data
+        let copy = new Node(temp.data);
+
+        // Point the copy's next to
+        // the original node's next
+        copy.next = nextElement;
+
+        // Point the original
+        // node's next to the copy
+        temp.next = copy;
+
+        // Move to the next original node
+        temp = nextElement;
+    }
+}
+
+// Function to connect random
+// pointers of the copied nodes
+function connectRandomPointers(head) {
+    let temp = head;
+    while (temp !== null) {
+        // Access the copied node
+        let copyNode = temp.next;
+
+        // If the original node
+        // has a random pointer
+        if (temp.random) {
+            // Point the copied node's random to the
+            // corresponding copied random node
+            copyNode.random = temp.random.next;
+        } else {
+            // Set the copied node's random to
+            // null if the original random is null
+            copyNode.random = null;
+        }
+
+        // Move to the next original node
+        temp = temp.next.next;
+    }
+}
+
+// Function to retrieve the
+// deep copy of the linked list
+function getDeepCopyList(head) {
+    let temp = head;
+    // Create a dummy node
+    let dummyNode = new Node(-1);
+    // Initialize a result pointer
+    let res = dummyNode;
+
+    while (temp !== null) {
+        // Creating a new List by
+        // pointing to copied nodes
+        res.next = temp.next;
+        res = res.next;
+
+        // Disconnect and revert back to the
+        // initial state of the original linked list
+        temp.next = temp.next.next;
+        temp = temp.next;
+    }
+
+    // Return the deep copy of the
+    // list starting from the dummy node
+    return dummyNode.next;
+}
+
+// Function to clone the linked list
+function cloneLL(head) {
+    // If the original list
+    // is empty, return null
+    if (!head) return null;
+
+    // Step 1: Insert copy of
+    // nodes in between
+    insertCopyInBetween(head);
+    // Step 2: Connect random
+    // pointers of copied nodes
+    connectRandomPointers(head);
+    // Step 3: Retrieve the deep
+    // copy of the linked list
+    return getDeepCopyList(head);
+}
+
+// Function to print the cloned linked list
+function printClonedLinkedList(head) {
+    while (head !== null) {
+        console.log(`Data: ${head.data}${head.random ? `, Random: ${head.random.data}` : ', Random: nullptr'}`);
+        // Move to the next node
+        head = head.next;
+    }
+}
+
+// Main function
+function main() {
+    // Example linked list: 7 -&gt; 14 -&gt; 21 -&gt; 28
+    let head = new Node(7);
+    head.next = new Node(14);
+    head.next.next = new Node(21);
+    head.next.next.next = new Node(28);
+
+    // Assigning random pointers
+    head.random = head.next.next;
+    head.next.random = head;
+    head.next.next.random = head.next.next.next;
+    head.next.next.next.random = head.next;
+
+    console.log("Original Linked List with Random Pointers:");
+    printClonedLinkedList(head);
+
+    // Clone the linked list
+    let clonedList = cloneLL(head);
+
+    console.log("\nCloned Linked List with Random Pointers:");
+    printClonedLinkedList(clonedList);
+}
+
+main();
+
+                            </code>
+                        </pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+</summary>
+<p>
+</p><p><strong>Time Complexity: O(2N)</strong>, where N is the number of nodes in the linked list. The
+                        linked list is traversed twice, once for creating copies of each node and for the second time to
+                        set the next and random pointers for each copied node. The time to access the nodes in the map
+                        is O(1) due to hashing.</p>
+<p><strong>Space Complexity : O(N)+O(N)</strong>, where N is the number of nodes in the linked list
+                        as
+                        all nodes are stored in the map to maintain mappings and the copied linked lists takes O(N)
+                        space as well.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+<p>The previous approach uses an extra space complexity of creating mappings between the
+                            original and copied nodes. Instead of creating duplicate nodes and storing them in a map,
+                            insert it in between the original node and the next node for quick access without the need
+                            for additional space.</p>
+<p>Traverse the list again to set the random pointer of copied nodes to the corresponding copied
+                            node duplicating the original arrangement. As a final traversal, separate the copied and
+                            original nodes by detaching alternate nodes.</p>
+<ul>
+<li>
+                                Traverse the original node and create a copy of each node and insert it in between the
+                                original node and the next node.</li>
+<li>Traverse this modified list and for each original node that has a
+                                random pointer, set the copied node’s random pointer to the corresponding copies random
+                                node. If the original node’s random pointer is full, set the copied node’s random pointe
+                                to
+                                null as well.</li>
+<li></li>Traverse the modified list again and extract the coped
+                            nodes by breaking the links between the original nodes and the copied nodes. Revert the
+                            original list to its initial state by fixing the next pointers.
+
+                            <li>Return the head of the deep copy obtained after extracting the
+                                copied nodes from the modified list.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Code
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<button class="code-tab dsa_article_code_active" data-lang="cpp">C++</button>
+<button class="code-tab" data-lang="java">Java</button>
+<button class="code-tab" data-lang="python">Python</button>
+<button class="code-tab" data-lang="javascript">JavaScript</button>
+<svg class="copy-btn" fill="none" height="20" viewbox="0 0 17 20" width="17" xmlns="http://www.w3.org/2000/svg">
+<path d="M2 20C1.45 20 0.979002 19.804 0.587002 19.412C0.195002 19.02 -0.000664969 18.5493 1.69779e-06 18V4H2V18H13V20H2ZM6 16C5.45 16 4.979 15.804 4.587 15.412C4.195 15.02 3.99934 14.5493 4 14V2C4 1.45 4.196 0.979002 4.588 0.587002C4.98 0.195002 5.45067 -0.000664969 6 1.69779e-06H15C15.55 1.69779e-06 16.021 0.196002 16.413 0.588002C16.805 0.980002 17.0007 1.45067 17 2V14C17 14.55 16.804 15.021 16.412 15.413C16.02 15.805 15.5493 16.0007 15 16H6ZM6 14H15V2H6V14Z">
+</path>
+</svg>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0">
+                                <code class="language-cpp" lang="cpp">
+#include &lt;iostream&gt;
+using namespace std;
+
+// Node class to represent
+// elements in the linked list
+class Node {
+public:
+    // Data stored in the node
+    int data;           
+     // Pointer to the next node
+    Node *next;        
+    // Pointer to a random
+    // node in the list
+    Node *random;       
+
+    // Constructors for Node class
+    Node() : data(0), next(nullptr), random(nullptr){}; 
+    Node(int x) : data(x), next(nullptr), random(nullptr) {} 
+    // Constructor with data,
+    // next, and random pointers
+    Node(int x, Node *nextNode, Node *randomNode) :
+            data(x), next(nextNode), random(randomNode) {}  
+};
+
+// Function to insert a copy of each
+// node in between the original nodes
+void insertCopyInBetween(Node* head){
+    Node* temp = head;
+    while(temp != NULL){
+        Node* nextElement = temp-&gt;next;
+        // Create a new node with the same data
+        Node* copy = new Node(temp-&gt;data);  
+        
+        // Point the copy's next to
+        // the original node's next
+        copy-&gt;next = nextElement;  
+        
+        // Point the original
+        // node's next to the copy
+        temp-&gt;next = copy;         
+
+        // Move to the next original node
+        temp = nextElement;         
+    }
+}
+
+// Function to connect random
+// pointers of the copied nodes
+void connectRandomPointers(Node* head){
+    Node* temp = head;
+    while(temp != NULL){
+        // Access the copied node
+        Node* copyNode = temp-&gt;next;    
+        
+        // If the original node
+        // has a random pointer
+        if(temp-&gt;random){   
+             // Point the copied node's random to the
+             // corresponding copied random node
+            copyNode-&gt;random = temp-&gt;random-&gt;next; 
+        }
+        else{
+             // Set the copied node's random to
+             // null if the original random is null
+            copyNode-&gt;random = NULL;   
+        }
+        
+         // Move to the next original node
+        temp = temp-&gt;next-&gt;next;   
+    }
+}
+
+// Function to retrieve the
+// deep copy of the linked list
+Node* getDeepCopyList(Node* head){
+    Node* temp = head;
+     // Create a dummy node
+    Node* dummyNode = new Node(-1);   
+    // Initialize a result pointer
+    Node* res = dummyNode;             
+
+    while(temp != NULL){
+        // Creating a new List by
+        // pointing to copied nodes
+        res-&gt;next = temp-&gt;next;
+        res = res-&gt;next;
+
+        // Disconnect and revert back to the
+        // initial state of the original linked list
+        temp-&gt;next = temp-&gt;next-&gt;next;
+        temp = temp-&gt;next;
+    }
+    
+     // Return the deep copy of the
+     // list starting from the dummy node
+    return dummyNode-&gt;next;   
+}
+
+// Function to clone the linked list
+Node *cloneLL(Node *head){
+    // If the original list
+    // is empty, return null
+    if(!head) return nullptr;   
+    
+     // Step 1: Insert copy of
+     // nodes in between
+    insertCopyInBetween(head); 
+    // Step 2: Connect random
+    // pointers of copied nodes
+    connectRandomPointers(head);  
+    // Step 3: Retrieve the deep
+    // copy of the linked list
+    return getDeepCopyList(head); 
+}
+
+// Function to print the cloned linked list
+void printClonedLinkedList(Node *head) {
+    while (head != nullptr) {
+        cout &lt;&lt; "Data: " &lt;&lt; head-&gt;data;
+        if (head-&gt;random != nullptr) {
+            cout &lt;&lt; ", Random: " &lt;&lt; head-&gt;random-&gt;data;
+        } else {
+            cout &lt;&lt; ", Random: nullptr";
+        }
+        cout &lt;&lt; endl;
+         // Move to the next node
+        head = head-&gt;next;  
+    }
+}
+
+// Main function
+int main() {
+    // Example linked list: 7 -&gt; 14 -&gt; 21 -&gt; 28
+    Node* head = new Node(7);
+    head-&gt;next = new Node(14);
+    head-&gt;next-&gt;next = new Node(21);
+    head-&gt;next-&gt;next-&gt;next = new Node(28);
+
+    // Assigning random pointers
+    head-&gt;random = head-&gt;next-&gt;next;
+    head-&gt;next-&gt;random = head;
+    head-&gt;next-&gt;next-&gt;random = head-&gt;next-&gt;next-&gt;next;
+    head-&gt;next-&gt;next-&gt;next-&gt;random = head-&gt;next;
+
+    cout &lt;&lt; "Original Linked List with Random Pointers:" &lt;&lt; endl;
+    printClonedLinkedList(head);
+
+    // Clone the linked list
+    Node* clonedList = cloneLL(head);
+
+    cout &lt;&lt; "\nCloned Linked List with Random Pointers:" &lt;&lt; endl;
+    printClonedLinkedList(clonedList);
+
+    return 0;
+}
+
+                                </code>
+                            </pre><pre class="wp-block-code hidden" data-i="1">
+                                <code class="language-java" lang="java">
+// Node class to represent
+// elements in the linked list
+class Node {
+    // Data stored in the node
+    int data;
+    // Pointer to the next node
+    Node next;
+    // Pointer to a random
+    // node in the list
+    Node random;
+
+    // Constructors for Node class
+    Node() {
+        // Default constructor
+        this.data = 0;
+        this.next = null;
+        this.random = null;
+    }
+
+    Node(int x) {
+        // Constructor with data
+        this.data = x;
+        this.next = null;
+        this.random = null;
+    }
+
+    Node(int x, Node nextNode, Node randomNode) {
+        // Constructor with data,
+        // next, and random pointers
+        this.data = x;
+        this.next = nextNode;
+        this.random = randomNode;
+    }
+}
+
+// Function to insert a copy of each
+// node in between the original nodes
+void insertCopyInBetween(Node head) {
+    Node temp = head;
+    while (temp != null) {
+        Node nextElement = temp.next;
+        // Create a new node with the same data
+        Node copy = new Node(temp.data);
+
+        // Point the copy's next to
+        // the original node's next
+        copy.next = nextElement;
+
+        // Point the original
+        // node's next to the copy
+        temp.next = copy;
+
+        // Move to the next original node
+        temp = nextElement;
+    }
+}
+
+// Function to connect random
+// pointers of the copied nodes
+void connectRandomPointers(Node head) {
+    Node temp = head;
+    while (temp != null) {
+        // Access the copied node
+        Node copyNode = temp.next;
+
+        // If the original node
+        // has a random pointer
+        if (temp.random != null) {
+            // Point the copied node's random to the
+            // corresponding copied random node
+            copyNode.random = temp.random.next;
+        } else {
+            // Set the copied node's random to
+            // null if the original random is null
+            copyNode.random = null;
+        }
+
+        // Move to the next original node
+        temp = temp.next.next;
+    }
+}
+
+// Function to retrieve the
+// deep copy of the linked list
+Node getDeepCopyList(Node head) {
+    Node temp = head;
+    // Create a dummy node
+    Node dummyNode = new Node(-1);
+    // Initialize a result pointer
+    Node res = dummyNode;
+
+    while (temp != null) {
+        // Creating a new List by
+        // pointing to copied nodes
+        res.next = temp.next;
+        res = res.next;
+
+        // Disconnect and revert back to the
+        // initial state of the original linked list
+        temp.next = temp.next.next;
+        temp = temp.next;
+    }
+
+    // Return the deep copy of the
+    // list starting from the dummy node
+    return dummyNode.next;
+}
+
+// Function to clone the linked list
+Node cloneLL(Node head) {
+    // If the original list
+    // is empty, return null
+    if (head == null) return null;
+
+    // Step 1: Insert copy of
+    // nodes in between
+    insertCopyInBetween(head);
+    // Step 2: Connect random
+    // pointers of copied nodes
+    connectRandomPointers(head);
+    // Step 3: Retrieve the deep
+    // copy of the linked list
+    return getDeepCopyList(head);
+}
+
+// Function to print the cloned linked list
+void printClonedLinkedList(Node head) {
+    while (head != null) {
+        System.out.print("Data: " + head.data);
+        if (head.random != null) {
+            System.out.print(", Random: " + head.random.data);
+        } else {
+            System.out.print(", Random: null");
+        }
+        System.out.println();
+        // Move to the next node
+        head = head.next;
+    }
+}
+
+// Main function
+public static void main(String[] args) {
+    // Example linked list: 7 -&gt; 14 -&gt; 21 -&gt; 28
+    Node head = new Node(7);
+    head.next = new Node(14);
+    head.next.next = new Node(21);
+    head.next.next.next = new Node(28);
+
+    // Assigning random pointers
+    head.random = head.next.next;
+    head.next.random = head;
+    head.next.next.random = head.next.next.next;
+    head.next.next.next.random = head.next;
+
+    System.out.println("Original Linked List with Random Pointers:");
+    printClonedLinkedList(head);
+
+    // Clone the linked list
+    Node clonedList = cloneLL(head);
+
+    System.out.println("\nCloned Linked List with Random Pointers:");
+    printClonedLinkedList(clonedList);
+}
+
+                                </code>
+                            </pre><pre class="wp-block-code hidden" data-i="2">
+                                <code class="language-python" lang="python">
+                     
+# Node class to represent
+# elements in the linked list
+class Node:
+    # Data stored in the node
+    def __init__(self, x):
+        self.data = x
+        # Pointer to the next node
+        self.next = None
+        # Pointer to a random
+        # node in the list
+        self.random = None
+
+# Function to insert a copy of each
+# node in between the original nodes
+def insertCopyInBetween(head):
+    temp = head
+    while temp:
+        nextElement = temp.next
+        # Create a new node with the same data
+        copy = Node(temp.data)
+
+        # Point the copy's next to
+        # the original node's next
+        copy.next = nextElement
+
+        # Point the original
+        # node's next to the copy
+        temp.next = copy
+
+        # Move to the next original node
+        temp = nextElement
+
+# Function to connect random
+# pointers of the copied nodes
+def connectRandomPointers(head):
+    temp = head
+    while temp:
+        # Access the copied node
+        copyNode = temp.next
+
+        # If the original node
+        # has a random pointer
+        if temp.random:
+            # Point the copied node's random to the
+            # corresponding copied random node
+            copyNode.random = temp.random.next
+        else:
+            # Set the copied node's random to
+            # null if the original random is null
+            copyNode.random = None
+
+        # Move to the next original node
+        temp = temp.next.next
+
+# Function to retrieve the
+# deep copy of the linked list
+def getDeepCopyList(head):
+    temp = head
+    # Create a dummy node
+    dummyNode = Node(-1)
+    # Initialize a result pointer
+    res = dummyNode
+
+    while temp:
+        # Creating a new List by
+        # pointing to copied nodes
+        res.next = temp.next
+        res = res.next
+
+        # Disconnect and revert back to the
+        # initial state of the original linked list
+        temp.next = temp.next.next
+        temp = temp.next
+
+    # Return the deep copy of the
+    # list starting from the dummy node
+    return dummyNode.next
+
+# Function to clone the linked list
+def cloneLL(head):
+    # If the original list
+    # is empty, return null
+    if not head:
+        return None
+
+    # Step 1: Insert copy of
+    # nodes in between
+    insertCopyInBetween(head)
+    # Step 2: Connect random
+    # pointers of copied nodes
+    connectRandomPointers(head)
+    # Step 3: Retrieve the deep
+    # copy of the linked list
+    return getDeepCopyList(head)
+
+# Function to print the cloned linked list
+def printClonedLinkedList(head):
+    while head:
+        print("Data:", head.data, end="")
+        if head.random:
+            print(", Random:", head.random.data, end="")
+        else:
+            print(", Random: None", end="")
+        print()
+        # Move to the next node
+        head = head.next
+
+# Main function
+if __name__ == "__main__":
+    # Example linked list: 7 -&gt; 14 -&gt; 21 -&gt; 28
+    head = Node(7)
+    head.next = Node(14)
+    head.next.next = Node(21)
+    head.next.next.next = Node(28)
+
+    # Assigning random pointers
+    head.random = head.next.next
+    head.next.random = head
+    head.next.next.random = head.next.next.next
+    head.next.next.next.random = head.next
+
+    print("Original Linked List with Random Pointers:")
+    printClonedLinkedList(head)
+
+    # Clone the linked list
+    clonedList = cloneLL(head)
+
+    print("\nCloned Linked List with Random Pointers:")
+    printClonedLinkedList(clonedList)
+
+                                </code>
+                            </pre><pre class="wp-block-code hidden" data-i="3">
+                            <code class="language-javascript" lang="javascript">
+ // Node class to represent
+// elements in the linked list
+class Node {
+    // Data stored in the node
+    constructor(x, nextNode = null, randomNode = null) {
+        this.data = x;
+        // Pointer to the next node
+        this.next = nextNode;
+        // Pointer to a random
+        // node in the list
+        this.random = randomNode;
+    }
+}
+
+// Function to insert a copy of each
+// node in between the original nodes
+function insertCopyInBetween(head) {
+    let temp = head;
+    while (temp !== null) {
+        let nextElement = temp.next;
+        // Create a new node with the same data
+        let copy = new Node(temp.data);
+
+        // Point the copy's next to
+        // the original node's next
+        copy.next = nextElement;
+
+        // Point the original
+        // node's next to the copy
+        temp.next = copy;
+
+        // Move to the next original node
+        temp = nextElement;
+    }
+}
+
+// Function to connect random
+// pointers of the copied nodes
+function connectRandomPointers(head) {
+    let temp = head;
+    while (temp !== null) {
+        // Access the copied node
+        let copyNode = temp.next;
+
+        // If the original node
+        // has a random pointer
+        if (temp.random) {
+            // Point the copied node's random to the
+            // corresponding copied random node
+            copyNode.random = temp.random.next;
+        } else {
+            // Set the copied node's random to
+            // null if the original random is null
+            copyNode.random = null;
+        }
+
+        // Move to the next original node
+        temp = temp.next.next;
+    }
+}
+
+// Function to retrieve the
+// deep copy of the linked list
+function getDeepCopyList(head) {
+    let temp = head;
+    // Create a dummy node
+    let dummyNode = new Node(-1);
+    // Initialize a result pointer
+    let res = dummyNode;
+
+    while (temp !== null) {
+        // Creating a new List by
+        // pointing to copied nodes
+        res.next = temp.next;
+        res = res.next;
+
+        // Disconnect and revert back to the
+        // initial state of the original linked list
+        temp.next = temp.next.next;
+        temp = temp.next;
+    }
+
+    // Return the deep copy of the
+    // list starting from the dummy node
+    return dummyNode.next;
+}
+
+// Function to clone the linked list
+function cloneLL(head) {
+    // If the original list
+    // is empty, return null
+    if (!head) return null;
+
+    // Step 1: Insert copy of
+    // nodes in between
+    insertCopyInBetween(head);
+    // Step 2: Connect random
+    // pointers of copied nodes
+    connectRandomPointers(head);
+    // Step 3: Retrieve the deep
+    // copy of the linked list
+    return getDeepCopyList(head);
+}
+
+// Function to print the cloned linked list
+function printClonedLinkedList(head) {
+    while (head !== null) {
+        console.log(`Data: ${head.data}${head.random ? `, Random: ${head.random.data}` : ', Random: nullptr'}`);
+        // Move to the next node
+        head = head.next;
+    }
+}
+
+// Main function
+function main() {
+    // Example linked list: 7 -&gt; 14 -&gt; 21 -&gt; 28
+    let head = new Node(7);
+    head.next = new Node(14);
+    head.next.next = new Node(21);
+    head.next.next.next = new Node(28);
+
+    // Assigning random pointers
+    head.random = head.next.next;
+    head.next.random = head;
+    head.next.next.random = head.next.next.next;
+    head.next.next.next.random = head.next;
+
+    console.log("Original Linked List with Random Pointers:");
+    printClonedLinkedList(head);
+
+    // Clone the linked list
+    let clonedList = cloneLL(head);
+
+    console.log("\nCloned Linked List with Random Pointers:");
+    printClonedLinkedList(clonedList);
+}
+
+main();
+
+                            </code>
+                        </pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+</summary>
+<p>
+</p><p><strong>Time Complexity: O(3N)</strong>, where N is the number of nodes in the linked list. The
+                        algorithm makes three traversals of the linked list, once to create copies and insert them
+                        between original nodes, then to set the random pointers of the copied nodes to their appropriate
+                        copied nodes and then to separate the copied and original nodes.</p>
+<p><strong>Space Complexity : O(N)</strong>, where N is the number of nodes in the linked list as
+                        the
+                        only extra additional space allocated it to create the copied list without creating any other
+                        additional data structures.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

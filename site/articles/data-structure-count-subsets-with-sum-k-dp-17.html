@@ -1,0 +1,799 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Count Subsets with Sum K (DP - 17)</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Count Subsets with Sum K (DP - 17)</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/count-subsets-with-sum-k-dp-17/</code></div>
+  <p><strong>Problem Statement :</strong> Given an array arr of n integers and an integer K, count the number of subsets of the given array that have a sum equal to K. 
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: arr = [1, 2, 2, 3], K = 3</span>
+<span>Output: 3</span>
+<img height="356" loading="lazy" src="../assets/img/798972be8efe3516.png" width="624"/>
+<span>Explanation: The subarrays [1,2], [1,2] and [3] have a sum of 3. </span>
+<p></p>
+<span>Input: arr = [1, 2, 3, 4, 5], K = 5</span>
+<span>Output: 3</span>
+<span>Explanation: The subsets are [5], [2, 3], and [1, 4]. </span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/count-subsets-with-sum-k" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. 
+    It's highly recommend trying to 
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Memoization
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+ The problem of counting subsets with a given sum K can be thought of as a decision process where, for each element in the array, we either include it in the subset or exclude it. If we include it, the target reduces by that element’s value and if we exclude it, the target remains the same. This naturally forms a recursion. However, many subproblems repeat, such as computing the number of ways to reach the same target with the same index again and again.<br/><br/> To avoid redundant work, we use memoization, where each state defined by the pair (index, target) is stored after being computed once. This way, instead of exploring an exponential number of recursive paths, we reuse previously computed results, bringing the complexity down to polynomial time.
+<ul>
+<li>Define a recursive function that takes the current index and the remaining target sum as parameters</li>
+<li>If the target becomes zero, return 1 because one valid subset is found</li>
+<li>If the index is zero, check if the first element equals the target, and return 1 if true, else 0</li>
+<li>Before solving, check if the result for this state is already stored in a dp table, and if yes, return it</li>
+<li>Recursively call the function by excluding the current element, keeping the target unchanged</li>
+<li>If the current element is less than or equal to the target, also call the function by including it and reducing the target</li>
+<li>Add the results of including and excluding to get the total number of subsets for this state</li>
+<li>Store the result in the dp table and return it</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to count subsets that sum up to target
+    int countSubsets(vector&lt;int&gt;&amp; nums, int target) {
+        // Initialize dp table with -1 (uncomputed states)
+        vector&lt;vector&lt;int&gt;&gt; dp(nums.size(), vector&lt;int&gt;(target + 1, -1));
+        return solve(nums.size() - 1, target, nums, dp);
+    }
+
+private:
+    // Recursive helper with memoization
+    int solve(int index, int target, vector&lt;int&gt;&amp; nums, vector&lt;vector&lt;int&gt;&gt;&amp; dp) {
+        // Base case: if target is 0, we found a valid subset
+        if (target == 0) return 1;
+
+        // Base case: if we are at index 0, check if nums[0] equals target
+        if (index == 0) return (nums[0] == target ? 1 : 0);
+
+        // If already computed, return from dp
+        if (dp[index][target] != -1) return dp[index][target];
+
+        // Case 1: Exclude current element
+        int notTake = solve(index - 1, target, nums, dp);
+
+        // Case 2: Include current element (if it is not greater than target)
+        int take = 0;
+        if (nums[index] &lt;= target) {
+            take = solve(index - 1, target - nums[index], nums, dp);
+        }
+
+        // Store result in dp and return
+        return dp[index][target] = take + notTake;
+    }
+};
+
+int main() {
+    vector&lt;int&gt; nums = {1, 2, 3, 3};
+    int target = 6;
+    Solution obj;
+    cout &lt;&lt; obj.countSubsets(nums, target) &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to count subsets that sum up to target
+    public int countSubsets(int[] nums, int target) {
+        // Initialize dp table with -1 (uncomputed states)
+        int[][] dp = new int[nums.length][target + 1];
+        for (int[] row : dp) Arrays.fill(row, -1);
+        return solve(nums.length - 1, target, nums, dp);
+    }
+
+    // Recursive helper with memoization
+    private int solve(int index, int target, int[] nums, int[][] dp) {
+        // Base case: if target is 0, we found a valid subset
+        if (target == 0) return 1;
+
+        // Base case: if we are at index 0, check if nums[0] equals target
+        if (index == 0) return (nums[0] == target ? 1 : 0);
+
+        // If already computed, return from dp
+        if (dp[index][target] != -1) return dp[index][target];
+
+        // Case 1: Exclude current element
+        int notTake = solve(index - 1, target, nums, dp);
+
+        // Case 2: Include current element (if it is not greater than target)
+        int take = 0;
+        if (nums[index] &lt;= target) {
+            take = solve(index - 1, target - nums[index], nums, dp);
+        }
+
+        // Store result in dp and return
+        return dp[index][target] = take + notTake;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Solution obj = new Solution();
+        int[] nums = {1, 2, 3, 3};
+        int target = 6;
+        System.out.println(obj.countSubsets(nums, target));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to count subsets that sum up to target
+    def countSubsets(self, nums, target):
+        # Initialize dp table with -1 (uncomputed states)
+        dp = [[-1] * (target + 1) for _ in range(len(nums))]
+        return self.solve(len(nums) - 1, target, nums, dp)
+
+    # Recursive helper with memoization
+    def solve(self, index, target, nums, dp):
+        # Base case: if target is 0, we found a valid subset
+        if target == 0:
+            return 1
+
+        # Base case: if we are at index 0, check if nums[0] equals target
+        if index == 0:
+            return 1 if nums[0] == target else 0
+
+        # If already computed, return from dp
+        if dp[index][target] != -1:
+            return dp[index][target]
+
+        # Case 1: Exclude current element
+        notTake = self.solve(index - 1, target, nums, dp)
+
+        # Case 2: Include current element (if it is not greater than target)
+        take = 0
+        if nums[index] &lt;= target:
+            take = self.solve(index - 1, target - nums[index], nums, dp)
+
+        # Store result in dp and return
+        dp[index][target] = take + notTake
+        return dp[index][target]
+
+
+# Driver code
+nums = [1, 2, 3, 3]
+target = 6
+obj = Solution()
+print(obj.countSubsets(nums, target))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to count subsets that sum up to target
+    countSubsets(nums, target) {
+        // Initialize dp table with -1 (uncomputed states)
+        let dp = Array.from({ length: nums.length }, () =&gt;
+            Array(target + 1).fill(-1)
+        );
+        return this.solve(nums.length - 1, target, nums, dp);
+    }
+
+    // Recursive helper with memoization
+    solve(index, target, nums, dp) {
+        // Base case: if target is 0, we found a valid subset
+        if (target === 0) return 1;
+
+        // Base case: if we are at index 0, check if nums[0] equals target
+        if (index === 0) return nums[0] === target ? 1 : 0;
+
+        // If already computed, return from dp
+        if (dp[index][target] !== -1) return dp[index][target];
+
+        // Case 1: Exclude current element
+        let notTake = this.solve(index - 1, target, nums, dp);
+
+        // Case 2: Include current element (if it is not greater than target)
+        let take = 0;
+        if (nums[index] &lt;= target) {
+            take = this.solve(index - 1, target - nums[index], nums, dp);
+        }
+
+        // Store result in dp and return
+        dp[index][target] = take + notTake;
+        return dp[index][target];
+    }
+}
+
+// Driver code
+let nums = [1, 2, 3, 3];
+let target = 6;
+let obj = new Solution();
+console.log(obj.countSubsets(nums, target));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N * K)</strong>, each state defined by index and target is computed once.<br/>
+<strong>Space Complexity: O(N * K)</strong>, extra space is used for the dp table and recursion stack.
+
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Tabulation
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+The problem of counting subsets with a given sum K can be solved using tabulation by building the solution bottom-up. Instead of starting with recursion, we construct a dp table where each entry dp[i][t] represents the number of subsets that can be formed using the first i elements to achieve the sum t. We iteratively fill this table, considering for each element whether we include it or exclude it.<br/><br/> This way, we systematically compute the answer without recursion and avoid stack overhead, while still ensuring that overlapping subproblems are reused effectively.
+
+<ul>
+<li>Create a 2D dp table where dp[i][t] means number of subsets using first i elements to make sum t</li>
+<li>Initialize dp[0][0] as 1 because with zero elements, only one subset (empty set) makes sum 0</li>
+<li>If the first element is less than or equal to K, set dp[0][arr[0]] as 1 because a single element can form that sum</li>
+<li>Iterate over all elements from index 1 to n-1</li>
+<li>For each element, iterate over all target sums from 0 to K</li>
+<li>For each dp[i][t], first take the value from dp[i-1][t] (excluding current element)</li>
+<li>If current element is less than or equal to t, also add dp[i-1][t - arr[i]] (including current element)</li>
+<li>At the end, dp[n-1][K] will hold the total number of subsets with sum equal to K</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    int countSubsets(vector&lt;int&gt;&amp; arr, int K) {
+        // Get number of elements
+        int n = arr.size();
+
+        // Create dp table with dimensions n x (K+1)
+        vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(K + 1, 0));
+
+        // Base case: one subset (empty set) makes sum 0
+        dp[0][0] = 1;
+
+        // If first element is &lt;= K, mark dp[0][arr[0]] as 1
+        if (arr[0] &lt;= K) dp[0][arr[0]] = 1;
+
+        // Fill the table
+        for (int i = 1; i &lt; n; i++) {
+            for (int target = 0; target &lt;= K; target++) {
+                // Exclude current element
+                int notTake = dp[i - 1][target];
+
+                // Include current element if possible
+                int take = 0;
+                if (arr[i] &lt;= target) take = dp[i - 1][target - arr[i]];
+
+                // Total ways
+                dp[i][target] = notTake + take;
+            }
+        }
+
+        // Final answer
+        return dp[n - 1][K];
+    }
+};
+
+int main() {
+    Solution obj;
+    vector&lt;int&gt; arr = {1, 2, 3, 3};
+    int K = 6;
+    cout &lt;&lt; obj.countSubsets(arr, K) &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    public int countSubsets(int[] arr, int K) {
+        // Get number of elements
+        int n = arr.length;
+
+        // Create dp table with dimensions n x (K+1)
+        int[][] dp = new int[n][K + 1];
+
+        // Base case: one subset (empty set) makes sum 0
+        dp[0][0] = 1;
+
+        // If first element is &lt;= K, mark dp[0][arr[0]] as 1
+        if (arr[0] &lt;= K) dp[0][arr[0]] = 1;
+
+        // Fill the table
+        for (int i = 1; i &lt; n; i++) {
+            for (int target = 0; target &lt;= K; target++) {
+                // Exclude current element
+                int notTake = dp[i - 1][target];
+
+                // Include current element if possible
+                int take = 0;
+                if (arr[i] &lt;= target) take = dp[i - 1][target - arr[i]];
+
+                // Total ways
+                dp[i][target] = notTake + take;
+            }
+        }
+
+        // Final answer
+        return dp[n - 1][K];
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Solution obj = new Solution();
+        int[] arr = {1, 2, 3, 3};
+        int K = 6;
+        System.out.println(obj.countSubsets(arr, K));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    def countSubsets(self, arr, K):
+        # Get number of elements
+        n = len(arr)
+
+        # Create dp table with dimensions n x (K+1)
+        dp = [[0] * (K + 1) for _ in range(n)]
+
+        # Base case: one subset (empty set) makes sum 0
+        dp[0][0] = 1
+
+        # If first element is &lt;= K, mark dp[0][arr[0]] as 1
+        if arr[0] &lt;= K:
+            dp[0][arr[0]] = 1
+
+        # Fill the table
+        for i in range(1, n):
+            for target in range(K + 1):
+                # Exclude current element
+                notTake = dp[i - 1][target]
+
+                # Include current element if possible
+                take = 0
+                if arr[i] &lt;= target:
+                    take = dp[i - 1][target - arr[i]]
+
+                # Total ways
+                dp[i][target] = notTake + take
+
+        # Final answer
+        return dp[n - 1][K]
+
+
+# Driver code
+arr = [1, 2, 3, 3]
+K = 6
+obj = Solution()
+print(obj.countSubsets(arr, K))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    countSubsets(arr, K) {
+        // Get number of elements
+        let n = arr.length;
+
+        // Create dp table with dimensions n x (K+1)
+        let dp = Array.from({ length: n }, () =&gt; Array(K + 1).fill(0));
+
+        // Base case: one subset (empty set) makes sum 0
+        dp[0][0] = 1;
+
+        // If first element is &lt;= K, mark dp[0][arr[0]] as 1
+        if (arr[0] &lt;= K) dp[0][arr[0]] = 1;
+
+        // Fill the table
+        for (let i = 1; i &lt; n; i++) {
+            for (let target = 0; target &lt;= K; target++) {
+                // Exclude current element
+                let notTake = dp[i - 1][target];
+
+                // Include current element if possible
+                let take = 0;
+                if (arr[i] &lt;= target) take = dp[i - 1][target - arr[i]];
+
+                // Total ways
+                dp[i][target] = notTake + take;
+            }
+        }
+
+        // Final answer
+        return dp[n - 1][K];
+    }
+}
+
+// Driver code
+let arr = [1, 2, 3, 3];
+let K = 6;
+let obj = new Solution();
+console.log(obj.countSubsets(arr, K));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N * K)</strong>, each state defined by index and target is computed once.<br/>
+<strong>Space Complexity: O(N * K)</strong>, extra space is used for the dp table.
+
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Space Optimization
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+The problem of counting subsets with a given sum K can also be solved with space optimization.
+Instead of storing results for all n rows, we notice that dp[i][t] only depends on the previous row. Thus instead of storing entire table, we can only store the previous row.
+
+<ul> <li>Create a 1D dp array of size (K + 1), where dp[t] represents number of subsets that sum to t</li> <li>Initialize dp[0] = 1 because there’s always one subset (empty set) with sum 0</li> <li>If the first element is less than or equal to K, set dp[arr[0]] = 1</li> <li>Iterate through the array from index 1 to n-1</li> <li>For each element, traverse target sums backwards from K down to arr[i]</li> <li>Update dp[t] by adding dp[t - arr[i]], meaning we include the current element</li> <li>Backward traversal ensures we don’t overwrite values that are yet to be used</li> <li>At the end, dp[K] will hold the total number of subsets that sum to K</li> </ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    int countSubsets(vector&lt;int&gt;&amp; arr, int K) {
+        // Create a dp array of size K+1 initialized to 0
+        vector&lt;int&gt; dp(K + 1, 0);
+
+        // Base case: One subset (empty set) makes sum 0
+        dp[0] = 1;
+
+        // If first element &lt;= K, mark it as a subset
+        if (arr[0] &lt;= K) dp[arr[0]] += 1;
+
+        // Loop through elements starting from index 1
+        for (int i = 1; i &lt; arr.size(); i++) {
+            // Create a temporary dp array for current element
+            vector&lt;int&gt; curr(K + 1, 0);
+
+            // Empty set always makes sum 0
+            curr[0] = 1;
+
+            // Iterate over all possible targets
+            for (int t = 0; t &lt;= K; t++) {
+                // Exclude current element
+                int notTake = dp[t];
+
+                // Include current element if possible
+                int take = 0;
+                if (arr[i] &lt;= t) {
+                    take = dp[t - arr[i]];
+                }
+
+                // Total ways = include + exclude
+                curr[t] = take + notTake;
+            }
+
+            // Update dp for next iteration
+            dp = curr;
+        }
+
+        // Return answer for sum K
+        return dp[K];
+    }
+};
+
+int main() {
+    Solution sol;
+    vector&lt;int&gt; arr = {1, 2, 3};
+    int K = 4;
+    cout &lt;&lt; sol.countSubsets(arr, K) &lt;&lt; endl; 
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    public int countSubsets(int[] arr, int K) {
+        // Create dp array of size K+1
+        int[] dp = new int[K + 1];
+
+        // Base case: Empty set makes sum 0
+        dp[0] = 1;
+
+        // If first element &lt;= K, mark it
+        if (arr[0] &lt;= K) dp[arr[0]] += 1;
+
+        // Loop over elements
+        for (int i = 1; i &lt; arr.length; i++) {
+            // Temporary array for current iteration
+            int[] curr = new int[K + 1];
+
+            // Base case: Empty set makes sum 0
+            curr[0] = 1;
+
+            // Check all target sums
+            for (int t = 0; t &lt;= K; t++) {
+                // Exclude current element
+                int notTake = dp[t];
+
+                // Include current element if possible
+                int take = 0;
+                if (arr[i] &lt;= t) {
+                    take = dp[t - arr[i]];
+                }
+
+                // Sum of both choices
+                curr[t] = take + notTake;
+            }
+
+            // Update dp
+            dp = curr;
+        }
+
+        // Return answer
+        return dp[K];
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        int[] arr = {1, 2, 3};
+        int K = 4;
+        System.out.println(sol.countSubsets(arr, K)); 
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    def countSubsets(self, arr, K):
+        # Initialize dp array with 0
+        dp = [0] * (K + 1)
+
+        # Base case: Empty set makes sum 0
+        dp[0] = 1
+
+        # If first element &lt;= K, mark it
+        if arr[0] &lt;= K:
+            dp[arr[0]] += 1
+
+        # Loop through elements
+        for i in range(1, len(arr)):
+            # Temporary array for current iteration
+            curr = [0] * (K + 1)
+            curr[0] = 1
+
+            # Iterate through target sums
+            for t in range(K + 1):
+                # Exclude current element
+                notTake = dp[t]
+
+                # Include current element if possible
+                take = 0
+                if arr[i] &lt;= t:
+                    take = dp[t - arr[i]]
+
+                # Add both cases
+                curr[t] = take + notTake
+
+            # Update dp
+            dp = curr
+
+        # Return answer
+        return dp[K]
+
+
+# Driver code
+sol = Solution()
+arr = [1, 2, 3]
+K = 4
+print(sol.countSubsets(arr, K))  
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    countSubsets(arr, K) {
+        // Initialize dp array
+        let dp = new Array(K + 1).fill(0);
+
+        // Base case: Empty set makes sum 0
+        dp[0] = 1;
+
+        // If first element &lt;= K, mark it
+        if (arr[0] &lt;= K) dp[arr[0]] += 1;
+
+        // Loop through elements
+        for (let i = 1; i &lt; arr.length; i++) {
+            // Temporary array for current element
+            let curr = new Array(K + 1).fill(0);
+            curr[0] = 1;
+
+            // Check all target sums
+            for (let t = 0; t &lt;= K; t++) {
+                // Exclude current element
+                let notTake = dp[t];
+
+                // Include current element if possible
+                let take = 0;
+                if (arr[i] &lt;= t) {
+                    take = dp[t - arr[i]];
+                }
+
+                // Sum of both choices
+                curr[t] = take + notTake;
+            }
+
+            // Update dp
+            dp = curr;
+        }
+
+        // Return answer
+        return dp[K];
+    }
+}
+
+// Driver code
+let sol = new Solution();
+let arr = [1, 2, 3];
+let K = 4;
+console.log(sol.countSubsets(arr, K)); 
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N * K)</strong>, each state defined by index and target is computed once.<br/>
+<strong>Space Complexity: O(K)</strong>, extra space is used for storing the dp array.
+
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

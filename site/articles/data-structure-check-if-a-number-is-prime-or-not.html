@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Check if a number is prime or not</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Check if a number is prime or not</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/check-if-a-number-is-prime-or-not/</code></div>
+  <p><strong>Problem Statement: </strong> Given an integer N, check whether it is prime or not. A prime number is a number
+    that is only divisible by 1 and itself and the total number of divisors is 2..</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+                
+Example 1:
+Input:N = 2
+               
+Output:True
+                
+Explanation: 2 is a prime number because it has two divisors: 1 and 2 (the number itself).
+                                        
+Example 2:
+Input:N =10                
+                
+Output: False
+                
+Explanation: 10 is not prime, it is a composite number because it has 4 divisors: 1, 2, 5 and 10.                          
+
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/check-for-prime-number" rel="noopener" target="_blank">practice link</a>
+        to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Brute Force Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<p>We can iterate through numbers from 1 to n, counting how many of these numbers divide n
+                            without a remainder. If exactly two numbers do, so n is prime otherwise it is not prime.
+                        </p>
+<p><strong>Algorithm:</strong></p>
+<p><strong>Step 1:</strong>Initialise a variable cnt to count the number of factors and set it
+                            to 0.</p>
+<p><strong>Step 2:</strong>Start a loop from 1 to n, iterating through each number i. Inside the
+                            loop:
+                        </p><ol>
+<li>Check if n is divisible by i without any remainder.</li>
+<li>If it is, increment the counter variable by 1.</li>
+</ol>
+<p><strong>Step 3:</strong>After the loop if the number of divisors is equal to 2, return true
+                            indicating the number is prime.
+                        </p><ol>
+<li>If the number of divisors is not equal to 2 (but greater), return false indicating that
+                                the number is not prime.</li>
+</ol>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div>
+<div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Function to check if a given number is prime.
+bool checkPrime(int n) {
+    int cnt = 0;  // Initialize a counter variable to count the number of factors.
+
+    // Loop through numbers from 1 to n.
+    for (int i = 1; i &lt;= n; i++) {
+        // If n is divisible by i without any remainder.
+        if (n % i == 0) {
+            cnt++;  // Increment the counter.
+        }
+    }
+
+    // If the number of factors is exactly 2 (1 and the number itself), it's prime.
+    if (cnt == 2) {
+        return true;
+    }
+    // If the number of factors is not 2, it's not prime.
+    else {
+        return false;
+    }
+}
+
+int main() {
+    int n = 1483;  // Example number
+    bool isPrime = checkPrime(n);  // Function call to check if the number is prime
+
+    if (isPrime) {
+        cout &lt;&lt; n &lt;&lt; " is a prime number." &lt;&lt; endl;
+    } else {
+        cout &lt;&lt; n &lt;&lt; " is not a prime number." &lt;&lt; endl;
+    }
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // Function to check if a given number is prime
+    public boolean checkPrime(int n) {
+        int cnt = 0;  // Initialize a counter variable to count the number of factors
+
+        // Loop through numbers from 1 to n
+        for (int i = 1; i &lt;= n; i++) {
+            // If n is divisible by i without any remainder
+            if (n % i == 0) {
+                cnt++;  // Increment the counter
+            }
+        }
+
+        // If the number of factors is exactly 2 (1 and the number itself), it's prime
+        return cnt == 2;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int n = 1483;  // Example number
+        Solution obj = new Solution();
+        boolean isPrime = obj.checkPrime(n);  // Function call to check if the number is prime
+
+        if (isPrime) {
+            System.out.println(n + " is a prime number.");
+        } else {
+            System.out.println(n + " is not a prime number.");
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Function to check if a given number is prime
+def checkPrime(n):
+    cnt = 0  # Initialize a counter variable to count the number of factors
+
+    # Loop through numbers from 1 to n
+    for i in range(1, n + 1):
+        # If n is divisible by i without any remainder
+        if n % i == 0:
+            cnt += 1  # Increment the counter
+
+    # If the number of factors is exactly 2 (1 and the number itself), it's prime
+    return cnt == 2
+
+# Driver code
+n = 1483  # Example number
+isPrime = checkPrime(n)  # Function call to check if the number is prime
+
+if isPrime:
+    print(f"{n} is a prime number.")
+else:
+    print(f"{n} is not a prime number.")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to check if a given number is prime
+    checkPrime(n) {
+        let cnt = 0;  // Initialize a counter variable to count the number of factors
+
+        // Loop through numbers from 1 to n
+        for (let i = 1; i &lt;= n; i++) {
+            // If n is divisible by i without any remainder
+            if (n % i === 0) {
+                cnt++;  // Increment the counter
+            }
+        }
+
+        // If the number of factors is exactly 2 (1 and the number itself), it's prime
+        return cnt === 2;
+    }
+}
+
+// Driver code
+let n = 1483;  // Example number
+let obj = new Solution();
+let isPrime = obj.checkPrime(n);  // Function call to check if the number is prime
+
+if (isPrime) {
+    console.log(`${n} is a prime number.`);
+} else {
+    console.log(`${n} is not a prime number.`);
+}
+</code></pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity: O(N)</strong>, as we iterate from 1 to N performing constant-time
+                        operation for each iteration.</p>
+<p><strong>Space Complexity : O(1)</strong>, as the space used by the algorithm does not increase
+                        with the size of the input.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<p>We can optimise the algorithm by only iterating up to the square root of n when checking for
+                            factors. This is because if n has a factor greater than its square root, it must also have a
+                            factor smaller than its square root.</p>
+<p>This property is symmetric about the square root of n by traversing just the first half we
+                            can avoid redundant iteration and computations improving the efficiency of the algorithm.
+                            Discusses in detail here:<a href="https://takeuforward.org/data-structure/print-all-divisors-of-a-given-number/" rel="noopener" target="_blank">Print
+                                All Divisiors</a></p>
+
+<p><strong>Algorithm</strong></p>
+<p><strong>Step 1: </strong>
+                            Initialise a counter variable cnt to count the number of factors to 0.</p>
+<p><strong>Step 2: </strong>Begin a loop from 1 to the square root of n. This loop iterates
+                            through possible factors of n. For each value of i within the loop:
+                        </p><ol>
+<li>Check if n is divisible by i without any remainder.</li>
+<li>If n is divisible by i, it means i is a factor of n, so increment the counter variable
+                                cnt by 1. </li>
+<li>Check if the reciprocal factor of i ie. n/i is not equal to i. If they are not equal, it
+                                means there is a distinct factor so increment cnt by 1 again.</li>
+</ol>
+<p><strong>Step 3: </strong>After the loop, cnt will contain the total numbers of factors of n.
+                        </p>
+<p><strong>Step 4: </strong>Check if the value of cnt is exactly 2, it means that n has exactly
+                            two distinct factors (1 and itself), indicating that it is a prime number.
+                        </p><ol>
+<li>If the the number of factors is greater than 2 then it is a composite number, return
+                                false. </li>
+</ol>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div>
+<div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Function to check if a given number is prime
+bool checkPrime(int n) {
+    int cnt = 0;  // Initialize a counter variable to count the number of factors
+
+    // Loop through numbers from 1 to the square root of n
+    for (int i = 1; i &lt;= sqrt(n); i++) {
+        if (n % i == 0) {
+            cnt++;  // If n is divisible by i, increment the counter
+
+            // If n is not a perfect square, count its reciprocal factor
+            if (n / i != i) {
+                cnt++;
+            }
+        }
+    }
+
+    // If the number of factors is exactly 2 (1 and the number itself), it's prime
+    if (cnt == 2) {
+        return true;
+    } else {
+        return false;  // If not, it's not a prime number
+    }
+}
+
+int main() {
+    int n = 1483;  // Example number
+    bool isPrime = checkPrime(n);  // Function call to check if the number is prime
+
+    if (isPrime) {
+        cout &lt;&lt; n &lt;&lt; " is a prime number." &lt;&lt; endl;
+    } else {
+        cout &lt;&lt; n &lt;&lt; " is not a prime number." &lt;&lt; endl;
+    }
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // Function to check if a given number is prime
+    public boolean checkPrime(int n) {
+        int cnt = 0;  // Initialize a counter variable to count the number of factors
+
+        // Loop through numbers from 1 to the square root of n
+        for (int i = 1; i &lt;= Math.sqrt(n); i++) {
+            if (n % i == 0) {
+                cnt++;  // If n is divisible by i, increment the counter
+
+                // If n is not a perfect square, count its reciprocal factor
+                if (n / i != i) {
+                    cnt++;
+                }
+            }
+        }
+
+        // If the number of factors is exactly 2 (1 and the number itself), it's prime
+        return cnt == 2;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int n = 1483;  // Example number
+        Solution obj = new Solution();
+        boolean isPrime = obj.checkPrime(n);  // Function call to check if the number is prime
+
+        if (isPrime) {
+            System.out.println(n + " is a prime number.");
+        } else {
+            System.out.println(n + " is not a prime number.");
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Function to check if a given number is prime
+def checkPrime(n):
+    cnt = 0  # Initialize a counter variable to count the number of factors
+
+    # Loop through numbers from 1 to the square root of n
+    for i in range(1, int(n ** 0.5) + 1):
+        if n % i == 0:
+            cnt += 1  # If n is divisible by i, increment the counter
+
+            # If n is not a perfect square, count its reciprocal factor
+            if n // i != i:
+                cnt += 1
+
+    # If the number of factors is exactly 2 (1 and the number itself), it's prime
+    return cnt == 2
+
+# Driver code
+n = 1483  # Example number
+isPrime = checkPrime(n)  # Function call to check if the number is prime
+
+if isPrime:
+    print(f"{n} is a prime number.")
+else:
+    print(f"{n} is not a prime number.")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to check if a given number is prime
+    checkPrime(n) {
+        let cnt = 0;  // Initialize a counter variable to count the number of factors
+
+        // Loop through numbers from 1 to the square root of n
+        for (let i = 1; i &lt;= Math.sqrt(n); i++) {
+            if (n % i === 0) {
+                cnt++;  // If n is divisible by i, increment the counter
+
+                // If n is not a perfect square, count its reciprocal factor
+                if (n / i !== i) {
+                    cnt++;
+                }
+            }
+        }
+
+        // If the number of factors is exactly 2 (1 and the number itself), it's prime
+        return cnt === 2;
+    }
+}
+
+// Driver code
+let n = 1483;  // Example number
+let obj = new Solution();
+let isPrime = obj.checkPrime(n);  // Function call to check if the number is prime
+
+if (isPrime) {
+    console.log(`${n} is a prime number.`);
+} else {
+    console.log(`${n} is not a prime number.`);
+}
+</code></pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity: O(sqrt(N))</strong>, as The loop iterates up to the square root of n
+                        performing constant time operations at each step.</p>
+<p><strong>Space Complexity : O(1)</strong>, as the space complexity remains constant and
+                        independent of the input size. Only a fixed amount of memory is required to store the integer
+                        variables.
+
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

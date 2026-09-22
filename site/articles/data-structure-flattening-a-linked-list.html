@@ -1,0 +1,1160 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Flattening a Linked List</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Flattening a Linked List</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/flattening-a-linked-list/</code></div>
+  <p><strong>Problem Statement: </strong>
+Given a linked list containing ‘N’ head nodes where every node in the linked list contains two pointers:
+</p><li>‘Next’ points to the next node in the list</li>
+<li>‘Child’ pointer to a linked list where the current node is the head</li><br/>
+Each of these child linked lists is in sorted order and connected by a 'child' pointer. Your task is to flatten this linked list such that all nodes appear in a single layer or level in a 'sorted order'.
+
+
+
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong></pre>
+<strong>Input:</strong> <img alt="Example 1" class="wp-image-10263" height="200" loading="lazy" src="../assets/img/b1e0d6498c7b349e.png" width="500"/>
+<strong>Output:</strong> 1 2 3 4 5 6 7 8 9 10 11 12 <img alt="Example 1 Output" class="wp-image-10264" height="200" loading="lazy" src="../assets/img/b1e0d6498c7b349e.png" width="500"/>
+<strong>Explanation:</strong> The linked list is flattened in sorted order, resulting in a single layer with all nodes appearing in ascending order. <img alt="Example 1 Explanation" class="wp-image-10265" height="200" loading="lazy" src="../assets/img/bab5834e7da79c75.png" width="500"/>
+<strong>Example 2:</strong>
+<strong>Input:</strong> <img alt="Example 1" class="wp-image-10263" height="200" loading="lazy" src="../assets/img/d0da3c93c824cfa3.png" width="500"/>
+<strong>Output:</strong> 1 2 3 4 5 6 7 8 9 10 11 12 <img alt="Example 1 Output" class="wp-image-10264" height="200" loading="lazy" src="../assets/img/d0da3c93c824cfa3.png" width="500"/>
+<strong>Explanation:</strong> The linked list is flattened in sorted order, resulting in a single layer with all nodes appearing in ascending order. <img alt="Example 1 Explanation" class="wp-image-10265" height="200" loading="lazy" src="../assets/img/d0da3c93c824cfa3.png" width="500"/>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/flattening-of-ll" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Brute Force 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Initialize an array to store node values and traverse the list, collecting values from both top-level and child nodes.</li>
+<li>Sort the array to arrange the values in ascending order.</li>
+<li>Create and return a new linked list from the sorted array.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Definition of special linked list:
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode *child;
+    ListNode() {
+        val = 0;
+        next = NULL;
+        child = NULL;
+    }
+    ListNode(int data1) {
+        val = data1;
+        next = NULL;
+        child = NULL;
+    }
+    ListNode(int data1, ListNode *next1, ListNode* next2) {
+        val = data1;
+        next = next1;
+        child = next1;
+    }
+};
+
+class Solution {
+private:
+    // Function to convert a vector to a linked list
+    ListNode* convertArrToLinkedList(vector&lt;int&gt;&amp; arr) {
+        /* Create a dummy node to serve as
+         the head of the linked list */
+        ListNode* dummyNode = new ListNode(-1);
+        ListNode* temp = dummyNode;
+
+        /* Iterate through the vector and
+         create nodes with vector elements */
+        for (int i=0; i &lt; arr.size(); i++) {
+            // Create a new node with the vector element
+            temp-&gt;child = new ListNode(arr[i]);
+            
+            // Update the temporary pointer
+            temp = temp-&gt;child;
+        }
+        
+        /* Return the linked list starting
+         from the next of the dummy node */
+        return dummyNode-&gt;child;
+    }
+
+public:
+    // Function to flatten a linked list with child pointers 
+    ListNode* flattenLinkedList(ListNode* head) {
+        vector&lt;int&gt; arr;
+
+        // Traverse through the linked list
+        while (head != nullptr) {
+            /* Traverse through the child
+             nodes of each head node */
+            ListNode* t2 = head;
+            
+            while (t2 != nullptr) {
+                // Store each node's data in the array
+                arr.push_back(t2-&gt;val);
+                
+                // Move to the next child node
+                t2 = t2-&gt;child;
+            }
+            // Move to the next head node
+            head = head-&gt;next;
+        }
+
+        // Sort the array containing node values
+        sort(arr.begin(), arr.end());
+
+        // Convert the sorted array back to a linked list
+        return convertArrToLinkedList(arr);
+    }
+};
+
+// Function to print the linked list
+void printLinkedList(ListNode* head) {
+    while (head != nullptr) {
+        cout &lt;&lt; head-&gt;val &lt;&lt; " ";
+        head = head-&gt;child;
+    }
+    cout &lt;&lt; endl;
+}
+
+// Function to print the linked list in a grid-like structure
+void printOriginalLinkedList(ListNode* head, int depth) {
+    while (head != nullptr) {
+        cout &lt;&lt; head-&gt;val;
+
+        /* If child exists, recursively
+         print it with indentation */
+        if (head-&gt;child) {
+            cout &lt;&lt; " -&gt; ";
+            printOriginalLinkedList(head-&gt;child, depth + 1);
+        }
+
+        // Add vertical bars for each level in the grid
+        if (head-&gt;next) {
+            cout &lt;&lt; endl;
+            for (int i = 0; i &lt; depth; ++i) {
+                cout &lt;&lt; "| ";
+            }
+        }
+        head = head-&gt;next;
+    }
+}
+
+int main() {
+    // Create a linked list with child pointers
+    ListNode* head = new ListNode(5);
+    head-&gt;child = new ListNode(14);
+
+    head-&gt;next = new ListNode(10);
+    head-&gt;next-&gt;child = new ListNode(4);
+
+    head-&gt;next-&gt;next = new ListNode(12);
+    head-&gt;next-&gt;next-&gt;child = new ListNode(20);
+    head-&gt;next-&gt;next-&gt;child-&gt;child = new ListNode(13);
+
+    head-&gt;next-&gt;next-&gt;next = new ListNode(7);
+    head-&gt;next-&gt;next-&gt;next-&gt;child = new ListNode(17);
+
+    // Print the original linked list structure
+    cout &lt;&lt; "Original linked list:" &lt;&lt; endl;
+    printOriginalLinkedList(head, 0);
+
+    // Creating an instance of Solution class
+    Solution sol;
+    
+    // Function call to flatten the linked list
+    ListNode* flattened = sol.flattenLinkedList(head);
+    
+    // Printing the flattened linked list
+    cout &lt;&lt; "\nFlattened linked list: ";
+    printLinkedList(flattened);
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Node definition for linked list with child pointers
+class ListNode {
+    int val;
+    ListNode next;
+    ListNode child;
+
+    ListNode() {
+        val = 0;
+        next = null;
+        child = null;
+    }
+
+    ListNode(int data1) {
+        val = data1;
+        next = null;
+        child = null;
+    }
+
+    ListNode(int data1, ListNode next1, ListNode child1) {
+        val = data1;
+        next = next1;
+        child = child1;
+    }
+}
+
+class Solution {
+    // Function to convert an array list to a linked list
+    private ListNode convertArrToLinkedList(List&lt;Integer&gt; arr) {
+        ListNode dummyNode = new ListNode(-1);
+        ListNode temp = dummyNode;
+
+        for (int val : arr) {
+            temp.child = new ListNode(val);
+            temp = temp.child;
+        }
+        return dummyNode.child;
+    }
+
+    // Function to flatten a linked list with child pointers
+    public ListNode flattenLinkedList(ListNode head) {
+        List&lt;Integer&gt; arr = new ArrayList&lt;&gt;();
+
+        while (head != null) {
+            ListNode t2 = head;
+            while (t2 != null) {
+                arr.add(t2.val);
+                t2 = t2.child;
+            }
+            head = head.next;
+        }
+
+        Collections.sort(arr);
+        return convertArrToLinkedList(arr);
+    }
+}
+
+class Main {
+    // Print the linked list in a single line
+    public static void printLinkedList(ListNode head) {
+        while (head != null) {
+            System.out.print(head.val + " ");
+            head = head.child;
+        }
+        System.out.println();
+    }
+
+    // Print the original linked list in a grid-like structure
+    public static void printOriginalLinkedList(ListNode head, int depth) {
+        while (head != null) {
+            System.out.print(head.val);
+            if (head.child != null) {
+                System.out.print(" -&gt; ");
+                printOriginalLinkedList(head.child, depth + 1);
+            }
+            if (head.next != null) {
+                System.out.println();
+                for (int i = 0; i &lt; depth; ++i) {
+                    System.out.print("| ");
+                }
+            }
+            head = head.next;
+        }
+    }
+
+    public static void main(String[] args) {
+        // Create linked list with child pointers
+        ListNode head = new ListNode(5);
+        head.child = new ListNode(14);
+
+        head.next = new ListNode(10);
+        head.next.child = new ListNode(4);
+
+        head.next.next = new ListNode(12);
+        head.next.next.child = new ListNode(20);
+        head.next.next.child.child = new ListNode(13);
+
+        head.next.next.next = new ListNode(7);
+        head.next.next.next.child = new ListNode(17);
+
+        // Print original list
+        System.out.println("Original linked list:");
+        printOriginalLinkedList(head, 0);
+
+        // Flatten and print
+        Solution sol = new Solution();
+        ListNode flattened = sol.flattenLinkedList(head);
+        System.out.print("\nFlattened linked list: ");
+        printLinkedList(flattened);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class ListNode:
+    def __init__(self, val=0, next=None, child=None):
+        self.val = val
+        self.next = next
+        self.child = child
+
+class Solution:
+    # Function to convert a vector to a linked list
+    def convertArrToLinkedList(self, arr):
+        ''' Create a dummy node to serve as
+         the head of the linked list '''
+        dummyNode = ListNode(-1)
+        temp = dummyNode
+
+        ''' Iterate through the vector and
+         create nodes with vector elements '''
+        for i in range(len(arr)):
+            # Create a new node with the vector element
+            temp.child = ListNode(arr[i])
+            
+            # Update the temporary pointer
+            temp = temp.child
+        
+        ''' Return the linked list starting
+         from the next of the dummy node '''
+        return dummyNode.child
+
+    # Function to flatten a linked list with child pointers 
+    def flattenLinkedList(self, head):
+        arr = []
+
+        # Traverse through the linked list
+        while head is not None:
+            ''' Traverse through the child
+             nodes of each head node '''
+            t2 = head
+            
+            while t2 is not None:
+                # Store each node's data in the array
+                arr.append(t2.val)
+                
+                # Move to the next child node
+                t2 = t2.child
+
+            # Move to the next head node
+            head = head.next
+
+        # Sort the array containing node values
+        arr.sort()
+
+        # Convert the sorted array back to a linked list
+        return self.convertArrToLinkedList(arr)
+
+# Function to print the linked list
+def printLinkedList(head):
+    while head is not None:
+        print(head.val, end=" ")
+        head = head.child
+    print()
+
+# Function to print the linked list in a grid-like structure
+def printOriginalLinkedList(head, depth):
+    while head is not None:
+        print(head.val, end="")
+
+        ''' If child exists, recursively
+         print it with indentation '''
+        if head.child:
+            print(" -&gt; ", end="")
+            printOriginalLinkedList(head.child, depth + 1)
+
+        # Add vertical bars for each level in the grid
+        if head.next:
+            print()
+            for i in range(depth):
+                print("| ", end="")
+        
+        head = head.next
+
+if __name__ == "__main__":
+    # Create a linked list with child pointers
+    head = ListNode(5)
+    head.child = ListNode(14)
+
+    head.next = ListNode(10)
+    head.next.child = ListNode(4)
+
+    head.next.next = ListNode(12)
+    head.next.next.child = ListNode(20)
+    head.next.next.child.child = ListNode(13)
+
+    head.next.next.next = ListNode(7)
+    head.next.next.next.child = ListNode(17)
+
+    # Print the original linked list structure
+    print("Original linked list:")
+    printOriginalLinkedList(head, 0)
+
+    # Creating an instance of Solution class
+    sol = Solution()
+    
+    # Function call to flatten the linked list
+    flattened = sol.flattenLinkedList(head)
+    
+    # Printing the flattened linked list
+    print("\nFlattened linked list: ", end="")
+    printLinkedList(flattened)</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class ListNode {
+    constructor(val = 0, next = null, child = null) {
+        this.val = val;
+        this.next = next;
+        this.child = child;
+    }
+}
+
+class Solution {
+    // Function to convert an array to a linked list
+    convertArrToLinkedList(arr) {
+        /* Create a dummy node to serve as
+         the head of the linked list */
+        let dummyNode = new ListNode(-1);
+        let temp = dummyNode;
+
+        /* Iterate through the array and
+         create nodes with array elements */
+        for (let i = 0; i &lt; arr.length; i++) {
+            // Create a new node with the array element
+            temp.child = new ListNode(arr[i]);
+            
+            // Update the temporary pointer
+            temp = temp.child;
+        }
+        
+        /* Return the linked list starting
+         from the next of the dummy node */
+        return dummyNode.child;
+    }
+
+    // Function to flatten a linked list with child pointers 
+    flattenLinkedList(head) {
+        let arr = [];
+
+        // Traverse through the linked list
+        while (head !== null) {
+            /* Traverse through the child
+             nodes of each head node */
+            let t2 = head;
+            
+            while (t2 !== null) {
+                // Store each node's data in the array
+                arr.push(t2.val);
+                
+                // Move to the next child node
+                t2 = t2.child;
+            }
+
+            // Move to the next head node
+            head = head.next;
+        }
+
+        // Sort the array containing node values
+        arr.sort((a, b) =&gt; a - b);
+
+        // Convert the sorted array back to a linked list
+        return this.convertArrToLinkedList(arr);
+    }
+}
+
+// Function to print the linked list
+function printLinkedList(head) {
+    while (head !== null) {
+        process.stdout.write(head.val + " ");
+        head = head.child;
+    }
+    console.log();
+}
+
+// Function to print the linked list in a grid-like structure
+function printOriginalLinkedList(head, depth) {
+    while (head !== null) {
+        process.stdout.write(head.val.toString());
+
+        /* If child exists, recursively
+         print it with indentation */
+        if (head.child) {
+            process.stdout.write(" -&gt; ");
+            printOriginalLinkedList(head.child, depth + 1);
+        }
+
+        // Add vertical bars for each level in the grid
+        if (head.next) {
+            console.log();
+            for (let i = 0; i &lt; depth; ++i) {
+                process.stdout.write("| ");
+            }
+        }
+        head = head.next;
+    }
+}
+
+let head = new ListNode(5);
+head.child = new ListNode(14);
+
+head.next = new ListNode(10);
+head.next.child = new ListNode(4);
+
+head.next.next = new ListNode(12);
+head.next.next.child = new ListNode(20);
+head.next.next.child.child = new ListNode(13);
+
+head.next.next.next = new ListNode(7);
+head.next.next.next.child = new ListNode(17);
+
+// Print the original linked list structure
+console.log("Original linked list:");
+printOriginalLinkedList(head, 0);
+
+// Creating an instance of Solution class
+let sol = new Solution();
+
+// Function call to flatten the linked list
+let flattened = sol.flattenLinkedList(head);
+
+// Printing the flattened linked list
+console.log("\nFlattened linked list: ");
+printLinkedList(flattened);</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity:</strong> O(N x M) + O(N x M log(N x M)) + O(N x M), where N is the number of nodes along the next pointers and M is the number of nodes along the child pointers.<br/>
+O(N x M) because we traverse through all the nodes, iterating through N nodes along the next pointers and M nodes along the child pointers.<br/>
+O(N x M log(N x M)) because we sort the array containing N x M total elements.<br/>
+O(N x M) because we reconstruct the linked list from the sorted array by iterating over the N x M elements.<br/><br/>
+<strong>Space Complexity:</strong> O(N x M) + O(N x M), where N is the number of nodes along the next pointers and M is the number of nodes along the child pointers.<br/>
+O(N x M) for storing all the elements in an additional array for sorting.<br/>
+O(N x M) to reconstruct the linked list from the array after sorting.
+
+                    </p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<li>Establish base case conditions by checking if the head is null or has no next pointer. If either condition is met, return the head, as there is no further flattening or merging required.</li>
+<li>Recursively initiate the flattening process by calling flattenLinkedList on the next node (head -&gt; next). The result of this recursive call will be the head of the flattened and merged linked list.</li>
+<li>Within the recursive call, perform merge operations by calling a merge function. This function merges the current list with the already flattened and merged list based on their data values. The merged list is then updated in the head and returned as the result of the flattening process.</li>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/882e2e2110bbd5cc.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/22ff240ae455b043.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/882e2e2110bbd5cc.png"/><img alt="Image 2" loading="lazy" src="../assets/img/22ff240ae455b043.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Definition of special linked list
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode *child;
+    ListNode() {
+        val = 0;
+        next = NULL;
+        child = NULL;
+    }
+    ListNode(int data1) {
+        val = data1;
+        next = NULL;
+        child = NULL;
+    }
+    ListNode(int data1, ListNode *next1, ListNode* next2) {
+        val = data1;
+        next = next1;
+        child = next1;
+    }
+};
+
+class Solution {
+private:
+    /* Merge the two linked lists in a particular
+     order based on the data value */
+    ListNode* merge(ListNode* list1, ListNode* list2){
+        /* Create a dummy node as a 
+        placeholder for the result */
+        ListNode* dummyNode = new ListNode(-1);
+        ListNode* res = dummyNode;
+    
+        // Merge the lists based on data values
+        while(list1 != NULL &amp;&amp; list2 != NULL){
+            if(list1-&gt;val &lt; list2-&gt;val){
+                res-&gt;child = list1;
+                res = list1;
+                list1 = list1-&gt;child;
+            }
+            else{
+                res-&gt;child = list2;
+                res = list2;
+                list2 = list2-&gt;child;
+            }
+            res-&gt;next = NULL;
+        }
+    
+        // Connect the remaining elements if any
+        if(list1){
+            res-&gt;child = list1;
+        } else {
+            res-&gt;child = list2;
+        }
+    
+        // Break the last node's link to prevent cycles
+        if(dummyNode-&gt;child){
+            dummyNode-&gt;child-&gt;next = NULL;
+        }
+        
+        return dummyNode-&gt;child;
+    }
+
+public:
+    // Function to flatten a linked list with child pointers 
+    ListNode* flattenLinkedList(ListNode* head) {
+        // If head is null or there is no next node
+        if(head == NULL || head-&gt;next == NULL){
+            return head; // Return head
+        }
+    
+        // Recursively flatten the rest of the linked list
+        ListNode* mergedHead = flattenLinkedList(head-&gt;next);
+        
+        // Merge the lists
+        head = merge(head, mergedHead);
+        return head;
+    }
+};
+
+// Function to print the linked list
+void printLinkedList(ListNode* head) {
+    while (head != nullptr) {
+        cout &lt;&lt; head-&gt;val &lt;&lt; " ";
+        head = head-&gt;child;
+    }
+    cout &lt;&lt; endl;
+}
+
+// Function to print the linked list in a grid-like structure
+void printOriginalLinkedList(ListNode* head, int depth) {
+    while (head != nullptr) {
+        cout &lt;&lt; head-&gt;val;
+
+        /* If child exists, recursively
+         print it with indentation */
+        if (head-&gt;child) {
+            cout &lt;&lt; " -&gt; ";
+            printOriginalLinkedList(head-&gt;child, depth + 1);
+        }
+
+        // Add vertical bars for each level in the grid
+        if (head-&gt;next) {
+            cout &lt;&lt; endl;
+            for (int i = 0; i &lt; depth; ++i) {
+                cout &lt;&lt; "| ";
+            }
+        }
+        head = head-&gt;next;
+    }
+}
+
+int main() {
+    // Create a linked list with child pointers
+    ListNode* head = new ListNode(5);
+    head-&gt;child = new ListNode(14);
+
+    head-&gt;next = new ListNode(10);
+    head-&gt;next-&gt;child = new ListNode(4);
+
+    head-&gt;next-&gt;next = new ListNode(12);
+    head-&gt;next-&gt;next-&gt;child = new ListNode(20);
+    head-&gt;next-&gt;next-&gt;child-&gt;child = new ListNode(13);
+
+    head-&gt;next-&gt;next-&gt;next = new ListNode(7);
+    head-&gt;next-&gt;next-&gt;next-&gt;child = new ListNode(17);
+
+    // Print the original linked list structure
+    cout &lt;&lt; "Original linked list:" &lt;&lt; endl;
+    printOriginalLinkedList(head, 0);
+
+    // Creating an instance of Solution class
+    Solution sol;
+    
+    // Function call to flatten the linked list
+    ListNode* flattened = sol.flattenLinkedList(head);
+    
+    // Printing the flattened linked list
+    cout &lt;&lt; "\nFlattened linked list: ";
+    printLinkedList(flattened);
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Definition of special linked list
+class ListNode {
+    int val;
+    ListNode next;
+    ListNode child;
+
+    ListNode() {
+        val = 0;
+        next = null;
+        child = null;
+    }
+
+    ListNode(int data1) {
+        val = data1;
+        next = null;
+        child = null;
+    }
+
+    ListNode(int data1, ListNode next1, ListNode child1) {
+        val = data1;
+        next = next1;
+        child = child1;
+    }
+}
+
+// Logic class
+class Solution {
+    // Merge two sorted linked lists (by child pointers)
+    private ListNode merge(ListNode list1, ListNode list2) {
+        ListNode dummyNode = new ListNode(-1);
+        ListNode res = dummyNode;
+
+        while (list1 != null &amp;&amp; list2 != null) {
+            if (list1.val &lt; list2.val) {
+                res.child = list1;
+                res = list1;
+                list1 = list1.child;
+            } else {
+                res.child = list2;
+                res = list2;
+                list2 = list2.child;
+            }
+            res.next = null;
+        }
+
+        if (list1 != null) res.child = list1;
+        else res.child = list2;
+
+        if (dummyNode.child != null) {
+            dummyNode.child.next = null;
+        }
+
+        return dummyNode.child;
+    }
+
+    // Flatten a multi-level linked list
+    public ListNode flattenLinkedList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        ListNode mergedHead = flattenLinkedList(head.next);
+        return merge(head, mergedHead);
+    }
+}
+
+// Main class for running the program
+public class Main {
+    // Print linked list in flattened form
+    public static void printLinkedList(ListNode head) {
+        while (head != null) {
+            System.out.print(head.val + " ");
+            head = head.child;
+        }
+        System.out.println();
+    }
+
+    // Print original linked list in grid format
+    public static void printOriginalLinkedList(ListNode head, int depth) {
+        while (head != null) {
+            System.out.print(head.val);
+
+            if (head.child != null) {
+                System.out.print(" -&gt; ");
+                printOriginalLinkedList(head.child, depth + 1);
+            }
+
+            if (head.next != null) {
+                System.out.println();
+                for (int i = 0; i &lt; depth; ++i) {
+                    System.out.print("| ");
+                }
+            }
+            head = head.next;
+        }
+    }
+
+    public static void main(String[] args) {
+        // Create a linked list with child pointers
+        ListNode head = new ListNode(5);
+        head.child = new ListNode(14);
+
+        head.next = new ListNode(10);
+        head.next.child = new ListNode(4);
+
+        head.next.next = new ListNode(12);
+        head.next.next.child = new ListNode(20);
+        head.next.next.child.child = new ListNode(13);
+
+        head.next.next.next = new ListNode(7);
+        head.next.next.next.child = new ListNode(17);
+
+        // Print original structure
+        System.out.println("Original linked list:");
+        printOriginalLinkedList(head, 0);
+
+        // Flatten list
+        Solution sol = new Solution();
+        ListNode flattened = sol.flattenLinkedList(head);
+
+        // Print flattened version
+        System.out.print("\nFlattened linked list: ");
+        printLinkedList(flattened);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class ListNode:
+    def __init__(self, val=0, next=None, child=None):
+        self.val = val
+        self.next = next
+        self.child = child
+
+class Solution:
+    ''' Merge the two linked lists in a particular
+     order based on the data value '''
+    def merge(self, list1, list2):
+        ''' Create a dummy node as a 
+        placeholder for the result '''
+        dummyNode = ListNode(-1)
+        res = dummyNode
+
+        # Merge the lists based on data values
+        while list1 is not None and list2 is not None:
+            if list1.val &lt; list2.val:
+                res.child = list1
+                res = list1
+                list1 = list1.child
+            else:
+                res.child = list2
+                res = list2
+                list2 = list2.child
+            res.next = None
+
+        # Connect the remaining elements if any
+        if list1:
+            res.child = list1
+        else:
+            res.child = list2
+
+        # Break the last node's link to prevent cycles
+        if dummyNode.child:
+            dummyNode.child.next = None
+
+        return dummyNode.child
+
+    # Function to flatten a linked list with child pointers 
+    def flattenLinkedList(self, head):
+        # If head is null or there is no next node
+        if head is None or head.next is None:
+            return head # Return head
+
+        # Recursively flatten the rest of the linked list
+        mergedHead = self.flattenLinkedList(head.next)
+
+        # Merge the lists
+        head = self.merge(head, mergedHead)
+        return head
+
+# Function to print the linked list
+def printLinkedList(head):
+    while head is not None:
+        print(head.val, end=" ")
+        head = head.child
+    print()
+
+# Function to print the linked list in a grid-like structure
+def printOriginalLinkedList(head, depth):
+    while head is not None:
+        print(head.val, end="")
+
+        ''' If child exists, recursively
+         print it with indentation '''
+        if head.child:
+            print(" -&gt; ", end="")
+            printOriginalLinkedList(head.child, depth + 1)
+
+        # Add vertical bars for each level in the grid
+        if head.next:
+            print()
+            for i in range(depth):
+                print("| ", end="")
+        
+        head = head.next
+
+if __name__ == "__main__":
+    # Create a linked list with child pointers
+    head = ListNode(5)
+    head.child = ListNode(14)
+
+    head.next = ListNode(10)
+    head.next.child = ListNode(4)
+
+    head.next.next = ListNode(12)
+    head.next.next.child = ListNode(20)
+    head.next.next.child.child = ListNode(13)
+
+    head.next.next.next = ListNode(7)
+    head.next.next.next.child = ListNode(17)
+
+    # Print the original linked list structure
+    print("Original linked list:")
+    printOriginalLinkedList(head, 0)
+
+    # Creating an instance of Solution class
+    sol = Solution()
+    
+    # Function call to flatten the linked list
+    flattened = sol.flattenLinkedList(head)
+    
+    # Printing the flattened linked list
+    print("\nFlattened linked list: ", end="")
+    printLinkedList(flattened)</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class ListNode {
+    constructor(val = 0, next = null, child = null) {
+        this.val = val;
+        this.next = next;
+        this.child = child;
+    }
+}
+
+class Solution {
+    /* Merge the two linked lists in a particular
+     order based on the data value */
+    merge(list1, list2) {
+        /* Create a dummy node as a 
+        placeholder for the result */
+        let dummyNode = new ListNode(-1);
+        let res = dummyNode;
+
+        // Merge the lists based on data values
+        while (list1 !== null &amp;&amp; list2 !== null) {
+            if (list1.val &lt; list2.val) {
+                res.child = list1;
+                res = list1;
+                list1 = list1.child;
+            } else {
+                res.child = list2;
+                res = list2;
+                list2 = list2.child;
+            }
+            res.next = null;
+        }
+
+        // Connect the remaining elements if any
+        if (list1 !== null) {
+            res.child = list1;
+        } else {
+            res.child = list2;
+        }
+
+        // Break the last node's link to prevent cycles
+        if (dummyNode.child !== null) {
+            dummyNode.child.next = null;
+        }
+
+        return dummyNode.child;
+    }
+
+    // Function to flatten a linked list with child pointers 
+    flattenLinkedList(head) {
+        // If head is null or there is no next node
+        if (head === null || head.next === null) {
+            return head; // Return head
+        }
+
+        // Recursively flatten the rest of the linked list
+        let mergedHead = this.flattenLinkedList(head.next);
+
+        // Merge the lists
+        head = this.merge(head, mergedHead);
+        return head;
+    }
+}
+
+// Function to print the linked list
+function printLinkedList(head) {
+    while (head !== null) {
+        process.stdout.write(head.val + " ");
+        head = head.child;
+    }
+    console.log();
+}
+
+// Function to print the linked list in a grid-like structure
+function printOriginalLinkedList(head, depth) {
+    while (head !== null) {
+        process.stdout.write(head.val.toString());
+
+        /* If child exists, recursively
+         print it with indentation */
+        if (head.child) {
+            process.stdout.write(" -&gt; ");
+            printOriginalLinkedList(head.child, depth + 1);
+        }
+
+        // Add vertical bars for each level in the grid
+        if (head.next) {
+            console.log();
+            for (let i = 0; i &lt; depth; ++i) {
+                process.stdout.write("| ");
+            }
+        }
+        head = head.next;
+    }
+}
+
+let head = new ListNode(5);
+head.child = new ListNode(14);
+
+head.next = new ListNode(10);
+head.next.child = new ListNode(4);
+
+head.next.next = new ListNode(12);
+head.next.next.child = new ListNode(20);
+head.next.next.child.child = new ListNode(13);
+
+head.next.next.next = new ListNode(7);
+head.next.next.next.child = new ListNode(17);
+
+// Print the original linked list structure
+console.log("Original linked list:");
+printOriginalLinkedList(head, 0);
+
+// Creating an instance of Solution class
+let sol = new Solution();
+
+// Function call to flatten the linked list
+let flattened = sol.flattenLinkedList(head);
+
+// Printing the flattened linked list
+console.log("\nFlattened linked list: ");
+printLinkedList(flattened);</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity:</strong> O(N x (2M)) ~ O(2N x M), where N is the length of the linked list along the next pointer and M is the length of the linked list along the child pointers.<br/>
+The merge operation in each recursive call takes time complexity proportional to the length of the linked lists being merged, as they have to iterate over the entire lists. Since the vertical depth of the linked lists is assumed to be M, the time complexity for a single merge operation is proportional to O(2M).<br/>
+This operation is performed N number of times (to each and every node along the next pointer list), hence the resultant time complexity becomes O(N x 2M).<br/><br/>
+<strong>Space Complexity:</strong> O(1), as this code uses no external space or additional data structures to store values. But a recursive stack uses O(N) space to build the recursive calls for each node along the next pointer list.
+
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

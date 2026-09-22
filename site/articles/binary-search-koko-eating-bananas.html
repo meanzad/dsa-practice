@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Koko Eating Bananas</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Koko Eating Bananas</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/binary-search/koko-eating-bananas/</code></div>
+  <p><strong>Problem Statement: </strong> A monkey Koko is given ‘n’ piles of bananas, whereas the 'ith' pile has ‘a[i]’ bananas. An integer ‘h’ is also given, which denotes the time (in hours) for all the bananas to be eaten.<br/><br/>
+
+Each hour, the monkey chooses a non-empty pile of bananas and eats ‘k’ bananas. If the pile contains less than ‘k’ bananas, then the monkey consumes all the bananas and won’t eat any more bananas in that hour.<br/><br/>
+
+Find the minimum number of bananas ‘k’ to eat per hour so that the monkey can eat all the bananas within ‘h’ hours.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: N = 4, a[] = {7, 15, 6, 3}, h = 8</span>
+<span>Output: 5</span>
+<span>Explanation:  If Koko eats 5 bananas/hr, he will take 2, 3, 2, and 1 hour to eat the piles accordingly. So, he will take 8 hours to complete all the piles.  </span>
+<p></p>
+<span>Input: N = 5, a[] = {25, 12, 8, 14, 19}, h = 5</span>
+<span>Output: 25</span>
+<span>Explanation: If Koko eats 25 bananas/hr, he will take 1, 1, 1, 1, and 1 hour to eat the piles accordingly. </span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/koko-eating-bananas" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. 
+    It's highly recommend trying to 
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Brute-Force Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+  The problem is about finding the minimum eating speed such that Koko can finish all bananas within h hours. The extremely naive approach is to check all possible answers from 1 to max(a[]). The minimum number for which the required time is less than or equal to h is our answer.
+<ul>
+<li>Find the largest pile size (max of the array).</li>
+<li>Loop through all possible speeds from 1 to this maximum value.</li>
+<li>For each speed, calculate the total hours needed. For each pile, compute the time as ceil(pile / speed).</li>
+<li>Sum up the hours for all piles.</li>
+<li>If the total hours is less than or equal to the allowed hours, return this speed as the answer.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to calculate total hours for given speed
+    int calculateTotalHours(vector&lt;int&gt;&amp; a, int hourly) {
+        int totalHours = 0;
+        for (int pile : a) {
+            // Add hours using ceil
+            totalHours += (pile + hourly - 1) / hourly;
+        }
+        return totalHours;
+    }
+
+    // Function to find minimum eating speed
+    int minEatingSpeed(vector&lt;int&gt;&amp; a, int h) {
+        // Find maximum pile size
+        int maxVal = *max_element(a.begin(), a.end());
+
+        // Try every possible speed
+        for (int i = 1; i &lt;= maxVal; i++) {
+            int hours = calculateTotalHours(a, i);
+
+            // If hours fit within h
+            if (hours &lt;= h) {
+                return i;
+            }
+        }
+        return maxVal;
+    }
+};
+
+int main() {
+    // Input array
+    vector&lt;int&gt; a = {3, 6, 7, 11};
+    // Hours allowed
+    int h = 8;
+
+    Solution obj;
+    cout &lt;&lt; obj.minEatingSpeed(a, h);
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to calculate total hours for given speed
+    public int calculateTotalHours(int[] a, int hourly) {
+        int totalHours = 0;
+        for (int pile : a) {
+            // Add hours using ceil
+            totalHours += (int)Math.ceil((double)pile / hourly);
+        }
+        return totalHours;
+    }
+
+    // Function to find minimum eating speed
+    public int minEatingSpeed(int[] a, int h) {
+        // Find maximum pile size
+        int maxVal = Arrays.stream(a).max().getAsInt();
+
+        // Try every possible speed
+        for (int i = 1; i &lt;= maxVal; i++) {
+            int hours = calculateTotalHours(a, i);
+
+            // If hours fit within h
+            if (hours &lt;= h) {
+                return i;
+            }
+        }
+        return maxVal;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Input array
+        int[] a = {3, 6, 7, 11};
+        // Hours allowed
+        int h = 8;
+
+        Solution obj = new Solution();
+        System.out.println(obj.minEatingSpeed(a, h));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">import math
+
+class Solution:
+    # Function to calculate total hours for given speed
+    def calculateTotalHours(self, a, hourly):
+        totalHours = 0
+        for pile in a:
+            # Add hours using ceil
+            totalHours += math.ceil(pile / hourly)
+        return totalHours
+
+    # Function to find minimum eating speed
+    def minEatingSpeed(self, a, h):
+        # Find maximum pile size
+        maxVal = max(a)
+
+        # Try every possible speed
+        for i in range(1, maxVal + 1):
+            hours = self.calculateTotalHours(a, i)
+
+            # If hours fit within h
+            if hours &lt;= h:
+                return i
+        return maxVal
+
+# Driver code
+a = [3, 6, 7, 11]
+h = 8
+obj = Solution()
+print(obj.minEatingSpeed(a, h))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to calculate total hours for given speed
+    calculateTotalHours(a, hourly) {
+        let totalHours = 0;
+        for (let pile of a) {
+            // Add hours using ceil
+            totalHours += Math.ceil(pile / hourly);
+        }
+        return totalHours;
+    }
+
+    // Function to find minimum eating speed
+    minEatingSpeed(a, h) {
+        // Find maximum pile size
+        let maxVal = Math.max(...a);
+
+        // Try every possible speed
+        for (let i = 1; i &lt;= maxVal; i++) {
+            let hours = this.calculateTotalHours(a, i);
+
+            // If hours fit within h
+            if (hours &lt;= h) {
+                return i;
+            }
+        }
+        return maxVal;
+    }
+}
+
+// Driver code
+let a = [3, 6, 7, 11];
+let h = 8;
+let obj = new Solution();
+console.log(obj.minEatingSpeed(a, h));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(n * max(a[]))</strong>, since for each possible speed we go through all the piles.<br/>
+<strong>Space Complexity: O(1)</strong>, since the algorithm does not use any additional space or data structures.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+ The naive method checks every speed, which is slow if the piles are large. But the possible answer space (from 1 to the maximum pile size) is sorted, meaning if a certain speed works, then all higher speeds will also work. This allows us to apply Binary Search on the answer space to efficiently find the minimum speed at which Koko can finish the bananas within the given hours.
+
+<ul>
+<li>First, identify the largest pile size since the eating speed cannot be more than that.</li>
+<li>Set the search range with the lowest speed as 1 and the highest speed as the maximum pile size.</li>
+<li>Use binary search within this range to check possible speeds.</li>
+<li>At each step, take the middle value as the current speed and calculate how many hours it would take to finish all piles at this speed.</li>
+<li>If the total hours are less than or equal to the allowed hours, this speed is a candidate, so try to see if a smaller speed also works by moving left.</li>
+<li>If the total hours exceed the allowed hours, then the speed is too slow, so move right to try higher speeds.</li>
+<li>Continue this process until the range closes, and the smallest valid speed found will be the answer.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to calculate total hours at given speed
+    int calculateTotalHours(vector&lt;int&gt;&amp; piles, int speed) {
+        int totalH = 0;
+        for (int bananas : piles) {
+            totalH += ceil((double)bananas / speed);
+        }
+        return totalH;
+    }
+
+    // Function to find minimum eating speed
+    int minEatingSpeed(vector&lt;int&gt;&amp; piles, int h) {
+        // Find maximum element
+        int maxPile = *max_element(piles.begin(), piles.end());
+
+        // Initialize low and high pointers
+        int low = 1, high = maxPile;
+        int ans = maxPile;
+
+        // Binary search on answer space
+        while (low &lt;= high) {
+            int mid = (low + high) / 2;
+            int totalH = calculateTotalHours(piles, mid);
+
+            // If possible, try smaller speed
+            if (totalH &lt;= h) {
+                ans = mid;
+                high = mid - 1;
+            }
+            // Otherwise, try larger speed
+            else {
+                low = mid + 1;
+            }
+        }
+        return ans;
+    }
+};
+
+int main() {
+    vector&lt;int&gt; piles = {3, 6, 7, 11};
+    int h = 8;
+
+    Solution obj;
+    cout &lt;&lt; obj.minEatingSpeed(piles, h);
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to calculate total hours at given speed
+    private int calculateTotalHours(int[] piles, int speed) {
+        int totalH = 0;
+        for (int bananas : piles) {
+            totalH += (int)Math.ceil((double)bananas / speed);
+        }
+        return totalH;
+    }
+
+    // Function to find minimum eating speed
+    public int minEatingSpeed(int[] piles, int h) {
+        // Find maximum element
+        int maxPile = Arrays.stream(piles).max().getAsInt();
+
+        // Initialize low and high pointers
+        int low = 1, high = maxPile;
+        int ans = maxPile;
+
+        // Binary search on answer space
+        while (low &lt;= high) {
+            int mid = (low + high) / 2;
+            int totalH = calculateTotalHours(piles, mid);
+
+            // If possible, try smaller speed
+            if (totalH &lt;= h) {
+                ans = mid;
+                high = mid - 1;
+            }
+            // Otherwise, try larger speed
+            else {
+                low = mid + 1;
+            }
+        }
+        return ans;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[] piles = {3, 6, 7, 11};
+        int h = 8;
+
+        Solution obj = new Solution();
+        System.out.println(obj.minEatingSpeed(piles, h));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">import math
+
+class Solution:
+    # Function to calculate total hours at given speed
+    def calculateTotalHours(self, piles, speed):
+        totalH = 0
+        for bananas in piles:
+            totalH += math.ceil(bananas / speed)
+        return totalH
+
+    # Function to find minimum eating speed
+    def minEatingSpeed(self, piles, h):
+        # Find maximum element
+        maxPile = max(piles)
+
+        # Initialize low and high pointers
+        low, high = 1, maxPile
+        ans = maxPile
+
+        # Binary search on answer space
+        while low &lt;= high:
+            mid = (low + high) // 2
+            totalH = self.calculateTotalHours(piles, mid)
+
+            # If possible, try smaller speed
+            if totalH &lt;= h:
+                ans = mid
+                high = mid - 1
+            # Otherwise, try larger speed
+            else:
+                low = mid + 1
+
+        return ans
+
+# Driver code
+piles = [3, 6, 7, 11]
+h = 8
+obj = Solution()
+print(obj.minEatingSpeed(piles, h))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to calculate total hours at given speed
+    calculateTotalHours(piles, speed) {
+        let totalH = 0;
+        for (let bananas of piles) {
+            totalH += Math.ceil(bananas / speed);
+        }
+        return totalH;
+    }
+
+    // Function to find minimum eating speed
+    minEatingSpeed(piles, h) {
+        // Find maximum element
+        let maxPile = Math.max(...piles);
+
+        // Initialize low and high pointers
+        let low = 1, high = maxPile;
+        let ans = maxPile;
+
+        // Binary search on answer space
+        while (low &lt;= high) {
+            let mid = Math.floor((low + high) / 2);
+            let totalH = this.calculateTotalHours(piles, mid);
+
+            // If possible, try smaller speed
+            if (totalH &lt;= h) {
+                ans = mid;
+                high = mid - 1;
+            }
+            // Otherwise, try larger speed
+            else {
+                low = mid + 1;
+            }
+        }
+        return ans;
+    }
+}
+
+// Driver code
+let piles = [3, 6, 7, 11];
+let h = 8;
+let obj = new Solution();
+console.log(obj.minEatingSpeed(piles, h));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N*log(max(a[])))</strong>, we apply binary search on our search space to reduce it into half at every step.<br/>
+<strong>Space Complexity: O(1)</strong>, since the algorithm does not use any additional space or data structures.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

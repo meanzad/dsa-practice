@@ -1,0 +1,710 @@
+[1/399] delete-all-occurrences-of-a-key-in-dll
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    FAILED: no snapshot
+[2/399] s-insert-interval
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    FAILED: no snapshot
+[3/399] greedy-jump-game-i
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    FAILED: no snapshot
+[11/399] arrays-find-the-row-with-maximum-number-of-1s
+    ok  28,591 chars, 8 code, 4 img
+[12/399] arrays-find-the-smallest-divisor-given-a-threshold
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ok  28,125 chars, 8 code, 5 img
+[13/399] arrays-floor-and-ceil-in-sorted-array
+    ok  16,653 chars, 4 code, 0 img
+[14/399] arrays-implement-lower-bound-bs-2
+    ok  25,151 chars, 8 code, 6 img
+[15/399] arrays-implement-upper-bound
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    FAILED: no snapshot
+[17/399] arrays-minimise-maximum-distance-between-gas-stations
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    FAILED: not-found
+[18/399] arrays-minimum-days-to-make-m-bouquets
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    FAILED: no snapshot
+[28/399] binary-search-tree-floor-in-a-binary-search-tree
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ok  29,460 chars, 4 code, 11 img
+[29/399] binary-search-tree-introduction-to-binary-search-trees
+    ok  4,006 chars, 0 code, 4 img
+[30/399] binary-search-finding-sqrt-of-a-number-using-binary-search
+    ok  23,578 chars, 8 code, 0 img
+[31/399] binary-search-koko-eating-bananas
+    ok  27,055 chars, 8 code, 0 img
+[32/399] binary-tree-binary-tree-representation-in-java
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    FAILED: no snapshot
+[33/399] binary-tree-count-number-of-nodes-in-a-binary-tree
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    FAILED: no snapshot
+[34/399] binary-tree-introduction-to-trees
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ok  12,163 chars, 0 code, 16 img
+[35/399] bit-manipulation-power-set-bit-manipulation
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ok  19,783 chars, 4 code, 3 img
+[36/399] c-c-basic-input-output
+    ok  3,492 chars, 0 code, 0 img
+[37/399] c-c-stl-tutorial-most-frequent-used-stl-containers
+    ok  4,294 chars, 0 code, 0 img
+[38/399] data-structure-3-d-dp-ninja-and-his-friends-dp-13
+    ok  60,007 chars, 12 code, 8 img
+[39/399] data-structure-3-sum-find-triplets-that-add-up-to-a-zero
+    ok  48,489 chars, 12 code, 4 img
+[40/399] data-structure-4-sum-find-quads-that-add-up-to-a-target-value
+    ok  49,316 chars, 12 code, 4 img
+[41/399] data-structure-accounts-merge-dsu-g-50
+    ok  33,506 chars, 4 code, 1 img
+[42/399] data-structure-add-1-to-a-number-represented-by-ll
+    FAILED: no snapshot
+[44/399] data-structure-aggressive-cows-detailed-solution
+    ok  37,164 chars, 8 code, 2 img
+[45/399] data-structure-alien-dictionary-topological-sort-g-26
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ok  23,542 chars, 4 code, 0 img
+[49/399] data-structure-assign-cookies
+    FAILED: not-found
+[50/399] data-structure-asteroid-collision
+    FAILED: no snapshot
+[53/399] data-structure-binary-subarray-with-sum
+    FAILED: no snapshot
+[56/399] data-structure-bst-iterator
+    FAILED: not-found
+[57/399] data-structure-bubble-sort-algorithm
+    ok  27,144 chars, 8 code, 10 img
+[59/399] data-structure-buy-and-sell-stock-ii-dp-36
+    ok  48,876 chars, 12 code, 8 img
+[60/399] data-structure-buy-and-sell-stock-iii-dp-37
+    ok  41,832 chars, 12 code, 4 img
+[61/399] data-structure-buy-and-sell-stock-iv-dp-38
+    ok  37,456 chars, 12 code, 2 img
+[62/399] data-structure-buy-and-sell-stocks-with-cooldown-dp-39
+    ok  41,671 chars, 12 code, 9 img
+[63/399] data-structure-buy-and-sell-stocks-with-transaction-fees-dp-40
+    ok  43,821 chars, 12 code, 11 img
+[64/399] data-structure-calculate-the-diameter-of-a-binary-tree
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    FAILED: no snapshot
+[65/399] data-structure-candy
+    FAILED: no snapshot
+[66/399] data-structure-celebrity-problem
+    FAILED: no snapshot
+[70/399] data-structure-check-if-a-number-is-odd-or-not
+    FAILED: no snapshot
+[72/399] data-structure-check-if-a-number-is-power-of-2-or-not
+    FAILED: not-found
+[75/399] data-structure-check-if-an-array-represents-a-min-heap
+    FAILED: no snapshot
+[80/399] data-structure-check-if-the-i-th-bit-is-set-or-not
+    FAILED: no snapshot
+[81/399] data-structure-check-if-there-exists-a-subsequence-with-sum-k
+    FAILED: not-found
+[88/399] data-structure-combination-sum-iii
+    FAILED: no snapshot
+[89/399] data-structure-connected-components
+    FAILED: no snapshot
+[92/399] data-structure-count-all-subsequences-with-sum-k
+    FAILED: not-found
+[93/399] data-structure-count-and-say
+    FAILED: not-found
+[96/399] data-structure-count-good-numbers
+    FAILED: no snapshot
+[99/399] data-structure-count-number-of-bits-to-be-flipped-to-convert-a-to-b
+    FAILED: no snapshot
+[100/399] data-structure-count-number-of-nice-subarrays
+    FAILED: no snapshot
+[101/399] data-structure-count-number-of-substrings
+    FAILED: no snapshot
+[105/399] data-structure-count-square-submatrices-with-all-1s-dp-on-rectangles-d
+    FAILED: not-found
+[107/399] data-structure-count-the-number-of-set-bits
+    FAILED: no snapshot
+[108/399] data-structure-count-the-number-of-subarrays-with-given-xor-k
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    FAILED: not-found
+[110/399] data-structure-delete-last-node-of-a-doubly-linked-list
+    FAILED: not-found
+[111/399] data-structure-delete-last-node-of-linked-list
+    FAILED: not-found
+[113/399] data-structure-design-twitter
+    FAILED: not-found
+[123/399] data-structure-divide-two-integers-without-using-multiplication-divisi
+    FAILED: no snapshot
+[132/399] data-structure-expression-add-operators
+    FAILED: no snapshot
+[134/399] data-structure-find-eventual-safe-states-bfs-topological-sort-g-25
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ok  23,385 chars, 4 code, 4 img
+[137/399] data-structure-find-median-from-data-stream
+    FAILED: no snapshot
+[139/399] data-structure-find-minmax-in-a-bst
+    FAILED: no snapshot
+[140/399] data-structure-find-pairs-with-given-sum-in-doubly-linked-list
+    FAILED: no snapshot
+[141/399] data-structure-find-peak-element-2d-matrix
+    FAILED: no snapshot
+[147/399] data-structure-find-the-two-numbers-appearing-odd-number-of-times
+    FAILED: no snapshot
+[148/399] data-structure-find-xor-of-numbers-from-l-to-r
+    FAILED: no snapshot
+[153/399] data-structure-fruit-into-baskets
+    FAILED: not-found
+[155/399] data-structure-g-36-shortest-distance-in-a-binary-maze
+    FAILED: not-found
+[159/399] data-structure-generate-all-binary-strings
+    FAILED: no snapshot
+[160/399] data-structure-generate-parenthesis
+    FAILED: no snapshot
+[161/399] data-structure-graph-representation-in-java
+    FAILED: no snapshot
+[164/399] data-structure-hands-of-straights
+    FAILED: no snapshot
+[165/399] data-structure-hashing-in-strings
+    FAILED: no snapshot
+[166/399] data-structure-implement-min-stack-o2n-and-on-space-complexity
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ok  42,636 chars, 8 code, 36 img
+[178/399] data-structure-inorder-successorpredecessor-in-bst
+    FAILED: no snapshot
+[179/399] data-structure-inorder-traversal-of-binary-tree
+    ok  38,259 chars, 8 code, 17 img
+[180/399] data-structure-insert-at-end-of-doubly-linked-list
+    ok  22,972 chars, 4 code, 1 img
+[181/399] data-structure-insertion-sort-algorithm
+    ok  14,653 chars, 4 code, 0 img
+[182/399] data-structure-introduction-to-bit-manipulation-theory
+    FAILED: not-found
+[183/399] data-structure-introduction-to-priority-queues-using-binary-heaps
+    FAILED: not-found
+[184/399] data-structure-isomorphic-string
+    FAILED: not-found
+[185/399] data-structure-iterative-postorder-traversal-of-binary-tree-using-2-st
+    ok  23,757 chars, 4 code, 18 img
+[186/399] data-structure-iterative-preorder-traversal-of-binary-tree
+    ok  22,798 chars, 4 code, 18 img
+[187/399] data-structure-java-collections
+    FAILED: not-found
+[188/399] data-structure-job-sequencing-problem
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ok  23,123 chars, 4 code, 10 img
+[189/399] data-structure-jump-game-2
+    FAILED: no snapshot
+[192/399] data-structure-kmp-algorithm-or-lps-array
+    FAILED: no snapshot
+[193/399] data-structure-kth-largest-element-in-a-stream-of-running-integers
+    FAILED: no snapshot
+[196/399] data-structure-largest-odd-number-in-a-string
+    FAILED: no snapshot
+[199/399] data-structure-learn-all-patterns-of-subsequences-theory
+    FAILED: no snapshot
+[200/399] data-structure-left-rotate-the-array-by-one
+    ok  20,723 chars, 8 code, 1 img
+[201/399] data-structure-length-of-longest-substring-without-any-repeating-chara
+    ok  32,685 chars, 8 code, 2 img
+[202/399] data-structure-length-of-the-longest-subarray-with-zero-sum
+    ok  28,824 chars, 8 code, 0 img
+[203/399] data-structure-letter-combinations-of-a-phone-number
+    FAILED: not-found
+[205/399] data-structure-lfu-cache
+    FAILED: no snapshot
+[206/399] data-structure-linear-search-in-c
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    FAILED: no snapshot
+[207/399] data-structure-longest-bitonic-subsequence-dp-46
+    FAILED: not-found
+[208/399] data-structure-longest-common-prefix
+    FAILED: not-found
+[209/399] data-structure-longest-common-substring-dp-27
+    FAILED: not-found
+[212/399] data-structure-longest-happy-prefix
+    FAILED: no snapshot
+[215/399] data-structure-longest-repeating-character-replacement
+    FAILED: no snapshot
+[224/399] data-structure-max-consecutive-ones-iii
+    FAILED: not-found
+[226/399] data-structure-maximum-nesting-depth-of-parenthesis
+    FAILED: no snapshot
+[227/399] data-structure-maximum-point-you-can-obtain-from-cards
+    FAILED: no snapshot
+[230/399] data-structure-maximum-sum-combination
+    FAILED: not-found
+[236/399] data-structure-merge-m-sorted-lists
+    FAILED: no snapshot
+[240/399] data-structure-minimum-coins-dp-20
+    FAILED: not-found
+[241/399] data-structure-minimum-cost-to-connect-sticks
+    FAILED: no snapshot
+[246/399] data-structure-minimum-number-of-bracket-reversals-needed-to-make-an-e
+    FAILED: no snapshot
+[251/399] data-structure-minimum-time-taken-to-burn-the-binary-tree-from-a-node
+    FAILED: not-found
+[252/399] data-structure-morris-inorder-traversal-of-a-binary-tree
+    ok  30,522 chars, 4 code, 21 img
+[253/399] data-structure-morris-preorder-traversal-of-a-binary-tree
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ok  32,149 chars, 4 code, 19 img
+[258/399] data-structure-network-delay-time
+    FAILED: not-found
+[259/399] data-structure-next-greater-element-2
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    FAILED: no snapshot
+[263/399] data-structure-non-overlapping-intervals
+    FAILED: no snapshot
+[268/399] data-structure-number-of-nges-to-the-right
+    FAILED: not-found
+[269/399] data-structure-number-of-operations-to-make-network-connected-dsu-g-49
+    FAILED: not-found
+[271/399] data-structure-number-of-substring-containing-all-three-characters
+    FAILED: no snapshot
+[272/399] data-structure-palindrome-partitioning-ii-front-partition-dp-53
+    FAILED: not-found
+[276/399] data-structure-peak-element-in-array
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    FAILED: no snapshot
+[278/399] data-structure-postfix-to-infix
+    FAILED: not-found
+[279/399] data-structure-postfix-to-prefix-conversion
+    FAILED: no snapshot
+[281/399] data-structure-prefix-to-infix-conversion
+    FAILED: not-found
+[282/399] data-structure-prefix-to-postfix-conversion
+    FAILED: not-found
+[287/399] data-structure-print-all-the-nodes-at-a-distance-of-k-in-a-binary-tree
+    FAILED: no snapshot
+[291/399] data-structure-program-for-least-recently-used-lru-page-replacement-al
+    FAILED: no snapshot
+[295/399] data-structure-recursive-implementation-of-atoi
+    FAILED: no snapshot
+[296/399] data-structure-remove-duplicates-from-sorted-dll
+    FAILED: not-found
+[298/399] data-structure-remove-k-digits
+    FAILED: not-found
+[300/399] data-structure-remove-outermost-parentheses
+    FAILED: not-found
+[305/399] data-structure-reverse-a-stack-using-recursion
+    FAILED: not-found
+[310/399] data-structure-roman-numerals-to-integer
+    FAILED: no snapshot
+[322/399] data-structure-set-the-rightmost-bit
+    FAILED: not-found
+[326/399] data-structure-sieve-of-eratosthenes
+    FAILED: no snapshot
+[328/399] data-structure-sort-a-linked-list-of-0s-1s-and-2s-by-changing-links
+    FAILED: no snapshot
+[329/399] data-structure-sort-a-stack
+    FAILED: no snapshot
+[330/399] data-structure-sort-an-array-of-0s-1s-and-2s
+    ok  42,600 chars, 12 code, 11 img
+[331/399] data-structure-sort-characters-by-frequency
+    FAILED: not-found
+[332/399] data-structure-sort-k-sorted-array
+    FAILED: not-found
+[333/399] data-structure-spiral-traversal-of-matrix
+    ok  20,955 chars, 4 code, 6 img
+[334/399] data-structure-starting-point-of-loop-in-a-linked-list
+    ok  45,329 chars, 8 code, 43 img
+[335/399] data-structure-stock-buy-and-sell
+    ok  24,427 chars, 8 code, 2 img
+[336/399] data-structure-stock-span-problem
+    FAILED: no snapshot
+[337/399] data-structure-subarray-with-k-different-integers
+    FAILED: not-found
+[338/399] data-structure-subset-ii-print-all-the-unique-subsets
+    ok  31,516 chars, 8 code, 1 img
+[339/399] data-structure-subset-sum-equal-to-target-dp-14
+    ok  51,890 chars, 12 code, 12 img
+[340/399] data-structure-subset-sum-sum-of-all-subsets
+    ok  27,458 chars, 8 code, 4 img
+[342/399] data-structure-sum-of-beauty-of-all-substring
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    FAILED: no snapshot
+[344/399] data-structure-sum-of-subarray-minimums
+    FAILED: no snapshot
+[345/399] data-structure-sum-of-subarray-ranges
+    FAILED: no snapshot
+[346/399] data-structure-swap-two-numbers
+    FAILED: not-found
+[347/399] data-structure-swim-in-rising-water
+    FAILED: not-found
+[348/399] data-structure-target-sum-dp-21
+    ok  51,917 chars, 12 code, 3 img
+[349/399] data-structure-task-scheduler
+    FAILED: no snapshot
+[350/399] data-structure-top-k-frequent-elements
+    FAILED: no snapshot
+[351/399] data-structure-top-view-of-a-binary-tree
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ok  30,724 chars, 4 code, 26 img
+[355/399] data-structure-two-sum-in-bst-check-if-there-exists-a-pair-with-sum-k
+    FAILED: not-found
+[356/399] data-structure-unbounded-knapsack-dp-23
+    ok  50,221 chars, 12 code, 6 img
+[357/399] data-structure-union-of-two-sorted-arrays
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    ! ConnectionError HTTPSConnectionPool(host='web.archive.org', port=443): Max r
+    FAILED: no snapshot
+[358/399] data-structure-valid-paranthesis-checker
+    FAILED: no snapshot
+[365/399] for-loop-understanding-for-loop
+    FAILED: not-found
+[371/399] graph-graph-representation-in-c
+    FAILED: not-found
+[385/399] linked-list-search-an-element-in-a-linked-list
+    FAILED: not-found
+[398/399] while-loop-while-loops-in-programming
+    FAILED: not-found
+[399/399] find-the-missing-number
+    FAILED: not-found
+
+done: 279 ok, 0 thin, 120 failed  (see data/report.json)
+ code, 6 img
+[257/399] data-structure-n-queen-problem-return-all-distinct-solutions-to-the-n-
+    ok  43,272 chars, 8 code, 14 img
+[258/399] data-structure-network-delay-time
+    FAILED: not-found
+[259/399] data-structure-next-greater-element-2
+    FAILED: no snapshot
+[260/399] data-structure-next-greater-element-using-stack
+    ok  19,285 chars, 4 code, 15 img
+[261/399] data-structure-next-smaller-element
+    ok  32,145 chars, 8 code, 18 img
+[262/399] data-structure-next-permutation-find-next-lexicographically-greater-pe
+    ok  33,686 chars, 8 code, 12 img
+[263/399] data-structure-non-overlapping-intervals
+    FAILED: no snapshot
+[264/399] data-structure-nth-root-of-a-number-using-binary-search
+    ok  23,385 chars, 8 code, 1 img
+[265/399] data-structure-number-of-distinct-islands
+    ok  24,099 chars, 4 code, 22 img
+[266/399] data-structure-number-of-distinct-substrings-in-a-string-using-trie
+    ok  47,881 chars, 8 code, 6 img
+[267/399] data-structure-number-of-longest-increasing-subsequences-dp-47
+    ok  55,018 chars, 12 code, 14 img
+[268/399] data-structure-number-of-nges-to-the-right
+    FAILED: not-found
+[269/399] data-structure-number-of-operations-to-make-network-connected-dsu-g-49
+    FAILED: not-found
+[270/399] data-structure-number-of-provinces
+    ok  24,067 chars, 4 code, 21 img
+[271/399] data-structure-number-of-substring-containing-all-three-characters
+    FAILED: no snapshot
+[272/399] data-structure-palindrome-partitioning-ii-front-partition-dp-53
+    FAILED: not-found
+[273/399] data-structure-partition-array-for-maximum-sum-front-partition-dp-54
+    ok  33,229 chars, 8 code, 2 img
+[274/399] data-structure-partition-equal-subset-sum-dp-15
+    ok  51,634 chars, 12 code, 2 img
+[275/399] data-structure-partition-set-into-2-subsets-with-min-absolute-sum-diff
+    ok  55,823 chars, 12 code, 4 img
+[276/399] data-structure-peak-element-in-array
+    ok  25,745 chars, 8 code, 6 img
+[277/399] data-structure-post-order-traversal-of-binary-tree
+    ok  19,771 chars, 4 code, 28 img
+[278/399] data-structure-postfix-to-infix
+    FAILED: not-found
+[279/399] data-structure-postfix-to-prefix-conversion
+    FAILED: no snapshot
+[280/399] data-structure-power-set-print-all-the-possible-subsequences-of-the-st
+    ok  29,712 chars, 8 code, 2 img
+[281/399] data-structure-prefix-to-infix-conversion
+    FAILED: not-found
+[282/399] data-structure-prefix-to-postfix-conversion
+    FAILED: not-found
+[283/399] data-structure-preorder-inorder-postorder-traversals-in-one-traversal
+    ok  33,917 chars, 4 code, 24 img
+[284/399] data-structure-preorder-traversal-of-binary-tree
+    ok  24,232 chars, 4 code, 16 img
+[285/399] data-structure-prims-algorithm-minimum-spanning-tree-c-and-java-g-45
+    ok  15,442 chars, 2 code, 4 img
+[286/399] data-structure-print-all-divisors-of-a-given-number
+    ok  23,763 chars, 8 code, 2 img
+[287/399] data-structure-print-all-the-nodes-at-a-distance-of-k-in-a-binary-tree
+    FAILED: no snapshot
+[288/399] data-structure-print-longest-common-subsequence-dp-26
+    ok  51,824 chars, 12 code, 15 img
+[289/399] data-structure-print-root-to-node-path-in-a-binary-tree
+    ok  26,042 chars, 4 code, 14 img
+[290/399] data-structure-printing-longest-increasing-subsequence-dp-42
+    ok  50,634 chars, 12 code, 9 img
+[291/399] data-structure-program-for-least-recently-used-lru-page-replacement-al
+    FAILED: no snapshot
+[292/399] data-structure-program-to-generate-pascals-triangle
+    ok  36,390 chars, 12 code, 10 img
+[293/399] data-structure-quick-sort-algorithm
+    ok  20,388 chars, 4 code, 10 img
+[294/399] data-structure-rat-in-a-maze
+    ok  21,743 chars, 4 code, 4 img
+[295/399] data-structure-recursive-implementation-of-atoi
+    FAILED: no snapshot
+[296/399] data-structure-remove-duplicates-from-sorted-dll
+    FAILED: not-found
+[297/399] data-structure-remove-duplicates-in-place-from-sorted-array
+    ok  29,300 chars, 8 code, 9 img
+[298/399] data-structure-remove-k-digits
+    FAILED: not-found
+[299/399] data-structure-remove-n-th-node-from-the-end-of-a-linked-list
+    ok  44,465 chars, 8 code, 17 img
+[300/399] data-structure-remove-outermost-parentheses
+    FAILED: not-found
+[301/399] data-structure-replace-elements-by-its-rank-in-the-array
+    ok  30,735 chars, 8 code, 22 img
+[302/399] data-structure-reverse-a-doubly-linked-list
+    ok  54,623 chars, 8 code, 42 img
+[303/399] data-structure-reverse-a-given-array
+    ok  39,220 chars, 12 code, 20 img
+[304/399] data-structure-reverse-a-linked-list
+    ok  51,505 chars, 12 code, 14 img
+[305/399] data-structure-reverse-a-stack-using-recursion
+    FAILED: not-found
+[306/399] data-structure-reverse-linked-list-in-groups-of-size-k
+    ok  24,415 chars, 4 code, 9 img
+[307/399] data-structure-reverse-words-in-a-string
+    ok  34,856 chars, 8 code, 8 img
+[308/399] data-structure-right-left-view-of-binary-tree
+    ok  52,215 chars, 8 code, 17 img
+[309/399] data-structure-rod-cutting-problem-dp-24
+    ok  51,111 chars, 12 code, 3 img
+[310/399] data-structure-roman-numerals-to-integer
+    FAILED: no snapshot
+[311/399] data-structure-rotate-a-linked-list
+    ok  38,608 chars, 8 code, 12 img
+[312/399] data-structure-rotate-array-by-k-elements
+    ok  34,007 chars, 8 code, 2 img
+[313/399] data-structure-rotate-image-by-90-degree
+    ok  27,632 chars, 8 code, 5 img
+[314/399] data-structure-rotten-oranges-min-time-to-rot-all-oranges-bfs
+    ok  24,996 chars, 4 code, 5 img
+[315/399] data-structure-search-element-in-a-rotated-sorted-array
+    ok  32,616 chars, 8 code, 12 img
+[316/399] data-structure-search-in-a-binary-search-tree-2
+    ok  15,534 chars, 4 code, 6 img
+[317/399] data-structure-search-in-a-sorted-2d-matrix
+    ok  48,545 chars, 12 code, 1 img
+[318/399] data-structure-search-single-element-in-a-sorted-array
+    ok  46,433 chars, 12 code, 10 img
+[319/399] data-structure-segregate-even-and-odd-nodes-in-linkedlist
+    ok  27,359 chars, 4 code, 24 img
+[320/399] data-structure-serialize-and-deserialize-a-binary-tree
+    ok  38,702 chars, 4 code, 32 img
+[321/399] data-structure-set-matrix-zero
+    ok  50,692 chars, 12 code, 6 img
+[322/399] data-structure-set-the-rightmost-bit
+    FAILED: not-found
+[323/399] data-structure-shortest-common-supersequence-dp-31
+    ok  30,787 chars, 4 code, 25 img
+[324/399] data-structure-shortest-path-in-directed-acyclic-graph-topological-sor
+    ok  30,569 chars, 4 code, 6 img
+[325/399] data-structure-shortest-path-in-undirected-graph-with-unit-distance-g-
+    ok  23,466 chars, 4 code, 18 img
+[326/399] data-structure-sieve-of-eratosthenes
+    FAILED: no snapshot
+[327/399] data-structure-sliding-window-maximum
+    ok  34,340 chars, 8 code, 21 img
+[328/399] data-structure-sort-a-linked-list-of-0s-1s-and-2s-by-changing-links
+    FAILED: no snapshot
+[329/399] data-structure-sort-a-stack
+    FAILED: no snapshot
+[330/399] data-structure-sort-an-array-of-0s-1s-and-2s
+    ok  42,600 chars, 12 code, 11 img
+[331/399] data-structure-sort-characters-by-frequency
+    FAILED: not-found
+[332/399] data-structure-sort-k-sorted-array
+    FAILED: not-found
+[333/399] data-structure-spiral-traversal-of-matrix
+    ok  20,955 chars, 4 code, 6 img
+[334/399] data-structure-starting-point-of-loop-in-a-linked-list
+    ok  45,329 chars, 8 code, 43 img
+[335/399] data-structure-stock-buy-and-sell
+    ok  24,427 chars, 8 code, 2 img
+[336/399] data-structure-stock-span-problem
+    FAILED: no snapshot
+[337/399] data-structure-subarray-with-k-different-integers
+    FAILED: not-found
+[338/399] data-structure-subset-ii-print-all-the-unique-subsets
+    ok  31,516 chars, 8 code, 1 img
+[339/399] data-structure-subset-sum-equal-to-target-dp-14
+    ok  51,890 chars, 12 code, 12 img
+[340/399] data-structure-subset-sum-sum-of-all-subsets
+    ok  27,458 chars, 8 code, 4 img
+[341/399] data-structure-sudoku-solver
+    ok  27,282 chars, 4 code, 7 img
+[342/399] data-structure-sum-of-beauty-of-all-substring
+    FAILED: no snapshot
+[343/399] data-structure-sum-of-first-n-natural-numbers
+    ok  30,102 chars, 12 code, 6 img
+[344/399] data-structure-sum-of-subarray-minimums
+    FAILED: no snapshot
+[345/399] data-structure-sum-of-subarray-ranges
+    FAILED: no snapshot
+[346/399] data-structure-swap-two-numbers
+    FAILED: not-found
+[347/399] data-structure-swim-in-rising-water
+    FAILED: not-found
+[348/399] data-structure-target-sum-dp-21
+    ok  51,917 chars, 12 code, 3 img
+[349/399] data-structure-task-scheduler
+    FAILED: no snapshot
+[350/399] data-structure-top-k-frequent-elements
+    FAILED: no snapshot
+[351/399] data-structure-top-view-of-a-binary-tree
+    ok  30,724 chars, 4 code, 26 img
+[352/399] data-structure-topological-sort-algorithm-dfs-g-21
+    ok  47,511 chars, 8 code, 24 img
+[353/399] data-structure-trapping-rainwater
+    ok  41,119 chars, 8 code, 26 img
+[354/399] data-structure-two-sum-check-if-a-pair-with-given-sum-exists-in-array
+    ok  51,570 chars, 12 code, 3 img
+[355/399] data-structure-two-sum-in-bst-check-if-there-exists-a-pair-with-sum-k
+    FAILED: not-found
+[356/399] data-structure-unbounded-knapsack-dp-23
+    ok  50,221 chars, 12 code, 6 img
+[357/399] data-structure-union-of-two-sorted-arrays
+    ok  49,591 chars, 12 code, 8 img
+[358/399] data-structure-valid-paranthesis-checker
+    FAILED: no snapshot
+[359/399] data-structure-vertical-order-traversal-of-binary-tree
+    ok  31,602 chars, 4 code, 12 img
+[360/399] data-structure-what-are-arrays-strings
+    ok  32,513 chars, 16 code, 5 img
+[361/399] data-structure-wildcard-matching-dp-34
+    ok  60,854 chars, 12 code, 5 img
+[362/399] data-structure-word-search-leetcode
+    ok  20,918 chars, 4 code, 10 img
+[363/399] data-structure-zig-zag-traversal-of-binary-tree
+    ok  31,251 chars, 4 code, 17 img
+[364/399] dynamic-programming-matrix-chain-multiplication-dp-48
+    ok  33,361 chars, 8 code, 19 img
+[365/399] for-loop-understanding-for-loop
+    FAILED: not-found
+[366/399] graph-bipartite-graph-dfs-implementation
+    ok  12,893 chars, 2 code, 7 img
+[367/399] graph-bridges-in-graph-using-tarjans-algorithm-of-time-in-and-low-time
+    ok  19,999 chars, 4 code, 2 img
+[368/399] graph-distance-of-nearest-cell-having-1
+    ok  24,959 chars, 4 code, 34 img
+[369/399] graph-g-30-word-ladder-ii
+    ok  23,481 chars, 4 code, 0 img
+[370/399] graph-g-39-minimum-multiplications-to-reach-end
+    ok  18,122 chars, 4 code, 2 img
+[371/399] graph-graph-representation-in-c
+    FAILED: not-found
+[372/399] graph-number-of-enclaves
+    ok  24,616 chars, 4 code, 5 img
+[373/399] graph-number-of-islands-ii-online-queries-dsu-g-51
+    ok  26,971 chars, 4 code, 0 img
+[374/399] graph-strongly-connected-components-kosarajus-algorithm-g-54
+    ok  20,722 chars, 4 code, 4 img
+[375/399] graph-surrounded-regions-replace-os-with-xs
+    ok  24,034 chars, 4 code, 6 img
+[376/399] graph-word-ladder-i-g-29
+    ok  18,464 chars, 4 code, 1 img
+[377/399] hashing-hashing-maps-time-complexity-collisions-division-rule-of-hashi
+    ok  37,383 chars, 8 code, 14 img
+[378/399] if-else-if-else-statements
+    ok  13,962 chars, 8 code, 3 img
+[379/399] linked-list-delete-the-middle-node-of-the-linked-list
+    ok  44,229 chars, 8 code, 14 img
+[380/399] linked-list-find-the-length-of-a-linked-list
+    ok  18,134 chars, 4 code, 10 img
+[381/399] linked-list-insert-at-the-head-of-a-linked-list
+    ok  19,307 chars, 4 code, 11 img
+[382/399] linked-list-introduction-to-doubly-linked-list
+    ok  17,575 chars, 8 code, 2 img
+[383/399] linked-list-length-of-loop-in-linked-list
+    ok  55,284 chars, 8 code, 59 img
+[384/399] linked-list-linked-list-introduction
+    ok  14,094 chars, 4 code, 6 img
+[385/399] linked-list-search-an-element-in-a-linked-list
+    FAILED: not-found
+[386/399] linked-list-sort-a-linked-list
+    ok  53,326 chars, 8 code, 14 img
+[387/399] maths-check-if-a-number-is-armstrong-number-or-not
+    ok  12,173 chars, 4 code, 0 img
+[388/399] maths-reverse-digits-of-a-number
+    ok  11,219 chars, 4 code, 0 img
+[389/399] recursion-introduction-to-recursion-understand-recursion-by-printing-s
+    ok  5,491 chars, 0 code, 5 img
+[390/399] recursion-print-1-to-n-using-recursion
+    ok  19,826 chars, 8 code, 4 img
+[391/399] recursion-print-n-to-1-using-recursion
+    ok  19,878 chars, 8 code, 4 img
+[392/399] recursion-print-name-n-times-using-recursion
+    ok  10,815 chars, 4 code, 0 img
+[393/399] sorting-selection-sort-algorithm
+    ok  14,189 chars, 4 code, 4 img
+[394/399] strivers-a2z-dsa-course-must-do-pattern-problems-before-starting-dsa
+    ok  19,111 chars, 0 code, 22 img
+[395/399] switch-case-switch-case-statements
+    ok  15,617 chars, 12 code, 1 img
+[396/399] time-complexity-time-and-space-complexity-strivers-a2z-dsa-course
+    ok  17,409 chars, 0 code, 11 img
+[397/399] trie-maximum-xor-queries-trie
+    ok  37,886 chars, 4 code, 11 img
+[398/399] while-loop-while-loops-in-programming
+    FAILED: not-found
+[399/399] find-the-missing-number
+    FAILED: not-found
+
+done: 288 ok, 0 thin, 111 failed  (see data/report.json)

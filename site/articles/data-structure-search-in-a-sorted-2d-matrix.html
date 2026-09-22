@@ -1,0 +1,927 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Search in a sorted 2D matrix</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Search in a sorted 2D matrix</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/search-in-a-sorted-2d-matrix/</code></div>
+  <p><strong>Problem Statement: </strong> You have been given a 2-D array <strong>'mat'</strong> of size <strong>'N x M' </strong>where <strong>'N'</strong> and <strong>'M'</strong> denote the number of rows and columns, respectively. The elements of each row are sorted in non-decreasing order. Moreover, the first element of a row is greater than the last element of the previous row (if it exists). You are given an integer <strong>‘target’</strong>, and your task is to find if it exists in the given 'mat' or not.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p><strong>Input :</strong>mat = [ [1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12] ], target = 8
+<strong>Output :</strong>True.
+<strong>Explanation :</strong>The target = 8 exists in the 'mat' at index (1, 3).<br/>
+<strong>Input :</strong>mat = [ [1, 2, 4], [6, 7, 8], [9, 10, 34] ], target = 78
+<strong>Output :</strong>false.
+<strong>Explanation :</strong>The target = 78 does not exist in the 'mat'. Therefore in the output, we see 'false'.</p></pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/search-in-a-2d-matrix" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Brute force Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+                  The extremely naive approach is to get the answer by checking all the elements of the given matrix. So, we will traverse the matrix and check every element if it is equal to the given ‘target’.
+<ol><li>We will use a loop(say i) to select a particular row at a time.</li><li>Next, for every row, we will use another loop(say j) to traverse each column.</li><li>Inside the loops, we will check if the element i.e. matrix[i][j] is equal to the ‘target’. If we find any matching element, we will return true.</li><li>Otherwise, after completing the traversal, we will return false.</li></ol>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to search for a target value in the matrix
+    bool searchMatrix(vector&lt;vector&lt;int&gt;&gt;&amp; matrix, int target) {
+        // Get number of rows in the matrix
+        int n = matrix.size();
+
+        // Get number of columns in the matrix
+        int m = matrix[0].size();
+
+        // Traverse each row
+        for (int i = 0; i &lt; n; i++) {
+            // Traverse each column in the current row
+            for (int j = 0; j &lt; m; j++) {
+                // Check if the current element matches the target
+                if (matrix[i][j] == target)
+                    return true;
+            }
+        }
+
+        // Return false if the target is not found
+        return false;
+    }
+};
+
+// Driver code
+int main() {
+    // Define a 2D matrix
+    vector&lt;vector&lt;int&gt;&gt; matrix = {{1, 2, 3, 4}, 
+                                  {5, 6, 7, 8}, 
+                                  {9, 10, 11, 12}};
+
+    // Create an object of the Solution class
+    Solution obj;
+
+    // Call the searchMatrix function and print the result
+    if (obj.searchMatrix(matrix, 8)) 
+        cout &lt;&lt; "true\n";
+    else 
+        cout &lt;&lt; "false\n";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+public class Solution {
+    // Function to search for a target value in the matrix
+    public boolean searchMatrix(int[][] matrix, int target) {
+        // Get number of rows in the matrix
+        int n = matrix.length;
+
+        // Get number of columns in the matrix
+        int m = matrix[0].length;
+
+        // Traverse each row
+        for (int i = 0; i &lt; n; i++) {
+            // Traverse each column in the current row
+            for (int j = 0; j &lt; m; j++) {
+                // Check if the current element matches the target
+                if (matrix[i][j] == target)
+                    return true;
+            }
+        }
+
+        // Return false if the target is not found
+        return false;
+    }
+}
+
+// Driver class
+class Main {
+    public static void main(String[] args) {
+        // Define a 2D matrix
+        int[][] matrix = {
+            {1, 2, 3, 4},
+            {5, 6, 7, 8},
+            {9, 10, 11, 12}
+        };
+
+        // Create an object of the Solution class
+        Solution obj = new Solution();
+
+        // Call the searchMatrix function and print the result
+        if (obj.searchMatrix(matrix, 8)) 
+            System.out.println("true");
+        else 
+            System.out.println("false");
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to search for a target value in the matrix
+    def searchMatrix(self, matrix, target):
+        # Get number of rows in the matrix
+        n = len(matrix)
+
+        # Get number of columns in the matrix
+        m = len(matrix[0])
+
+        # Traverse each row
+        for i in range(n):
+            # Traverse each column in the current row
+            for j in range(m):
+                # Check if the current element matches the target
+                if matrix[i][j] == target:
+                    return True
+
+        # Return false if the target is not found
+        return False
+
+# Driver code
+if __name__ == "__main__":
+    # Define a 2D matrix
+    matrix = [
+        [1, 2, 3, 4],
+        [5, 6, 7, 8],
+        [9, 10, 11, 12]
+    ]
+
+    # Create an object of the Solution class
+    obj = Solution()
+
+    # Call the searchMatrix function and print the result
+    if obj.searchMatrix(matrix, 8):
+        print("true")
+    else:
+        print("false")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to search for a target value in the matrix
+    searchMatrix(matrix, target) {
+        // Get number of rows in the matrix
+        let n = matrix.length;
+
+        // Get number of columns in the matrix
+        let m = matrix[0].length;
+
+        // Traverse each row
+        for (let i = 0; i &lt; n; i++) {
+            // Traverse each column in the current row
+            for (let j = 0; j &lt; m; j++) {
+                // Check if the current element matches the target
+                if (matrix[i][j] === target) {
+                    return true;
+                }
+            }
+        }
+
+        // Return false if the target is not found
+        return false;
+    }
+}
+
+// Driver code
+// Define a 2D matrix
+const matrix = [
+    [1, 2, 3, 4],
+    [5, 6, 7, 8],
+    [9, 10, 11, 12]
+];
+
+// Create an object of the Solution class
+const obj = new Solution();
+
+// Call the searchMatrix function and print the result
+if (obj.searchMatrix(matrix, 8)) {
+    console.log("true");
+} else {
+    console.log("false");
+}
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+</p><p><strong>Time Complexity:</strong> O(n × m), We are traversing the entire matrix with `n` rows and `m` columns. In the worst case, we may end up visiting every cell once if the target is not present. So, the total number of operations is proportional to the number of elements in the matrix. </p>
+<p><strong>Space Complexity:</strong> O(1),We are not using any additional space. The algorithm uses a constant amount of extra memory regardless of the size of the matrix  just loop variables and the target. Therefore, the space complexity is constant. </p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="better-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Better Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+We are going to use the Binary Search algorithm to optimize the approach.
+The primary objective of the Binary Search algorithm is to efficiently determine the appropriate half to eliminate, thereby reducing the search space by half. It does this by determining a specific condition that ensures that the target is not present in that half.<br/><br/>
+The question specifies that each row in the given matrix is sorted. Therefore, to determine if the target is present in a specific row, we don't need to search column by column. Instead, we can efficiently use the binary search algorithm.<br/><br/>
+To make the time complexity even better, we won't use binary search on every row. We'll focus only on the particular row where the target might be located.<br/><br/>
+<strong>How to check if a specific row is containing the target:</strong><br/>If the target lies between the first and last element of the row, i (<em>i.e. matrix[i][0] &lt;= target &amp;&amp; target &lt;= matrix[i][m-1]</em>), we can conclude that the target might be present in that specific row.<br/><br/>
+Once we locate the potentially relevant row containing the 'target', we need to confirm its presence. To accomplish this, we will utilize the Binary search algorithm, effectively reducing the time complexity.
+
+<ol><li>We will use a loop(say i) to select a particular row at a time.</li><li>Next, for every row, i, we will check if it contains the target.<ol><li><strong>If matrix[i][0] &lt;= target &amp;&amp; target &lt;= matrix[i][m-1]: </strong>If this condition is met, we can conclude that row i has the possibility of containing the target.<br/>So, we will apply binary search on row i, and check if the ‘target’ is present. If it is present, we will return true from this step. Otherwise, we will return false.</li></ol></li><li>Otherwise, after completing the traversal, we will return false.</li></ol>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to perform binary search on a 1D vector
+    bool binarySearch(vector&lt;int&gt;&amp; nums, int target) {
+        // Get the size of the array
+        int n = nums.size();
+
+        // Initialize low and high pointers for binary search
+        int low = 0, high = n - 1;
+
+        // Binary search loop
+        while (low &lt;= high) {
+            // Calculate the middle index
+            int mid = (low + high) / 2;
+
+            // If the middle element is the target, return true
+            if (nums[mid] == target)
+                return true;
+
+            // If the target is greater, move to the right half
+            else if (target &gt; nums[mid])
+                low = mid + 1;
+
+            // Otherwise, move to the left half
+            else
+                high = mid - 1;
+        }
+
+        // Return false if target not found
+        return false;
+    }
+
+    // Function to search for target in the 2D matrix
+    bool searchMatrix(vector&lt;vector&lt;int&gt;&gt;&amp; matrix, int target) {
+        // Get the number of rows
+        int n = matrix.size();
+
+        // Get the number of columns
+        int m = matrix[0].size();
+
+        // Traverse each row
+        for (int i = 0; i &lt; n; i++) {
+            // Check if target could be within this row
+            if (matrix[i][0] &lt;= target &amp;&amp; target &lt;= matrix[i][m - 1]) {
+                // Apply binary search on the current row
+                return binarySearch(matrix[i], target);
+            }
+        }
+
+        // Return false if target is not found in any row
+        return false;
+    }
+};
+
+// Driver code
+int main() {
+    // Define a 2D matrix
+    vector&lt;vector&lt;int&gt;&gt; matrix = {
+        {1, 2, 3, 4},
+        {5, 6, 7, 8},
+        {9, 10, 11, 12}
+    };
+
+    // Create an object of the Solution class
+    Solution obj;
+
+    // Call the searchMatrix function and print the result
+    if (obj.searchMatrix(matrix, 8))
+        cout &lt;&lt; "true\n";
+    else
+        cout &lt;&lt; "false\n";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+public class Solution {
+    // Function to perform binary search on a 1D array
+    public boolean binarySearch(int[] nums, int target) {
+        // Get the length of the array
+        int n = nums.length;
+
+        // Initialize low and high pointers
+        int low = 0, high = n - 1;
+
+        // Perform binary search
+        while (low &lt;= high) {
+            // Calculate the middle index
+            int mid = (low + high) / 2;
+
+            // If the middle element is the target, return true
+            if (nums[mid] == target)
+                return true;
+
+            // If target is greater, search in the right half
+            else if (target &gt; nums[mid])
+                low = mid + 1;
+
+            // Otherwise, search in the left half
+            else
+                high = mid - 1;
+        }
+
+        // Return false if target is not found
+        return false;
+    }
+
+    // Function to search for target in a 2D matrix
+    public boolean searchMatrix(int[][] matrix, int target) {
+        // Get the number of rows
+        int n = matrix.length;
+
+        // Get the number of columns
+        int m = matrix[0].length;
+
+        // Traverse each row
+        for (int i = 0; i &lt; n; i++) {
+            // Check if target could be in this row
+            if (matrix[i][0] &lt;= target &amp;&amp; target &lt;= matrix[i][m - 1]) {
+                // Perform binary search on this row
+                return binarySearch(matrix[i], target);
+            }
+        }
+
+        // Return false if target is not found
+        return false;
+    }
+}
+
+// Driver class
+class Main {
+    public static void main(String[] args) {
+        // Define a 2D matrix
+        int[][] matrix = {
+            {1, 2, 3, 4},
+            {5, 6, 7, 8},
+            {9, 10, 11, 12}
+        };
+
+        // Create an object of the Solution class
+        Solution obj = new Solution();
+
+        // Call the searchMatrix method and print the result
+        if (obj.searchMatrix(matrix, 8))
+            System.out.println("true");
+        else
+            System.out.println("false");
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to perform binary search on a list
+    def binarySearch(self, nums, target):
+        # Get the length of the array
+        n = len(nums)
+
+        # Initialize low and high pointers
+        low, high = 0, n - 1
+
+        # Binary search loop
+        while low &lt;= high:
+            # Calculate the middle index
+            mid = (low + high) // 2
+
+            # If target is found at mid
+            if nums[mid] == target:
+                return True
+
+            # If target is greater, search right half
+            elif target &gt; nums[mid]:
+                low = mid + 1
+
+            # Otherwise, search left half
+            else:
+                high = mid - 1
+
+        # Return False if not found
+        return False
+
+    # Function to search for target in 2D matrix
+    def searchMatrix(self, matrix, target):
+        # Get number of rows
+        n = len(matrix)
+
+        # Get number of columns
+        m = len(matrix[0])
+
+        # Traverse each row
+        for i in range(n):
+            # Check if target can be in this row
+            if matrix[i][0] &lt;= target &lt;= matrix[i][m - 1]:
+                # Perform binary search on this row
+                return self.binarySearch(matrix[i], target)
+
+        # Return False if not found
+        return False
+
+# Driver code
+if __name__ == "__main__":
+    # Define a 2D matrix
+    matrix = [
+        [1, 2, 3, 4],
+        [5, 6, 7, 8],
+        [9, 10, 11, 12]
+    ]
+
+    # Create an object of the Solution class
+    obj = Solution()
+
+    # Call the searchMatrix method and print the result
+    if obj.searchMatrix(matrix, 8):
+        print("true")
+    else:
+        print("false")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to perform binary search on an array
+    binarySearch(nums, target) {
+        // Get the length of the array
+        let n = nums.length;
+
+        // Initialize low and high pointers
+        let low = 0, high = n - 1;
+
+        // Binary search loop
+        while (low &lt;= high) {
+            // Calculate the middle index
+            let mid = Math.floor((low + high) / 2);
+
+            // If the middle element is the target, return true
+            if (nums[mid] === target)
+                return true;
+
+            // If target is greater, move right
+            else if (target &gt; nums[mid])
+                low = mid + 1;
+
+            // Otherwise, move left
+            else
+                high = mid - 1;
+        }
+
+        // Return false if not found
+        return false;
+    }
+
+    // Function to search for target in 2D matrix
+    searchMatrix(matrix, target) {
+        // Get number of rows
+        let n = matrix.length;
+
+        // Get number of columns
+        let m = matrix[0].length;
+
+        // Traverse each row
+        for (let i = 0; i &lt; n; i++) {
+            // Check if target can be in this row
+            if (matrix[i][0] &lt;= target &amp;&amp; target &lt;= matrix[i][m - 1]) {
+                // Perform binary search on the current row
+                return this.binarySearch(matrix[i], target);
+            }
+        }
+
+        // Return false if not found
+        return false;
+    }
+}
+
+// Driver code
+// Define a 2D matrix
+const matrix = [
+    [1, 2, 3, 4],
+    [5, 6, 7, 8],
+    [9, 10, 11, 12]
+];
+
+// Create an object of the Solution class
+const obj = new Solution();
+
+// Call the searchMatrix method and print the result
+if (obj.searchMatrix(matrix, 8)) {
+    console.log("true");
+} else {
+    console.log("false");
+}
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O(n × log m), We go through each of the `n` rows once. For any valid row where the target can exist, we apply binary search which takes O(log m). So overall time = O(n × log m). </p>
+<p><strong>Space Complexity:</strong> O(1), No extra space is used just a few integer variables for looping and binary search. So space complexity is constant. </p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+                   
+
+If we flatten the given 2D matrix into a 1D array, that 1D array would also be sorted. By running binary search on this flattened version, we could quickly check if the element exists.<br/><br/>
+
+But actually flattening the matrix takes extra time and memory, which makes it inefficient. Instead, we can simulate the flattening without creating a new array. The trick is to directly map a 1D index into the corresponding row and column of the 2D matrix.<br/><br/>
+
+To do this mapping, if there are `m` columns in the matrix and the index is `i`, then:<br/>
+Row = i / m, Column = i % m.<br/><br/>
+
+So instead of working on the 2D matrix directly, we pretend it’s a sorted 1D array of length (rows × columns), and apply binary search on this imaginary array.<br/><br/>
+<ul>
+<li>Start with two pointers: one at the first index of the imaginary 1D array, and the other at the last index.</li>
+<li>While the first pointer does not cross the last:
+    <ul>
+<li>Find the middle index between the two pointers.</li>
+<li>Convert this middle index into a row and column of the original 2D matrix.</li>
+<li>If the element at that position matches the target, return true (element found).</li>
+<li>If the element is smaller than the target, discard the left half and continue searching in the right half.</li>
+<li>If the element is larger than the target, discard the right half and continue searching in the left half.</li>
+</ul>
+</li>
+<li>If the search ends without finding the element, return false (element not present in the matrix).</li>
+</ul>
+<figure class="wp-block-image size-full"> <img alt="" class="wp-image-12006" loading="lazy" src="../assets/img/e03226fbe36d2991.png"/> </figure>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to search target in a 2D matrix using binary search over a virtual 1D array
+    bool searchMatrix(vector&lt;vector&lt;int&gt;&gt;&amp; matrix, int target) {
+        // Get the number of rows
+        int n = matrix.size();
+
+        // Get the number of columns
+        int m = matrix[0].size();
+
+        // Set initial binary search range over the imaginary 1D array
+        int low = 0, high = n * m - 1;
+
+        // Perform binary search
+        while (low &lt;= high) {
+            // Calculate the middle index of the virtual 1D array
+            int mid = (low + high) / 2;
+
+            // Convert mid index to corresponding 2D indices
+            int row = mid / m;
+            int col = mid % m;
+
+            // Check if the target is found
+            if (matrix[row][col] == target)
+                return true;
+
+            // If the target is greater, discard the left half
+            else if (matrix[row][col] &lt; target)
+                low = mid + 1;
+
+            // If the target is smaller, discard the right half
+            else
+                high = mid - 1;
+        }
+
+        // If not found, return false
+        return false;
+    }
+};
+
+// Driver code
+int main() {
+    // Define a 2D matrix
+    vector&lt;vector&lt;int&gt;&gt; matrix = {
+        {1, 2, 3, 4},
+        {5, 6, 7, 8},
+        {9, 10, 11, 12}
+    };
+
+    // Create an object of the Solution class
+    Solution obj;
+
+    // Call the function and print result
+    if (obj.searchMatrix(matrix, 8))
+        cout &lt;&lt; "true\n";
+    else
+        cout &lt;&lt; "false\n";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to search target in 2D matrix using binary search
+    public boolean searchMatrix(int[][] matrix, int target) {
+        // Get the number of rows
+        int n = matrix.length;
+
+        // Get the number of columns
+        int m = matrix[0].length;
+
+        // Set initial binary search range
+        int low = 0, high = n * m - 1;
+
+        // Perform binary search
+        while (low &lt;= high) {
+            // Calculate middle index
+            int mid = (low + high) / 2;
+
+            // Map 1D index to 2D coordinates
+            int row = mid / m;
+            int col = mid % m;
+
+            // Check if target is found
+            if (matrix[row][col] == target)
+                return true;
+
+            // Discard left half
+            else if (matrix[row][col] &lt; target)
+                low = mid + 1;
+
+            // Discard right half
+            else
+                high = mid - 1;
+        }
+
+        // Target not found
+        return false;
+    }
+}
+
+// Driver class
+public class Main {
+    public static void main(String[] args) {
+        // Define 2D matrix
+        int[][] matrix = {
+            {1, 2, 3, 4},
+            {5, 6, 7, 8},
+            {9, 10, 11, 12}
+        };
+
+        // Create object of Solution
+        Solution obj = new Solution();
+
+        // Call the method and print result
+        if (obj.searchMatrix(matrix, 8))
+            System.out.println("true");
+        else
+            System.out.println("false");
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to search target in 2D matrix using binary search
+    def searchMatrix(self, matrix, target):
+        # Get number of rows and columns
+        n = len(matrix)
+        m = len(matrix[0])
+
+        # Set initial binary search range
+        low = 0
+        high = n * m - 1
+
+        # Perform binary search
+        while low &lt;= high:
+            # Calculate middle index
+            mid = (low + high) // 2
+
+            # Convert 1D index to 2D indices
+            row = mid // m
+            col = mid % m
+
+            # Check if target is found
+            if matrix[row][col] == target:
+                return True
+            # Discard left half
+            elif matrix[row][col] &lt; target:
+                low = mid + 1
+            # Discard right half
+            else:
+                high = mid - 1
+
+        # Target not found
+        return False
+
+# Driver code
+if __name__ == "__main__":
+    # Define 2D matrix
+    matrix = [
+        [1, 2, 3, 4],
+        [5, 6, 7, 8],
+        [9, 10, 11, 12]
+    ]
+
+    # Create object of Solution
+    obj = Solution()
+
+    # Call the method and print result
+    print("true" if obj.searchMatrix(matrix, 8) else "false")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to search target in 2D matrix using binary search
+    searchMatrix(matrix, target) {
+        // Get number of rows and columns
+        const n = matrix.length;
+        const m = matrix[0].length;
+
+        // Set initial binary search range
+        let low = 0, high = n * m - 1;
+
+        // Perform binary search
+        while (low &lt;= high) {
+            // Calculate middle index
+            const mid = Math.floor((low + high) / 2);
+
+            // Convert 1D index to 2D indices
+            const row = Math.floor(mid / m);
+            const col = mid % m;
+
+            // Check if target is found
+            if (matrix[row][col] === target) {
+                return true;
+            }
+            // Discard left half
+            else if (matrix[row][col] &lt; target) {
+                low = mid + 1;
+            }
+            // Discard right half
+            else {
+                high = mid - 1;
+            }
+        }
+
+        // Target not found
+        return false;
+    }
+}
+
+// Driver code
+const matrix = [
+    [1, 2, 3, 4],
+    [5, 6, 7, 8],
+    [9, 10, 11, 12]
+];
+
+// Create object of Solution
+const obj = new Solution();
+
+// Call the function and print result
+console.log(obj.searchMatrix(matrix, 8) ? "true" : "false");
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity: </strong>O(log(NxM)), where N = given row number, M = given column number.We are applying binary search on the imaginary 1D array of size NxM.</p>
+<p><strong>Space Complexity: </strong>O(1) as we are not using any extra space.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

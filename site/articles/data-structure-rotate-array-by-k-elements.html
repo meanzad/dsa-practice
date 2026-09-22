@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Rotate array by K elements</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Rotate array by K elements</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/rotate-array-by-k-elements/</code></div>
+  <p><strong>Problem Statement: </strong>Given an array of integers, rotating array of elements by k elements either left or right.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p><strong>Input :</strong> nums = [1, 2, 3, 4, 5, 6, 7], k = 2, right
+<strong>Output :</strong> [6, 7, 1, 2, 3, 4, 5]
+<strong>Explanation :</strong> rotate 1 step to the right: [7, 1, 2, 3, 4, 5, 6]
+rotate 2 steps to the right: [6, 7, 1, 2, 3, 4, 5] <br/>
+<strong>Input :</strong> nums = [1, 2, 3, 4, 5, 6], k=2, left
+<strong>Output :</strong> [3, 4, 5, 6, 1, 2]
+<strong>Explanation :</strong>rotate 1 step to the left: [2, 3, 4, 5, 6, 1]
+rotate 2 steps to the left: [3, 4, 5, 6, 1, 2]
+</p></pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/left-rotate-array" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Brute Force Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<strong>Right Rotation</strong>:
+We store the last k elements of the array into a temporary array. Then we shift all the other elements (n-k elements) to the right by k positions. Finally, we place the elements from the temporary array at the beginning of the original array. This achieves a right rotation by k positions.
+<ul> <li>Take the last k elements and store them in a temporary array.</li> <li>Shift the first n-k elements to the right by k positions.</li> <li>Copy the k stored elements from the temporary array to the start of the original array.</li> </ul><br/>
+<strong>Left Rotation</strong>: 
+We store the first k elements in a temporary array. Then we shift the remaining n-k elements to the left by k positions. Finally, we copy the elements from the temporary array to the end of the array. This achieves a left rotation by k positions.
+<ul> <li>Store the first k elements in a temporary array.</li> <li>Shift the remaining elements to the left by k positions.</li> <li>Copy the k stored elements to the end of the original array.</li> </ul>
+<p><img height="457" loading="lazy" src="../assets/img/7ef73eaae95770f0.png" width="481"/></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to rotate the array to the right by k positions
+    void rotateRight(int arr[], int n, int k) {
+        if (n == 0) return;
+
+        // Normalize k if greater than n
+        k = k % n;
+
+        // Store last k elements in a temporary array
+        int temp[k];
+        for (int i = n - k; i &lt; n; i++) {
+            temp[i - n + k] = arr[i];
+        }
+
+        // Shift the first n-k elements to the right by k steps
+        for (int i = n - k - 1; i &gt;= 0; i--) {
+            arr[i + k] = arr[i];
+        }
+
+        // Copy back the k elements to the start
+        for (int i = 0; i &lt; k; i++) {
+            arr[i] = temp[i];
+        }
+    }
+
+    // Function to rotate the array to the left by k positions
+    void rotateLeft(int arr[], int n, int k) {
+        if (n == 0) return;
+
+        // Normalize k if greater than n
+        k = k % n;
+
+        // Store first k elements in temporary array
+        int temp[k];
+        for (int i = 0; i &lt; k; i++) {
+            temp[i] = arr[i];
+        }
+
+        // Shift remaining elements to the left by k positions
+        for (int i = k; i &lt; n; i++) {
+            arr[i - k] = arr[i];
+        }
+
+        // Copy back the stored elements to the end
+        for (int i = 0; i &lt; k; i++) {
+            arr[n - k + i] = temp[i];
+        }
+    }
+};
+
+// Driver code
+int main() {
+    Solution sol;
+
+    int arr[] = {1, 2, 3, 4, 5, 6, 7};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int k = 2;
+
+    sol.rotateRight(arr, n, k);
+    cout &lt;&lt; "Array after right rotation by " &lt;&lt; k &lt;&lt; " steps:\n";
+    for (int i = 0; i &lt; n; i++) cout &lt;&lt; arr[i] &lt;&lt; " ";
+
+    cout &lt;&lt; "\n";
+
+    // Reset array for left rotation demo
+    int arr2[] = {1, 2, 3, 4, 5, 6, 7};
+    sol.rotateLeft(arr2, n, k);
+    cout &lt;&lt; "Array after left rotation by " &lt;&lt; k &lt;&lt; " steps:\n";
+    for (int i = 0; i &lt; n; i++) cout &lt;&lt; arr2[i] &lt;&lt; " ";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.Arrays;
+
+class Solution {
+    // Rotate the array to the right by k positions
+    public void rotateRight(int[] arr, int k) {
+        int n = arr.length;
+        if (n == 0) return;
+
+        k = k % n;
+
+        // Store last k elements
+        int[] temp = Arrays.copyOfRange(arr, n - k, n);
+
+        // Shift the remaining elements to the right
+        for (int i = n - k - 1; i &gt;= 0; i--) {
+            arr[i + k] = arr[i];
+        }
+
+        // Copy the stored elements to the front
+        for (int i = 0; i &lt; k; i++) {
+            arr[i] = temp[i];
+        }
+    }
+
+    // Rotate the array to the left by k positions
+    public void rotateLeft(int[] arr, int k) {
+        int n = arr.length;
+        if (n == 0) return;
+
+        k = k % n;
+
+        // Store first k elements
+        int[] temp = Arrays.copyOfRange(arr, 0, k);
+
+        // Shift remaining elements to the left
+        for (int i = k; i &lt; n; i++) {
+            arr[i - k] = arr[i];
+        }
+
+        // Copy stored elements to the end
+        for (int i = 0; i &lt; k; i++) {
+            arr[n - k + i] = temp[i];
+        }
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+
+        int[] arr = {1, 2, 3, 4, 5, 6, 7};
+        int k = 2;
+
+        sol.rotateRight(arr, k);
+        System.out.println("Array after right rotation: " + Arrays.toString(arr));
+
+        int[] arr2 = {1, 2, 3, 4, 5, 6, 7};
+        sol.rotateLeft(arr2, k);
+        System.out.println("Array after left rotation: " + Arrays.toString(arr2));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Rotate the array to the right by k positions
+    def rotateRight(self, arr, k):
+        n = len(arr)
+        if n == 0:
+            return
+
+        k %= n
+
+        # Store last k elements
+        temp = arr[-k:]
+
+        # Shift the remaining elements
+        for i in range(n - k - 1, -1, -1):
+            arr[i + k] = arr[i]
+
+        # Copy stored elements to the front
+        for i in range(k):
+            arr[i] = temp[i]
+
+    # Rotate the array to the left by k positions
+    def rotateLeft(self, arr, k):
+        n = len(arr)
+        if n == 0:
+            return
+
+        k %= n
+
+        # Store first k elements
+        temp = arr[:k]
+
+        # Shift remaining elements
+        for i in range(k, n):
+            arr[i - k] = arr[i]
+
+        # Copy stored elements to the end
+        for i in range(k):
+            arr[n - k + i] = temp[i]
+
+
+# Driver code
+sol = Solution()
+
+arr = [1, 2, 3, 4, 5, 6, 7]
+k = 2
+sol.rotateRight(arr, k)
+print("Array after right rotation:", arr)
+
+arr2 = [1, 2, 3, 4, 5, 6, 7]
+sol.rotateLeft(arr2, k)
+print("Array after left rotation:", arr2)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Rotate the array to the right by k positions
+    rotateRight(arr, k) {
+        const n = arr.length;
+        if (n === 0) return;
+
+        k = k % n;
+
+        // Store last k elements
+        const temp = arr.slice(n - k);
+
+        // Shift remaining elements
+        for (let i = n - k - 1; i &gt;= 0; i--) {
+            arr[i + k] = arr[i];
+        }
+
+        // Copy stored elements to the front
+        for (let i = 0; i &lt; k; i++) {
+            arr[i] = temp[i];
+        }
+    }
+
+    // Rotate the array to the left by k positions
+    rotateLeft(arr, k) {
+        const n = arr.length;
+        if (n === 0) return;
+
+        k = k % n;
+
+        // Store first k elements
+        const temp = arr.slice(0, k);
+
+        // Shift remaining elements
+        for (let i = k; i &lt; n; i++) {
+            arr[i - k] = arr[i];
+        }
+
+        // Copy stored elements to the end
+        for (let i = 0; i &lt; k; i++) {
+            arr[n - k + i] = temp[i];
+        }
+    }
+}
+
+// Driver code
+const sol = new Solution();
+
+let arr = [1, 2, 3, 4, 5, 6, 7];
+let k = 2;
+
+sol.rotateRight(arr, k);
+console.log("Array after right rotation:", arr);
+
+let arr2 = [1, 2, 3, 4, 5, 6, 7];
+sol.rotateLeft(arr2, k);
+console.log("Array after left rotation:", arr2);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O(n), We are performing a constant number of linear operations copying `k` elements and shifting up to `n-k` elements.</p> <p><strong>Space Complexity:</strong> O(k) ,A temporary array of size `k` is used to store either the first `k` or last `k` elements depending on the direction of rotation.</p>
+</details>
+</div>
+</details>
+
+</div>
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+Instead of simulating each rotation one by one, we can get the rotated array in-place by reversing specific parts of the array.
+This works because rotating is just rearranging sections of the array.
+<ul>
+<li><strong>For Right Rotation by k steps:</strong>
+<ul>
+<li>Reverse the entire array</li>
+<li>Reverse the first k elements</li>
+<li>Reverse the remaining n - k elements</li>
+</ul>
+</li>
+<li><strong>For Left Rotation by k steps:</strong>
+<ul>
+<li>Reverse the first k elements</li>
+<li>Reverse the remaining n - k elements</li>
+<li>Reverse the entire array</li>
+</ul>
+</li>
+</ul>
+<ul> <li>Normalize k by doing k = k % N</li> <li>If direction is "right": <ul> <li>Reverse the entire array</li> <li>Reverse the first k elements</li> <li>Reverse the rest (from k to end)</li> </ul> </li> <li>If direction is "left": <ul> <li>Reverse the first k elements</li> <li>Reverse the rest (from k to end)</li> <li>Reverse the entire array</li> </ul> </li> </ul>
+<p><img height="457" loading="lazy" src="../assets/img/e0df21d31ad514fe.png" width="481"/></p>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Helper function to reverse a subarray from index start to end
+    void reverseArray(vector&lt;int&gt;&amp; nums, int start, int end) {
+        while (start &lt; end) {
+            swap(nums[start], nums[end]);
+            start++;
+            end--;
+        }
+    }
+
+    // Function to rotate array left or right by k steps
+    vector&lt;int&gt; rotateArray(vector&lt;int&gt;&amp; nums, int k, string direction) {
+        int n = nums.size();
+
+        // Edge case: empty or no rotation
+        if (n == 0 || k == 0) return nums;
+
+        // Normalize k
+        k = k % n;
+
+        if (direction == "right") {
+            // Step 1: Reverse the whole array
+            reverseArray(nums, 0, n - 1);
+
+            // Step 2: Reverse first k elements
+            reverseArray(nums, 0, k - 1);
+
+            // Step 3: Reverse remaining n-k elements
+            reverseArray(nums, k, n - 1);
+        } 
+        else if (direction == "left") {
+            // Step 1: Reverse first k elements
+            reverseArray(nums, 0, k - 1);
+
+            // Step 2: Reverse remaining n-k elements
+            reverseArray(nums, k, n - 1);
+
+            // Step 3: Reverse the whole array
+            reverseArray(nums, 0, n - 1);
+        }
+
+        return nums;
+    }
+};
+
+// Driver code
+int main() {
+    Solution sol;
+
+    vector&lt;int&gt; nums = {1, 2, 3, 4, 5, 6, 7};
+    int k = 2;
+    string dir = "right";
+
+    vector&lt;int&gt; result = sol.rotateArray(nums, k, dir);
+
+    for (int num : result) {
+        cout &lt;&lt; num &lt;&lt; " ";
+    }
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to reverse part of the array between given indices
+    void reverseArray(int[] nums, int start, int end) {
+        // Swap elements until start meets end
+        while (start &lt; end) {
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
+    // Function to rotate array left or right by k steps
+    public int[] rotateArray(int[] nums, int k, String direction) {
+        // Get array length
+        int n = nums.length;
+
+        // Edge case: do nothing if array is empty or k is 0
+        if (n == 0 || k == 0) return nums;
+
+        // Normalize k if greater than n
+        k = k % n;
+
+        // If rotation is to the right
+        if (direction.equals("right")) {
+            // Step 1: reverse entire array
+            reverseArray(nums, 0, n - 1);
+
+            // Step 2: reverse first k elements
+            reverseArray(nums, 0, k - 1);
+
+            // Step 3: reverse remaining n-k elements
+            reverseArray(nums, k, n - 1);
+        } 
+        // If rotation is to the left
+        else if (direction.equals("left")) {
+            // Step 1: reverse first k elements
+            reverseArray(nums, 0, k - 1);
+
+            // Step 2: reverse remaining n-k elements
+            reverseArray(nums, k, n - 1);
+
+            // Step 3: reverse entire array
+            reverseArray(nums, 0, n - 1);
+        }
+
+        // Return the rotated array
+        return nums;
+    }
+}
+
+// Driver code
+public class Main {
+    public static void main(String[] args) {
+        // Create instance of Solution
+        Solution sol = new Solution();
+
+        // Input array and parameters
+        int[] nums = {1, 2, 3, 4, 5, 6, 7};
+        int k = 2;
+        String direction = "right";
+
+        // Call rotateArray and store result
+        int[] result = sol.rotateArray(nums, k, direction);
+
+        // Print rotated array
+        for (int num : result) {
+            System.out.print(num + " ");
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Helper function to reverse part of array between two indices
+    def reverse(self, nums, start, end):
+        # Swap elements from start to end
+        while start &lt; end:
+            nums[start], nums[end] = nums[end], nums[start]
+            start += 1
+            end -= 1
+
+    # Function to rotate array left or right by k steps
+    def rotateArray(self, nums, k, direction):
+        # Get length of array
+        n = len(nums)
+
+        # Edge case: no rotation needed
+        if n == 0 or k == 0:
+            return nums
+
+        # Normalize k if it's larger than n
+        k = k % n
+
+        # If direction is right
+        if direction == "right":
+            # Step 1: reverse the entire array
+            self.reverse(nums, 0, n - 1)
+
+            # Step 2: reverse first k elements
+            self.reverse(nums, 0, k - 1)
+
+            # Step 3: reverse remaining n-k elements
+            self.reverse(nums, k, n - 1)
+
+        # If direction is left
+        elif direction == "left":
+            # Step 1: reverse first k elements
+            self.reverse(nums, 0, k - 1)
+
+            # Step 2: reverse remaining n-k elements
+            self.reverse(nums, k, n - 1)
+
+            # Step 3: reverse entire array
+            self.reverse(nums, 0, n - 1)
+
+        # Return rotated array
+        return nums
+
+# Driver code
+sol = Solution()
+
+# Input values
+nums = [1, 2, 3, 4, 5, 6, 7]
+k = 2
+direction = "right"
+
+# Perform rotation
+result = sol.rotateArray(nums, k, direction)
+
+# Print result
+print(result)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Helper function to reverse part of the array
+    reverse(nums, start, end) {
+        // Swap elements from start to end
+        while (start &lt; end) {
+            [nums[start], nums[end]] = [nums[end], nums[start]];
+            start++;
+            end--;
+        }
+    }
+
+    // Function to rotate array left or right by k steps
+    rotateArray(nums, k, direction) {
+        // Get length of the array
+        const n = nums.length;
+
+        // Edge case: no rotation needed
+        if (n === 0 || k === 0) return nums;
+
+        // Normalize k if greater than array size
+        k = k % n;
+
+        // If direction is right
+        if (direction === "right") {
+            // Step 1: reverse entire array
+            this.reverse(nums, 0, n - 1);
+
+            // Step 2: reverse first k elements
+            this.reverse(nums, 0, k - 1);
+
+            // Step 3: reverse remaining n-k elements
+            this.reverse(nums, k, n - 1);
+        }
+
+        // If direction is left
+        else if (direction === "left") {
+            // Step 1: reverse first k elements
+            this.reverse(nums, 0, k - 1);
+
+            // Step 2: reverse remaining n-k elements
+            this.reverse(nums, k, n - 1);
+
+            // Step 3: reverse the whole array
+            this.reverse(nums, 0, n - 1);
+        }
+
+        // Return rotated array
+        return nums;
+    }
+}
+
+// Driver code
+const sol = new Solution();
+
+// Input array and parameters
+const nums = [1, 2, 3, 4, 5, 6, 7];
+const k = 2;
+const direction = "right";
+
+// Perform rotation
+const result = sol.rotateArray(nums, k, direction);
+
+// Print rotated array
+console.log(result);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O(N), We reverse parts of the array each reverse takes linear time. So total work is 3 × O(N) = O(N).</p> <p><strong>Space Complexity:</strong> O(1) All modifications are done in-place, using only a few temporary variables.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

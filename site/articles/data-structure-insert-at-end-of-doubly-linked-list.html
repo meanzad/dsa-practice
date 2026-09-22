@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Insert at end of Doubly Linked List</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Insert at end of Doubly Linked List</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/insert-at-end-of-doubly-linked-list/</code></div>
+  <p><strong>Problem Statement: </strong>
+Given a doubly linked list, and a value ‘k’, insert a node having value ‘k’ at the end of the doubly linked list.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>  
+<strong>Input Format:</strong>  
+DLL: 1 &lt;-&gt; 2 &lt;-&gt; 3 &lt;-&gt; 4  
+Value to be Inserted: 6  
+<strong>Result:</strong>  DLL: 1 &lt;-&gt; 2 &lt;-&gt; 3 &lt;-&gt; 4 &lt;-&gt; 6  
+<strong>Explanation:</strong>  A new node with value 6 has been inserted at the end of the doubly linked list after the tail node.
+
+<strong>Example 2:</strong>  
+<strong>Input Format:</strong>  
+DLL: 10 &lt;-&gt; 20 &lt;-&gt; 30  
+Value to be Inserted: 40  
+<strong>Result:</strong>  DLL: 10 &lt;-&gt; 20 &lt;-&gt; 30 &lt;-&gt; 40  
+<strong>Explanation:</strong>  In this case, a new node with value 40 is inserted after 30, which is at the end of the doubly linked list.</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>It's highly recommend trying to solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>To insert a new node before a given node in a doubly linked list, start by identifying the previous node of the given node. This is guaranteed because the node to be inserted before is never the head of the list.</li>
+<li>Create a new node with the specified value to be inserted before the given node. The back pointer of the new node should point to the previous node, and the next pointer of the new node should point to the given node.</li>
+<li>To properly integrate the new node into the list, update the next pointer of the previous node to point to the new node, and set the back pointer of the given node to point to the new node, ensuring the doubly linked list remains intact.</li>
+<li>To insert a new node at the end of the doubly linked list, begin by traversing the list from the head node until you reach the tail.</li>
+<li>Create a new node with the provided data, setting its back pointer to the current tail node and its next pointer to null, as this new node will become the tail of the list.</li>
+<li>Update the next pointer of the current tail node to point to the newly created node, making the new node the new tail of the list.</li>
+<li>Finally, return the head of the updated doubly linked list, which remains unchanged after this operation.</li>
+</ul>
+<p><img height="457" loading="lazy" src="../assets/img/9137861b0225aa63.png" width="481"/></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;iostream&gt;
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Define a Node class for doubly linked list
+class Node {
+public:
+    int data;   // Data stored in the node
+    Node* next; // Pointer to the next node in the list (forward direction)
+    Node* back; // Pointer to the previous node in the list (backward direction)
+
+    // Constructor for a Node with both data, next, and back references
+    Node(int data1, Node* next1, Node* back1) {
+        data = data1;
+        next = next1;
+        back = back1;
+    }
+
+    // Constructor for a Node with only data, no next or back references (end of the list)
+    Node(int data1) {
+        data = data1;
+        next = nullptr;
+        back = nullptr;
+    }
+};
+
+// Function to convert an array to a doubly linked list
+Node* convertArr2DLL(vector&lt;int&gt; arr) {
+    // Create the head node with the first element of the array
+    Node* head = new Node(arr[0]);
+    Node* prev = head; // Initialize 'prev' to the head node
+
+    // Traverse the array to create the doubly linked list
+    for (int i = 1; i &lt; arr.size(); i++) {
+        // Create a new node with data from the array and set its 'back' pointer to the previous node
+        Node* temp = new Node(arr[i], nullptr, prev);
+        prev-&gt;next = temp; // Set 'next' of the previous node to the new node
+        prev = temp; // Move 'prev' to the new node
+    }
+    return head;  // Return the head of the doubly linked list
+}
+
+// Function to print the elements of the doubly linked list
+void print(Node* head) {
+    // Traverse through the list and print each node's data
+    while (head != nullptr) {
+        cout &lt;&lt; head-&gt;data &lt;&lt; " ";  // Print the data of the current node
+        head = head-&gt;next;          // Move to the next node
+    }
+}
+
+// Function to insert a new node with value 'k' at the end of the doubly linked list
+Node* insertAtTail(Node* head, int k) {
+    // Create a new node with data 'k'
+    Node* newNode = new Node(k);
+
+    // If the doubly linked list is empty, return the new node as the head
+    if (head == nullptr) {
+        return newNode;
+    }
+
+    // Traverse to the last node of the doubly linked list
+    Node* tail = head;
+    while (tail-&gt;next != nullptr) {
+        tail = tail-&gt;next;
+    }
+
+    // Connect the new node to the last node
+    tail-&gt;next = newNode;
+    newNode-&gt;back = tail; // Set the 'back' pointer of the new node to the previous node
+    return head;  // Return the head of the modified list
+}
+
+int main() {
+    // Initialize an array of integers
+    vector&lt;int&gt; arr = {12, 5, 8, 7, 4};
+
+    // Convert the array into a doubly linked list
+    Node* head = convertArr2DLL(arr);
+
+    // Print the initially created doubly linked list
+    cout &lt;&lt; "Doubly Linked List Initially: " &lt;&lt; endl;
+    print(head);
+
+    // Insert a node with value 10 at the end of the doubly linked list
+    cout &lt;&lt; endl &lt;&lt; "Doubly Linked List After Inserting at the tail with value 10: " &lt;&lt; endl;
+    head = insertAtTail(head, 10);
+    print(head);
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Node {
+    int data;
+    Node next;
+    Node back;
+
+    // Constructor for a Node with both data, next, and back references
+    public Node(int data1, Node next1, Node back1) {
+        data = data1;
+        next = next1;
+        back = back1;
+    }
+
+    // Constructor for a Node with only data, no next or back references (end of the list)
+    public Node(int data1) {
+        data = data1;
+        next = null;
+        back = null;
+    }
+}
+
+class Solution {
+
+    // Function to convert an array to a doubly linked list
+    public static Node convertArr2DLL(int[] arr) {
+        // Create the head node with the first element of the array
+        Node head = new Node(arr[0]);
+        Node prev = head;  // Initialize 'prev' to the head node
+
+        // Traverse the array to create the doubly linked list
+        for (int i = 1; i &lt; arr.length; i++) {
+            Node temp = new Node(arr[i], null, prev);  // Create a new node
+            prev.next = temp;  // Set 'next' of the previous node to the new node
+            prev = temp;  // Move 'prev' to the new node
+        }
+
+        return head;  // Return the head of the doubly linked list
+    }
+
+    // Function to print the elements of the doubly linked list
+    public static void print(Node head) {
+        // Traverse through the list and print each node's data
+        while (head != null) {
+            System.out.print(head.data + " ");  // Print the data of the current node
+            head = head.next;  // Move to the next node
+        }
+        System.out.println();  // New line after printing the list
+    }
+
+    // Function to insert a new node at the tail of the doubly linked list
+    public static Node insertAtTail(Node head, int k) {
+        // Create a new node with data 'k'
+        Node newNode = new Node(k);
+
+        // If the list is empty, return the new node as the head
+        if (head == null) {
+            return newNode;
+        }
+
+        // Traverse to the last node of the doubly linked list
+        Node tail = head;
+        while (tail.next != null) {
+            tail = tail.next;
+        }
+
+        // Connect the new node to the last node
+        tail.next = newNode;
+        newNode.back = tail;  // Set the 'back' pointer of the new node to the previous node
+        return head;  // Return the head of the modified list
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+        // Initialize an array of integers
+        int[] arr = {12, 5, 8, 7, 4};
+
+        // Convert the array to a doubly linked list
+        Node head = Solution.convertArr2DLL(arr);
+
+        // Print the initially created doubly linked list
+        System.out.println("Doubly Linked List Initially: ");
+        Solution.print(head);
+
+        // Insert a node with value 10 at the end of the doubly linked list
+        System.out.println("\nDoubly Linked List After Inserting at the tail with value 10: ");
+        head = Solution.insertAtTail(head, 10);
+        Solution.print(head);
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Define a Node class for doubly linked list
+class Node:
+    def __init__(self, data, next_node=None, back_node=None):
+        self.data = data
+        self.next = next_node
+        self.back = back_node
+
+# Function to convert an array to a doubly linked list
+def convertArr2DLL(arr):
+    head = Node(arr[0])  # Create the head node with the first element
+    prev = head  # Initialize 'prev' to the head node
+
+    # Traverse the array to create the doubly linked list
+    for i in range(1, len(arr)):
+        temp = Node(arr[i], None, prev)  # Create a new node
+        prev.next = temp  # Set 'next' of the previous node to the new node
+        prev = temp  # Move 'prev' to the new node
+
+    return head  # Return the head of the doubly linked list
+
+# Function to print the elements of the doubly linked list
+def printList(head):
+    while head:
+        print(head.data, end=" ")  # Print the data of the current node
+        head = head.next  # Move to the next node
+    print()  # New line after printing the list
+
+# Function to insert a new node at the tail of the doubly linked list
+def insertAtTail(head, k):
+    newNode = Node(k)  # Create a new node with data 'k'
+
+    if not head:
+        return newNode  # If the list is empty, return the new node as the head
+
+    tail = head
+    while tail.next:
+        tail = tail.next  # Traverse to the last node of the list
+
+    tail.next = newNode  # Connect the new node to the last node
+    newNode.back = tail  # Set the 'back' pointer of the new node to the previous node
+    return head  # Return the head of the modified list
+
+# Driver code
+if __name__ == "__main__":
+    arr = [12, 5, 8, 7, 4]  # Initialize an array
+    head = convertArr2DLL(arr)  # Convert the array to a doubly linked list
+
+    print("Doubly Linked List Initially:")
+    printList(head)  # Print the doubly linked list
+
+    print("\nDoubly Linked List After Inserting at the tail with value 10:")
+    head = insertAtTail(head, 10)  # Insert a node with value 10 at the end
+    printList(head)  # Print the updated doubly linked list</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Define a Node class for doubly linked list
+class Node {
+    constructor(data, next_node = null, back_node = null) {
+        this.data = data;
+        this.next = next_node;
+        this.back = back_node;
+    }
+}
+
+// Function to convert an array to a doubly linked list
+function convertArr2DLL(arr) {
+    let head = new Node(arr[0]);  // Create the head node with the first element
+    let prev = head;  // Initialize 'prev' to the head node
+
+    // Traverse the array to create the doubly linked list
+    for (let i = 1; i &lt; arr.length; i++) {
+        let temp = new Node(arr[i], null, prev);  // Create a new node
+        prev.next = temp;  // Set 'next' of the previous node to the new node
+        prev = temp;  // Move 'prev' to the new node
+    }
+
+    return head;  // Return the head of the doubly linked list
+}
+
+// Function to print the elements of the doubly linked list
+function printList(head) {
+    while (head) {
+        process.stdout.write(head.data + " ");  // Print the data of the current node
+        head = head.next;  // Move to the next node
+    }
+    console.log();  // New line after printing the list
+}
+
+// Function to insert a new node at the tail of the doubly linked list
+function insertAtTail(head, k) {
+    let newNode = new Node(k);  // Create a new node with data 'k'
+
+    if (!head) {
+        return newNode;  // If the list is empty, return the new node as the head
+    }
+
+    let tail = head;
+    while (tail.next) {
+        tail = tail.next;  // Traverse to the last node of the list
+    }
+
+    tail.next = newNode;  // Connect the new node to the last node
+    newNode.back = tail;  // Set the 'back' pointer of the new node to the previous node
+    return head;  // Return the head of the modified list
+}
+
+// Main function to handle input and output
+function main() {
+    let arr = [12, 5, 8, 7, 4];  // Initialize an array
+    let head = convertArr2DLL(arr);  // Convert the array to a doubly linked list
+
+    console.log("Doubly Linked List Initially:");
+    printList(head);  // Print the doubly linked list
+
+    console.log("\nDoubly Linked List After Inserting at the tail with value 10:");
+    head = insertAtTail(head, 10);  // Insert a node with value 10 at the end
+    printList(head);  // Print the updated doubly linked list
+}
+
+// Call the main function
+main();</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity:</strong> O(n), where n is the number of nodes in the doubly linked list. This is because we traverse the list to find the tail node before inserting the new node.
+                        <br/><br/>
+<strong>Space Complexity:</strong> O(1), as we are only using a constant amount of extra space for the new node, regardless of the size of the list.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

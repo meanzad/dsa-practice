@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Burst Balloons | Partition DP | DP 51</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Burst Balloons | Partition DP | DP 51</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/burst-balloons-partition-dp-dp-51/</code></div>
+  <p><strong>Problem Statement:</strong> You are given n balloons, indexed from 0 to n - 1. Each balloon is painted with a number on it represented by an array. You are asked to burst all the balloons.</p>
+<p>If you burst the ith balloon, you will get arr[i - 1] * arr[i] * arr[i + 1] coins. If i - 1 or i + 1 goes out of the array's bounds, then treat it as if there is a balloon with a 1 painted on it.</p>
+<p>Return the maximum coins you can collect by bursting the balloons wisely.</p>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/burst-balloons" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+Examples
+</strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input: N = 4, array[] = {3, 1, 5, 8}
+Output: 167
+Explanation: First, we will burst the second balloon with the value 1. Coins = 3*1*5 = 15. Second, we will burst the balloon with the value 5. Coins = 3*5*8 = 120. Third, we will burst the balloon with the value 3. Coins = 1*3*8 = 24. Fourth, we will burst the balloon with the value 8. Coins = 1*8*1 = 8. So, the total number of coins we can collect is 167. This is the maximum number of coins we can collect.
+
+
+Example 2:
+Input: N = 2, array[] = {1, 5}
+Output: 10
+Explanation:
+First, we will burst the second balloon with the value 1. Coins = 1*1*5 = 5. Second, we will burst the balloon with the value 5. Coins = 1*5*1 = 5. So, the total number of coins we can collect is 10. This is the maximum number of coins we can collect.</pre>
+</div>
+</details>
+</div>
+
+
+
+<div class="practice">
+<span><strong>Practice: </strong></span>
+<div class="problem-buttons">
+
+<span>Solve Problem</span>
+<img alt="code-studio" loading="lazy" src="../assets/img/66297b3c5a7813f2.png"/>
+</div>
+</div>
+
+
+<div class="horizontal_navbar_dsa_article">
+<div class="grid_container_three">
+<a class="three-boxes box-a" href="#brute-force-approach">
+Recursive approach
+</a>
+<a class="three-boxes box-b" href="#better-approach">
+Memoization approach
+</a>
+<a class="three-boxes box-c" href="#optimal-approach">
+Tabulation Approach
+</a>
+<a class="three-boxes box-d" href="#dsa_article_video_explanation">
+<svg fill="none" height="26" viewbox="0 0 20 14" width="26" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 10L13.19 7L8 4V10ZM19.56 2.17C19.69 2.64 19.78 3.27 19.84 4.07C19.91 4.87 19.94 5.56 19.94 6.16L20 7C20 9.19 19.84 10.8 19.56 11.83C19.31 12.73 18.73 13.31 17.83 13.56C17.36 13.69 16.5 13.78 15.18 13.84C13.88 13.91 12.69 13.94 11.59 13.94L10 14C5.81 14 3.2 13.84 2.17 13.56C1.27 13.31 0.69 12.73 0.44 11.83C0.31 11.36 0.22 10.73 0.16 9.93C0.0900001 9.13 0.0599999 8.44 0.0599999 7.84L0 7C0 4.81 0.16 3.2 0.44 2.17C0.69 1.27 1.27 0.69 2.17 0.44C2.64 0.31 3.5 0.22 4.82 0.16C6.12 0.0899998 7.31 0.0599999 8.41 0.0599999L10 0C14.19 0 16.8 0.16 17.83 0.44C18.73 0.69 19.31 1.27 19.56 2.17Z" fill="red"></path>
+</svg>
+</a>
+<div class="box-e tooltip">
+<svg fill="none" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.842 9.25L11.9577 10.17C11.2502 10.89 10.8081 11.5 10.8081 13H8.84297V12.5C8.84297 11.39 9.28511 10.39 9.99255 9.67L11.2109 8.41C11.5745 8.05 11.7906 7.55 11.7906 7C11.7906 6.46957 11.5836 5.96086 11.2151 5.58579C10.8465 5.21071 10.3467 5 9.82552 5C9.30434 5 8.80451 5.21071 8.43598 5.58579C8.06745 5.96086 7.86041 6.46957 7.86041 7H5.89531C5.89531 5.93913 6.30938 4.92172 7.04644 4.17157C7.7835 3.42143 8.78316 3 9.82552 3C10.8679 3 11.8675 3.42143 12.6046 4.17157C13.3417 4.92172 13.7557 5.93913 13.7557 7C13.7543 7.84324 13.4259 8.65183 12.842 9.25ZM10.8081 17H8.84297V15H10.8081M9.82552 0C8.53521 0 7.25754 0.258658 6.06545 0.761205C4.87337 1.26375 3.79021 2.00035 2.87783 2.92893C1.03519 4.8043 0 7.34784 0 10C0 12.6522 1.03519 15.1957 2.87783 17.0711C3.79021 17.9997 4.87337 18.7362 6.06545 19.2388C7.25754 19.7413 8.53521 20 9.82552 20C12.4314 20 14.9306 18.9464 16.7732 17.0711C18.6158 15.1957 19.651 12.6522 19.651 10C19.651 4.47 15.2296 0 9.82552 0Z" fill="black"></path>
+</svg>
+<div class="bottom">
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+Recursive Approach
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+Algorithm
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<p>We must burst balloons in a specific order to collect the most coins. The order of bursting affects the total, and multiple valid sequences may exist.</p>
+<p>Initially, we may think to choose the first balloon to burst, assuming we can solve the rest separately. But this leads to interdependency problems.</p>
+<p>For example, bursting the middle balloon splits the array into two parts. But bursting one side may still depend on balloons from the other, making them not truly independent.</p>
+<p><img height="457" loading="lazy" src="../assets/img/050639eadbba3765.png" width="481"/></p>
+<p>So, this approach fails as subproblems overlap and depend on each other. Instead, think in reverse: choose the <strong>last</strong> balloon to burst.</p>
+<p>Now, if we burst a balloon last, the balloons on its left and right are fixed, allowing us to treat the left and right parts as separate subproblems.</p>
+<p>For example, if a middle balloon is burst last, its neighbors are known, and we can solve the left and right sections independently. This eliminates overlapping dependency.</p>
+<p><img height="457" loading="lazy" src="../assets/img/820fc843e08fbfb9.png" width="481"/></p>
+<p>Now subproblems are truly independent. We use this structure to apply a Partition DP technique.</p>
+<ol>
+<li>Start with the whole array marked by i and j.</li>
+<li>Try all possible last balloons to burst within i to j.</li>
+<li>Calculate total coins as:
+    <ul>
+<li>Coins from bursting the chosen balloon (with neighbors)</li>
+<li>Plus coins from solving the left subarray</li>
+<li>Plus coins from solving the right subarray</li>
+</ul>
+</li>
+<li>Track the maximum among all such combinations.</li>
+</ol>
+<p>Mark the array with two pointers i and j, covering the full range of balloons.</p>
+<p><img height="457" loading="lazy" src="../assets/img/26a0ba2f16edfb52.png" width="481"/></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+class Solution{
+// Recursive function to calculate the maximum coins obtained
+int maxCoinsHelper(int i, int j, vector&lt;int&gt; &amp;nums) {
+    if (i &gt; j) return 0;
+    int maxCoins = INT_MIN;
+    
+    // Iterate through each possible balloon to burst last
+    for (int k = i; k &lt;= j; k++) {
+        // Calculate the coins obtained by bursting the k-th balloon last
+        int coins = nums[i - 1] * nums[k] * nums[j + 1];
+        
+        // Recursively calculate the maximum coins for the remaining balloons
+        int remainingCoins = maxCoinsHelper(i, k - 1, nums) + maxCoinsHelper(k + 1, j, nums);
+        
+        // Update the maximum coins
+        maxCoins = max(maxCoins, coins + remainingCoins);
+    }
+    
+    return maxCoins;
+}
+
+// Function to calculate the maximum coins obtained
+int maxCoins(vector&lt;int&gt; &amp;nums) {
+    int n = nums.size();
+    
+    // Add 1 to the beginning and end of the nums array
+    nums.insert(nums.begin(), 1);
+    nums.push_back(1);
+    
+    // Call the helper function to compute the maximum coins
+    return maxCoinsHelper(1, n, nums);
+}
+
+int main() {
+    vector&lt;int&gt; nums = {3, 1, 5, 8};
+    int maxCoinsResult = maxCoins(nums);
+    cout &lt;&lt; "Maximum coins obtained: " &lt;&lt; maxCoinsResult &lt;&lt; "\n";
+    
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+public class Solution{
+    // Function to recursively calculate the maximum coins
+    static int maxCoins(int i, int j, ArrayList&lt;Integer&gt; a) {
+        if (i &gt; j) return 0;
+        int maxi = Integer.MIN_VALUE;
+        for (int ind = i; ind &lt;= j; ind++) {
+            int cost = a.get(i - 1) * a.get(ind) * a.get(j + 1)
+                       + maxCoins(i, ind - 1, a) + maxCoins(ind + 1, j, a);
+            maxi = Math.max(maxi, cost);
+        }
+        return maxi;
+    }
+
+    // Wrapper function to calculate the maximum coins
+    static int maxCoins(ArrayList&lt;Integer&gt; a) {
+        int n = a.size();
+        a.add(1);
+        a.add(0, 1);
+        return maxCoins(1, n, a);
+    }
+
+    public static void main(String[] args) {
+        ArrayList&lt;Integer&gt; a = new ArrayList&lt;&gt;(Arrays.asList(3, 1, 5, 8));
+        int ans = maxCoins(a);
+        System.out.println(ans);
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">def maxCoins(a):
+    n = len(a)
+    a.insert(0, 1)
+    a.append(1)
+
+    # Create a 2D DP table initialized with zeros
+    dp = [[0] * (n + 2) for _ in range(n + 2)]
+
+    # Calculate the maximum coins using dynamic programming
+    for length in range(1, n + 1):
+        for i in range(1, n - length + 2):
+            j = i + length - 1
+            maxi = float('-inf')
+            
+            for ind in range(i, j + 1):
+                cost = a[i - 1] * a[ind] * a[j + 1] + dp[i][ind - 1] + dp[ind + 1][j]
+                maxi = max(maxi, cost)
+            
+            dp[i][j] = maxi
+    
+    return dp[1][n]
+
+if __name__ == "__main__":
+    a = [3, 1, 5, 8]
+    ans = maxCoins(a)
+    print(ans)</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">function findMaxCoins(a) {
+    // Function f implements the recursive calculation
+    function f(i, j, a) {
+        // Base case: if i &gt; j, return 0
+        if (i &gt; j) return 0;
+        
+        let maxi = -Infinity;
+
+        // Iterate through all possible balloon indices from i to j
+        for (let ind = i; ind &lt;= j; ind++) {
+            // Calculate the cost for bursting balloon ind
+            let cost = a[i - 1] * a[ind] * a[j + 1] +
+                       f(i, ind - 1, a) + f(ind + 1, j, a);
+            
+            // Update the maximum cost
+            maxi = Math.max(maxi, cost);
+        }
+        
+        return maxi;
+    }
+
+    // Add 1 to the beginning and end of the array 'a'
+    a.unshift(1);
+    a.push(1);
+
+    // Call the recursive function 'f' with initial values
+    return f(1, a.length - 2, a);
+}
+
+// Define the input values
+let a = [3, 1, 5, 8];
+
+// Call the function and print the result
+let ans = findMaxCoins(a);
+console.log(ans);</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+Complexity Analysis
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><li>Time Complexity: Exponential</li>
+<li>Space Complexity: O(1). No extra space used</li>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="better-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+Memoization Approach
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+Algorithm
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ol>
+<li>Create a 2D array to store results for each subproblem. Its size should be one more than the array length in both dimensions (n+1 x n+1) to cover all index ranges.</li>
+<li>Set all values in this array to -1 to indicate uncomputed states.</li>
+<li>Before solving any subproblem (for example, from i to j), check if the result is already stored in the array (i.e., check if the value is not -1).</li>
+<li>If the value exists, return it directly instead of recomputing.</li>
+<li>If it doesn't exist, compute the result normally using recursion, then store it in the array before returning.</li>
+</ol>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+class Solution{
+// Recursive function to calculate the maximum coins obtained
+int maxCoinsHelper(int i, int j, vector&lt;int&gt; &amp;nums, vector&lt;vector&lt;int&gt;&gt; &amp;dp) {
+    if (i &gt; j) return 0;
+    if (dp[i][j] != -1) return dp[i][j];
+    int maxCoins = INT_MIN;
+    
+    // Iterate through each possible balloon to burst last
+    for (int k = i; k &lt;= j; k++) {
+        // Calculate the coins obtained by bursting the k-th balloon last
+        int coins = nums[i - 1] * nums[k] * nums[j + 1];
+        
+        // Recursively calculate the maximum coins for the remaining balloons
+        int remainingCoins = maxCoinsHelper(i, k - 1, nums, dp) + maxCoinsHelper(k + 1, j, nums, dp);
+        
+        // Update the maximum coins
+        maxCoins = max(maxCoins, coins + remainingCoins);
+    }
+    
+    return dp[i][j] = maxCoins;
+}
+
+// Function to calculate the maximum coins obtained
+int maxCoins(vector&lt;int&gt; &amp;nums) {
+    int n = nums.size();
+    
+    // Add 1 to the beginning and end of the nums array
+    nums.insert(nums.begin(), 1);
+    nums.push_back(1);
+    
+    // Create a DP array for memoization
+    vector&lt;vector&lt;int&gt;&gt; dp(n + 2, vector&lt;int&gt;(n + 2, -1));
+    
+    // Call the helper function to compute the maximum coins
+    return maxCoinsHelper(1, n, nums, dp);
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+public class Solution {
+    // Function to recursively calculate the maximum coins
+    static int maxCoins(int i, int j, ArrayList&lt;Integer&gt; a, int[][] dp) {
+        if (i &gt; j) return 0;
+        if (dp[i][j] != -1) return dp[i][j];
+        int maxi = Integer.MIN_VALUE;
+        for (int ind = i; ind &lt;= j; ind++) {
+            int cost = a.get(i - 1) * a.get(ind) * a.get(j + 1)
+                       + maxCoins(i, ind - 1, a, dp) + maxCoins(ind + 1, j, a, dp);
+            maxi = Math.max(maxi, cost);
+        }
+        return dp[i][j] = maxi;
+    }
+
+    // Wrapper function to calculate the maximum coins
+    static int maxCoins(ArrayList&lt;Integer&gt; a) {
+        int n = a.size();
+        a.add(1);
+        a.add(0, 1);
+        int[][] dp = new int[n + 2][n + 2];
+        for (int[] row : dp) {
+            Arrays.fill(row, -1);
+        }
+        return maxCoins(1, n, a, dp);
+    }
+
+    public static void main(String[] args) {
+        ArrayList&lt;Integer&gt; a = new ArrayList&lt;&gt;(Arrays.asList(3, 1, 5, 8));
+        int ans = maxCoins(a);
+        System.out.println(ans);
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">def maxCoins(a):
+    n = len(a)
+    
+    # Extend the list 'a' with 1s at both ends
+    a.insert(0, 1)
+    a.append(1)
+
+    # Create a 2D DP table initialized with -1s
+    dp = [[-1] * (n + 2) for _ in range(n + 2)]
+
+    def f(i, j):
+        if i &gt; j:
+            return 0
+        if dp[i][j] != -1:
+            return dp[i][j]
+        maxi = float('-inf')
+        for ind in range(i, j + 1):
+            cost = a[i - 1] * a[ind] * a[j + 1] + f(i, ind - 1) + f(ind + 1, j)
+            maxi = max(maxi, cost)
+        dp[i][j] = maxi
+        return maxi
+
+    return f(1, n)
+
+if __name__ == "__main__":
+    a = [3, 1, 5, 8]
+    ans = maxCoins(a)
+    print(ans)</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">function findMaxCoins(a) {
+    // Function f with memoization
+    function f(i, j, a, dp) {
+        // Base case: if i &gt; j, return 0
+        if (i &gt; j) return 0;
+
+        // If the result for this subproblem is already computed, return it
+        if (dp[i][j] !== -1) return dp[i][j];
+
+        let maxi = -Infinity;
+
+        // Iterate through all possible balloon indices from i to j
+        for (let ind = i; ind &lt;= j; ind++) {
+            // Calculate the cost for bursting balloon ind
+            let cost = a[i - 1] * a[ind] * a[j + 1] +
+                       f(i, ind - 1, a, dp) + f(ind + 1, j, a, dp);
+
+            // Update the maximum cost
+            maxi = Math.max(maxi, cost);
+        }
+
+        // Store the result in the memoization table
+        dp[i][j] = maxi;
+        return maxi;
+    }
+
+    // Add 1 to the beginning and end of the array 'a'
+    a.unshift(1);
+    a.push(1);
+
+    // Create a memoization table 'dp' initialized with -1
+    let n = a.length;
+    let dp = new Array(n).fill(null).map(() =&gt; new Array(n).fill(-1));
+
+    // Call the recursive function 'f' with initial values
+    return f(1, n - 2, a, dp);
+}
+
+// Define the input values
+let a = [3, 1, 5, 8];
+
+// Call the function and print the result
+let ans = findMaxCoins(a);
+console.log(ans);</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+Complexity Analysis
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity: </strong>O(N<sup>3</sup>), There are total N<sup>2</sup> no. of states. And for each state, we are running a partitioning loop roughly for N times.</p>
+<p><strong>Space Complexity: </strong>O(N<sup>2</sup>) + Auxiliary stack space of O(N), N<sup>2</sup> for the dp array we are using. </p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+Tabulation Approach
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+Algorithm
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ol>
+<li>Begin by handling the situation where the starting index crosses the ending index. In this case, no balloons can be burst, so the result is zero. To account for this, initialize the entire solution table with zeros.</li>
+<li>In the bottom-up method, we move through the solution table from the end towards the beginning for one side of the range, and from the beginning to the end for the other side. This ensures smaller subproblems are solved before larger ones.</li>
+<li>Once the correct order of processing is set, reuse the same decision-making steps from the recursive method inside the nested structure, building up the solution gradually.</li>
+</ol>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+class Solution{
+// Function to calculate the maximum coins obtained
+int maxCoins(vector&lt;int&gt; &amp;nums) {
+    int n = nums.size();
+    
+    // Add 1 to the beginning and end of the nums array
+    nums.insert(nums.begin(), 1);
+    nums.push_back(1);
+    
+    // Create a DP array for memoization
+    vector&lt;vector&lt;int&gt;&gt; dp(n + 2, vector&lt;int&gt;(n + 2, 0));
+
+    for (int i = n; i &gt;= 1; i--) {
+        for (int j = 1; j &lt;= n; j++) {
+            if (i &gt; j) continue;
+            int maxi = INT_MIN;
+            
+            // Iterate through each possible balloon to burst last
+            for (int ind = i; ind &lt;= j; ind++) {
+                // Calculate the coins obtained by bursting the ind-th balloon last
+                int coins = nums[i - 1] * nums[ind] * nums[j + 1];
+                
+                // Calculate the maximum coins for the remaining balloons
+                int remainingCoins = dp[i][ind - 1] + dp[ind + 1][j];
+                
+                // Update the maximum coins
+                maxi = max(maxi, coins + remainingCoins);
+            }
+            
+            dp[i][j] = maxi;
+        }
+    }
+    
+    return dp[1][n];
+}
+
+int main() {
+    vector&lt;int&gt; nums = {3, 1, 5, 8};
+    int maxCoinsResult = maxCoins(nums);
+    cout &lt;&lt; "Maximum coins obtained: " &lt;&lt; maxCoinsResult &lt;&lt; "\n";
+    
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+public class Solution {
+    static int maxCoins(ArrayList&lt;Integer&gt; a) {
+        int n = a.size();
+        
+        // Add 1 to the beginning and end of the array
+        a.add(0, 1);
+        a.add(1);
+        
+        // Create a 2D DP array
+        int[][] dp = new int[n + 2][n + 2];
+
+        // Iterate from the end to the beginning
+        for (int i = n; i &gt;= 1; i--) {
+            for (int j = 1; j &lt;= n; j++) {
+                if (i &gt; j) continue;
+                int maxi = Integer.MIN_VALUE;
+                
+                // Iterate through possible indices to split the array
+                for (int ind = i; ind &lt;= j; ind++) {
+                    int cost = a.get(i - 1) * a.get(ind) * a.get(j + 1) +
+                               dp[i][ind - 1] + dp[ind + 1][j];
+                    maxi = Math.max(maxi, cost);
+                }
+                dp[i][j] = maxi;
+            }
+        }
+        return dp[1][n];
+    }
+
+    public static void main(String[] args) {
+        ArrayList&lt;Integer&gt; a = new ArrayList&lt;&gt;(Arrays.asList(3, 1, 5, 8));
+        int ans = maxCoins(a);
+        System.out.println(ans);
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">def maxCoins(a):
+    n = len(a)
+    
+    # Extend the list 'a' with 1s at both ends
+    a.insert(0, 1)
+    a.append(1)
+
+    # Create a 2D DP table initialized with 0s
+    dp = [[0] * (n + 2) for _ in range(n + 2)]
+
+    # Loop from the end of 'a' to the beginning
+    for i in range(n, 0, -1):
+        for j in range(1, n + 1):
+            if i &gt; j:
+                continue
+            maxi = float('-inf')
+            
+            # Iterate through the balloons from 'i' to 'j'
+            for ind in range(i, j + 1):
+                cost = a[i - 1] * a[ind] * a[j + 1] + dp[i][ind - 1] + dp[ind + 1][j]
+                maxi = max(maxi, cost)
+            
+            dp[i][j] = maxi
+    
+    return dp[1][n]
+
+if __name__ == "__main__":
+    a = [3, 1, 5, 8]
+    ans = maxCoins(a)
+    print(ans)</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">function findMaxCoins(a) {
+    // Add 1 to the beginning and end of the array 'a'
+    a.unshift(1);
+    a.push(1);
+    
+    // Get the length of the array 'a'
+    let n = a.length;
+    
+    // Create a 2D array 'dp' to store dynamic programming results
+    let dp = new Array(n + 2);
+    for (let i = 0; i &lt; n + 2; i++) {
+        dp[i] = new Array(n + 2).fill(0);
+    }
+
+    // Loop to fill in the 'dp' array
+    for (let i = n; i &gt;= 1; i--) {
+        for (let j = 1; j &lt;= n; j++) {
+            // Skip invalid cases where i &gt; j
+            if (i &gt; j) continue;
+
+            let maxi = -Infinity;
+
+            // Calculate the cost for each possible balloon to burst between i and j
+            for (let ind = i; ind &lt;= j; ind++) {
+                let cost = a[i - 1] * a[ind] * a[j + 1] +
+                           dp[i][ind - 1] + dp[ind + 1][j];
+                maxi = Math.max(maxi, cost);
+            }
+
+            // Store the maximum cost in 'dp'
+            dp[i][j] = maxi;
+        }
+    }
+
+    // The maximum coins are stored in dp[1][n]
+    return dp[1][n];
+}
+
+// Define the input values
+let a = [3, 1, 5, 8];
+
+// Call the function and print the result
+let ans = findMaxCoins(a);
+console.log(ans);</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+Complexity Analysis
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity: </strong>O(N<sup>3</sup>), There are total N<sup>2</sup> no. of states. And for each state, we are running a partitioning loop roughly for N times.</p>
+<p><strong>Space Complexity: </strong>O(N<sup>2</sup>), N<sup>2</sup> for the dp array we are using.</p>
+<p></p>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

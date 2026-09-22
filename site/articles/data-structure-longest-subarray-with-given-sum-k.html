@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Longest Subarray with given Sum K(Positives)</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Longest Subarray with given Sum K(Positives)</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/longest-subarray-with-given-sum-k/</code></div>
+  <p><strong>Problem Statement: </strong>
+Given an array nums of size n and an integer k, find the length of the longest sub-array that sums to k. If no such sub-array exists, return 0.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>  
+<strong>Input:</strong> nums = [10, 5, 2, 7, 1, 9], k = 15  
+<strong>Output:</strong> 4  
+<strong>Explanation:</strong> The longest sub-array with a sum equal to 15 is [5, 2, 7, 1], which has a length of 4. This sub-array starts at index 1 and ends at index 4, and the sum of its elements (5 + 2 + 7 + 1) equals 15. Therefore, the length of this sub-array is 4.
+
+<strong>Example 2:</strong>  
+<strong>Input:</strong> nums = [-3, 2, 1], k = 6  
+<strong>Output:</strong> 0  
+<strong>Explanation:</strong> There is no sub-array in the array that sums to 6. Therefore, the output is 0.</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/longest-subarray-with-sum-k" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Brute Force 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>We first run a loop with index <code>i</code> to select every possible starting index of the subarray. These starting indices range from <code>0</code> to <code>n-1</code> where <code>n</code> is the size of the array.</li>
+<li>Inside this loop, we run another loop with index <code>j</code> to select the ending index of the subarray. For each subarray starting at index <code>i</code>, the ending index <code>j</code> can range from <code>i</code> to <code>n-1</code>.</li>
+<li>Next, for each subarray starting from index <code>i</code> and ending at index <code>j</code> (i.e., <code>arr[i...j]</code>), we run an additional loop to calculate the sum of all the elements in that subarray.</li>
+<li>If the sum equals <code>k</code>, we consider its length, which is <code>(j - i + 1)</code>. Among all such subarrays, we keep track of the maximum length by comparing all the lengths found so far.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution
+{
+public:
+    int longestSubarray(vector&lt;int&gt; &amp;nums, int k)
+    {
+        int n = nums.size(); 
+        int maxLength = 0;
+
+        // starting index
+        for (int startIndex = 0; startIndex &lt; n; startIndex++) { 
+            // ending index
+            for (int endIndex = startIndex; endIndex &lt; n; endIndex++) { 
+                /* add all the elements of 
+                   subarray = nums[startIndex...endIndex]  */
+                int currentSum = 0;
+                for (int i = startIndex; i &lt;= endIndex; i++) {
+                    currentSum += nums[i];
+                }
+
+                if (currentSum == k)
+                    maxLength = max(maxLength, endIndex - startIndex + 1);
+            }
+        }
+        return maxLength;
+    }
+};
+
+int main()
+{
+    vector&lt;int&gt; a = { -1, 1, 1 };
+    int k = 1;
+
+    // Create an instance of the Solution class
+    Solution solution;
+    // Function call to get the result
+    int len = solution.longestSubarray(a, k);
+    
+    cout &lt;&lt; "The length of the longest subarray is: " &lt;&lt; len &lt;&lt; "\n";
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">// GFG.java
+import java.util.*;
+
+class Solution {
+
+    public int longestSubarray(int[] nums, int k) {
+        int n = nums.length;
+        int maxLength = 0;
+
+        // starting index
+        for (int startIndex = 0; startIndex &lt; n; startIndex++) {
+            // ending index
+            for (int endIndex = startIndex; endIndex &lt; n; endIndex++) {
+
+                /* add all the elements of
+                   subarray = nums[startIndex...endIndex] */
+                int currentSum = 0;
+                for (int i = startIndex; i &lt;= endIndex; i++) {
+                    currentSum += nums[i];
+                }
+
+                if (currentSum == k) {
+                    maxLength = Math.max(maxLength, endIndex - startIndex + 1);
+                }
+            }
+        }
+        return maxLength;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[] a = { -1, 1, 1 };
+        int k = 1;
+
+        // Create an instance of the Solution class
+        Solution solution = new Solution();
+
+        // Function call to get the result
+        int len = solution.longestSubarray(a, k);
+
+        System.out.println("The length of the longest subarray is: " + len);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">
+class Solution:
+    def longestSubarray(self, nums, k):
+        n = len(nums) 
+        maxLength = 0
+
+        # starting index
+        for startIndex in range(n):
+            # ending index
+            for endIndex in range(startIndex, n):
+                # add all the elements of 
+                # subarray = nums[startIndex...endIndex]
+                currentSum = 0
+                for i in range(startIndex, endIndex + 1):
+                    currentSum += nums[i]
+
+                if currentSum == k:
+                    maxLength = max(maxLength, endIndex - startIndex + 1)
+
+        return maxLength
+
+if __name__ == "__main__":
+    nums = [-1, 1, 1]
+    k = 1
+
+    # Create an instance of the Solution class
+    solution = Solution()
+    # Function call to get the result
+    length = solution.longestSubarray(nums, k)
+    
+    print("The length of the longest subarray is:", length)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">
+class Solution {
+    longestSubarray(nums, k) {
+        const n = nums.length;
+        let maxLength = 0;
+
+        // starting index
+        for (let startIndex = 0; startIndex &lt; n; startIndex++) {
+            // ending index
+            for (let endIndex = startIndex; endIndex &lt; n; endIndex++) {
+                /* add all the elements of 
+                   subarray = nums[startIndex...endIndex] */
+                let currentSum = 0;
+                for (let i = startIndex; i &lt;= endIndex; i++) {
+                    currentSum += nums[i];
+                }
+
+                if (currentSum === k) {
+                    maxLength = Math.max(maxLength, endIndex - startIndex + 1);
+                }
+            }
+        }
+        return maxLength;
+    }
+}
+
+const nums = [-1, 1, 1];
+const k = 1;
+
+// Create an instance of the Solution class
+const solution = new Solution();
+// Function call to get the result
+const length = solution.longestSubarray(nums, k);
+
+console.log("The length of the longest subarray is:", length);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(n<sup>3</sup>)</strong>, where n is the size of the array. This is because we have three nested loops: one for the starting index, one for the ending index, and one for calculating the sum of the subarray.
+                        <br/><br/>
+<strong>Space Complexity: O(1)</strong>, as we are using a constant amount of space for variables and not using any additional data structures that grow with input size.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Two pointers, <code>left</code> and <code>right</code>, are used to maintain the current window of elements in the array. These pointers represent the start and end of the current subarray.</li>
+<li>A variable, <code>sum</code>, is used to keep track of the sum of the elements in the current window between <code>left</code> and <code>right</code>.</li>
+<li>The <code>right</code> pointer expands the window by including new elements, increasing the <code>sum</code>.</li>
+<li>If the sum of the window exceeds <code>k</code>, the <code>left</code> pointer shrinks the window by removing elements from the start until the sum is less than or equal to <code>k</code>.</li>
+<li>If the sum of the current window equals <code>k</code>, the maximum length of such a subarray is updated.</li>
+<li>The process continues until the <code>right</code> pointer traverses the entire array.</li>
+<li>Finally, the maximum length of the subarray with sum <code>k</code> is returned as the result.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution{
+public:
+    // Function to find the length of longest subarray having sum k
+    int longestSubarray(vector&lt;int&gt; &amp;nums, int k){
+        int n = nums.size();
+        
+        // To store the maximum length of the subarray
+        int maxLen = 0;
+        
+        // Pointers to mark the start and end of window
+        int left = 0, right = 0;
+        
+        // To store the sum of elements in the window
+        int sum = nums[0];
+        
+        // Traverse all the elements
+        while(right &lt; n) {
+            
+            // If the sum exceeds K, shrink the window
+            while(left &lt;= right &amp;&amp; sum &gt; k) {
+                sum -= nums[left];
+                left++;
+            }
+            
+            // store the maximum length
+            if(sum == k) {
+                maxLen = max(maxLen, right - left + 1);
+            }
+            
+            right++;
+            if(right &lt; n) sum += nums[right];
+        }
+        
+        return maxLen;
+    }
+};
+
+int main() {
+	vector&lt;int&gt; nums = {10, 5, 2, 7, 1, 9};
+    int k = 15;
+    
+	// Creating an object of Solution class
+	Solution sol;
+
+	/* Function call to find the length
+	of longest subarray having sum k */
+	int ans = sol.longestSubarray(nums, k);
+
+	cout &lt;&lt; "The length of longest subarray having sum k is: " &lt;&lt; ans;
+
+	return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Class containing the sliding window algorithm
+class Solution {
+    public int longestSubarray(int[] nums, int k) {
+        int n = nums.length;
+
+        // To store the maximum length of the subarray
+        int maxLen = 0;
+
+        // Pointers for sliding window
+        int left = 0, right = 0;
+
+        // Sum of the current window
+        int sum = nums[0];
+
+        // Traverse through the array
+        while (right &lt; n) {
+
+            // Shrink the window if sum exceeds k
+            while (left &lt;= right &amp;&amp; sum &gt; k) {
+                sum -= nums[left];
+                left++;
+            }
+
+            // Update max length if sum equals k
+            if (sum == k) {
+                maxLen = Math.max(maxLen, right - left + 1);
+            }
+
+            // Expand the window to the right
+            right++;
+            if (right &lt; n) {
+                sum += nums[right];
+            }
+        }
+
+        return maxLen;
+    }
+}
+
+// Separate class containing only the main method
+public class Main {
+    public static void main(String[] args) {
+        int[] nums = {10, 5, 2, 7, 1, 9};
+        int k = 15;
+
+        // Create Solution object
+        Solution sol = new Solution();
+
+        // Function call to find the result
+        int ans = sol.longestSubarray(nums, k);
+
+        // Output the result
+        System.out.println("The length of longest subarray having sum k is: " + ans);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to find the length of longest subarray having sum k
+    def longestSubarray(self, nums, k):
+        n = len(nums)
+        
+        # To store the maximum length of the subarray
+        maxLen = 0
+        
+        # Pointers to mark the start and end of window
+        left = 0
+        right = 0
+        
+        # To store the sum of elements in the window
+        sum = nums[0]
+        
+        # Traverse all the elements
+        while right &lt; n:
+            
+            # If the sum exceeds K, shrink the window
+            while left &lt;= right and sum &gt; k:
+                sum -= nums[left]
+                left += 1
+            
+            # Store the maximum length
+            if sum == k:
+                maxLen = max(maxLen, right - left + 1)
+            
+            right += 1
+            if right &lt; n:
+                sum += nums[right]
+        
+        return maxLen
+
+
+nums = [10, 5, 2, 7, 1, 9]
+k = 15
+
+# Creating an object of Solution class
+sol = Solution()
+
+# Function call to find the length
+# of longest subarray having sum k
+ans = sol.longestSubarray(nums, k)
+
+print(f"The length of longest subarray having sum k is: {ans}")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find the length of longest subarray having sum k
+    longestSubarray(nums, k) {
+        let n = nums.length;
+        
+        // To store the maximum length of the subarray
+        let maxLen = 0;
+        
+        // Pointers to mark the start and end of window
+        let left = 0, right = 0;
+        
+        // To store the sum of elements in the window
+        let sum = nums[0];
+        
+        // Traverse all the elements
+        while (right &lt; n) {
+            
+            // If the sum exceeds K, shrink the window
+            while (left &lt;= right &amp;&amp; sum &gt; k) {
+                sum -= nums[left];
+                left++;
+            }
+            
+            // Store the maximum length
+            if (sum === k) {
+                maxLen = Math.max(maxLen, right - left + 1);
+            }
+            
+            right++;
+            if (right &lt; n) sum += nums[right];
+        }
+        
+        return maxLen;
+    }
+}
+
+// Input array and target sum
+const nums = [10, 5, 2, 7, 1, 9];
+const k = 15;
+
+// Creating an object of Solution class
+const sol = new Solution();
+
+/* Function call to find the length
+of longest subarray having sum k */
+const ans = sol.longestSubarray(nums, k);
+
+console.log(`The length of longest subarray having sum k is: ${ans}`);</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(N)</strong>, where N is the size of the array. The algorithm traverses the array once with two pointers, making it linear in time complexity.<br/><br/>
+<strong>Space Complexity: O(1)</strong>, as it uses a constant amount of space.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

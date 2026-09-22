@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Bellman Ford Algorithm: G-41</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Bellman Ford Algorithm: G-41</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/bellman-ford-algorithm-g-41/</code></div>
+  <p><strong>Problem Statement: </strong>Given a weighted, directed and connected graph of V vertices and E edges, Find the shortest distance of all the vertices from the source vertex S.
+Note: If the Graph contains a negative cycle then return an array consisting of only -1.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input Format: 
+V = 6, 
+E = [[3, 2, 6], [5, 3, 1], [0, 1, 5], [1, 5, -3], [1, 2, -2], [3, 4, -2], [2, 4, 3]], 
+S = 0
+<p><img height="457" loading="lazy" src="../assets/img/01cbc85e20d17dac.png" width="481"/></p>
+Result: 0 5 3 3 1 2
+
+
+Example 2:
+Input Format:V = 2, E = [[0,1,9]],  S = 0
+<p><img height="457" loading="lazy" src="../assets/img/be4ba87c1dfedfcd.png" width="481"/></p>
+Result: 0 9
+Explanation: Shortest distance of all nodes from the source node is returned.
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://www.geeksforgeeks.org/problems/distance-from-the-source-bellman-ford-algorithm/1?utm_medium=collab_striver_ytdescription&amp;utm_campaign=distance-from-the-source-bellman-ford-algorithm&amp;utm_source=youtube" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                Approach
+            </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Algorithm
+                    </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<h3><strong>Bellman-Ford Algorithm</strong></h3>
+<ul>
+<li>Finds the shortest paths from one starting point to all other points. Works even when there are negative edge weights and can detect negative cycles (unlike Dijkstra).</li>
+<li><strong>Where Dijkstra Fails:</strong> When there are negative edges or a negative cycle because it may loop forever or give incorrect results.</li>
+<li><strong>Negative Cycle:</strong> A cycle where the total path weight is negative, causing the distance to decrease endlessly.</li>
+</ul>
+<p><strong>Why Bellman-Ford?</strong> It works with negative edges and can detect negative cycles. For undirected graphs, treat each edge as two directed edges.</p>
+<h3><strong>Intuition</strong></h3>
+<ul>
+<li>Go through all edges multiple times to update the shortest distances. After repeating this process for the number of nodes minus one, the shortest paths are found.</li>
+<li><strong>Relaxation:</strong> If taking a certain edge gives a shorter path to a point, update that point with the new shorter distance.</li>
+<li><strong>Why Repeat N-1 Times?</strong> Because the shortest path to any point can involve at most one less edge than the total number of points.</li>
+</ul>
+<h3><strong>Detecting a Negative Cycle</strong></h3>
+<ul>
+<li>After finishing the updates, go through all edges one more time:
+    <ul>
+<li>If any distance can still be reduced, a negative cycle exists.</li>
+<li>If not, the shortest distances are correct.</li>
+<li>Start by setting the distance of the starting point to zero and all other points to infinity (unknown large value).</li>
+<li>Repeat the process of updating distances for all edges, one by one, for the number of points minus one times.</li>
+<li>Go through all edges one more time to check if a negative cycle exists.</li>
+<li>Return all shortest distances if no negative cycle is found; otherwise, report that a negative cycle exists.</li>
+</ul>
+</li>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/faea7471ad56d986.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/8525919864b7a5d6.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/ce427af0ed5f7ce8.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/d127fb470ff07695.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/faea7471ad56d986.png"/><img alt="Image 2" loading="lazy" src="../assets/img/8525919864b7a5d6.png"/><img alt="Image 3" loading="lazy" src="../assets/img/ce427af0ed5f7ce8.png"/><img alt="Image 4" loading="lazy" src="../assets/img/d127fb470ff07695.png"/></div></div>
+</ul></div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+	/*  Function to implement Bellman Ford
+	*   edges: vector of vectors which represents the graph
+	*   S: source vertex to start traversing graph with
+	*   V: number of vertices
+	*/
+	vector&lt;int&gt; bellman_ford(int V, vector&lt;vector&lt;int&gt;&gt;&amp; edges, int S) {
+		vector&lt;int&gt; dist(V, 1e8);
+		dist[S] = 0;
+		for (int i = 0; i &lt; V - 1; i++) {
+			for (auto it : edges) {
+				int u = it[0]; //Starting point of the edge
+				int v = it[1]; //Ending point of the edge
+				int wt = it[2]; //Edge weight
+				if (dist[u] != 1e8 &amp;&amp; dist[u] + wt &lt; dist[v]) {
+					dist[v] = dist[u] + wt;
+				}
+			}
+		}
+		// Nth relaxation to check negative cycle
+		for (auto it : edges) {
+			int u = it[0];
+			int v = it[1];
+			int wt = it[2];
+			if (dist[u] != 1e8 &amp;&amp; dist[u] + wt &lt; dist[v]) {
+				return { -1};
+			}
+		}
+
+
+		return dist;
+	}
+};
+
+
+int main() {
+
+	int V = 6;
+	vector&lt;vector&lt;int&gt;&gt; edges(7, vector&lt;int&gt;(3));
+	edges[0] = {3, 2, 6};
+	edges[1] = {5, 3, 1};
+	edges[2] = {0, 1, 5};
+	edges[3] = {1, 5, -3};
+	edges[4] = {1, 2, -2};
+	edges[5] = {3, 4, -2};
+	edges[6] = {2, 4, 3};
+
+	int S = 0;
+	Solution obj;
+	vector&lt;int&gt; dist = obj.bellman_ford(V, edges, S);
+	for (auto d : dist) {
+		cout &lt;&lt; d &lt;&lt; " ";
+	}
+	cout &lt;&lt; endl;
+
+	return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">
+import java.util.*;
+
+/*  
+*   edges: vector of vectors which represents the graph
+*   S: source vertex to start traversing graph with
+*   V: number of vertices
+*/
+class Solution {
+    static int[] bellman_ford(int V,
+                              ArrayList&lt;ArrayList&lt;Integer&gt;&gt; edges, int S) {
+        int[] dist = new int[V];
+        for (int i = 0; i &lt; V; i++) dist[i] = (int)(1e8);
+        dist[S] = 0;
+        // V x E
+        for (int i = 0; i &lt; V - 1; i++) {
+            for (ArrayList&lt;Integer&gt; it : edges) {
+                int u = it.get(0); //Starting point of the edge
+                int v = it.get(1); //Ending point of the edge
+                int wt = it.get(2); //Edge weight
+                if (dist[u] != 1e8 &amp;&amp; dist[u] + wt &lt; dist[v]) {
+                    dist[v] = dist[u] + wt;
+                }
+            }
+        }
+        // Nth relaxation to check negative cycle
+        for (ArrayList&lt;Integer&gt; it : edges) {
+            int u = it.get(0);  
+            int v = it.get(1);
+            int wt = it.get(2);
+            if (dist[u] != 1e8 &amp;&amp; dist[u] + wt &lt; dist[v]) {
+                int temp[] = new int[1];
+                temp[0] = -1;
+                return temp;
+            }
+        }
+        return dist;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int V = 6;
+        int S = 0;
+        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; edges = new ArrayList&lt;&gt;() {
+            {
+                add(new ArrayList&lt;Integer&gt;(Arrays.asList(3, 2, 6)));
+                add(new ArrayList&lt;Integer&gt;(Arrays.asList(5, 3, 1)));
+                add(new ArrayList&lt;Integer&gt;(Arrays.asList(0, 1, 5)));
+                add(new ArrayList&lt;Integer&gt;(Arrays.asList(1, 5, -3)));
+                add(new ArrayList&lt;Integer&gt;(Arrays.asList(1, 2, -2)));
+                add(new ArrayList&lt;Integer&gt;(Arrays.asList(3, 4, -2)));
+                add(new ArrayList&lt;Integer&gt;(Arrays.asList(2, 4, 3)));
+            }
+        };
+        int[] dist = Solution.bellman_ford(V, edges, S);
+        for (int i = 0; i &lt; V; i++) {
+            System.out.print(dist[i] + " ");
+        }
+        System.out.println("");
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">
+class Solution:
+def bellman_ford(V, edges, S):
+dist = [int(1e8)] * V
+dist[S] = 0
+
+    # Relax all edges (V-1) times
+    for _ in range(V - 1):
+        for u, v, wt in edges:  #V is the ending point of the edge
+            if dist[u] != int(1e8) and dist[u] + wt &lt; dist[v]:  #U is the Starting point of the edge
+                dist[v] = dist[u] + wt    #Wt is the edge weight 
+
+    # Check for negative weight cycle
+    for u, v, wt in edges:
+        if dist[u] != int(1e8) and dist[u] + wt &lt; dist[v]:
+            return [-1]  # Negative cycle detected
+
+    return dist
+
+if __name__ == "__main__":
+    V = 6
+    S = 0
+    edges = [
+        [3, 2, 6],
+        [5, 3, 1],
+        [0, 1, 5],
+        [1, 5, -3],
+        [1, 2, -2],
+        [3, 4, -2],
+        [2, 4, 3]
+    ]
+
+    dist = bellman_ford(V, edges, S)
+    print(" ".join(map(str, dist)))</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">
+class Solution{
+function bellmanFord(V, edges, S) {
+    // Initialize distance array with a large number (Infinity approximation)
+const dist = new Array(V).fill(1e8);
+dist[S] = 0;  // Distance to source is 0
+
+    // Relax all edges V-1 times
+    for (let i = 0; i &lt; V - 1; i++) {
+        for (const [u, v, wt] of edges) {  //Starting point of the edge
+            if (dist[u] !== 1e8 &amp;&amp; dist[u] + wt &lt; dist[v]) { //V is the ending point of the edge
+                dist[v] = dist[u] + wt;  //Wt is the edge weight
+            }
+        }
+    }
+
+    // Check for negative weight cycle
+    for (const [u, v, wt] of edges) {
+        if (dist[u] !== 1e8 &amp;&amp; dist[u] + wt &lt; dist[v]) {
+            return [-1]; // Negative weight cycle detected
+        }
+    }
+
+    return dist;
+}
+
+// Driver code
+const V = 6;
+const S = 0;
+const edges = [
+    [3, 2, 6],
+    [5, 3, 1],
+    [0, 1, 5],
+    [1, 5, -3],
+    [1, 2, -2],
+    [3, 4, -2],
+    [2, 4, 3]
+];
+
+const dist = bellmanFord(V, edges, S);
+console.log(dist.join(" "));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Complexity Analysis
+                    </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+</p><p>Time Complexity: O(V*E), where V = no. of vertices and E = no. of Edges.</p>
+<p>Space Complexity: O(V) for the distance array which stores the minimized distances.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

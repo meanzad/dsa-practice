@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Find Eventual Safe States - BFS - Topological Sort: G-25</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Find Eventual Safe States - BFS - Topological Sort: G-25</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/find-eventual-safe-states-bfs-topological-sort-g-25/</code></div>
+  <p><strong>Problem Statement: </strong> A directed graph of V vertices and E edges is given in the form of an adjacency
+    list adj. Each node of the graph is labeled with a distinct integer in the range 0 to V - 1. A node is a terminal
+    node if there are no outgoing edges. A node is a safe node if every possible path starting from that node leads to a
+    terminal node. You have to return an array containing all the safe nodes of the graph. The answer should be sorted
+    in ascending order.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input Format: N = 7, E = 7
+<p><img height="457" loading="lazy" src="../assets/img/7a54d70211e43d10.png" width="481"/></p>
+Result: {2 4 5 6}
+
+Example 2:
+Input Format: N = 4, E = 4
+<p><img height="457" loading="lazy" src="../assets/img/05a9a1c3751dbec8.png" width="481"/></p>
+Result: {3}
+                </pre>
+
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/find-eventual-safe-states" rel="noopener" target="_blank">practice
+            link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+               Approach
+            </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Algorithm
+                    </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<p>
+                        In a directed graph, a <strong><em>terminal node</em></strong> is defined as a node that has no
+                        outgoing edges (i.e., its outdegree is 0).
+                        A node is considered a <strong><em>safe node</em></strong> if every possible path starting from
+                        it eventually leads to a terminal node and does not enter any cycle.
+                    </p>
+<p>
+                        If a node is part of a cycle or leads to a cycle via an outgoing path, then that node cannot be
+                        considered safe.
+                        In simpler terms, a node is safe if it does not contribute to or connect into a cycle.
+                    </p>
+<p>Let’s understand this using the graph below:</p>
+<p><img height="457" loading="lazy" src="../assets/img/363273fc3b8c7e74.png" width="481"/></p>
+<ul>
+<li>In the graph, a cycle exists: 0 → 1 → 3 → 0. Node 7 has an edge leading into this cycle.
+                        </li>
+<li>Any path from nodes 0, 1, 3, or 7 could result in entering this cycle. Hence, they are
+                            <strong>not</strong> safe.
+                        </li>
+<li>Node 2 connects outward from the cycle and leads to terminal node 5. Since all paths from 2
+                            reach a terminal node, it is considered safe.</li>
+<li>Nodes 4, 5, and 6 are also safe because they do not lead into any cycle and eventually end
+                            at terminal nodes.</li>
+</ul>
+<p>
+                        The key insight is to identify nodes that are neither part of a cycle nor have paths that lead
+                        into a cycle.
+                        We can accomplish this using traversal algorithms like DFS or BFS.
+                        In this explanation, we focus on using <strong>BFS with Topological Sort</strong> to detect safe
+                        nodes.
+                    </p>
+<p>
+                        The topological sorting method naturally excludes cyclic paths, and thus helps identify nodes
+                        that are guaranteed to lead to terminal states.
+                    </p>
+<p><strong>Note:</strong> Any node that is in a cycle or leads into a cycle through a directed edge
+                        cannot be a safe node. All other nodes are safe.</p>
+<p><strong>Approach:</strong></p>
+<p>
+                        Topological sort generally uses <strong>indegree</strong> (number of incoming edges), whereas
+                        terminal nodes are detected using <strong>outdegree</strong> (number of outgoing edges).
+                        To align this with topological sort logic, we <strong>reverse all edges</strong> in the graph so
+                        that terminal nodes become nodes with indegree 0.
+                    </p>
+<p><img height="457" loading="lazy" src="../assets/img/d5b28f981565dfab.png" width="481"/></p>
+<p>We use the <strong>BFS (Breadth-First Search)</strong> traversal technique to process the graph
+                        level-by-level. The steps are as follows:</p>
+<ul>
+<li><strong>Step 1:</strong> Reverse all edges of the graph so we can apply topological sort
+                            based on indegrees.</li>
+<li><strong>Step 2:</strong> Create an <code>indegree[]</code> array initialized to 0. Count the
+                            incoming edges for each node and store them accordingly.</li>
+<li><strong>Step 3:</strong> Initialize a queue and enqueue all nodes with indegree 0 — these
+                            are now our terminal nodes in the reversed graph.</li>
+<li><strong>Step 4:</strong> Create an empty list <code>safeNodes[]</code> to store all safe
+                            nodes.</li>
+<li><strong>Step 5:</strong> While the queue is not empty:
+                            <ul>
+<li>Pop a node <code>u</code> from the queue and add it to <code>safeNodes</code>.</li>
+<li>For each neighbor <code>v</code> of node <code>u</code> in the reversed graph,
+                                    reduce <code>indegree[v]</code> by 1.</li>
+<li>If <code>indegree[v]</code> becomes 0, push it into the queue.</li>
+</ul>
+</li>
+<li><strong>Step 6:</strong> Repeat this process until the queue is empty.</li>
+<li><strong>Step 7:</strong> The <code>safeNodes</code> list now contains all the nodes that are
+                            not part of any cycle and do not connect into one.</li>
+<li><strong>Step 8:</strong> Sort the <code>safeNodes</code> array before returning it, as the
+                            problem requires output in ascending order.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div>
+<div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find all eventual safe nodes in a directed graph
+    vector&lt;int&gt; eventualSafeNodes(int V, vector&lt;int&gt; adj[]) {
+        vector&lt;int&gt; adjRev[V];  // Reverse adjacency list
+        int indegree[V] = {0};  // Indegree array to track nodes with no outgoing edges
+
+        // Build the reverse graph and calculate indegrees
+        for (int i = 0; i &lt; V; i++) {
+            for (auto it : adj[i]) {
+                adjRev[it].push_back(i);  // Reverse the direction of edges
+                indegree[i]++;  // Increment indegree for the current node
+            }
+        }
+
+        queue&lt;int&gt; q;  // Queue to store nodes with no outgoing edges (safe nodes)
+        vector&lt;int&gt; safeNodes;
+
+        // Add all nodes with 0 indegree to the queue
+        for (int i = 0; i &lt; V; i++) {
+            if (indegree[i] == 0) {
+                q.push(i);
+            }
+        }
+
+        // Process the queue to find all safe nodes
+        while (!q.empty()) {
+            int node = q.front();
+            q.pop();
+            safeNodes.push_back(node);  // This node is safe
+            for (auto it : adjRev[node]) {
+                indegree[it]--;  // Decrease indegree of the parent nodes
+                if (indegree[it] == 0) {
+                    q.push(it);  // If indegree becomes 0, it is a safe node
+                }
+            }
+        }
+
+        sort(safeNodes.begin(), safeNodes.end());  // Sort the safe nodes
+        return safeNodes;
+    }
+};
+
+int main() {
+    // Adjacency list representation of the graph
+    vector&lt;int&gt; adj[12] = {{1}, {2}, {3, 4}, {4, 5}, {6}, {6}, {7}, {}, {1, 9}, {10},
+                           {8}, {9}};
+    int V = 12;  // Number of nodes in the graph
+
+    Solution obj;
+    vector&lt;int&gt; safeNodes = obj.eventualSafeNodes(V, adj);  // Call function to get safe nodes
+
+    for (auto node : safeNodes) {
+        cout &lt;&lt; node &lt;&lt; " ";  // Print the safe nodes
+    }
+    cout &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to find all eventual safe nodes in a directed graph
+    public List&lt;Integer&gt; eventualSafeNodes(int V, List&lt;Integer&gt;[] adj) {
+        List&lt;Integer&gt;[] adjRev = new List[V];  // Reverse adjacency list
+        int[] indegree = new int[V];  // Indegree array to track nodes with no outgoing edges
+
+        // Initialize reverse adjacency list
+        for (int i = 0; i &lt; V; i++) {
+            adjRev[i] = new ArrayList&lt;&gt;();
+        }
+
+        // Build the reverse graph and calculate indegrees
+        for (int i = 0; i &lt; V; i++) {
+            for (int neighbor : adj[i]) {
+                adjRev[neighbor].add(i);  // Reverse the direction of edges
+                indegree[i]++;  // Increment indegree for the current node
+            }
+        }
+
+        Queue&lt;Integer&gt; q = new LinkedList&lt;&gt;();  // Queue to store nodes with no outgoing edges
+        List&lt;Integer&gt; safeNodes = new ArrayList&lt;&gt;();
+
+        // Add all nodes with 0 indegree to the queue
+        for (int i = 0; i &lt; V; i++) {
+            if (indegree[i] == 0) {
+                q.offer(i);
+            }
+        }
+
+        // Process the queue to find all safe nodes
+        while (!q.isEmpty()) {
+            int node = q.poll();
+            safeNodes.add(node);  // This node is safe
+            for (int parent : adjRev[node]) {
+                indegree[parent]--;  // Decrease indegree of the parent nodes
+                if (indegree[parent] == 0) {
+                    q.offer(parent);  // If indegree becomes 0, it is a safe node
+                }
+            }
+        }
+
+        Collections.sort(safeNodes);  // Sort the safe nodes
+        return safeNodes;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Adjacency list representation of the graph
+        List&lt;Integer&gt;[] adj = new ArrayList[12];
+        for (int i = 0; i &lt; 12; i++) {
+            adj[i] = new ArrayList&lt;&gt;();
+        }
+
+        adj[0].add(1);
+        adj[1].add(2);
+        adj[2].add(3);
+        adj[2].add(4);
+        adj[3].add(4);
+        adj[4].add(5);
+        adj[5].add(6);
+        adj[6].add(7);
+        adj[8].add(1);
+        adj[8].add(9);
+        adj[9].add(10);
+        adj[10].add(8);
+        adj[11].add(9);
+
+        int V = 12;  // Number of nodes in the graph
+
+        Solution sol = new Solution();
+        List&lt;Integer&gt; safeNodes = sol.eventualSafeNodes(V, adj);  // Call function to get safe nodes
+
+        for (int node : safeNodes) {
+            System.out.print(node + " ");  // Print the safe nodes
+        }
+        System.out.println();
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">from collections import deque
+
+# Function to find all eventual safe nodes in a directed graph
+def eventualSafeNodes(V, adj):
+    adjRev = [[] for _ in range(V)]  # Reverse adjacency list
+    indegree = [0] * V  # Indegree array to track nodes with no outgoing edges
+
+    # Build the reverse graph and calculate indegrees
+    for i in range(V):
+        for neighbor in adj[i]:
+            adjRev[neighbor].append(i)  # Reverse the direction of edges
+            indegree[i] += 1  # Increment indegree for the current node
+
+    q = deque()  # Queue to store nodes with no outgoing edges
+    safeNodes = []
+
+    # Add all nodes with 0 indegree to the queue
+    for i in range(V):
+        if indegree[i] == 0:
+            q.append(i)
+
+    # Process the queue to find all safe nodes
+    while q:
+        node = q.popleft()
+        safeNodes.append(node)  # This node is safe
+        for parent in adjRev[node]:
+            indegree[parent] -= 1  # Decrease indegree of the parent nodes
+            if indegree[parent] == 0:
+                q.append(parent)  # If indegree becomes 0, it is a safe node
+
+    safeNodes.sort()  # Sort the safe nodes
+    return safeNodes
+
+# Driver code
+adj = [
+    [1], [2], [3, 4], [4, 5], [6], [6], [7], [], [1, 9], [10], [8], [9]
+]  # Example input (Adjacency list)
+
+V = 12  # Number of nodes in the graph
+safeNodes = eventualSafeNodes(V, adj)  # Call function to get safe nodes
+
+print("The eventual safe nodes are:", *safeNodes)  # Print the safe nodes
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Function to find all eventual safe nodes in a directed graph
+function eventualSafeNodes(V, adj) {
+    let adjRev = Array.from({ length: V }, () =&gt; []);  // Reverse adjacency list
+    let indegree = Array(V).fill(0);  // Indegree array to track nodes with no outgoing edges
+
+    // Build the reverse graph and calculate indegrees
+    for (let i = 0; i &lt; V; i++) {
+        for (let neighbor of adj[i]) {
+            adjRev[neighbor].push(i);  // Reverse the direction of edges
+            indegree[i]++;  // Increment indegree for the current node
+        }
+    }
+
+    let q = [];  // Queue to store nodes with no outgoing edges
+    let safeNodes = [];
+
+    // Add all nodes with 0 indegree to the queue
+    for (let i = 0; i &lt; V; i++) {
+        if (indegree[i] === 0) q.push(i);
+    }
+
+    // Process the queue to find all safe nodes
+    while (q.length &gt; 0) {
+        let node = q.shift();
+        safeNodes.push(node);  // This node is safe
+        for (let parent of adjRev[node]) {
+            indegree[parent]--;  // Decrease indegree of the parent nodes
+            if (indegree[parent] === 0) q.push(parent);  // If indegree becomes 0, it is a safe node
+        }
+    }
+
+    safeNodes.sort((a, b) =&gt; a - b);  // Sort the safe nodes
+    return safeNodes;
+}
+
+// Driver code
+let adj = [
+    [1], [2], [3, 4], [4, 5], [6], [6], [7], [], [1, 9], [10], [8], [9]
+];  // Example input (Adjacency list)
+let V = 12;  // Number of nodes in the graph
+let safeNodes = eventualSafeNodes(V, adj);  // Call function to get safe nodes
+
+console.log("The eventual safe nodes are:", ...safeNodes);  // Print the safe nodes
+</code></pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Complexity Analysis
+                    </span>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity: O(V + E) + O(N log N)</strong>,</p>
+<ul>
+<li><code>O(V + E)</code> for performing BFS on the graph (where <code>V</code> = number of
+                        vertices/nodes, <code>E</code> = number of edges).</li>
+<li><code>O(N log N)</code> for sorting the <code>safeNodes</code> array (where <code>N</code> is
+                        the number of safe nodes).</li>
+</ul>
+<p><strong>Space Complexity: O(3N) ~ O(N)</strong>,</p>
+<ul>
+<li><code>O(N)</code> for the indegree array.</li>
+<li><code>O(N)</code> for the queue used during BFS traversal.</li>
+<li><code>O(N)</code> for the reversed adjacency list representation of the graph.</li>
+</ul>
+</details>
+</div>
+</details>
+</div>
+</div>
+</article>
+<script src="../article.js"></script>
+</body></html>

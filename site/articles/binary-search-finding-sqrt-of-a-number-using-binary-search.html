@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Finding Sqrt of a number using Binary Search</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Finding Sqrt of a number using Binary Search</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/binary-search/finding-sqrt-of-a-number-using-binary-search/</code></div>
+  <p><strong>Problem Statement: </strong>  You are given a positive integer n. Your task is to find and return its square root. If ‘n’ is not a perfect square, then return the floor value of sqrt(n).
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: N = 36</span>
+<span>Output: 6</span>
+<span>Explanation: Square root of 36 is 6. </span>
+<p></p>
+<span>Input: N = 28</span>
+<span>Output: 5</span>
+<span>Explanation: Square root of 28 is approximately 5.292. So, the floor value will be 5. </span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/find-square-root-of-a-number" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. 
+    It's highly recommend trying to 
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Brute-Force Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+  The idea is that the square root of a number n will always lie between 1 and n. So, we can linearly search in this range to find the largest integer x such that square of x is less than or equal to number n.
+<ul>
+<li>Start by creating a variable called ans to hold the result and run a loop from 1 up to n.</li>
+<li>While the square of the current number is less than or equal to n, keep updating ans with that number.</li>
+<li>As soon as the square of the number becomes greater than n, stop the loop because no bigger number can be the answer.</li>
+<li>At the end, the value stored in ans will be the integer square root of n.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find floor of square root using linear search
+    int floorSqrt(int n) {
+        // Variable to store answer
+        int ans = 0;
+
+        // Run loop from 1 to n
+        for (int i = 1; i &lt;= n; i++) {
+            // Check if i*i &lt;= n
+            if ((long long)i * i &lt;= n) {
+                // Update answer
+                ans = i;
+            } else {
+                // Break when i*i &gt; n
+                break;
+            }
+        }
+        // Return final answer
+        return ans;
+    }
+};
+
+int main() {
+    // Example input
+    int n = 27;
+
+    // Create object of Solution
+    Solution sol;
+
+    // Call function and print result
+    cout &lt;&lt; sol.floorSqrt(n) &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // Function to find floor of square root using linear search
+    public int floorSqrt(int n) {
+        // Variable to store answer
+        int ans = 0;
+
+        // Run loop from 1 to n
+        for (int i = 1; i &lt;= n; i++) {
+            // Check if i*i &lt;= n
+            if ((long)(i) * i &lt;= n) {
+                // Update answer
+                ans = i;
+            } else {
+                // Break when i*i &gt; n
+                break;
+            }
+        }
+        // Return final answer
+        return ans;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Example input
+        int n = 27;
+
+        // Create object of Solution
+        Solution sol = new Solution();
+
+        // Call function and print result
+        System.out.println(sol.floorSqrt(n));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to find floor of square root using linear search
+    def floorSqrt(self, n: int) -&gt; int:
+        # Variable to store answer
+        ans = 0
+
+        # Run loop from 1 to n
+        for i in range(1, n + 1):
+            # Check if i*i &lt;= n
+            if i * i &lt;= n:
+                # Update answer
+                ans = i
+            else:
+                # Break when i*i &gt; n
+                break
+
+        # Return final answer
+        return ans
+
+
+# Example input
+n = 27
+
+# Create object of Solution
+sol = Solution()
+
+# Call function and print result
+print(sol.floorSqrt(n))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find floor of square root using linear search
+    floorSqrt(n) {
+        // Variable to store answer
+        let ans = 0;
+
+        // Run loop from 1 to n
+        for (let i = 1; i &lt;= n; i++) {
+            // Check if i*i &lt;= n
+            if (i * i &lt;= n) {
+                // Update answer
+                ans = i;
+            } else {
+                // Break when i*i &gt; n
+                break;
+            }
+        }
+        // Return final answer
+        return ans;
+    }
+}
+
+// Example input
+let n = 27;
+
+// Create object of Solution
+let sol = new Solution();
+
+// Call function and print result
+console.log(sol.floorSqrt(n));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N)</strong>, we check for every number from 1 to N.<br/>
+<strong>Space Complexity: O(1)</strong>, since the algorithm does not use any additional space or data structures.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+ The naive method tries every number, which is slow when n is large. But our possible answer space (from 1 to n) is sorted, meaning if a certain number squared is less than or equal to n, then all smaller numbers will also work. This allows us to apply Binary Search on the answer space to efficiently find the largest number whose square is less than or equal to n.
+
+<ul>
+<li>First, note that the answer lies between 1 and the given number n.</li>
+<li>Set the search range with the smallest value as 1 and the largest value as n.</li>
+<li>Use binary search within this range to test possible numbers.</li>
+<li>At each step, take the middle number and check if its square is less than or equal to n.</li>
+<li>If it is, record this number as a candidate and move right to check for a larger number.</li>
+<li>If the square is greater than n, move left to check smaller numbers.</li>
+<li>Continue this process until the range closes, and the largest recorded number will be the square root.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // This function returns the floor value of the square root of a number
+    int mySqrt(int x) {
+        // Handle small numbers directly
+        if (x &lt; 2) return x;
+
+        // Initialize binary search range
+        int left = 1, right = x / 2, ans = 0;
+
+        // Perform binary search
+        while (left &lt;= right) {
+            // Find middle point
+            long long mid = left + (right - left) / 2;
+
+            // Check if mid*mid is less than or equal to x
+            if (mid * mid &lt;= x) {
+                // Store mid as potential answer
+                ans = mid;
+                // Move to right half
+                left = mid + 1;
+            } else {
+                // Move to left half
+                right = mid - 1;
+            }
+        }
+
+        // Return final answer
+        return ans;
+    }
+};
+
+int main() {
+    Solution s;
+    cout &lt;&lt; s.mySqrt(8) &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // This function returns the floor value of the square root of a number
+    public int mySqrt(int x) {
+        // Handle small numbers directly
+        if (x &lt; 2) return x;
+
+        // Initialize binary search range
+        int left = 1, right = x / 2, ans = 0;
+
+        // Perform binary search
+        while (left &lt;= right) {
+            // Find middle point
+            long mid = left + (right - left) / 2;
+
+            // Check if mid*mid is less than or equal to x
+            if (mid * mid &lt;= x) {
+                // Store mid as potential answer
+                ans = (int) mid;
+                // Move to right half
+                left = (int) mid + 1;
+            } else {
+                // Move to left half
+                right = (int) mid - 1;
+            }
+        }
+
+        // Return final answer
+        return ans;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Solution s = new Solution();
+        System.out.println(s.mySqrt(8));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # This function returns the floor value of the square root of a number
+    def mySqrt(self, x: int) -&gt; int:
+        # Handle small numbers directly
+        if x &lt; 2:
+            return x
+
+        # Initialize binary search range
+        left, right, ans = 1, x // 2, 0
+
+        # Perform binary search
+        while left &lt;= right:
+            # Find middle point
+            mid = (left + right) // 2
+
+            # Check if mid*mid is less than or equal to x
+            if mid * mid &lt;= x:
+                # Store mid as potential answer
+                ans = mid
+                # Move to right half
+                left = mid + 1
+            else:
+                # Move to left half
+                right = mid - 1
+
+        # Return final answer
+        return ans
+
+if __name__ == "__main__":
+    s = Solution()
+    print(s.mySqrt(8))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // This function returns the floor value of the square root of a number
+    mySqrt(x) {
+        // Handle small numbers directly
+        if (x &lt; 2) return x;
+
+        // Initialize binary search range
+        let left = 1, right = Math.floor(x / 2), ans = 0;
+
+        // Perform binary search
+        while (left &lt;= right) {
+            // Find middle point
+            let mid = Math.floor((left + right) / 2);
+
+            // Check if mid*mid is less than or equal to x
+            if (mid * mid &lt;= x) {
+                // Store mid as potential answer
+                ans = mid;
+                // Move to right half
+                left = mid + 1;
+            } else {
+                // Move to left half
+                right = mid - 1;
+            }
+        }
+
+        // Return final answer
+        return ans;
+    }
+}
+
+const s = new Solution();
+console.log(s.mySqrt(8));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(log(N))</strong>, we apply binary search on our search space to reduce it into half at every step.<br/>
+<strong>Space Complexity: O(1)</strong>, since the algorithm does not use any additional space or data structures.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

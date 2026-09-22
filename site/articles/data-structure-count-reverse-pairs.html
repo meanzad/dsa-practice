@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Count Reverse Pairs</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Count Reverse Pairs</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/count-reverse-pairs/</code></div>
+  <p><strong>Problem Statement:</strong> Given an array of numbers, you need to return the count of reverse pairs. <strong>Reverse Pairs </strong>are those pairs where i&lt;j and arr[i]&gt;2*arr[j].</p>
+
+
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+Examples
+</strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>
+<strong>Input:</strong> N = 5, array[] = {1,3,2,3,1)
+<strong>Output</strong>: 2 
+<strong>Explanation:</strong> The pairs are (3, 1) and (3, 1) as from both the pairs the condition arr[i] &gt; 2*arr[j] is satisfied.
+
+<strong>Example 2:</strong>
+<strong>Input:</strong> N = 4, array[] = {3,2,1,4}
+<strong>Output:</strong> 1
+<strong>Explaination: </strong>There is only 1 pair  ( 3 , 1 ) that satisfy the condition arr[i] &gt; 2*arr[j]</pre>
+</pre>
+</div>
+</details>
+</div>
+
+
+
+<div class="practice">
+<span><strong>Practice: </strong></span>
+<div class="problem-buttons">
+
+<a href="https://www.codingninjas.com/codestudio/problems/team-contest_6840309?utm_source=youtube&amp;utm_medium=affiliate&amp;utm_campaign=striver_Arrayproblems" rel="noopener" target="_blank">
+<span>Solve Problem</span>
+<img alt="code-studio" loading="lazy" src="../assets/img/66297b3c5a7813f2.png"/>
+</a>
+</div>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Don’t jump directly to the solution, try it out
+yourself first. </em></p>
+
+
+<div class="horizontal_navbar_dsa_article">
+<div class="grid_container_two">
+<a class="two-boxes box-a" href="#brute-force-approach">
+Brute Force Approach
+</a>
+<a class="two-boxes box-c" href="#optimal-approach">
+Optimal Approach
+</a>
+<a class="three-boxes box-d" href="#dsa_article_video_explanation">
+<svg fill="none" height="26" viewbox="0 0 20 14" width="26" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 10L13.19 7L8 4V10ZM19.56 2.17C19.69 2.64 19.78 3.27 19.84 4.07C19.91 4.87 19.94 5.56 19.94 6.16L20 7C20 9.19 19.84 10.8 19.56 11.83C19.31 12.73 18.73 13.31 17.83 13.56C17.36 13.69 16.5 13.78 15.18 13.84C13.88 13.91 12.69 13.94 11.59 13.94L10 14C5.81 14 3.2 13.84 2.17 13.56C1.27 13.31 0.69 12.73 0.44 11.83C0.31 11.36 0.22 10.73 0.16 9.93C0.0900001 9.13 0.0599999 8.44 0.0599999 7.84L0 7C0 4.81 0.16 3.2 0.44 2.17C0.69 1.27 1.27 0.69 2.17 0.44C2.64 0.31 3.5 0.22 4.82 0.16C6.12 0.0899998 7.31 0.0599999 8.41 0.0599999L10 0C14.19 0 16.8 0.16 17.83 0.44C18.73 0.69 19.31 1.27 19.56 2.17Z" fill="red"></path>
+</svg>
+</a>
+<div class="box-e tooltip">
+<svg fill="none" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.842 9.25L11.9577 10.17C11.2502 10.89 10.8081 11.5 10.8081 13H8.84297V12.5C8.84297 11.39 9.28511 10.39 9.99255 9.67L11.2109 8.41C11.5745 8.05 11.7906 7.55 11.7906 7C11.7906 6.46957 11.5836 5.96086 11.2151 5.58579C10.8465 5.21071 10.3467 5 9.82552 5C9.30434 5 8.80451 5.21071 8.43598 5.58579C8.06745 5.96086 7.86041 6.46957 7.86041 7H5.89531C5.89531 5.93913 6.30938 4.92172 7.04644 4.17157C7.7835 3.42143 8.78316 3 9.82552 3C10.8679 3 11.8675 3.42143 12.6046 4.17157C13.3417 4.92172 13.7557 5.93913 13.7557 7C13.7543 7.84324 13.4259 8.65183 12.842 9.25ZM10.8081 17H8.84297V15H10.8081M9.82552 0C8.53521 0 7.25754 0.258658 6.06545 0.761205C4.87337 1.26375 3.79021 2.00035 2.87783 2.92893C1.03519 4.8043 0 7.34784 0 10C0 12.6522 1.03519 15.1957 2.87783 17.0711C3.79021 17.9997 4.87337 18.7362 6.06545 19.2388C7.25754 19.7413 8.53521 20 9.82552 20C12.4314 20 14.9306 18.9464 16.7732 17.0711C18.6158 15.1957 19.651 12.6522 19.651 10C19.651 4.47 15.2296 0 9.82552 0Z" fill="black"></path>
+</svg>
+<div class="bottom">
+<p>Expand any one approach by clicking the given options in the bar. Clicking one approach on bar,
+closes all other expands. You can manually expand more than one approach at a time</p>
+<i></i>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+Brute Force Approach
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+Algorithm / Intuition
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<p>The naive approach is pretty straightforward. We will use nested loops to generate all possible pairs. We know index i must be smaller than index j. So, we will fix i at one index at a time through a loop, and with another loop, we will check(<em>the condition a[i] &gt; 2*a[j]</em>) the elements from index i+1 to N-1  if they can form a pair with a[i].</p>
+<p><strong>Note: </strong><em>For a better understanding of intuition, please watch the video at the bottom of the page.</em></p>
+<p><strong>Approach:</strong></p>
+<p>The steps are as follows:</p>
+<ol><li>First, we will run a loop(say i) from 0 to N-1 to select the a[i].</li><li>As index j should be greater than index i, inside loop i, we will run another loop i.e. j from i+1 to N-1, and select the element a[j].</li><li>Inside this second loop, we will check if a[i] &gt; 2*a[j] i.e. if a[i] and a[j] can be a pair. If they satisfy the condition, we will increase the count by 1.</li><li>Finally, we will return the count i.e. the number of such pairs.</li></ol>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+Code
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<button class="code-tab dsa_article_code_active" data-lang="cpp">C++</button>
+<button class="code-tab" data-lang="java">Java</button>
+<button class="code-tab" data-lang="python">Python</button>
+<button class="code-tab" data-lang="javascript">JavaScript</button>
+<svg class="copy-btn" fill="none" height="20" viewbox="0 0 17 20" width="17" xmlns="http://www.w3.org/2000/svg">
+<path d="M2 20C1.45 20 0.979002 19.804 0.587002 19.412C0.195002 19.02 -0.000664969 18.5493 1.69779e-06 18V4H2V18H13V20H2ZM6 16C5.45 16 4.979 15.804 4.587 15.412C4.195 15.02 3.99934 14.5493 4 14V2C4 1.45 4.196 0.979002 4.588 0.587002C4.98 0.195002 5.45067 -0.000664969 6 1.69779e-06H15C15.55 1.69779e-06 16.021 0.196002 16.413 0.588002C16.805 0.980002 17.0007 1.45067 17 2V14C17 14.55 16.804 15.021 16.412 15.413C16.02 15.805 15.5493 16.0007 15 16H6ZM6 14H15V2H6V14Z">
+</path>
+</svg>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int countPairs(vector&lt;int&gt;&amp;a, int n) {
+
+    // Count the number of pairs:
+    int cnt = 0;
+    for (int i = 0; i &lt; n; i++) {
+        for (int j = i + 1; j &lt; n; j++) {
+            if (a[i] &gt; 2 * a[j]) cnt++;
+        }
+    }
+    return cnt;
+}
+
+int team(vector &lt;int&gt; &amp; skill, int n) {
+    return countPairs(skill, n);
+}
+
+int main()
+{
+    vector&lt;int&gt; a = {4, 1, 2, 3, 1};
+    int n = 5;
+    int cnt = team(a, n);
+    cout &lt;&lt; "The number of reverse pair is: "
+         &lt;&lt; cnt &lt;&lt; endl;
+    return 0;
+}
+</code>
+</pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">
+import java.util.*;
+
+public class tUf {
+
+    public static int countPairs(int[] a, int n) {
+
+        // Count the number of pairs:
+        int cnt = 0;
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = i + 1; j &lt; n; j++) {
+                if (a[i] &gt; 2 * a[j])
+                    cnt++;
+            }
+        }
+        return cnt;
+    }
+
+    public static int team(int[] skill, int n) {
+        return countPairs(skill, n);
+    }
+
+    public static void main(String[] args) {
+        int[] a = {4, 1, 2, 3, 1};
+        int n = 5;
+        int cnt = team(a, n);
+        System.out.println("The number of reverse pair is: " + cnt);
+    }
+}  
+</code>
+</pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">
+from typing import List
+
+def countPairs(a: [int], n: int) -&gt; int:
+    # Count the number of pairs:
+    cnt = 0
+    for i in range(n):
+        for j in range(i + 1, n):
+            if a[i] &gt; 2 * a[j]:
+                cnt += 1
+    return cnt
+
+def team(skill: [int], n: int) -&gt; int:
+    return countPairs(skill, n)
+
+if __name__ == "__main__":
+    a = [4, 1, 2, 3, 1]
+    n = 5
+    cnt = team(a, n)
+    print("The number of inversions are:", cnt)
+</code>
+</pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">
+function countPairs(a, n) {
+  // Count the number of pairs:
+  let cnt = 0;
+  for (let i = 0; i &lt; n; i++) {
+    for (let j = i + 1; j &lt; n; j++) {
+      if (a[i] &gt; 2 * a[j]) cnt++;
+    }
+  }
+  return cnt;
+}
+
+function team(skill, n) {
+  return countPairs(skill, n);
+}
+
+let a = [4, 1, 2, 3, 1];
+let n = 5;
+let cnt = team(a, n);
+console.log("The number of reverse pair is: " + cnt);
+</code>
+</pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+Complexity Analysis
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+</p><p><strong>Time Complexity: </strong>O(N<sup>2</sup>), We are using nested loops here and those two loops roughly run for N times.</p>
+<p><strong>Space Complexity: </strong>O(1), as we are not using any extra space to solve this problem.</p>
+<p></p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+Optimal Approach
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+Algorithm / Intuition
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<p>In order to solve this problem we will use the merge sort algorithm like we used in the problem <a href="https://takeuforward.org/data-structure/count-inversions-in-an-array/" rel="noopener" target="_blank" title="">count inversion</a> with a slight modification of the merge() function. But in this case, the same logic will not work. In order to understand this, we need to deep dive into the merge() function.</p>
+<p><strong>Why the same logic of </strong><a href="https://takeuforward.org/data-structure/count-inversions-in-an-array/" rel="noopener" target="_blank" title=""><strong>count inversion</strong></a><strong> will not work?</strong></p>
+<ul><li>The merge function works by comparing two elements from two halves i.e. arr[left] and arr[right]. Now, the condition in the question was arr[i] &gt; arr[j]. That is why we merged the logic. While comparing the elements, we counted the number of pairs.</li><li>But in this case, the condition is arr[i] &gt; 2*arr[j]. And, we cannot change the condition of comparing the elements in the merge() function. If we change the condition, the merge() function will fail to merge the elements. So, we need to check this condition and count the number of pairs separately.</li></ul>
+<p>Here, our approach will be to check, for every element in the sorted left half(<em>sorted</em>), how many elements in the right half(<em>also sorted</em>) can make a pair. Let’s try to understand, using the following example:</p>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-11300" loading="lazy" src="../assets/img/1ef4a95ff134d255.png"/></figure>
+<p>For the first element of the left half i.e. 6, we will start checking from index 0 of the right half i.e. arr2[]. Now, we can clearly see that the first two elements of arr2[] can make a pair with arr1[0] i.e. 6.</p>
+<figure class="wp-block-image size-full"><img loading="lazy" src="../assets/img/75b45a3c7a61a6ae.png"/></figure>
+<p>For the next element i.e. arr1[1], we will start checking from index 2(<em>0-based indexing</em>) i.e. where we stopped for the previous element. </p>
+<p><strong>Note: </strong><em>This process will work because arr1[1] will always be greater than arr1[0] which concludes if arr2[0] and arr2[1] are making a pair with arr1[0], they will obviously make pairs with a number greater than arr1[0] i.e. arr1[1].</em></p>
+<p>Thus before the merge step in the merge sort algorithm, we will calculate the total number of pairs each time.</p>
+<p><strong>Approach:</strong></p>
+<p>The steps are basically the same as they are in the case of the <a href="https://takeuforward.org/data-structure/merge-sort-algorithm/" rel="noopener" target="_blank" title="">merge sort algorithm</a>. The change will be just in the mergeSort() function:</p>
+<ul><li><em>In order to count the number of pairs, we will keep a count variable, cnt, initialized to 0 beforehand inside the mergeSort().</em></li><li><em>We will add the numbers returned by the previous mergeSort() calls.</em></li><li><em>Before the merge step, we will count the number of pairs using a function, named countPairs().</em></li><li><em>We need to remember that the left half starts from low and ends at mid, and the right half starts from mid+1 and ends at high.</em></li></ul>
+<p>The steps of the countPairs() function will be as follows:</p>
+<ol><li>We will declare a variable, cnt, initialized with 0.</li><li>We will run a loop from low to mid, to select an element at a time from the left half.</li><li>Inside that loop, we will use another loop to check how many elements from the right half can make a pair.</li><li>Lastly, we will add the total number of elements i.e. (right-(mid+1)) (where <em>right = current index)</em>, to the cnt and return it.</li></ol>
+<p><strong>Note: </strong><em>For a better understanding of intuition, please watch the video at the bottom of the page.</em></p>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+Code
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<button class="code-tab dsa_article_code_active" data-lang="cpp">C++</button>
+<button class="code-tab" data-lang="java">Java</button>
+<button class="code-tab" data-lang="python">Python</button>
+<button class="code-tab" data-lang="javascript">JavaScript</button>
+<svg class="copy-btn" fill="none" height="20" viewbox="0 0 17 20" width="17" xmlns="http://www.w3.org/2000/svg">
+<path d="M2 20C1.45 20 0.979002 19.804 0.587002 19.412C0.195002 19.02 -0.000664969 18.5493 1.69779e-06 18V4H2V18H13V20H2ZM6 16C5.45 16 4.979 15.804 4.587 15.412C4.195 15.02 3.99934 14.5493 4 14V2C4 1.45 4.196 0.979002 4.588 0.587002C4.98 0.195002 5.45067 -0.000664969 6 1.69779e-06H15C15.55 1.69779e-06 16.021 0.196002 16.413 0.588002C16.805 0.980002 17.0007 1.45067 17 2V14C17 14.55 16.804 15.021 16.412 15.413C16.02 15.805 15.5493 16.0007 15 16H6ZM6 14H15V2H6V14Z">
+</path>
+</svg>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+void merge(vector&lt;int&gt; &amp;arr, int low, int mid, int high) {
+    vector&lt;int&gt; temp; // temporary array
+    int left = low;      // starting index of left half of arr
+    int right = mid + 1;   // starting index of right half of arr
+
+    //storing elements in the temporary array in a sorted manner//
+
+    while (left &lt;= mid &amp;&amp; right &lt;= high) {
+        if (arr[left] &lt;= arr[right]) {
+            temp.push_back(arr[left]);
+            left++;
+        }
+        else {
+            temp.push_back(arr[right]);
+            right++;
+        }
+    }
+
+    // if elements on the left half are still left //
+
+    while (left &lt;= mid) {
+        temp.push_back(arr[left]);
+        left++;
+    }
+
+    //  if elements on the right half are still left //
+    while (right &lt;= high) {
+        temp.push_back(arr[right]);
+        right++;
+    }
+
+    // transfering all elements from temporary to arr //
+    for (int i = low; i &lt;= high; i++) {
+        arr[i] = temp[i - low];
+    }
+}
+
+int countPairs(vector&lt;int&gt; &amp;arr, int low, int mid, int high) {
+    int right = mid + 1;
+    int cnt = 0;
+    for (int i = low; i &lt;= mid; i++) {
+        while (right &lt;= high &amp;&amp; arr[i] &gt; 2 * arr[right]) right++;
+        cnt += (right - (mid + 1));
+    }
+    return cnt;
+}
+
+int mergeSort(vector&lt;int&gt; &amp;arr, int low, int high) {
+    int cnt = 0;
+    if (low &gt;= high) return cnt;
+    int mid = (low + high) / 2 ;
+    cnt += mergeSort(arr, low, mid);  // left half
+    cnt += mergeSort(arr, mid + 1, high); // right half
+    cnt += countPairs(arr, low, mid, high); //Modification
+    merge(arr, low, mid, high);  // merging sorted halves
+    return cnt;
+}
+
+int team(vector &lt;int&gt; &amp; skill, int n)
+{
+    return mergeSort(skill, 0, n - 1);
+}
+
+int main()
+{
+    vector&lt;int&gt; a = {4, 1, 2, 3, 1};
+    int n = 5;
+    int cnt = team(a, n);
+    cout &lt;&lt; "The number of reverse pair is: "
+         &lt;&lt; cnt &lt;&lt; endl;
+    return 0;
+}
+</code>
+</pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">
+import java.util.*;
+
+public class tUf {
+
+    private static void merge(int[] arr, int low, int mid, int high) {
+        ArrayList&lt;Integer&gt; temp = new ArrayList&lt;&gt;(); // temporary array
+        int left = low;      // starting index of left half of arr
+        int right = mid + 1;   // starting index of right half of arr
+
+        //storing elements in the temporary array in a sorted manner//
+
+        while (left &lt;= mid &amp;&amp; right &lt;= high) {
+            if (arr[left] &lt;= arr[right]) {
+                temp.add(arr[left]);
+                left++;
+            } else {
+                temp.add(arr[right]);
+                right++;
+            }
+        }
+
+        // if elements on the left half are still left //
+
+        while (left &lt;= mid) {
+            temp.add(arr[left]);
+            left++;
+        }
+
+        //  if elements on the right half are still left //
+        while (right &lt;= high) {
+            temp.add(arr[right]);
+            right++;
+        }
+
+        // transfering all elements from temporary to arr //
+        for (int i = low; i &lt;= high; i++) {
+            arr[i] = temp.get(i - low);
+        }
+    }
+
+    public static int countPairs(int[] arr, int low, int mid, int high) {
+        int right = mid + 1;
+        int cnt = 0;
+        for (int i = low; i &lt;= mid; i++) {
+            while (right &lt;= high &amp;&amp; arr[i] &gt; 2 * arr[right]) right++;
+            cnt += (right - (mid + 1));
+        }
+        return cnt;
+    }
+
+    public static int mergeSort(int[] arr, int low, int high) {
+        int cnt = 0;
+        if (low &gt;= high) return cnt;
+        int mid = (low + high) / 2 ;
+        cnt += mergeSort(arr, low, mid);  // left half
+        cnt += mergeSort(arr, mid + 1, high); // right half
+        cnt += countPairs(arr, low, mid, high); //Modification
+        merge(arr, low, mid, high);  // merging sorted halves
+        return cnt;
+    }
+
+    public static int team(int[] skill, int n) {
+        return mergeSort(skill, 0, n - 1);
+    }
+
+    public static void main(String[] args) {
+        int[] a = {4, 1, 2, 3, 1};
+        int n = 5;
+        int cnt = team(a, n);
+        System.out.println("The number of reverse pair is: " + cnt);
+    }
+}
+</code>
+</pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">
+from typing import List
+
+def merge(arr, low, mid, high):
+    temp = []  # temporary array
+    left = low  # starting index of left half of arr
+    right = mid + 1  # starting index of right half of arr
+
+    # storing elements in the temporary array in a sorted manner
+    while left &lt;= mid and right &lt;= high:
+        if arr[left] &lt;= arr[right]:
+            temp.append(arr[left])
+            left += 1
+        else:
+            temp.append(arr[right])
+            right += 1
+
+    # if elements on the left half are still left
+    while left &lt;= mid:
+        temp.append(arr[left])
+        left += 1
+
+    # if elements on the right half are still left
+    while right &lt;= high:
+        temp.append(arr[right])
+        right += 1
+
+    # transferring all elements from temporary to arr
+    for i in range(low, high + 1):
+        arr[i] = temp[i - low]
+
+def countPairs(arr, low, mid, high):
+    right = mid + 1
+    cnt = 0
+    for i in range(low, mid + 1):
+        while right &lt;= high and arr[i] &gt; 2 * arr[right]:
+            right += 1
+        cnt += (right - (mid + 1))
+    return cnt
+
+def mergeSort(arr, low, high):
+    cnt = 0
+    if low &gt;= high:
+        return cnt
+    mid = (low + high) // 2
+    cnt += mergeSort(arr, low, mid)  # left half
+    cnt += mergeSort(arr, mid + 1, high)  # right half
+    cnt += countPairs(arr, low, mid, high)  # Modification
+    merge(arr, low, mid, high)  # merging sorted halves
+    return cnt
+
+def team(skill: [int], n: int) -&gt; int:
+    return mergeSort(skill, 0, n - 1)
+
+if __name__ == "__main__":
+    a = [4, 1, 2, 3, 1]
+    n = 5
+    cnt = team(a, n)
+    print("The number of reverse pair is:", cnt).
+
+</code>
+</pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">
+function merge(arr, low, mid, high) {
+  let temp = []; // temporary array
+  let left = low; // starting index of left half of arr
+  let right = mid + 1; // starting index of right half of arr
+
+  // storing elements in the temporary array in a sorted manner
+  while (left &lt;= mid &amp;&amp; right &lt;= high) {
+    if (arr[left] &lt;= arr[right]) {
+      temp.push(arr[left]);
+      left++;
+    } else {
+      temp.push(arr[right]);
+      right++;
+    }
+  }
+
+  // if elements on the left half are still left
+  while (left &lt;= mid) {
+    temp.push(arr[left]);
+    left++;
+  }
+
+  // if elements on the right half are still left
+  while (right &lt;= high) {
+    temp.push(arr[right]);
+    right++;
+  }
+
+  // transferring all elements from temporary to arr
+  for (let i = low; i &lt;= high; i++) {
+    arr[i] = temp[i - low];
+  }
+}
+
+function countPairs(arr, low, mid, high) {
+  let right = mid + 1;
+  let cnt = 0;
+  for (let i = low; i &lt;= mid; i++) {
+    while (right &lt;= high &amp;&amp; arr[i] &gt; 2 * arr[right]) right++;
+    cnt += right - (mid + 1);
+  }
+  return cnt;
+}
+
+function mergeSort(arr, low, high) {
+  let cnt = 0;
+  if (low &gt;= high) return cnt;
+  let mid = Math.floor((low + high) / 2);
+  cnt += mergeSort(arr, low, mid); // left half
+  cnt += mergeSort(arr, mid + 1, high); // right half
+  cnt += countPairs(arr, low, mid, high); // Modification
+  merge(arr, low, mid, high); // merging sorted halves
+  return cnt;
+}
+
+function team(skill, n) {
+  return mergeSort(skill, 0, n - 1);
+}
+
+let a = [4, 1, 2, 3, 1];
+let n = 5;
+let cnt = team(a, n);
+console.log("The number of reverse pair is: " + cnt);
+</code>
+</pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+Complexity Analysis
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+</p><p><strong>Time Complexity:</strong> O(2N*logN), Inside the mergeSort() we call merge() and countPairs() except mergeSort() itself. Now, inside the function countPairs(), though we are running a nested loop, we are actually iterating the left half once and the right half once in total. That is why, the time complexity is O(N). And the merge() function also takes O(N). The mergeSort() takes O(logN) time complexity. Therefore, the overall time complexity will be O(logN * (N+N)) = O(2N*logN).</p>
+<p><strong>Space Complexity: </strong>O(N), as in the merge sort We use a temporary array to store elements in sorted order.</p>
+<p></p>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

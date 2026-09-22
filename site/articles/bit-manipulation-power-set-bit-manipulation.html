@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Power Set | Bit Manipulation</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Power Set | Bit Manipulation</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/bit-manipulation/power-set-bit-manipulation</code></div>
+  <p><strong>Problem Statement: </strong> Given an array of numbers, print all subsets of it using bitwise operators.
+</p>
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p><strong>Input:</strong> nums = [1, 2, 3]
+<strong>Output:</strong> [[ ], [1], [2], [3], [1, 2], [2, 3], [3, 1], [1, 2, 3]]
+<strong>Explanation: </strong> A power set of an array is an array of all possible subarrays, including an empty array. It contains all combinations of elements from the original array. By iterating through all possible combinations of the elements in the input array we are able to get the power set of the array.<br/>
+<strong>Input:</strong> nums = [5, 7, 8]
+<strong>Output:</strong> [[ ], [5], [7], [8], [5, 7], [7, 8], [8, 5], [5, 7, 8]]
+<strong>Explanation: </strong> A power set of an array is an array of all possible subarrays, including an empty array. It contains all combinations of elements from the original array. By iterating through all possible combinations of the elements in the input array we are able to get the power set of the array.</p></pre>
+</div>
+</details>
+</div>
+
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Don’t jump directly to the solution, try it out
+        yourself first. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                 Approach 
+            </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Algorithm 
+                    </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<p>This problem has already been previously solved using Recursion here:<a href="https://takeuforward.org/data-structure/power-set-print-all-the-possible-subsequences-of-the-string/" rel="noopener" target="_blank">Power Set: Recursion</a>.</p>
+                    To solve it using bit wise operators, we observe a pattern that the number of subsets is dependant on the size of the input array as:<br/>
+<ol><li>N = 1, No. of subsets = 2</li><li>N = 2, No. of subsets = 4</li><li>N = 3, No. of subsets = 8 and so on…</li></ol>
+<p>No. of subsets of input array of size N = 2N = [1 &lt;&lt; n]</p>
+
+<p><img height="457" loading="lazy" src="../assets/img/25778a114480e231.png" width="481"/></p>
+
+                    Hence we can associate each subset with a number in the range 0 to 2N-1. Each of these numbers represents a bitmask where each bit indicates whether the corresponding element from the input array is included in the current subset or not.<br/>
+<ul>
+<li>Create an empty array to hold all the subsets of the input array.</li>
+<li>Determine the size of the power set, which is 2<sup>N</sup>, where N represents the number of elements in the input array.</li>
+<li>Iterate through all possible numbers from 0 to 2<sup>N</sup>-1: Each number represents a unique combination of elements in the input array.</li>
+<li>For each number, generate the corresponding subset.</li>
+<li>After constructing each subset, add it to the array of subsets.</li>
+<li>Return the array containing all the subsets of the input array.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to generate all subsets (the power set) of the input array
+    vector&lt;vector&lt;int&gt;&gt; getPowerSet(vector&lt;int&gt;&amp; nums) {
+        // Get the size of the input array
+        int n = nums.size();
+
+        // Calculate the total number of subsets (2^n) using bitwise shift
+        int subsets = 1 &lt;&lt; n;
+
+        // Vector to store all subsets
+        vector&lt;vector&lt;int&gt;&gt; ans;
+
+        // Iterate through all numbers from 0 to 2^n - 1
+        for (int num = 0; num &lt; subsets; num++) {
+            // Temporary vector to hold the current subset
+            vector&lt;int&gt; subset;
+
+            // Iterate through each bit of the number
+            for (int i = 0; i &lt; n; i++) {
+                // If the ith bit is set, include nums[i] in the subset
+                if (num &amp; (1 &lt;&lt; i)) {
+                    subset.push_back(nums[i]);
+                }
+            }
+
+            // Add the constructed subset into the result
+            ans.push_back(subset);
+        }
+
+        // Return all subsets
+        return ans;
+    }
+};
+
+// Driver code
+int main() {
+    // Input array
+    vector&lt;int&gt; nums = {5, 7, 8};
+
+    // Create object of Solution
+    Solution obj;
+
+    // Call function to generate subsets
+    vector&lt;vector&lt;int&gt;&gt; subsets = obj.getPowerSet(nums);
+
+    // Print original input array
+    cout &lt;&lt; "Initial Input Array: ";
+    for (auto num : nums) {
+        cout &lt;&lt; num &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+
+    // Print all subsets
+    cout &lt;&lt; "Subsets: " &lt;&lt; endl;
+    for (auto subset : subsets) {
+        cout &lt;&lt; "[ ";
+        for (auto num : subset) {
+            cout &lt;&lt; num &lt;&lt; " ";
+        }
+        cout &lt;&lt; "]" &lt;&lt; endl;
+    }
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to generate all subsets (power set) of the input array
+    public List&lt;List&lt;Integer&gt;&gt; getPowerSet(int[] nums) {
+        // Get the size of the input array
+        int n = nums.length;
+
+        // Calculate the total number of subsets (2^n)
+        int subsets = 1 &lt;&lt; n;
+
+        // List to store all subsets
+        List&lt;List&lt;Integer&gt;&gt; ans = new ArrayList&lt;&gt;();
+
+        // Iterate through all numbers from 0 to 2^n - 1
+        for (int num = 0; num &lt; subsets; num++) {
+            // Temporary list to hold current subset
+            List&lt;Integer&gt; subset = new ArrayList&lt;&gt;();
+
+            // Iterate through each bit of the number
+            for (int i = 0; i &lt; n; i++) {
+                // If ith bit is set, include nums[i] in the subset
+                if ((num &amp; (1 &lt;&lt; i)) != 0) {
+                    subset.add(nums[i]);
+                }
+            }
+
+            // Add this subset into the final result
+            ans.add(subset);
+        }
+
+        // Return all subsets
+        return ans;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Input array
+        int[] nums = {5, 7, 8};
+
+        // Create object of Solution
+        Solution obj = new Solution();
+
+        // Generate power set
+        List&lt;List&lt;Integer&gt;&gt; subsets = obj.getPowerSet(nums);
+
+        // Print input array
+        System.out.print("Initial Input Array: ");
+        for (int num : nums) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+
+        // Print subsets
+        System.out.println("Subsets:");
+        for (List&lt;Integer&gt; subset : subsets) {
+            System.out.print("[ ");
+            for (int num : subset) {
+                System.out.print(num + " ");
+            }
+            System.out.println("]");
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to generate all subsets (the power set) of the input list
+    def getPowerSet(self, nums):
+        # Get the size of the input list
+        n = len(nums)
+
+        # Calculate total number of subsets (2^n)
+        subsets = 1 &lt;&lt; n
+
+        # List to store all subsets
+        ans = []
+
+        # Iterate through all numbers from 0 to 2^n - 1
+        for num in range(subsets):
+            # Temporary list for current subset
+            subset = []
+
+            # Check each bit of the number
+            for i in range(n):
+                # If ith bit is set, include nums[i] in the subset
+                if num &amp; (1 &lt;&lt; i):
+                    subset.append(nums[i])
+
+            # Add this subset to the result
+            ans.append(subset)
+
+        # Return all subsets
+        return ans
+
+
+# Driver code
+if __name__ == "__main__":
+    # Input array
+    nums = [5, 7, 8]
+
+    # Create object of Solution
+    obj = Solution()
+
+    # Generate power set
+    subsets = obj.getPowerSet(nums)
+
+    # Print input array
+    print("Initial Input Array:", nums)
+
+    # Print subsets
+    print("Subsets:")
+    for subset in subsets:
+        print("[", " ".join(map(str, subset)), "]")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to generate all subsets (power set) of the input array
+    getPowerSet(nums) {
+        // Get the size of the input array
+        const n = nums.length;
+
+        // Calculate total number of subsets (2^n)
+        const subsets = 1 &lt;&lt; n;
+
+        // Array to store all subsets
+        const ans = [];
+
+        // Iterate through all numbers from 0 to 2^n - 1
+        for (let num = 0; num &lt; subsets; num++) {
+            // Temporary array to hold current subset
+            const subset = [];
+
+            // Check each bit of the number
+            for (let i = 0; i &lt; n; i++) {
+                // If ith bit is set, include nums[i]
+                if (num &amp; (1 &lt;&lt; i)) {
+                    subset.push(nums[i]);
+                }
+            }
+
+            // Add this subset to the result
+            ans.push(subset);
+        }
+
+        // Return all subsets
+        return ans;
+    }
+}
+
+// Driver code
+function main() {
+    // Input array
+    const nums = [5, 7, 8];
+
+    // Create object of Solution
+    const obj = new Solution();
+
+    // Generate power set
+    const subsets = obj.getPowerSet(nums);
+
+    // Print input array
+    console.log("Initial Input Array:", nums);
+
+    // Print subsets
+    console.log("Subsets:");
+    for (const subset of subsets) {
+        console.log("[ " + subset.join(" ") + " ]");
+    }
+}
+
+main();
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Complexity Analysis
+                    </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity: O(N x 2<sup>N</sup>)</strong>
+                     where N is the number of elements in the input array.
+                     Iterating through all possible numbers from 0 to 2<sup>N</sup>-1 where N is the number of elements in the input array requires O(2<sup>N</sup>) iterations.For each iteration, we perform O(N) operations to construct the corresponding subset by interpreting the bits of the number.</p>
+<p><strong>Space Complexity: O(N x 2<sup>N</sup>)</strong>   
+					where N is the number of elements in the input array. We store all subsets in a list. Since there are 2<sup>N</sup> subsets in the power set, each subset can have at most N elements.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

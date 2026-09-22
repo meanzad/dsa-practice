@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Starting point of loop in a Linked List</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Starting point of loop in a Linked List</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/starting-point-of-loop-in-a-linked-list/</code></div>
+  <p><strong>Problem Statement: </strong>Given the head of a linked list that may contain a cycle, return the starting point of that cycle. If there is no cycle in the linked list return null.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p><strong>Input:</strong> LL: 1  2  3  4  5
+<strong>Output:</strong> 3
+<strong>Explanation: </strong>This linked list contains a loop of size 3 starting at node with value 3.
+<img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/965a0addbb093140.png" width="439"/><br/>
+<strong>Input:</strong> LL: 1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 9 -&gt; 9
+<strong>Output:</strong>NULL
+<strong>Explanation: </strong>This linked list does not contain a loop hence has no starting point
+<img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/a184fe49f29c6ee2.png" width="439"/></p></pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/find-the-starting-point-in-ll" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Brute Force Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+The starting point of a loop of the linked list is the first node we visit twice during its traversal. It's the point where we realise that we are no longer moving forward in the list but rather entering a cycle.
+
+
+
+<ul>
+<li>Traverse through the linked list by assigning a temporary node to the head and moving to the next node repeatedly until reaching null.</li>
+<li>While traversing, keep a record of visited nodes using a map data structure.</li>
+<li>Storing the entire node in the map is necessary to differentiate between nodes with the same value but different positions, ensuring proper detection of cycles instead of just duplicates.</li>
+<li>If a node already exists in the map, this confirms a loop, and we return that node as the starting point of the loop.</li>
+<li>If the traversal reaches the end of the list (null), it means no loop exists, so return null.</li>
+</ul>
+
+
+
+
+
+
+</div>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/227e1b0deeadc525.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/0a222436d53dff85.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/7b55cf33c1450356.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/83711beb51e64bd5.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/883f84f9c7fbbd42.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/671e87f2561dc094.png"/></div><div class="carousel-image"><img alt="Image 7" loading="lazy" src="../assets/img/2012acc1f2fdfc66.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/227e1b0deeadc525.png"/><img alt="Image 2" loading="lazy" src="../assets/img/0a222436d53dff85.png"/><img alt="Image 3" loading="lazy" src="../assets/img/7b55cf33c1450356.png"/><img alt="Image 4" loading="lazy" src="../assets/img/83711beb51e64bd5.png"/><img alt="Image 5" loading="lazy" src="../assets/img/883f84f9c7fbbd42.png"/><img alt="Image 6" loading="lazy" src="../assets/img/671e87f2561dc094.png"/><img alt="Image 7" loading="lazy" src="../assets/img/2012acc1f2fdfc66.png"/></div></div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class ListNode {
+public:
+    int val;
+    ListNode* next;
+    ListNode(int x) {
+        val = x;
+        next = NULL;
+    }
+};
+
+class Solution {
+public:
+    // Function to detect start of loop using Hash Map
+    ListNode* detectCycle(ListNode* head) {
+        // Create a map to store visited nodes
+        unordered_set&lt;ListNode*&gt; visited;
+
+        // Start traversing from head
+        while (head != NULL) {
+            // If current node is already in set, it's the start of loop
+            if (visited.find(head) != visited.end()) {
+                return head;
+            }
+
+            // Otherwise, insert current node into set
+            visited.insert(head);
+
+            // Move to the next node
+            head = head-&gt;next;
+        }
+
+        // If loop not found, return NULL
+        return NULL;
+    }
+};
+
+// Driver code
+int main() {
+    // Creating nodes
+    ListNode* head = new ListNode(3);
+    head-&gt;next = new ListNode(2);
+    head-&gt;next-&gt;next = new ListNode(0);
+    head-&gt;next-&gt;next-&gt;next = new ListNode(-4);
+
+    // Creating a cycle (tail connects to node index 1)
+    head-&gt;next-&gt;next-&gt;next-&gt;next = head-&gt;next;
+
+    Solution obj;
+    ListNode* startNode = obj.detectCycle(head);
+
+    if (startNode)
+        cout &lt;&lt; "Cycle starts at node with value: " &lt;&lt; startNode-&gt;val &lt;&lt; endl;
+    else
+        cout &lt;&lt; "No cycle found." &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode(int x) {
+        val = x;
+        next = null;
+    }
+}
+
+class Solution {
+    // Function to detect start of loop using Hash Map
+    public ListNode detectCycle(ListNode head) {
+        // Create a set to store visited nodes
+        Set&lt;ListNode&gt; visited = new HashSet&lt;&gt;();
+
+        // Traverse through the list
+        while (head != null) {
+            // If already visited, it's the start of the loop
+            if (visited.contains(head)) {
+                return head;
+            }
+
+            // Mark current node as visited
+            visited.add(head);
+
+            // Move to the next node
+            head = head.next;
+        }
+
+        // No cycle found
+        return null;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Creating linked list nodes
+        ListNode head = new ListNode(3);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(0);
+        head.next.next.next = new ListNode(-4);
+
+        // Creating a cycle (tail connects to node index 1)
+        head.next.next.next.next = head.next;
+
+        Solution obj = new Solution();
+        ListNode startNode = obj.detectCycle(head);
+
+        if (startNode != null)
+            System.out.println("Cycle starts at node with value: " + startNode.val);
+        else
+            System.out.println("No cycle found.");
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class ListNode:
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+
+class Solution:
+    # Function to detect start of loop using Hash Map
+    def detectCycle(self, head):
+        # Create a set to store visited nodes
+        visited = set()
+
+        # Traverse the list
+        while head:
+            # If current node already visited, it's the start of cycle
+            if head in visited:
+                return head
+
+            # Add current node to visited set
+            visited.add(head)
+
+            # Move to next node
+            head = head.next
+
+        # No cycle found
+        return None
+
+# Driver code
+if __name__ == "__main__":
+    # Creating nodes
+    head = ListNode(3)
+    head.next = ListNode(2)
+    head.next.next = ListNode(0)
+    head.next.next.next = ListNode(-4)
+
+    # Creating a cycle (tail connects to node index 1)
+    head.next.next.next.next = head.next
+
+    obj = Solution()
+    startNode = obj.detectCycle(head)
+
+    if startNode:
+        print("Cycle starts at node with value:", startNode.val)
+    else:
+        print("No cycle found.")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class ListNode {
+    constructor(val) {
+        this.val = val;
+        this.next = null;
+    }
+}
+
+class Solution {
+    // Function to detect start of loop using Set
+    detectCycle(head) {
+        // Create a set to store visited nodes
+        let visited = new Set();
+
+        // Traverse through the list
+        while (head !== null) {
+            // If node already in set, it's start of the loop
+            if (visited.has(head)) {
+                return head;
+            }
+
+            // Mark node as visited
+            visited.add(head);
+
+            // Move to next node
+            head = head.next;
+        }
+
+        // If no cycle, return null
+        return null;
+    }
+}
+
+// Driver code
+let head = new ListNode(3);
+head.next = new ListNode(2);
+head.next.next = new ListNode(0);
+head.next.next.next = new ListNode(-4);
+
+// Creating a cycle (tail connects to node index 1)
+head.next.next.next.next = head.next;
+
+let obj = new Solution();
+let startNode = obj.detectCycle(head);
+
+if (startNode)
+    console.log("Cycle starts at node with value:", startNode.val);
+else
+    console.log("No cycle found.");
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O(N) where N is the number of nodes in the linked list.
+Each node is visited only once during traversal. Hashing allows O(1) lookup to check for previously visited nodes.</p>
+<p><strong>Space Complexity:</strong> O(N) due to the additional hash set used to store visited nodes.
+In the worst case (no cycle), all N nodes will be stored in the hash set.</p>
+</details>
+</div>
+</details>
+
+</div>
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+The previous method uses O(N) additional memory, which can become quite large as the linked list length grows. To enhance efficiency, the Tortoise and Hare Algorithm is introduced as an optimization.<br/><br/>
+
+The Tortoise and Hare approach has been discussed in this <a href="https://takeuforward.org/data-structure/find-middle-element-in-a-linked-list/" rel="noopener" target="_blank">article</a>. The key insight is that when the slow and fast pointers meet inside the loop, the distance travelled by each pointer can be used to calculate the starting point of the loop.
+
+
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/67eec71b7254a6ba.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/a634caf1d81c0161.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/30acebe86bd3e63f.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/f10ead2ccae8a4d3.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/e8d25279ce0613da.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/8561a022d8abfe02.png"/></div><div class="carousel-image"><img alt="Image 7" loading="lazy" src="../assets/img/b4cf9d8a4ee5b351.png"/></div><div class="carousel-image"><img alt="Image 8" loading="lazy" src="../assets/img/38ef312f834f8429.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/67eec71b7254a6ba.png"/><img alt="Image 2" loading="lazy" src="../assets/img/a634caf1d81c0161.png"/><img alt="Image 3" loading="lazy" src="../assets/img/30acebe86bd3e63f.png"/><img alt="Image 4" loading="lazy" src="../assets/img/f10ead2ccae8a4d3.png"/><img alt="Image 5" loading="lazy" src="../assets/img/e8d25279ce0613da.png"/><img alt="Image 6" loading="lazy" src="../assets/img/8561a022d8abfe02.png"/><img alt="Image 7" loading="lazy" src="../assets/img/b4cf9d8a4ee5b351.png"/><img alt="Image 8" loading="lazy" src="../assets/img/38ef312f834f8429.png"/></div></div>
+<ul> <li>Initialise two pointers, `slow` and `fast`, to the head of the linked list. `slow` will advance one step at a time, while `fast` will advance two steps at a time. These pointers will move simultaneously.</li> <li>Traverse the linked list with the `slow` and `fast` pointers. While traversing, repeatedly move `slow` one step and `fast` two steps at a time.</li> <li>Continue this traversal until one of the following conditions is met: <ol> <li>`fast` or `fast.next` reaches the end of the linked list (i.e., becomes null). In this case, there is no loop in the linked list, and the algorithm terminates by returning null.</li> <li>`fast` and `slow` pointers meet at the same node. This indicates the presence of a loop in the linked list.</li> </ol> </li> <li>Reset the `slow` pointer to the head of the linked list. Move `fast` and `slow` one step at a time until they meet again. The point where they meet again is the starting point of the loop.</li> </ul>
+<br/>
+<strong>You may be curious about the proof for this algorithm, and it hinges on the idea that the point where the slow and fast pointers converge can be leveraged to determine the starting point of the loop.</strong><br/><br/>
+In the "tortoise and hare" algorithm for detecting loops in a linked list, when the slow pointer (tortoise) reaches the starting point of the loop, the fast pointer (hare) is positioned at a point that is twice the distance travelled by the slow pointer. This is because the hare moves at double the speed of the tortoise.<br/><br/>
+
+If slow has travelled distance L1 then fast has travelled 2 x L1. Now that slow and fast have entered the loop, the distance fast will have to cover to catch up to slow is the total length of loop minus L1. Let this distance be d. Distance travelled by slow = L1 Distance travelled by fast = 2 * L1 Total length of loop = L1 + d<br/><br/>
+In this configuration, the fast pointer advances toward the slow pointer with two jumps per step, while the slow pointer moves away with one jump per step. As a result, the gap between them decreases by 1 with each step. Given that the initial gap is d, it takes exactly d steps for them to meet.<br/>
+<pre class="wp-block-preformatted"> Total length of loop = L1 + d Distance between slow and fast = d </pre> <img alt="" class="wp-image-8107" height="1000" loading="lazy" src="../assets/img/9c75ea6920f3f2b4.png" width="600"/><br/><br/>
+During these d steps, the slow pointer effectively travels d steps from the starting point within the loop and fast travels 2 x d and they meet at a specific point. Based on our previous calculations, the total length of the loop is L1 + d. And since the distance covered by the slow pointer within the loop is d, the remaining distance within the loop is equal to L1.<br/><br/>
+Therefore, it is proven that the distance between the starting point of the loop and the point where the two pointers meet is indeed equal to the distance between the starting point and head of the linked list.
+
+
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/6bced2e22eb01762.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/e9e497a7808e1ea3.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/6bced2e22eb01762.png"/><img alt="Image 2" loading="lazy" src="../assets/img/e9e497a7808e1ea3.png"/></div></div>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class ListNode {
+public:
+    int val;
+    ListNode* next;
+    ListNode(int x) {
+        val = x;
+        next = NULL;
+    }
+};
+
+class Solution {
+public:
+    // Function to detect the starting point of the loop using Floyd’s algorithm
+    ListNode* detectCycle(ListNode* head) {
+        // Initialize slow and fast pointers
+        ListNode* slow = head;
+        ListNode* fast = head;
+
+        // Traverse until fast and fast-&gt;next are not null
+        while (fast != NULL &amp;&amp; fast-&gt;next != NULL) {
+            // Move slow by one step
+            slow = slow-&gt;next;
+
+            // Move fast by two steps
+            fast = fast-&gt;next-&gt;next;
+
+            // If they meet, loop is detected
+            if (slow == fast) {
+                // Reset slow to head
+                slow = head;
+
+                // Move both one step at a time to find starting point
+                while (slow != fast) {
+                    slow = slow-&gt;next;
+                    fast = fast-&gt;next;
+                }
+
+                // Return the start node of the loop
+                return slow;
+            }
+        }
+
+        // If no loop found, return NULL
+        return NULL;
+    }
+};
+
+// Driver code
+int main() {
+    // Create nodes
+    ListNode* head = new ListNode(3);
+    head-&gt;next = new ListNode(2);
+    head-&gt;next-&gt;next = new ListNode(0);
+    head-&gt;next-&gt;next-&gt;next = new ListNode(-4);
+
+    // Create a cycle: connect tail to index 1 node (value 2)
+    head-&gt;next-&gt;next-&gt;next-&gt;next = head-&gt;next;
+
+    Solution obj;
+    ListNode* result = obj.detectCycle(head);
+
+    if (result != NULL)
+        cout &lt;&lt; "Cycle starts at node with value: " &lt;&lt; result-&gt;val &lt;&lt; endl;
+    else
+        cout &lt;&lt; "No cycle found." &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import.java.util.*;
+    class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode(int x) {
+        val = x;
+        next = null;
+    }
+}
+
+class Solution {
+    // Function to detect the starting point of loop using Floyd’s algorithm
+    public ListNode detectCycle(ListNode head) {
+        // Initialize slow and fast pointers
+        ListNode slow = head;
+        ListNode fast = head;
+
+        // Traverse while fast and fast.next are not null
+        while (fast != null &amp;&amp; fast.next != null) {
+            // Move slow one step
+            slow = slow.next;
+
+            // Move fast two steps
+            fast = fast.next.next;
+
+            // If they meet, cycle is present
+            if (slow == fast) {
+                // Reset slow to head
+                slow = head;
+
+                // Move both one step to find start of loop
+                while (slow != fast) {
+                    slow = slow.next;
+                    fast = fast.next;
+                }
+
+                // Return the starting node of loop
+                return slow;
+            }
+        }
+
+        // If no cycle found
+        return null;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Create nodes
+        ListNode head = new ListNode(3);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(0);
+        head.next.next.next = new ListNode(-4);
+
+        // Create cycle: last node connects to node with value 2
+        head.next.next.next.next = head.next;
+
+        Solution obj = new Solution();
+        ListNode result = obj.detectCycle(head);
+
+        if (result != null)
+            System.out.println("Cycle starts at node with value: " + result.val);
+        else
+            System.out.println("No cycle found.");
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class ListNode:
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+
+class Solution:
+    # Function to detect the starting node of the loop using Floyd’s algorithm
+    def detectCycle(self, head):
+        # Initialize slow and fast pointers
+        slow = head
+        fast = head
+
+        # Traverse while fast and fast.next are not None
+        while fast and fast.next:
+            # Move slow one step
+            slow = slow.next
+
+            # Move fast two steps
+            fast = fast.next.next
+
+            # If they meet, there is a cycle
+            if slow == fast:
+                # Reset slow to head
+                slow = head
+
+                # Move both pointers one step to find entry point
+                while slow != fast:
+                    slow = slow.next
+                    fast = fast.next
+
+                # Return starting node of cycle
+                return slow
+
+        # No cycle found
+        return None
+
+# Driver code
+if __name__ == "__main__":
+    # Create linked list nodes
+    head = ListNode(3)
+    head.next = ListNode(2)
+    head.next.next = ListNode(0)
+    head.next.next.next = ListNode(-4)
+
+    # Create cycle (last node points to node with value 2)
+    head.next.next.next.next = head.next
+
+    obj = Solution()
+    result = obj.detectCycle(head)
+
+    if result:
+        print("Cycle starts at node with value:", result.val)
+    else:
+        print("No cycle found.")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class ListNode {
+    constructor(val) {
+        this.val = val;
+        this.next = null;
+    }
+}
+
+class Solution {
+    // Function to detect start of loop using Floyd’s cycle detection
+    detectCycle(head) {
+        // Initialize slow and fast pointers
+        let slow = head;
+        let fast = head;
+
+        // Traverse while fast and fast.next are not null
+        while (fast &amp;&amp; fast.next) {
+            // Move slow one step
+            slow = slow.next;
+
+            // Move fast two steps
+            fast = fast.next.next;
+
+            // If they meet, cycle exists
+            if (slow === fast) {
+                // Reset slow to head
+                slow = head;
+
+                // Move both one step until they meet again
+                while (slow !== fast) {
+                    slow = slow.next;
+                    fast = fast.next;
+                }
+
+                // Return the starting node of the cycle
+                return slow;
+            }
+        }
+
+        // No cycle found
+        return null;
+    }
+}
+
+// Driver code
+let head = new ListNode(3);
+head.next = new ListNode(2);
+head.next.next = new ListNode(0);
+head.next.next.next = new ListNode(-4);
+
+// Create cycle: last node connects to node with value 2
+head.next.next.next.next = head.next;
+
+let obj = new Solution();
+let result = obj.detectCycle(head);
+
+if (result)
+    console.log("Cycle starts at node with value:", result.val);
+else
+    console.log("No cycle found.");
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+</p><p><strong>Time Complexity:</strong> O(N) where N is the number of nodes in the linked list.
+In the worst case, we traverse the entire list once with the slow and fast pointers, and then again to find the entry point of the loop.</p>
+<p><strong>Space Complexity:</strong> O(1) constant extra space.
+No additional data structures are used, only two pointers.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

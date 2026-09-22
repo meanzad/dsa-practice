@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Sum of first N Natural Numbers</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Sum of first N Natural Numbers</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/sum-of-first-n-natural-numbers/</code></div>
+  <p><strong>Problem Statement: </strong>Given a number ‘N’, find out the sum of the first N natural numbers .</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p><strong>Input:</strong> N=5
+<strong>Output:</strong> 15
+<strong>Explanation:</strong> 1+2+3+4+5=15<br/>
+<strong>Input:</strong> N=6
+<strong>Output:</strong> 21
+<strong>Explanation:</strong> 1+2+3+4+5+6=15</p></pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Don’t jump directly to the solution, try it out yourself first. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Brute Force Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+The most straightforward way to find the sum of the first N natural numbers is to iterate from 1 to N and keep adding each number to a running total. This approach is beginner-friendly and easy to understand because it directly mimics the problem definition. However, it is less efficient than the formula-based approach since it requires looping through all numbers, which means more time complexity when N is large.
+
+
+
+<ul> <li>Initialize a variable to store the sum as 0.</li> <li>Start a loop from 1 and go up to the given number.</li> <li>In each iteration, add the current number to the sum.</li> <li>After the loop finishes, the sum variable will hold the result.</li> <li>Return or print the sum.</li> </ul>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find sum of first N natural numbers using loop
+    int sumOfNaturalNumbers(int N) {
+        // Initialize sum to 0
+        int sum = 0;
+
+        // Loop from 1 to N
+        for (int i = 1; i &lt;= N; i++) {
+            // Add current number to sum
+            sum += i;
+        }
+
+        // Return the computed sum
+        return sum;
+    }
+};
+
+// Driver code
+int main() {
+    // Create object of Solution class
+    Solution obj;
+
+    // Input value for N
+    int N;
+    cin &gt;&gt; N;
+
+    // Call the function and store the result
+    int result = obj.sumOfNaturalNumbers(N);
+
+    // Print the result
+    cout &lt;&lt; result &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import.java.util.*;
+class Solution {
+    // Function to find sum of first N natural numbers using loop
+    public int sumOfNaturalNumbers(int N) {
+        // Initialize sum to 0
+        int sum = 0;
+
+        // Loop from 1 to N
+        for (int i = 1; i &lt;= N; i++) {
+            // Add current number to sum
+            sum += i;
+        }
+
+        // Return the computed sum
+        return sum;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Create object of Solution class
+        Solution obj = new Solution();
+
+        // Input value for N
+        java.util.Scanner sc = new java.util.Scanner(System.in);
+        int N = sc.nextInt();
+
+        // Call the function and store the result
+        int result = obj.sumOfNaturalNumbers(N);
+
+        // Print the result
+        System.out.println(result);
+
+        sc.close();
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to find sum of first N natural numbers using loop
+    def sumOfNaturalNumbers(self, N):
+        # Initialize sum to 0
+        total = 0
+        
+        # Loop from 1 to N
+        for i in range(1, N + 1):
+            # Add current number to sum
+            total += i
+        
+        # Return the computed sum
+        return total
+
+# Driver code
+if __name__ == "__main__":
+    # Create object of Solution class
+    obj = Solution()
+    
+    # Input value for N
+    N = int(input())
+    
+    # Call the function and store the result
+    result = obj.sumOfNaturalNumbers(N)
+    
+    # Print the result
+    print(result)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find sum of first N natural numbers using loop
+    sumOfNaturalNumbers(N) {
+        // Initialize sum to 0
+        let sum = 0;
+
+        // Loop from 1 to N
+        for (let i = 1; i &lt;= N; i++) {
+            // Add current number to sum
+            sum += i;
+        }
+
+        // Return the computed sum
+        return sum;
+    }
+}
+
+// Driver code
+const obj = new Solution();
+
+// Input value for N
+const fs = require('fs');
+const N = parseInt(fs.readFileSync(0, 'utf-8').trim());
+
+// Call the function and store the result
+const result = obj.sumOfNaturalNumbers(N);
+
+// Print the result
+console.log(result);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O(N),We iterate from 1 to N once, performing a constant-time addition operation in each iteration, resulting in linear time complexity.</p> <p><strong>Space Complexity:</strong> O(1),We only use a few variables to store the sum and loop counter, so the space usage remains constant regardless of N.</p>
+</details>
+</div>
+</details>
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Using Formula
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+We can use the formula for the sum of N numbers, i.e N(N+1)/2.
+
+<ul><li>Take a variable sum.</li><li>Initialize it with <strong>N(N+1)/2, </strong>where N is a given number.</li></ul>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find sum of first N natural numbers using formula
+    int sumOfNaturalNumbers(int N) {
+        // Apply formula directly
+        return (N * (N + 1)) / 2;
+    }
+};
+
+// Driver code
+int main() {
+    Solution obj;
+    int N;
+    cin &gt;&gt; N;
+    cout &lt;&lt; obj.sumOfNaturalNumbers(N) &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import.java.util.*;
+class Solution {
+    // Function to find sum of first N natural numbers using formula
+    public int sumOfNaturalNumbers(int N) {
+        // Apply formula directly
+        return (N * (N + 1)) / 2;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Solution obj = new Solution();
+        java.util.Scanner sc = new java.util.Scanner(System.in);
+        int N = sc.nextInt();
+        System.out.println(obj.sumOfNaturalNumbers(N));
+        sc.close();
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to find sum of first N natural numbers using formula
+    def sumOfNaturalNumbers(self, N):
+        # Apply formula directly
+        return (N * (N + 1)) // 2
+
+# Driver code
+if __name__ == "__main__":
+    obj = Solution()
+    N = int(input())
+    print(obj.sumOfNaturalNumbers(N))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find sum of first N natural numbers using formula
+    sumOfNaturalNumbers(N) {
+        // Apply formula directly
+        return (N * (N + 1)) / 2;
+    }
+}
+
+// Driver code
+const obj = new Solution();
+const fs = require('fs');
+const N = parseInt(fs.readFileSync(0, 'utf-8').trim());
+console.log(obj.sumOfNaturalNumbers(N));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O(1)</p>
+
+
+<p><strong>Space Complexity:</strong> O(1)</p>
+</details>
+</div>
+</details>
+
+</div>
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Recursive Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+Instead of looping, we can solve the problem using recursion by defining the sum of the first N natural numbers as:
+<br/><br/>
+sum(N) = N + sum(N-1), with the base case sum(1) = 1.
+
+<br/><br/>
+<strong>Recursive way of calculating the sum of first N Natural Numbers:</strong>
+
+
+
+<ul>
+<li>Define a recursive function to calculate the sum of natural numbers.</li>
+<li>If the input is the smallest natural number, return it directly as the base case.</li>
+<li>Otherwise, add the current number to the result of calling the same function with the previous number.</li>
+<li>Repeat this process until the base case is reached.</li>
+<li>The results from each call combine to give the final sum.</li>
+</ul>
+
+
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/f610decc30a9d02b.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/59aad633c9addb08.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/f610decc30a9d02b.png"/><img alt="Image 2" loading="lazy" src="../assets/img/59aad633c9addb08.png"/></div></div>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Recursive function to find sum of first N natural numbers
+    int sumOfNaturalNumbers(int N) {
+        // Base case: if N is 1, return 1
+        if (N == 1) {
+            return 1;
+        }
+        // Recursive case: current number + sum of previous numbers
+        return N + sumOfNaturalNumbers(N - 1);
+    }
+};
+
+// Driver code
+int main() {
+    Solution obj;
+    int N;
+    cin &gt;&gt; N;
+    cout &lt;&lt; obj.sumOfNaturalNumbers(N) &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // Recursive function to find sum of first N natural numbers
+    public int sumOfNaturalNumbers(int N) {
+        // Base case: if N is 1, return 1
+        if (N == 1) {
+            return 1;
+        }
+        // Recursive case: current number + sum of previous numbers
+        return N + sumOfNaturalNumbers(N - 1);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Solution obj = new Solution();
+        java.util.Scanner sc = new java.util.Scanner(System.in);
+        int N = sc.nextInt();
+        System.out.println(obj.sumOfNaturalNumbers(N));
+        sc.close();
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Recursive function to find sum of first N natural numbers
+    def sumOfNaturalNumbers(self, N):
+        # Base case: if N is 1, return 1
+        if N == 1:
+            return 1
+        # Recursive case: current number + sum of previous numbers
+        return N + self.sumOfNaturalNumbers(N - 1)
+
+# Driver code
+if __name__ == "__main__":
+    obj = Solution()
+    N = int(input())
+    print(obj.sumOfNaturalNumbers(N))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Recursive function to find sum of first N natural numbers
+    sumOfNaturalNumbers(N) {
+        // Base case: if N is 1, return 1
+        if (N === 1) {
+            return 1;
+        }
+        // Recursive case: current number + sum of previous numbers
+        return N + this.sumOfNaturalNumbers(N - 1);
+    }
+}
+
+// Driver code
+const obj = new Solution();
+const fs = require('fs');
+const N = parseInt(fs.readFileSync(0, 'utf-8').trim());
+console.log(obj.sumOfNaturalNumbers(N));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O(N),The function is called N times, with each call performing O(1) work.</p> <p><strong>Space Complexity:</strong> O(N),Due to recursive function calls being stored on the call stack, which grows linearly with N.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</div>
+</article>
+<script src="../article.js"></script>
+</body></html>

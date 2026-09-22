@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Print all Divisors of a given Number</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Print all Divisors of a given Number</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/print-all-divisors-of-a-given-number/</code></div>
+  <p><strong>Problem Statement: </strong>Given an integer N, return all divisors of N. <br/>A divisor of an integer N is a positive integer that divides N without leaving a remainder. In other words, if N is divisible by another integer without any remainder, then that integer is considered a divisor of N.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: N = 36</span>
+<span>Output: [1, 2, 3, 4, 6, 9, 12, 18, 36]  </span>
+<span>Explanation: The divisors of 36 are 1, 2, 3, 4, 6, 9, 12, 18, 36.</span>
+<p></p>
+<span>Input: N = 12</span>
+<span>Output: [1, 2, 3, 4, 6, 12]</span>
+<span>Explanation: The divisors of 12 are 1, 2, 3, 4, 6, 12.</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/divisors-of-a-number" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better.
+            It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                 Brute Force Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+The brute force approach to find all the divisors of a number is to iterate through every number from 1 to N and check whether it is a divisor or not. We can store all the divisors and return the list of divisors after iteration.<p></p>
+<p></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find all divisors
+    vector&lt;int&gt; getDivisors(int N) {
+        // Create a vector to store divisors
+        vector&lt;int&gt; res;
+
+        // Loop from 1 to N
+        for (int i = 1; i &lt;= N; i++) {
+            // Check if i is a divisor of N
+            if (N % i == 0) {
+                // Add i to the result
+                res.push_back(i);
+            }
+        }
+        // Return the list of divisors
+        return res;
+    }
+};
+
+int main() {
+    // Create object of Solution class
+    Solution sol;
+
+    // Input number
+    int N = 36;
+
+    // Call the function to get divisors
+    vector&lt;int&gt; result = sol.getDivisors(N);
+
+    // Print the result
+    cout &lt;&lt; "Divisors of " &lt;&lt; N &lt;&lt; ": ";
+    for (int val : result) {
+        cout &lt;&lt; val &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to find all divisors
+    public List&lt;Integer&gt; getDivisors(int N) {
+        // Create list to store divisors
+        List&lt;Integer&gt; res = new ArrayList&lt;&gt;();
+
+        // Loop from 1 to N
+        for (int i = 1; i &lt;= N; i++) {
+            // Check if i is a divisor of N
+            if (N % i == 0) {
+                // Add i to the result
+                res.add(i);
+            }
+        }
+        // Return the list of divisors
+        return res;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Create object of Solution class
+        Solution sol = new Solution();
+
+        // Input number
+        int N = 36;
+
+        // Call the function to get divisors
+        List&lt;Integer&gt; result = sol.getDivisors(N);
+
+        // Print the result
+        System.out.print("Divisors of " + N + ": ");
+        for (int val : result) {
+            System.out.print(val + " ");
+        }
+        System.out.println();
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to find all divisors
+    def getDivisors(self, N):
+        # Create list to store divisors
+        res = []
+
+        # Loop from 1 to N
+        for i in range(1, N + 1):
+            # Check if i is a divisor of N
+            if N % i == 0:
+                # Add i to result
+                res.append(i)
+
+        # Return the list of divisors
+        return res
+
+# Create object of Solution class
+sol = Solution()
+
+# Input number
+N = 36
+
+# Call the function to get divisors
+result = sol.getDivisors(N)
+
+# Print the result
+print("Divisors of", N, ":", *result)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find all divisors
+    getDivisors(N) {
+        // Create array to store divisors
+        let res = [];
+
+        // Loop from 1 to N
+        for (let i = 1; i &lt;= N; i++) {
+            // Check if i is a divisor of N
+            if (N % i === 0) {
+                // Add i to result
+                res.push(i);
+            }
+        }
+
+        // Return the list of divisors
+        return res;
+    }
+}
+
+// Create object of Solution class
+const sol = new Solution();
+
+// Input number
+const N = 36;
+
+// Call the function to get divisors
+const result = sol.getDivisors(N);
+
+// Print the result
+console.log("Divisors of", N, ":", result.join(" "));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N)</strong>, we check for every number from 1 to N.<br/>
+<strong>Space Complexity: O(N)</strong>, extra space used for storing divisors.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                Optimal Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+We can optimise the previous approach by using the property that for any non-negative integer n, if d is a divisor of n then n/d is also a divisor of n. This property is symmetric about the square root of N. Thus, by traversing just the first half we can avoid redundant iteration and computations improving the efficiency of the algorithm.
+
+<p><img height="457" loading="lazy" src="../assets/img/f1098817dab87ae3.png" width="481"/></p>
+<p></p>
+Iterate from 1 to sqrt(N) and for every divisor found, if N/divisor is distinct, add that to the list of divisors as well.
+                    </div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to get all divisors
+    vector&lt;int&gt; getDivisors(int N) {
+        // Create a vector to store divisors
+        vector&lt;int&gt; res;
+
+        // Loop from 1 to square root of N
+        for (int i = 1; i * i &lt;= N; i++) {
+            // Check if i divides N
+            if (N % i == 0) {
+                // Add i to the result
+                res.push_back(i);
+
+                // If N / i is different from i, add N / i too
+                if (i != N / i) {
+                    res.push_back(N / i);
+                }
+            }
+        }
+
+        // Return the list of divisors
+        return res;
+    }
+};
+
+int main() {
+    // Create object of Solution class
+    Solution sol;
+
+    // Input number
+    int N = 36;
+
+    // Get divisors
+    vector&lt;int&gt; result = sol.getDivisors(N);
+
+    // Print the result
+    cout &lt;&lt; "Divisors of " &lt;&lt; N &lt;&lt; ": ";
+    for (int val : result) {
+        cout &lt;&lt; val &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to get all divisors
+    public List&lt;Integer&gt; getDivisors(int N) {
+        // Create a list to store divisors
+        List&lt;Integer&gt; res = new ArrayList&lt;&gt;();
+
+        // Loop from 1 to square root of N
+        for (int i = 1; i * i &lt;= N; i++) {
+            // Check if i divides N
+            if (N % i == 0) {
+                // Add i to result
+                res.add(i);
+
+                // If N / i is different from i, add N / i too
+                if (i != N / i) {
+                    res.add(N / i);
+                }
+            }
+        }
+
+        // Return the list of divisors
+        return res;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Create object of Solution class
+        Solution sol = new Solution();
+
+        // Input number
+        int N = 36;
+
+        // Get divisors
+        List&lt;Integer&gt; result = sol.getDivisors(N);
+
+        // Print the result
+        System.out.print("Divisors of " + N + ": ");
+        for (int val : result) {
+            System.out.print(val + " ");
+        }
+        System.out.println();
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">import math
+
+class Solution:
+    # Function to get all divisors
+    def getDivisors(self, N):
+        # Create list to store divisors
+        res = []
+
+        # Loop from 1 to square root of N
+        for i in range(1, int(math.isqrt(N)) + 1):
+            # Check if i divides N
+            if N % i == 0:
+                # Add i to result
+                res.append(i)
+
+                # If N // i is not the same, add that too
+                if i != N // i:
+                    res.append(N // i)
+
+        # Return the list of divisors
+        return res
+
+# Create object of Solution class
+sol = Solution()
+
+# Input number
+N = 36
+
+# Get divisors
+result = sol.getDivisors(N)
+
+# Print the result
+print("Divisors of", N, ":", *result)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to get all divisors
+    getDivisors(N) {
+        // Create array to store divisors
+        let res = [];
+
+        // Loop from 1 to square root of N
+        for (let i = 1; i * i &lt;= N; i++) {
+            // Check if i divides N
+            if (N % i === 0) {
+                // Add i to result
+                res.push(i);
+
+                // If N / i is different, add that too
+                if (i !== N / i) {
+                    res.push(N / i);
+                }
+            }
+        }
+
+        // Return the list of divisors
+        return res;
+    }
+}
+
+// Create object of Solution class
+const sol = new Solution();
+
+// Input number
+const N = 36;
+
+// Get divisors
+const result = sol.getDivisors(N);
+
+// Print the result
+console.log("Divisors of", N, ":", result.join(" "));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(sqrt(N))</strong>, we check for every number between 1 and sqaure root of N.<br/>
+<strong>Space Complexity: O(2*sqrt(N))</strong>, extra space used for storing divisors.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Power Set: Print all the possible subsequences of the String</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Power Set: Print all the possible subsequences of the String</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/power-set-print-all-the-possible-subsequences-of-the-string/</code></div>
+  <p><strong>Problem Description: </strong>Given a string, find all the possible subsequences of the string.
+</p>
+
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: str = "abc"</span>
+<span>Output: [a, ab, abc, ac, b, bc, c]</span>
+<span>Explanation: Given string has 7 subsequences.</span>
+<p></p>
+<span>Input: str = "aa"</span>
+<span>Output: [a, a, aa] </span>
+<span>Explanation: Given string has 3 subsequences.</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+
+
+            It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                   Approach - 1
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+Each subsequence corresponds to a binary number where the bits represent whether to include (1) or exclude (0) a character at that position.
+
+<ul>
+<li>There are 2^n subsequences for a string of length n.</li>
+<li>Iterate from 0 to 2^n - 1. For each number, check each bit.</li>
+<li>If the bit is set, include the corresponding character. Else, exclude it.</li>
+<li>Print the subsequence formed by the included characters.</li>
+</ul>
+<p><img height="457" loading="lazy" src="../assets/img/cd7d492004e148c7.png" width="700"/></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Solution class to generate all subsequences using bit manipulation
+class Solution {
+public:
+    // Function to return all subsequences of string s
+    vector&lt;string&gt; getSubsequences(string s) {
+        // Length of input string
+        int n = s.size();
+
+        // Total subsequences = 2^n
+        int total = 1 &lt;&lt; n;
+
+        // Vector to store all subsequences
+        vector&lt;string&gt; subsequences;
+
+        // Iterate over all bit masks from 0 to 2^n - 1
+        for (int mask = 0; mask &lt; total; mask++) {
+            // Temporary subsequence string
+            string subseq = "";
+
+            // Check each bit position in mask
+            for (int i = 0; i &lt; n; i++) {
+                // If i-th bit of mask is set, include s[i]
+                if (mask &amp; (1 &lt;&lt; i)) {
+                    subseq += s[i];
+                }
+            }
+
+            // Store the formed subsequence
+            subsequences.push_back(subseq);
+        }
+
+        // Return all generated subsequences
+        return subsequences;
+    }
+};
+
+int main() {
+    // Input string
+    string s = "abc";
+
+    // Create Solution object
+    Solution sol;
+
+    // Get all subsequences
+    vector&lt;string&gt; subsequences = sol.getSubsequences(s);
+
+    // Print all subsequences
+    for (auto &amp;subseq : subsequences) {
+        cout &lt;&lt; "\"" &lt;&lt; subseq &lt;&lt; "\"" &lt;&lt; endl;
+    }
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Solution class to generate all subsequences using bit manipulation
+class Solution {
+    // Function to return all subsequences of string s
+    public List&lt;String&gt; getSubsequences(String s) {
+        // Length of input string
+        int n = s.length();
+
+        // Total subsequences = 2^n
+        int total = 1 &lt;&lt; n;
+
+        // List to store all subsequences
+        List&lt;String&gt; subsequences = new ArrayList&lt;&gt;();
+
+        // Iterate over all bit masks from 0 to 2^n - 1
+        for (int mask = 0; mask &lt; total; mask++) {
+            // Temporary subsequence builder
+            StringBuilder subseq = new StringBuilder();
+
+            // Check each bit position in mask
+            for (int i = 0; i &lt; n; i++) {
+                // If i-th bit of mask is set, include s.charAt(i)
+                if ((mask &amp; (1 &lt;&lt; i)) != 0) {
+                    subseq.append(s.charAt(i));
+                }
+            }
+
+            // Store the formed subsequence as string
+            subsequences.add(subseq.toString());
+        }
+
+        // Return all generated subsequences
+        return subsequences;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Input string
+        String s = "abc";
+
+        // Create Solution object
+        Solution sol = new Solution();
+
+        // Get all subsequences
+        List&lt;String&gt; subsequences = sol.getSubsequences(s);
+
+        // Print all subsequences
+        for (String subseq : subsequences) {
+            System.out.println("\"" + subseq + "\"");
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Solution class to generate all subsequences using bit manipulation
+class Solution:
+    # Function to return all subsequences of string s
+    def getSubsequences(self, s: str) -&gt; list[str]:
+        # Length of input string
+        n = len(s)
+
+        # Total subsequences = 2^n
+        total = 1 &lt;&lt; n
+
+        # List to store all subsequences
+        subsequences = []
+
+        # Iterate over all bit masks from 0 to 2^n - 1
+        for mask in range(total):
+            # Temporary subsequence list
+            subseq = []
+
+            # Check each bit position in mask
+            for i in range(n):
+                # If i-th bit of mask is set, include s[i]
+                if mask &amp; (1 &lt;&lt; i):
+                    subseq.append(s[i])
+
+            # Store the formed subsequence as string
+            subsequences.append("".join(subseq))
+
+        # Return all generated subsequences
+        return subsequences
+
+if __name__ == "__main__":
+    # Input string
+    s = "abc"
+
+    # Create Solution object
+    sol = Solution()
+
+    # Get all subsequences
+    subsequences = sol.getSubsequences(s)
+
+    # Print all subsequences
+    for subseq in subsequences:
+        print(f'"{subseq}"')
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Solution class to generate all subsequences using bit manipulation
+class Solution {
+    // Function to return all subsequences of string s
+    getSubsequences(s) {
+        // Length of input string
+        const n = s.length;
+
+        // Total subsequences = 2^n
+        const total = 1 &lt;&lt; n;
+
+        // Array to store all subsequences
+        const subsequences = [];
+
+        // Iterate over all bit masks from 0 to 2^n - 1
+        for (let mask = 0; mask &lt; total; mask++) {
+            // Temporary subsequence array
+            const subseq = [];
+
+            // Check each bit position in mask
+            for (let i = 0; i &lt; n; i++) {
+                // If i-th bit of mask is set, include s[i]
+                if ((mask &amp; (1 &lt;&lt; i)) !== 0) {
+                    subseq.push(s[i]);
+                }
+            }
+
+            // Store the formed subsequence as string
+            subsequences.push(subseq.join(''));
+        }
+
+        // Return all generated subsequences
+        return subsequences;
+    }
+}
+
+// Driver code
+const s = "abc";
+
+// Create Solution object
+const sol = new Solution();
+
+// Get all subsequences
+const subsequences = sol.getSubsequences(s);
+
+// Print all subsequences
+subsequences.forEach(subseq =&gt; {
+    console.log(`"${subseq}"`);
+});
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(n * 2^n)</strong>, for each subsequence, we may check up to n bits to decide inclusion.<br/>
+<strong>Space Complexity: O(n * 2^n)</strong>, space used to store all possible subsequences.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                 Approach - 2
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+Use recursion to decide for each character whether to include it or not in the current subsequence. This forms a binary decision tree exploring all combinations.
+
+<ul>
+<li>Start with an empty subsequence. For each character, recursively make a decision.</li>
+<li>Either include it in the subsequence or exclude it from the subsequence.</li>
+<li>When you reach the end of the string, print the current subsequence.</li>
+</ul>
+<p><img height="457" loading="lazy" src="../assets/img/6430993962975fbc.png" width="700"/></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Solution class to generate all subsequences using recursion
+class Solution {
+public:
+    // Helper recursive function to generate subsequences
+    void helper(string &amp;s, int index, string &amp;current, vector&lt;string&gt; &amp;result) {
+        // Base case: If index reaches string length, add current subsequence to result
+        if (index == s.size()) {
+            result.push_back(current);
+            return;
+        }
+
+        // Exclude current character and recurse
+        helper(s, index + 1, current, result);
+
+        // Include current character and recurse
+        current.push_back(s[index]);
+        helper(s, index + 1, current, result);
+
+        // Backtrack: remove last character before returning to previous call
+        current.pop_back();
+    }
+
+    // Function to return all subsequences of string s
+    vector&lt;string&gt; getSubsequences(string s) {
+        // Vector to store all subsequences
+        vector&lt;string&gt; result;  
+        // Current subsequence being built
+        string current = "";    
+        helper(s, 0, current, result);
+        return result;
+    }
+};
+
+int main() {
+    // Input string
+    string s = "abc";
+
+    // Create Solution object
+    Solution sol;
+
+    // Get all subsequences
+    vector&lt;string&gt; subsequences = sol.getSubsequences(s);
+
+    // Print all subsequences
+    for (auto &amp;subseq : subsequences) {
+        cout &lt;&lt; "\"" &lt;&lt; subseq &lt;&lt; "\"" &lt;&lt; endl;
+    }
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Solution class to generate all subsequences using recursion
+class Solution {
+    // Helper recursive method to generate subsequences
+    private void helper(String s, int index, StringBuilder current, List&lt;String&gt; result) {
+        // Base case: if index reaches string length, add current subsequence to result
+        if (index == s.length()) {
+            result.add(current.toString());
+            return;
+        }
+
+        // Exclude current character and recurse
+        helper(s, index + 1, current, result);
+
+        // Include current character and recurse
+        current.append(s.charAt(index));
+        helper(s, index + 1, current, result);
+
+        // Backtrack by removing last character
+        current.deleteCharAt(current.length() - 1);
+    }
+
+    // Method to return all subsequences of string s
+    public List&lt;String&gt; getSubsequences(String s) {
+        // List to store all subsequences
+        List&lt;String&gt; result = new ArrayList&lt;&gt;();
+
+        // StringBuilder to store current subsequence
+        StringBuilder current = new StringBuilder();
+
+        // Start recursion from index 0
+        helper(s, 0, current, result);
+
+        // Return list of subsequences
+        return result;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Input string
+        String s = "abc";
+
+        // Create Solution object
+        Solution sol = new Solution();
+
+        // Get all subsequences
+        List&lt;String&gt; subsequences = sol.getSubsequences(s);
+
+        // Print all subsequences
+        for (String subseq : subsequences) {
+            System.out.println("\"" + subseq + "\"");
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Solution class to generate all subsequences using recursion
+class Solution:
+    # Helper recursive method to generate subsequences
+    def helper(self, s, index, current, result):
+        # Base case: if index reaches string length, add current subsequence to result
+        if index == len(s):
+            result.append("".join(current))
+            return
+
+        # Exclude current character and recurse
+        self.helper(s, index + 1, current, result)
+
+        # Include current character and recurse
+        current.append(s[index])
+        self.helper(s, index + 1, current, result)
+
+        # Backtrack by removing last character
+        current.pop()
+
+    # Method to return all subsequences of string s
+    def getSubsequences(self, s):
+        # List to store all subsequences
+        result = []
+
+        # List to store current subsequence characters
+        current = []
+
+        # Start recursion from index 0
+        self.helper(s, 0, current, result)
+
+        # Return list of subsequences
+        return result
+
+if __name__ == "__main__":
+    # Input string
+    s = "abc"
+
+    # Create Solution object
+    sol = Solution()
+
+    # Get all subsequences
+    subsequences = sol.getSubsequences(s)
+
+    # Print all subsequences
+    for subseq in subsequences:
+        print(f'"{subseq}"')
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Solution class to generate all subsequences using recursion
+class Solution {
+    // Helper recursive method to generate subsequences
+    helper(s, index, current, result) {
+        // Base case: if index reaches string length, add current subsequence to result
+        if (index === s.length) {
+            result.push(current.join(''));
+            return;
+        }
+
+        // Exclude current character and recurse
+        this.helper(s, index + 1, current, result);
+
+        // Include current character and recurse
+        current.push(s[index]);
+        this.helper(s, index + 1, current, result);
+
+        // Backtrack by removing last character
+        current.pop();
+    }
+
+    // Method to return all subsequences of string s
+    getSubsequences(s) {
+        // Array to store all subsequences
+        const result = [];
+
+        // Array to store current subsequence characters
+        const current = [];
+
+        // Start recursion from index 0
+        this.helper(s, 0, current, result);
+
+        // Return array of subsequences
+        return result;
+    }
+}
+
+// Driver code
+const s = "abc";
+
+// Create Solution object
+const sol = new Solution();
+
+// Get all subsequences
+const subsequences = sol.getSubsequences(s);
+
+// Print all subsequences
+subsequences.forEach(subseq =&gt; {
+    console.log(`"${subseq}"`);
+});
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(n * 2^n)</strong>, for each subsequence, we construct and print the entire subsequence.<br/>
+<strong>Space Complexity: O(n * 2^n)</strong>, space used to store all possible subsequences.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

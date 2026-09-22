@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Add two numbers represented as Linked Lists</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Add two numbers represented as Linked Lists</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/add-two-numbers-represented-as-linked-lists/</code></div>
+  <p><strong>Problem Statement: </strong>Add two numbers represented as Linked Lists.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input: num1 = 243, num2 = 564
+Output:sum = 807; L = [7,0,8]
+<p><img height="457" loading="lazy" src="../assets/img/ef1757c0e04de3ce.png" width="481"/></p>
+Explanation: Since the digits are stored in reverse order, reverse the numbers first to get the or original number and then add them as → 342 + 465 = 807. 
+
+Example 2:
+Input: l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
+Output: Result: [8,9,9,9,0,0,0,1]
+<p><img height="457" loading="lazy" src="../assets/img/4f8cf98e37fd6fee.png" width="481"/></p>
+Explanation: Since the digits are stored in reverse order, reverse the numbers first to get the original number and then add them as → 9999999 + 9999 = 8999001. Refer to the image below.
+</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/add-two-numbers-in-ll" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                Approach
+            </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Algorithm
+                    </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<ul>
+<li>Create a dummy node that will act as the starting point of the new linked list.</li>
+<li>Create a temporary pointer and set it to the dummy node.</li>
+<li>Start with a carry value of 0.</li>
+<li>Loop through both linked lists until you reach the end of both, or until there is no carry left.</li>
+<li>At each step, add the values of the current nodes and the carry.</li>
+<li>Update the carry by dividing the total by 10.</li>
+<li>Create a new node with the last digit of the total (total % 10) and attach it to the next of the temporary pointer, then move the temporary pointer forward.</li>
+<li>Move both list pointers to their next nodes.</li>
+<li>After the loop ends, return the next node of the dummy (this is the head of the result list).</li>
+<li>The dummy node is used to make the code easier. Without it, extra conditions would be needed to handle the first node.</li>
+</ul>
+</div>
+<p><img height="457" loading="lazy" src="../assets/img/bb65a4b807ce6a3a.png" width="481"/></p>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+        
+// Definition for singly-linked list.
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+       //Initialize a dummy node as a new node
+        ListNode *dummy = new ListNode(); 
+        ListNode *temp = dummy; 
+        //Carry will be carried to the next new node created
+        int carry = 0;
+        //Iterate till the end of both the lists
+        while( (l1 != NULL || l2 != NULL) || carry) {
+            int sum = 0; 
+            if(l1 != NULL) {
+                sum += l1-&gt;val; 
+                l1 = l1 -&gt; next; 
+            }
+            //Repeat the same process for l2 as l1
+            if(l2 != NULL) {
+                sum += l2 -&gt; val; 
+                l2 = l2 -&gt; next; 
+            }
+            //Carry gets added to sum in the node (carry=sum/10)
+            sum += carry; 
+            carry = sum / 10; 
+            ListNode *node = new ListNode(sum % 10); 
+            temp -&gt; next = node; 
+            temp = temp -&gt; next; 
+        }
+        return dummy -&gt; next; 
+    }
+};
+ListNode* createList(vector<int> arr) {
+    ListNode *head = new ListNode(arr[0]);
+    ListNode *temp = head;
+    for (int i = 1; i &lt; arr.size(); i++) {
+        temp-&gt;next = new ListNode(arr[i]);
+        temp = temp-&gt;next;
+    }
+    return head;
+}
+
+// Helper to print a linked list
+void printList(ListNode* head) {
+    while (head) {
+        cout &lt;&lt; head-&gt;val;
+        if (head-&gt;next) cout &lt;&lt; " -&gt; ";
+        head = head-&gt;next;
+    }
+    cout &lt;&lt; endl;
+}
+
+int main() {
+    vector<int> num1 = {2, 4, 3}; // represents 342
+    vector<int> num2 = {5, 6, 4}; // represents 465
+    ListNode* l1 = createList(num1);
+    ListNode* l2 = createList(num2);
+
+    Solution sol;
+    ListNode* result = sol.addTwoNumbers(l1, l2);
+    printList(result); // Output: 7 -&gt; 0 -&gt; 8
+    return 0;
+}
+</int></int></int></code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Definition for singly-linked list.
+public class ListNode {
+    int val;
+    ListNode next;
+    ListNode() {}
+    ListNode(int val) { this.val = val; }
+    ListNode(int val, ListNode next) { 
+     this.val = val; 
+     this.next = next; 
+    }
+}
+
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+       //Initialize a dummy node as a new node
+        ListNode dummy = new ListNode(); 
+        ListNode temp = dummy; 
+        int carry = 0;
+        //Iterate till the end of both the lists
+        while (l1 != null || l2 != null || carry != 0) {
+            int sum = 0;
+
+            if (l1 != null) {
+                sum += l1.val;
+                l1 = l1.next;
+            }
+             //Repeat the same process for l2 as l1
+            if (l2 != null) {
+                sum += l2.val;
+                l2 = l2.next;
+            }
+            //Carry gets added to sum in the node (carry=sum/10)
+            sum += carry;
+            carry = sum / 10;
+
+            ListNode node = new ListNode(sum % 10);
+            temp.next = node;
+            temp = temp.next;
+        }
+
+        return dummy.next;
+    }
+};
+public class Main {
+    static ListNode createList(int[] arr) {
+        ListNode head = new ListNode(arr[0]);
+        ListNode temp = head;
+        for (int i = 1; i &lt; arr.length; i++) {
+            temp.next = new ListNode(arr[i]);
+            temp = temp.next;
+        }
+        return head;
+    }
+
+    static void printList(ListNode head) {
+        while (head != null) {
+            System.out.print(head.val);
+            if (head.next != null) System.out.print(" -&gt; ");
+            head = head.next;
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        int[] num1 = {2, 4, 3}; // represents 342
+        int[] num2 = {5, 6, 4}; // represents 465
+        ListNode l1 = createList(num1);
+        ListNode l2 = createList(num2);
+
+        Solution sol = new Solution();
+        ListNode result = sol.addTwoNumbers(l1, l2);
+        printList(result); // Output: 7 -&gt; 0 -&gt; 8
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Definition for singly-linked list node
+class ListNode:
+    def __init__(self, val=0, next=None):
+        # Value stored in the node
+        self.val = val    
+        # Pointer to the next node
+        self.next = next  
+
+class Solution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -&gt; ListNode:
+        # Create a dummy node to simplify handling the result list
+        dummy = ListNode()
+        # Pointer to the current node in the result list
+        temp = dummy  
+        # Carry from the previous digit addition
+        carry = 0     
+
+        # Loop until both lists are fully traversed and no carry remains
+        while (l1 is not None or l2 is not None) or carry:
+            sum_val = 0  # Holds the sum of current digits and carry
+
+            # Add l1's value to sum if l1 exists
+            if l1 is not None:
+                sum_val += l1.val
+                l1 = l1.next
+
+            # Add l2's value to sum if l2 exists
+            if l2 is not None:
+                sum_val += l2.val
+                l2 = l2.next
+
+            # Add any carry from the previous step
+            sum_val += carry
+
+            # Update carry for the next addition
+            carry = sum_val // 10
+
+            # Create a new node with the digit value (sum % 10)
+            node = ListNode(sum_val % 10)
+            # Append the new node to the result list
+            temp.next = node  
+            # Move temp forward
+            temp = temp.next  
+
+        # Return the result list, skipping the dummy node
+        return dummy.next
+def create_list(arr):
+    head = ListNode(arr[0])
+    temp = head
+    for i in arr[1:]:
+        temp.next = ListNode(i)
+        temp = temp.next
+    return head
+
+def print_list(head):
+    while head:
+        print(head.val, end=" -&gt; " if head.next else "\n")
+        head = head.next
+
+if __name__ == "__main__":
+    num1 = [2, 4, 3]  # represents 342
+    num2 = [5, 6, 4]  # represents 465
+    l1 = create_list(num1)
+    l2 = create_list(num2)
+
+    sol = Solution()
+    result = sol.addTwoNumbers(l1, l2)
+    print_list(result)  # Output: 7 -&gt; 0 -&gt; 8
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Definition for singly-linked list node
+class ListNode {
+    constructor(val = 0, next = null) {
+        this.val = val;   
+        this.next = next;
+    }
+}
+
+class Solution {
+    /**
+     * Adds two numbers represented by linked lists.
+     * @param {ListNode} l1 - Head of the first linked list
+     * @param {ListNode} l2 - Head of the second linked list
+     * @returns {ListNode} Head of the resulting linked list
+     */
+    addTwoNumbers(l1, l2) {
+        // Create a dummy node to simplify result list handling
+        let dummy = new ListNode();
+        // Pointer to the current node in the result list
+        let temp = dummy; 
+        // Carry from the previous addition
+        let carry = 0;    
+
+        // Loop until both lists are exhausted and carry is 0
+        while (l1 !== null || l2 !== null || carry) {
+        // Holds sum of current digits + carry
+            let sum = 0; 
+
+            // Add value from l1 if it exists
+            if (l1 !== null) {
+                sum += l1.val;
+                l1 = l1.next;
+            }
+
+            // Add value from l2 if it exists
+            if (l2 !== null) {
+                sum += l2.val;
+                l2 = l2.next;
+            }
+
+            // Add carry from previous step
+            sum += carry;
+
+            // Update carry for next iteration
+            carry = Math.floor(sum / 10);
+
+            // Create new node with digit value (sum % 10)
+            temp.next = new ListNode(sum % 10);
+
+            // Move temp forward
+            temp = temp.next;
+        }
+
+        // Return the head of the result list (skipping dummy)
+        return dummy.next;
+    }
+}
+function createList(arr) {
+    let head = new ListNode(arr[0]);
+    let temp = head;
+    for (let i = 1; i &lt; arr.length; i++) {
+        temp.next = new ListNode(arr[i]);
+        temp = temp.next;
+    }
+    return head;
+}
+
+function printList(head) {
+    let res = [];
+    while (head) {
+        res.push(head.val);
+        head = head.next;
+    }
+    console.log(res.join(" -&gt; "));
+}
+
+// Example usage:
+let num1 = [2, 4, 3]; // represents 342
+let num2 = [5, 6, 4]; // represents 465
+let l1 = createList(num1);
+let l2 = createList(num2);
+
+let sol = new Solution();
+let result = sol.addTwoNumbers(l1, l2);
+printList(result); // Output: 7 -&gt; 0 -&gt; 8
+
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Complexity Analysis
+                    </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+                    Time Complexity: O(max(m,n)). Assume that m and n represent the length of l1 and l2 respectively, the algorithm above iterates at most max(m,n) times.
+                    </p><p>Space Complexity: O(max(m,n)). The length of the new list is at most max(m,n)+1.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

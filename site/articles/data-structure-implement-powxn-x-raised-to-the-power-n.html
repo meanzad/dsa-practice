@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Implement Pow(x,n) | X raised to the power N</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Implement Pow(x,n) | X raised to the power N</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/implement-powxn-x-raised-to-the-power-n/</code></div>
+  <p><strong>Problem Statement: </strong>
+Implement the power function pow(x, n) , which calculates the x raised to n i.e. x<sup>n</sup>.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>  
+<strong>Input:</strong> x = 2.0000, n = 10  
+<strong>Output:</strong> 1024.0000  
+<strong>Explanation:</strong> The answer is calculated as 2^10, which equals 1024.
+
+<strong>Example 2:</strong>  
+<strong>Input:</strong> x = 2.0000, n = -2  
+<strong>Output:</strong> 0.2500  
+<strong>Explanation:</strong> The answer is calculated as 2^(-2), which is equal to 1/4 = 0.25.</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/pow(x,n)" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Brute Force
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Initialize the result variable, <code>ans</code>, to 1. This serves as the base case where any number raised to the power of 0 is 1.</li>
+<li>Check if the exponent <code>n</code> is less than 0:
+    <ul>
+<li>If true, invert <code>x</code> by setting <code>x = 1/x</code> and make <code>n</code> positive by setting <code>n = -n</code>. This transformation allows handling of negative exponents.</li>
+</ul>
+</li>
+<li>Use a loop to iterate from 0 to <code>n</code> (converted to an integer). In each iteration, multiply <code>ans</code> by <code>x</code>. This effectively computes <code>x</code> raised to the power of <code>n</code>.</li>
+<li>Return the result stored in <code>ans</code>, which now contains the value of <code>x^n</code>.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/578d41902b62101c.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/c50da34286cf110b.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/5dcb7049a768f59f.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/b57f6df90aed1622.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/7e79a9404b7355eb.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/578d41902b62101c.png"/><img alt="Image 2" loading="lazy" src="../assets/img/c50da34286cf110b.png"/><img alt="Image 3" loading="lazy" src="../assets/img/5dcb7049a768f59f.png"/><img alt="Image 4" loading="lazy" src="../assets/img/b57f6df90aed1622.png"/><img alt="Image 5" loading="lazy" src="../assets/img/7e79a9404b7355eb.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    double myPow(double x, int n) {
+        // Base case: any number to the power of 0 is 1
+        if (n == 0 || x == 1.0) return 1; 
+        
+        long long temp = n; // to avoid integer overflow
+        
+        // Handle negative exponents
+        if (n &lt; 0) { 
+            x = 1 / x;
+            temp = -1*1LL*n;
+        }
+
+        double ans = 1;
+
+        for (long long i = 0; i &lt; temp; i++) {
+            // Multiply ans by x for n times
+            ans *= x; 
+        }
+        return ans;
+    }
+};
+
+int main() {
+    Solution sol;
+    // Output: 1024.0000
+    printf("%.4f\n", sol.myPow(2.0000, 10));
+    // Output: 0.2500 
+    printf("%.4f\n", sol.myPow(2.0000, -2)); 
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    public double myPow(double x, int n) {
+        // Base case: any number to the power of 0 is 1
+        if (n == 0 || x == 1.0) return 1; 
+        
+        long temp = n; // to avoid integer overflow
+        
+        // Handle negative exponents
+        if (n &lt; 0) {
+            x = 1 / x;
+            temp = -1L * n;
+        }
+
+        double ans = 1;
+
+        for (long i = 0; i &lt; temp; i++) {
+            // Multiply ans by x for n times
+            ans *= x; 
+        }
+        return ans;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        // Output: 1024.0000
+        System.out.printf("%.4f\n", sol.myPow(2.0000, 10));
+        // Output: 0.2500 
+        System.out.printf("%.4f\n", sol.myPow(2.0000, -2));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    def myPow(self, x, n):
+        # Base case: any number to the power of 0 is 1
+        if n == 0 or x == 1.0:
+            return 1
+        
+        temp = n  # to avoid integer overflow
+        
+        # Handle negative exponents
+        if n &lt; 0:
+            x = 1 / x
+            temp = -1 * n
+
+        ans = 1
+
+        for i in range(temp):
+            # Multiply ans by x for n times
+            ans *= x 
+        return ans
+
+def main():
+    sol = Solution()
+    # Output: 1024.0000
+    print(f"{sol.myPow(2.0000, 10):.4f}")
+    # Output: 0.2500 
+    print(f"{sol.myPow(2.0000, -2):.4f}")
+
+if __name__ == "__main__":
+    main()
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    myPow(x, n) {
+        // Base case: any number to the power of 0 is 1
+        if (n === 0 || x === 1.0) return 1;
+        
+        let temp = n; // to avoid integer overflow
+        
+        // Handle negative exponents
+        if (n &lt; 0) {
+            x = 1 / x;
+            temp = -n;
+        }
+
+        let ans = 1;
+
+        for (let i = 0; i &lt; temp; i++) {
+            // Multiply ans by x for n times
+            ans *= x;
+        }
+        return ans;
+    }
+}
+
+function main() {
+    const sol = new Solution();
+    // Output: 1024.0000
+    console.log(sol.myPow(2.0000, 10).toFixed(4));
+    // Output: 0.2500
+    console.log(sol.myPow(2.0000, -2).toFixed(4));
+}
+
+main();
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(n)</strong>, where n is the absolute value of the exponent. This is because we multiply the base x, n times.<br/><br/>
+<strong>Space Complexity: O(1)</strong>, as we are using a constant amount of space for the variables used in the computation.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Define a helper function that handles the recursive calculation of the power.</li>
+<li><strong>Base Case 1:</strong> If the exponent <code>n</code> is 0, return 1 because any number raised to the power of 0 is 1.</li>
+<li><strong>Base Case 2:</strong> If the exponent <code>n</code> is 1, return the base <code>x</code>, since any number raised to the power of 1 is itself.</li>
+<li><strong>If the exponent <code>n</code> is even:</strong></li>
+<ul>
+<li>If true, recursively calculate the power by squaring the base and halving the exponent:
+      <ul>
+<li><code>power(x, n) = power(x * x, n / 2)</code></li>
+</ul>
+</li>
+</ul>
+<li><strong>If the exponent <code>n</code> is odd:</strong></li>
+<ul>
+<li>If true, recursively calculate the power by multiplying the base with the result of the power function for <code>n - 1</code>:
+      <ul>
+<li><code>power(x, n) = x * power(x, n - 1)</code></li>
+</ul>
+</li>
+</ul>
+<li><strong>Handle negative exponents:</strong></li>
+<ul>
+<li>If the exponent is negative, calculate the power for the positive exponent and take the reciprocal of the result.</li>
+</ul>
+<li>Finally, combine these steps in a main function that checks if the exponent is negative and calls the helper function accordingly.</li>
+</ul>
+<p><img height="457" loading="lazy" src="../assets/img/26e7200c46dd5fe6.png" width="481"/></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Class definition for the solution
+class Solution {
+private:
+    // Function to calculate power
+    // of 'x' raised to 'n'
+    double power(double x, long n) {
+        // Base case: anything raised to 0 is 1
+        if (n == 0) return 1.0;
+
+        // Base case: anything raised to 1 is itself
+        if (n == 1) return x;
+
+        // If 'n' is even
+        if (n % 2 == 0) {
+            // Recursive call: x * x, n / 2
+            return power(x * x, n / 2);
+        }
+        // If 'n' is odd
+        // Recursive call: x * power(x, n-1)
+        return x * power(x, n - 1);
+    }
+
+public:
+    // Function to calculate x raised to n
+    double myPow(double x, int n) {
+        // Store the value of n in a separate variable
+        int num = n;
+
+        // If n is negative
+        if (num &lt; 0) {
+            // Calculate the power of -n and take reciprocal
+            return (1.0 / power(x, -1 * num));
+        }
+        // If n is non-negative
+        return power(x, num);
+    }
+};
+
+int main() {
+    Solution sol;
+    double x = 2.0;
+    int n = 10;
+
+    // Calculate x raised to n
+    double result = sol.myPow(x, n);
+
+    // Print the result
+    std::cout &lt;&lt; x &lt;&lt; "^" &lt;&lt; n &lt;&lt; " = " &lt;&lt; result &lt;&lt; std::endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">// Class containing power calculation logic
+class Solution {
+    
+    // Helper method to calculate power using recursion
+    private double power(double x, long n) {
+        // Base case: anything raised to 0 is 1
+        if (n == 0) return 1.0;
+        
+        // Base case: anything raised to 1 is itself
+        if (n == 1) return x;
+        
+        // If 'n' is even
+        if (n % 2 == 0) {
+            // Recursive call: square the base and halve the exponent
+            return power(x * x, n / 2);
+        }
+        
+        // If 'n' is odd
+        // Recursive call: multiply base once and reduce exponent by 1
+        return x * power(x, n - 1);
+    }
+    
+    // Public method to handle negative exponents as well
+    public double myPow(double x, int n) {
+        // If 'n' is negative, take reciprocal of positive exponent result
+        if (n &lt; 0) {
+            return 1.0 / power(x, -n);
+        }
+        // If 'n' is non-negative
+        return power(x, n);
+    }
+}
+
+// Separate main class for testing
+class Main {
+    public static void main(String[] args) {
+        // Create an instance of Solution
+        Solution sol = new Solution();
+        
+        // Example input
+        double x = 2.0;
+        int n = 10;
+
+        // Calculate power
+        double result = sol.myPow(x, n);
+
+        // Print result
+        System.out.println(x + "^" + n + " = " + result);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    def power(self, x, n):
+        # Base case: anything raised to 0 is 1
+        if n == 0:
+            return 1.0
+        
+        # Base case: anything raised to 1 is itself
+        if n == 1:
+            return x
+        
+        # If 'n' is even
+        if n % 2 == 0:
+            # Recursive call: x * x, n // 2
+            return self.power(x * x, n // 2)
+        
+        # If 'n' is odd
+        # Recursive call: x * power(x, n - 1)
+        return x * self.power(x, n - 1)
+
+    def myPow(self, x, n):
+        # If 'n' is negative
+        if n &lt; 0:
+            # Calculate the power of -n and take reciprocal
+            return 1.0 / self.power(x, -n)
+        
+        # If 'n' is non-negative
+        return self.power(x, n)
+
+# Example usage
+sol = Solution()
+x = 2.0
+n = 10
+
+# Calculate x raised to n
+result = sol.myPow(x, n)
+
+# Print the result
+print(f"{x}^{n} = {result}")</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    power(x, n) {
+        // Base case: anything raised to 0 is 1
+        if (n === 0) return 1.0;
+        
+        // Base case: anything raised to 1 is itself
+        if (n === 1) return x;
+        
+        // If 'n' is even
+        if (n % 2 === 0) {
+            // Recursive call: x * x, n / 2
+            return this.power(x * x, Math.floor(n / 2));
+        }
+        
+        // If 'n' is odd
+        // Recursive call: x * power(x, n - 1)
+        return x * this.power(x, n - 1);
+    }
+    
+    myPow(x, n) {
+        // If 'n' is negative
+        if (n &lt; 0) {
+            // Calculate the power of -n and take reciprocal
+            return 1.0 / this.power(x, -n);
+        }
+        
+        // If 'n' is non-negative
+        return this.power(x, n);
+    }
+}
+
+// Example usage
+const sol = new Solution();
+const x = 2.0;
+const n = 10;
+
+// Calculate x raised to n
+const result = sol.myPow(x, n);
+
+// Print the result
+console.log(`${x}^${n} = ${result}`);</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(log n)</strong>, where n is the absolute value of the exponent. This is because we reduce the problem size by half in each recursive call when n is even.<br/><br/>
+<strong>Space Complexity: O(log n)</strong>, due to the recursive call stack. In the worst case, the depth of the recursion can go up to log(n) when n is even.
+
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

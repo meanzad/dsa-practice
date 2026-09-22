@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>C++ Basic Input/Output</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>C++ Basic Input/Output</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/c/c-basic-input-output/</code></div>
+  <h3>Introduction</h3>
+<p>
+    When you start learning C++, it’s important to focus on the basics first.  
+    Input and Output (I/O) are fundamental concepts, and they are handled using streams in C++.  
+    Let’s walk through the structure of a C++ program and how input/output works.
+</p>
+<h3>Including Libraries:</h3>
+<li>Libraries provide pre-built functions and tools.</li>
+<li><strong>#include&lt;iostream&gt;</strong> → used for input/output.</li>
+<li><strong>#include&lt;math.h&gt;</strong> → used for mathematical functions.</li>
+<br/>
+<pre>
+#include&lt;iostream&gt;
+int main() {
+    // Your code here
+    return 0;
+}
+</pre>
+<h3>Output with cout:</h3>
+<p>
+    To print output, we use <strong>cout</strong> from the iostream library.  
+    Since it belongs to the standard namespace, we write <strong>std::cout</strong>.
+</p>
+<pre>
+#include&lt;iostream&gt;
+int main() {
+    std::cout &lt;&lt; "Hey, Striver!";
+    return 0;
+}
+</pre>
+<p><strong>Output:</strong> Hey, Striver!</p>
+<h4>Printing on Multiple Lines:</h4>
+<li>If you write cout statements repeatedly, they print on the same line.</li>
+<br/>
+<pre>
+#include&lt;iostream&gt;
+int main() {
+    std::cout &lt;&lt; "Hey, Striver!";
+    std::cout &lt;&lt; "Hey, Striver!";
+    return 0;
+}
+</pre>
+<p><strong>Output: </strong>Hey, Striver! Hey, Striver!</p>
+<li>Use <strong>\n</strong> (newline character) or <strong>std::endl</strong> to print on new lines.</li>
+<br/>
+<pre>
+#include&lt;iostream&gt;
+int main() {
+    std::cout &lt;&lt; "Hey, Striver!" &lt;&lt; "\n";
+    std::cout &lt;&lt; "Hey, Striver!";
+    return 0;
+}
+</pre>
+<p><strong>Output: </strong><br/>Hey, Striver!<br/>
+Hey, Striver!</p>
+<h4>\n vs std::endl : </h4>
+<li><strong>\n</strong> → inserts a new line (faster, commonly used).</li>
+<li><strong>std::endl</strong> → inserts a new line and flushes the output buffer (slower).</li>
+<br/>
+<pre>
+#include&lt;iostream&gt;
+int main() {
+    std::cout &lt;&lt; "Hey, Striver!" &lt;&lt; std::endl;
+    std::cout &lt;&lt; "Hey, Striver!";
+    return 0;
+}
+</pre>
+<h3>Using namespace std:</h3>
+<p>
+    Writing <strong>using namespace std;</strong> removes the need to prefix <strong>std::</strong>.  
+    This makes code cleaner but can cause naming conflicts in large projects.
+</p>
+<pre>
+#include&lt;iostream&gt;
+using namespace std;
+int main() {
+    cout &lt;&lt; "Hey, Striver!" &lt;&lt; endl;
+    cout &lt;&lt; "Hey, Striver!";
+    return 0;
+}
+</pre>
+<h3>Taking User Input with cin:</h3>
+<p>
+<strong>cin</strong> is used to take input from the user.
+</p>
+<pre>
+#include&lt;iostream&gt;
+using namespace std;
+int main() {
+    int x;
+    cin &gt;&gt; x;
+    cout &lt;&lt; "Value of x: " &lt;&lt; x;
+    return 0;
+}
+</pre>
+<p><strong>Input:</strong> 10</p>
+<p><strong>Output: </strong>Value of x: 10</p>
+<h4>Multiple Inputs:</h4>
+<pre>
+#include&lt;iostream&gt;
+using namespace std;
+int main() {
+    int x, y;
+    cin &gt;&gt; x &gt;&gt; y;
+    cout &lt;&lt; "Value of x: " &lt;&lt; x &lt;&lt; " and y: " &lt;&lt; y;
+    return 0;
+}
+</pre>
+<p><strong>Input: </strong>10 20</p>
+<p><strong>Output: </strong>Value of x: 10 and y: 20</p>
+<h3>Shortcut: bits/stdc++.h</h3>
+<p>
+    Instead of including libraries one by one, you can use:
+</p>
+<br/>
+<pre>
+#include&lt;bits/stdc++.h&gt;
+</pre>
+<li>Includes almost all standard libraries at once.</li>
+<li>Useful in competitive programming.</li>
+<li>Not recommended for production (due to compile-time overhead).</li>
+<pre>
+#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int main() {
+    int x, y;
+    cin &gt;&gt; x &gt;&gt; y;
+    cout &lt;&lt; "Value of x: " &lt;&lt; x &lt;&lt; " and y: " &lt;&lt; y;
+    return 0;
+}
+</pre>
+</article>
+<script src="../article.js"></script>
+</body></html>

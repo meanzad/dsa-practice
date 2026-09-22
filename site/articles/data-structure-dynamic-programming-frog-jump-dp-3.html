@@ -1,0 +1,938 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Dynamic Programming : Frog Jump (DP 3)</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Dynamic Programming : Frog Jump (DP 3)</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/dynamic-programming-frog-jump-dp-3/</code></div>
+  <p><strong>Problem Statement: </strong> Given a number of stairs and a frog, the frog wants to climb from the 0th stair
+    to the (N-1)th stair. At a time the frog can climb either one or two steps. A height[N] array is also given.
+    Whenever the frog jumps from a stair i to stair j, the energy consumed in the jump is abs(height[i]- height[j]),
+    where abs() means the absolute difference. We need to return the minimum energy that can be used by the frog to jump
+    from stair 0 to stair N-1..</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input: heights = [2, 1, 3, 5, 4]
+Output: 2
+Explanation: One possible route can be,
+0th step -&gt; 2nd Step = abs(2 - 3) = 1
+2nd step -&gt; 4th step = abs(3 - 4) = 1
+Total = 1 + 1 = 2.
+
+Example 2:
+Input: heights = [7, 5, 1, 2, 6]
+Output: 9
+Explanation: One possible route can be,
+0th step -&gt; 1st Step = abs(7 - 5) = 2
+1st step -&gt; 3rd step = abs(5 - 2) = 3
+3rd step -&gt; 4th step = abs(2 - 6) = 4
+Total = 2 + 3 + 4 = 9.
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/frog-jump" rel="noopener" target="_blank">practice link</a> to help you
+        assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Memoization Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+<p>A frog is trying to reach the last stone. From any stone <code>i</code>, it can jump either
+                            to stone <code>i-1</code> or <code>i-2</code>, and the cost of a jump is the absolute
+                            difference between the heights of the stones. To minimize the total cost, we recursively
+                            compute the minimum cost to reach each stone, reusing already computed results through
+                            memoization.</p>
+<p><strong>Approach:</strong></p>
+<ol>
+<li>Define a recursive function <code>solve(ind)</code> that returns the minimum cost to
+                                reach index <code>ind</code>.</li>
+<li>Base case: <code>solve(0) = 0</code>, since starting at the first stone has no cost.
+                            </li>
+<li>For each index, calculate:
+                                <ul>
+<li><strong>Jump One:</strong> Cost from <code>ind-1</code> to <code>ind</code>.
+                                    </li>
+<li><strong>Jump Two:</strong> Cost from <code>ind-2</code> to <code>ind</code>
+                                        (only if <code>ind &gt; 1</code>).</li>
+</ul>
+</li>
+<li>Take the minimum of both jumps and store it in the DP array for reuse.</li>
+<li>Finally, return <code>solve(n-1)</code> as the answer.</li>
+</ol>
+<p><img height="351" loading="lazy" src="../assets/img/9e6fd716ecc97cfd.png" width="624"/>
+</p>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div>
+<div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Solve function using recursion with memoization
+    // ind -&gt; current index the frog needs to reach
+    // height -&gt; vector of heights
+    // dp -&gt; memo table where dp[i] stores min cost to reach i
+    int solve(int ind, const vector&lt;int&gt;&amp; height, vector&lt;int&gt;&amp; dp) {
+        // If at the first stone, cost is 0
+        if (ind == 0) return 0;
+
+        // Return memoized result if already computed
+        if (dp[ind] != -1) return dp[ind];
+
+        // Initialize jumpTwo with a large value
+        int jumpTwo = INT_MAX;
+
+        // Compute cost when jumping from previous stone (ind - 1)
+        int jumpOne = solve(ind - 1, height, dp) + abs(height[ind] - height[ind - 1]);
+
+        // Compute cost when jumping from two stones back (ind - 2) if possible
+        if (ind &gt; 1) {
+            jumpTwo = solve(ind - 2, height, dp) + abs(height[ind] - height[ind - 2]);
+        }
+
+        // Memoize and return the minimum of the two choices
+        return dp[ind] = min(jumpOne, jumpTwo);
+    }
+
+    // Helper to handle edge cases and start recursion
+    int frogJump(const vector&lt;int&gt;&amp; height) {
+        // Handle empty input
+        if (height.empty()) return 0;
+
+        // Prepare dp with -1 indicating uncomputed states
+        int n = (int)height.size();
+        vector&lt;int&gt; dp(n, -1);
+
+        // Start from the last index
+        return solve(n - 1, height, dp);
+    }
+};
+
+int main() {
+    // Define the heights array
+    vector&lt;int&gt; height{30, 10, 60, 10, 60, 50};
+
+    // Create Solution instance
+    Solution sol;
+
+    // Compute and print the minimum energy
+    cout &lt;&lt; sol.frogJump(height) &lt;&lt; endl; // Expected: 40
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Solve function using recursion with memoization
+    // ind -&gt; current index the frog needs to reach
+    // height -&gt; array of heights
+    // dp -&gt; memo table where dp[i] stores min cost to reach i
+    private int solve(int ind, int[] height, int[] dp) {
+        // If at the first stone, cost is 0
+        if (ind == 0) return 0;
+
+        // Return memoized result if already computed
+        if (dp[ind] != -1) return dp[ind];
+
+        // Initialize jumpTwo with a large value
+        int jumpTwo = Integer.MAX_VALUE;
+
+        // Compute cost when jumping from previous stone (ind - 1)
+        int jumpOne = solve(ind - 1, height, dp) + Math.abs(height[ind] - height[ind - 1]);
+
+        // Compute cost when jumping from two stones back (ind - 2) if possible
+        if (ind &gt; 1) {
+            jumpTwo = solve(ind - 2, height, dp) + Math.abs(height[ind] - height[ind - 2]);
+        }
+
+        // Memoize and return the minimum of the two choices
+        dp[ind] = Math.min(jumpOne, jumpTwo);
+        return dp[ind];
+    }
+
+    // Helper to handle edge cases and start recursion
+    public int frogJump(int[] height) {
+        // Handle empty input
+        if (height == null || height.length == 0) return 0;
+
+        // Prepare dp with -1 indicating uncomputed states
+        int n = height.length;
+        int[] dp = new int[n];
+        Arrays.fill(dp, -1);
+
+        // Start from the last index
+        return solve(n - 1, height, dp);
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        // Define the heights array
+        int[] height = {30, 10, 60, 10, 60, 50};
+
+        // Create Solution instance
+        Solution sol = new Solution();
+
+        // Compute and print the minimum energy
+        System.out.println(sol.frogJump(height)); // Expected: 40
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Solve function using recursion with memoization
+    # ind -&gt; current index the frog needs to reach
+    # height -&gt; list of heights
+    # dp -&gt; memo table where dp[i] stores min cost to reach i
+    def solve(self, ind, height, dp):
+        # If at the first stone, cost is 0
+        if ind == 0:
+            return 0
+
+        # Return memoized result if already computed
+        if dp[ind] != -1:
+            return dp[ind]
+
+        # Initialize jumpTwo with a large value
+        jumpTwo = float('inf')
+
+        # Compute cost when jumping from previous stone (ind - 1)
+        jumpOne = self.solve(ind - 1, height, dp) + abs(height[ind] - height[ind - 1])
+
+        # Compute cost when jumping from two stones back (ind - 2) if possible
+        if ind &gt; 1:
+            jumpTwo = self.solve(ind - 2, height, dp) + abs(height[ind] - height[ind - 2])
+
+        # Memoize and return the minimum of the two choices
+        dp[ind] = min(jumpOne, jumpTwo)
+        return dp[ind]
+
+    # Helper to handle edge cases and start recursion
+    def frogJump(self, height):
+        # Handle empty input
+        if not height:
+            return 0
+
+        # Prepare dp with -1 indicating uncomputed states
+        n = len(height)
+        dp = [-1] * n
+
+        # Start from the last index
+        return self.solve(n - 1, height, dp)
+
+
+if __name__ == "__main__":
+    # Define the heights array
+    height = [30, 10, 60, 10, 60, 50]
+
+    # Create Solution instance
+    sol = Solution()
+
+    # Compute and print the minimum energy
+    print(sol.frogJump(height))  # Expected: 40
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Solve function using recursion with memoization
+    // ind -&gt; current index the frog needs to reach
+    // height -&gt; array of heights
+    // dp -&gt; memo table where dp[i] stores min cost to reach i
+    solve(ind, height, dp) {
+        // If at the first stone, cost is 0
+        if (ind === 0) return 0;
+
+        // Return memoized result if already computed
+        if (dp[ind] !== -1) return dp[ind];
+
+        // Initialize jumpTwo with a large value
+        let jumpTwo = Number.POSITIVE_INFINITY;
+
+        // Compute cost when jumping from previous stone (ind - 1)
+        const jumpOne = this.solve(ind - 1, height, dp) + Math.abs(height[ind] - height[ind - 1]);
+
+        // Compute cost when jumping from two stones back (ind - 2) if possible
+        if (ind &gt; 1) {
+            jumpTwo = this.solve(ind - 2, height, dp) + Math.abs(height[ind] - height[ind - 2]);
+        }
+
+        // Memoize and return the minimum of the two choices
+        dp[ind] = Math.min(jumpOne, jumpTwo);
+        return dp[ind];
+    }
+
+    // Helper to handle edge cases and start recursion
+    frogJump(height) {
+        // Handle empty input
+        if (!height || height.length === 0) return 0;
+
+        // Prepare dp with -1 indicating uncomputed states
+        const n = height.length;
+        const dp = Array(n).fill(-1);
+
+        // Start from the last index
+        return this.solve(n - 1, height, dp);
+    }
+}
+
+// Driver code
+(function main() {
+    // Define the heights array
+    const height = [30, 10, 60, 10, 60, 50];
+
+    // Create Solution instance
+    const sol = new Solution();
+
+    // Compute and print the minimum energy
+    console.log(sol.frogJump(height)); // Expected: 40
+})();
+</code></pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+</summary>
+<p>
+</p><p><strong>Time Complexity:</strong> O(n), since each state (index) is computed once and stored in
+                        the DP array.</p>
+<p><strong>Space Complexity:</strong> O(n) for the DP array + O(n) recursion stack, leading to O(n)
+                        overall.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="better-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Tabulation Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+<p>Instead of solving the problem recursively, we can build the solution iteratively. Each
+                            stone's minimum cost depends only on the previous one or two stones. By filling a DP array
+                            step by step, we avoid recursion overhead and directly compute the answer.</p>
+<p><strong>Approach:</strong></p>
+<ol>
+<li>Initialize a DP array of size <code>n</code>, where <code>dp[i]</code> represents the
+                                minimum cost to reach stone <code>i</code>.</li>
+<li>Set <code>dp[0] = 0</code> (no cost to start).</li>
+<li>Iterate from <code>1</code> to <code>n-1</code>:
+                                <ul>
+<li><strong>Jump One:</strong> From <code>i-1</code> to <code>i</code>.</li>
+<li><strong>Jump Two:</strong> From <code>i-2</code> to <code>i</code> (only if
+                                        <code>i &gt; 1</code>).
+                                    </li>
+</ul>
+</li>
+<li>At each step, store the minimum of the two jumps in <code>dp[i]</code>.</li>
+<li>The final answer is <code>dp[n-1]</code>, the minimum cost to reach the last stone.</li>
+</ol>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div>
+<div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Computes minimum energy to reach last index using bottom-up DP
+    int frogJump(const vector&lt;int&gt;&amp; height) {
+        // Handle empty input
+        if (height.empty()) return 0;
+
+        // Fetch size of the input
+        int n = (int)height.size();
+
+        // Create dp array where dp[i] = min energy to reach i
+        vector&lt;int&gt; dp(n, INT_MAX);
+
+        // Base case: cost to stand on first stone is zero
+        dp[0] = 0;
+
+        // Iterate over stones from index 1 to n-1
+        for (int ind = 1; ind &lt; n; ind++) {
+            // Compute cost for a jump from ind-1
+            int jumpOne = dp[ind - 1] + abs(height[ind] - height[ind - 1]);
+
+            // Initialize jumpTwo with large value
+            int jumpTwo = INT_MAX;
+
+            // If possible, compute cost for a jump from ind-2
+            if (ind &gt; 1) {
+                jumpTwo = dp[ind - 2] + abs(height[ind] - height[ind - 2]);
+            }
+
+            // Take the minimum of the two options
+            dp[ind] = min(jumpOne, jumpTwo);
+        }
+
+        // Return min energy to reach last stone
+        return dp[n - 1];
+    }
+};
+
+int main() {
+    // Define the heights array
+    vector&lt;int&gt; height{30, 10, 60, 10, 60, 50};
+
+    // Create Solution instance
+    Solution sol;
+
+    // Compute and print the minimum energy
+    cout &lt;&lt; sol.frogJump(height) &lt;&lt; endl; // Expected: 40
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Computes minimum energy to reach last index using bottom-up DP
+    public int frogJump(int[] height) {
+        // Handle empty input
+        if (height == null || height.length == 0) return 0;
+
+        // Fetch size of the input
+        int n = height.length;
+
+        // Create dp array where dp[i] = min energy to reach i
+        int[] dp = new int[n];
+        
+        // Initialize all values to a large number
+        Arrays.fill(dp, Integer.MAX_VALUE);
+
+        // Base case: cost to stand on first stone is zero
+        dp[0] = 0;
+
+        // Iterate over stones from index 1 to n-1
+        for (int ind = 1; ind &lt; n; ind++) {
+            // Compute cost for a jump from ind-1
+            int jumpOne = dp[ind - 1] + Math.abs(height[ind] - height[ind - 1]);
+
+            // Initialize jumpTwo with large value
+            int jumpTwo = Integer.MAX_VALUE;
+
+            // If possible, compute cost for a jump from ind-2
+            if (ind &gt; 1) {
+                jumpTwo = dp[ind - 2] + Math.abs(height[ind] - height[ind - 2]);
+            }
+
+            // Take the minimum of the two options
+            dp[ind] = Math.min(jumpOne, jumpTwo);
+        }
+
+        // Return min energy to reach last stone
+        return dp[n - 1];
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        // Define the heights array
+        int[] height = {30, 10, 60, 10, 60, 50};
+
+        // Create Solution instance
+        Solution sol = new Solution();
+
+        // Compute and print the minimum energy
+        System.out.println(sol.frogJump(height)); // Expected: 40
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Computes minimum energy to reach last index using bottom-up DP
+    def frogJump(self, height):
+        # Handle empty input
+        if not height:
+            return 0
+
+        # Fetch size of the input
+        n = len(height)
+
+        # Create dp array where dp[i] = min energy to reach i
+        dp = [float('inf')] * n
+
+        # Base case: cost to stand on first stone is zero
+        dp[0] = 0
+
+        # Iterate over stones from index 1 to n-1
+        for ind in range(1, n):
+            # Compute cost for a jump from ind-1
+            jump_one = dp[ind - 1] + abs(height[ind] - height[ind - 1])
+
+            # Initialize jump_two with large value
+            jump_two = float('inf')
+
+            # If possible, compute cost for a jump from ind-2
+            if ind &gt; 1:
+                jump_two = dp[ind - 2] + abs(height[ind] - height[ind - 2])
+
+            # Take the minimum of the two options
+            dp[ind] = min(jump_one, jump_two)
+
+        # Return min energy to reach last stone
+        return dp[-1]
+
+
+if __name__ == "__main__":
+    # Define the heights array
+    height = [30, 10, 60, 10, 60, 50]
+
+    # Create Solution instance
+    sol = Solution()
+
+    # Compute and print the minimum energy
+    print(sol.frogJump(height))  # Expected: 40
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Computes minimum energy to reach last index using bottom-up DP
+    frogJump(height) {
+        // Handle empty input
+        if (!height || height.length === 0) return 0;
+
+        // Fetch size of the input
+        const n = height.length;
+
+        // Create dp array where dp[i] = min energy to reach i
+        const dp = new Array(n).fill(Number.POSITIVE_INFINITY);
+
+        // Base case: cost to stand on first stone is zero
+        dp[0] = 0;
+
+        // Iterate over stones from index 1 to n-1
+        for (let ind = 1; ind &lt; n; ind++) {
+            // Compute cost for a jump from ind-1
+            const jumpOne = dp[ind - 1] + Math.abs(height[ind] - height[ind - 1]);
+
+            // Initialize jumpTwo with large value
+            let jumpTwo = Number.POSITIVE_INFINITY;
+
+            // If possible, compute cost for a jump from ind-2
+            if (ind &gt; 1) {
+                jumpTwo = dp[ind - 2] + Math.abs(height[ind] - height[ind - 2]);
+            }
+
+            // Take the minimum of the two options
+            dp[ind] = Math.min(jumpOne, jumpTwo);
+        }
+
+        // Return min energy to reach last stone
+        return dp[n - 1];
+    }
+}
+
+// Driver code
+(function main() {
+    // Define the heights array
+    const height = [30, 10, 60, 10, 60, 50];
+
+    // Create Solution instance
+    const sol = new Solution();
+
+    // Compute and print the minimum energy
+    console.log(sol.frogJump(height)); // Expected: 40
+})();
+</code></pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+</summary>
+<p>
+</p><p><strong>Time Complexity:</strong> O(n), since we fill the DP array once with at most two
+                        computations per index.</p>
+<p><strong>Space Complexity:</strong> O(n) for the DP array.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Space Optimization Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+<p>We observed in the tabulation approach that to compute <code>dp[i]</code>, we only need the
+                            last two values: <code>dp[i-1]</code> and <code>dp[i-2]</code>.
+                            Hence, instead of storing the entire DP array, we can optimize the space by keeping just two
+                            variables to track these states.</p>
+<p><strong>Approach:</strong></p>
+<ol>
+<li>Initialize two variables:
+                                <ul>
+<li><code>prev</code> → represents <code>dp[i-1]</code>.</li>
+<li><code>prev2</code> → represents <code>dp[i-2]</code>.</li>
+</ul>
+</li>
+<li>Iterate from <code>i = 1</code> to <code>n-1</code>:
+                                <ul>
+<li>Compute the cost of <strong>Jump One</strong>:
+                                        <code>prev + abs(height[i] - height[i-1])</code>.
+                                    </li>
+<li>If <code>i &gt; 1</code>, compute <strong>Jump Two</strong>:
+                                        <code>prev2 + abs(height[i] - height[i-2])</code>.
+                                    </li>
+<li>Take the minimum of the two.</li>
+</ul>
+</li>
+<li>Update <code>prev2</code> and <code>prev</code> accordingly after each iteration.</li>
+<li>At the end, <code>prev</code> holds the minimum cost to reach the last stone.</li>
+</ol>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div>
+<div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Computes minimum energy to reach the last stone using O(1) space
+    int frogJump(const vector&lt;int&gt;&amp; height) {
+        // Handle empty input
+        if (height.empty()) return 0;
+
+        // Fetch number of stones
+        int n = (int)height.size();
+
+        // Handle single stone case
+        if (n == 1) return 0;
+
+        // Initialize the cost to reach i-1 (prev) and i-2 (prev2)
+        int prev = 0;
+        int prev2 = 0;
+
+        // Iterate through stones from index 1 to n-1
+        for (int i = 1; i &lt; n; i++) {
+            // Initialize jumpTwo with large value
+            int jumpTwo = INT_MAX;
+
+            // Compute cost for jumping from i-1
+            int jumpOne = prev + abs(height[i] - height[i - 1]);
+
+            // If possible, compute cost for jumping from i-2
+            if (i &gt; 1) {
+                jumpTwo = prev2 + abs(height[i] - height[i - 2]);
+            }
+
+            // Determine minimal cost to reach current stone
+            int cur_i = min(jumpOne, jumpTwo);
+
+            // Shift window: update prev2 and prev
+            prev2 = prev;
+            prev = cur_i;
+        }
+
+        // Return minimal cost to reach last stone
+        return prev;
+    }
+};
+
+int main() {
+    // Define the heights array
+    vector&lt;int&gt; height{30, 10, 60, 10, 60, 50};
+
+    // Create Solution instance
+    Solution sol;
+
+    // Compute and print the minimum energy
+    cout &lt;&lt; sol.frogJump(height) &lt;&lt; endl; // Expected: 40
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Computes minimum energy to reach the last stone using O(1) space
+    public int frogJump(int[] height) {
+        // Handle empty input
+        if (height == null || height.length == 0) return 0;
+
+        // Fetch number of stones
+        int n = height.length;
+
+        // Handle single stone case
+        if (n == 1) return 0;
+
+        // Initialize the cost to reach i-1 (prev) and i-2 (prev2)
+        int prev = 0;
+        int prev2 = 0;
+
+        // Iterate through stones from index 1 to n-1
+        for (int i = 1; i &lt; n; i++) {
+            // Initialize jumpTwo with large value
+            int jumpTwo = Integer.MAX_VALUE;
+
+            // Compute cost for jumping from i-1
+            int jumpOne = prev + Math.abs(height[i] - height[i - 1]);
+
+            // If possible, compute cost for jumping from i-2
+            if (i &gt; 1) {
+                jumpTwo = prev2 + Math.abs(height[i] - height[i - 2]);
+            }
+
+            // Determine minimal cost to reach current stone
+            int cur_i = Math.min(jumpOne, jumpTwo);
+
+            // Shift window: update prev2 and prev
+            prev2 = prev;
+            prev = cur_i;
+        }
+
+        // Return minimal cost to reach last stone
+        return prev;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        // Define the heights array
+        int[] height = {30, 10, 60, 10, 60, 50};
+
+        // Create Solution instance
+        Solution sol = new Solution();
+
+        // Compute and print the minimum energy
+        System.out.println(sol.frogJump(height)); // Expected: 40
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Computes minimum energy to reach the last stone using O(1) space
+    def frogJump(self, height):
+        # Handle empty input
+        if not height:
+            return 0
+
+        # Fetch number of stones
+        n = len(height)
+
+        # Handle single stone case
+        if n == 1:
+            return 0
+
+        # Initialize the cost to reach i-1 (prev) and i-2 (prev2)
+        prev = 0
+        prev2 = 0
+
+        # Iterate through stones from index 1 to n-1
+        for i in range(1, n):
+            # Initialize jump_two with large value
+            jump_two = float('inf')
+
+            # Compute cost for jumping from i-1
+            jump_one = prev + abs(height[i] - height[i - 1])
+
+            # If possible, compute cost for jumping from i-2
+            if i &gt; 1:
+                jump_two = prev2 + abs(height[i] - height[i - 2])
+
+            # Determine minimal cost to reach current stone
+            cur_i = min(jump_one, jump_two)
+
+            # Shift window: update prev2 and prev
+            prev2 = prev
+            prev = cur_i
+
+        # Return minimal cost to reach last stone
+        return prev
+
+
+if __name__ == "__main__":
+    # Define the heights array
+    height = [30, 10, 60, 10, 60, 50]
+
+    # Create Solution instance
+    sol = Solution()
+
+    # Compute and print the minimum energy
+    print(sol.frogJump(height))  # Expected: 40
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Computes minimum energy to reach the last stone using O(1) space
+    frogJump(height) {
+        // Handle empty input
+        if (!height || height.length === 0) return 0;
+
+        // Fetch number of stones
+        const n = height.length;
+
+        // Handle single stone case
+        if (n === 1) return 0;
+
+        // Initialize the cost to reach i-1 (prev) and i-2 (prev2)
+        let prev = 0;
+        let prev2 = 0;
+
+        // Iterate through stones from index 1 to n-1
+        for (let i = 1; i &lt; n; i++) {
+            // Initialize jumpTwo with large value
+            let jumpTwo = Number.POSITIVE_INFINITY;
+
+            // Compute cost for jumping from i-1
+            const jumpOne = prev + Math.abs(height[i] - height[i - 1]);
+
+            // If possible, compute cost for jumping from i-2
+            if (i &gt; 1) {
+                jumpTwo = prev2 + Math.abs(height[i] - height[i - 2]);
+            }
+
+            // Determine minimal cost to reach current stone
+            const cur_i = Math.min(jumpOne, jumpTwo);
+
+            // Shift window: update prev2 and prev
+            prev2 = prev;
+            prev = cur_i;
+        }
+
+        // Return minimal cost to reach last stone
+        return prev;
+    }
+}
+
+// Driver code
+(function main() {
+    // Define the heights array
+    const height = [30, 10, 60, 10, 60, 50];
+
+    // Create Solution instance
+    const sol = new Solution();
+
+    // Compute and print the minimum energy
+    console.log(sol.frogJump(height)); // Expected: 40
+})();
+</code></pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+</summary>
+<p>
+</p><p><strong>Time Complexity:</strong> O(n), since we iterate through the stones once.</p>
+<p><strong>Space Complexity:</strong> O(1), because we only store two variables instead of an entire
+                        DP array.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

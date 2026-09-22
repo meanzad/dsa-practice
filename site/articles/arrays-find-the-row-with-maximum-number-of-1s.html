@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Find the row with maximum number of 1&#x27;s</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Find the row with maximum number of 1&#x27;s</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/arrays/find-the-row-with-maximum-number-of-1s/</code></div>
+  <p><strong>Problem Statement:</strong> You have been given a non-empty grid ‘mat’ with 'n' rows and 'm' columns consisting of only 0s and 1s. All the rows are sorted in ascending order.
+Your task is to find the index of the row with the maximum number of ones.
+Note: If two rows have the same number of ones, consider the one with a smaller index. If there's no row with at least 1 zero, return -1</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input Format: n = 3, m = 3, 
+mat[] = 
+1 1 1
+0 0 1
+0 0 0
+Result: 0
+Explanation: The row with the maximum number of ones is 0 (0 - indexed).
+
+Example 2:
+Input Format: n = 2, m = 2 , 
+mat[] = 
+0 0
+0 0
+Result: -1
+Explanation:  The matrix does not contain any 1. So, -1 is the answer.
+
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/find-row-with-maximum-1's" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Brute Force
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<h2>Intuition</h2>
+The intution is to traverse the matrix as usual using nested loops and for every single row count the number of 1’s. Finally, we will return the row with the maximum no. of 1’s. If multiple rows contain the maximum no. of 1’s we will return the row with the minimum index.<h2>Approach</h2>
+<ul>
+<li>First, we create two variables: cnt_max is set to 0 and will keep track of the highest number of 1s found so far, and <code>index</code> is set to -1 and will store the row number with the most 1s.</li>
+<li>Then, we go through each row of the matrix one by one using a loop.</li>
+<li>Inside that loop, for each row, we count how many 1s it contains using another loop.</li>
+<li>If this count is higher than our current maximum cnt_max, we update cnt_max with this new count and set indexto the current row number.</li>
+<li>At the end, we return the index. It will either be the row number with the most 1s, or -1 if no 1s were found.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/30651d7b3e5abbd2.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/2db49839ca8e3745.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/30651d7b3e5abbd2.png"/><img alt="Image 2" loading="lazy" src="../assets/img/2db49839ca8e3745.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Define a class to encapsulate the method
+class Solution {
+public:
+    int rowWithMax1s(vector&lt;vector&lt;int&gt;&gt; &amp;matrix, int n, int m) {
+        int cnt_max = 0;  // Max number of 1s found
+        int index = -1;   // Index of row with most 1s
+
+        // Traverse each row of the matrix
+        for (int i = 0; i &lt; n; i++) {
+            int cnt_ones = 0;  // Count 1s in current row
+            for (int j = 0; j &lt; m; j++) {
+                cnt_ones += matrix[i][j];
+            }
+            // Update if this row has more 1s
+            if (cnt_ones &gt; cnt_max) {
+                cnt_max = cnt_ones;
+                index = i;
+            }
+        }
+        return index;
+    }
+};
+
+int main() {
+    vector&lt;vector&lt;int&gt;&gt; matrix = {{1, 1, 1}, {0, 0, 1}, {0, 0, 0}};
+    int n = 3, m = 3;
+
+    Solution obj;
+    cout &lt;&lt; "The row with maximum no. of 1's is: " &lt;&lt; obj.rowWithMax1s(matrix, n, m) &lt;&lt; '\n';
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // Method to find row with maximum number of 1s
+    public int rowWithMax1s(int[][] matrix, int n, int m) {
+        int cnt_max = 0;  // Max number of 1s
+        int index = -1;   // Row index with max 1s
+
+        for (int i = 0; i &lt; n; i++) {
+            int cnt_ones = 0;
+            for (int j = 0; j &lt; m; j++) {
+                cnt_ones += matrix[i][j];
+            }
+            if (cnt_ones &gt; cnt_max) {
+                cnt_max = cnt_ones;
+                index = i;
+            }
+        }
+        return index;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[][] matrix = {{1, 1, 1}, {0, 0, 1}, {0, 0, 0}};
+        int n = 3, m = 3;
+
+        Solution obj = new Solution();
+        System.out.println("The row with maximum no. of 1's is: " + obj.rowWithMax1s(matrix, n, m));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">
+class Solution:
+def row_with_max_1s(self, matrix, n, m):
+        cnt_max = 0  # Maximum number of 1s found so far
+        index = -1   # Row index with maximum 1s
+
+        # Traverse each row
+        for i in range(n):
+            cnt_ones = 0  # Count of 1s in the current row
+            for j in range(m):
+                cnt_ones += matrix[i][j]
+            if cnt_ones &gt; cnt_max:
+                cnt_max = cnt_ones
+                index = i
+
+        return index  # Return row index with most 1s
+
+
+# Driver code
+if __name__ == "__main__":
+    matrix = [[1, 1, 1], [0, 0, 1], [0, 0, 0]]
+    n, m = 3, 3
+
+    obj = Solution()
+    print("The row with maximum no. of 1's is:", obj.row_with_max_1s(matrix, n, m))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Define a class containing the method
+class Solution {
+    rowWithMax1s(matrix, n, m) {
+        let cnt_max = 0; // Max number of 1s found
+        let index = -1;  // Row index with most 1s
+
+        for (let i = 0; i &lt; n; i++) {
+            let cnt_ones = 0;
+            for (let j = 0; j &lt; m; j++) {
+                cnt_ones += matrix[i][j];
+            }
+            if (cnt_ones &gt; cnt_max) {
+                cnt_max = cnt_ones;
+                index = i;
+            }
+        }
+        return index;
+    }
+}
+
+// Driver code
+const matrix = [[1, 1, 1], [0, 0, 1], [0, 0, 0]];
+const n = 3, m = 3;
+
+const obj = new Solution();
+console.log("The row with maximum no. of 1's is:", obj.rowWithMax1s(matrix, n, m));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+</p><p>Time Complexity:O(n X m), where n = given row number, m = given column number. We are using nested loops running for n and m times respectively.</p>
+<p>Space Complexity: O(1). No extra space used</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="better-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<h2>Intuition</h2>
+<p>
+We will use Binary Search to make our solution more efficient. While we still need to check each row one by one, we can speed up how we count the 1s in each row. 
+Instead of going through every element in a row to count the 1s, we find the position of the first 1 using Binary Search, and subtract that index from the total number of columns to get how many 1s are present.
+</p>
+<h2>Approach</h2>
+<ul>
+<li>Start by keeping track of the highest number of 1s seen so far and the row where that occurred.</li>
+<li>Go through each row of the matrix one by one.</li>
+<li>For each row, use Binary Search to find the first position where a 1 appears. Then subtract that position from the total number of columns to get the number of 1s in that row.</li>
+<li>Compare the current row's number of 1s with the highest found so far. If it's greater, update the highest count and the corresponding row number.</li>
+<li>After checking all rows, return the row number where the highest number of 1s was found. If there are no 1s at all, return -1.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Binary search to find the first index where value &gt;= x
+    int lowerBound(vector&lt;int&gt; &amp;arr, int n, int x) {
+        int low = 0, high = n - 1;
+        int ans = n;  // Default if x not found
+
+        while (low &lt;= high) {
+            int mid = (low + high) / 2;
+            if (arr[mid] &gt;= x) {
+                ans = mid;       // Possible answer
+                high = mid - 1;  // Look for smaller index
+            } else {
+                low = mid + 1;   // Search right half
+            }
+        }
+        return ans;
+    }
+
+    // Find row with max number of 1s
+    int rowWithMax1s(vector&lt;vector&lt;int&gt;&gt; &amp;matrix, int n, int m) {
+        int cnt_max = 0;
+        int index = -1;
+
+        for (int i = 0; i &lt; n; i++) {
+            int cnt_ones = m - lowerBound(matrix[i], m, 1);  // 1s = total - index of first 1
+            if (cnt_ones &gt; cnt_max) {
+                cnt_max = cnt_ones;
+                index = i;
+            }
+        }
+        return index;
+    }
+};
+
+int main() {
+    vector&lt;vector&lt;int&gt;&gt; matrix = {{1, 1, 1}, {0, 0, 1}, {0, 0, 0}};
+    int n = 3, m = 3;
+
+    Solution obj;
+    cout &lt;&lt; "The row with maximum no. of 1's is: " &lt;&lt; obj.rowWithMax1s(matrix, n, m) &lt;&lt; '\n';
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">
+class Solution {
+    // Function to find the lower bound (first index where value &gt;= x)
+    public int lowerBound(int[] arr, int n, int x) {
+        int low = 0, high = n - 1;
+        int ans = n;  // Default value if no such index is found
+
+        while (low &lt;= high) {
+            int mid = (low + high) / 2;
+            if (arr[mid] &gt;= x) {
+                ans = mid;        // Possible answer found
+                high = mid - 1;   // Try to find a smaller index
+            } else {
+                low = mid + 1;    // Move right
+            }
+        }
+        return ans;  // Index of first element &gt;= x
+    }
+
+    // Function to return index of the row with the maximum number of 1s
+    public int rowWithMax1s(int[][] matrix, int n, int m) {
+        int cnt_max = 0;  // Keeps track of the maximum number of 1s found so far
+        int index = -1;   // Stores index of the row with maximum 1s
+
+        // Iterate over all rows
+        for (int i = 0; i &lt; n; i++) {
+            // Count of 1s = total columns - index of first 1 (lower bound)
+            int cnt_ones = m - lowerBound(matrix[i], m, 1);
+            if (cnt_ones &gt; cnt_max) {
+                cnt_max = cnt_ones;
+                index = i;
+            }
+        }
+        return index;  // Return row index with maximum 1s
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[][] matrix = {{1, 1, 1}, {0, 0, 1}, {0, 0, 0}};
+        int n = 3, m = 3;
+
+        Solution obj = new Solution();
+        System.out.println("The row with maximum no. of 1's is: " + obj.rowWithMax1s(matrix, n, m));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">
+class Solution:
+    # Binary search to find the lower bound (first index where element &gt;= x)
+    def lower_bound(self, arr, n, x):
+        low, high = 0, n - 1
+        ans = n  # Default if x not found
+
+        while low &lt;= high:
+            mid = (low + high) // 2
+            if arr[mid] &gt;= x:
+                ans = mid       # Potential answer found
+                high = mid - 1  # Look on the left half
+            else:
+                low = mid + 1   # Move right
+        return ans  # Return index of first element &gt;= x
+
+    # Function to find the row with maximum number of 1s
+    def row_with_max_1s(self, matrix, n, m):
+        cnt_max = 0   # Maximum number of 1s found so far
+        index = -1    # Row index with the max 1s
+
+        for i in range(n):
+            # Calculate count of 1s using lower bound
+            cnt_ones = m - self.lower_bound(matrix[i], m, 1)
+            if cnt_ones &gt; cnt_max:
+                cnt_max = cnt_ones
+                index = i
+        return index  # Return row index with most 1s
+
+
+# Driver code
+if __name__ == "__main__":
+    matrix = [[1, 1, 1], [0, 0, 1], [0, 0, 0]]
+    n, m = 3, 3
+
+    obj = Solution()
+    print("The row with maximum no. of 1's is:", obj.row_with_max_1s(matrix, n, m))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">
+class Solution {
+    // Binary search to find the lower bound (first index where value &gt;= x)
+    lowerBound(arr, n, x) {
+        let low = 0, high = n - 1;
+        let ans = n;  // Default if x is not found
+
+        while (low &lt;= high) {
+            let mid = Math.floor((low + high) / 2);
+            if (arr[mid] &gt;= x) {
+                ans = mid;      // Potential answer found
+                high = mid - 1; // Try left side
+            } else {
+                low = mid + 1;  // Try right side
+            }
+        }
+        return ans;  // Return first index where element &gt;= x
+    }
+
+    // Function to find the row with the most 1s
+    rowWithMax1s(matrix, n, m) {
+        let cnt_max = 0; // Max number of 1s found so far
+        let index = -1;  // Index of the row with max 1s
+
+        // Iterate through each row
+        for (let i = 0; i &lt; n; i++) {
+            // Number of 1s = total columns - index of first 1
+            let cnt_ones = m - this.lowerBound(matrix[i], m, 1);
+            if (cnt_ones &gt; cnt_max) {
+                cnt_max = cnt_ones;
+                index = i;
+            }
+        }
+        return index;  // Return the index of the row with most 1s
+    }
+}
+
+// Driver code
+const matrix = [[1, 1, 1], [0, 0, 1], [0, 0, 0]];
+const n = 3, m = 3;
+
+const obj = new Solution();
+console.log("The row with maximum no. of 1's is:", obj.rowWithMax1s(matrix, n, m));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+</p><p>Time Complexity:O(n X logm), where n = given row number, m = given column number. We are using a loop running for n times to traverse the rows. Then we are applying binary search on each row with m columns.</p>
+<p>Space Complexity: O(1), no extra space is used.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

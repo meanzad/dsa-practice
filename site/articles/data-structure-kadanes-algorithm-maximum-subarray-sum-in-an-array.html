@@ -1,0 +1,1146 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Kadane&#x27;s Algorithm : Maximum Subarray Sum in an Array</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Kadane&#x27;s Algorithm : Maximum Subarray Sum in an Array</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/kadanes-algorithm-maximum-subarray-sum-in-an-array/</code></div>
+  <p><strong>Problem Statement: </strong>
+Given an integer array nums, find the subarray with the largest sum and return the sum of the elements present in that subarray.
+<br/><br/>
+A subarray is a contiguous non-empty sequence of elements within an array.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>  
+<strong>Input:</strong> nums = [2, 3, 5, -2, 7, -4]  
+<strong>Output:</strong> 15  
+<strong>Explanation:</strong> The subarray from index 0 to index 4 has the largest sum = 15, which is the maximum sum of any contiguous subarray.
+
+<strong>Example 2:</strong>  
+<strong>Input:</strong> nums = [-2, -3, -7, -2, -10, -4]  
+<strong>Output:</strong> -2  
+<strong>Explanation:</strong> The largest sum is -2, which comes from taking the element at index 0 or index 3 as the subarray. Since all numbers are negative, the subarray with the least negative number gives the largest sum.</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/kadane's-algorithm" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Brute Force 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Iterate through the array with variable <code>i</code>, which represents the starting index of each subarray. The possible values for <code>i</code> range from 0 to <code>n-1</code>, where <code>n</code> is the size of the array.</li>
+<li>Inside the first loop, run another loop with variable <code>j</code> that represents the ending index of the subarray. For each <code>i</code>, <code>j</code> can range from <code>i</code> to <code>n-1</code>.</li>
+<li>For each subarray defined by <code>i</code> and <code>j</code>, iterate through its elements to calculate the sum. Maintain a variable, <code>max</code>, to store the maximum sum encountered so far during the iteration.</li>
+<li>At each step, compare the current subarray sum with the current <code>max</code> value. If the current sum is greater, update the <code>max</code> value with the new sum.</li>
+<li>Finally, after completing all iterations, return the <code>max</code> variable, which holds the maximum sum of any subarray.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    //Function to find maximum sum of subarrays
+    int maxSubArray(vector&lt;int&gt;&amp; nums) {
+        
+        /* Initialize maximum sum with 
+        the smallest possible integer*/
+        int maxi = INT_MIN; 
+
+        // Iterate over each starting index of subarrays
+        for (int i = 0; i &lt; nums.size(); i++) {
+            
+            /* Iterate over each ending index
+            of subarrays starting from i*/
+            for (int j = i; j &lt; nums.size(); j++) {
+                
+                // Variable to store the sum of the current subarray
+                int sum = 0; 
+
+                // Calculate the sum of subarray nums[i...j]
+                for (int k = i; k &lt;= j; k++) {
+                    sum += nums[k];
+                }
+
+                /* Update maxi with the maximum of its current 
+                value and the sum of the current subarray*/
+                maxi = max(maxi, sum);
+                
+            }
+        }
+        
+        // Return the maximum subarray sum found
+        return maxi; 
+    }
+};
+
+int main() {
+    vector&lt;int&gt; arr = { -2, 1, -3, 4, -1, 2, 1, -5, 4};
+    
+    //create an instance of Solution class
+    Solution sol;
+    
+    int maxSum = sol.maxSubArray(arr);
+    
+    //Print the max subarray sum
+    cout &lt;&lt; "The maximum subarray sum is: " &lt;&lt; maxSum &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to find maximum sum of subarrays
+    public int maxSubArray(int[] nums) {
+        
+        /* Initialize maximum sum with
+           the smallest possible integer */
+        int maxi = Integer.MIN_VALUE;
+
+        // Iterate over each starting index of subarrays
+        for (int i = 0; i &lt; nums.length; i++) {
+            
+            /* Iterate over each ending index
+               of subarrays starting from i */
+            for (int j = i; j &lt; nums.length; j++) {
+                
+                /* Variable to store the sum
+                   of the current subarray */
+                int sum = 0;
+
+                // Calculate the sum of subarray nums[i...j]
+                for (int k = i; k &lt;= j; k++) {
+                    sum += nums[k];
+                }
+
+                /* Update maxi with the maximum of its current
+                   value and the sum of the current subarray */
+                maxi = Math.max(maxi, sum);
+            }
+        }
+
+        // Return the maximum subarray sum found
+        return maxi;
+    }
+}
+
+// Separate Main class
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
+
+        // Create an instance of Solution class
+        Solution sol = new Solution();
+
+        int maxSum = sol.maxSubArray(arr);
+
+        // Print the max subarray sum
+        System.out.println("The maximum subarray sum is: " + maxSum);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">from typing import List
+
+class Solution:
+    # Function to find maximum sum of subarrays
+    def maxSubArray(self, nums: list[int]) -&gt; int:
+        
+        """ Initialize maximum sum with
+        the smallest possible integer"""
+        maxi = float('-inf')
+
+        # Iterate over each starting index of subarrays
+        for i in range(len(nums)):
+            
+            """ Iterate over each ending index
+            of subarrays starting from i"""
+            for j in range(i, len(nums)):
+                
+                """ Variable to store the sum
+                of the current subarray"""
+                sum = 0
+
+                # Calculate the sum of subarray nums[i...j]
+                for k in range(i, j + 1):
+                    sum += nums[k]
+
+                """ Update maxi with the maximum of itscurrent
+                value and the sum of the current subarray"""
+                maxi = max(maxi, sum)
+
+        # Return the maximum subarray sum found
+        return maxi
+
+# Test
+arr = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+
+#create an isinstance of Solution class
+sol = Solution()
+
+maxSum = sol.maxSubArray(arr)
+
+#Print the max sum of subarrays
+print("The maximum subarray sum is:", maxSum)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find maximum sum of subarrays
+    maxSubArray(nums) {
+        
+        /* Initialize maximum sum with
+        the smallest possible integer*/
+        let maxi = -Infinity;
+
+        // Iterate over each starting index of subarrays
+        for (let i = 0; i &lt; nums.length; i++) {
+            
+            /* Iterate over each ending index
+            of subarrays starting from i*/
+            for (let j = i; j &lt; nums.length; j++) {
+                
+                /* Variable to store the sum
+                of the current subarray*/
+                let sum = 0;
+
+                // Calculate the sum of subarray nums[i...j]
+                for (let k = i; k &lt;= j; k++) {
+                    sum += nums[k];
+                }
+
+                /* Update maxi with the maximum of its current
+                value and the sum of the current subarray*/
+                maxi = Math.max(maxi, sum);
+                
+            }
+        }
+
+        // Return the maximum subarray sum found
+        return maxi;
+    }
+}
+
+// Main function to test the Solution class
+function main() {
+    let arr = [-2, 1, -3, 4, -1, 2, 1, -5, 4];
+
+    // Create an instance of Solution class
+    let sol = new Solution();
+
+    let maxSum = sol.maxSubArray(arr);
+
+    // Print the max subarray sum
+    console.log("The maximum subarray sum is: " + maxSum);
+}
+
+main();
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity:</strong> O(N^3), where N is the size of the array. This is because we have three nested loops: one for the starting index, one for the ending index, and one for calculating the sum of the subarray.
+                        <br/><br/>
+<strong>Space Complexity:</strong> O(1), as we are using a constant amount of space for variables, regardless of the input size.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="better-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Better Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Iterate through the array with variable <code>i</code>, which represents the starting index of each subarray. The possible values for <code>i</code> range from 0 to <code>n-1</code>, where <code>n</code> is the size of the array.</li>
+<li>Inside the first loop, iterate again with variable <code>j</code> to signify the ending index of the subarray and the current element of the subarray. For each <code>i</code>, <code>j</code> can range from <code>i</code> to <code>n-1</code>.</li>
+<li>For each subarray defined by <code>i</code> and <code>j</code>, add the current element at <code>arr[j]</code> to the sum of the previous subarray.</li>
+<li>Keep track of the maximum sum encountered during the iteration using a variable, say <code>maxSum</code>, and update it whenever a greater sum is found.</li>
+<li>Once all iterations are complete, return <code>maxSum</code> as the maximum sum of all subarrays.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find maximum sum of subarrays
+    int maxSubArray(vector&lt;int&gt;&amp; nums) {
+        
+        /* Initialize maximum sum with
+        the smallest possible integer*/
+        int maxi = INT_MIN; 
+
+        // Iterate over each starting index of subarrays
+        for (int i = 0; i &lt; nums.size(); i++) {
+            
+            /* Variable to store the sum
+            of the current subarray*/
+            int sum = 0; 
+            
+            /* Iterate over each ending index
+            of subarrays starting from i*/
+            for (int j = i; j &lt; nums.size(); j++) {
+                
+                /* Add the current element nums[j] to
+                the sum i.e. sum of nums[i...j-1]*/
+                sum += nums[j];
+
+                /* Update maxi with the maximum of its current
+                value and the sum of the current subarray*/
+                maxi = max(maxi, sum);
+            }
+        }
+
+        // Return the maximum subarray sum found
+        return maxi;
+    }
+};
+
+int main() {
+    vector&lt;int&gt; arr = { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
+
+    // Create an instance of Solution class
+    Solution sol;
+
+    int maxSum = sol.maxSubArray(arr);
+
+    // Print the max subarray sum
+    cout &lt;&lt; "The maximum subarray sum is: " &lt;&lt; maxSum &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to find maximum sum of subarrays
+    public int maxSubArray(int[] nums) {
+        
+        /* Initialize maximum sum with
+           the smallest possible integer */
+        int maxi = Integer.MIN_VALUE;
+
+        // Iterate over each starting index of subarrays
+        for (int i = 0; i &lt; nums.length; i++) {
+            
+            /* Variable to store the sum
+               of the current subarray */
+            int sum = 0; 
+            
+            /* Iterate over each ending index
+               of subarrays starting from i */
+            for (int j = i; j &lt; nums.length; j++) {
+                
+                /* Add the current element nums[j] to
+                   the sum i.e. sum of nums[i...j-1] */
+                sum += nums[j];
+
+                /* Update maxi with the maximum of its current
+                   value and the sum of the current subarray */
+                maxi = Math.max(maxi, sum);
+            }
+        }
+
+        // Return the maximum subarray sum found
+        return maxi;
+    }
+}
+
+// Separate Main class in the same file
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
+
+        // Create an instance of Solution class
+        Solution sol = new Solution();
+
+        int maxSum = sol.maxSubArray(arr);
+
+        // Print the max subarray sum
+        System.out.println("The maximum subarray sum is: " + maxSum);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">from typing import List
+
+class Solution:
+    # Function to find maximum sum of subarrays
+    def maxSubArray(self, nums: List[int]) -&gt; int:
+        
+        """ Initialize maximum sum with
+         the smallest possible integer"""
+        maxi = float('-inf')
+
+        # Iterate over each starting index of subarrays
+        for i in range(len(nums)):
+            
+            """ Variable to store the sum
+             of the current subarray"""
+            sum = 0
+            
+            """ Iterate over each ending index
+             of subarrays starting from i"""
+            for j in range(i, len(nums)):
+                
+                """ Add the current element nums[j] to
+                 the sum i.e. sum of nums[i...j-1]"""
+                sum += nums[j]
+
+                """ Update maxi with the maximum of its current
+                 value and the sum of the current subarray"""
+                maxi = max(maxi, sum)
+
+        # Return the maximum subarray sum found
+        return maxi
+
+# Main function to test the Solution class
+if __name__ == "__main__":
+    arr = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+
+    # Create an instance of Solution class
+    sol = Solution()
+
+    maxSum = sol.maxSubArray(arr)
+
+    # Print the max subarray sum
+    print(f"The maximum subarray sum is: {maxSum}")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find maximum sum of subarrays
+    maxSubArray(nums) {
+        
+        /* Initialize maximum sum with
+        the smallest possible integer*/
+        let maxi = -Infinity; 
+
+        // Iterate over each starting index of subarrays
+        for (let i = 0; i &lt; nums.length; i++) {
+            
+            /* Variable to store the sum
+            of the current subarray*/
+            let sum = 0; 
+            
+            /* Iterate over each ending index
+            of subarrays starting from i*/
+            for (let j = i; j &lt; nums.length; j++) {
+                
+                /* Add the current element nums[j] to
+                the sum i.e. sum of nums[i...j-1]*/
+                sum += nums[j];
+
+                /* Update maxi with the maximum of its current
+                value and the sum of the current subarray*/
+                maxi = Math.max(maxi, sum);
+            }
+        }
+
+        // Return the maximum subarray sum found
+        return maxi;
+    }
+}
+
+function main() {
+    let arr = [ -2, 1, -3, 4, -1, 2, 1, -5, 4 ];
+
+    // Create an instance of Solution class
+    let sol = new Solution();
+
+    let maxSum = sol.maxSubArray(arr);
+
+    // Print the max subarray sum
+    console.log("The maximum subarray sum is: " + maxSum);
+}
+
+// Execute the main function
+main();
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(N^2)</strong>, where N is the size of the array. This is because we have two nested loops: one for the starting index and one for the ending index of the subarray.
+                        <br/><br/>
+<strong>Space Complexity: O(1)</strong>, as we are using a constant amount of space for variables, regardless of the input size.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach-1">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Iterate through the array using a variable <code>i</code>. During each iteration, add the current element <code>arr[i]</code> to a running <code>sum</code> variable.</li>
+<li>Keep track of the maximum sum encountered during the iteration by comparing the current <code>sum</code> with the previous maximum sum, and update it if the current <code>sum</code> is greater.</li>
+<li>If at any point the <code>sum</code> becomes negative, reset it to 0, as a negative sum won't contribute positively to the overall maximum sum.</li>
+<li>Continue the iteration until all elements in the array are processed.</li>
+<li>Finally, return the maximum sum encountered during the iteration.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/50fd772baef1a6e4.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/b2677f5c6920b515.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/444bd38d596e9c83.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/5f62802bced01028.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/d783711f79ac7518.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/50fd772baef1a6e4.png"/><img alt="Image 2" loading="lazy" src="../assets/img/b2677f5c6920b515.png"/><img alt="Image 3" loading="lazy" src="../assets/img/444bd38d596e9c83.png"/><img alt="Image 4" loading="lazy" src="../assets/img/5f62802bced01028.png"/><img alt="Image 5" loading="lazy" src="../assets/img/d783711f79ac7518.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find maximum sum of subarrays
+    int maxSubArray(vector&lt;int&gt;&amp; nums) {
+        
+        // maximum sum
+        long long maxi = LLONG_MIN; 
+        
+        // current sum of subarray
+        long long sum = 0; 
+        
+        // Iterate through the array
+        for (int i = 0; i &lt; nums.size(); i++) {
+            
+            // Add current element to the sum
+            sum += nums[i]; 
+            
+            // Update maxi if current sum is greater
+            if (sum &gt; maxi) {
+                maxi = sum; 
+            }
+            
+            // Reset sum to 0 if it becomes negative
+            if (sum &lt; 0) {
+                sum = 0; 
+            }
+        }
+        
+        // Return the maximum subarray sum found
+        return maxi;
+    }
+};
+
+int main() {
+    vector&lt;int&gt; arr = { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
+
+    // Create an instance of Solution class
+    Solution sol;
+
+    int maxSum = sol.maxSubArray(arr);
+
+    // Print the max subarray sum
+    cout &lt;&lt; "The maximum subarray sum is: " &lt;&lt; maxSum &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to find maximum sum of subarrays
+    public int maxSubArray(int[] nums) {
+        
+        // Maximum sum
+        long maxi = Long.MIN_VALUE; 
+        
+        // Current sum of subarray 
+        long sum = 0; 
+        
+        // Iterate through the array
+        for (int i = 0; i &lt; nums.length; i++) {
+            
+            // Add current element to the sum
+            sum += nums[i]; 
+            
+            // Update maxi if current sum is greater
+            if (sum &gt; maxi) {
+                maxi = sum; 
+            }
+            
+            // Reset sum to 0 if it becomes negative
+            if (sum &lt; 0) {
+                sum = 0; 
+            }
+        }
+        
+        // Return the maximum subarray sum found
+        return (int) maxi;
+    }
+}
+
+// Separate Main class in same file
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
+
+        // Create an instance of Solution class
+        Solution sol = new Solution();
+
+        int maxSum = sol.maxSubArray(arr);
+
+        // Print the max subarray sum
+        System.out.println("The maximum subarray sum is: " + maxSum);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">from typing import List
+
+class Solution:
+    # Function to find maximum sum of subarrays
+    def maxSubArray(self, nums: List[int]) -&gt; int:
+        
+        # maximum sum
+        maxi = float('-inf') 
+        
+        # current sum of subarray
+        sum = 0 
+        
+        # Iterate through the array
+        for i in range(len(nums)):
+            
+            # Add current element to the sum
+            sum += nums[i] 
+            
+            # Update maxi if current sum is greater
+            if sum &gt; maxi:
+                maxi = sum 
+            
+            # Reset sum to 0 if it becomes negative
+            if sum &lt; 0:
+                sum = 0 
+        
+        # Return the maximum subarray sum found
+        return maxi
+
+if __name__ == "__main__":
+    arr = [ -2, 1, -3, 4, -1, 2, 1, -5, 4 ]
+
+    # Create an instance of Solution class
+    sol = Solution()
+
+    maxSum = sol.maxSubArray(arr)
+
+    # Print the max subarray sum
+    print(f"The maximum subarray sum is: {maxSum}")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find maximum sum of subarrays
+    maxSubArray(nums) {
+        
+        // maximum sum
+        let maxi = -Infinity; 
+        
+        // current sum of subarray
+        let sum = 0; 
+        
+        // Iterate through the array
+        for (let i = 0; i &lt; nums.length; i++) {
+            
+            // Add current element to the sum
+            sum += nums[i]; 
+            
+            // Update maxi if current sum is greater
+            if (sum &gt; maxi) {
+                maxi = sum; 
+            }
+            
+            // Reset sum to 0 if it becomes negative
+            if (sum &lt; 0) {
+                sum = 0; 
+            }
+        }
+        
+        // Return the maximum subarray sum found
+        return maxi;
+    }
+}
+
+function main() {
+    let arr = [ -2, 1, -3, 4, -1, 2, 1, -5, 4 ];
+
+    // Create an instance of Solution class
+    let sol = new Solution();
+
+    let maxSum = sol.maxSubArray(arr);
+
+    // Print the max subarray sum
+    console.log("The maximum subarray sum is: " + maxSum);
+}
+
+// Execute the main function
+main();
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity:</strong> O(n), where n is the number of elements in the array. We traverse the array only once.
+                        <br/><br/>
+<strong>Space Complexity:</strong> O(1). We use a constant amount of space for variables.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach-2">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Follow Up
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm / Intuition
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<h2>Follow-up Question:</h2>
+<p>Can you print the subarray that has the maximum sum?</p>
+<h2>Approach:</h2>
+<ul>
+<li>Start by iterating through the array using a variable <strong>i</strong>. During each iteration, add the current element <strong>arr[i]</strong> to a running <strong>sum</strong> variable.</li>
+<li>Initialize a <strong>start</strong> variable to keep track of the starting index of the current subarray.</li>
+<li>Use <strong>ansStart</strong> and <strong>ansEnd</strong> to store the starting and ending indices of the subarray with the maximum sum found so far. Initially, set both to <strong>-1</strong>.</li>
+<li>If the current <strong>sum</strong> is greater than the previous maximum sum, update <strong>ansStart</strong> to <strong>start</strong> and <strong>ansEnd</strong> to <strong>i</strong>.</li>
+<li>If the <strong>sum</strong> becomes negative at any point, reset it to <strong>0</strong> and set <strong>start</strong> to <strong>i + 1</strong> to start a new subarray.</li>
+<li>After processing all elements, <strong>ansStart</strong> and <strong>ansEnd</strong> will point to the starting and ending indices of the subarray with the maximum sum.</li>
+<li>Return the subarray from <strong>arr[ansStart]</strong> to <strong>arr[ansEnd]</strong>.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find maximum sum of subarrays and print the subarray having maximum sum
+    int maxSubArray(vector&lt;int&gt;&amp; nums) {
+        
+        // maximum sum
+        long long maxi = LLONG_MIN; 
+        
+        // current sum of subarray
+        long long sum = 0;
+        
+        // starting index of current subarray
+        int start = 0; 
+        
+        // indices of the maximum sum subarray
+        int ansStart = -1, ansEnd = -1; 
+        
+        // Iterate through the array
+        for (int i = 0; i &lt; nums.size(); i++) {
+            
+            // update starting index if sum is reset
+            if (sum == 0) {
+                start = i;
+            }
+            
+            // add current element to the sum
+            sum += nums[i]; 
+            
+            /* Update maxi and subarray indice
+            s if current sum is greater*/
+            if (sum &gt; maxi) {
+                maxi = sum;
+                ansStart = start;
+                ansEnd = i;
+            }
+            
+            // Reset sum to 0 if it becomes negative
+            if (sum &lt; 0) {
+                sum = 0;
+            }
+        }
+        
+        // Printing the subarray
+        cout &lt;&lt; "The subarray is: [";
+        for (int i = ansStart; i &lt;= ansEnd; i++) {
+            cout &lt;&lt; nums[i] &lt;&lt; " ";
+        }
+        cout &lt;&lt; "]" &lt;&lt; endl;
+        
+        // Return the maximum subarray sum found
+        return maxi;
+    }
+};
+
+int main() {
+    vector&lt;int&gt; arr = { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
+
+    // Create an instance of Solution class
+    Solution sol;
+
+    int maxSum = sol.maxSubArray(arr);
+
+    // Print the max subarray sum
+    cout &lt;&lt; "The maximum subarray sum is: " &lt;&lt; maxSum &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to find maximum sum of subarrays and print the subarray having maximum sum
+    public int maxSubArray(int[] nums) {
+        
+        // Maximum sum
+        long maxi = Long.MIN_VALUE; 
+        
+        // Current sum of subarray
+        long sum = 0; 
+        
+        // Starting index of current subarray
+        int start = 0; 
+        
+        // Indices of the maximum sum subarray
+        int ansStart = -1, ansEnd = -1; 
+        
+        // Iterate through the array
+        for (int i = 0; i &lt; nums.length; i++) {
+            
+            // Update starting index if sum is reset
+            if (sum == 0) {
+                start = i;
+            }
+            
+            // Add current element to the sum
+            sum += nums[i]; 
+            
+            // Update maxi and subarray indices if current sum is greater
+            if (sum &gt; maxi) {
+                maxi = sum;
+                ansStart = start;
+                ansEnd = i;
+            }
+            
+            // Reset sum to 0 if it becomes negative
+            if (sum &lt; 0) {
+                sum = 0;
+            }
+        }
+        
+        // Printing the subarray
+        System.out.print("The subarray is: [");
+        for (int i = ansStart; i &lt;= ansEnd; i++) {
+            System.out.print(nums[i] + " ");
+        }
+        System.out.println("]");
+
+        // Return the maximum subarray sum found
+        return (int) maxi;
+    }
+}
+
+// Separate Main class
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
+
+        // Create an instance of Solution class
+        Solution sol = new Solution();
+
+        int maxSum = sol.maxSubArray(arr);
+
+        // Print the max subarray sum
+        System.out.println("The maximum subarray sum is: " + maxSum);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">from typing import List
+
+class Solution:
+    # Function to find maximum sum of subarrays and print the subarray having maximum sum
+    def maxSubArray(self, nums: List[int]) -&gt; int:
+        
+        # maximum sum
+        maxi = float('-inf') 
+        
+        # current sum of subarray
+        sum = 0 
+        
+        # starting index of current subarray
+        start = 0 
+        
+        # indices of the maximum sum subarray
+        ansStart = -1
+        ansEnd = -1
+        
+        # Iterate through the array
+        for i in range(len(nums)):
+            
+            # update starting index if sum is reset
+            if sum == 0:
+                start = i
+            
+            # add current element to the sum
+            sum += nums[i] 
+            
+            """ Update maxi and subarray indices
+            if current sum is greater """
+            if sum &gt; maxi:
+                maxi = sum
+                ansStart = start
+                ansEnd = i
+            
+            # Reset sum to 0 if it becomes negative
+            if sum &lt; 0:
+                sum = 0
+        
+        # Printing the subarray
+        print("The subarray is: [", end="")
+        for i in range(ansStart, ansEnd + 1):
+            print(nums[i], end=" ")
+        print("]")
+
+        # Return the maximum subarray sum found
+        return maxi
+
+if __name__ == "__main__":
+    arr = [ -2, 1, -3, 4, -1, 2, 1, -5, 4 ]
+
+    # Create an instance of Solution class
+    sol = Solution()
+
+    maxSum = sol.maxSubArray(arr)
+
+    # Print the max subarray sum
+    print(f"The maximum subarray sum is: {maxSum}")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+   // Function to find maximum sum of subarrays and print the subarray having maximum sum
+    maxSubArray(nums) {
+        
+        // maximum sum
+        let maxi = -Infinity; 
+        
+        // current sum of subarray
+        let sum = 0; 
+        
+        // starting index of current subarray
+        let start = 0; 
+        
+        // indices of the maximum sum subarray
+        let ansStart = -1, ansEnd = -1; 
+        
+        // Iterate through the array
+        for (let i = 0; i &lt; nums.length; i++) {
+            
+            // update starting index if sum is reset
+            if (sum === 0) {
+                start = i;
+            }
+            
+            // add current element to the sum
+            sum += nums[i]; 
+            
+            /* Update maxi and subarray indices
+            if current sum is greater */
+            if (sum &gt; maxi) {
+                maxi = sum;
+                ansStart = start;
+                ansEnd = i;
+            }
+            
+            // Reset sum to 0 if it becomes negative
+            if (sum &lt; 0) {
+                sum = 0;
+            }
+        }
+        
+        // Printing the subarray
+        process.stdout.write("The subarray is: [");
+        for (let i = ansStart; i &lt;= ansEnd; i++) {
+            process.stdout.write(nums[i] + " ");
+        }
+        console.log("]");
+
+        // Return the maximum subarray sum found
+        return maxi;
+    }
+}
+
+function main() {
+    let arr = [ -2, 1, -3, 4, -1, 2, 1, -5, 4 ];
+
+    // Create an instance of Solution class
+    let sol = new Solution();
+
+    let maxSum = sol.maxSubArray(arr);
+
+    // Print the max subarray sum
+    console.log("The maximum subarray sum is: " + maxSum);
+}
+
+// Execute the main function
+main();
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(n)</strong>, where n is the number of elements in the array. We traverse the array only once.
+                        <br/><br/>
+<strong>Space Complexity: O(1)</strong>. We use a constant amount of space for variables.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

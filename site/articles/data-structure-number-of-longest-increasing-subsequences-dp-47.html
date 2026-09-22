@@ -1,0 +1,801 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Number of Longest Increasing Subsequences | (DP-47)</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Number of Longest Increasing Subsequences | (DP-47)</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/number-of-longest-increasing-subsequences-dp-47/</code></div>
+  <p><strong>Problem Description: </strong>Given an integer array nums, find the number of Longest Increasing Subsequences (LIS) in the array.<br/><br/>The Longest Increasing Subsequence (LIS) is the longest subsequence where all elements are in strictly increasing order.
+
+</p>
+
+<p>Prerequisite:<a href="https://takeuforward.org/data-structure/longest-increasing-subsequence-dp-41/" rel="noopener" target="_blank">Longest increasing subsequence</a>, <a href="https://takeuforward.org/data-structure/printing-longest-increasing-subsequence-dp-42/" rel="noopener" target="_blank">Printing Longest Increasing subsequence</a></p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: nums = [1, 3, 5, 4, 7]</span>
+<span>Output: 2</span>
+<span>Explanation: There are two LIS of length 4: [1, 3, 4, 7] and [1, 3, 5, 7].</span>
+<img height="600;" loading="lazy" src="../assets/img/027619ea9f72b7b2.png" width="600"/>
+<span>Input: nums = [2, 2, 2, 2, 2]</span>
+<span>Output: 5 </span>
+<span>Explanation: All elements are the same, so every single element can form an LIS of length 1. There are 5 such subsequences.</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/number-of-longest-increasing-subsequences" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better.
+            It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                   Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+In the normal LIS problem, we keep track of the length of the longest increasing subsequence ending at each element. However, when counting the total number of LIS, we also need to store how many such sequences of that length end at that element.<br/><br/> As we iterate through the array, if we find a longer subsequence for a position, we update its length and replace the count with the number of ways to form that new longer subsequence. If we instead find another subsequence of the same maximum length ending at that position, we add to the existing count to account for the new path.<br/><br/> In the end, we sum the counts of all elements whose LIS length matches the overall maximum length, giving us the total number of longest increasing subsequences in the array.
+
+<ul>
+<li>Start by preparing two separate lists, one to store the lengths of the increasing subsequences ending at each position, and another to store how many such subsequences exist for that position.</li>
+<li>Initially, set the length at each position to 1 (since a single element itself is a valid subsequence) and the count at each position to 1 (since there is at least one such subsequence of length 1).</li>
+<li>For each position in the sequence, compare it with all previous positions. If the previous element is smaller and using it leads to a longer subsequence, update the length for the current position and set its count equal to the count from that previous position.</li>
+<li>If the previous element is smaller and using it leads to a subsequence of the same maximum length as already stored for the current position, add the count from the previous position to the current position’s count.</li>
+<li>After processing all positions, find the largest length value. This is the length of the longest increasing subsequence.</li>
+<li>Sum up the counts of all positions whose length matches the maximum length. This total represents the number of longest increasing subsequences.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/e2b57feb19fe8a84.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/d391e25a1f186495.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/8ab4d7622bbd13ed.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/fbfaed163f8e9ee0.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/abeef0531e5acfb7.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/826bb94d75cdd618.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/e2b57feb19fe8a84.png"/><img alt="Image 2" loading="lazy" src="../assets/img/d391e25a1f186495.png"/><img alt="Image 3" loading="lazy" src="../assets/img/8ab4d7622bbd13ed.png"/><img alt="Image 4" loading="lazy" src="../assets/img/fbfaed163f8e9ee0.png"/><img alt="Image 5" loading="lazy" src="../assets/img/abeef0531e5acfb7.png"/><img alt="Image 6" loading="lazy" src="../assets/img/826bb94d75cdd618.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Class containing the method to find the count of Longest Increasing Subsequences
+class Solution {
+public:
+    // Method to calculate the count of LIS
+    int findNumberOfLIS(vector&lt;int&gt;&amp; arr) {
+        // Store the size of the input sequence
+        int n = arr.size();
+
+        // Store the length of the increasing subsequence ending at each position
+        vector&lt;int&gt; dp(n, 1);
+
+        // Store the count of increasing subsequences ending at each position
+        vector&lt;int&gt; ct(n, 1);
+
+        // Track the maximum subsequence length found so far
+        int maxi = 1;
+
+        // Loop through each position in the sequence
+        for (int i = 0; i &lt; n; i++) {
+            // Compare the current position with all previous positions
+            for (int j = 0; j &lt; i; j++) {
+                // If an increasing sequence is found that is longer than the current best for this position
+                if (arr[j] &lt; arr[i] &amp;&amp; dp[j] + 1 &gt; dp[i]) {
+                    // Update the best subsequence length for this position
+                    dp[i] = dp[j] + 1;
+
+                    // Reset the count to match the source subsequence count
+                    ct[i] = ct[j];
+                }
+                // If an increasing sequence of the same best length is found
+                else if (arr[j] &lt; arr[i] &amp;&amp; dp[j] + 1 == dp[i]) {
+                    // Add the count of subsequences from the previous position
+                    ct[i] = ct[i] + ct[j];
+                }
+            }
+            // Update the global maximum subsequence length if needed
+            maxi = max(maxi, dp[i]);
+        }
+
+        // Store the total number of subsequences of maximum length
+        int countLIS = 0;
+
+        // Sum the counts of all positions where the length equals the maximum length
+        for (int i = 0; i &lt; n; i++) {
+            if (dp[i] == maxi) {
+                countLIS += ct[i];
+            }
+        }
+
+        // Return the total number of longest increasing subsequences
+        return countLIS;
+    }
+};
+
+int main() {
+    // Define the input sequence
+    vector&lt;int&gt; arr = {1, 5, 4, 3, 2, 6, 7, 2};
+
+    // Create an object of Solution class
+    Solution sol;
+
+    // Output the total count of longest increasing subsequences
+    cout &lt;&lt; "The count of Longest Increasing Subsequences (LIS) is " 
+         &lt;&lt; sol.findNumberOfLIS(arr) &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Method to calculate the count of LIS
+    public int findNumberOfLIS(int[] arr) {
+        // Store the size of the input sequence
+        int n = arr.length;
+
+        // Store the length of the increasing subsequence ending at each position
+        int[] dp = new int[n];
+        Arrays.fill(dp, 1);
+
+        // Store the count of increasing subsequences ending at each position
+        int[] ct = new int[n];
+        Arrays.fill(ct, 1);
+
+        // Track the maximum subsequence length found so far
+        int maxi = 1;
+
+        // Loop through each position in the sequence
+        for (int i = 0; i &lt; n; i++) {
+            // Compare the current position with all previous positions
+            for (int j = 0; j &lt; i; j++) {
+                // If an increasing sequence is found that is longer than the current best for this position
+                if (arr[j] &lt; arr[i] &amp;&amp; dp[j] + 1 &gt; dp[i]) {
+                    // Update the best subsequence length for this position
+                    dp[i] = dp[j] + 1;
+
+                    // Reset the count to match the source subsequence count
+                    ct[i] = ct[j];
+                }
+                // If an increasing sequence of the same best length is found
+                else if (arr[j] &lt; arr[i] &amp;&amp; dp[j] + 1 == dp[i]) {
+                    // Add the count of subsequences from the previous position
+                    ct[i] = ct[i] + ct[j];
+                }
+            }
+            // Update the global maximum subsequence length if needed
+            maxi = Math.max(maxi, dp[i]);
+        }
+
+        // Store the total number of subsequences of maximum length
+        int countLIS = 0;
+
+        // Sum the counts of all positions where the length equals the maximum length
+        for (int i = 0; i &lt; n; i++) {
+            if (dp[i] == maxi) {
+                countLIS += ct[i];
+            }
+        }
+
+        // Return the total number of longest increasing subsequences
+        return countLIS;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Define the input sequence
+        int[] arr = {1, 5, 4, 3, 2, 6, 7, 2};
+
+        // Create an object of Solution class
+        Solution sol = new Solution();
+
+        // Output the total count of longest increasing subsequences
+        System.out.println("The count of Longest Increasing Subsequences (LIS) is " 
+                           + sol.findNumberOfLIS(arr));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Method to calculate the count of LIS
+    def findNumberOfLIS(self, arr):
+        # Store the size of the input sequence
+        n = len(arr)
+
+        # Store the length of the increasing subsequence ending at each position
+        dp = [1] * n
+
+        # Store the count of increasing subsequences ending at each position
+        ct = [1] * n
+
+        # Track the maximum subsequence length found so far
+        maxi = 1
+
+        # Loop through each position in the sequence
+        for i in range(n):
+            # Compare the current position with all previous positions
+            for j in range(i):
+                # If an increasing sequence is found that is longer than the current best for this position
+                if arr[j] &lt; arr[i] and dp[j] + 1 &gt; dp[i]:
+                    # Update the best subsequence length for this position
+                    dp[i] = dp[j] + 1
+
+                    # Reset the count to match the source subsequence count
+                    ct[i] = ct[j]
+                # If an increasing sequence of the same best length is found
+                elif arr[j] &lt; arr[i] and dp[j] + 1 == dp[i]:
+                    # Add the count of subsequences from the previous position
+                    ct[i] += ct[j]
+
+            # Update the global maximum subsequence length if needed
+            maxi = max(maxi, dp[i])
+
+        # Store the total number of subsequences of maximum length
+        countLIS = sum(ct[i] for i in range(n) if dp[i] == maxi)
+
+        # Return the total number of longest increasing subsequences
+        return countLIS
+
+
+if __name__ == "__main__":
+    # Define the input sequence
+    arr = [1, 5, 4, 3, 2, 6, 7, 2]
+
+    # Create an object of Solution class
+    sol = Solution()
+
+    # Output the total count of longest increasing subsequences
+    print("The count of Longest Increasing Subsequences (LIS) is", sol.findNumberOfLIS(arr))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Method to calculate the count of LIS
+    findNumberOfLIS(arr) {
+        // Store the size of the input sequence
+        let n = arr.length;
+
+        // Store the length of the increasing subsequence ending at each position
+        let dp = new Array(n).fill(1);
+
+        // Store the count of increasing subsequences ending at each position
+        let ct = new Array(n).fill(1);
+
+        // Track the maximum subsequence length found so far
+        let maxi = 1;
+
+        // Loop through each position in the sequence
+        for (let i = 0; i &lt; n; i++) {
+            // Compare the current position with all previous positions
+            for (let j = 0; j &lt; i; j++) {
+                // If an increasing sequence is found that is longer than the current best for this position
+                if (arr[j] &lt; arr[i] &amp;&amp; dp[j] + 1 &gt; dp[i]) {
+                    // Update the best subsequence length for this position
+                    dp[i] = dp[j] + 1;
+
+                    // Reset the count to match the source subsequence count
+                    ct[i] = ct[j];
+                }
+                // If an increasing sequence of the same best length is found
+                else if (arr[j] &lt; arr[i] &amp;&amp; dp[j] + 1 == dp[i]) {
+                    // Add the count of subsequences from the previous position
+                    ct[i] += ct[j];
+                }
+            }
+            // Update the global maximum subsequence length if needed
+            maxi = Math.max(maxi, dp[i]);
+        }
+
+        // Store the total number of subsequences of maximum length
+        let countLIS = 0;
+
+        // Sum the counts of all positions where the length equals the maximum length
+        for (let i = 0; i &lt; n; i++) {
+            if (dp[i] === maxi) {
+                countLIS += ct[i];
+            }
+        }
+
+        // Return the total number of longest increasing subsequences
+        return countLIS;
+    }
+}
+
+// Define the input sequence
+let arr = [1, 5, 4, 3, 2, 6, 7, 2];
+
+// Create an object of Solution class
+let sol = new Solution();
+
+// Output the total count of longest increasing subsequences
+console.log("The count of Longest Increasing Subsequences (LIS) is " + sol.findNumberOfLIS(arr));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N^2)</strong>, for each element, we compare it with all previous elements to check if it can extend an increasing subsequence.<br/>
+<strong>Space Complexity: O(N)</strong>, space used to store length array and count array array.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

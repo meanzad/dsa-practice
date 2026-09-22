@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Dijkstra’s Algorithm - Using Priority Queue : G-32</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Dijkstra’s Algorithm - Using Priority Queue : G-32</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/dijkstras-algorithm-using-priority-queue-g-32/</code></div>
+  <p><strong>Problem Statement: </strong> Given a weighted, undirected, and connected graph of V vertices and E edges, find the shortest distance of all the vertex's from the source vertex S.
+<br/>
+Note: The Graph doesn't contain any negative weight cycle.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input : V = 2, E = 1</span>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-6934" loading="lazy" src="../assets/img/aebdd9e8fdaf7e16.png"/></figure>
+<span>Output : [0, 9]</span>
+<span>Explanation : The source vertex is 0. Hence, the shortest distance of node 0 from the source is 0 and the shortest distance of node 1 from source will be 9.</span>
+<p></p>
+<span>Input : V = 3, E = 3</span>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-6935" loading="lazy" src="../assets/img/979c6cf983b6bdaf.png"/></figure>
+<span>Output : [4, 3, 0]</span>
+<span>Explanation : For nodes 2 to 0, we can follow the path 2-1-0. This has a distance of 1+3 = 4, whereas the path 2-0 has a distance of 6. So, the Shortest path from 2 to 0 is 4.</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/dijkstra's-algorithm" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. 
+    It's highly recommend trying to 
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+  In a weighted graph, the goal of Dijkstra’s algorithm is to find the shortest path from a source node to all other nodes. The idea is to always expand the closest node not yet processed.
+Using a priority queue (min-heap) ensures that we can efficiently pick the node with the smallest current distance, instead of scanning all nodes each time.<br/><br/>
+
+The algorithm starts with the source node at distance 0. At each step, the priority queue pops the node with the smallest distance. For every neighbor of that node, if the new distance through this node is shorter than the current stored distance, we update it and push the neighbor into the priority queue. This process continues until all nodes are processed.
+<ul> <li>Initialize a distance array with infinity for all nodes except the source (0).</li> <li>Use a priority queue (min-heap) to store pairs of (distance, node).</li> <li>Push the source with distance 0 into the queue.</li> <li>While the queue is not empty, pop the node with the smallest distance.</li> <li>If the popped distance is greater than the stored distance, skip it (already processed).</li> <li>For each neighbor of the current node, calculate the new distance.</li> <li>If the new distance is smaller than the stored one, update it and push the neighbor into the queue.</li> <li>After processing, the distance array will hold the shortest path distances from the source to all nodes.</li> </ul>
+<div class="image-carousel-container"><div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/8bc08f9b4c58dff2.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/164614d7483912a5.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/4c58b4ba70c64d8f.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/978ebf7555040a57.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/7c6cf57fe70bf7ac.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/8bc08f9b4c58dff2.png"/><img alt="Image 2" loading="lazy" src="../assets/img/164614d7483912a5.png"/><img alt="Image 3" loading="lazy" src="../assets/img/4c58b4ba70c64d8f.png"/><img alt="Image 4" loading="lazy" src="../assets/img/978ebf7555040a57.png"/><img alt="Image 5" loading="lazy" src="../assets/img/7c6cf57fe70bf7ac.png"/></div></div></div></div>
+</details></div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to implement Dijkstra's Algorithm
+    vector&lt;int&gt; dijkstra(int V, vector&lt;vector&lt;pair&lt;int,int&gt;&gt;&gt;&amp; adj, int src) {
+        // Distance array initialized to large value
+        vector&lt;int&gt; dist(V, 1e9);
+
+        // Min-heap storing {distance, node}
+        priority_queue&lt;pair&lt;int,int&gt;, vector&lt;pair&lt;int,int&gt;&gt;, 
+                       greater&lt;pair&lt;int,int&gt;&gt;&gt; pq;
+
+        // Distance to source is 0
+        dist[src] = 0;
+
+        // Push source into heap
+        pq.push({0, src});
+
+        // Process nodes until heap is empty
+        while (!pq.empty()) {
+            // Extract node with minimum distance
+            int d = pq.top().first;
+            int node = pq.top().second;
+            pq.pop();
+
+            // Skip if this distance is outdated
+            if (d &gt; dist[node]) continue;
+
+            // Traverse all adjacent neighbors
+            for (auto it : adj[node]) {
+                int next = it.first;
+                int wt = it.second;
+
+                // Relaxation check
+                if (dist[node] + wt &lt; dist[next]) {
+                    // Update distance
+                    dist[next] = dist[node] + wt;
+
+                    // Push updated distance into heap
+                    pq.push({dist[next], next});
+                }
+            }
+        }
+        return dist;
+    }
+};
+
+int main() {
+    // Number of vertices
+    int V = 5;
+
+    // Adjacency list {neighbor, weight}
+    vector&lt;vector&lt;pair&lt;int,int&gt;&gt;&gt; adj(V);
+
+    // Example edges
+    adj[0].push_back({1, 2});
+    adj[0].push_back({2, 4});
+    adj[1].push_back({2, 1});
+    adj[1].push_back({3, 7});
+    adj[2].push_back({4, 3});
+    adj[3].push_back({4, 2});
+
+    // Run algorithm
+    Solution obj;
+    vector&lt;int&gt; dist = obj.dijkstra(V, adj, 0);
+
+    // Print shortest distances
+    for (int i = 0; i &lt; V; i++) {
+        cout &lt;&lt; "Distance from 0 to " &lt;&lt; i &lt;&lt; " = " &lt;&lt; dist[i] &lt;&lt; endl;
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to implement Dijkstra's Algorithm
+    public int[] dijkstra(int V, List&lt;List&lt;int[]&gt;&gt; adj, int src) {
+        // Distance array initialized to large value
+        int[] dist = new int[V];
+        Arrays.fill(dist, (int)1e9);
+
+        // Min-heap storing {distance, node}
+        PriorityQueue&lt;int[]&gt; pq = new PriorityQueue&lt;&gt;((a,b) -&gt; a[0]-b[0]);
+
+        // Distance to source is 0
+        dist[src] = 0;
+
+        // Push source into heap
+        pq.add(new int[]{0, src});
+
+        // Process nodes until heap is empty
+        while (!pq.isEmpty()) {
+            // Extract node with minimum distance
+            int[] cur = pq.poll();
+            int d = cur[0];
+            int node = cur[1];
+
+            // Skip if outdated distance
+            if (d &gt; dist[node]) continue;
+
+            // Traverse all neighbors
+            for (int[] edge : adj.get(node)) {
+                int next = edge[0];
+                int wt = edge[1];
+
+                // Relaxation check
+                if (dist[node] + wt &lt; dist[next]) {
+                    // Update distance
+                    dist[next] = dist[node] + wt;
+
+                    // Push into heap
+                    pq.add(new int[]{dist[next], next});
+                }
+            }
+        }
+        return dist;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Number of vertices
+        int V = 5;
+
+        // Adjacency list {neighbor, weight}
+        List&lt;List&lt;int[]&gt;&gt; adj = new ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; V; i++) adj.add(new ArrayList&lt;&gt;());
+
+        // Example edges
+        adj.get(0).add(new int[]{1, 2});
+        adj.get(0).add(new int[]{2, 4});
+        adj.get(1).add(new int[]{2, 1});
+        adj.get(1).add(new int[]{3, 7});
+        adj.get(2).add(new int[]{4, 3});
+        adj.get(3).add(new int[]{4, 2});
+
+        // Run algorithm
+        Solution obj = new Solution();
+        int[] dist = obj.dijkstra(V, adj, 0);
+
+        // Print shortest distances
+        for (int i = 0; i &lt; V; i++) {
+            System.out.println("Distance from 0 to " + i + " = " + dist[i]);
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">import heapq
+
+class Solution:
+    # Function to implement Dijkstra's Algorithm
+    def dijkstra(self, V, adj, src):
+        # Initialize distances
+        dist = [float('inf')] * V
+        dist[src] = 0
+
+        # Min-heap storing (distance, node)
+        pq = [(0, src)]
+
+        # Process nodes until heap is empty
+        while pq:
+            # Extract node with minimum distance
+            d, node = heapq.heappop(pq)
+
+            # Skip if outdated distance
+            if d &gt; dist[node]:
+                continue
+
+            # Traverse neighbors
+            for next, wt in adj[node]:
+                # Relaxation check
+                if dist[node] + wt &lt; dist[next]:
+                    # Update distance
+                    dist[next] = dist[node] + wt
+
+                    # Push into heap
+                    heapq.heappush(pq, (dist[next], next))
+
+        return dist
+
+
+# Driver code
+V = 5
+adj = [[] for _ in range(V)]
+
+# Example edges
+adj[0].append((1, 2))
+adj[0].append((2, 4))
+adj[1].append((2, 1))
+adj[1].append((3, 7))
+adj[2].append((4, 3))
+adj[3].append((4, 2))
+
+# Run algorithm
+obj = Solution()
+dist = obj.dijkstra(V, adj, 0)
+
+# Print shortest distances
+for i in range(V):
+    print(f"Distance from 0 to {i} = {dist[i]}")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to implement Dijkstra's Algorithm
+    dijkstra(V, adj, src) {
+        // Distance array initialized to Infinity
+        let dist = new Array(V).fill(Infinity);
+
+        // Distance to source is 0
+        dist[src] = 0;
+
+        // Min-heap simulated using array
+        let pq = [[0, src]]; // [distance, node]
+
+        // Process nodes until heap is empty
+        while (pq.length &gt; 0) {
+            // Extract node with minimum distance
+            pq.sort((a, b) =&gt; a[0] - b[0]);
+            let [d, node] = pq.shift();
+
+            // Skip if outdated distance
+            if (d &gt; dist[node]) continue;
+
+            // Traverse neighbors
+            for (let [next, wt] of adj[node]) {
+                // Relaxation check
+                if (dist[node] + wt &lt; dist[next]) {
+                    // Update distance
+                    dist[next] = dist[node] + wt;
+
+                    // Push updated distance
+                    pq.push([dist[next], next]);
+                }
+            }
+        }
+        return dist;
+    }
+}
+
+// Driver code
+let V = 5;
+let adj = Array.from({ length: V }, () =&gt; []);
+
+// Example edges
+adj[0].push([1, 2]);
+adj[0].push([2, 4]);
+adj[1].push([2, 1]);
+adj[1].push([3, 7]);
+adj[2].push([4, 3]);
+adj[3].push([4, 2]);
+
+// Run algorithm
+let obj = new Solution();
+let dist = obj.dijkstra(V, adj, 0);
+
+// Print shortest distances
+for (let i = 0; i &lt; V; i++) {
+    console.log(`Distance from 0 to ${i} = ${dist[i]}`);
+}
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O((V+E)logV)</strong>, each edge is relaxed at most once, and for each relaxation we may push into the priority queue, giving O(E) pushes with O(log V) heap operations.<br/>
+<strong>Space Complexity: O(V+E)</strong>, additonal space is used to store adjacency list, distance array and priority queue.
+                            <p></p>
+</span>
+</details>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

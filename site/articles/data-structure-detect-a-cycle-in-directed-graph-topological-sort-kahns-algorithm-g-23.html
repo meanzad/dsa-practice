@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Detect a Cycle in Directed Graph | Topological Sort | Kahn&#x27;s Algorithm | G-23</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Detect a Cycle in Directed Graph | Topological Sort | Kahn&#x27;s Algorithm | G-23</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/detect-a-cycle-in-directed-graph-topological-sort-kahns-algorithm-g-23/</code></div>
+  <p><strong>Problem Statement: </strong> Given a Directed Graph with V vertices and E edges, check whether it contains any cycle or not using BFS.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input : V = 5, E = 5</span>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-6833" loading="lazy" src="../assets/img/7d2a6e43b5ecd299.png"/></figure>
+<span>Output : True</span>
+<span>Explanation : 2-&gt;3-&gt;4-&gt;2 is a cycle.</span>
+<p></p>
+<span>Input : V = 4, E = 3</span>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-6834" loading="lazy" src="../assets/img/a4dc912af216b19a.png"/></figure>
+<span>Output : False</span>
+<span>Explanation : There is no cycle in the graph. This is a directed acyclic graph.</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/detect-a-cycle-in-a-directed-graph" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. 
+    It's highly recommend trying to 
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+   In a directed graph, a cycle exists if we can start at some node and keep following directed edges such that we eventually come back to the same node. Detecting such cycles is crucial in problems like task scheduling, dependency resolution, and deadlock detection.<br/><br/>
+   A Topological Sort is a linear ordering of vertices such that for every directed edge from u to v, u comes before v in the ordering. Importantly, a valid topological order exists only if the graph is a Directed Acyclic Graph (DAG). This gives us a powerful idea that if we try to generate a topological sort but cannot include all vertices (some nodes remain stuck due to dependencies), then the graph must contain a cycle.<br/><br/>
+<a href="https://takeuforward.org/data-structure/kahns-algorithm-topological-sort-algorithm-bfs-g-22/" rel="noopener" target="_blank" title="">Kahn’s Algorithm (Topological Sorting Using BFS)</a> makes this detection very straightforward. It repeatedly removes nodes with zero in-degree and if at the end, the number of removed nodes is less than the total nodes, that means some nodes were locked in cycles, and hence a cycle exists.
+   <ul> <li>Compute the in-degree of all nodes in the graph.</li> <li>Add all nodes with in-degree equal to zero into a queue.</li> <li>Process nodes from the queue one by one, increasing the count of processed nodes.</li> <li>For each processed node, reduce the in-degree of its neighbors by one.</li> <li>If any neighbor’s in-degree becomes zero, push it into the queue.</li> <li>After processing, compare the count of processed nodes with the total number of nodes to decide if a cycle exists.</li> </ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to detect cycle in a directed graph using Kahn's Algorithm
+    bool hasCycle(int V, vector&lt;vector&lt;int&gt;&gt;&amp; adj) {
+        // Store in-degrees of all nodes
+        vector&lt;int&gt; indegree(V, 0);
+        for (int u = 0; u &lt; V; u++) {
+            for (int v : adj[u]) {
+                indegree[v]++;
+            }
+        }
+
+        // Queue for nodes with 0 in-degree
+        queue&lt;int&gt; q;
+        for (int i = 0; i &lt; V; i++) {
+            if (indegree[i] == 0) q.push(i);
+        }
+
+        // Count visited nodes
+        int count = 0;
+        while (!q.empty()) {
+            int node = q.front();
+            q.pop();
+            count++;
+
+            // Reduce in-degree of neighbors
+            for (int neighbor : adj[node]) {
+                indegree[neighbor]--;
+                if (indegree[neighbor] == 0) {
+                    q.push(neighbor);
+                }
+            }
+        }
+
+        // If count != V, cycle exists
+        return count != V;
+    }
+};
+
+int main() {
+    int V = 4;
+    vector&lt;vector&lt;int&gt;&gt; adj = {
+        {1}, {2}, {3}, {1}
+    };
+
+    Solution obj;
+    if (obj.hasCycle(V, adj))
+        cout &lt;&lt; "Cycle detected\n";
+    else
+        cout &lt;&lt; "No cycle\n";
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to detect cycle in a directed graph using Kahn's Algorithm
+    public boolean hasCycle(int V, List&lt;List&lt;Integer&gt;&gt; adj) {
+        // Store in-degrees of all nodes
+        int[] indegree = new int[V];
+        for (int u = 0; u &lt; V; u++) {
+            for (int v : adj.get(u)) {
+                indegree[v]++;
+            }
+        }
+
+        // Queue for nodes with 0 in-degree
+        Queue&lt;Integer&gt; q = new LinkedList&lt;&gt;();
+        for (int i = 0; i &lt; V; i++) {
+            if (indegree[i] == 0) q.add(i);
+        }
+
+        // Count visited nodes
+        int count = 0;
+        while (!q.isEmpty()) {
+            int node = q.poll();
+            count++;
+
+            // Reduce in-degree of neighbors
+            for (int neighbor : adj.get(node)) {
+                indegree[neighbor]--;
+                if (indegree[neighbor] == 0) {
+                    q.add(neighbor);
+                }
+            }
+        }
+
+        // If count != V, cycle exists
+        return count != V;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int V = 4;
+        List&lt;List&lt;Integer&gt;&gt; adj = new ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; V; i++) adj.add(new ArrayList&lt;&gt;());
+        adj.get(0).add(1);
+        adj.get(1).add(2);
+        adj.get(2).add(3);
+        adj.get(3).add(1);
+
+        Solution obj = new Solution();
+        if (obj.hasCycle(V, adj))
+            System.out.println("Cycle detected");
+        else
+            System.out.println("No cycle");
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">from collections import deque
+
+class Solution:
+    # Function to detect cycle in a directed graph using Kahn's Algorithm
+    def hasCycle(self, V, adj):
+        # Store in-degrees of all nodes
+        indegree = [0] * V
+        for u in range(V):
+            for v in adj[u]:
+                indegree[v] += 1
+
+        # Queue for nodes with 0 in-degree
+        q = deque()
+        for i in range(V):
+            if indegree[i] == 0:
+                q.append(i)
+
+        # Count visited nodes
+        count = 0
+        while q:
+            node = q.popleft()
+            count += 1
+
+            # Reduce in-degree of neighbors
+            for neighbor in adj[node]:
+                indegree[neighbor] -= 1
+                if indegree[neighbor] == 0:
+                    q.append(neighbor)
+
+        # If count != V, cycle exists
+        return count != V
+
+
+if __name__ == "__main__":
+    V = 4
+    adj = [[1], [2], [3], [1]]
+
+    obj = Solution()
+    if obj.hasCycle(V, adj):
+        print("Cycle detected")
+    else:
+        print("No cycle")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to detect cycle in a directed graph using Kahn's Algorithm
+    hasCycle(V, adj) {
+        // Store in-degrees of all nodes
+        let indegree = new Array(V).fill(0);
+        for (let u = 0; u &lt; V; u++) {
+            for (let v of adj[u]) {
+                indegree[v]++;
+            }
+        }
+
+        // Queue for nodes with 0 in-degree
+        let q = [];
+        for (let i = 0; i &lt; V; i++) {
+            if (indegree[i] === 0) q.push(i);
+        }
+
+        // Count visited nodes
+        let count = 0;
+        while (q.length &gt; 0) {
+            let node = q.shift();
+            count++;
+
+            // Reduce in-degree of neighbors
+            for (let neighbor of adj[node]) {
+                indegree[neighbor]--;
+                if (indegree[neighbor] === 0) {
+                    q.push(neighbor);
+                }
+            }
+        }
+
+        // If count != V, cycle exists
+        return count !== V;
+    }
+}
+
+// Driver code
+let V = 4;
+let adj = [[1], [2], [3], [1]];
+
+let obj = new Solution();
+if (obj.hasCycle(V, adj))
+    console.log("Cycle detected");
+else
+    console.log("No cycle");
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(V+E)</strong>, we traverse all the edges and visit all the vertices once.<br/>
+<strong>Space Complexity: O(V+E)</strong>, additonal space is used to store adjacency list, in-degree array and vertices in queue.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

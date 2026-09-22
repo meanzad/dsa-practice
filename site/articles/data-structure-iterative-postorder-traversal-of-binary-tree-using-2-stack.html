@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Iterative Postorder Traversal of Binary Tree Using 2 Stacks</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Iterative Postorder Traversal of Binary Tree Using 2 Stacks</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/iterative-postorder-traversal-of-binary-tree-using-2-stack</code></div>
+  <p><strong>Problem Statement: </strong>
+Given the root of a Binary Tree, create a function that performs a postorder traversal using two stacks and returns an array containing the traversal sequence.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>  
+<strong>Input:</strong> Binary Tree: 4 2 5 3 -1 7 6 -1 9 -1 -1 8 -1 1  
+<strong>Output:</strong> [1, 9, 3, 2, 7, 8, 6, 5, 4]  
+<strong>Explanation:</strong> We traverse the binary tree in the order of Left, Right, and then Root recursively. This results in the following traversal:  
+1 → 9 → 3 → 2 → 7 → 8 → 6 → 5 → 4.
+
+<strong>Example 2:</strong>  
+<strong>Input:</strong> Binary Tree: 1 2 3 4 5 6 7 -1 -1 8 -1 -1 -1 9 10  
+<strong>Output:</strong> [1, 2, 4, 5, 8, 3, 6, 7, 9, 10]  
+<strong>Explanation:</strong> We traverse the binary tree in the order of Left, Right, and then Root recursively. This results in the following traversal:  
+1 → 2 → 4 → 5 → 8 → 3 → 6 → 7 → 9 → 10.
+</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>It's highly recommend trying to solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Create two stacks: one for holding nodes and another for storing the final postorder traversal sequence. Initialize an array `postorder` to store the traversal sequence.</li>
+<li>Push the root node to the first stack.</li>
+<li>Process the nodes until the first stack is empty:
+    <ul>
+<li>Pop a node from the top of the first stack.</li>
+<li>Push this node onto the second stack.</li>
+<li>Push its left child (if it exists) onto the first stack.</li>
+<li>Push its right child (if it exists) onto the first stack.</li>
+</ul>
+</li>
+<li>Once the first stack is empty, retrieve the nodes in the postorder sequence by popping nodes from the second stack one by one and store them in the postorder array.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/2d8ede48465511a4.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/8afca86b26125d2a.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/77f5dbaa7edeee7b.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/950efeb410a43ae2.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/cf275d261b63c531.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/848adfd2158a934a.png"/></div><div class="carousel-image"><img alt="Image 7" loading="lazy" src="../assets/img/7c5645476728c9c0.png"/></div><div class="carousel-image"><img alt="Image 8" loading="lazy" src="../assets/img/a53a9e2a6ecc5683.png"/></div><div class="carousel-image"><img alt="Image 9" loading="lazy" src="../assets/img/2248c70f3228e4ba.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/2d8ede48465511a4.png"/><img alt="Image 2" loading="lazy" src="../assets/img/8afca86b26125d2a.png"/><img alt="Image 3" loading="lazy" src="../assets/img/77f5dbaa7edeee7b.png"/><img alt="Image 4" loading="lazy" src="../assets/img/950efeb410a43ae2.png"/><img alt="Image 5" loading="lazy" src="../assets/img/cf275d261b63c531.png"/><img alt="Image 6" loading="lazy" src="../assets/img/848adfd2158a934a.png"/><img alt="Image 7" loading="lazy" src="../assets/img/7c5645476728c9c0.png"/><img alt="Image 8" loading="lazy" src="../assets/img/a53a9e2a6ecc5683.png"/><img alt="Image 9" loading="lazy" src="../assets/img/2248c70f3228e4ba.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Node structure for the binary tree
+struct Node {
+    int data;   // Value of the node
+    Node* left; // Pointer to the left child
+    Node* right; // Pointer to the right child
+    
+    // Constructor to initialize the node with a value
+    Node(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+
+// Function to return the postOrder traversal of a binary tree using two stacks
+vector&lt;int&gt; postOrder(Node* root) {
+    vector&lt;int&gt; postorder; // Vector to store the postorder traversal
+
+    // If the tree is empty, return an empty traversal
+    if(root == NULL){
+        return postorder;
+    }
+
+    // Two stacks for iterative traversal
+    stack&lt;Node*&gt; st1, st2;
+
+    // Push the root node onto the first stack
+    st1.push(root);
+
+    // Iterative traversal to populate st2 with nodes in postorder
+    while(!st1.empty()){
+        // Get the top node from st1
+        root = st1.top();
+        st1.pop();
+
+        // Push the node onto st2
+        st2.push(root);
+
+        // Push left child onto st1 if exists
+        if(root-&gt;left != NULL){
+            st1.push(root-&gt;left);
+        }
+
+        // Push right child onto st1 if exists
+        if(root-&gt;right != NULL){
+            st1.push(root-&gt;right);
+        }
+    }
+
+    // Populate the postorder traversal vector by popping st2
+    while(!st2.empty()){
+        postorder.push_back(st2.top()-&gt;data);
+        st2.pop();
+    }
+
+    // Return the postorder traversal
+    return postorder;
+}
+
+// Function to print the elements of a vector
+void printVector(const vector&lt;int&gt;&amp; vec) {
+    // Iterate through the vector and print each element
+    for (int num : vec) {
+        cout &lt;&lt; num &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+}
+
+// Main function
+int main()
+{
+    // Creating a sample binary tree
+    Node* root = new Node(1);
+    root-&gt;left = new Node(2);
+    root-&gt;right = new Node(3);
+    root-&gt;left-&gt;left = new Node(4);
+    root-&gt;left-&gt;right = new Node(5);
+
+    // Getting postorder traversal
+    vector&lt;int&gt; result = postOrder(root);
+
+    // Printing the postorder traversal result
+    cout &lt;&lt; "Postorder traversal: ";
+    printVector(result);
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Node {
+    int data;
+    Node left;
+    Node right;
+
+    // Constructor to initialize the node with a value
+    public Node(int val) {
+        data = val;
+        left = null;
+        right = null;
+    }
+}
+
+class Solution {
+
+    // Function to return the postOrder traversal of a binary tree using two stacks
+    public static java.util.List&lt;Integer&gt; postOrder(Node root) {
+        java.util.List&lt;Integer&gt; postorder = new java.util.ArrayList&lt;&gt;();  // List to store the postorder traversal
+        
+        // If the tree is empty, return an empty traversal
+        if (root == null) {
+            return postorder;
+        }
+
+        java.util.Stack&lt;Node&gt; st1 = new java.util.Stack&lt;&gt;();  // First stack for iterative traversal
+        java.util.Stack&lt;Node&gt; st2 = new java.util.Stack&lt;&gt;();  // Second stack to store the nodes in postorder
+
+        // Push the root node onto the first stack
+        st1.push(root);
+
+        // Iterative traversal to populate st2 with nodes in postorder
+        while (!st1.isEmpty()) {
+            root = st1.pop();  // Get the top node from st1
+            st2.push(root);  // Push the node onto st2
+
+            // Push left child onto st1 if exists
+            if (root.left != null) {
+                st1.push(root.left);
+            }
+
+            // Push right child onto st1 if exists
+            if (root.right != null) {
+                st1.push(root.right);
+            }
+        }
+
+        // Populate the postorder traversal list by popping st2
+        while (!st2.isEmpty()) {
+            postorder.add(st2.pop().data);  // Add the node's value to the postorder result
+        }
+
+        // Return the postorder traversal result
+        return postorder;
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+        // Creating a sample binary tree
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+
+        // Getting the postorder traversal
+        java.util.List&lt;Integer&gt; result = Solution.postOrder(root);
+
+        // Printing the postorder traversal result
+        System.out.print("Postorder traversal: ");
+        for (int val : result) {
+            System.out.print(val + " ");
+        }
+        System.out.println();
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Define a TreeNode class for the binary tree
+class TreeNode:
+    def __init__(self, x):
+        self.val = x  # The value of the node
+        self.left = None  # Pointer to the left child
+        self.right = None  # Pointer to the right child
+
+# Function to perform postorder traversal of a binary tree iteratively
+def postOrder(root):
+    postorder = []  # List to store the postorder traversal result
+
+    # If the tree is empty, return an empty traversal
+    if root is None:
+        return postorder
+
+    # Two stacks for iterative traversal
+    st1 = []  # First stack
+    st2 = []  # Second stack to store nodes in postorder
+
+    # Push the root node onto the first stack
+    st1.append(root)
+
+    # Iterative traversal to populate st2 with nodes in postorder
+    while st1:
+        root = st1.pop()  # Get the top node from st1
+        st2.append(root)  # Push the node onto st2
+
+        # Push left child onto st1 if exists
+        if root.left:
+            st1.append(root.left)
+
+        # Push right child onto st1 if exists
+        if root.right:
+            st1.append(root.right)
+
+    # Populate the postorder traversal list by popping st2
+    while st2:
+        postorder.append(st2.pop().val)  # Add the node's value to the postorder result
+
+    # Return the postorder traversal result
+    return postorder
+
+# Driver code
+if __name__ == "__main__":
+    # Creating a sample binary tree
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.right = TreeNode(3)
+    root.left.left = TreeNode(4)
+    root.left.right = TreeNode(5)
+
+    # Getting the postorder traversal
+    result = postOrder(root)
+
+    # Displaying the postorder traversal result
+    print("Postorder traversal:", result)</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Define a TreeNode class for the binary tree
+class TreeNode {
+    constructor(x) {
+        this.val = x;  // The value of the node
+        this.left = null;  // Pointer to the left child
+        this.right = null;  // Pointer to the right child
+    }
+}
+
+// Function to perform postorder traversal of a binary tree iteratively
+function postOrder(root) {
+    let postorder = [];  // Array to store the postorder traversal result
+
+    // If the tree is empty, return an empty traversal
+    if (root === null) {
+        return postorder;
+    }
+
+    let st1 = [];  // First stack for iterative traversal
+    let st2 = [];  // Second stack to store nodes in postorder
+
+    // Push the root node onto the first stack
+    st1.push(root);
+
+    // Iterative traversal to populate st2 with nodes in postorder
+    while (st1.length &gt; 0) {
+        root = st1.pop();  // Get the top node from st1
+        st2.push(root);  // Push the node onto st2
+
+        // Push left child onto st1 if exists
+        if (root.left) {
+            st1.push(root.left);
+        }
+
+        // Push right child onto st1 if exists
+        if (root.right) {
+            st1.push(root.right);
+        }
+    }
+
+    // Populate the postorder traversal result by popping st2
+    while (st2.length &gt; 0) {
+        postorder.push(st2.pop().val);  // Add the node's value to the postorder result
+    }
+
+    // Return the postorder traversal result
+    return postorder;
+}
+
+// Main function to handle input and output
+function main() {
+    // Creating a sample binary tree
+    let root = new TreeNode(1);
+    root.left = new TreeNode(2);
+    root.right = new TreeNode(3);
+    root.left.left = new TreeNode(4);
+    root.left.right = new TreeNode(5);
+
+    // Getting the postorder traversal
+    let result = postOrder(root);
+
+    // Displaying the postorder traversal result
+    console.log("Postorder traversal:", result);
+}
+
+// Call the main function
+main();</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(N)</strong>, where N is the number of nodes in the binary tree. Each node is visited once during the traversal.
+                        <br/><br/>
+<strong>Space Complexity: O(H)</strong>, where H is the height of the binary tree. The space is used by the stack to store nodes during traversal.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

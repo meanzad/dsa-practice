@@ -1,0 +1,869 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Rod Cutting Problem | (DP - 24)</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Rod Cutting Problem | (DP - 24)</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/rod-cutting-problem-dp-24/</code></div>
+  <p><strong>Problem Statement: </strong>Given a rod of length N inches and an array price[] where price[i] denotes the value of a piece of rod of length i inches (1-based indexing). Determine the maximum value obtainable by cutting up the rod and selling the pieces. Make any number of cuts, or none at all, and sell the resulting pieces.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p>
+<strong>Input :</strong> price = [1, 6, 8, 9, 10, 19, 7, 20], N = 8
+<strong>Output :</strong>25
+<strong>Explanation :</strong>Cut the rod into lengths of 2 and 6 for a total price of 6 + 19= 25.<br/>
+<strong>Input :</strong>price = [1, 5, 8, 9], N = 4
+<strong>Output :</strong>10
+<strong>Explanation :</strong>Cut the rod into lengths of 2 and 2 for a total price of 5 + 5 = 10.
+            </p></pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/rod-cutting-problem" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Memoization Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<h3><strong>Why a Greedy Solution doesn’t work?</strong></h3>
+The first approach that comes to our mind is greedy. A greedy solution will fail in this problem because there is no ‘uniformity’ in data. While selecting a local better choice we may choose an item that will in the long term give less value.<br/><br/>
+As the greedy approach doesn’t work, we will try to generate all possible combinations using <strong>recursion</strong> and select the combination which gives us the <strong>maximum</strong> value in the given constraints.<br/><br/>
+<strong>Steps to form the recursive solution:</strong><br/><br/>
+We will first form the recursive solution by the three points mentioned in 
+<a href="https://takeuforward.org/data-structure/dynamic-programming-introduction/" rel="noopener" target="_blank">Dynamic Programming Introduction</a>.<br/><br/>
+<strong>Express the problem in terms of indexes:</strong>
+<ul>
+<li>We are given ‘n’ items. Their weight is represented by the ‘wt’ array and value by the ‘val’ array. So clearly one parameter will be ‘ind’, i.e., the index up to which the array items are being considered.</li>
+<li>There is one more parameter “W”. We need the capacity of the knapsack to decide whether we can pick an array item or not in the knapsack.</li>
+<li>So, we can say that initially, we need to find f(n-1, W) where W is the overall capacity given to us. f(n-1, W) means we are finding the maximum value of items that the thief can steal from items with index 0 to n-1 with capacity W of the knapsack.</li>
+</ul>
+<br/>
+<strong>Base Cases:</strong>
+<ul>
+<li>If ind == 0, it means we are at the first item. Now, in an unbounded knapsack we can pick an item any number of times we want. As there is only one item left, we will pick for <strong>W/wt[0]</strong> times because we ultimately want to maximize the value of items while respecting the constraint of weight of the knapsack. The value added will be the product of the number of items picked and value of the individual item. Therefore we return (<strong>W/wt[0]) * val[0]</strong>.</li>
+</ul>
+<br/>
+<strong>Try out all possible choices at a given index:</strong>
+<ul>
+<li>We need to generate all the subsequences. We will use the pick/non-pick technique as discussed in this video 
+    <a href="https://www.youtube.com/watch?v=AxNNVECce8c" rel="noopener" target="_blank">Recursion on Subsequences</a>.
+  </li>
+<li>We have two choices:
+    <ul>
+<li><strong>Exclude the current element in the subsequence:</strong> We first try to find a subsequence without considering the current index item. If we exclude the current item, the capacity of the bag will not be affected and the value added will be 0 for the current item. So we will call the recursive function f(ind-1, W).</li>
+<li><strong>Include the current element in the subsequence:</strong> We will try to find a subsequence by considering the current item to the knapsack. As we have included the item, the capacity of the knapsack will be updated to W-wt[ind] and the current item’s value (val[ind]) will also be added to the further recursive call answer.</li>
+<li>Since there is an unlimited supply of items, we will not recursively call for f(ind-1, W-wt[ind]). Instead, we stay at the same index and call f(ind, W-wt[ind]).</li>
+<li><strong>Note:</strong> We consider the current item only if its weight is less than or equal to the capacity W of the knapsack.</li>
+</ul>
+</li>
+</ul>
+<br/>
+<strong>Return the maximum of take and notTake:</strong>
+<ul>
+<li>Since we need to maximize the value, the final result will be max(take, notTake).</li>
+</ul>
+<br/>
+<strong>Steps to memoize a recursive solution:</strong>
+<ul>
+<li>If we draw the recursion tree, we will see that there are overlapping subproblems. To convert a recursive solution to memoization:
+    <ul>
+<li>Create a dp array of size [n][W+1]. The size of the input array is ‘n’, so the index will always lie between ‘0’ and ‘n-1’. The capacity can take any value between ‘0’ and ‘W’. Therefore we take the dp array as dp[n][W+1].</li>
+<li>Initialize the dp array to -1.</li>
+<li>Whenever we want to find the answer of particular parameters (say f(ind, target)), we first check whether the answer is already calculated (dp[ind][target] != -1). If yes, simply return the value from the dp array.</li>
+<li>If not, then we are finding the answer for the given parameters for the first time. We compute it using the recursive relation, and before returning, we store it in dp[ind][target].</li>
+</ul>
+<p><img height="457" loading="lazy" src="../assets/img/e6b1a92a0881c858.png" width="481"/></p>
+</li>
+</ul>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+  public:
+    // Function to compute maximum price obtainable by cutting the rod
+    int rodCutting(vector&lt;int&gt; price, int n) {
+
+        // Initialize a DP table where dp[i][j] stores the max price 
+        // using first i rod lengths to make total rod length j
+        vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(n + 1, 0));
+
+        // Fill the base case: only using the first rod length (length = 1)
+        for(int length = 0; length &lt;= n; length++) {
+            // We can use rod of length 1 (index 0) multiple times
+            dp[0][length] = length * price[0];
+        }
+
+        // Iterate through each rod piece starting from index 1
+        for(int i = 1; i &lt; n; i++) {
+            for(int length = 0; length &lt;= n; length++) {
+
+                // Option 1: Do not cut with this rod (copy from above)
+                int notTake = dp[i - 1][length];
+
+                // Option 2: Cut with current rod length (reuse allowed)
+                int take = INT_MIN;
+                int rodLength = i + 1;
+
+                // Check if this rod fits in current length
+                if(rodLength &lt;= length) {
+                    take = price[i] + dp[i][length - rodLength];
+                }
+
+                // Store the best value in the DP table
+                dp[i][length] = max(take, notTake);
+            }
+        }
+
+        // Return the answer from the last row and column (full rod length)
+        return dp[n - 1][n];
+    }
+};
+
+// Driver code
+int main() {
+    // Length of the rod
+    int n = 8;
+
+    // Price list where price[i] is the value of rod of length i+1
+    vector&lt;int&gt; price = {1, 5, 8, 9, 10, 17, 17, 20};
+
+    // Create object of Solution class
+    Solution obj;
+
+    // Call rodCutting function and print the result
+    int maxValue = obj.rodCutting(price, n);
+    cout &lt;&lt; "The maximum obtainable value is: " &lt;&lt; maxValue &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to compute max value by cutting rod using top-down DP
+    public int rodCutting(int[] price, int n) {
+        // Create DP table initialized to -1
+        int[][] dp = new int[n][n + 1];
+
+        // Fill dp with -1 to indicate uncomputed subproblems
+        for (int[] row : dp) {
+            Arrays.fill(row, -1);
+        }
+
+        // Start from last index (n - 1)
+        return helper(n - 1, n, price, dp);
+    }
+
+    // Recursive helper function with memoization
+    private int helper(int i, int length, int[] price, int[][] dp) {
+        // Base case: only one rod piece of length 1
+        if (i == 0) {
+            return length * price[0];
+        }
+
+        // Return precomputed value
+        if (dp[i][length] != -1) return dp[i][length];
+
+        // Option 1: do not take current rod length
+        int notTake = helper(i - 1, length, price, dp);
+
+        // Option 2: take current rod length (if it fits)
+        int take = Integer.MIN_VALUE;
+        int rodLength = i + 1;
+        if (rodLength &lt;= length) {
+            take = price[i] + helper(i, length - rodLength, price, dp);
+        }
+
+        // Store max of both in dp
+        return dp[i][length] = Math.max(take, notTake);
+    }
+}
+
+// Driver class
+class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+
+        // Price list
+        int[] price = {1, 5, 8, 9, 10, 17, 17, 20};
+
+        // Total rod length
+        int n = 8;
+
+        // Output result
+        int result = sol.rodCutting(price, n);
+        System.out.println("The maximum obtainable value is: " + result);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to compute max value by cutting rod using memoization
+    def rodCutting(self, price, n):
+        # Initialize a 2D dp table with -1
+        dp = [[-1] * (n + 1) for _ in range(n)]
+
+        # Call helper from last index
+        return self.helper(n - 1, n, price, dp)
+
+    # Recursive helper function with memoization
+    def helper(self, i, length, price, dp):
+        # Base case: only 1 piece of length 1
+        if i == 0:
+            return length * price[0]
+
+        # Return precomputed value
+        if dp[i][length] != -1:
+            return dp[i][length]
+
+        # Option 1: not take
+        notTake = self.helper(i - 1, length, price, dp)
+
+        # Option 2: take if rod fits
+        take = float('-inf')
+        rodLength = i + 1
+        if rodLength &lt;= length:
+            take = price[i] + self.helper(i, length - rodLength, price, dp)
+
+        # Store and return result
+        dp[i][length] = max(take, notTake)
+        return dp[i][length]
+
+# Driver code
+price = [1, 5, 8, 9, 10, 17, 17, 20]
+n = 8
+
+sol = Solution()
+print("The maximum obtainable value is:", sol.rodCutting(price, n))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Main function to compute max rod cut value
+    rodCutting(price, n) {
+        // Initialize 2D dp array filled with -1
+        const dp = Array.from({ length: n }, () =&gt; Array(n + 1).fill(-1));
+
+        // Call recursive helper
+        return this.helper(n - 1, n, price, dp);
+    }
+
+    // Recursive helper with memoization
+    helper(i, length, price, dp) {
+        // Base case: only rod length 1 available
+        if (i === 0) {
+            return length * price[0];
+        }
+
+        // Return precomputed value
+        if (dp[i][length] !== -1) return dp[i][length];
+
+        // Option 1: do not take
+        let notTake = this.helper(i - 1, length, price, dp);
+
+        // Option 2: take if fits
+        let take = -Infinity;
+        let rodLength = i + 1;
+        if (rodLength &lt;= length) {
+            take = price[i] + this.helper(i, length - rodLength, price, dp);
+        }
+
+        // Store and return max
+        dp[i][length] = Math.max(take, notTake);
+        return dp[i][length];
+    }
+}
+
+// Driver code
+const price = [1, 5, 8, 9, 10, 17, 17, 20];
+const n = 8;
+
+const sol = new Solution();
+console.log("The maximum obtainable value is:", sol.rodCutting(price, n));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+</p><p><strong>Time Complexity:</strong> O(n × n) Each subproblem (i, length) is computed once.</p> <p><strong>Space Complexity:</strong> O(n × n),We use a 2D DP table for memoization.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="better-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                Tabulation Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+To convert the memoization approach to a tabulation one, create a dp array with the same size as done in memoization. We can initialize it as 0.<br/><br/>
+First, we need to initialize the base conditions of the recursive solution.
+<ul><li>At ind==0, we are considering the first element, so we will assign its value as <strong>(i/wt[0]) * val[0]</strong>, where i will iterate from 0 to W.</li><li>Next, we are done for the first row, so our ‘ind’ variable will move from 1 to n-1, whereas our ‘cap’ variable will move from 0 to ‘W’. We will set the nested loops to traverse the dp array.</li><li>Inside the nested loops we will apply the recursive logic to find the answer of the cell.</li><li>When the nested loop execution has ended, we will return dp[n-1][W] as our answer.</li></ul>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to solve the rod cutting problem
+    int rodCutting(vector&lt;int&gt;&amp; price, int n) {
+        // Initialize DP table with dimensions [n][n + 1]
+        vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(n + 1, 0));
+        
+        for(int length = 0; length &lt;= n; length++){
+            dp[0][length] = price[0]*length;
+        }
+        
+        // Fill the DP table
+        for (int ind = 1; ind &lt; n; ++ind) { 
+            for (int length = 1; length &lt;= n; ++length) { 
+                
+                // Case when the piece is not taken
+                int notTaken = 0+dp[ind - 1][length];
+                
+                // Case when the piece is taken
+                int taken = INT_MIN;
+                
+                /* Length of the rod piece 
+                corresponding to the current index*/
+                int rodLength = ind + 1;
+                
+                // Check if the piece can be taken
+                if (rodLength &lt;= length) {
+                    taken = price[ind] + dp[ind][length - rodLength];
+                }
+                
+                /* Update dp[ind][length] with the maximum of 
+                including or not including the current piece*/
+                dp[ind][length] = max(notTaken, taken);
+            }
+        }
+        
+        // Return the result 
+        return dp[n - 1][n];
+    }
+};
+
+int main() {
+    vector&lt;int&gt; price = {2, 4, 6, 8};
+    int n = price.size();
+
+    // Create an instance of Solution class
+    Solution sol;
+
+    // Print the result
+    cout &lt;&lt; "The Maximum value is " &lt;&lt; sol.rodCutting(price, n) &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to solve the rod cutting problem
+    public int rodCutting(int[] price, int n) {
+        // Initialize DP table with dimensions [n][n + 1]
+        int[][] dp = new int[n][n + 1];
+        
+        for (int length = 0; length &lt;= n; length++) {
+            dp[0][length] = price[0] * length;
+        }
+        
+        // Fill the DP table
+        for (int ind = 1; ind &lt; n; ++ind) { 
+            for (int length = 1; length &lt;= n; ++length) { 
+                
+                // Case when the piece is not taken
+                int notTaken = dp[ind - 1][length];
+                
+                // Case when the piece is taken
+                int taken = Integer.MIN_VALUE;
+                
+                /* Length of the rod piece 
+                corresponding to the current index*/
+                int rodLength = ind + 1;
+                
+                // Check if the piece can be taken
+                if (rodLength &lt;= length) {
+                    taken = price[ind] + dp[ind][length - rodLength];
+                }
+                
+                /* Update dp[ind][length] with the maximum of
+                including or not including the current piece*/
+                dp[ind][length] = Math.max(notTaken, taken);
+            }
+        }
+        
+        // Return the result
+        return dp[n - 1][n];
+    }
+
+    public static void main(String[] args) {
+        int[] price = {2, 4, 6, 8};
+        int n = price.length;
+
+        // Create an instance of Solution class
+        Solution sol = new Solution();
+
+        // Print the result
+        System.out.println("The Maximum value is " + sol.rodCutting(price, n));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to solve the rod cutting problem
+    def rodCutting(self, price, n):
+        # Initialize a 2D DP table with dimensions [n][n+1]
+        # dp[ind][length] represents the maximum price obtainable
+        # by considering rod pieces up to index 'ind' and total rod length 'length'
+        dp = [[0] * (n + 1) for _ in range(n)]
+        
+        # Base case: filling the first row (index 0)
+        # If only the first piece is available, we can cut 'length' times
+        # and total value will be price[0] * length
+        for length in range(n + 1):
+            dp[0][length] = price[0] * length
+
+        # Fill the DP table for other indices
+        for ind in range(1, n):
+            for length in range(1, n + 1):
+                
+                # Case when the current piece is not taken
+                notTaken = dp[ind - 1][length]
+                
+                # Case when the current piece is taken
+                taken = float('-inf')
+                
+                # The actual rod length corresponding to this index
+                rodLength = ind + 1
+                
+                # If this rod length can fit, consider taking it
+                if rodLength &lt;= length:
+                    taken = price[ind] + dp[ind][length - rodLength]
+                
+                # Store the maximum of taken and notTaken
+                dp[ind][length] = max(notTaken, taken)
+        
+        # The last cell contains the maximum obtainable value
+        return dp[n - 1][n]
+
+
+# Driver code
+if __name__ == "__main__":
+    # Prices for each rod piece length
+    price = [2, 4, 6, 8]
+    # Length of the rod (equal to number of price entries)
+    n = len(price)
+    
+    # Create an instance of Solution
+    sol = Solution()
+    
+    # Get the maximum obtainable value
+    result = sol.rodCutting(price, n)
+    
+    # Print result
+    print("The Maximum value is", result)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to solve the rod cutting problem
+    rodCutting(price, n) {
+        // Initialize DP table with dimensions [n][n + 1]
+        let dp = Array.from({ length: n }, () =&gt; Array(n + 1).fill(0));
+        
+        for (let length = 0; length &lt;= n; length++) {
+            dp[0][length] = price[0] * length;
+        }
+        
+        // Fill the DP table
+        for (let ind = 1; ind &lt; n; ++ind) { 
+            for (let length = 1; length &lt;= n; ++length) { 
+                
+                // Case when the piece is not taken
+                let notTaken = dp[ind - 1][length];
+                
+                // Case when the piece is taken
+                let taken = -Infinity;
+                
+                /* Length of the rod piece 
+                corresponding to the current index*/
+                let rodLength = ind + 1;
+                
+                // Check if the piece can be taken
+                if (rodLength &lt;= length) {
+                    taken = price[ind] + dp[ind][length - rodLength];
+                }
+                
+                /* Update dp[ind][length] with the maximum 
+                of including or not including the current piece*/
+                dp[ind][length] = Math.max(notTaken, taken);
+            }
+        }
+        
+        // Return the result
+        return dp[n - 1][n];
+    }
+}
+    const price = [2, 4, 6, 8];
+    const n = price.length;
+
+    // Create an instance of Solution class
+    const sol = new Solution();
+
+    // Print the result
+    console.log("The Maximum value is " + sol.rodCutting(price, n));</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O(N * W),Because we have a nested loop iterating through all `n` items and all `W` capacities.</p> <p><strong>Space Complexity:</strong> O(N * W),We are using a 2D DP table of size `n` by `W+1` to store intermediate results, and we eliminated recursion stack space.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                 Space Optimization Approach
+
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+If we closely look the relation,<br/><br/>
+<strong>dp[ind][cap] =  max(dp[ind-1][cap] ,dp[ind][cap-wt[ind]]</strong><br/><br/>
+We see that to calculate a value of a cell of the dp array, we need only the previous row values (say prev). So, we don’t need to store an entire array. Hence we can space optimize it.<br/><br/>
+We will be space optimizing this solution using <strong>only one row.</strong>
+If we clearly see the values required:  dp[ind-1][cap] and dp[ind-1][cap - wt[ind]], we can say that if we are at a column cap, we will only require the values shown in the blue box(of the same column) from the previous row and other values will be from the cur row itself. So why do we need to store an entire array for it?<br/><br/>
+If we need only one value from the prev row, there is no need to store an entire row. We can work a bit smarter.
+We can use the cur row itself to store the required value in the following way:
+<ul><li>We somehow make sure that the previous value( say preValue) is available to us in some manner ( we will discuss later how we got the value).</li><li>Now, let us say that we want to find the value of cell cur[3], by going through the relation we find that we need a preValue and one value from the cur row.</li><li>We see that to calculate the cur[3] element, we need only a single variable (preValue). The catch is that we can initially place this preValue at the position cur[3] (before finding its updated value) and later while calculating for the current row’s cell cur[3], the value present there automatically serves as the preValue and we can use it to find the required cur[3] value. ( If there is any confusion please see the code).</li><li>After calculating the cur[3] value we store it at the cur[3] position so this cur[3] will automatically serve as preValue for the next row. In this way, we space-optimize the tabulation approach by just using one row.</li></ul>
+
+<p><img height="457" loading="lazy" src="../assets/img/80533c0974007f58.png" width="481"/></p>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to solve the rod cutting problem
+    int rodCutting(vector&lt;int&gt;&amp; price, int n) {
+        // Initialize DP table with dimensions [n + 1]
+        vector&lt;int&gt; prev(n+1, 0), cur(n+1, 0);
+        
+        for(int length = 0; length &lt;= n; length++){
+            prev[length] = price[0]*length;
+        }
+        
+        // Fill the DP table
+        for (int ind = 1; ind &lt; n; ++ind) { 
+            for (int length = 1; length &lt;= n; ++length) { 
+                
+                // Case when the piece is not taken
+                int notTaken = 0+prev[length];
+                
+                // Case when the piece is taken
+                int taken = INT_MIN;
+                
+                /* Length of the rod piece 
+                corresponding to the current index*/
+                int rodLength = ind + 1;
+                
+                // Check if the piece can be taken
+                if (rodLength &lt;= length) {
+                    taken = price[ind] + cur[length - rodLength];
+                }
+                
+                /* Update cur[length] with the maximum of 
+                including or not including the current piece*/
+                cur[length] = max(notTaken, taken);
+            }
+            prev = cur;
+        }
+        
+        // Return the result 
+        return prev[n];
+    }
+};
+
+int main() {
+    vector&lt;int&gt; price = {2, 4, 6, 8};
+    int n = price.size();
+
+    // Create an instance of Solution class
+    Solution sol;
+
+    // Print the result
+    cout &lt;&lt; "The Maximum value is " &lt;&lt; sol.rodCutting(price, n) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to solve the rod cutting problem
+    public int rodCutting(int[] price, int n) {
+        // Create two 1D arrays for space optimization
+        int[] prev = new int[n + 1];
+        int[] cur = new int[n + 1];
+        
+        // Base case: if only the first piece is available
+        for (int length = 0; length &lt;= n; length++) {
+            prev[length] = price[0] * length;
+        }
+        
+        // Fill DP rows for each piece length
+        for (int ind = 1; ind &lt; n; ind++) {
+            for (int length = 1; length &lt;= n; length++) {
+                // Case 1: Do not take current piece
+                int notTaken = prev[length];
+                
+                // Case 2: Take current piece if possible
+                int taken = Integer.MIN_VALUE;
+                int rodLength = ind + 1;
+                if (rodLength &lt;= length) {
+                    taken = price[ind] + cur[length - rodLength];
+                }
+                
+                // Store maximum value
+                cur[length] = Math.max(notTaken, taken);
+            }
+            // Update prev row with current row
+            prev = cur.clone();
+        }
+        
+        // Final answer is stored in prev[n]
+        return prev[n];
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[] price = {2, 4, 6, 8};
+        int n = price.length;
+        
+        Solution sol = new Solution();
+        System.out.println("The Maximum value is " + sol.rodCutting(price, n));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to solve the rod cutting problem
+    def rodCutting(self, price, n):
+        # Create two 1D arrays for space optimization
+        prev = [0] * (n + 1)
+        cur = [0] * (n + 1)
+        
+        # Base case: if only the first piece is available
+        for length in range(n + 1):
+            prev[length] = price[0] * length
+        
+        # Fill DP rows for each piece length
+        for ind in range(1, n):
+            for length in range(1, n + 1):
+                # Case 1: Do not take current piece
+                notTaken = prev[length]
+                
+                # Case 2: Take current piece if possible
+                taken = float('-inf')
+                rodLength = ind + 1
+                if rodLength &lt;= length:
+                    taken = price[ind] + cur[length - rodLength]
+                
+                # Store maximum value
+                cur[length] = max(notTaken, taken)
+            
+            # Update prev row with current row
+            prev = cur[:]
+        
+        # Final answer is stored in prev[n]
+        return prev[n]
+
+
+# Driver code
+if __name__ == "__main__":
+    price = [2, 4, 6, 8]
+    n = len(price)
+    
+    sol = Solution()
+    print("The Maximum value is", sol.rodCutting(price, n))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to solve the rod cutting problem
+    rodCutting(price, n) {
+        // Create two 1D arrays for space optimization
+        let prev = new Array(n + 1).fill(0);
+        let cur = new Array(n + 1).fill(0);
+        
+        // Base case: if only the first piece is available
+        for (let length = 0; length &lt;= n; length++) {
+            prev[length] = price[0] * length;
+        }
+        
+        // Fill DP rows for each piece length
+        for (let ind = 1; ind &lt; n; ind++) {
+            for (let length = 1; length &lt;= n; length++) {
+                // Case 1: Do not take current piece
+                let notTaken = prev[length];
+                
+                // Case 2: Take current piece if possible
+                let taken = -Infinity;
+                let rodLength = ind + 1;
+                if (rodLength &lt;= length) {
+                    taken = price[ind] + cur[length - rodLength];
+                }
+                
+                // Store maximum value
+                cur[length] = Math.max(notTaken, taken);
+            }
+            // Update prev row with current row
+            prev = [...cur];
+        }
+        
+        // Final answer is stored in prev[n]
+        return prev[n];
+    }
+}
+
+// Driver code
+const price = [2, 4, 6, 8];
+const n = price.length;
+
+const sol = new Solution();
+console.log("The Maximum value is " + sol.rodCutting(price, n));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O(N * W), We iterate through N items, and for each item we process W weight capacities.</p> <p><strong>Space Complexity:</strong> O(W),We only use a 1D array of size W to store intermediate results, eliminating the need for 2D DP or recursion stack.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

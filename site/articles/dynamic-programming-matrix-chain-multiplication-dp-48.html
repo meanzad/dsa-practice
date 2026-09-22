@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Matrix Chain Multiplication | (DP-48)</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Matrix Chain Multiplication | (DP-48)</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/dynamic-programming/matrix-chain-multiplication-dp-48/</code></div>
+  <p><strong>Problem Statement: </strong>Given a chain of matrices A1,..., An denoted by an array of size n+1, find out the minimum number of operations to multiply these n matrices .</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p>
+<strong>Input : </strong> [40, 20, 30, 10, 30]
+<strong>Output : </strong> 26000 
+<strong>Explanation : </strong> Best parenthesization is ( (A1 x (A2 x A3)) x A4 ).<br/>
+<strong>Input : </strong> [10, 20, 30, 40, 30] 
+<strong>Output : </strong> 30000 
+<strong>Explanation : </strong> Optimal parenthesization minimizes cost.</p></pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Don’t jump directly to the solution, try it out yourself first. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Recursive Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<strong>Pattern Identification:</strong><br/>
+Whenever we need to find the answer to a large problem such that the problem can be broken into subproblems and the final answer varies due to the <strong>order</strong> in which the subproblems are solved, we can think in terms of partition DP.<br/><br/>
+Let us first understand the problem of matrix chain multiplication. In order to understand the problem we need to first understand the rules of matrix multiplication:<br/>
+<ul> <li>Two matrices A1 and A2 of dimensions [p x q] and [r x s] can only be multiplied if and only if q=r.</li> <li>The total number of multiplications required to multiply A1 and A2 are: p*q*s</li> </ul> As this problem of matrix multiplication solves one big problem (minimum operations to get A1.A2….An) and the answer varies in the order the subproblems are being solved, we can identify this problem as a partition DP problem.<br/><br/> <strong>Rules to solve the problem of partition DP:</strong><br/>
+<ul> <li><strong>Start with the full array:</strong> Represent the matrices with indexes i and j. We need to find the minimum cost to multiply matrices from i to j (f(i,j)).</li> <li><strong>Check the base case:</strong> If i == j, there is only one matrix, so return 0 (no multiplication needed).</li> <li><strong>Try all possible partitions:</strong> For k from i to j-1, split the array into two parts: f(i,k) and f(k+1,j).</li> <li><strong>Calculate cost for each partition:</strong> Add the cost of multiplying the two subproblems plus the cost of multiplying their resulting matrices.</li> <li><strong>Choose the minimum:</strong> Keep track of the minimum cost among all partitions.</li> <li><strong>Return the result:</strong> After checking all partitions, return the minimum cost for multiplying matrices from i to j.</li> </ul>
+
+
+</div>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/28d4cb4482943fc7.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/1bd3b32af49b939b.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/55db1c7604db6798.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/70a82d6cb0feb863.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/8fe51c6c88d4a01f.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/fd4fb2c3fa14d561.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/28d4cb4482943fc7.png"/><img alt="Image 2" loading="lazy" src="../assets/img/1bd3b32af49b939b.png"/><img alt="Image 3" loading="lazy" src="../assets/img/55db1c7604db6798.png"/><img alt="Image 4" loading="lazy" src="../assets/img/70a82d6cb0feb863.png"/><img alt="Image 5" loading="lazy" src="../assets/img/8fe51c6c88d4a01f.png"/><img alt="Image 6" loading="lazy" src="../assets/img/fd4fb2c3fa14d561.png"/></div></div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find the minimum multiplication cost
+    int matrixChainOrder(vector&lt;int&gt;&amp; arr, int i, int j) {
+        // Base case: if only one matrix is present, no multiplication needed
+        if (i == j) return 0;
+
+        // Initialize minimum cost as very large
+        int minCost = INT_MAX;
+
+        // Try all possible partitions
+        for (int k = i; k &lt; j; k++) {
+            // Cost of multiplying matrices from i to k
+            int cost1 = matrixChainOrder(arr, i, k);
+
+            // Cost of multiplying matrices from k+1 to j
+            int cost2 = matrixChainOrder(arr, k + 1, j);
+
+            // Cost of multiplying the two resulting matrices
+            int costMultiply = arr[i - 1] * arr[k] * arr[j];
+
+            // Total cost for this partition
+            int total = cost1 + cost2 + costMultiply;
+
+            // Update minimum
+            minCost = min(minCost, total);
+        }
+
+        return minCost;
+    }
+};
+
+// Driver code
+int main() {
+    Solution sol;
+    vector&lt;int&gt; arr = {40, 20, 30, 10, 30}; 
+    int n = arr.size();
+
+    cout &lt;&lt; "Minimum number of multiplications is: "
+         &lt;&lt; sol.matrixChainOrder(arr, 1, n - 1) &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import.java.util.*;
+class Solution {
+    // Function to find the minimum multiplication cost
+    public int matrixChainOrder(int[] arr, int i, int j) {
+        // Base case: if only one matrix is present, no multiplication needed
+        if (i == j) return 0;
+
+        // Initialize minimum cost as very large
+        int minCost = Integer.MAX_VALUE;
+
+        // Try all possible partitions
+        for (int k = i; k &lt; j; k++) {
+            // Cost of multiplying matrices from i to k
+            int cost1 = matrixChainOrder(arr, i, k);
+
+            // Cost of multiplying matrices from k+1 to j
+            int cost2 = matrixChainOrder(arr, k + 1, j);
+
+            // Cost of multiplying the two resulting matrices
+            int costMultiply = arr[i - 1] * arr[k] * arr[j];
+
+            // Total cost for this partition
+            int total = cost1 + cost2 + costMultiply;
+
+            // Update minimum
+            minCost = Math.min(minCost, total);
+        }
+
+        return minCost;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        int[] arr = {40, 20, 30, 10, 30};
+        int n = arr.length;
+
+        System.out.println("Minimum number of multiplications is: "
+                + sol.matrixChainOrder(arr, 1, n - 1));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to find the minimum multiplication cost
+    def matrixChainOrder(self, arr, i, j):
+        # Base case: if only one matrix is present, no multiplication needed
+        if i == j:
+            return 0
+
+        # Initialize minimum cost as very large
+        min_cost = float("inf")
+
+        # Try all possible partitions
+        for k in range(i, j):
+            # Cost of multiplying matrices from i to k
+            cost1 = self.matrixChainOrder(arr, i, k)
+
+            # Cost of multiplying matrices from k+1 to j
+            cost2 = self.matrixChainOrder(arr, k + 1, j)
+
+            # Cost of multiplying the two resulting matrices
+            costMultiply = arr[i - 1] * arr[k] * arr[j]
+
+            # Total cost for this partition
+            total = cost1 + cost2 + costMultiply
+
+            # Update minimum
+            min_cost = min(min_cost, total)
+
+        return min_cost
+
+
+# Driver code
+if __name__ == "__main__":
+    sol = Solution()
+    arr = [40, 20, 30, 10, 30]
+    n = len(arr)
+    print("Minimum number of multiplications is:",
+          sol.matrixChainOrder(arr, 1, n - 1))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find the minimum multiplication cost
+    matrixChainOrder(arr, i, j) {
+        // Base case: if only one matrix is present, no multiplication needed
+        if (i === j) return 0;
+
+        // Initialize minimum cost as very large
+        let minCost = Number.MAX_SAFE_INTEGER;
+
+        // Try all possible partitions
+        for (let k = i; k &lt; j; k++) {
+            // Cost of multiplying matrices from i to k
+            let cost1 = this.matrixChainOrder(arr, i, k);
+
+            // Cost of multiplying matrices from k+1 to j
+            let cost2 = this.matrixChainOrder(arr, k + 1, j);
+
+            // Cost of multiplying the two resulting matrices
+            let costMultiply = arr[i - 1] * arr[k] * arr[j];
+
+            // Total cost for this partition
+            let total = cost1 + cost2 + costMultiply;
+
+            // Update minimum
+            minCost = Math.min(minCost, total);
+        }
+
+        return minCost;
+    }
+}
+
+// Driver code
+const sol = new Solution();
+const arr = [40, 20, 30, 10, 30];
+const n = arr.length;
+console.log("Minimum number of multiplications is:",
+    sol.matrixChainOrder(arr, 1, n - 1));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O(2^n). This is because we try every possible parenthesization, which leads to exponential recursion.</p> <p><strong>Space Complexity:</strong> O(n). This comes from the recursion call stack depth in the worst case.</p>
+</details>
+</div>
+</details>
+
+</div>
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                Memoization Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+
+<strong>Steps to memoize a recursive solution:</strong><br/><br/>
+
+
+As there are overlapping subproblems in the recursive tree, we can memoize the recursive code to reduce the time complexity.
+
+
+<ol><li>Create a dp array of size [n][n]. I and j can range from 0 to n-1 so we take the size n X n.</li><li>We initialize the dp array to -1.</li><li>Whenever we want to find the answer to particular parameters (say f(i,j)), we first check whether the answer is already calculated using the dp array(i.e dp[i][j]!= -1 ). If yes, simply return the value from the dp array.</li><li>If not, then we are finding the answer for the given value for the first time, we will use the recursive relation as usual but before returning from the function, we will set dp[i][j] to the solution we get.</li></ol>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Recursive function with memoization
+    int solve(vector&lt;int&gt;&amp; arr, int i, int j, vector&lt;vector&lt;int&gt;&gt;&amp; dp) {
+        // Base case: only one matrix, no multiplication
+        if (i == j) return 0;
+
+        // If already computed, return from dp
+        if (dp[i][j] != -1) return dp[i][j];
+
+        // Initialize min cost as very large
+        int minCost = INT_MAX;
+
+        // Try every partition
+        for (int k = i; k &lt; j; k++) {
+            int cost1 = solve(arr, i, k, dp);
+            int cost2 = solve(arr, k + 1, j, dp);
+            int costMultiply = arr[i - 1] * arr[k] * arr[j];
+
+            int total = cost1 + cost2 + costMultiply;
+
+            minCost = min(minCost, total);
+        }
+
+        // Store and return result
+        return dp[i][j] = minCost;
+    }
+
+    // Function to start the memoization approach
+    int matrixChainOrder(vector&lt;int&gt;&amp; arr) {
+        int n = arr.size();
+        vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(n, -1));
+        return solve(arr, 1, n - 1, dp);
+    }
+};
+
+// Driver code
+int main() {
+    Solution sol;
+    vector&lt;int&gt; arr = {40, 20, 30, 10, 30};
+    cout &lt;&lt; "Minimum number of multiplications is: "
+         &lt;&lt; sol.matrixChainOrder(arr) &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import.java.util.*;
+class Solution {
+    // Recursive function with memoization
+    public int solve(int[] arr, int i, int j, int[][] dp) {
+        // Base case: only one matrix, no multiplication
+        if (i == j) return 0;
+
+        // If already computed, return from dp
+        if (dp[i][j] != -1) return dp[i][j];
+
+        int minCost = Integer.MAX_VALUE;
+
+        // Try every partition
+        for (int k = i; k &lt; j; k++) {
+            int cost1 = solve(arr, i, k, dp);
+            int cost2 = solve(arr, k + 1, j, dp);
+            int costMultiply = arr[i - 1] * arr[k] * arr[j];
+
+            int total = cost1 + cost2 + costMultiply;
+            minCost = Math.min(minCost, total);
+        }
+
+        return dp[i][j] = minCost;
+    }
+
+    public int matrixChainOrder(int[] arr) {
+        int n = arr.length;
+        int[][] dp = new int[n][n];
+
+        // Initialize dp with -1
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                dp[i][j] = -1;
+            }
+        }
+        return solve(arr, 1, n - 1, dp);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        int[] arr = {40, 20, 30, 10, 30};
+        System.out.println("Minimum number of multiplications is: "
+                + sol.matrixChainOrder(arr));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Recursive function with memoization
+    def solve(self, arr, i, j, dp):
+        # Base case: only one matrix, no multiplication
+        if i == j:
+            return 0
+
+        # If already computed, return from dp
+        if dp[i][j] != -1:
+            return dp[i][j]
+
+        min_cost = float("inf")
+
+        # Try every partition
+        for k in range(i, j):
+            cost1 = self.solve(arr, i, k, dp)
+            cost2 = self.solve(arr, k + 1, j, dp)
+            costMultiply = arr[i - 1] * arr[k] * arr[j]
+            total = cost1 + cost2 + costMultiply
+            min_cost = min(min_cost, total)
+
+        dp[i][j] = min_cost
+        return dp[i][j]
+
+    def matrixChainOrder(self, arr):
+        n = len(arr)
+        dp = [[-1] * n for _ in range(n)]
+        return self.solve(arr, 1, n - 1, dp)
+
+
+# Driver code
+if __name__ == "__main__":
+    sol = Solution()
+    arr = [40, 20, 30, 10, 30]
+    print("Minimum number of multiplications is:",
+          sol.matrixChainOrder(arr))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Recursive function with memoization
+    solve(arr, i, j, dp) {
+        // Base case: only one matrix, no multiplication
+        if (i === j) return 0;
+
+        // If already computed, return from dp
+        if (dp[i][j] !== -1) return dp[i][j];
+
+        let minCost = Number.MAX_SAFE_INTEGER;
+
+        // Try every partition
+        for (let k = i; k &lt; j; k++) {
+            let cost1 = this.solve(arr, i, k, dp);
+            let cost2 = this.solve(arr, k + 1, j, dp);
+            let costMultiply = arr[i - 1] * arr[k] * arr[j];
+
+            let total = cost1 + cost2 + costMultiply;
+            minCost = Math.min(minCost, total);
+        }
+
+        dp[i][j] = minCost;
+        return dp[i][j];
+    }
+
+    matrixChainOrder(arr) {
+        let n = arr.length;
+        let dp = Array.from({ length: n }, () =&gt; Array(n).fill(-1));
+        return this.solve(arr, 1, n - 1, dp);
+    }
+}
+
+// Driver code
+const sol = new Solution();
+const arr = [40, 20, 30, 10, 30];
+console.log("Minimum number of multiplications is:",
+    sol.matrixChainOrder(arr));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O(n^3). There are O(n^2) subproblems (for each i, j), and for each we try O(n) partitions.</p> <p><strong>Space Complexity:</strong> O(n^2). We use a 2D dp table of size n x n, plus recursion stack O(n).</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

@@ -1,0 +1,865 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Distinct Subsequences| (DP-32)</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Distinct Subsequences| (DP-32)</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/distinct-subsequences-dp-32/</code></div>
+  <p><strong>Problem Statement :</strong> Given two strings s and t, return the number of distinct subsequences of s that equal t.
+
+<br/><br/>
+
+A subsequence of a string is a new string generated from the original string with some characters (can be none) deleted without changing the relative order of the remaining characters. For example, "ace" is a subsequence of "abcde" while "aec" is not.
+
+<br/><br/>
+
+The task is to count how many different ways we can form t from s by deleting some (or no) characters from s.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: s = "axbxax", t = "axa"</span>
+<span>Output: 2</span>
+<span>Explanation: In the string "axbxax", there are two distinct subsequences "axa":
+(a)(x)bx(a)x
+(a)xb(x)(a)x </span>
+<p></p>
+<span>Input: s = "babgbag", t = "bag"</span>
+<span>Output: 5</span>
+<span>Explanation: In the string "babgbag", there are five distinct subsequences "bag":
+(ba)(b)(ga)(g)
+(ba)(bg)(ag)
+(bab)(ga)(g)
+(bab)(g)(ag)
+(babg)(a)(g) </span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/distinct-subsequences" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. 
+    It's highly recommend trying to 
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Memoization
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+The problem asks us to count how many ways we can form string t from string s by deleting characters.
+Whenever we compare characters from s and t, we have two choices, if the characters match, we can either use it (move both pointers) or skip it (move only in s). If the characters don’t match, the only option is to skip the character from s. This naturally gives us overlapping subproblems, so memoization works perfectly.
+<ul>
+<li>Define a recursive function f(i, j) which counts ways to form substring of t starting at j from substring of s starting at i</li>
+<li>If j equals length of t, return 1 because we have successfully formed t</li>
+<li>If i equals length of s but j is smaller than length of t, return 0 because s is exhausted</li>
+<li>If s[i] is equal to t[j], then we can either take this character or skip it</li>
+<li>If characters match, f(i, j) becomes f(i+1, j+1) plus f(i+1, j)</li>
+<li>If characters do not match, we can only skip the character from s so f(i, j) becomes f(i+1, j)</li>
+<li>Store results of each state in a 2D memo table dp[i][j] to avoid recomputation</li>
+<li>Start recursion with f(0, 0) and return the final answer</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Recursive helper function with memoization
+    // i -&gt; current index in s
+    // j -&gt; current index in t
+    // dp -&gt; memoization table
+    int helper(int i, int j, string &amp;s, string &amp;t,
+               vector&lt;vector&lt;int&gt;&gt; &amp;dp) {
+        // If we have matched all characters of t
+        // then we found one valid subsequence
+        if (j == t.size()) return 1;
+
+        // If we have exhausted s but not t
+        // then no valid subsequence can be formed
+        if (i == s.size()) return 0;
+
+        // If this state has been already computed
+        if (dp[i][j] != -1) return dp[i][j];
+
+        // If current characters of s and t match
+        if (s[i] == t[j]) {
+            // Option 1: take this character and move both indices
+            int take = helper(i + 1, j + 1, s, t, dp);
+
+            // Option 2: skip this character of s and move only in s
+            int notTake = helper(i + 1, j, s, t, dp);
+
+            // Store result in dp table
+            return dp[i][j] = take + notTake;
+        } else {
+            // If characters do not match, we can only skip s[i]
+            return dp[i][j] = helper(i + 1, j, s, t, dp);
+        }
+    }
+
+    // Main function to count distinct subsequences
+    int numDistinct(string s, string t) {
+        // Initialize dp table with -1 (uncomputed states)
+        vector&lt;vector&lt;int&gt;&gt; dp(s.size(),
+                               vector&lt;int&gt;(t.size(), -1));
+
+        // Start recursion from index 0 of s and t
+        return helper(0, 0, s, t, dp);
+    }
+};
+
+// Driver code
+int main() {
+    Solution sol;
+
+    // Input strings
+    string s = "babgbag";
+    string t = "bag";
+
+    // Print number of distinct subsequences
+    cout &lt;&lt; sol.numDistinct(s, t) &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Recursive helper function with memoization
+    int helper(int i, int j, String s, String t,
+               int[][] dp) {
+        // If we have matched all characters of t
+        if (j == t.length()) return 1;
+
+        // If we have exhausted s but not t
+        if (i == s.length()) return 0;
+
+        // If already computed
+        if (dp[i][j] != -1) return dp[i][j];
+
+        // If characters match
+        if (s.charAt(i) == t.charAt(j)) {
+            // Option 1: take current character
+            int take = helper(i + 1, j + 1, s, t, dp);
+
+            // Option 2: skip current character of s
+            int notTake = helper(i + 1, j, s, t, dp);
+
+            // Store result
+            dp[i][j] = take + notTake;
+        } else {
+            // If mismatch, skip character of s
+            dp[i][j] = helper(i + 1, j, s, t, dp);
+        }
+        return dp[i][j];
+    }
+
+    // Main function to count distinct subsequences
+    public int numDistinct(String s, String t) {
+        // Initialize dp array with -1
+        int[][] dp = new int[s.length()][t.length()];
+        for (int[] row : dp) Arrays.fill(row, -1);
+
+        // Start recursion
+        return helper(0, 0, s, t, dp);
+    }
+}
+
+// Driver class
+public class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+
+        // Input strings
+        String s = "babgbag";
+        String t = "bag";
+
+        // Print answer
+        System.out.println(sol.numDistinct(s, t));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Recursive helper with memoization
+    def helper(self, i, j, s, t, dp):
+        # If we have matched all characters of t
+        if j == len(t):
+            return 1
+
+        # If we have exhausted s but not t
+        if i == len(s):
+            return 0
+
+        # If result already computed
+        if dp[i][j] != -1:
+            return dp[i][j]
+
+        # If characters match
+        if s[i] == t[j]:
+            # Option 1: take the character
+            take = self.helper(i + 1, j + 1, s, t, dp)
+
+            # Option 2: skip the character from s
+            notTake = self.helper(i + 1, j, s, t, dp)
+
+            # Store result
+            dp[i][j] = take + notTake
+        else:
+            # If mismatch, skip character of s
+            dp[i][j] = self.helper(i + 1, j, s, t, dp)
+
+        return dp[i][j]
+
+    # Main function to count distinct subsequences
+    def numDistinct(self, s: str, t: str) -&gt; int:
+        # Initialize dp table with -1
+        dp = [[-1] * len(t) for _ in range(len(s))]
+
+        # Start recursion
+        return self.helper(0, 0, s, t, dp)
+
+
+# Driver code
+if __name__ == "__main__":
+    sol = Solution()
+
+    # Input strings
+    s = "babgbag"
+    t = "bag"
+
+    # Print result
+    print(sol.numDistinct(s, t))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Recursive helper function with memoization
+    helper(i, j, s, t, dp) {
+        // If we have matched all characters of t
+        if (j === t.length) return 1;
+
+        // If we have exhausted s but not t
+        if (i === s.length) return 0;
+
+        // If already computed
+        if (dp[i][j] !== -1) return dp[i][j];
+
+        // If characters match
+        if (s[i] === t[j]) {
+            // Option 1: take current character
+            let take = this.helper(i + 1, j + 1, s, t, dp);
+
+            // Option 2: skip current character of s
+            let notTake = this.helper(i + 1, j, s, t, dp);
+
+            // Store result
+            dp[i][j] = take + notTake;
+        } else {
+            // If mismatch, skip character of s
+            dp[i][j] = this.helper(i + 1, j, s, t, dp);
+        }
+        return dp[i][j];
+    }
+
+    // Main function to count distinct subsequences
+    numDistinct(s, t) {
+        // Initialize dp array with -1
+        let dp = Array.from({ length: s.length },
+            () =&gt; new Array(t.length).fill(-1));
+
+        // Start recursion
+        return this.helper(0, 0, s, t, dp);
+    }
+}
+
+// Driver code
+let sol = new Solution();
+
+// Input strings
+let s = "babgbag";
+let t = "bag";
+
+// Print result
+console.log(sol.numDistinct(s, t));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N * M)</strong>, each state defined by character of string s and character of string t is computed once.<br/>
+<strong>Space Complexity: O(N*M) + O(N)</strong>, extra space is used for storing the dp array and recursion stack space.
+
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Tabulation
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+In memoization, we solve the problem top-down by making recursive calls and storing results in a dp table to avoid recomputation.
+To convert it into tabulation, we flip the process.
+
+Instead of recursion, we directly fill the dp table bottom-up.
+
+Start with the base cases (empty string cases) and build solutions for larger substrings step by step.
+
+This avoids recursion stack overhead and makes the solution more efficient.
+
+<ul>
+<li>Create a 2D dp table of size (n+1) x (m+1) where n is length of s and m is length of t</li>
+<li>dp[i][j] will represent number of ways to form t[j:] from s[i:]</li>
+<li>Initialize dp[n][m] = 1 because empty t can be formed from empty s in one way</li>
+<li>Initialize dp[i][m] = 1 for all i from 0 to n because empty t can always be formed from any suffix of s</li>
+<li>Initialize dp[n][j] = 0 for all j less than m because non empty t cannot be formed from empty s</li>
+<li>Fill the table in reverse order starting from i = n-1 to 0 and j = m-1 to 0</li>
+<li>If s[i] equals t[j], then dp[i][j] = dp[i+1][j+1] + dp[i+1][j]</li>
+<li>If s[i] does not equal t[j], then dp[i][j] = dp[i+1][j]</li>
+<li>Final answer will be stored in dp[0][0]</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to count distinct subsequences
+    int numDistinct(string s, string t) {
+        // Get lengths of both strings
+        int n = s.size();
+        int m = t.size();
+
+        // Create dp table of size (n+1) x (m+1)
+        vector&lt;vector&lt;long long&gt;&gt; dp(n + 1, vector&lt;long long&gt;(m + 1, 0));
+
+        // Base case: empty t can be formed from any suffix of s
+        for (int i = 0; i &lt;= n; i++) {
+            dp[i][m] = 1;
+        }
+
+        // Fill dp table from bottom to top
+        for (int i = n - 1; i &gt;= 0; i--) {
+            for (int j = m - 1; j &gt;= 0; j--) {
+                // If characters match, we have two options:
+                // 1. Take this character -&gt; dp[i+1][j+1]
+                // 2. Skip this character -&gt; dp[i+1][j]
+                if (s[i] == t[j]) {
+                    dp[i][j] = dp[i + 1][j + 1] + dp[i + 1][j];
+                } else {
+                    // If characters don't match, we can only skip
+                    dp[i][j] = dp[i + 1][j];
+                }
+            }
+        }
+
+        // Final answer is stored at dp[0][0]
+        return dp[0][0];
+    }
+};
+
+int main() {
+    Solution sol;
+    string s = "babgbag";
+    string t = "bag";
+    cout &lt;&lt; sol.numDistinct(s, t) &lt;&lt; endl; 
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to count distinct subsequences
+    public int numDistinct(String s, String t) {
+        // Get lengths of both strings
+        int n = s.length();
+        int m = t.length();
+
+        // Create dp table of size (n+1) x (m+1)
+        long[][] dp = new long[n + 1][m + 1];
+
+        // Base case: empty t can be formed from any suffix of s
+        for (int i = 0; i &lt;= n; i++) {
+            dp[i][m] = 1;
+        }
+
+        // Fill dp table from bottom to top
+        for (int i = n - 1; i &gt;= 0; i--) {
+            for (int j = m - 1; j &gt;= 0; j--) {
+                // If characters match, we have two options:
+                // 1. Take this character -&gt; dp[i+1][j+1]
+                // 2. Skip this character -&gt; dp[i+1][j]
+                if (s.charAt(i) == t.charAt(j)) {
+                    dp[i][j] = dp[i + 1][j + 1] + dp[i + 1][j];
+                } else {
+                    // If characters don't match, we can only skip
+                    dp[i][j] = dp[i + 1][j];
+                }
+            }
+        }
+
+        // Final answer is stored at dp[0][0]
+        return (int) dp[0][0];
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        String s = "babgbag";
+        String t = "bag";
+        System.out.println(sol.numDistinct(s, t)); 
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to count distinct subsequences
+    def numDistinct(self, s: str, t: str) -&gt; int:
+        # Get lengths of both strings
+        n = len(s)
+        m = len(t)
+
+        # Create dp table of size (n+1) x (m+1) initialized to 0
+        dp = [[0] * (m + 1) for _ in range(n + 1)]
+
+        # Base case: empty t can be formed from any suffix of s
+        for i in range(n + 1):
+            dp[i][m] = 1
+
+        # Fill dp table from bottom to top
+        for i in range(n - 1, -1, -1):
+            for j in range(m - 1, -1, -1):
+                # If characters match, we have two options:
+                # 1. Take this character -&gt; dp[i+1][j+1]
+                # 2. Skip this character -&gt; dp[i+1][j]
+                if s[i] == t[j]:
+                    dp[i][j] = dp[i + 1][j + 1] + dp[i + 1][j]
+                else:
+                    # If characters don't match, we can only skip
+                    dp[i][j] = dp[i + 1][j]
+
+        # Final answer is stored at dp[0][0]
+        return dp[0][0]
+
+
+# Driver code
+s = "babgbag"
+t = "bag"
+sol = Solution()
+print(sol.numDistinct(s, t))  
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to count distinct subsequences
+    numDistinct(s, t) {
+        // Get lengths of both strings
+        const n = s.length;
+        const m = t.length;
+
+        // Create dp table of size (n+1) x (m+1) filled with 0
+        const dp = Array.from({ length: n + 1 }, () =&gt; Array(m + 1).fill(0));
+
+        // Base case: empty t can be formed from any suffix of s
+        for (let i = 0; i &lt;= n; i++) {
+            dp[i][m] = 1;
+        }
+
+        // Fill dp table from bottom to top
+        for (let i = n - 1; i &gt;= 0; i--) {
+            for (let j = m - 1; j &gt;= 0; j--) {
+                // If characters match, we have two options:
+                // 1. Take this character -&gt; dp[i+1][j+1]
+                // 2. Skip this character -&gt; dp[i+1][j]
+                if (s[i] === t[j]) {
+                    dp[i][j] = dp[i + 1][j + 1] + dp[i + 1][j];
+                } else {
+                    // If characters don't match, we can only skip
+                    dp[i][j] = dp[i + 1][j];
+                }
+            }
+        }
+
+        // Final answer is stored at dp[0][0]
+        return dp[0][0];
+    }
+}
+
+// Driver code
+const s = "babgbag";
+const t = "bag";
+const sol = new Solution();
+console.log(sol.numDistinct(s, t)); 
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+<strong>Time Complexity: O(N * M)</strong>, each state defined by character of string s and character of string t is computed once.<br/>
+<strong>Space Complexity: O(N*M) </strong>, extra space is used for storing the dp array.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Space Optimization
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+In tabulation, we use a 2D dp table of size (n+1) x (m+1) to store results.
+But if we look closely, to compute the current row dp[i][*], we only need the next row dp[i+1][*].
+This means we don’t need the entire table but just two 1D arrays to find the number of distinct subsequences.
+<ul>
+<li>Create a 1D dp array of size m+1 where m is the length of t</li>
+<li>Initialize dp[m] = 1 because empty t can be formed from any suffix of s</li>
+<li>Fill the array backwards from i = n-1 to 0 where n is the length of s</li>
+<li>For each character in s, create a copy of dp to represent current row</li>
+<li>Iterate j from m-1 down to 0 to avoid overwriting required values</li>
+<li>If s[i] equals t[j], then dp[j] = previous[j+1] + previous[j]</li>
+<li>If s[i] does not equal t[j], then dp[j] = previous[j]</li>
+<li>At the end, dp[0] will store the total number of distinct subsequences</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to count distinct subsequences
+    int numDistinct(string s, string t) {
+        // Length of source string
+        int n = s.size();
+        // Length of target string
+        int m = t.size();
+
+        // Create dp array of size m+1, initialize with 0
+        vector&lt;long long&gt; dp(m + 1, 0);
+
+        // Base case: Empty target string can always be formed
+        // in exactly 1 way (by deleting all characters of s)
+        dp[m] = 1;
+
+        // Traverse source string from end to start
+        for (int i = n - 1; i &gt;= 0; i--) {
+            // Create a copy of dp for current iteration
+            vector&lt;long long&gt; curr = dp;
+
+            // Traverse target string from end to start
+            for (int j = m - 1; j &gt;= 0; j--) {
+                // If characters match, we can either take it or skip it
+                if (s[i] == t[j]) {
+                    curr[j] = dp[j + 1] + dp[j];
+                } 
+                // Else we can only skip this character of s
+                else {
+                    curr[j] = dp[j];
+                }
+            }
+
+            // Update dp for next iteration
+            dp = curr;
+        }
+
+        // Answer is number of ways to form entire t
+        return (int)dp[0];
+    }
+};
+
+int main() {
+    Solution sol;
+    string s = "rabbbit";
+    string t = "rabbit";
+    cout &lt;&lt; sol.numDistinct(s, t) &lt;&lt; endl; 
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to count distinct subsequences
+    public int numDistinct(String s, String t) {
+        // Length of source string
+        int n = s.length();
+        // Length of target string
+        int m = t.length();
+
+        // Create dp array of size m+1
+        long[] dp = new long[m + 1];
+
+        // Base case: Empty target string can always be formed
+        dp[m] = 1;
+
+        // Traverse source string from end to start
+        for (int i = n - 1; i &gt;= 0; i--) {
+            // Create copy for current iteration
+            long[] curr = Arrays.copyOf(dp, m + 1);
+
+            // Traverse target string from end to start
+            for (int j = m - 1; j &gt;= 0; j--) {
+                // If characters match, take it or skip it
+                if (s.charAt(i) == t.charAt(j)) {
+                    curr[j] = dp[j + 1] + dp[j];
+                } 
+                // Else only skip option
+                else {
+                    curr[j] = dp[j];
+                }
+            }
+
+            // Update dp
+            dp = curr;
+        }
+
+        // Return answer
+        return (int)dp[0];
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        String s = "rabbbit";
+        String t = "rabbit";
+        System.out.println(sol.numDistinct(s, t));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to count distinct subsequences
+    def numDistinct(self, s: str, t: str) -&gt; int:
+        # Length of source string
+        n = len(s)
+        # Length of target string
+        m = len(t)
+
+        # Create dp array of size m+1 initialized to 0
+        dp = [0] * (m + 1)
+
+        # Base case: Empty target can always be formed
+        dp[m] = 1
+
+        # Traverse source string backwards
+        for i in range(n - 1, -1, -1):
+            # Create a copy of dp for current iteration
+            curr = dp[:]
+
+            # Traverse target string backwards
+            for j in range(m - 1, -1, -1):
+                # If characters match, we can take or skip
+                if s[i] == t[j]:
+                    curr[j] = dp[j + 1] + dp[j]
+                # Else only skip option
+                else:
+                    curr[j] = dp[j]
+
+            # Update dp
+            dp = curr
+
+        # Answer is number of ways to form entire t
+        return dp[0]
+
+
+# Driver code
+sol = Solution()
+s = "rabbbit"
+t = "rabbit"
+print(sol.numDistinct(s, t))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to count distinct subsequences
+    numDistinct(s, t) {
+        // Length of source string
+        let n = s.length;
+        // Length of target string
+        let m = t.length;
+
+        // Create dp array of size m+1
+        let dp = new Array(m + 1).fill(0);
+
+        // Base case: Empty target can always be formed
+        dp[m] = 1;
+
+        // Traverse source string backwards
+        for (let i = n - 1; i &gt;= 0; i--) {
+            // Copy dp for current iteration
+            let curr = [...dp];
+
+            // Traverse target string backwards
+            for (let j = m - 1; j &gt;= 0; j--) {
+                // If characters match, take or skip
+                if (s[i] === t[j]) {
+                    curr[j] = dp[j + 1] + dp[j];
+                } 
+                // Else only skip option
+                else {
+                    curr[j] = dp[j];
+                }
+            }
+
+            // Update dp
+            dp = curr;
+        }
+
+        // Return answer
+        return dp[0];
+    }
+}
+
+// Driver code
+let sol = new Solution();
+let s = "rabbbit";
+let t = "rabbit";
+console.log(sol.numDistinct(s, t));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+<strong>Time Complexity: O(N * M)</strong>, each state defined by character of string s and character of string t is computed once.<br/>
+<strong>Space Complexity: O(M) </strong>, extra space is used for storing the 1D array.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

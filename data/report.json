@@ -1,0 +1,607 @@
+{
+ "total": 399,
+ "ok": 279,
+ "thin": [],
+ "failed": [
+  {
+   "slug": "delete-all-occurrences-of-a-key-in-dll",
+   "url": "Delete all occurrences of a key in DLL",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "s-insert-interval",
+   "url": "https://takeuforward.org/?s=Insert+Interval",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "greedy-jump-game-i",
+   "url": "https://takeuforward.org/Greedy/jump-game-i",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "arrays-implement-upper-bound",
+   "url": "https://takeuforward.org/arrays/implement-upper-bound/",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "arrays-minimise-maximum-distance-between-gas-stations",
+   "url": "https://takeuforward.org/arrays/minimise-maximum-distance-between-gas-stations/",
+   "why": "not-found"
+  },
+  {
+   "slug": "arrays-minimum-days-to-make-m-bouquets",
+   "url": "https://takeuforward.org/arrays/minimum-days-to-make-m-bouquets/",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "binary-tree-binary-tree-representation-in-java",
+   "url": "https://takeuforward.org/binary-tree/binary-tree-representation-in-java/",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "binary-tree-count-number-of-nodes-in-a-binary-tree",
+   "url": "https://takeuforward.org/binary-tree/count-number-of-nodes-in-a-binary-tree/",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-add-1-to-a-number-represented-by-ll",
+   "url": "https://takeuforward.org/data-structure/add-1-to-a-number-represented-by-ll",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-assign-cookies",
+   "url": "https://takeuforward.org/data-structure/assign-cookies",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-asteroid-collision",
+   "url": "https://takeuforward.org/data-structure/asteroid-collision",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-binary-subarray-with-sum",
+   "url": "https://takeuforward.org/data-structure/binary-subarray-with-sum",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-bst-iterator",
+   "url": "https://takeuforward.org/data-structure/bst-iterator",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-calculate-the-diameter-of-a-binary-tree",
+   "url": "https://takeuforward.org/data-structure/calculate-the-diameter-of-a-binary-tree/",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-candy",
+   "url": "https://takeuforward.org/data-structure/candy",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-celebrity-problem",
+   "url": "https://takeuforward.org/data-structure/celebrity-problem",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-check-if-a-number-is-odd-or-not",
+   "url": "https://takeuforward.org/data-structure/check-if-a-number-is-odd-or-not",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-check-if-a-number-is-power-of-2-or-not",
+   "url": "https://takeuforward.org/data-structure/check-if-a-number-is-power-of-2-or-not",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-check-if-an-array-represents-a-min-heap",
+   "url": "https://takeuforward.org/data-structure/check-if-an-array-represents-a-min-heap",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-check-if-the-i-th-bit-is-set-or-not",
+   "url": "https://takeuforward.org/data-structure/check-if-the-i-th-bit-is-set-or-not",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-check-if-there-exists-a-subsequence-with-sum-k",
+   "url": "https://takeuforward.org/data-structure/check-if-there-exists-a-subsequence-with-sum-k",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-combination-sum-iii",
+   "url": "https://takeuforward.org/data-structure/combination-sum-iii",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-connected-components",
+   "url": "https://takeuforward.org/data-structure/connected-components",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-count-all-subsequences-with-sum-k",
+   "url": "https://takeuforward.org/data-structure/count-all-subsequences-with-sum-k",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-count-and-say",
+   "url": "https://takeuforward.org/data-structure/count-and-say",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-count-good-numbers",
+   "url": "https://takeuforward.org/data-structure/count-good-numbers",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-count-number-of-bits-to-be-flipped-to-convert-a-to-b",
+   "url": "https://takeuforward.org/data-structure/count-number-of-bits-to-be-flipped-to-convert-a-to-b",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-count-number-of-nice-subarrays",
+   "url": "https://takeuforward.org/data-structure/count-number-of-nice-subarrays",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-count-number-of-substrings",
+   "url": "https://takeuforward.org/data-structure/count-number-of-substrings",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-count-square-submatrices-with-all-1s-dp-on-rectangles-dp-56",
+   "url": "https://takeuforward.org/data-structure/count-square-submatrices-with-all-1s-dp-on-rectangles-dp-56/",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-count-the-number-of-set-bits",
+   "url": "https://takeuforward.org/data-structure/count-the-number-of-set-bits",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-count-the-number-of-subarrays-with-given-xor-k",
+   "url": "https://takeuforward.org/data-structure/count-the-number-of-subarrays-with-given-xor-k/",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-delete-last-node-of-a-doubly-linked-list",
+   "url": "https://takeuforward.org/data-structure/delete-last-node-of-a-doubly-linked-list/",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-delete-last-node-of-linked-list",
+   "url": "https://takeuforward.org/data-structure/delete-last-node-of-linked-list/",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-design-twitter",
+   "url": "https://takeuforward.org/data-structure/design-twitter",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-divide-two-integers-without-using-multiplication-division-and-mod-operator",
+   "url": "https://takeuforward.org/data-structure/divide-two-integers-without-using-multiplication-division-and-mod-operator",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-expression-add-operators",
+   "url": "https://takeuforward.org/data-structure/expression-add-operators",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-find-median-from-data-stream",
+   "url": "https://takeuforward.org/data-structure/find-median-from-data-stream",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-find-minmax-in-a-bst",
+   "url": "https://takeuforward.org/data-structure/find-minmax-in-a-bst",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-find-pairs-with-given-sum-in-doubly-linked-list",
+   "url": "https://takeuforward.org/data-structure/find-pairs-with-given-sum-in-doubly-linked-list",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-find-peak-element-2d-matrix",
+   "url": "https://takeuforward.org/data-structure/find-peak-element-2d-matrix",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-find-the-two-numbers-appearing-odd-number-of-times",
+   "url": "https://takeuforward.org/data-structure/find-the-two-numbers-appearing-odd-number-of-times",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-find-xor-of-numbers-from-l-to-r",
+   "url": "https://takeuforward.org/data-structure/find-xor-of-numbers-from-l-to-r",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-fruit-into-baskets",
+   "url": "https://takeuforward.org/data-structure/fruit-into-baskets",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-g-36-shortest-distance-in-a-binary-maze",
+   "url": "https://takeuforward.org/data-structure/g-36-shortest-distance-in-a-binary-maze/",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-generate-all-binary-strings",
+   "url": "https://takeuforward.org/data-structure/generate-all-binary-strings",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-generate-parenthesis",
+   "url": "https://takeuforward.org/data-structure/generate-parenthesis",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-graph-representation-in-java",
+   "url": "https://takeuforward.org/data-structure/graph-representation-in-java",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-hands-of-straights",
+   "url": "https://takeuforward.org/data-structure/hands-of-straights",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-hashing-in-strings",
+   "url": "https://takeuforward.org/data-structure/hashing-in-strings",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-inorder-successorpredecessor-in-bst",
+   "url": "https://takeuforward.org/data-structure/inorder-successorpredecessor-in-bst",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-introduction-to-bit-manipulation-theory",
+   "url": "https://takeuforward.org/data-structure/introduction-to-bit-manipulation-theory",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-introduction-to-priority-queues-using-binary-heaps",
+   "url": "https://takeuforward.org/data-structure/introduction-to-priority-queues-using-binary-heaps",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-isomorphic-string",
+   "url": "https://takeuforward.org/data-structure/isomorphic-string",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-java-collections",
+   "url": "https://takeuforward.org/data-structure/java-collections",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-jump-game-2",
+   "url": "https://takeuforward.org/data-structure/jump-game-2",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-kmp-algorithm-or-lps-array",
+   "url": "https://takeuforward.org/data-structure/kmp-algorithm-or-lps-array",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-kth-largest-element-in-a-stream-of-running-integers",
+   "url": "https://takeuforward.org/data-structure/kth-largest-element-in-a-stream-of-running-integers",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-largest-odd-number-in-a-string",
+   "url": "https://takeuforward.org/data-structure/largest-odd-number-in-a-string",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-learn-all-patterns-of-subsequences-theory",
+   "url": "https://takeuforward.org/data-structure/learn-all-patterns-of-subsequences-theory",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-letter-combinations-of-a-phone-number",
+   "url": "https://takeuforward.org/data-structure/letter-combinations-of-a-phone-number",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-lfu-cache",
+   "url": "https://takeuforward.org/data-structure/lfu-cache",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-linear-search-in-c",
+   "url": "https://takeuforward.org/data-structure/linear-search-in-c/",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-longest-bitonic-subsequence-dp-46",
+   "url": "https://takeuforward.org/data-structure/longest-bitonic-subsequence-dp-46/",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-longest-common-prefix",
+   "url": "https://takeuforward.org/data-structure/longest-common-prefix",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-longest-common-substring-dp-27",
+   "url": "https://takeuforward.org/data-structure/longest-common-substring-dp-27/",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-longest-happy-prefix",
+   "url": "https://takeuforward.org/data-structure/longest-happy-prefix",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-longest-repeating-character-replacement",
+   "url": "https://takeuforward.org/data-structure/longest-repeating-character-replacement",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-max-consecutive-ones-iii",
+   "url": "https://takeuforward.org/data-structure/max-consecutive-ones-iii",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-maximum-nesting-depth-of-parenthesis",
+   "url": "https://takeuforward.org/data-structure/maximum-nesting-depth-of-parenthesis",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-maximum-point-you-can-obtain-from-cards",
+   "url": "https://takeuforward.org/data-structure/maximum-point-you-can-obtain-from-cards",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-maximum-sum-combination",
+   "url": "https://takeuforward.org/data-structure/maximum-sum-combination",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-merge-m-sorted-lists",
+   "url": "https://takeuforward.org/data-structure/merge-m-sorted-lists",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-minimum-coins-dp-20",
+   "url": "https://takeuforward.org/data-structure/minimum-coins-dp-20/",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-minimum-cost-to-connect-sticks",
+   "url": "https://takeuforward.org/data-structure/minimum-cost-to-connect-sticks",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-minimum-number-of-bracket-reversals-needed-to-make-an-expression-balanced",
+   "url": "https://takeuforward.org/data-structure/minimum-number-of-bracket-reversals-needed-to-make-an-expression-balanced",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-minimum-time-taken-to-burn-the-binary-tree-from-a-node",
+   "url": "https://takeuforward.org/data-structure/minimum-time-taken-to-burn-the-binary-tree-from-a-node",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-network-delay-time",
+   "url": "https://takeuforward.org/data-structure/network-delay-time",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-next-greater-element-2",
+   "url": "https://takeuforward.org/data-structure/next-greater-element-2",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-non-overlapping-intervals",
+   "url": "https://takeuforward.org/data-structure/non-overlapping-intervals",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-number-of-nges-to-the-right",
+   "url": "https://takeuforward.org/data-structure/number-of-nges-to-the-right",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-number-of-operations-to-make-network-connected-dsu-g-49",
+   "url": "https://takeuforward.org/data-structure/number-of-operations-to-make-network-connected-dsu-g-49/",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-number-of-substring-containing-all-three-characters",
+   "url": "https://takeuforward.org/data-structure/number-of-substring-containing-all-three-characters",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-palindrome-partitioning-ii-front-partition-dp-53",
+   "url": "https://takeuforward.org/data-structure/palindrome-partitioning-ii-front-partition-dp-53/",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-peak-element-in-array",
+   "url": "https://takeuforward.org/data-structure/peak-element-in-array/",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-postfix-to-infix",
+   "url": "https://takeuforward.org/data-structure/postfix-to-infix",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-postfix-to-prefix-conversion",
+   "url": "https://takeuforward.org/data-structure/postfix-to-prefix-conversion",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-prefix-to-infix-conversion",
+   "url": "https://takeuforward.org/data-structure/prefix-to-infix-conversion",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-prefix-to-postfix-conversion",
+   "url": "https://takeuforward.org/data-structure/prefix-to-postfix-conversion",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-print-all-the-nodes-at-a-distance-of-k-in-a-binary-tree",
+   "url": "https://takeuforward.org/data-structure/print-all-the-nodes-at-a-distance-of-k-in-a-binary-tree",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-program-for-least-recently-used-lru-page-replacement-algorithm",
+   "url": "https://takeuforward.org/data-structure/program-for-least-recently-used-lru-page-replacement-algorithm",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-recursive-implementation-of-atoi",
+   "url": "https://takeuforward.org/data-structure/recursive-implementation-of-atoi",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-remove-duplicates-from-sorted-dll",
+   "url": "https://takeuforward.org/data-structure/remove-duplicates-from-sorted-dll",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-remove-k-digits",
+   "url": "https://takeuforward.org/data-structure/remove-k-digits",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-remove-outermost-parentheses",
+   "url": "https://takeuforward.org/data-structure/remove-outermost-parentheses",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-reverse-a-stack-using-recursion",
+   "url": "https://takeuforward.org/data-structure/reverse-a-stack-using-recursion",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-roman-numerals-to-integer",
+   "url": "https://takeuforward.org/data-structure/roman-numerals-to-integer",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-set-the-rightmost-bit",
+   "url": "https://takeuforward.org/data-structure/set-the-rightmost-bit",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-sieve-of-eratosthenes",
+   "url": "https://takeuforward.org/data-structure/sieve-of-eratosthenes",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-sort-a-linked-list-of-0s-1s-and-2s-by-changing-links",
+   "url": "https://takeuforward.org/data-structure/sort-a-linked-list-of-0s-1s-and-2s-by-changing-links",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-sort-a-stack",
+   "url": "https://takeuforward.org/data-structure/sort-a-stack",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-sort-characters-by-frequency",
+   "url": "https://takeuforward.org/data-structure/sort-characters-by-frequency",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-sort-k-sorted-array",
+   "url": "https://takeuforward.org/data-structure/sort-k-sorted-array",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-stock-span-problem",
+   "url": "https://takeuforward.org/data-structure/stock-span-problem",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-subarray-with-k-different-integers",
+   "url": "https://takeuforward.org/data-structure/subarray-with-k-different-integers",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-sum-of-beauty-of-all-substring",
+   "url": "https://takeuforward.org/data-structure/sum-of-beauty-of-all-substring",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-sum-of-subarray-minimums",
+   "url": "https://takeuforward.org/data-structure/sum-of-subarray-minimums",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-sum-of-subarray-ranges",
+   "url": "https://takeuforward.org/data-structure/sum-of-subarray-ranges",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-swap-two-numbers",
+   "url": "https://takeuforward.org/data-structure/swap-two-numbers",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-swim-in-rising-water",
+   "url": "https://takeuforward.org/data-structure/swim-in-rising-water",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-task-scheduler",
+   "url": "https://takeuforward.org/data-structure/task-scheduler",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-top-k-frequent-elements",
+   "url": "https://takeuforward.org/data-structure/top-k-frequent-elements",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-two-sum-in-bst-check-if-there-exists-a-pair-with-sum-k",
+   "url": "https://takeuforward.org/data-structure/two-sum-in-bst-check-if-there-exists-a-pair-with-sum-k",
+   "why": "not-found"
+  },
+  {
+   "slug": "data-structure-union-of-two-sorted-arrays",
+   "url": "https://takeuforward.org/data-structure/union-of-two-sorted-arrays/",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "data-structure-valid-paranthesis-checker",
+   "url": "https://takeuforward.org/data-structure/valid-paranthesis-checker",
+   "why": "no-snapshot"
+  },
+  {
+   "slug": "for-loop-understanding-for-loop",
+   "url": "https://takeuforward.org/for-loop/understanding-for-loop/",
+   "why": "not-found"
+  },
+  {
+   "slug": "graph-graph-representation-in-c",
+   "url": "https://takeuforward.org/graph/graph-representation-in-c/",
+   "why": "not-found"
+  },
+  {
+   "slug": "linked-list-search-an-element-in-a-linked-list",
+   "url": "https://takeuforward.org/linked-list/search-an-element-in-a-linked-list",
+   "why": "not-found"
+  },
+  {
+   "slug": "while-loop-while-loops-in-programming",
+   "url": "https://takeuforward.org/while-loop/while-loops-in-programming/",
+   "why": "not-found"
+  },
+  {
+   "slug": "find-the-missing-number",
+   "url": "https://www.geeksforgeeks.org/find-the-missing-number/",
+   "why": "not-found"
+  }
+ ]
+}

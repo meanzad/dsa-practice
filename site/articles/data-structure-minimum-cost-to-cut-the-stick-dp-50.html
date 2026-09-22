@@ -1,0 +1,887 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Minimum cost to cut the stick| (DP-50)</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Minimum cost to cut the stick| (DP-50)</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/minimum-cost-to-cut-the-stick-dp-50/</code></div>
+  <p><strong>Problem Description: </strong>We are given a stick of length N and a cuts array of size C. The stick has markings as shown, and the cuts array depicts the marking at which the stick needs to be cut (shown in red).</p>
+
+
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-6861" loading="lazy" src="../assets/img/6c65c17de67c4a0b.png"/></figure>
+
+
+<p><strong>Note: </strong>It is necessary to make cuts at all the red markings.</p>
+
+
+<p>Whenever we make a cut, we incur a cost. This cost is equal to the length of the stick on which we are making the cut.</p>
+
+
+<figure class="wp-block-image size-full is-resized is-style-default"><img alt="" class="wp-image-6862" height="448" loading="lazy" src="../assets/img/6768f427bae0a590.png" width="636"/></figure>
+
+
+<p>We need to find the <strong>minimum cost</strong> incurred to cut the stick at all the cut points.</p>
+
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: n = 7, cuts = [1, 3, 4, 5]</span>
+<span>Output: 16</span>
+<span>Explanation: Rearranging the cuts to be [3, 5, 1, 4] for example will lead to a scenario with total cost = 16</span>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-6864" loading="lazy" src="../assets/img/aadda55aef700b3a.png"/></figure><br/>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-6865" loading="lazy" src="../assets/img/8386f3c2f3aeee98.png"/></figure>
+<span>Input: n = 7, cuts = [1, 3, 6]</span>
+<span>Output: 14</span>
+<span>Explanation: The optimal order for cutting the stick is [3, 1, 6].
+The cost will be =&gt; 7 + 3 + 4 =&gt; 14.</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/minimum-cost-to-cut-the-stick" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better.
+            It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                  Recursion
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+We need to minimize the cost incurred to cut the stick. Whenever we make a cut, we are changing the length of the stick which in turn decides the cost. Therefore the order in which we make the cuts changes the total cost. As discussed in <a href="https://takeuforward.org/dynamic-programming/matrix-chain-multiplication-dp-48/" rel="noopener" target="_blank">DP-48</a> whenever the order of solving the problem comes into play, we can think in terms of Partition DP.<br/><br/>
+We are given a stick of size N and the cuts array. Every element of the cuts array represents the marking at which one cut needs to be made. When we make a cut, we are dividing the stick into two different parts.
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-6866" loading="lazy" src="../assets/img/0d2c29ee3d780d78.png"/></figure><p></p>
+Ideally, we would want to place the i, and j pointers at both ends of the cuts array and try to solve the problem recursively, which we will eventually do. But before that we need to sort the cuts array. By sorting the cuts array, we know that at whatever point we are making the cut, the information on the markings of the left portion will always be present on the left side of the cuts array partition. Similarly on the right side.
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-6869" loading="lazy" src="../assets/img/200e9155bfcbee27.png"/></figure>
+<ul>
+<li>Consider the stick as a segment defined by two boundaries (start and end positions). If there are no cuts to be made between these boundaries, the cost is zero.</li>
+<li>For each cut, calculate:<br/>
+The cost of cutting the current segment (length of the segment).<br/>
+
+The cost of recursively cutting the left sub-segment (from start to the current cut).<br/>
+
+The cost of recursively cutting the right sub-segment (from the current cut to the end).</li>
+<li>Sum these costs to get the total cost for that choice of cut. Choose the cut position that gives the minimum total cost.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Solution class to compute minimum cost to cut a stick
+class Solution {
+public:
+    // Recursive function to find the minimum cost to cut between indices i and j in cuts
+    int findMinimumCost(int i, int j, vector&lt;int&gt; &amp;cuts) {
+        // Base case: no cuts to consider
+        if (i &gt; j) {
+            return 0;
+        }
+
+        int mini = INT_MAX;
+
+        // Try cutting at every position between i and j
+        for (int ind = i; ind &lt;= j; ind++) {
+            // Cost of making the current cut plus
+            // cost of cutting left and right sub-segments recursively
+            int ans = cuts[j + 1] - cuts[i - 1] +
+                      findMinimumCost(i, ind - 1, cuts) +
+                      findMinimumCost(ind + 1, j, cuts);
+
+            // Update minimum cost
+            mini = min(mini, ans);
+        }
+
+        return mini;
+    }
+
+    // Function to calculate minimum total cost to cut the stick
+    int minimumCost(int n, int c, vector&lt;int&gt; &amp;cuts) {
+        // Add the two ends of the stick to the cuts array
+        cuts.push_back(n);
+        cuts.insert(cuts.begin(), 0);
+
+        // Sort the cuts array
+        sort(cuts.begin(), cuts.end());
+
+        // Compute the minimum cost to make all cuts between indices 1 and c
+        return findMinimumCost(1, c, cuts);
+    }
+};
+
+int main() {
+    vector&lt;int&gt; cuts = {3, 5, 1, 4};
+    int c = cuts.size();
+    int n = 7;
+
+    Solution sol;
+    cout &lt;&lt; "The minimum cost incurred is: " &lt;&lt; sol.minimumCost(n, c, cuts) &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Solution class to compute minimum cost to cut a stick
+class Solution {
+    // Recursive function to find the minimum cost to cut between indices i and j in cuts
+    public int findMinimumCost(int i, int j, List&lt;Integer&gt; cuts) {
+        // Base case: no cuts to consider
+        if (i &gt; j) {
+            return 0;
+        }
+
+        int mini = Integer.MAX_VALUE;
+
+        // Try cutting at every position between i and j
+        for (int ind = i; ind &lt;= j; ind++) {
+            // Cost of making the current cut plus
+            // cost of cutting left and right sub-segments recursively
+            int ans = cuts.get(j + 1) - cuts.get(i - 1) +
+                      findMinimumCost(i, ind - 1, cuts) +
+                      findMinimumCost(ind + 1, j, cuts);
+
+            // Update minimum cost
+            mini = Math.min(mini, ans);
+        }
+
+        return mini;
+    }
+
+    // Function to calculate minimum total cost to cut the stick
+    public int minimumCost(int n, List&lt;Integer&gt; cuts) {
+        // Add the two ends of the stick to the cuts list
+        cuts.add(n);
+        cuts.add(0);
+        Collections.sort(cuts);
+
+        // Compute the minimum cost to make all cuts between indices 1 and cuts.size()-2
+        return findMinimumCost(1, cuts.size() - 2, cuts);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        List&lt;Integer&gt; cuts = new ArrayList&lt;&gt;(Arrays.asList(3, 5, 1, 4));
+        int n = 7;
+
+        Solution sol = new Solution();
+        System.out.println("The minimum cost incurred is: " + sol.minimumCost(n, cuts));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Solution class to compute minimum cost to cut a stick
+class Solution:
+    # Recursive function to find the minimum cost to cut between indices i and j in cuts
+    def findMinimumCost(self, i, j, cuts):
+        # Base case: no cuts to consider
+        if i &gt; j:
+            return 0
+
+        mini = float('inf')
+
+        # Try cutting at every position between i and j
+        for ind in range(i, j + 1):
+            # Cost of making the current cut plus
+            # cost of cutting left and right sub-segments recursively
+            ans = cuts[j + 1] - cuts[i - 1] + \
+                  self.findMinimumCost(i, ind - 1, cuts) + \
+                  self.findMinimumCost(ind + 1, j, cuts)
+
+            # Update minimum cost
+            mini = min(mini, ans)
+
+        return mini
+
+    # Function to calculate minimum total cost to cut the stick
+    def minimumCost(self, n, cuts):
+        # Add the two ends of the stick to the cuts list
+        cuts.append(n)
+        cuts.insert(0, 0)
+        cuts.sort()
+
+        # Compute the minimum cost to make all cuts between indices 1 and len(cuts)-2
+        return self.findMinimumCost(1, len(cuts) - 2, cuts)
+
+
+if __name__ == "__main__":
+    cuts = [3, 5, 1, 4]
+    n = 7
+
+    sol = Solution()
+    print("The minimum cost incurred is:", sol.minimumCost(n, cuts))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Solution class to compute minimum cost to cut a stick
+class Solution {
+    // Recursive function to find the minimum cost to cut between indices i and j in cuts
+    findMinimumCost(i, j, cuts) {
+        // Base case: no cuts to consider
+        if (i &gt; j) {
+            return 0;
+        }
+
+        let mini = Number.MAX_SAFE_INTEGER;
+
+        // Try cutting at every position between i and j
+        for (let ind = i; ind &lt;= j; ind++) {
+            // Cost of making the current cut plus
+            // cost of cutting left and right sub-segments recursively
+            let ans = cuts[j + 1] - cuts[i - 1] +
+                      this.findMinimumCost(i, ind - 1, cuts) +
+                      this.findMinimumCost(ind + 1, j, cuts);
+
+            // Update minimum cost
+            mini = Math.min(mini, ans);
+        }
+
+        return mini;
+    }
+
+    // Function to calculate minimum total cost to cut the stick
+    minimumCost(n, cuts) {
+        // Add the two ends of the stick to the cuts array
+        cuts.push(n);
+        cuts.unshift(0);
+        cuts.sort((a, b) =&gt; a - b);
+
+        // Compute the minimum cost to make all cuts between indices 1 and cuts.length-2
+        return this.findMinimumCost(1, cuts.length - 2, cuts);
+    }
+}
+
+// Main execution
+const cuts = [3, 5, 1, 4];
+const n = 7;
+const sol = new Solution();
+
+console.log("The minimum cost incurred is:", sol.minimumCost(n, cuts));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(2^C)</strong>, as we try all possible cuts between the current boundary, the time complexity is exponential. <br/>
+<strong>Space Complexity: O(C)</strong>, additional space used for recursive stack.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                  Memoization
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+To optimize our time complexity we can memoize our solution to prevent repeated computation of overlapping sub problems. Steps to memoize our solution:
+<ul>
+<li>Create a dp array of size [c+1][c+1] as i and j can range from 0 to c. Initialize the dp array to -1.</li>
+<li>For a subproblem from i to j, if its result is already computed, return the result.</li>
+<li>If the result is yet not computed, compute the result using recursive solution and store it in dp array for future.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Solution class to compute minimum cost to cut a stick using memoization
+class Solution {
+public:
+    // Recursive function with memoization to find minimum cost between indices i and j in cuts
+    int findMinimumCost(int i, int j, vector&lt;int&gt; &amp;cuts, vector&lt;vector&lt;int&gt;&gt; &amp;dp) {
+        // Base case: no cuts to consider
+        if (i &gt; j) {
+            return 0;
+        }
+
+        // Return precomputed result if available
+        if (dp[i][j] != -1) {
+            return dp[i][j];
+        }
+
+        int mini = INT_MAX;
+
+        // Try cutting at every position between i and j
+        for (int ind = i; ind &lt;= j; ind++) {
+            // Calculate cost of current cut plus costs of left and right subproblems
+            int ans = cuts[j + 1] - cuts[i - 1] +
+                      findMinimumCost(i, ind - 1, cuts, dp) +
+                      findMinimumCost(ind + 1, j, cuts, dp);
+
+            // Update minimum cost
+            mini = min(mini, ans);
+        }
+
+        // Store and return the minimum cost found
+        return dp[i][j] = mini;
+    }
+
+    // Function to calculate minimum total cost to cut the stick
+    int minimumCost(int n, int c, vector&lt;int&gt; &amp;cuts) {
+        // Add the two ends of the stick to the cuts array
+        cuts.push_back(n);
+        cuts.insert(cuts.begin(), 0);
+
+        // Sort the cuts array
+        sort(cuts.begin(), cuts.end());
+
+        // Create a DP table initialized with -1
+        vector&lt;vector&lt;int&gt;&gt; dp(c + 1, vector&lt;int&gt;(c + 1, -1));
+
+        // Compute minimum cost to make all cuts between indices 1 and c
+        return findMinimumCost(1, c, cuts, dp);
+    }
+};
+
+int main() {
+    vector&lt;int&gt; cuts = {3, 5, 1, 4};
+    int c = cuts.size();
+    int n = 7;
+
+    Solution sol;
+    cout &lt;&lt; "The minimum cost incurred is: " &lt;&lt; sol.minimumCost(n, c, cuts) &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Solution class to compute minimum cost to cut a stick using memoization
+class Solution {
+    // Recursive function with memoization to find minimum cost between indices i and j in cuts
+    public int findMinimumCost(int i, int j, List&lt;Integer&gt; cuts, int[][] dp) {
+        // Base case: no cuts to consider
+        if (i &gt; j) {
+            return 0;
+        }
+
+        // Return precomputed result if available
+        if (dp[i][j] != -1) {
+            return dp[i][j];
+        }
+
+        int mini = Integer.MAX_VALUE;
+
+        // Try cutting at every position between i and j
+        for (int ind = i; ind &lt;= j; ind++) {
+            // Cost of making current cut plus left and right subproblems
+            int ans = cuts.get(j + 1) - cuts.get(i - 1) +
+                      findMinimumCost(i, ind - 1, cuts, dp) +
+                      findMinimumCost(ind + 1, j, cuts, dp);
+
+            // Update minimum cost
+            mini = Math.min(mini, ans);
+        }
+
+        // Store and return minimum cost found
+        return dp[i][j] = mini;
+    }
+
+    // Function to calculate minimum total cost to cut the stick
+    public int minimumCost(int n, List&lt;Integer&gt; cuts) {
+        // Add the two ends of the stick to the cuts list
+        cuts.add(n);
+        cuts.add(0);
+        Collections.sort(cuts);
+
+        int c = cuts.size() - 2; // number of cuts excluding ends
+
+        // Create DP table initialized with -1
+        int[][] dp = new int[c + 2][c + 2];
+        for (int[] row : dp) {
+            Arrays.fill(row, -1);
+        }
+
+        // Compute minimum cost to make all cuts between indices 1 and c
+        return findMinimumCost(1, c, cuts, dp);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        List&lt;Integer&gt; cuts = new ArrayList&lt;&gt;(Arrays.asList(3, 5, 1, 4));
+        int n = 7;
+
+        Solution sol = new Solution();
+        System.out.println("The minimum cost incurred is: " + sol.minimumCost(n, cuts));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Solution class to compute minimum cost to cut a stick using memoization
+class Solution:
+    # Recursive function with memoization to find minimum cost between indices i and j in cuts
+    def findMinimumCost(self, i, j, cuts, dp):
+        # Base case: no cuts to consider
+        if i &gt; j:
+            return 0
+
+        # Return precomputed result if available
+        if dp[i][j] != -1:
+            return dp[i][j]
+
+        mini = float('inf')
+
+        # Try cutting at every position between i and j
+        for ind in range(i, j + 1):
+            # Cost of making current cut plus left and right subproblems
+            ans = cuts[j + 1] - cuts[i - 1] + \
+                  self.findMinimumCost(i, ind - 1, cuts, dp) + \
+                  self.findMinimumCost(ind + 1, j, cuts, dp)
+
+            # Update minimum cost
+            mini = min(mini, ans)
+
+        # Store and return minimum cost found
+        dp[i][j] = mini
+        return mini
+
+    # Function to calculate minimum total cost to cut the stick
+    def minimumCost(self, n, cuts):
+        # Add the two ends of the stick to the cuts list
+        cuts.append(n)
+        cuts.insert(0, 0)
+        cuts.sort()
+
+        c = len(cuts) - 2  # number of cuts excluding ends
+
+        # Create DP table initialized with -1
+        dp = [[-1] * (c + 2) for _ in range(c + 2)]
+
+        # Compute minimum cost to make all cuts between indices 1 and c
+        return self.findMinimumCost(1, c, cuts, dp)
+
+
+if __name__ == "__main__":
+    cuts = [3, 5, 1, 4]
+    n = 7
+
+    sol = Solution()
+    print("The minimum cost incurred is:", sol.minimumCost(n, cuts))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Solution class to compute minimum cost to cut a stick using memoization
+class Solution {
+    // Recursive function with memoization to find minimum cost between indices i and j in cuts
+    findMinimumCost(i, j, cuts, dp) {
+        // Base case: no cuts to consider
+        if (i &gt; j) {
+            return 0;
+        }
+
+        // Return precomputed result if available
+        if (dp[i][j] !== -1) {
+            return dp[i][j];
+        }
+
+        let mini = Number.MAX_SAFE_INTEGER;
+
+        // Try cutting at every position between i and j
+        for (let ind = i; ind &lt;= j; ind++) {
+            // Cost of making current cut plus left and right subproblems
+            let ans = cuts[j + 1] - cuts[i - 1] +
+                      this.findMinimumCost(i, ind - 1, cuts, dp) +
+                      this.findMinimumCost(ind + 1, j, cuts, dp);
+
+            // Update minimum cost
+            mini = Math.min(mini, ans);
+        }
+
+        // Store and return minimum cost found
+        dp[i][j] = mini;
+        return mini;
+    }
+
+    // Function to calculate minimum total cost to cut the stick
+    minimumCost(n, cuts) {
+        // Add the two ends of the stick to the cuts array
+        cuts.push(n);
+        cuts.unshift(0);
+        cuts.sort((a, b) =&gt; a - b);
+
+        const c = cuts.length - 2; // number of cuts excluding ends
+
+        // Create DP table initialized with -1
+        const dp = Array.from({ length: c + 2 }, () =&gt; Array(c + 2).fill(-1));
+
+        // Compute minimum cost to make all cuts between indices 1 and c
+        return this.findMinimumCost(1, c, cuts, dp);
+    }
+}
+
+// Main execution
+const cuts = [3, 5, 1, 4];
+const n = 7;
+const sol = new Solution();
+
+console.log("The minimum cost incurred is:", sol.minimumCost(n, cuts));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(C^3)</strong>, for every state in our dp table i.e. c^2 states, we try all possible cuts between i and j.<br/>
+<strong>Space Complexity: O(C^2)</strong>, additional space used for dp array and recursion stack.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                  Tabulation
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+To optimize our solution even further, we can convert our recursive solution into tabulation approach to prevent the extra space being used for recursive stack.
+To convert our recursive solution into tabulation approach we need to follow these steps:
+<ul>
+<li>First of all, we handle the base case. If (i &gt; j) we return 0. To cover this case we can initialize the entire dp array with 0.</li>
+<li>Next, memoization is a top-down approach, whereas tabulation is bottom-up. Our changing parameters i and j will change in opposite directions, i.e i will change from c to 1 and j will change from 1 to c.</li>
+<li>Next, we copy down the recursive logic inside the nested loops.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/f5f76842460bf120.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/c0e8b0aae69e5c00.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/ebf3f1853f7d5362.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/f5f76842460bf120.png"/><img alt="Image 2" loading="lazy" src="../assets/img/c0e8b0aae69e5c00.png"/><img alt="Image 3" loading="lazy" src="../assets/img/ebf3f1853f7d5362.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Solution class to compute minimum cost to cut a stick using tabulation (bottom-up DP)
+class Solution {
+public:
+    // Function to calculate minimum total cost to cut the stick using tabulation
+    int minimumCost(int n, int c, vector&lt;int&gt; &amp;cuts) {
+        // Add the two ends of the stick to the cuts array
+        cuts.push_back(n);
+        cuts.insert(cuts.begin(), 0);
+
+        // Sort the cuts array
+        sort(cuts.begin(), cuts.end());
+
+        // Create a DP table initialized with 0
+        vector&lt;vector&lt;int&gt;&gt; dp(c + 2, vector&lt;int&gt;(c + 2, 0));
+
+        // Fill the DP table for all possible segments
+        // i traverses backward from c to 1
+        for (int i = c; i &gt;= 1; i--) {
+            // j traverses forward from i to c
+            for (int j = i; j &lt;= c; j++) {
+                int mini = INT_MAX;
+
+                // Try making a cut at every position between i and j
+                for (int ind = i; ind &lt;= j; ind++) {
+                    // Cost of making the current cut plus costs of left and right subproblems
+                    int ans = cuts[j + 1] - cuts[i - 1] + dp[i][ind - 1] + dp[ind + 1][j];
+
+                    // Update minimum cost
+                    mini = min(mini, ans);
+                }
+
+                // Store the minimum cost in DP table
+                dp[i][j] = mini;
+            }
+        }
+
+        // The answer is the minimum cost to cut between indices 1 and c
+        return dp[1][c];
+    }
+};
+
+int main() {
+    vector&lt;int&gt; cuts = {3, 5, 1, 4};
+    int c = cuts.size();
+    int n = 7;
+
+    Solution sol;
+    cout &lt;&lt; "The minimum cost incurred is: " &lt;&lt; sol.minimumCost(n, c, cuts) &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Solution class to compute minimum cost to cut a stick using tabulation (bottom-up DP)
+class Solution {
+    // Function to calculate minimum total cost to cut the stick using tabulation
+    public int minimumCost(int n, List&lt;Integer&gt; cuts) {
+        // Add the two ends of the stick to the cuts list
+        cuts.add(n);
+        cuts.add(0);
+        Collections.sort(cuts);
+
+        int c = cuts.size() - 2; // number of cuts excluding ends
+
+        // Create DP table initialized with 0
+        int[][] dp = new int[c + 2][c + 2];
+
+        // Fill DP table for all segments
+        for (int i = c; i &gt;= 1; i--) {
+            for (int j = i; j &lt;= c; j++) {
+                int mini = Integer.MAX_VALUE;
+
+                // Try making a cut at every position between i and j
+                for (int ind = i; ind &lt;= j; ind++) {
+                    // Cost of current cut plus left and right subproblems
+                    int ans = cuts.get(j + 1) - cuts.get(i - 1) + dp[i][ind - 1] + dp[ind + 1][j];
+
+                    // Update minimum cost
+                    mini = Math.min(mini, ans);
+                }
+
+                // Store minimum cost in DP table
+                dp[i][j] = mini;
+            }
+        }
+
+        // Return minimum cost to cut between indices 1 and c
+        return dp[1][c];
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        List&lt;Integer&gt; cuts = new ArrayList&lt;&gt;(Arrays.asList(3, 5, 1, 4));
+        int n = 7;
+
+        Solution sol = new Solution();
+        System.out.println("The minimum cost incurred is: " + sol.minimumCost(n, cuts));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Solution class to compute minimum cost to cut a stick using tabulation (bottom-up DP)
+class Solution:
+    # Function to calculate minimum total cost to cut the stick using tabulation
+    def minimumCost(self, n, cuts):
+        # Add the two ends of the stick to the cuts list
+        cuts.append(n)
+        cuts.insert(0, 0)
+        cuts.sort()
+
+        c = len(cuts) - 2  # number of cuts excluding ends
+
+        # Create DP table initialized with 0
+        dp = [[0] * (c + 2) for _ in range(c + 2)]
+
+        # Fill DP table for all segments
+        for i in range(c, 0, -1):
+            for j in range(i, c + 1):
+                mini = float('inf')
+
+                # Try making a cut at every position between i and j
+                for ind in range(i, j + 1):
+                    # Cost of current cut plus left and right subproblems
+                    ans = cuts[j + 1] - cuts[i - 1] + dp[i][ind - 1] + dp[ind + 1][j]
+
+                    # Update minimum cost
+                    mini = min(mini, ans)
+
+                # Store minimum cost in DP table
+                dp[i][j] = mini
+
+        # Return minimum cost to cut between indices 1 and c
+        return dp[1][c]
+
+
+if __name__ == "__main__":
+    cuts = [3, 5, 1, 4]
+    n = 7
+
+    sol = Solution()
+    print("The minimum cost incurred is:", sol.minimumCost(n, cuts))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Solution class to compute minimum cost to cut a stick using tabulation (bottom-up DP)
+class Solution {
+    // Function to calculate minimum total cost to cut the stick using tabulation
+    minimumCost(n, cuts) {
+        // Add the two ends of the stick to the cuts array
+        cuts.push(n);
+        cuts.unshift(0);
+        cuts.sort((a, b) =&gt; a - b);
+
+        const c = cuts.length - 2; // number of cuts excluding ends
+
+        // Create DP table initialized with 0
+        const dp = Array.from({ length: c + 2 }, () =&gt; Array(c + 2).fill(0));
+
+        // Fill DP table for all segments
+        for (let i = c; i &gt;= 1; i--) {
+            for (let j = i; j &lt;= c; j++) {
+                let mini = Number.MAX_SAFE_INTEGER;
+
+                // Try making a cut at every position between i and j
+                for (let ind = i; ind &lt;= j; ind++) {
+                    // Cost of current cut plus left and right subproblems
+                    let ans = cuts[j + 1] - cuts[i - 1] + dp[i][ind - 1] + dp[ind + 1][j];
+
+                    // Update minimum cost
+                    mini = Math.min(mini, ans);
+                }
+
+                // Store minimum cost in DP table
+                dp[i][j] = mini;
+            }
+        }
+
+        // Return minimum cost to cut between indices 1 and c
+        return dp[1][c];
+    }
+}
+
+// Main execution
+const cuts = [3, 5, 1, 4];
+const n = 7;
+const sol = new Solution();
+
+console.log("The minimum cost incurred is:", sol.minimumCost(n, cuts));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(C^3)</strong>, for every state in our dp table i.e. c^2 states, we try all possible cuts between i and j.<br/>
+<strong>Space Complexity: O(C^2)</strong>, additional space used for dp array.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

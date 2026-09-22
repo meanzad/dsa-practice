@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Find the highest/lowest frequency element</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Find the highest/lowest frequency element</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/arrays/find-the-highest-lowest-frequency-element/</code></div>
+  <p><strong>Problem Statement: </strong> Problem Statement: Given an array of size N. Find the highest and lowest frequency element.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input: array[] = {10,5,10,15,10,5};
+Output: 10 15
+Explanation: The frequency of 10 is 3, i.e. the highest and the frequency of 15 is 1 i.e. the lowest.
+
+
+Example 2:
+Input: array[] = {2,2,3,4,4,2};
+Output: 2 3
+Explanation: The frequency of 2 is 3, i.e. the highest and the frequency of 3 is 1 i.e. the lowest.
+            </pre>
+</div>
+</details>
+</div>
+
+<div class="practice">
+<span><strong>Practice: </strong></span>
+<div class="problem-buttons">
+<span>Solve Problem</span>
+<img alt="code-studio" loading="lazy" src="../assets/img/98557c190adb0bc0.png"/>
+</div>
+</div>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                   Brute Force Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<ul>
+<li>Make a visited array of type boolean.</li>
+<li>Use the first loop to point to an element of the array.</li>
+<li>Initialize the variable count to 1.</li>
+<li>Make that index true in the visited array.</li>
+<li>Run the second loop, if we find the element then mark the visited index true and increase the count.</li>
+<li>If the visited index is already true then skip the other steps.</li>
+<li>After step 5, we will keep a track of the element with the highest frequency and the lowest frequency.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Class to count frequencies and find elements with max and min frequency
+class FrequencyCounter {
+public:
+    void countFreq(int arr[], int n)
+    {
+        vector&lt;bool&gt; visited(n, false); // Track which elements have already been processed
+        int maxFreq = 0, minFreq = n;   // Initialize frequency bounds
+        int maxEle = 0, minEle = 0;     // Initialize elements with max and min frequency
+
+        for (int i = 0; i &lt; n; i++) {
+
+            // Skip this element if it's already counted
+            if (visited[i] == true)
+                continue;
+
+            // Count the frequency of arr[i]
+            int count = 1;
+            for (int j = i + 1; j &lt; n; j++) {
+                if (arr[i] == arr[j]) {
+                    visited[j] = true; // Mark as visited to avoid recounting
+                    count++;
+                }
+            }
+
+            // Update max frequency and corresponding element
+            if (count &gt; maxFreq) {
+                maxEle = arr[i];
+                maxFreq = count;
+            }
+
+            // Update min frequency and corresponding element
+            if (count &lt; minFreq) {
+                minEle = arr[i];
+                minFreq = count;
+            }
+        }
+
+        // Output the results
+        cout &lt;&lt; "The highest frequency element is: " &lt;&lt; maxEle &lt;&lt; "\n";
+        cout &lt;&lt; "The lowest frequency element is: " &lt;&lt; minEle &lt;&lt; "\n";
+    }
+};
+
+int main()
+{
+    FrequencyCounter fc;                      // Create object of class
+    int arr[] = {10, 5, 10, 15, 10, 5};       // Input array
+    int n = sizeof(arr) / sizeof(arr[0]);    // Calculate array length
+    fc.countFreq(arr, n);                    // Call the function
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class FrequencyCounter {
+
+    // Method to count frequency and find elements with max and min frequency
+    public void countFreq(int[] arr, int n) {
+        boolean[] visited = new boolean[n]; // To track which elements are already processed
+        int maxFreq = 0, minFreq = n;       // Frequency bounds initialization
+        int maxEle = 0, minEle = 0;         // Elements with max and min frequency
+
+        for (int i = 0; i &lt; n; i++) {
+
+            // If element already processed, skip
+            if (visited[i])
+                continue;
+
+            // Count how many times arr[i] occurs
+            int count = 1;
+            for (int j = i + 1; j &lt; n; j++) {
+                if (arr[i] == arr[j]) {
+                    visited[j] = true; // Mark as counted
+                    count++;
+                }
+            }
+
+            // Update max frequency and corresponding element
+            if (count &gt; maxFreq) {
+                maxEle = arr[i];
+                maxFreq = count;
+            }
+
+            // Update min frequency and corresponding element
+            if (count &lt; minFreq) {
+                minEle = arr[i];
+                minFreq = count;
+            }
+        }
+
+        // Print final results
+        System.out.println("The highest frequency element is: " + maxEle);
+        System.out.println("The lowest frequency element is: " + minEle);
+    }
+
+    public static void main(String[] args) {
+        FrequencyCounter fc = new FrequencyCounter();       // Create object of the class
+        int[] arr = {10, 5, 10, 15, 10, 5};                  // Sample array
+        fc.countFreq(arr, arr.length);                      // Call the function
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class FrequencyCounter:
+    def countFreq(self, arr):
+        n = len(arr)                     # Get array length
+        visited = [False] * n           # Track if an element has already been counted
+        maxFreq = 0                     # Store max frequency seen so far
+        minFreq = n                     # Store min frequency (start high)
+        maxEle = 0                      # Element with max frequency
+        minEle = 0                      # Element with min frequency
+
+        for i in range(n):
+
+            # Skip already processed elements
+            if visited[i]:
+                continue
+
+            # Count frequency of arr[i]
+            count = 1
+            for j in range(i + 1, n):
+                if arr[i] == arr[j]:
+                    visited[j] = True   # Mark as visited
+                    count += 1
+
+            # Update max frequency info
+            if count &gt; maxFreq:
+                maxEle = arr[i]
+                maxFreq = count
+
+            # Update min frequency info
+            if count &lt; minFreq:
+                minEle = arr[i]
+                minFreq = count
+
+        # Print results
+        print("The highest frequency element is:", maxEle)
+        print("The lowest frequency element is:", minEle)
+
+
+if __name__ == "__main__":
+    fc = FrequencyCounter()                     # Create object
+    arr = [10, 5, 10, 15, 10, 5]                # Sample input
+    fc.countFreq(arr)                           # Run frequency analysis
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class FrequencyCounter {
+    countFreq(arr) {
+        const n = arr.length;
+        const visited = new Array(n).fill(false); // Track if element is already processed
+        let maxFreq = 0, minFreq = n;             // Initialize min and max frequency
+        let maxEle = 0, minEle = 0;               // Initialize elements
+
+        for (let i = 0; i &lt; n; i++) {
+
+            // Skip already processed element
+            if (visited[i]) continue;
+
+            // Count how many times arr[i] appears
+            let count = 1;
+            for (let j = i + 1; j &lt; n; j++) {
+                if (arr[i] === arr[j]) {
+                    visited[j] = true;  // Mark this index as processed
+                    count++;
+                }
+            }
+
+            // Check if this element has max frequency
+            if (count &gt; maxFreq) {
+                maxEle = arr[i];
+                maxFreq = count;
+            }
+
+            // Check if this element has min frequency
+            if (count &lt; minFreq) {
+                minEle = arr[i];
+                minFreq = count;
+            }
+        }
+
+        // Output the result
+        console.log("The highest frequency element is:", maxEle);
+        console.log("The lowest frequency element is:", minEle);
+    }
+}
+
+// Create an instance and run
+const fc = new FrequencyCounter();
+const arr = [10, 5, 10, 15, 10, 5]; // Sample input
+fc.countFreq(arr);                 // Call method to compute frequencies
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<li>Time Complexity: O(N*N), where N = size of the array. We are using the nested loop to find the frequency.</li>
+<li>Space Complexity:  O(N), where N = size of the array. It is for the visited array we are using.</li>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<ul>
+<li>Take a unordered_map<int int=""> / HashMap of <integer integer=""> pair.</integer></int></li>
+<li>Use a for loop to iterate the array.</li>
+<li>If the element is not present in the map then insert it with frequency 1, otherwise increase the existing frequency by 1.</li>
+<li>After visiting the whole array, we will find the element with the highest frequency and the element with the lowest frequency by iterating the map.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Class to count frequencies using unordered_map (hash table)
+class FrequencyCounter {
+public:
+    void Frequency(int arr[], int n)
+    {
+        unordered_map&lt;int, int&gt; map; // Stores frequency of each element
+
+        // Count frequencies of all elements
+        for (int i = 0; i &lt; n; i++)
+            map[arr[i]]++;
+
+        int maxFreq = 0, minFreq = n;
+        int maxEle = 0, minEle = 0;
+
+        // Traverse the map to find elements with max and min frequencies
+        for (auto it : map) {
+            int element = it.first;
+            int count = it.second;
+
+            // Update max frequency element
+            if (count &gt; maxFreq) {
+                maxFreq = count;
+                maxEle = element;
+            }
+
+            // Update min frequency element
+            if (count &lt; minFreq) {
+                minFreq = count;
+                minEle = element;
+            }
+        }
+
+        // Print results
+        cout &lt;&lt; "The highest frequency element is: " &lt;&lt; maxEle &lt;&lt; "\n";
+        cout &lt;&lt; "The lowest frequency element is: " &lt;&lt; minEle &lt;&lt; "\n";
+    }
+};
+
+int main()
+{
+    FrequencyCounter fc;                       // Create object of the class
+    int arr[] = {10, 5, 10, 15, 10, 5};        // Sample input array
+    int n = sizeof(arr) / sizeof(arr[0]);     // Determine length of array
+    fc.Frequency(arr, n);                     // Call the function
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class FrequencyCounter {
+
+    public void Frequency(int[] arr, int n) {
+        Map&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;(); // Stores element -&gt; frequency
+
+        // Count frequencies
+        for (int i = 0; i &lt; n; i++) {
+            map.put(arr[i], map.getOrDefault(arr[i], 0) + 1);
+        }
+
+        int maxFreq = 0, minFreq = n;
+        int maxEle = 0, minEle = 0;
+
+        // Traverse map to find min and max frequency elements
+        for (Map.Entry&lt;Integer, Integer&gt; entry : map.entrySet()) {
+            int element = entry.getKey();
+            int count = entry.getValue();
+
+            if (count &gt; maxFreq) {
+                maxFreq = count;
+                maxEle = element;
+            }
+
+            if (count &lt; minFreq) {
+                minFreq = count;
+                minEle = element;
+            }
+        }
+
+        // Print results
+        System.out.println("The highest frequency element is: " + maxEle);
+        System.out.println("The lowest frequency element is: " + minEle);
+    }
+
+    public static void main(String[] args) {
+        FrequencyCounter fc = new FrequencyCounter();
+        int[] arr = {10, 5, 10, 15, 10, 5};
+        fc.Frequency(arr, arr.length);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class FrequencyCounter:
+    def Frequency(self, arr):
+        freq_map = {}                # Dictionary to store frequency of each element
+
+        # Count frequencies
+        for num in arr:
+            freq_map[num] = freq_map.get(num, 0) + 1
+
+        maxFreq = 0
+        minFreq = len(arr)
+        maxEle = 0
+        minEle = 0
+
+        # Iterate through dictionary to find max and min frequency elements
+        for element, count in freq_map.items():
+            if count &gt; maxFreq:
+                maxFreq = count
+                maxEle = element
+
+            if count &lt; minFreq:
+                minFreq = count
+                minEle = element
+
+        # Print results
+        print("The highest frequency element is:", maxEle)
+        print("The lowest frequency element is:", minEle)
+
+
+if __name__ == "__main__":
+    fc = FrequencyCounter()
+    arr = [10, 5, 10, 15, 10, 5]
+    fc.Frequency(arr)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class FrequencyCounter {
+    Frequency(arr) {
+        const freqMap = new Map(); // Stores element -&gt; frequency
+
+        // Count the frequencies
+        for (let num of arr) {
+            freqMap.set(num, (freqMap.get(num) || 0) + 1);
+        }
+
+        let maxFreq = 0, minFreq = arr.length;
+        let maxEle = 0, minEle = 0;
+
+        // Iterate through map to find max and min frequency elements
+        for (let [element, count] of freqMap.entries()) {
+            if (count &gt; maxFreq) {
+                maxFreq = count;
+                maxEle = element;
+            }
+
+            if (count &lt; minFreq) {
+                minFreq = count;
+                minEle = element;
+            }
+        }
+
+        // Print results
+        console.log("The highest frequency element is:", maxEle);
+        console.log("The lowest frequency element is:", minEle);
+    }
+}
+
+// Create an instance and test
+const fc = new FrequencyCounter();
+const arr = [10, 5, 10, 15, 10, 5];
+fc.Frequency(arr);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<li>Time Complexity: O(N), where N = size of the array. The insertion and retrieval operation in the map takes O(1) time.</li>
+<li>Space Complexity:  O(N), where N = size of the array. It is for the map we are using.</li>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

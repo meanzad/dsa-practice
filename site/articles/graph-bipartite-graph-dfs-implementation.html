@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Bipartite Graph | DFS Implementation</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Bipartite Graph | DFS Implementation</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/graph/bipartite-graph-dfs-implementation/</code></div>
+  <p><strong>Problem Statement: </strong>Given an adjacency list of a graph adj of V no. of vertices having 0 based index. Check whether the graph is bipartite or not.</p>
+
+
+<p>If we are able to colour a graph with two colours such that no adjacent nodes have the same colour, it is called a bipartite graph.</p>
+
+
+<p><strong>Examples:</strong></p>
+
+
+<p><strong>Example 1:</strong></p>
+
+
+<p><strong>Input:</strong></p>
+
+
+<p><img height="218.89504167147953" loading="lazy" src="../assets/img/41ad802263a7552f.png" width="602"/></p>
+
+
+<p><strong>Output:  </strong>1</p>
+
+
+<p><strong>Explanation:</strong></p>
+
+
+<p><strong><img height="187" loading="lazy" src="../assets/img/437b4a4aba8eef9f.png" width="602"/></strong></p>
+
+
+<p><strong>Example 2:</strong></p>
+
+
+<p><strong>Input:</strong></p>
+
+
+<p><img height="209" loading="lazy" src="../assets/img/e060cd965d0ef574.png" width="511"/></p>
+
+
+<p><strong>Output:  </strong>0</p>
+
+
+<p><strong>Explanation:</strong></p>
+
+
+<p><strong><img height="208" loading="lazy" src="../assets/img/3e329b6407c20f5c.png" width="508"/></strong></p>
+
+
+<h3><strong>Solution</strong></h3>
+
+
+<p class="has-accent-color has-text-color"><strong><em>Disclaimer</em></strong>: <em>Don't jump directly to the solution, try it out yourself first.</em></p>
+
+
+<h3><strong>Intuition:</strong>.</h3>
+
+
+<p>A bipartite graph is a graph which can be coloured using 2 colours such that no adjacent nodes have the same colour. Any linear graph with no cycle is always a bipartite graph. With a cycle, any graph with an even cycle length can also be a bipartite graph. So, any graph with an odd cycle length can never be a bipartite graph.</p>
+
+
+<p>The intuition is the brute force of filling colours using any traversal technique, just make sure no two adjacent nodes have the same colour. If at any moment of traversal, we find the adjacent nodes to have the same colour, it means that there is an odd cycle, or it cannot be a bipartite graph. </p>
+
+
+<h3><strong>Approach</strong>:</h3>
+
+
+<p>We can follow either of the traversal techniques. In this article, we will be solving it using DFS traversal. </p>
+
+
+<p>DFS is a traversal technique which involves the idea of recursion and backtracking. DFS goes in-depth, i.e., traverses all nodes by going ahead, and when there are no further nodes to traverse in the current path, then it backtracks on the same path and traverses other unvisited nodes. </p>
+
+
+<p>We will be defining the DFS traversal below, but this check has to be done for every component, for that we can use the simple for loop concept that we have learnt, to call the traversals for unvisited nodes.</p>
+
+
+<p><strong><img height="181" loading="lazy" src="../assets/img/7d50670e49b823e3.png" width="389"/></strong></p>
+
+
+<p>The algorithm steps are as follows:</p>
+
+
+<ul><li>For DFS traversal, we need a start node and a visited array but in this case, instead of a visited array, we will take a colour array where all the nodes are initialised to -1 indicating they are not coloured yet.</li><li>In the DFS function call, make sure to pass the value of the assigned colour, and assign the same in the colour array. We will try to colour with 0 and 1, but you can choose other colours as well. We will start with the colour 0, you can start with 1 as well, just make sure for the adjacent node, it should be opposite of what the current node has. </li><li>In DFS traversal, we travel in-depth to all its uncoloured neighbours using the adjacency list. For every uncoloured node, initialise it with the opposite colour to that of the current node.</li><li>If at any moment, we get an adjacent node from the adjacency list which is already coloured and has the same colour as the current node, we can say it is not possible to colour it, hence it cannot be bipartite. Thereby return a false indicating the given graph is not bipartite; otherwise, keep on returning true.</li></ul>
+
+
+<p>Consider the following graph and its adjacency list.</p>
+
+
+<p><img height="288" loading="lazy" src="../assets/img/e80874cffa36491c.png" width="602"/></p>
+
+
+<p>Consider the following illustration to understand the colouring of the nodes using DFS traversal.</p>
+
+
+<p><img height="367" loading="lazy" src="../assets/img/ba23b48534e49253.png" width="602"/></p>
+
+
+<p><strong>Code:</strong></p>
+
+
+<div class="code-section secondary-details">
+<div class="code-tabs">
+<button class="code-tab dsa_article_code_active" data-lang="cpp">C++</button>
+<button class="code-tab" data-lang="java">Java</button>
+<svg class="copy-btn" fill="none" height="20" viewbox="0 0 17 20" width="17" xmlns="http://www.w3.org/2000/svg">
+<path d="M2 20C1.45 20 0.979002 19.804 0.587002 19.412C0.195002 19.02 -0.000664969 18.5493 1.69779e-06 18V4H2V18H13V20H2ZM6 16C5.45 16 4.979 15.804 4.587 15.412C4.195 15.02 3.99934 14.5493 4 14V2C4 1.45 4.196 0.979002 4.588 0.587002C4.98 0.195002 5.45067 -0.000664969 6 1.69779e-06H15C15.55 1.69779e-06 16.021 0.196002 16.413 0.588002C16.805 0.980002 17.0007 1.45067 17 2V14C17 14.55 16.804 15.021 16.412 15.413C16.02 15.805 15.5493 16.0007 15 16H6ZM6 14H15V2H6V14Z">
+</path>
+</svg>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+private: 
+    bool dfs(int node, int col, int color[], vector&lt;int&gt; adj[]) {
+        color[node] = col; 
+        
+        // traverse adjacent nodes
+        for(auto it : adj[node]) {
+            // if uncoloured
+            if(color[it] == -1) {
+                if(dfs(it, !col, color, adj) == false) return false; 
+            }
+            // if previously coloured and have the same colour
+            else if(color[it] == col) {
+                return false; 
+            }
+        }
+        
+        return true; 
+    }
+public:
+	bool isBipartite(int V, vector&lt;int&gt;adj[]){
+	    int color[V];
+	    for(int i = 0;i&lt;V;i++) color[i] = -1; 
+	    
+	    // for connected components
+	    for(int i = 0;i&lt;V;i++) {
+	        if(color[i] == -1) {
+	            if(dfs(i, 0, color, adj) == false) 
+	                return false; 
+	        }
+	    }
+	    return true; 
+	}
+};
+
+void addEdge(vector &lt;int&gt; adj[], int u, int v) {
+    adj[u].push_back(v);
+    adj[v].push_back(u);
+}
+
+int main(){
+	
+	// V = 4, E = 4
+	vector&lt;int&gt;adj[4];
+	
+	addEdge(adj, 0, 2);
+   	addEdge(adj, 0, 3);
+	addEdge(adj, 2, 3);
+	addEdge(adj, 3, 1);
+
+	Solution obj;
+	bool ans = obj.isBipartite(4, adj);    
+	if(ans)cout &lt;&lt; "1\n";
+	else cout &lt;&lt; "0\n";  
+	
+	return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution
+{
+    private boolean dfs(int node, int col, int color[], 
+    ArrayList&lt;ArrayList&lt;Integer&gt;&gt;adj) {
+        
+        color[node] = col; 
+        
+        // traverse adjacent nodes
+        for(int it : adj.get(node)) {
+            // if uncoloured
+            if(color[it] == -1) {
+                if(dfs(it, 1 - col, color, adj) == false) return false; 
+            }
+            // if previously coloured and have the same colour
+            else if(color[it] == col) {
+                return false; 
+            }
+        }
+        
+        return true; 
+    }
+    public boolean isBipartite(int V, ArrayList&lt;ArrayList&lt;Integer&gt;&gt;adj)
+    {
+        int color[] = new int[V];
+	    for(int i = 0;i&lt;V;i++) color[i] = -1; 
+	    
+	    // for connected components
+	    for(int i = 0;i&lt;V;i++) {
+	        if(color[i] == -1) {
+	            if(dfs(i, 0, color, adj) == false) return false; 
+	        }
+	    }
+	    return true; 
+    }
+     public static void main(String[] args)
+    {
+        // V = 4, E = 4
+        ArrayList &lt; ArrayList &lt; Integer &gt;&gt; adj = new ArrayList &lt; &gt; ();
+        for (int i = 0; i &lt; 4; i++) {
+            adj.add(new ArrayList &lt; &gt; ());
+        }
+        adj.get(0).add(2);
+        adj.get(2).add(0);
+        adj.get(0).add(3);
+        adj.get(3).add(0);
+        adj.get(1).add(3);
+        adj.get(3).add(1);
+        adj.get(2).add(3);
+        adj.get(3).add(2);
+
+        Solution obj = new Solution();
+        boolean ans = obj.isBipartite(4, adj);
+        if(ans)
+            System.out.println("1");
+        else System.out.println("0");
+    }
+
+}
+</code></pre></div>
+
+
+<p><strong>Output:  </strong>0</p>
+
+
+<p><strong>Time Complexity: </strong>O(V + 2E), Where V = Vertices, 2E is for total degrees as we traverse all adjacent nodes.</p>
+
+
+<p><strong>Space Complexity: </strong>O(3V) ~ O(V), Space for DFS stack space, colour array and an adjacency list.</p>
+
+
+</div>
+
+</div>
+</div>
+
+
+<blockquote class="wp-block-quote"><p><em>Special thanks to <strong><a href="https://www.linkedin.com/in/vanshika-singh-ba6b15157" rel="noopener" target="_blank">Vanshika Singh Gour</a></strong> for contributing to this article on takeUforward. If you also wish to share your knowledge with the takeUforward fam, </em><a href="https://takeuforward.org/interviews/paid-work-from-home-internship-at-takeuforward/" rel="noopener" target="_blank">please check out this article</a>. <em>If you want to suggest any improvement/correction in this article please mail us at write4tuf@gmail.com</em></p></blockquote>
+
+</article>
+<script src="../article.js"></script>
+</body></html>

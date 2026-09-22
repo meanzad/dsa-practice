@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Implement Lower Bound</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Implement Lower Bound</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/arrays/implement-lower-bound-bs-2/</code></div>
+  <p><strong>Problem Statement: </strong>Given a sorted array of N integers and an integer x, write a program to find the lower bound of x.</p>
+<h3>What is lower bound?</h3>
+<p>The lower bound algorithm finds the first or the smallest index in a sorted array where the value at that index is greater than or equal to a given key i.e. x.</p>
+<p>The lower bound is the smallest index, ind, where arr[ind] &gt;= x. But if any such index is not found, the lower bound algorithm returns n i.e. size of the given array.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input Format: N = 4, arr[] = {1,2,2,3}, x = 2
+Result: 1
+Explanation: Index 1 is the smallest index such that arr[1] &gt;= x.
+
+Example 2:
+Input Format: N = 5, arr[] = {3,5,8,15,19}, x = 9
+Result: 3
+Explanation: Index 3 is the smallest index such that arr[3] &gt;= x.
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/lower-bound-" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="practice">
+<span><strong>Practice: </strong></span>
+<div class="problem-buttons">
+<span>Solve Problem</span>
+<img alt="code-studio" loading="lazy" src="../assets/img/98557c190adb0bc0.png"/>
+</div>
+</div>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                   Brute Force Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<p>Let’s understand how we can find the answer using the linear search algorithm. With the knowledge that the array is sorted, our approach involves traversing the array starting from the beginning. During this traversal, each element will be compared with the target value, x. The index, i, where the condition arr[i] &gt;= x is first satisfied, will be the answer.</p>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/2cab9a9e77ad2a43.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/b0cc3a934a0fbfda.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/2cab9a9e77ad2a43.png"/><img alt="Image 2" loading="lazy" src="../assets/img/b0cc3a934a0fbfda.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Class containing methods for array operations
+class LowerBoundFinder {
+public:
+    // Function to find lower bound index
+    int lowerBound(vector&lt;int&gt; arr, int n, int x) {
+        // Traverse the array
+        for (int i = 0; i &lt; n; i++) {
+            // If current element is greater than or equal to x
+            if (arr[i] &gt;= x) {
+                return i;  // Return index of the first such element
+            }
+        }
+        // If all elements are smaller than x
+        return n;
+    }
+};
+
+int main() {
+    vector&lt;int&gt; arr = {3, 5, 8, 15, 19};
+    int n = arr.size();  // Size of the array
+    int x = 9;           // Target value
+
+    LowerBoundFinder finder;                  // Create object
+    int ind = finder.lowerBound(arr, n, x);   // Find lower bound index
+
+    cout &lt;&lt; "The lower bound is the index: " &lt;&lt; ind &lt;&lt; "\n";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class LowerBoundFinder {
+    // Function to find the lower bound index
+    public int lowerBound(int[] arr, int x) {
+        for (int i = 0; i &lt; arr.length; i++) {
+            if (arr[i] &gt;= x) {
+                return i;  // First index where element &gt;= x
+            }
+        }
+        return arr.length;  // If x is greater than all elements
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {3, 5, 8, 15, 19};
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class LowerBoundFinder:
+    # Method to find lower bound index
+    def lower_bound(self, arr, x):
+        for i in range(len(arr)):
+            if arr[i] &gt;= x:
+                return i  # First index where element &gt;= x
+        return len(arr)  # If x is greater than all elements
+
+# Driver code
+arr = [3, 5, 8, 15, 19]
+x = 9
+
+finder = LowerBoundFinder()
+ind = finder.lower_bound(arr, x)
+
+print("The lower bound is the index:", ind)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class LowerBoundFinder {
+    // Method to find lower bound index
+    lowerBound(arr, x) {
+        for (let i = 0; i &lt; arr.length; i++) {
+            if (arr[i] &gt;= x) {
+                return i; // First index where element &gt;= x
+            }
+        }
+        return arr.length; // If x is greater than all elements
+    }
+}
+
+// Driver code
+const arr = [3, 5, 8, 15, 19];
+const x = 9;
+
+const finder = new LowerBoundFinder();
+const ind = finder.lowerBound(arr, x);
+
+console.log("The lower bound is the index:", ind);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<li>Time Complexity: O(N), where N = size of the given array.</li>
+<li>Space Complexity:  O(1), no extra space used.</li>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+As the array is sorted, we will apply the Binary Search algorithm to find the index. The steps are as follows:
+We will declare the 2 pointers and an ‘ans’ variable initialized to n i.e. the size of the array(as If we don’t find any index, we will return n).
+                       <ul>
+<li>Place the 2 pointers i.e. low and high: Initially, we will place the pointers like this: low will point to the first index, and high will point to the last index.</li>
+<li>Calculate the ‘mid’: Now, we will calculate the value of mid using the following formula: mid = (low+high) // 2 ( ‘//’ refers to integer division)</li>
+<li>Compare arr[mid] with x: With comparing arr[mid] to x, we can observe 2 different cases:</li>
+<ul>
+<li>Case 1 - If arr[mid] &gt;= x: This condition means that the index mid may be an answer. So, we will update the ‘ans’ variable with mid and search in the left half if there is any smaller index that satisfies the same condition. Here, we are eliminating the right half.</li>
+<li>Case 2 - If arr[mid] &lt; x: In this case, mid cannot be our answer and we need to find some bigger element. So, we will eliminate the left half and search in the right half for the answer.</li>
+</ul>
+</ul>
+<p><img height="457" loading="lazy" src="../assets/img/57725730b01e7d9f.png" width="481"/></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Class to find the lower bound index in an array
+class LowerBoundFinder {
+public:
+    // Function to find the lower bound using binary search
+    int lowerBound(vector&lt;int&gt; arr, int n, int x) {
+        int low = 0;           // Start of search range
+        int high = n - 1;      // End of search range
+        int ans = n;           // Default to n (not found)
+
+        // Binary search loop
+        while (low &lt;= high) {
+            int mid = (low + high) / 2;  // Middle index
+
+            if (arr[mid] &gt;= x) {
+                ans = mid;           // Store possible answer
+                high = mid - 1;      // Try to find smaller index on left side
+            } else {
+                low = mid + 1;       // Move right if current element is less than x
+            }
+        }
+        return ans;  // Return the index of the lower bound
+    }
+};
+
+int main() {
+    vector&lt;int&gt; arr = {3, 5, 8, 15, 19};  // Sorted input array
+    int n = arr.size();                  // Size of array
+    int x = 9;                           // Target value
+
+    LowerBoundFinder finder;            // Create object of the class
+    int ind = finder.lowerBound(arr, n, x);  // Call method to find lower bound
+
+    cout &lt;&lt; "The lower bound is the index: " &lt;&lt; ind &lt;&lt; "\n";  // Output the result
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class LowerBoundFinder {
+    // Function to find the lower bound index using binary search
+    public int lowerBound(int[] arr, int x) {
+        int low = 0;                  // Start index
+        int high = arr.length - 1;    // End index
+        int ans = arr.length;         // Default value if not found
+
+        while (low &lt;= high) {
+            int mid = (low + high) / 2;  // Find mid index
+
+            if (arr[mid] &gt;= x) {
+                ans = mid;            // Store possible answer
+                high = mid - 1;       // Move left
+            } else {
+                low = mid + 1;        // Move right
+            }
+        }
+        return ans;  // Return the lower bound index
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {3, 5, 8, 15, 19};  // Sorted array
+        int x = 9;                      // Target value
+
+        LowerBoundFinder finder = new LowerBoundFinder();     // Create object
+        int ind = finder.lowerBound(arr, x);                  // Find lower bound
+
+        System.out.println("The lower bound is the index: " + ind);  // Print result
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class LowerBoundFinder:
+    # Function to find the lower bound index using binary search
+    def lower_bound(self, arr, x):
+        low, high = 0, len(arr) - 1     # Search range
+        ans = len(arr)                  # Default value if not found
+
+        while low &lt;= high:
+            mid = (low + high) // 2     # Find middle index
+            if arr[mid] &gt;= x:
+                ans = mid               # Store possible answer
+                high = mid - 1          # Move to the left
+            else:
+                low = mid + 1           # Move to the right
+        return ans                      # Return result
+
+# Driver code
+arr = [3, 5, 8, 15, 19]                # Sorted input array
+x = 9                                  # Target value
+
+finder = LowerBoundFinder()           # Create object
+ind = finder.lower_bound(arr, x)      # Call method
+
+print("The lower bound is the index:", ind)  # Output result
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class LowerBoundFinder {
+    // Method to find the lower bound index using binary search
+    lowerBound(arr, x) {
+        let low = 0;                    // Start index
+        let high = arr.length - 1;     // End index
+        let ans = arr.length;          // Default to array length if not found
+
+        while (low &lt;= high) {
+            let mid = Math.floor((low + high) / 2);  // Middle index
+
+            if (arr[mid] &gt;= x) {
+                ans = mid;             // Store possible index
+                high = mid - 1;        // Move left
+            } else {
+                low = mid + 1;         // Move right
+            }
+        }
+
+        return ans;  // Return the lower bound index
+    }
+}
+
+// Driver code
+const arr = [3, 5, 8, 15, 19];         // Sorted input array
+const x = 9;                           // Target value
+
+const finder = new LowerBoundFinder();          // Create object
+const ind = finder.lowerBound(arr, x);          // Call method
+
+console.log("The lower bound is the index:", ind);  // Output result
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<li>Time Complexity: O(logn), used for typical binary search</li>
+<li>Space Complexity:  O(1), no extra space used</li>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

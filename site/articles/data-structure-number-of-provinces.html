@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Number of Provinces</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Number of Provinces</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/number-of-provinces/</code></div>
+  <p><strong>Problem Statement: </strong>Given an undirected graph with V vertices. Two vertices u and v belong to a single province if there is a path from u to v or v to u. Find the number of provinces. The graph is given as an n x n matrix adj where adj[i][j] = 1 if the ith city and the jth city are directly connected, and adj[i][j] = 0 otherwise.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: adj=[ [1, 0, 0, 1], [0, 1, 1, 0], [0, 1, 1, 0], [1, 0, 0, 1] ]</span>
+<span>Output: 2</span>
+<span>Explanation: In this graph, there are two provinces: [1, 4] and [2, 3]. City 1 and city 4 have a path between them, and city 2 and city 3 also have a path between them. There is no path between any city in province 1 and any city in province 2.</span>
+<p></p>
+<span>Input: adj= [ [1, 0, 1], [0, 1, 0], [1, 0, 1] ]</span>
+<span>Output: 2</span>
+<span>Explanation :  The graph clearly has 2 Provinces [1,3] and [2]. As city 1 and city 3 has a path between them they belong to a single province. City 2 has no path to city 1 or city 3 hence it belongs to another province.</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/number-of-provinces" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better.
+            It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+    A province is a group of directly or indirectly connected cities and no other cities outside of the group. That means, if we traverse from any one city then we can reach to all the cities in that province.<br/><br/>
+     We know about both the traversals, Breadth First Search (BFS) and Depth First Search (DFS). We can use any of the traversals to solve this problem because a traversal algorithm visits all the nodes in a graph. In any traversal technique, we have one starting node and it traverses all the nodes in the graph. Suppose there are ‘N’ number of provinces so we need to call the traversal algorithm ‘N‘ times, i.e., there will be ‘N’ starting nodes. Hence, we just need to figure out the number of starting nodes.
+     <ul>
+<li>Create a visited array to keep track of all the cities that are visited.</li>
+<li>Run a loop from 0 to N, and call the DFS for the every unvisited node. </li>
+<li>DFS function call will make sure that it starts the DFS call from that unvisited node, and visits all the nodes that are in that province, and at the same time, it will also mark them as visited. </li>
+<li>Keep repeating these steps, for every node that you find unvisited, and visit the entire province. </li>
+<li>Add a counter to count the number of times the DFS function is called, as in this way we can count the total number of starting nodes, which will give us the number of provinces.</li>
+</ul>
+
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/7e428707ab0ea029.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/8b96c8d5d01e16dd.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/fab54f57a1b5d5d0.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/3b2403ce9a710291.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/0bc23271551ac934.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/981a93d59d2fcb12.png"/></div><div class="carousel-image"><img alt="Image 7" loading="lazy" src="../assets/img/f8a8eedd4843ba20.png"/></div><div class="carousel-image"><img alt="Image 8" loading="lazy" src="../assets/img/533e8a3723fa4710.png"/></div><div class="carousel-image"><img alt="Image 9" loading="lazy" src="../assets/img/f65f31615ffcd2a6.png"/></div><div class="carousel-image"><img alt="Image 10" loading="lazy" src="../assets/img/98be0b1bb1d6daea.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/7e428707ab0ea029.png"/><img alt="Image 2" loading="lazy" src="../assets/img/8b96c8d5d01e16dd.png"/><img alt="Image 3" loading="lazy" src="../assets/img/fab54f57a1b5d5d0.png"/><img alt="Image 4" loading="lazy" src="../assets/img/3b2403ce9a710291.png"/><img alt="Image 5" loading="lazy" src="../assets/img/0bc23271551ac934.png"/><img alt="Image 6" loading="lazy" src="../assets/img/981a93d59d2fcb12.png"/><img alt="Image 7" loading="lazy" src="../assets/img/f8a8eedd4843ba20.png"/><img alt="Image 8" loading="lazy" src="../assets/img/533e8a3723fa4710.png"/><img alt="Image 9" loading="lazy" src="../assets/img/f65f31615ffcd2a6.png"/><img alt="Image 10" loading="lazy" src="../assets/img/98be0b1bb1d6daea.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Solution class to hold the main logic
+class Solution {
+private:
+    // Function to perform DFS traversal
+    void dfs(int node, vector&lt;int&gt; adjList[], int visited[]) {
+        // Mark current node as visited
+        visited[node] = 1;
+
+        // Visit all adjacent unvisited nodes
+        for (auto neighbor : adjList[node]) {
+            if (!visited[neighbor]) {
+                dfs(neighbor, adjList, visited);
+            }
+        }
+    }
+
+public:
+    // Function to count number of connected components
+    int numProvinces(vector&lt;vector&lt;int&gt;&gt; adj, int V) {
+        // Create adjacency list from adjacency matrix
+        vector&lt;int&gt; adjList[V];
+
+        // Convert matrix to list
+        for (int i = 0; i &lt; V; i++) {
+            for (int j = 0; j &lt; V; j++) {
+                // Ignore self-loops
+                if (adj[i][j] == 1 &amp;&amp; i != j) {
+                    adjList[i].push_back(j);
+                    adjList[j].push_back(i);
+                }
+            }
+        }
+
+        // Array to keep track of visited nodes
+        int visited[V] = {0};
+
+        // Count of connected components
+        int count = 0;
+
+        // Traverse all nodes
+        for (int i = 0; i &lt; V; i++) {
+            // If node is not visited
+            if (!visited[i]) {
+                // Perform DFS and increment count
+                count++;
+                dfs(i, adjList, visited);
+            }
+        }
+
+        // Return final count
+        return count;
+    }
+};
+
+// Main function to drive the program
+int main() {
+    // Adjacency matrix input
+    vector&lt;vector&lt;int&gt;&gt; adj = {
+        {1, 0, 1},
+        {0, 1, 0},
+        {1, 0, 1}
+    };
+
+    // Number of vertices
+    int V = 3;
+
+    // Create object of Solution
+    Solution obj;
+
+    // Call the function and print result
+    cout &lt;&lt; obj.numProvinces(adj, V) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to perform DFS traversal
+    private void dfs(int node, List&lt;List&lt;Integer&gt;&gt; adjList, boolean[] visited) {
+        // Mark the current node as visited
+        visited[node] = true;
+
+        // Visit all adjacent unvisited nodes
+        for (int neighbor : adjList.get(node)) {
+            if (!visited[neighbor]) {
+                dfs(neighbor, adjList, visited);
+            }
+        }
+    }
+
+    // Function to count number of provinces
+    public int numProvinces(int[][] adj, int V) {
+        // Create adjacency list from adjacency matrix
+        List&lt;List&lt;Integer&gt;&gt; adjList = new ArrayList&lt;&gt;();
+
+        // Initialize the adjacency list
+        for (int i = 0; i &lt; V; i++) {
+            adjList.add(new ArrayList&lt;&gt;());
+        }
+
+        // Convert matrix to list
+        for (int i = 0; i &lt; V; i++) {
+            for (int j = 0; j &lt; V; j++) {
+                // Ignore self loops
+                if (adj[i][j] == 1 &amp;&amp; i != j) {
+                    adjList.get(i).add(j);
+                    adjList.get(j).add(i);
+                }
+            }
+        }
+
+        // Visited array to track visited nodes
+        boolean[] visited = new boolean[V];
+
+        // Count of provinces
+        int count = 0;
+
+        // Traverse all nodes
+        for (int i = 0; i &lt; V; i++) {
+            if (!visited[i]) {
+                // Start DFS and increment count
+                count++;
+                dfs(i, adjList, visited);
+            }
+        }
+
+        return count;
+    }
+}
+
+// Main class to run the program
+public class Main {
+    public static void main(String[] args) {
+        // Input adjacency matrix
+        int[][] adj = {
+            {1, 0, 1},
+            {0, 1, 0},
+            {1, 0, 1}
+        };
+
+        // Number of vertices
+        int V = 3;
+
+        // Create object of Solution class
+        Solution sol = new Solution();
+
+        // Call function and print result
+        System.out.println(sol.numProvinces(adj, V));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to perform DFS traversal
+    def dfs(self, node, adj_list, visited):
+        # Mark current node as visited
+        visited[node] = True
+
+        # Visit all unvisited neighbors
+        for neighbor in adj_list[node]:
+            if not visited[neighbor]:
+                self.dfs(neighbor, adj_list, visited)
+
+    # Function to count provinces
+    def numProvinces(self, adj, V):
+        # Create adjacency list from adjacency matrix
+        adj_list = [[] for _ in range(V)]
+
+        # Convert matrix to list
+        for i in range(V):
+            for j in range(V):
+                if adj[i][j] == 1 and i != j:
+                    adj_list[i].append(j)
+                    adj_list[j].append(i)
+
+        # Visited array
+        visited = [False] * V
+
+        # Count of provinces
+        count = 0
+
+        # Traverse all nodes
+        for i in range(V):
+            if not visited[i]:
+                # Perform DFS and increment count
+                count += 1
+                self.dfs(i, adj_list, visited)
+
+        return count
+
+# Driver code
+if __name__ == "__main__":
+    # Input adjacency matrix
+    adj = [
+        [1, 0, 1],
+        [0, 1, 0],
+        [1, 0, 1]
+    ]
+    
+    # Number of vertices
+    V = 3
+
+    # Create object of Solution
+    sol = Solution()
+
+    # Call function and print result
+    print(sol.numProvinces(adj, V))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to perform DFS traversal
+    dfs(node, adjList, visited) {
+        // Mark current node as visited
+        visited[node] = true;
+
+        // Visit all unvisited neighbors
+        for (let neighbor of adjList[node]) {
+            if (!visited[neighbor]) {
+                this.dfs(neighbor, adjList, visited);
+            }
+        }
+    }
+
+    // Function to count provinces
+    numProvinces(adj, V) {
+        // Create adjacency list
+        let adjList = Array.from({ length: V }, () =&gt; []);
+
+        // Convert matrix to list
+        for (let i = 0; i &lt; V; i++) {
+            for (let j = 0; j &lt; V; j++) {
+                if (adj[i][j] === 1 &amp;&amp; i !== j) {
+                    adjList[i].push(j);
+                    adjList[j].push(i);
+                }
+            }
+        }
+
+        // Visited array
+        let visited = new Array(V).fill(false);
+
+        // Count of provinces
+        let count = 0;
+
+        // Traverse all nodes
+        for (let i = 0; i &lt; V; i++) {
+            if (!visited[i]) {
+                // Perform DFS and increment count
+                count++;
+                this.dfs(i, adjList, visited);
+            }
+        }
+
+        return count;
+    }
+}
+
+// Driver code
+const adj = [
+    [1, 0, 1],
+    [0, 1, 0],
+    [1, 0, 1]
+];
+
+const V = 3;
+
+const sol = new Solution();
+console.log(sol.numProvinces(adj, V));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(V+E)</strong>, we visit every node and for every node we visit all of its neighbours in the DFS traversal.<br/>
+<strong>Space Complexity: O(N)</strong>, for storing visited array and auxiliary stack space.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

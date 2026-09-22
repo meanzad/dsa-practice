@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Preorder Inorder Postorder Traversals in One Traversal</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Preorder Inorder Postorder Traversals in One Traversal</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/preorder-inorder-postorder-traversals-in-one-traversal/</code></div>
+  <p><strong>Problem Statement: </strong>Given the root of a Binary Tree, return the preorder, inorder and postorder traversal sequence of the given tree by making just one traversal. 
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: Binary Tree: 4 2 5 3 -1 7 6 -1 9 -1 -1 8 -1 1</span>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/49efbe5ff9e46768.png" width="439"/></figure>
+<span>Output: Preorder: [4, 2, 3, 9, 1, 5, 7, 6, 8], Inorder: [3, 1, 9, 2, 4, 7, 5, 8, 6], Postorder: [1, 9, 3, 2, 7, 8, 6, 5, 4] </span>
+<span>Explanation:</span>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/e4fad8b44a94f23d.png" width="439"/></figure>
+<span>Input: Binary Tree: 1 2 3 4 5 6 7 -1 -1 8 -1 -1 -1 9 10</span>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/4c8703c381af560f.png" width="439"/></figure>
+<span>Output: Preorder: [1, 2, 4, 5, 8, 3, 6, 7, 9, 10], Inorder: [4, 2, 8, 5, 1, 6, 3, 9, 7, 10], Postorder: [4, 8, 5, 2, 6, 9, 10, 7, 3, 1] </span>
+<span>Explanation: The three traversal of the tree are given above.</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/pre,-post,-inorder-in-one-traversal" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better.
+            It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                 Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+This approach traverses the binary tree in a single pass while computing the preorder, inorder and postorder traversals at the same time. A stack is used for state management. The stack keeps track of the traversal state for each node. It stores nodes and their state information allowing the algorithm to resume traversal from intermediate points. For each node, it identifies its state i.e. if it's in the preorder state, it records the node's value and pushes the left child onto the stack. Moving to the inorder state, it records the node's value and pushes the right child onto the stack. Finally, in the post-order state, it stores the node's value and pops the node. As the algorithm executes over each node, it pushes each value in separate arrays for preorder, inorder and postorder traversals depending upon the current order and sequence. Hence, we are able to traverse the tree just once and get all three traversals from it.
+<ul>
+<li>Start at the root of the binary tree.Initialise a stack that holds a tree node and an integer value representing its state corresponding to pre order, inorder and postorder. Initialise empty arrays to store the three traversals as well.Check if the tree is empty. If so, return empty traversals.</li>
+<figure><img height="400;" loading="lazy" src="../assets/img/11c3879bb0098c5f.png" width="400;"/></figure>
+<li>Push the root node onto the stack along with its state ‘1’ (preorder) to start the traversal.</li>
+<li>While the stack isn’t empty, pop the top node of the stack and for each node:
+    <ul>
+<li>If the state is ‘1’ ie. preorder: store the node’s data in the preorder array and move its state to 2 (inorder) for this node. Push this updated state back onto the stack and push its left child as well.</li>
+<li>If the state is ‘2’ ie. inorder: store the node’s data is the inorder array and update its state to 3 (postorder) for this node. Push the updated state back onto the stack and push the right child onto the stack as well.</li>
+<li>If the state is ‘3’ ie. postorder: store the node’s data in the postorder array and pop it.
+</li>
+</ul>
+</li>
+<li>Return the preorder, inorder and postorder array.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/1cd97c04c0f0cfd0.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/67ab8df8a891dcb3.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/546107180f5d2426.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/d2f635af392a92de.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/b4cd1d140ace4d43.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/b8c2b69227374433.png"/></div><div class="carousel-image"><img alt="Image 7" loading="lazy" src="../assets/img/61a0b6ff840a042e.png"/></div><div class="carousel-image"><img alt="Image 8" loading="lazy" src="../assets/img/65f43731613f0dac.png"/></div><div class="carousel-image"><img alt="Image 9" loading="lazy" src="../assets/img/092793669c9badd4.png"/></div><div class="carousel-image"><img alt="Image 10" loading="lazy" src="../assets/img/083ccccaa44df4e6.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/1cd97c04c0f0cfd0.png"/><img alt="Image 2" loading="lazy" src="../assets/img/67ab8df8a891dcb3.png"/><img alt="Image 3" loading="lazy" src="../assets/img/546107180f5d2426.png"/><img alt="Image 4" loading="lazy" src="../assets/img/d2f635af392a92de.png"/><img alt="Image 5" loading="lazy" src="../assets/img/b4cd1d140ace4d43.png"/><img alt="Image 6" loading="lazy" src="../assets/img/b8c2b69227374433.png"/><img alt="Image 7" loading="lazy" src="../assets/img/61a0b6ff840a042e.png"/><img alt="Image 8" loading="lazy" src="../assets/img/65f43731613f0dac.png"/><img alt="Image 9" loading="lazy" src="../assets/img/092793669c9badd4.png"/><img alt="Image 10" loading="lazy" src="../assets/img/083ccccaa44df4e6.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Node structure for the binary tree
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+    // Constructor to initialize
+    // the node with a value
+    Node(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+
+// Solution class containing the traversal function
+class Solution {
+public:
+    // Function to get the Preorder,
+    // Inorder and Postorder traversal
+    // Of Binary Tree in One traversal
+    vector&lt;vector&lt;int&gt;&gt; preInPostTraversal(Node* root) {
+        // Vectors to store traversals
+        vector&lt;int&gt; pre, in, post;
+
+        // If the tree is empty,
+        // return empty traversals
+        if (root == NULL) {
+            return {};
+        }
+
+        // Stack to maintain nodes
+        // and their traversal state
+        stack&lt;pair&lt;Node*, int&gt;&gt; st;
+
+        // Start with the root node
+        // and state 1 (preorder)
+        st.push({root, 1});
+
+        while (!st.empty()) {
+            auto it = st.top();
+            st.pop();
+
+            // this is part of pre
+            if (it.second == 1) {
+                // Store the node's data
+                // in the preorder traversal
+                pre.push_back(it.first-&gt;data);
+                // Move to state 2
+                // (inorder) for this node
+                it.second = 2;
+                // Push the updated state
+                // back onto the stack
+                st.push(it); 
+
+                // Push left child onto
+                // the stack for processing
+                if (it.first-&gt;left != NULL) {
+                    st.push({it.first-&gt;left, 1});
+                }
+            }
+
+            // this is a part of in
+            else if (it.second == 2) {
+                // Store the node's data
+                // in the inorder traversal
+                in.push_back(it.first-&gt;data);
+                // Move to state 3
+                // (postorder) for this node
+                it.second = 3;
+                // Push the updated state
+                // back onto the stack
+                st.push(it); 
+
+                // Push right child onto
+                // the stack for processing
+                if (it.first-&gt;right != NULL) {
+                    st.push({it.first-&gt;right, 1});
+                }
+            }
+
+            // this is part of post
+            else {
+                // Store the node's data
+                // in the postorder traversal
+                post.push_back(it.first-&gt;data);
+            }
+        }
+
+        // Returning the traversals
+        vector&lt;vector&lt;int&gt;&gt; result;
+        result.push_back(pre);
+        result.push_back(in);
+        result.push_back(post);
+        return result;
+    }
+};
+
+// Main function
+int main()
+{
+    // Creating a sample binary tree
+    Node* root = new Node(1);
+    root-&gt;left = new Node(2);
+    root-&gt;right = new Node(3);
+    root-&gt;left-&gt;left = new Node(4);
+    root-&gt;left-&gt;right = new Node(5);
+
+    // Create object of Solution class
+    Solution sol;
+    
+    // Getting the pre-order, in-order,
+    // and post-order traversals
+    vector&lt;int&gt; pre, in, post;
+    vector&lt;vector&lt;int&gt;&gt; traversals = sol.preInPostTraversal(root);
+
+    // Extracting the traversals
+    // from the result
+    pre = traversals[0];
+    in = traversals[1];
+    post = traversals[2];
+
+    // Printing the traversals
+    cout &lt;&lt; "Preorder traversal: ";
+    for (int val : pre) {
+        cout &lt;&lt; val &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+
+    cout &lt;&lt; "Inorder traversal: ";
+    for (int val : in) {
+        cout &lt;&lt; val &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+
+    cout &lt;&lt; "Postorder traversal: ";
+    for (int val : post) {
+        cout &lt;&lt; val &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Node structure for the binary tree
+class Node {
+    int data;
+    Node left;
+    Node right;
+
+    // Constructor to initialize
+    // the node with a value
+    Node(int val) {
+        data = val;
+        left = null;
+        right = null;
+    }
+}
+
+// Solution class containing the traversal function
+class Solution {
+    // Function to get the Preorder,
+    // Inorder and Postorder traversal
+    // Of Binary Tree in One traversal
+    public List&lt;List&lt;Integer&gt;&gt; preInPostTraversal(Node root) {
+        // Lists to store traversals
+        List&lt;Integer&gt; pre = new ArrayList&lt;&gt;();
+        List&lt;Integer&gt; in = new ArrayList&lt;&gt;();
+        List&lt;Integer&gt; post = new ArrayList&lt;&gt;();
+
+        // If the tree is empty,
+        // return empty traversals
+        if (root == null) {
+            return new ArrayList&lt;&gt;();
+        }
+
+        // Stack to maintain nodes
+        // and their traversal state
+        Stack&lt;Pair&lt;Node, Integer&gt;&gt; st = new Stack&lt;&gt;();
+
+        // Start with the root node
+        // and state 1 (preorder)
+        st.push(new Pair&lt;&gt;(root, 1));
+
+        while (!st.empty()) {
+            Pair&lt;Node, Integer&gt; it = st.pop();
+
+            // this is part of pre
+            if (it.getValue() == 1) {
+                // Store the node's data
+                // in the preorder traversal
+                pre.add(it.getKey().data);
+                // Move to state 2
+                // (inorder) for this node
+                it.setValue(2);
+                // Push the updated state
+                // back onto the stack
+                st.push(it);
+
+                // Push left child onto
+                // the stack for processing
+                if (it.getKey().left != null) {
+                    st.push(new Pair&lt;&gt;(it.getKey().left, 1));
+                }
+            }
+
+            // this is a part of in
+            else if (it.getValue() == 2) {
+                // Store the node's data
+                // in the inorder traversal
+                in.add(it.getKey().data);
+                // Move to state 3
+                // (postorder) for this node
+                it.setValue(3);
+                // Push the updated state
+                // back onto the stack
+                st.push(it);
+
+                // Push right child onto
+                // the stack for processing
+                if (it.getKey().right != null) {
+                    st.push(new Pair&lt;&gt;(it.getKey().right, 1));
+                }
+            }
+
+            // this is part of post
+            else {
+                // Store the node's data
+                // in the postorder traversal
+                post.add(it.getKey().data);
+            }
+        }
+
+        // Returning the traversals
+        List&lt;List&lt;Integer&gt;&gt; result = new ArrayList&lt;&gt;();
+        result.add(pre);
+        result.add(in);
+        result.add(post);
+        return result;
+    }
+
+    // Function to print the elements of a list
+    public void printList(List&lt;Integer&gt; list) {
+        for (int num : list) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+        // Creating a sample binary tree
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+
+        // Create object of Solution class
+        Solution sol = new Solution();
+
+        // Getting the pre-order, in-order,
+        // and post-order traversals
+        List&lt;List&lt;Integer&gt;&gt; traversals = sol.preInPostTraversal(root);
+
+        // Extracting the traversals
+        List&lt;Integer&gt; pre = traversals.get(0);
+        List&lt;Integer&gt; in = traversals.get(1);
+        List&lt;Integer&gt; post = traversals.get(2);
+
+        // Printing the traversals
+        System.out.print("Preorder traversal: ");
+        sol.printList(pre);
+
+        System.out.print("Inorder traversal: ");
+        sol.printList(in);
+
+        System.out.print("Postorder traversal: ");
+        sol.printList(post);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Node structure for the binary tree
+class Node:
+    # Constructor to initialize the node with a value
+    def __init__(self, val):
+        self.data = val
+        self.left = None
+        self.right = None
+
+# Solution class containing the traversal function
+class Solution:
+    # Function to get the Preorder,
+    # Inorder and Postorder traversal
+    # Of Binary Tree in One traversal
+    def preInPostTraversal(self, root):
+        # Lists to store traversals
+        pre, ino, post = [], [], []
+
+        # If the tree is empty, return empty traversals
+        if root is None:
+            return []
+
+        # Stack to maintain nodes and their traversal state
+        st = [(root, 1)]
+
+        while st:
+            node, state = st.pop()
+
+            # this is part of pre
+            if state == 1:
+                # Store the node's data in the preorder traversal
+                pre.append(node.data)
+                # Move to state 2 (inorder) for this node
+                st.append((node, 2))
+
+                # Push left child onto the stack for processing
+                if node.left:
+                    st.append((node.left, 1))
+
+            # this is a part of in
+            elif state == 2:
+                # Store the node's data in the inorder traversal
+                ino.append(node.data)
+                # Move to state 3 (postorder) for this node
+                st.append((node, 3))
+
+                # Push right child onto the stack for processing
+                if node.right:
+                    st.append((node.right, 1))
+
+            # this is part of post
+            else:
+                # Store the node's data in the postorder traversal
+                post.append(node.data)
+
+        # Returning the traversals
+        return [pre, ino, post]
+
+# Main function
+if __name__ == "__main__":
+    # Creating a sample binary tree
+    root = Node(1)
+    root.left = Node(2)
+    root.right = Node(3)
+    root.left.left = Node(4)
+    root.left.right = Node(5)
+
+    # Create object of Solution class
+    sol = Solution()
+
+    # Getting the traversals
+    traversals = sol.preInPostTraversal(root)
+
+    # Extracting and printing the traversals
+    pre = traversals[0]
+    ino = traversals[1]
+    post = traversals[2]
+
+    print("Preorder traversal:", *pre)
+    print("Inorder traversal:", *ino)
+    print("Postorder traversal:", *post)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Node structure for the binary tree
+class Node {
+    // Constructor to initialize the node with a value
+    constructor(val) {
+        this.data = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+// Solution class containing the traversal function
+class Solution {
+    // Function to get the Preorder,
+    // Inorder and Postorder traversal
+    // Of Binary Tree in One traversal
+    preInPostTraversal(root) {
+        // Arrays to store traversals
+        let pre = [], ino = [], post = [];
+
+        // If the tree is empty, return empty traversals
+        if (root === null) return [];
+
+        // Stack to maintain nodes and their traversal state
+        let st = [[root, 1]];
+
+        while (st.length &gt; 0) {
+            let [node, state] = st.pop();
+
+            // this is part of pre
+            if (state === 1) {
+                // Store the node's data in the preorder traversal
+                pre.push(node.data);
+                // Move to state 2 (inorder) for this node
+                st.push([node, 2]);
+
+                // Push left child onto the stack for processing
+                if (node.left !== null) {
+                    st.push([node.left, 1]);
+                }
+            }
+
+            // this is a part of in
+            else if (state === 2) {
+                // Store the node's data in the inorder traversal
+                ino.push(node.data);
+                // Move to state 3 (postorder) for this node
+                st.push([node, 3]);
+
+                // Push right child onto the stack for processing
+                if (node.right !== null) {
+                    st.push([node.right, 1]);
+                }
+            }
+
+            // this is part of post
+            else {
+                // Store the node's data in the postorder traversal
+                post.push(node.data);
+            }
+        }
+
+        // Returning the traversals
+        return [pre, ino, post];
+    }
+}
+
+// Main driver code
+function main() {
+    // Creating a sample binary tree
+    let root = new Node(1);
+    root.left = new Node(2);
+    root.right = new Node(3);
+    root.left.left = new Node(4);
+    root.left.right = new Node(5);
+
+    // Create object of Solution class
+    let sol = new Solution();
+
+    // Getting the traversals
+    let [pre, ino, post] = sol.preInPostTraversal(root);
+
+    // Printing the traversals
+    console.log("Preorder traversal:", pre.join(" "));
+    console.log("Inorder traversal:", ino.join(" "));
+    console.log("Postorder traversal:", post.join(" "));
+}
+
+// Call the main function
+main();
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis.
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(3*N)</strong>, we process each node thrice, once for every traversal.<br/>
+<strong>Space Complexity: O(4*N)</strong>, extra space used for storing postorder, inorder, preorder traversal and stack.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

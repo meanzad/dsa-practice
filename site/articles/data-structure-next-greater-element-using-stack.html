@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Next Greater Element Using Stack</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Next Greater Element Using Stack</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/next-greater-element-using-stack/</code></div>
+  <p><strong>Problem Statement: </strong> Given an integer array A, return the next greater element for every element in A. The next greater element for an element x is the first element greater than x that we come across while traversing the array in a clockwise manner. If it doesn't exist, return -1 for this element.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: arr = [1, 3, 2, 4]</span>
+<span>Output: [3, 4, 4, -1]</span>
+<span>Explanation: In the array, the next larger element to 1 is 3, 3 is 4, 2 is 4 and for 4 is -1, since it does not exist.</span>
+<p></p>
+<span>Input : arr = [6, 8, 0, 1, 3]</span>
+<span>Output: [8, -1, 1, 3, -1]</span>
+<span>Explanation : In the array, the next larger element to 6 is 8, for 8 there is no larger elements hence it is -1, for 0 it is 1 , for 1 it is 3 and then for 3 there is no larger element on the right and hence -1.</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/next-greater-element" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better.
+            It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+  To find the next greater element for each element in an array, we can use a stack to efficiently track potential candidates. As we traverse the array from right to left, we maintain a stack that always stores elements in <strong>decreasing order</strong> from top to bottom. This way, when we process an element, we can simply pop off all smaller or equal elements (which can't be the next greater element), and the top of the stack, if it exists, will be the next greater element. If the stack is empty, there is no greater element to the right, so we assign -1.
+  <ul>
+<li>Initialize an empty stack and a result array of the same length as input.</li>
+<li>Traverse the array from the last element to the first (right to left).</li>
+<li>For each element, pop elements from the stack while the stack top is less than or equal to the current element.</li>
+<li>If the stack becomes empty, no greater element exists, assign -1 in the result.</li>
+<li>Otherwise, the top of the stack is the next greater element for the current element.</li>
+<li>Push the current element onto the stack for use in future comparisons.</li>
+</ul>
+
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/e3a2eff3cce870fd.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/15e1b6de5f77ef0e.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/ff696dc32af011d2.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/5f5d25435814d858.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/77f996be0b028aac.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/565055b2f35f73aa.png"/></div><div class="carousel-image"><img alt="Image 7" loading="lazy" src="../assets/img/e59b80f1ee909b34.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/e3a2eff3cce870fd.png"/><img alt="Image 2" loading="lazy" src="../assets/img/15e1b6de5f77ef0e.png"/><img alt="Image 3" loading="lazy" src="../assets/img/ff696dc32af011d2.png"/><img alt="Image 4" loading="lazy" src="../assets/img/5f5d25435814d858.png"/><img alt="Image 5" loading="lazy" src="../assets/img/77f996be0b028aac.png"/><img alt="Image 6" loading="lazy" src="../assets/img/565055b2f35f73aa.png"/><img alt="Image 7" loading="lazy" src="../assets/img/e59b80f1ee909b34.png"/></div></div>
+<p></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Solution class to find next greater elements
+class Solution {
+public:
+    // Function to find next greater elements
+    vector&lt;int&gt; nextGreater(vector&lt;int&gt;&amp; nums) {
+        // Stack to store elements
+        stack&lt;int&gt; st;
+
+        // Result array of same size
+        int n = nums.size();
+        vector&lt;int&gt; res(n);
+
+        // Traverse from right to left
+        for (int i = n - 1; i &gt;= 0; i--) {
+
+            // Pop all smaller or equal elements
+            while (!st.empty() &amp;&amp; st.top() &lt;= nums[i]) {
+                st.pop();
+            }
+
+            // If stack is empty, no greater element
+            if (st.empty()) res[i] = -1;
+
+            // Else top of stack is the answer
+            else res[i] = st.top();
+
+            // Push current element
+            st.push(nums[i]);
+        }
+
+        // Return the result
+        return res;
+    }
+};
+
+// Main function
+int main() {
+    vector&lt;int&gt; nums = {4, 5, 2, 10};
+    Solution sol;
+    vector&lt;int&gt; ans = sol.nextGreater(nums);
+
+    for (int x : ans) {
+        cout &lt;&lt; x &lt;&lt; " ";
+    }
+
+    cout &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Solution class to find next greater elements
+class Solution {
+    // Function to find next greater elements
+    public int[] nextGreater(int[] nums) {
+        // Stack to store elements
+        Stack&lt;Integer&gt; st = new Stack&lt;&gt;();
+
+        // Result array of same size
+        int n = nums.length;
+        int[] res = new int[n];
+
+        // Traverse from right to left
+        for (int i = n - 1; i &gt;= 0; i--) {
+
+            // Pop all smaller or equal elements
+            while (!st.isEmpty() &amp;&amp; st.peek() &lt;= nums[i]) {
+                st.pop();
+            }
+
+            // If stack is empty, no greater element
+            if (st.isEmpty()) res[i] = -1;
+
+            // Else top of stack is the answer
+            else res[i] = st.peek();
+
+            // Push current element
+            st.push(nums[i]);
+        }
+
+        // Return the result
+        return res;
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+        int[] nums = {4, 5, 2, 10};
+        Solution sol = new Solution();
+        int[] ans = sol.nextGreater(nums);
+
+        for (int x : ans) {
+            System.out.print(x + " ");
+        }
+
+        System.out.println();
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Solution class to find next greater elements
+class Solution:
+    # Function to find next greater elements
+    def nextGreater(self, nums):
+        # Stack to store elements
+        stack = []
+
+        # Result array of same size
+        n = len(nums)
+        res = [0] * n
+
+        # Traverse from right to left
+        for i in range(n - 1, -1, -1):
+
+            # Pop all smaller or equal elements
+            while stack and stack[-1] &lt;= nums[i]:
+                stack.pop()
+
+            # If stack is empty, no greater element
+            if not stack:
+                res[i] = -1
+
+            # Else top of stack is the answer
+            else:
+                res[i] = stack[-1]
+
+            # Push current element
+            stack.append(nums[i])
+
+        # Return the result
+        return res
+
+# Main function
+def main():
+    nums = [4, 5, 2, 10]
+    sol = Solution()
+    ans = sol.nextGreater(nums)
+    print(" ".join(map(str, ans)))
+
+main()
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Solution class to find next greater elements
+class Solution {
+    // Function to find next greater elements
+    nextGreater(nums) {
+        // Stack to store elements
+        let stack = [];
+
+        // Result array of same size
+        let n = nums.length;
+        let res = new Array(n);
+
+        // Traverse from right to left
+        for (let i = n - 1; i &gt;= 0; i--) {
+
+            // Pop all smaller or equal elements
+            while (stack.length &amp;&amp; stack[stack.length - 1] &lt;= nums[i]) {
+                stack.pop();
+            }
+
+            // If stack is empty, no greater element
+            if (stack.length === 0) res[i] = -1;
+
+            // Else top of stack is the answer
+            else res[i] = stack[stack.length - 1];
+
+            // Push current element
+            stack.push(nums[i]);
+        }
+
+        // Return the result
+        return res;
+    }
+}
+
+// Main function
+function main() {
+    let nums = [4, 5, 2, 10];
+    let sol = new Solution();
+    let ans = sol.nextGreater(nums);
+    console.log(ans.join(" "));
+}
+
+main();
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N)</strong>, we traverse the entire array once and find next greater element in linear time.<br/>
+<strong>Space Complexity: O(N)</strong>, additional space used for resultant array and stack.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

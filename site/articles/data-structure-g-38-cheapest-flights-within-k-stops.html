@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>G-38: Cheapest Flights Within K Stops</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>G-38: Cheapest Flights Within K Stops</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/g-38-cheapest-flights-within-k-stops/</code></div>
+  <p><strong>Problem Statement: </strong>
+There are n cities and m edges connected by some number of flights. You are given an array of flights where flights[i] = [ fromi, toi, pricei] indicates that there is a flight from city fromi to city toi with cost price. You have also given three integers src, dst, and k, and return the cheapest price from src to dst with at most k stops. If there is no such route, return -1.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>  
+<strong>Input:</strong>  n = 4  
+flights = [[0, 1, 100], [1, 2, 100], [2, 0, 100], [1, 3, 600], [2, 3, 200]]  
+src = 0  
+dst = 3  
+k = 1  
+<strong>Output:</strong> 700  
+<strong>Explanation:</strong> The optimal path with at most 1 stop from city 0 to 3 is through cities [0, 1, 3] with a total cost of 100 + 600 = 700.  
+Note that the path [0, 1, 2, 3] is cheaper but is invalid because it uses 2 stops.
+
+<strong>Example 2:</strong>  
+<strong>Input:</strong>  n = 3  
+flights = [[0, 1, 100], [1, 2, 100], [0, 2, 500]]  
+src = 0  
+dst = 2  
+k = 1  
+<strong>Output:</strong> 200  
+<strong>Explanation:</strong>  The optimal path with at most 1 stop from city 0 to 2 is through cities [0, 1, 2] with a total cost of 100 + 100 = 200.</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/cheapest-flight-within-k-stops" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Start by defining a queue that will store pairs of {stops, {node, dist}}. Here, 'dist' represents the distance from the source to the current node, and 'stops' keeps track of the number of nodes visited so far.</li>
+<li>Initialize a distance array with very large values (∞) for each node, except for the source node, which is set to 0, indicating that the source node has no distance to itself.</li>
+<li>Define the source and destination nodes, as these will be used to determine the start and end points of the search.</li>
+<li>Create an adjacency list to store all the neighbors for each node. This list will help to easily find the nodes that can be reached from a given node.</li>
+<li>Initialize the queue by adding the source node with a distance of 0 and a stop count of 0. This represents the starting point of the search.</li>
+<li>Begin the algorithm by popping the front element from the queue, which contains the current node along with the number of stops and the current distance from the source.</li>
+<li>Look at all the adjacent nodes of the current node (i.e., its neighbors).</li>
+<li>For each adjacent node, check if the new distance through the current node is smaller than the previously stored distance in the distance array and if the number of stops taken so far is less than the maximum allowed stops (K).</li>
+<li>If the new distance is smaller, update the distance in the array and push the adjacent node into the queue with the updated distance and incremented stop count.</li>
+<li>Repeat this process, popping the node with the smallest distance from the queue, checking its neighbors, and updating distances as necessary.</li>
+<li>Once the destination node is reached, return the calculated distance as the result.</li>
+<li>If the queue becomes empty and the destination node has not been reached, return -1, indicating that there is no valid path from the source to the destination within the allowed number of stops.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/10a76e98b30b5c27.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/c40a1c64a66fe3ae.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/d34c2803e8e5ecaf.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/842d08ae9fc3bc78.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/10a76e98b30b5c27.png"/><img alt="Image 2" loading="lazy" src="../assets/img/c40a1c64a66fe3ae.png"/><img alt="Image 3" loading="lazy" src="../assets/img/d34c2803e8e5ecaf.png"/><img alt="Image 4" loading="lazy" src="../assets/img/842d08ae9fc3bc78.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution
+{
+public:
+    // Method to find the cheapest flight within K stops using BFS
+    int CheapestFLight(int n, vector&lt;vector&lt;int&gt;&gt; &amp;flights,
+                       int src, int dst, int K)
+    {
+        // Create the adjacency list to represent airports and flights as a graph
+        vector&lt;pair&lt;int, int&gt;&gt; adj[n];
+        for (auto it : flights)
+        {
+            adj[it[0]].push_back({it[1], it[2]});  // Add an edge from source to destination with the weight (cost)
+        }
+
+        // Create a queue to store the node, its distance from the source, and the number of stops
+        queue&lt;pair&lt;int, pair&lt;int, int&gt;&gt;&gt; q;
+        
+        q.push({0, {src, 0}});  // Push the source node with 0 stops and 0 cost
+
+        // Create a distance array to store the minimum cost to reach each node
+        vector&lt;int&gt; dist(n, 1e9);
+        dist[src] = 0;  // The distance from source to itself is 0
+
+        // BFS traversal with a queue to process the nodes
+        while (!q.empty())
+        {
+            auto it = q.front();
+            q.pop();
+            int stops = it.first;  // Number of stops so far
+            int node = it.second.first;  // Current node
+            int cost = it.second.second;  // Cost to reach the current node
+
+            // If the number of stops exceeds K, continue to the next iteration
+            if (stops &gt; K)
+                continue;
+
+            // Iterate over all the adjacent nodes (next destinations)
+            for (auto iter : adj[node])
+            {
+                int adjNode = iter.first;  // Next destination node
+                int edW = iter.second;  // Cost of the flight to the next destination
+
+                // If a shorter path to the adjacent node is found, update the distance
+                if (cost + edW &lt; dist[adjNode] &amp;&amp; stops &lt;= K)
+                {
+                    dist[adjNode] = cost + edW;  // Update the distance
+                    q.push({stops + 1, {adjNode, cost + edW}});  // Push the new node with updated stops and cost
+                }
+            }
+        }
+
+        // If destination node is unreachable, return -1
+        if (dist[dst] == 1e9)
+            return -1;
+
+        return dist[dst];  // Return the minimum cost to reach the destination
+    }
+};
+
+int main()
+{
+    // Driver Code.
+    int n = 4, src = 0, dst = 3, K = 1;
+
+    // Flight routes and their costs
+    vector&lt;vector&lt;int&gt;&gt; flights = {{0, 1, 100}, {1, 2, 100}, {2, 0, 100}, {1, 3, 600},
+    {2, 3, 200}};
+
+    Solution obj;
+
+    // Call the method to find the cheapest flight
+    int ans = obj.CheapestFLight(n, flights, src, dst, K);
+
+    // Output the result
+    cout &lt;&lt; ans &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+
+    // Method to find the cheapest flight within K stops using BFS
+    public int CheapestFLight(int n, int[][] flights, int src, int dst, int K) {
+
+        // Create the adjacency list to represent airports and flights as a graph
+        List&lt;List&lt;int[]&gt;&gt; adj = new ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; n; i++) {
+            adj.add(new ArrayList&lt;&gt;());
+        }
+        
+        // Add edges for the flights to the adjacency list
+        for (int[] flight : flights) {
+            adj.get(flight[0]).add(new int[]{flight[1], flight[2]});
+        }
+
+        // Create a queue to store the node, its distance from the source, and the number of stops
+        Queue&lt;int[]&gt; q = new LinkedList&lt;&gt;();
+        q.offer(new int[]{0, src, 0});  // Push the source node with 0 stops and 0 cost
+
+        // Create a distance array to store the minimum cost to reach each node
+        int[] dist = new int[n];
+        Arrays.fill(dist, Integer.MAX_VALUE);
+        dist[src] = 0;
+
+        // BFS traversal with a queue to process the nodes
+        while (!q.isEmpty()) {
+            int[] current = q.poll();
+            int stops = current[0];  // Number of stops so far
+            int node = current[1];  // Current node
+            int cost = current[2];  // Cost to reach the current node
+
+            // If the number of stops exceeds K, continue to the next iteration
+            if (stops &gt; K)
+                continue;
+
+            // Iterate over all the adjacent nodes (next destinations)
+            for (int[] adjNode : adj.get(node)) {
+                int nextNode = adjNode[0];  // Next destination node
+                int edW = adjNode[1];  // Cost of the flight to the next destination
+
+                // If a shorter path to the adjacent node is found, update the distance
+                if (cost + edW &lt; dist[nextNode] &amp;&amp; stops &lt;= K) {
+                    dist[nextNode] = cost + edW;  // Update the distance
+                    q.offer(new int[]{stops + 1, nextNode, cost + edW});  // Push the new node with updated stops and cost
+                }
+            }
+        }
+
+        // If destination node is unreachable, return -1
+        if (dist[dst] == Integer.MAX_VALUE)
+            return -1;
+
+        return dist[dst];  // Return the minimum cost to reach the destination
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        // Driver Code
+        int n = 4, src = 0, dst = 3, K = 1;
+
+        // Flight routes and their costs
+        int[][] flights = {{0, 1, 100}, {1, 2, 100}, {2, 0, 100}, {1, 3, 600},
+        {2, 3, 200}};
+
+        Solution obj = new Solution();
+
+        // Call the method to find the cheapest flight
+        int ans = obj.CheapestFLight(n, flights, src, dst, K);
+
+        // Output the result
+        System.out.println(ans);
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">from collections import deque
+
+# Method to find the cheapest flight within K stops using BFS
+def CheapestFLight(n, flights, src, dst, K):
+
+    # Create an adjacency list to represent airports and flights as a graph
+    adj = {i: [] for i in range(n)}
+    for flight in flights:
+        adj[flight[0]].append([flight[1], flight[2]])
+
+    # Create a queue to store the node, its distance from the source, and the number of stops
+    q = deque([(0, src, 0)])  # Push the source node with 0 stops and 0 cost
+
+    # Create a distance array to store the minimum cost to reach each node
+    dist = [float('inf')] * n
+    dist[src] = 0
+
+    # BFS traversal with a queue to process the nodes
+    while q:
+        stops, node, cost = q.popleft()
+
+        # If the number of stops exceeds K, continue to the next iteration
+        if stops &gt; K:
+            continue
+
+        # Iterate over all the adjacent nodes (next destinations)
+        for adjNode, edW in adj[node]:
+            # If a shorter path to the adjacent node is found, update the distance
+            if cost + edW &lt; dist[adjNode] and stops &lt;= K:
+                dist[adjNode] = cost + edW  # Update the distance
+                q.append((stops + 1, adjNode, cost + edW))  # Push the new node with updated stops and cost
+
+    # If destination node is unreachable, return -1
+    if dist[dst] == float('inf'):
+        return -1
+
+    return dist[dst]  # Return the minimum cost to reach the destination
+
+# Main function
+def main():
+    # Input data
+    n = 4
+    src = 0
+    dst = 3
+    K = 1
+    flights = [[0, 1, 100], [1, 2, 100], [2, 0, 100], [1, 3, 600],
+               [2, 3, 200]]
+
+    # Call the method to find the cheapest flight
+    ans = CheapestFLight(n, flights, src, dst, K)
+
+    # Output the result
+    print(ans)
+
+# Call the main function
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Method to find the cheapest flight within K stops using BFS
+function CheapestFLight(n, flights, src, dst, K) {
+
+    // Create an adjacency list to represent airports and flights as a graph
+    let adj = Array.from({ length: n }, () =&gt; []);
+    for (let flight of flights) {
+        adj[flight[0]].push([flight[1], flight[2]]);
+    }
+
+    // Create a queue to store the node, its distance from the source, and the number of stops
+    let q = [[0, src, 0]];  // Push the source node with 0 stops and 0 cost
+
+    // Create a distance array to store the minimum cost to reach each node
+    let dist = Array(n).fill(Infinity);
+    dist[src] = 0;
+
+    // BFS traversal with a queue to process the nodes
+    while (q.length &gt; 0) {
+        let [stops, node, cost] = q.shift();
+
+        // If the number of stops exceeds K, continue to the next iteration
+        if (stops &gt; K) continue;
+
+        // Iterate over all the adjacent nodes (next destinations)
+        for (let [adjNode, edW] of adj[node]) {
+            // If a shorter path to the adjacent node is found, update the distance
+            if (cost + edW &lt; dist[adjNode] &amp;&amp; stops &lt;= K) {
+                dist[adjNode] = cost + edW;  // Update the distance
+                q.push([stops + 1, adjNode, cost + edW]);  // Push the new node with updated stops and cost
+            }
+        }
+    }
+
+    // If destination node is unreachable, return -1
+    if (dist[dst] === Infinity) return -1;
+
+    return dist[dst];  // Return the minimum cost to reach the destination
+}
+
+// Main function
+function main() {
+    // Input data
+    let n = 4;
+    let src = 0;
+    let dst = 3;
+    let K = 1;
+    let flights = [
+        [0, 1, 100], [1, 2, 100], [2, 0, 100], [1, 3, 600],
+        [2, 3, 200]
+    ];
+
+    // Call the method to find the cheapest flight
+    let ans = CheapestFLight(n, flights, src, dst, K);
+
+    // Output the result
+    console.log(ans);
+}
+
+// Call the main function
+main();</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(N)</strong>, where the additional log(N) time is eliminated by using a simple queue rather than a priority queue, which is usually used in Dijkstra’s Algorithm. Where N = Number of flights / Number of edges.<br/><br/>
+<strong>Space Complexity: O(|E| + |V|)</strong>, for the adjacency list, priority queue, and the dist array. Where E = Number of edges (flights.size()) and V = Number of airports.
+
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

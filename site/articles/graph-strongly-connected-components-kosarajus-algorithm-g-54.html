@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Strongly Connected Components - Kosaraju&#x27;s Algorithm: G-54</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Strongly Connected Components - Kosaraju&#x27;s Algorithm: G-54</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/graph/strongly-connected-components-kosarajus-algorithm-g-54/</code></div>
+  <p><strong>Problem Statement: </strong> Given a Directed Graph with V vertices (Numbered from 0 to V-1) and E edges,
+    Find the number of strongly connected components in the graph..</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<pre>
+Input Format:
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-7129" loading="lazy" src="../assets/img/d0a1ccbcd5bdb8e4.png"/></figure>
+Result: 3
+Explanation: Three strongly connected components are marked below:
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-7130" loading="lazy" src="../assets/img/0a97694ff0ccccf9.png"/></figure>
+
+Input Format:
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-7131" loading="lazy" src="../assets/img/697874177da4ee60.png"/></figure>
+Result: 4
+Explanation: Four strongly connected components are marked below:
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-7132" loading="lazy" src="../assets/img/3f2d0b30db163e0d.png"/></figure>
+            </pre>
+        </pre></div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://example.com" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+<p>In a directed graph, strongly connected components (SCCs) are subsets of nodes where every
+                            node is reachable from every other node within the same subset. Kosaraju’s Algorithm
+                            efficiently finds these SCCs by leveraging the concept of graph transposition and finishing
+                            times in DFS.</p>
+<p>The key idea is: if we perform a DFS on the graph and record the finishing times of nodes,
+                            then by reversing the graph and doing DFS in the order of decreasing finishing times, we can
+                            group nodes into SCCs.</p>
+<p><strong>Approach:</strong></p>
+<ol>
+<li>Perform a DFS traversal on the graph to fill nodes into a stack according to their
+                                finishing times (nodes that finish later are pushed later).</li>
+<li>Reverse (transpose) the graph by reversing the direction of every edge.</li>
+<li>Perform DFS again on the transposed graph, in the order defined by the stack. Each DFS
+                                traversal gives one strongly connected component.</li>
+<li>Count the number of DFS calls on the transposed graph, which equals the number of SCCs.
+                            </li>
+</ol>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div>
+<div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+private:
+    // Step 1: Perform DFS and store nodes in stack by finishing time
+    void dfs(int node, vector&lt;int&gt; &amp;vis, vector&lt;int&gt; adj[], stack&lt;int&gt; &amp;st) {
+        vis[node] = 1;
+        for (auto it : adj[node]) {
+            if (!vis[it]) {
+                dfs(it, vis, adj, st);
+            }
+        }
+        // Push the node into stack after visiting all neighbors
+        st.push(node);
+    }
+
+    // Step 2: Perform DFS on transposed graph
+    void dfs3(int node, vector&lt;int&gt; &amp;vis, vector&lt;int&gt; adjT[]) {
+        vis[node] = 1;
+        for (auto it : adjT[node]) {
+            if (!vis[it]) {
+                dfs3(it, vis, adjT);
+            }
+        }
+    }
+
+public:
+    // Function to find number of strongly connected components
+    int kosaraju(int V, vector&lt;int&gt; adj[]) {
+        vector&lt;int&gt; vis(V, 0);
+        stack&lt;int&gt; st;
+
+        // Step 1: Do DFS to fill stack by finishing times
+        for (int i = 0; i &lt; V; i++) {
+            if (!vis[i]) {
+                dfs(i, vis, adj, st);
+            }
+        }
+
+        // Step 2: Build the transpose graph
+        vector&lt;int&gt; adjT[V];
+        for (int i = 0; i &lt; V; i++) {
+            vis[i] = 0; // reset visited
+            for (auto it : adj[i]) {
+                adjT[it].push_back(i); // reverse edge
+            }
+        }
+
+        // Step 3: Process stack to count SCCs
+        int scc = 0;
+        while (!st.empty()) {
+            int node = st.top();
+            st.pop();
+            if (!vis[node]) {
+                scc++;
+                dfs3(node, vis, adjT);
+            }
+        }
+        return scc;
+    }
+};
+
+int main() {
+    int n = 5;
+    int edges[5][2] = {
+        {1, 0}, {0, 2},
+        {2, 1}, {0, 3},
+        {3, 4}
+    };
+
+    vector&lt;int&gt; adj[n];
+    for (int i = 0; i &lt; 5; i++) {
+        adj[edges[i][0]].push_back(edges[i][1]);
+    }
+
+    Solution obj;
+    int ans = obj.kosaraju(n, adj);
+    cout &lt;&lt; "The number of strongly connected components is: " &lt;&lt; ans &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Step 1: Perform DFS and store nodes in stack by finishing time
+    private void dfs(int node, int[] vis, List&lt;Integer&gt;[] adj, Stack&lt;Integer&gt; st) {
+        vis[node] = 1;
+        for (int it : adj[node]) {
+            if (vis[it] == 0) {
+                dfs(it, vis, adj, st);
+            }
+        }
+        st.push(node);
+    }
+
+    // Step 2: Perform DFS on transposed graph
+    private void dfs3(int node, int[] vis, List&lt;Integer&gt;[] adjT) {
+        vis[node] = 1;
+        for (int it : adjT[node]) {
+            if (vis[it] == 0) {
+                dfs3(it, vis, adjT);
+            }
+        }
+    }
+
+    // Function to find number of strongly connected components
+    public int kosaraju(int V, List&lt;Integer&gt;[] adj) {
+        int[] vis = new int[V];
+        Stack&lt;Integer&gt; st = new Stack&lt;&gt;();
+
+        // Step 1: Do DFS to fill stack
+        for (int i = 0; i &lt; V; i++) {
+            if (vis[i] == 0) {
+                dfs(i, vis, adj, st);
+            }
+        }
+
+        // Step 2: Build transpose graph
+        List&lt;Integer&gt;[] adjT = new ArrayList[V];
+        for (int i = 0; i &lt; V; i++) {
+            adjT[i] = new ArrayList&lt;&gt;();
+        }
+        Arrays.fill(vis, 0);
+
+        for (int i = 0; i &lt; V; i++) {
+            for (int it : adj[i]) {
+                adjT[it].add(i);
+            }
+        }
+
+        // Step 3: Process stack to count SCCs
+        int scc = 0;
+        while (!st.isEmpty()) {
+            int node = st.pop();
+            if (vis[node] == 0) {
+                scc++;
+                dfs3(node, vis, adjT);
+            }
+        }
+        return scc;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        int n = 5;
+        int[][] edges = {
+            {1, 0}, {0, 2},
+            {2, 1}, {0, 3},
+            {3, 4}
+        };
+
+        List&lt;Integer&gt;[] adj = new ArrayList[n];
+        for (int i = 0; i &lt; n; i++) adj[i] = new ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; edges.length; i++) {
+            adj[edges[i][0]].add(edges[i][1]);
+        }
+
+        Solution obj = new Solution();
+        int ans = obj.kosaraju(n, adj);
+        System.out.println("The number of strongly connected components is: " + ans);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Step 1: Perform DFS and store nodes in stack by finishing time
+    def dfs(self, node, vis, adj, st):
+        vis[node] = 1
+        for it in adj[node]:
+            if not vis[it]:
+                self.dfs(it, vis, adj, st)
+        st.append(node)
+
+    # Step 2: Perform DFS on transposed graph
+    def dfs3(self, node, vis, adjT):
+        vis[node] = 1
+        for it in adjT[node]:
+            if not vis[it]:
+                self.dfs3(it, vis, adjT)
+
+    # Function to find number of strongly connected components
+    def kosaraju(self, V, adj):
+        vis = [0] * V
+        st = []
+
+        # Step 1: Do DFS to fill stack
+        for i in range(V):
+            if not vis[i]:
+                self.dfs(i, vis, adj, st)
+
+        # Step 2: Build transpose graph
+        adjT = [[] for _ in range(V)]
+        vis = [0] * V
+        for i in range(V):
+            for it in adj[i]:
+                adjT[it].append(i)
+
+        # Step 3: Process stack to count SCCs
+        scc = 0
+        while st:
+            node = st.pop()
+            if not vis[node]:
+                scc += 1
+                self.dfs3(node, vis, adjT)
+
+        return scc
+
+
+if __name__ == "__main__":
+    n = 5
+    edges = [
+        [1, 0], [0, 2],
+        [2, 1], [0, 3],
+        [3, 4]
+    ]
+
+    adj = [[] for _ in range(n)]
+    for u, v in edges:
+        adj[u].append(v)
+
+    obj = Solution()
+    ans = obj.kosaraju(n, adj)
+    print("The number of strongly connected components is:", ans)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Step 1: Perform DFS and store nodes in stack by finishing time
+    dfs(node, vis, adj, st) {
+        vis[node] = 1;
+        for (let it of adj[node]) {
+            if (!vis[it]) {
+                this.dfs(it, vis, adj, st);
+            }
+        }
+        st.push(node);
+    }
+
+    // Step 2: Perform DFS on transposed graph
+    dfs3(node, vis, adjT) {
+        vis[node] = 1;
+        for (let it of adjT[node]) {
+            if (!vis[it]) {
+                this.dfs3(it, vis, adjT);
+            }
+        }
+    }
+
+    // Function to find number of strongly connected components
+    kosaraju(V, adj) {
+        let vis = new Array(V).fill(0);
+        let st = [];
+
+        // Step 1: Do DFS to fill stack
+        for (let i = 0; i &lt; V; i++) {
+            if (!vis[i]) {
+                this.dfs(i, vis, adj, st);
+            }
+        }
+
+        // Step 2: Build transpose graph
+        let adjT = Array.from({ length: V }, () =&gt; []);
+        vis.fill(0);
+        for (let i = 0; i &lt; V; i++) {
+            for (let it of adj[i]) {
+                adjT[it].push(i);
+            }
+        }
+
+        // Step 3: Process stack to count SCCs
+        let scc = 0;
+        while (st.length &gt; 0) {
+            let node = st.pop();
+            if (!vis[node]) {
+                scc++;
+                this.dfs3(node, vis, adjT);
+            }
+        }
+        return scc;
+    }
+}
+
+// Driver code
+(function main() {
+    let n = 5;
+    let edges = [
+        [1, 0], [0, 2],
+        [2, 1], [0, 3],
+        [3, 4]
+    ];
+
+    let adj = Array.from({ length: n }, () =&gt; []);
+    for (let [u, v] of edges) {
+        adj[u].push(v);
+    }
+
+    let obj = new Solution();
+    let ans = obj.kosaraju(n, adj);
+    console.log("The number of strongly connected components is:", ans);
+})();
+</code></pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+</summary>
+<p>
+</p><p><strong>Time Complexity:</strong> O(V + E), since each node and edge is visited at most twice
+                        (once in the original graph, once in the transposed graph).</p>
+<p><strong>Space Complexity:</strong> O(V + E), due to the adjacency list, visited array, and
+                        recursion stack.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

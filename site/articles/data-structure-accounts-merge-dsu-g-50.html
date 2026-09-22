@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Accounts Merge - DSU: G-50</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Accounts Merge - DSU: G-50</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/accounts-merge-dsu-g-50/</code></div>
+  <p><strong>Problem Statement: </strong>Merge accounts that share common emails and return each user’s name followed by their sorted, unique emails.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input: N = 4
+accounts [ ] =
+[["John","johnsmith@mail.com","john_newyork@mail.com"],
+["John","johnsmith@mail.com","john00@mail.com"],
+"Mary","mary@mail.com"]
+["John","johnnybravo@mail.com"]]
+<p>Output: [["John","john00@mail.com","john_newyork@mail.com", "johnsmith@mail.com"],
+["Mary","mary@mail.com"],
+["John","johnnybravo@mail.com"]]</p>
+Explanation: The first and the second John are the same person as they have a common email. But the third Mary and fourth John are not the same as they do not have any common email.  The result can be in any order but the emails must be in sorted order.
+
+Example 2:
+Input: N = 6
+accounts [ ] =
+[["John","j1@com","j2@com","j3@com"],
+["John","j4@com"],
+["Raj",”r1@com”, “r2@com”],
+["John","j1@com","j5@com"],
+["Raj",”r2@com”, “r3@com”],
+["Mary","m1@com"]]
+<p>Output: [["John","j1@com","j2@com","j3@com","j5@com"],
+["John","j4@com"],
+["Raj",”r1@com”, “r2@com”,  “r3@com”],
+["Mary","m1@com"]]</p>
+Explanation: The first and the fourth John are the same person here as they have a common email. And the third and the fifth Raj are also the same person. So, the same accounts are merged.
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/accounts-merge" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                Approach 
+            </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Algorithm 
+                    </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+Here we will perform the disjoint set operations on the indices of the accounts considering them as the nodes. 
+As in each account, the first element is the name, we will start iterating from the second element in each account to visit only the emails sequentially.
+The algorithm steps are the following:
+
+<ul>
+<li>Here we will create a map data structure. Then we will store each email with the respective index of the account(the email belongs to) in that map data structure.</li>
+<li>While doing so, if we encounter an email again(i.e. If any index is previously assigned for the email), we will perform union(either unionBySize() or unionByRank()) of the current index and the previously assigned index.</li>
+<li>After completing step 2, now it’s time to merge the accounts. For merging, we will iterate over all the emails individually and find the ultimate parent(using the findUPar() method) of the assigned index of every email. Then we will add the email of the current account to the index(account index) that is the ultimate parent. Thus the accounts will be merged.</li>
+<li>Finally, we will sort the emails for every account separately and store the final results in the answer array accordingly.</li>
+<li>If you wish to see the dry run of the above approach, you can watch the video attached to this article.</li>
+</ul>
+</div>
+<p><img height="457" loading="lazy" src="../assets/img/0bafb2d718e5bb23.png" width="481"/></p>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Disjoint Set (Union-Find) implementation
+class DisjointSet {
+    vector&lt;int&gt; rank, parent, size;
+public:
+    // Constructor to initialize DSU
+    DisjointSet(int n) {
+        rank.resize(n + 1, 0);
+        parent.resize(n + 1);
+        size.resize(n + 1);
+        // Initialize every node
+        for (int i = 0; i &lt;= n; i++) {
+            parent[i] = i;
+            size[i] = 1;
+        }
+    }
+
+    // Function to find ultimate parent with path compression
+    int findUPar(int node) {
+        if (node == parent[node])
+            return node;
+        parent[node] = findUPar(parent[node]);
+        return parent[node];
+    }
+
+    // Function to perform union by rank
+    void unionByRank(int u, int v) {
+        int ulp_u = findUPar(u);
+        int ulp_v = findUPar(v);
+
+        if (ulp_u == ulp_v) return;
+
+        if (rank[ulp_u] &lt; rank[ulp_v]) {
+            parent[ulp_u] = ulp_v;
+        }
+        else if (rank[ulp_v] &lt; rank[ulp_u]) {
+            parent[ulp_v] = ulp_u;
+        }
+        else {
+            parent[ulp_v] = ulp_u;
+            rank[ulp_u]++;
+        }
+    }
+
+    // Function to perform union by size
+    void unionBySize(int u, int v) {
+        int ulp_u = findUPar(u);
+        int ulp_v = findUPar(v);
+
+        if (ulp_u == ulp_v) return;
+
+        if (size[ulp_u] &lt; size[ulp_v]) {
+            parent[ulp_u] = ulp_v;
+            size[ulp_v] += size[ulp_u];
+        }
+        else {
+            parent[ulp_v] = ulp_u;
+            size[ulp_u] += size[ulp_v];
+        }
+    }
+};
+
+// Solution class to merge accounts
+class Solution {
+public:
+    // Function to merge accounts with common emails
+    vector&lt;vector&lt;string&gt;&gt; accountsMerge(
+        vector&lt;vector&lt;string&gt;&gt; &amp;details) 
+    {
+        // Number of accounts
+        int n = details.size();
+
+        // Create Disjoint Set
+        DisjointSet ds(n);
+
+        // Map to store email -&gt; account index
+        unordered_map&lt;string, int&gt; mapMailNode;
+
+        // Step 1: Union accounts having common emails
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = 1; j &lt; details[i].size(); j++) {
+                string mail = details[i][j];
+
+                if (mapMailNode.find(mail) == mapMailNode.end()) {
+                    mapMailNode[mail] = i;
+                }
+                else {
+                    ds.unionBySize(i, mapMailNode[mail]);
+                }
+            }
+        }
+
+        // Step 2: Group emails under ultimate parent
+        vector&lt;string&gt; mergedMail[n];
+        for (auto it : mapMailNode) {
+            string mail = it.first;
+            int node = ds.findUPar(it.second);
+            mergedMail[node].push_back(mail);
+        }
+
+        // Step 3: Prepare final merged result
+        vector&lt;vector&lt;string&gt;&gt; ans;
+        for (int i = 0; i &lt; n; i++) {
+            if (mergedMail[i].empty()) continue;
+
+            sort(mergedMail[i].begin(), mergedMail[i].end());
+
+            vector&lt;string&gt; temp;
+            temp.push_back(details[i][0]);
+
+            for (auto &amp;mail : mergedMail[i]) {
+                temp.push_back(mail);
+            }
+            ans.push_back(temp);
+        }
+
+        // Sort final answer
+        sort(ans.begin(), ans.end());
+        return ans;
+    }
+};
+
+// Driver function
+int main() {
+    // Input accounts
+    vector&lt;vector&lt;string&gt;&gt; accounts = {
+        {"John", "j1@com", "j2@com", "j3@com"},
+        {"John", "j4@com"},
+        {"Raj", "r1@com", "r2@com"},
+        {"John", "j1@com", "j5@com"},
+        {"Raj", "r2@com", "r3@com"},
+        {"Mary", "m1@com"}
+    };
+
+    // Create Solution object
+    Solution obj;
+
+    // Call function
+    vector&lt;vector&lt;string&gt;&gt; ans = obj.accountsMerge(accounts);
+
+    // Print output
+    for (auto &amp;acc : ans) {
+        cout &lt;&lt; acc[0] &lt;&lt; ":";
+        for (int i = 1; i &lt; acc.size(); i++) {
+            cout &lt;&lt; acc[i] &lt;&lt; " ";
+        }
+        cout &lt;&lt; endl;
+    }
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Disjoint Set (Union-Find) implementation
+class DisjointSet {
+    int[] rank;
+    int[] parent;
+    int[] size;
+
+    // Constructor to initialize DSU
+    DisjointSet(int n) {
+        rank = new int[n + 1];
+        parent = new int[n + 1];
+        size = new int[n + 1];
+
+        // Initialize every node
+        for (int i = 0; i &lt;= n; i++) {
+            parent[i] = i;
+            size[i] = 1;
+        }
+    }
+
+    // Function to find ultimate parent with path compression
+    int findUPar(int node) {
+        if (node == parent[node])
+            return node;
+        parent[node] = findUPar(parent[node]);
+        return parent[node];
+    }
+
+    // Function to perform union by rank
+    void unionByRank(int u, int v) {
+        int ulp_u = findUPar(u);
+        int ulp_v = findUPar(v);
+
+        if (ulp_u == ulp_v) return;
+
+        if (rank[ulp_u] &lt; rank[ulp_v]) {
+            parent[ulp_u] = ulp_v;
+        }
+        else if (rank[ulp_v] &lt; rank[ulp_u]) {
+            parent[ulp_v] = ulp_u;
+        }
+        else {
+            parent[ulp_v] = ulp_u;
+            rank[ulp_u]++;
+        }
+    }
+
+    // Function to perform union by size
+    void unionBySize(int u, int v) {
+        int ulp_u = findUPar(u);
+        int ulp_v = findUPar(v);
+
+        if (ulp_u == ulp_v) return;
+
+        if (size[ulp_u] &lt; size[ulp_v]) {
+            parent[ulp_u] = ulp_v;
+            size[ulp_v] += size[ulp_u];
+        }
+        else {
+            parent[ulp_v] = ulp_u;
+            size[ulp_u] += size[ulp_v];
+        }
+    }
+}
+
+// Solution class to merge accounts
+class Solution {
+    // Function to merge accounts with common emails
+    public List&lt;List&lt;String&gt;&gt; accountsMerge(
+        List&lt;List&lt;String&gt;&gt; details) 
+    {
+        // Number of accounts
+        int n = details.size();
+
+        // Create Disjoint Set
+        DisjointSet ds = new DisjointSet(n);
+
+        // Map to store email -&gt; account index
+        Map&lt;String, Integer&gt; mapMailNode = new HashMap&lt;&gt;();
+
+        // Step 1: Union accounts having common emails
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = 1; j &lt; details.get(i).size(); j++) {
+                String mail = details.get(i).get(j);
+
+                if (!mapMailNode.containsKey(mail)) {
+                    mapMailNode.put(mail, i);
+                }
+                else {
+                    ds.unionBySize(i, mapMailNode.get(mail));
+                }
+            }
+        }
+
+        // Step 2: Group emails under ultimate parent
+        ArrayList&lt;String&gt;[] mergedMail = new ArrayList[n];
+        for (int i = 0; i &lt; n; i++) 
+            mergedMail[i] = new ArrayList&lt;&gt;();
+
+        for (Map.Entry&lt;String, Integer&gt; it : 
+             mapMailNode.entrySet()) 
+        {
+            String mail = it.getKey();
+            int node = ds.findUPar(it.getValue());
+            mergedMail[node].add(mail);
+        }
+
+        // Step 3: Prepare final merged result
+        List&lt;List&lt;String&gt;&gt; ans = new ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; n; i++) {
+            if (mergedMail[i].isEmpty()) continue;
+
+            Collections.sort(mergedMail[i]);
+
+            List&lt;String&gt; temp = new ArrayList&lt;&gt;();
+            temp.add(details.get(i).get(0));
+
+            for (String mail : mergedMail[i]) {
+                temp.add(mail);
+            }
+            ans.add(temp);
+        }
+
+        // Sort final answer
+        ans.sort((a, b) -&gt; a.get(0).compareTo(b.get(0)));
+        return ans;
+    }
+}
+
+// Driver class
+public class Main {
+    public static void main(String[] args) {
+        // Input accounts
+        List&lt;List&lt;String&gt;&gt; accounts = new ArrayList&lt;&gt;();
+        accounts.add(Arrays.asList("John", "j1@com", "j2@com", "j3@com"));
+        accounts.add(Arrays.asList("John", "j4@com"));
+        accounts.add(Arrays.asList("Raj", "r1@com", "r2@com"));
+        accounts.add(Arrays.asList("John", "j1@com", "j5@com"));
+        accounts.add(Arrays.asList("Raj", "r2@com", "r3@com"));
+        accounts.add(Arrays.asList("Mary", "m1@com"));
+
+        // Create Solution object
+        Solution obj = new Solution();
+
+        // Call function
+        List&lt;List&lt;String&gt;&gt; ans = obj.accountsMerge(accounts);
+
+        // Print output
+        for (List&lt;String&gt; acc : ans) {
+            System.out.print(acc.get(0) + ":");
+            for (int i = 1; i &lt; acc.size(); i++) {
+                System.out.print(acc.get(i) + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Disjoint Set (Union-Find) implementation
+class DisjointSet:
+    # Constructor to initialize DSU
+    def __init__(self, n):
+        self.rank = [0] * (n + 1)
+        self.parent = [i for i in range(n + 1)]
+        self.size = [1] * (n + 1)
+
+    # Function to find ultimate parent with path compression
+    def findUPar(self, node):
+        if node == self.parent[node]:
+            return node
+        self.parent[node] = self.findUPar(self.parent[node])
+        return self.parent[node]
+
+    # Function to perform union by rank
+    def unionByRank(self, u, v):
+        ulp_u = self.findUPar(u)
+        ulp_v = self.findUPar(v)
+
+        if ulp_u == ulp_v:
+            return
+
+        if self.rank[ulp_u] &lt; self.rank[ulp_v]:
+            self.parent[ulp_u] = ulp_v
+        elif self.rank[ulp_v] &lt; self.rank[ulp_u]:
+            self.parent[ulp_v] = ulp_u
+        else:
+            self.parent[ulp_v] = ulp_u
+            self.rank[ulp_u] += 1
+
+    # Function to perform union by size
+    def unionBySize(self, u, v):
+        ulp_u = self.findUPar(u)
+        ulp_v = self.findUPar(v)
+
+        if ulp_u == ulp_v:
+            return
+
+        if self.size[ulp_u] &lt; self.size[ulp_v]:
+            self.parent[ulp_u] = ulp_v
+            self.size[ulp_v] += self.size[ulp_u]
+        else:
+            self.parent[ulp_v] = ulp_u
+            self.size[ulp_u] += self.size[ulp_v]
+
+
+# Solution class to merge accounts
+class Solution:
+    # Function to merge accounts with common emails
+    def accountsMerge(self, details):
+        # Number of accounts
+        n = len(details)
+
+        # Create Disjoint Set
+        ds = DisjointSet(n)
+
+        # Map to store email -&gt; account index
+        mapMailNode = {}
+
+        # Step 1: Union accounts having common emails
+        for i in range(n):
+            for j in range(1, len(details[i])):
+                mail = details[i][j]
+
+                if mail not in mapMailNode:
+                    mapMailNode[mail] = i
+                else:
+                    ds.unionBySize(i, mapMailNode[mail])
+
+        # Step 2: Group emails under ultimate parent
+        mergedMail = [[] for _ in range(n)]
+        for mail, idx in mapMailNode.items():
+            node = ds.findUPar(idx)
+            mergedMail[node].append(mail)
+
+        # Step 3: Prepare final merged result
+        ans = []
+        for i in range(n):
+            if not mergedMail[i]:
+                continue
+
+            mergedMail[i].sort()
+            temp = [details[i][0]]
+
+            for mail in mergedMail[i]:
+                temp.append(mail)
+
+            ans.append(temp)
+
+        # Sort final answer
+        ans.sort()
+        return ans
+
+
+# Driver function
+def main():
+    # Input accounts
+    accounts = [
+        ["John", "j1@com", "j2@com", "j3@com"],
+        ["John", "j4@com"],
+        ["Raj", "r1@com", "r2@com"],
+        ["John", "j1@com", "j5@com"],
+        ["Raj", "r2@com", "r3@com"],
+        ["Mary", "m1@com"]
+    ]
+
+    # Create Solution object
+    obj = Solution()
+
+    # Call function
+    ans = obj.accountsMerge(accounts)
+
+    # Print output
+    for acc in ans:
+        print(acc[0] + ":", end="")
+        for mail in acc[1:]:
+            print(mail, end=" ")
+        print()
+
+
+if __name__ == "__main__":
+    main()
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Disjoint Set (Union-Find) implementation
+class DisjointSet {
+    // Constructor to initialize DSU
+    constructor(n) {
+        this.rank = new Array(n + 1).fill(0);
+        this.parent = new Array(n + 1);
+        this.size = new Array(n + 1);
+
+        // Initialize every node
+        for (let i = 0; i &lt;= n; i++) {
+            this.parent[i] = i;
+            this.size[i] = 1;
+        }
+    }
+
+    // Function to find ultimate parent with path compression
+    findUPar(node) {
+        if (node === this.parent[node]) 
+            return node;
+        this.parent[node] = this.findUPar(this.parent[node]);
+        return this.parent[node];
+    }
+
+    // Function to perform union by rank
+    unionByRank(u, v) {
+        let ulp_u = this.findUPar(u);
+        let ulp_v = this.findUPar(v);
+
+        if (ulp_u === ulp_v) return;
+
+        if (this.rank[ulp_u] &lt; this.rank[ulp_v]) {
+            this.parent[ulp_u] = ulp_v;
+        } 
+        else if (this.rank[ulp_v] &lt; this.rank[ulp_u]) {
+            this.parent[ulp_v] = ulp_u;
+        } 
+        else {
+            this.parent[ulp_v] = ulp_u;
+            this.rank[ulp_u]++;
+        }
+    }
+
+    // Function to perform union by size
+    unionBySize(u, v) {
+        let ulp_u = this.findUPar(u);
+        let ulp_v = this.findUPar(v);
+
+        if (ulp_u === ulp_v) return;
+
+        if (this.size[ulp_u] &lt; this.size[ulp_v]) {
+            this.parent[ulp_u] = ulp_v;
+            this.size[ulp_v] += this.size[ulp_u];
+        } 
+        else {
+            this.parent[ulp_v] = ulp_u;
+            this.size[ulp_u] += this.size[ulp_v];
+        }
+    }
+}
+
+// Solution class to merge accounts
+class Solution {
+    // Function to merge accounts with common emails
+    accountsMerge(details) {
+        // Number of accounts
+        let n = details.length;
+
+        // Create Disjoint Set
+        let ds = new DisjointSet(n);
+
+        // Map to store email -&gt; account index
+        let mapMailNode = new Map();
+
+        // Step 1: Union accounts having common emails
+        for (let i = 0; i &lt; n; i++) {
+            for (let j = 1; j &lt; details[i].length; j++) {
+                let mail = details[i][j];
+
+                if (!mapMailNode.has(mail)) {
+                    mapMailNode.set(mail, i);
+                } 
+                else {
+                    ds.unionBySize(i, mapMailNode.get(mail));
+                }
+            }
+        }
+
+        // Step 2: Group emails under ultimate parent
+        let mergedMail = Array.from({ length: n }, () =&gt; []);
+        for (let [mail, idx] of mapMailNode.entries()) {
+            let node = ds.findUPar(idx);
+            mergedMail[node].push(mail);
+        }
+
+        // Step 3: Prepare final merged result
+        let ans = [];
+        for (let i = 0; i &lt; n; i++) {
+            if (mergedMail[i].length === 0) continue;
+
+            mergedMail[i].sort();
+            let temp = [details[i][0]];
+
+            for (let mail of mergedMail[i]) {
+                temp.push(mail);
+            }
+            ans.push(temp);
+        }
+
+        // Sort final answer
+        ans.sort((a, b) =&gt; a[0].localeCompare(b[0]));
+        return ans;
+    }
+}
+
+// Driver function
+function main() {
+    // Input accounts
+    let accounts = [
+        ["John", "j1@com", "j2@com", "j3@com"],
+        ["John", "j4@com"],
+        ["Raj", "r1@com", "r2@com"],
+        ["John", "j1@com", "j5@com"],
+        ["Raj", "r2@com", "r3@com"],
+        ["Mary", "m1@com"]
+    ];
+
+    // Create Solution object
+    let obj = new Solution();
+
+    // Call function
+    let ans = obj.accountsMerge(accounts);
+
+    // Print output
+    for (let acc of ans) {
+        process.stdout.write(acc[0] + ":");
+        for (let i = 1; i &lt; acc.length; i++) {
+            process.stdout.write(acc[i] + " ");
+        }
+        console.log();
+    }
+}
+
+main();
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Complexity Analysis
+                    </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+<strong>Time Complexity: O(N+E) + O(E*4ɑ) + O(N*(ElogE + E))</strong> where N = no. of indices or nodes and E = no. of emails. The first term is for visiting all the emails. The second term is for merging the accounts. And the third term is for sorting the emails and storing them in the answer array.<br/> <br/>
+<strong>Space Complexity: O(N)+ O(N) +O(2N) ~ O(N)</strong> where N = no. of nodes/indices. The first and second space is for the ‘mergedMail’ and the ‘ans’ array. The last term is for the parent and size array used inside the Disjoint set data structure.
+                </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

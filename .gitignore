@@ -1,0 +1,4 @@
+# Raw HTTP responses - large, regenerable, and not part of the archive.
+.cache/
+__pycache__/
+*.pyc

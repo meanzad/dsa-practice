@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Longest Divisible Subset | (DP-44)</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Longest Divisible Subset | (DP-44)</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/longest-divisible-subset-dp-44/</code></div>
+  <p><strong>Problem Statement: </strong>
+Given an array nums of positive integers, the task is to find the largest subset such that every pair (a, b) of elements in the subset satisfies a % b == 0 or b % a == 0.
+<br/><br/>
+Return the subset in any order. If there are multiple solutions, return any one of them.
+<br/><br/>
+<strong>Note:</strong> As there can be multiple correct answers, the compiler returns 1 if the answer is valid, else 0.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>  
+<strong>Input:</strong> nums = [3, 5, 10, 20]  
+<strong>Output:</strong> [5, 10, 20]  
+<strong>Explanation:</strong> The subset [5, 10, 20] satisfies the divisibility condition:  
+- 10 % 5 == 0  
+- 20 % 10 == 0  
+
+<strong>Example 2:</strong>  
+<strong>Input:</strong> nums = [16, 8, 2, 4, 32]  
+<strong>Output:</strong> [2, 4, 8, 16, 32]  
+<strong>Explanation:</strong> The entire array forms a divisible subset since:
+- 32 % 16 == 0  
+- 16 % 8 == 0  
+- 8 % 4 == 0  
+- 4 % 2 == 0</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/largest-divisible-subset" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Sort the input array in ascending order to transform the problem into finding the longest divisible chain.</li>
+<li>Initialize two arrays: <code>dp[i]</code> to store the length of the longest divisible subset ending at index <code>i</code> (initially set to 1), and <code>parent[i]</code> to store the previous element in the optimal subset (initially set to <code>i</code>).</li>
+<li>For each element, check all previous elements. If the current element is divisible by a previous element and forms a longer subset, update <code>dp[i]</code> and <code>parent[i]</code>.</li>
+<li>While filling the DP table, keep track of the maximum length and its ending index (<code>lastIndex</code>).</li>
+<li>Backtrack from <code>lastIndex</code> using the <code>parent</code> array until reaching an element whose parent is itself.</li>
+<li>The backtracked elements form the longest divisible subset in correct order, which can be returned as the result.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/81bc8415f46ac068.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/ee865142799f8a5c.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/ad66492d570dd765.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/a3b3fc6683794de8.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/bc1fbf06ecb7aa8f.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/d459adb7f8f69b65.png"/></div><div class="carousel-image"><img alt="Image 7" loading="lazy" src="../assets/img/f0f5659c573ab45d.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/81bc8415f46ac068.png"/><img alt="Image 2" loading="lazy" src="../assets/img/ee865142799f8a5c.png"/><img alt="Image 3" loading="lazy" src="../assets/img/ad66492d570dd765.png"/><img alt="Image 4" loading="lazy" src="../assets/img/a3b3fc6683794de8.png"/><img alt="Image 5" loading="lazy" src="../assets/img/bc1fbf06ecb7aa8f.png"/><img alt="Image 6" loading="lazy" src="../assets/img/d459adb7f8f69b65.png"/><img alt="Image 7" loading="lazy" src="../assets/img/f0f5659c573ab45d.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find the largest divisble subset
+    vector&lt;int&gt; largestDivisibleSubset(vector&lt;int&gt; nums) {
+        int n = nums.size(); // Size of the array 
+
+        sort(nums.begin(), nums.end());
+
+        vector&lt;int&gt; ans; // To store the LDS
+        vector&lt;int&gt; dp(n, 1); // DP array 
+        vector&lt;int&gt; parent(n); // Array to keep record of the parent
+
+        // To store the index of last element in the LDS
+        int lastIndex = 0; 
+
+        // To store the length of LDS
+        int maxLen = 0;
+
+        // Computing the DP array 
+        for(int i = 0; i &lt; n; i++) {
+            parent[i] = i; // Assign the parent to itself
+
+            // For each previous index
+            for(int prevInd = 0; prevInd &lt; i; prevInd++) {
+                
+                // If the element at index i can be included in the LDS ending at index j
+                if(nums[i] % nums[prevInd] == 0 &amp;&amp; dp[i] &lt; dp[prevInd] + 1) {
+
+                    dp[i] = dp[prevInd] + 1; // Update the DP value
+                    parent[i] = prevInd; // Store the parent
+                }
+            }
+
+            // If a longer LDS is found, update the values
+            if(dp[i] &gt; maxLen) {
+                lastIndex = i;
+                maxLen = dp[i];
+            }
+        }
+
+        // Backtracking
+        int i = lastIndex;
+
+        // Until we reach an index which is its own parent
+        while(parent[i] != i) {
+            ans.push_back(nums[i]); // Add the element at current index
+            i = parent[i]; 
+        }
+        ans.push_back(nums[i]); // Adding the last element 
+
+        // Return the computed result
+        return ans;
+    }  
+};
+
+
+int main() {
+    vector&lt;int&gt; nums = {3, 5, 10, 20};
+    
+    // Creating an object of Solution class
+    Solution sol;
+    vector&lt;int&gt; ans = sol.largestDivisibleSubset(nums);
+    
+    cout &lt;&lt; "The largest divisible subset is: ";
+    for(int x : ans) cout &lt;&lt; x &lt;&lt; " ";
+    
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to find the largest divisble subset
+    public List&lt;Integer&gt; largestDivisibleSubset(int[] nums) {
+        int n = nums.length; // Size of the array 
+        
+        Arrays.sort(nums);
+        
+        List&lt;Integer&gt; ans = new ArrayList&lt;&gt;(); // To store the LDS
+        
+        int[] dp = new int[n]; // DP array 
+        Arrays.fill(dp, 1);
+        
+        int[] parent = new int[n]; // Array to keep record of the parent
+        
+        // To store the index of last element in the LDS
+        int lastIndex = 0; 
+        
+        // To store the length of LDS
+        int maxLen = 0;
+        
+        // Computing the DP array 
+        for(int i = 0; i &lt; n; i++) {
+            parent[i] = i; // Assign the parent to itself
+            
+            // For each previous index
+            for(int prevInd = 0; prevInd &lt; i; prevInd++) {
+                
+                // If the element at index i can be included in the LDS ending at index j
+                if(nums[i] % nums[prevInd] == 0 &amp;&amp; dp[i] &lt; dp[prevInd] + 1) {
+                    dp[i] = dp[prevInd] + 1; // Update the DP value
+                    parent[i] = prevInd; // Store the parent
+                }
+            }
+            // If a longer LDS is found, update the values
+            if(dp[i] &gt; maxLen) {
+                lastIndex = i;
+                maxLen = dp[i];
+            }
+        }
+        // Backtracking
+        int i = lastIndex;
+        
+        // Until we reach an index which is its own parent
+        while(parent[i] != i) {
+            ans.add(nums[i]); // Add the element at current index
+            i = parent[i]; 
+        }
+        ans.add(nums[i]); // Adding the last element 
+        
+        // Return the computed result
+        return ans;
+    }  
+}
+
+class Main {
+    public static void main(String[] args) {
+        int[] nums = {3, 5, 10, 20};
+        
+        // Creating an object of Solution class
+        Solution sol = new Solution();
+        List&lt;Integer&gt; ans = sol.largestDivisibleSubset(nums);
+        
+        System.out.print("The largest divisible subset is: ");
+        for(int x : ans) System.out.print(x + " ");
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to find the largest divisble subset
+    def largestDivisibleSubset(self, nums):
+        n = len(nums)  # Size of the array 
+        
+        nums.sort()
+        
+        ans = []  # To store the LDS
+        
+        dp = [1] * n  # DP array 
+        parent = [0] * n  # Array to keep record of the parent
+        
+        # To store the index of last element in the LDS
+        lastIndex = 0
+        
+        # To store the length of LDS
+        maxLen = 0
+        
+        # Computing the DP array 
+        for i in range(n):
+            parent[i] = i  # Assign the parent to itself
+            
+            # For each previous index
+            for prevInd in range(i):
+                
+                # If the element at index i can be included in the LDS ending at index j
+                if nums[i] % nums[prevInd] == 0 and dp[i] &lt; dp[prevInd] + 1:
+                    dp[i] = dp[prevInd] + 1  # Update the DP value
+                    parent[i] = prevInd  # Store the parent
+            
+            # If a longer LDS is found, update the values
+            if dp[i] &gt; maxLen:
+                lastIndex = i
+                maxLen = dp[i]
+        
+        # Backtracking
+        i = lastIndex
+        
+        # Until we reach an index which is its own parent
+        while parent[i] != i:
+            ans.append(nums[i])  # Add the element at current index
+            i = parent[i]
+        
+        ans.append(nums[i])  # Adding the last element 
+        
+        # Return the computed result
+        return ans
+
+if __name__ == "__main__":
+    nums = [3, 5, 10, 20]
+    
+    # Creating an object of Solution class
+    sol = Solution()
+    ans = sol.largestDivisibleSubset(nums)
+    
+    print("The largest divisible subset is: ", end="")
+    for x in ans:
+        print(x, end=" ")</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find the largest divisble subset
+    largestDivisibleSubset(nums) {
+        let n = nums.length; // Size of the array 
+        
+        nums.sort((a, b) =&gt; a - b);
+        
+        let ans = []; // To store the LDS
+        
+        let dp = new Array(n).fill(1); // DP array 
+        let parent = new Array(n); // Array to keep record of the parent
+        
+        // To store the index of last element in the LDS
+        let lastIndex = 0; 
+        
+        // To store the length of LDS
+        let maxLen = 0;
+        
+        // Computing the DP array 
+        for(let i = 0; i &lt; n; i++) {
+            parent[i] = i; // Assign the parent to itself
+            
+            // For each previous index
+            for(let prevInd = 0; prevInd &lt; i; prevInd++) {
+                
+                // If the element at index i can be included in the LDS ending at index j
+                if(nums[i] % nums[prevInd] === 0 &amp;&amp; dp[i] &lt; dp[prevInd] + 1) {
+                    dp[i] = dp[prevInd] + 1; // Update the DP value
+                    parent[i] = prevInd; // Store the parent
+                }
+            }
+            // If a longer LDS is found, update the values
+            if(dp[i] &gt; maxLen) {
+                lastIndex = i;
+                maxLen = dp[i];
+            }
+        }
+        // Backtracking
+        let i = lastIndex;
+        
+        // Until we reach an index which is its own parent
+        while(parent[i] !== i) {
+            ans.push(nums[i]); // Add the element at current index
+            i = parent[i]; 
+        }
+        
+        ans.push(nums[i]); // Adding the last element 
+        
+        // Return the computed result
+        return ans;
+    }  
+}
+
+function main() {
+    let nums = [3, 5, 10, 20];
+    
+    // Creating an object of Solution class
+    let sol = new Solution();
+    let ans = sol.largestDivisibleSubset(nums);
+    
+    process.stdout.write("The largest divisible subset is: ");
+    for(let x of ans) process.stdout.write(x + " ");
+}
+
+main();</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(n^2)</strong>, where n is the number of elements in the input array. This is due to the nested loops used to fill the DP and parent arrays.
+                        <br/><br/>
+<strong>Space Complexity: O(n)</strong>, where n is the number of elements in the input array. This is due to the storage of the DP and parent arrays.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

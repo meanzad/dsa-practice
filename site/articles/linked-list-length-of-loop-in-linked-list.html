@@ -1,0 +1,928 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Length of Loop in Linked List</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Length of Loop in Linked List</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/linked-list/length-of-loop-in-linked-list</code></div>
+  <p><strong>Problem Statement: </strong>Given the head of a linked list, determine the length of a loop present in the linked list. If there's no loop present, return 0.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: </span>
+<figure class="wp-block-image size-large is-resized"><img alt="" class="wp-image-13003" height="269" loading="lazy" src="../assets/img/fa15a10956bd2d35.png" width="512"/></figure>
+<span>Output: 3</span>
+<span>Explanation: A cycle exists in the linked list starting at node 3 -&gt; 4 -&gt; 5 and then back to 3. There are 3 nodes present in this cycle.</span>
+<p></p>
+<span>Input: </span>
+<figure class="wp-block-image size-large is-resized"><img alt="" class="wp-image-13004" height="134" loading="lazy" src="../assets/img/4d360940096dbccd.png" width="512"/></figure>
+<span>Output: 0</span>
+<span>Explanation: The linked list is linear and does not have a loop hence return 0.</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+
+
+    It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Brute Force Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+      While traversing the linked list, employ a timer against each node to keep track of the number of nodes you've visited before it. Once a previously visited node is encountered again, the length of the loop can be determined by subtracting the timer values at the two instances of visiting that particular node.<br/><br/>
+      It's important to keep track of nodes and the timer value associated with them. This can be implemented using a hashmap with nodes as the key and the timer as the value.
+      <figure class="wp-block-image size-large is-resized"><img alt="" class="wp-image-13005" height="512" loading="lazy" src="../assets/img/c9d1dd1cb565ac50.png" width="768"/></figure>
+<ul>
+<li> Initialize a temporary pointer to head which will be used to traverse the list. While traversing, keep track of the Visited nodes and the timer value associated in the map data structure. </li>
+<li>Continue traversing till a node that has already been visited is found. The difference between its timer value in the hashmap and the current timers value will be the length of loop in the linked list. </li>
+<li>If the traversal is completed, and we reach the last point of the linked list which is null, it means there was no loop, hence we return 0.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/6bd655734c1114a3.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/3f31cef64addcb9c.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/2077884b89303b1a.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/c8d7df079418ae4a.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/cc177a699feaaab4.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/b02415f0aa62769b.png"/></div><div class="carousel-image"><img alt="Image 7" loading="lazy" src="../assets/img/5ef7de4448843c51.png"/></div><div class="carousel-image"><img alt="Image 8" loading="lazy" src="../assets/img/a2f5dec2a8ecff76.png"/></div><div class="carousel-image"><img alt="Image 9" loading="lazy" src="../assets/img/a11ce388afcb5c5c.png"/></div><div class="carousel-image"><img alt="Image 10" loading="lazy" src="../assets/img/943beedd85799d94.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/6bd655734c1114a3.png"/><img alt="Image 2" loading="lazy" src="../assets/img/3f31cef64addcb9c.png"/><img alt="Image 3" loading="lazy" src="../assets/img/2077884b89303b1a.png"/><img alt="Image 4" loading="lazy" src="../assets/img/c8d7df079418ae4a.png"/><img alt="Image 5" loading="lazy" src="../assets/img/cc177a699feaaab4.png"/><img alt="Image 6" loading="lazy" src="../assets/img/b02415f0aa62769b.png"/><img alt="Image 7" loading="lazy" src="../assets/img/5ef7de4448843c51.png"/><img alt="Image 8" loading="lazy" src="../assets/img/a2f5dec2a8ecff76.png"/><img alt="Image 9" loading="lazy" src="../assets/img/a11ce388afcb5c5c.png"/><img alt="Image 10" loading="lazy" src="../assets/img/943beedd85799d94.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Node class represents a node in a linked list
+class Node {
+public:
+    // Data stored in the node
+    int data;
+
+    // Pointer to the next node
+    Node* next;
+
+    // Constructor with both data and next node
+    Node(int data1, Node* next1) {
+        data = data1;
+        next = next1;
+    }
+
+    // Constructor with only data
+    Node(int data1) {
+        data = data1;
+        next = nullptr;
+    }
+};
+
+// Solution class containing the loop length function
+class Solution {
+public:
+    // Function to return the length of loop using hashing
+    int lengthOfLoop(Node* head) {
+        // Hashmap to store visited nodes and their timer values
+        unordered_map&lt;Node*, int&gt; visitedNodes;
+
+        // Pointer to traverse the linked list
+        Node* temp = head;
+
+        // Timer to track visited nodes
+        int timer = 0;
+
+        // Traverse the linked list till temp reaches nullptr
+        while (temp != NULL) {
+            // If revisiting a node, return the difference of timer values
+            if (visitedNodes.find(temp) != visitedNodes.end()) {
+                // Calculate the length of the loop
+                int loopLength = timer - visitedNodes[temp];
+
+                // Return the length of the loop
+                return loopLength;
+            }
+
+            // Store the current node and its timer value
+            visitedNodes[temp] = timer;
+
+            // Move to the next node
+            temp = temp-&gt;next;
+
+            // Increment the timer
+            timer++;
+        }
+
+        // If traversal is completed and we reach the end of the list
+        // means there is no loop
+        return 0;
+    }
+};
+
+// Main driver function
+int main() {
+    // Creating a sample linked list with a loop
+    Node* head = new Node(1);
+    Node* second = new Node(2);
+    Node* third = new Node(3);
+    Node* fourth = new Node(4);
+    Node* fifth = new Node(5);
+
+    // Linking the nodes
+    head-&gt;next = second;
+    second-&gt;next = third;
+    third-&gt;next = fourth;
+    fourth-&gt;next = fifth;
+
+    // Creating a loop from fifth to second
+    fifth-&gt;next = second;
+
+    // Creating a Solution object
+    Solution obj;
+
+    // Getting the loop length
+    int loopLength = obj.lengthOfLoop(head);
+
+    // Printing the result
+    if (loopLength &gt; 0) {
+        cout &lt;&lt; "Length of the loop: "
+             &lt;&lt; loopLength &lt;&lt; endl;
+    } else {
+        cout &lt;&lt; "No loop found in the linked list."
+             &lt;&lt; endl;
+    }
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Node class represents a node in a linked list
+class Node {
+    // Data stored in the node
+    int data;
+
+    // Pointer to the next node
+    Node next;
+
+    // Constructor with both data and next node
+    Node(int data1, Node next1) {
+        data = data1;
+        next = next1;
+    }
+
+    // Constructor with only data
+    Node(int data1) {
+        data = data1;
+        next = null;
+    }
+}
+
+// Solution class containing the loop length function
+class Solution {
+    // Function to return the length of loop using hashing
+    public int lengthOfLoop(Node head) {
+        // Hashmap to store visited nodes and their timer values
+        HashMap&lt;Node, Integer&gt; visitedNodes = new HashMap&lt;&gt;();
+
+        // Pointer to traverse the linked list
+        Node temp = head;
+
+        // Timer to track visited nodes
+        int timer = 0;
+
+        // Traverse the linked list till temp reaches null
+        while (temp != null) {
+            // If revisiting a node, return the difference of timer values
+            if (visitedNodes.containsKey(temp)) {
+                // Calculate the length of the loop
+                int loopLength = timer - visitedNodes.get(temp);
+
+                // Return the length of the loop
+                return loopLength;
+            }
+
+            // Store the current node and its timer value
+            visitedNodes.put(temp, timer);
+
+            // Move to the next node
+            temp = temp.next;
+
+            // Increment the timer
+            timer++;
+        }
+
+        // If traversal is completed and we reach the end of the list
+        // means there is no loop
+        return 0;
+    }
+}
+
+// Main driver class
+public class Main {
+    public static void main(String[] args) {
+        // Creating a sample linked list with a loop
+        Node head = new Node(1);
+        Node second = new Node(2);
+        Node third = new Node(3);
+        Node fourth = new Node(4);
+        Node fifth = new Node(5);
+
+        // Linking the nodes
+        head.next = second;
+        second.next = third;
+        third.next = fourth;
+        fourth.next = fifth;
+
+        // Creating a loop from fifth to second
+        fifth.next = second;
+
+        // Creating a Solution object
+        Solution obj = new Solution();
+
+        // Getting the loop length
+        int loopLength = obj.lengthOfLoop(head);
+
+        // Printing the result
+        if (loopLength &gt; 0) {
+            System.out.println("Length of the loop: " + loopLength);
+        } else {
+            System.out.println("No loop found in the linked list.");
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Node class represents a node in a linked list
+class Node:
+    # Constructor with both data and next node
+    def __init__(self, data1, next1=None):
+        # Data stored in the node
+        self.data = data1
+        # Pointer to the next node
+        self.next = next1
+
+
+# Solution class containing the loop length function
+class Solution:
+    # Function to return the length of loop using hashing
+    def lengthOfLoop(self, head):
+        # Dictionary to store visited nodes and their timer values
+        visitedNodes = {}
+
+        # Pointer to traverse the linked list
+        temp = head
+
+        # Timer to track visited nodes
+        timer = 0
+
+        # Traverse the linked list till temp reaches None
+        while temp is not None:
+            # If revisiting a node, return the difference of timer values
+            if temp in visitedNodes:
+                # Calculate the length of the loop
+                loopLength = timer - visitedNodes[temp]
+
+                # Return the length of the loop
+                return loopLength
+
+            # Store the current node and its timer value
+            visitedNodes[temp] = timer
+
+            # Move to the next node
+            temp = temp.next
+
+            # Increment the timer
+            timer += 1
+
+        # If traversal is completed and we reach the end of the list
+        # means there is no loop
+        return 0
+
+
+# Main driver code
+if __name__ == "__main__":
+    # Creating a sample linked list with a loop
+    head = Node(1)
+    second = Node(2)
+    third = Node(3)
+    fourth = Node(4)
+    fifth = Node(5)
+
+    # Linking the nodes
+    head.next = second
+    second.next = third
+    third.next = fourth
+    fourth.next = fifth
+
+    # Creating a loop from fifth to second
+    fifth.next = second
+
+    # Creating a Solution object
+    obj = Solution()
+
+    # Getting the loop length
+    loopLength = obj.lengthOfLoop(head)
+
+    # Printing the result
+    if loopLength &gt; 0:
+        print("Length of the loop:", loopLength)
+    else:
+        print("No loop found in the linked list.")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Node class represents a node in a linked list
+class Node {
+    // Constructor with both data and next node
+    constructor(data1, next1 = null) {
+        // Data stored in the node
+        this.data = data1;
+        // Pointer to the next node
+        this.next = next1;
+    }
+}
+
+// Solution class containing the loop length function
+class Solution {
+    // Function to return the length of loop using hashing
+    lengthOfLoop(head) {
+        // Map to store visited nodes and their timer values
+        let visitedNodes = new Map();
+
+        // Pointer to traverse the linked list
+        let temp = head;
+
+        // Timer to track visited nodes
+        let timer = 0;
+
+        // Traverse the linked list till temp reaches null
+        while (temp !== null) {
+            // If revisiting a node, return the difference of timer values
+            if (visitedNodes.has(temp)) {
+                // Calculate the length of the loop
+                let loopLength = timer - visitedNodes.get(temp);
+
+                // Return the length of the loop
+                return loopLength;
+            }
+
+            // Store the current node and its timer value
+            visitedNodes.set(temp, timer);
+
+            // Move to the next node
+            temp = temp.next;
+
+            // Increment the timer
+            timer++;
+        }
+
+        // If traversal is completed and we reach the end of the list
+        // means there is no loop
+        return 0;
+    }
+}
+
+// Main driver code
+function main() {
+    // Creating a sample linked list with a loop
+    let head = new Node(1);
+    let second = new Node(2);
+    let third = new Node(3);
+    let fourth = new Node(4);
+    let fifth = new Node(5);
+
+    // Linking the nodes
+    head.next = second;
+    second.next = third;
+    third.next = fourth;
+    fourth.next = fifth;
+
+    // Creating a loop from fifth to second
+    fifth.next = second;
+
+    // Creating a Solution object
+    let obj = new Solution();
+
+    // Getting the loop length
+    let loopLength = obj.lengthOfLoop(head);
+
+    // Printing the result
+    if (loopLength &gt; 0) {
+        console.log("Length of the loop:", loopLength);
+    } else {
+        console.log("No loop found in the linked list.");
+    }
+}
+
+// Calling the main function
+main();
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+<strong>Time Complexity: O(N)</strong>, we traverse the entire linked list atleast once to find the length of the loop.<br/>
+<strong>Space Complexity: O(N) </strong>, we use a map to store the timers for the nodes in the linked list.<br/>
+<p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+      The previous method uses additional memory in order to find length of the loop. To enhance efficiency, the <a href="https://takeuforward.org/data-structure/find-middle-element-in-a-linked-list/" rel="noopener" target="_blank" title="">Tortoise and Hare Algorithm</a> is introduced as an optimization.
+      
+<ul>
+<li> Initialise two pointers, slow and fast, to the head of the linked list. Slow will advance one step at a time, while fast will advance two steps at a time. These pointers will move simultaneously. </li>
+<li>Traverse the linked list with the slow and fast pointers. While traversing, repeatedly move slow one step and fast two steps at a time. </li>
+<li>Continue this traversal until either fast (or next node of fast) reaches null or both the pointers, slow and fast, meet. </li>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/6f65f3e9ddf4bcc5.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/21f90ce9b3b52910.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/041d92fd17a1dc9c.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/5d2bfaef6345742c.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/f0d27e6e44b9cf39.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/768b4b16736f3e02.png"/></div><div class="carousel-image"><img alt="Image 7" loading="lazy" src="../assets/img/6dec2a1ef26d983f.png"/></div><div class="carousel-image"><img alt="Image 8" loading="lazy" src="../assets/img/442c9677a56846fb.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/6f65f3e9ddf4bcc5.png"/><img alt="Image 2" loading="lazy" src="../assets/img/21f90ce9b3b52910.png"/><img alt="Image 3" loading="lazy" src="../assets/img/041d92fd17a1dc9c.png"/><img alt="Image 4" loading="lazy" src="../assets/img/5d2bfaef6345742c.png"/><img alt="Image 5" loading="lazy" src="../assets/img/f0d27e6e44b9cf39.png"/><img alt="Image 6" loading="lazy" src="../assets/img/768b4b16736f3e02.png"/><img alt="Image 7" loading="lazy" src="../assets/img/6dec2a1ef26d983f.png"/><img alt="Image 8" loading="lazy" src="../assets/img/442c9677a56846fb.png"/></div></div>
+<li>This is the point where the slow and fast have met proving that there is a loop in the linked list. From here onwards we start counting for the length of this loop.</li>
+<li> Initialise a counter with zero and traverse the linked list using the slow pointer again while incrementing the counter with each node visited. </li>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/a0023ff7dd90873a.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/3418d556cf59a978.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/7626ae8eaba93e9c.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/435866bfe9f44a19.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/3862e9c6ca74e622.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/25f08ad23a001f92.png"/></div><div class="carousel-image"><img alt="Image 7" loading="lazy" src="../assets/img/f029424454d4afe8.png"/></div><div class="carousel-image"><img alt="Image 8" loading="lazy" src="../assets/img/f31904f90b71b234.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/a0023ff7dd90873a.png"/><img alt="Image 2" loading="lazy" src="../assets/img/3418d556cf59a978.png"/><img alt="Image 3" loading="lazy" src="../assets/img/7626ae8eaba93e9c.png"/><img alt="Image 4" loading="lazy" src="../assets/img/435866bfe9f44a19.png"/><img alt="Image 5" loading="lazy" src="../assets/img/3862e9c6ca74e622.png"/><img alt="Image 6" loading="lazy" src="../assets/img/25f08ad23a001f92.png"/><img alt="Image 7" loading="lazy" src="../assets/img/f029424454d4afe8.png"/><img alt="Image 8" loading="lazy" src="../assets/img/f31904f90b71b234.png"/></div></div> <li>As the slow pointer reaches back at the fast pointer, the value of the counter will represent the length of the loop.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Node class represents a node in a linked list
+class Node {
+public:
+    // Data stored in the node
+    int data;
+
+    // Pointer to the next node
+    Node* next;
+
+    // Constructor with both data and next node
+    Node(int data1, Node* next1) {
+        data = data1;
+        next = next1;
+    }
+
+    // Constructor with only data
+    Node(int data1) {
+        data = data1;
+        next = nullptr;
+    }
+};
+
+// Solution class containing the loop length function
+class Solution {
+public:
+    // Function to return the length of loop using Floyd's Algorithm
+    int lengthOfLoop(Node* head) {
+        // Initialize slow and fast pointers
+        Node* slow = head;
+        Node* fast = head;
+
+        // Loop until fast and slow meet
+        while (fast != NULL &amp;&amp; fast-&gt;next != NULL) {
+            // Move slow by one step
+            slow = slow-&gt;next;
+
+            // Move fast by two steps
+            fast = fast-&gt;next-&gt;next;
+
+            // If slow and fast meet, loop detected
+            if (slow == fast) {
+                // Count the length of the loop
+                return countLoopLength(slow);
+            }
+        }
+
+        // No loop found
+        return 0;
+    }
+
+    // Function to count loop length
+    int countLoopLength(Node* meetingPoint) {
+        // Start from meeting point
+        Node* temp = meetingPoint;
+        int length = 1;
+
+        // Move until we meet again
+        while (temp-&gt;next != meetingPoint) {
+            temp = temp-&gt;next;
+            length++;
+        }
+        return length;
+    }
+};
+
+// Main driver function
+int main() {
+    // Creating a sample linked list with a loop
+    Node* head = new Node(1);
+    Node* second = new Node(2);
+    Node* third = new Node(3);
+    Node* fourth = new Node(4);
+    Node* fifth = new Node(5);
+
+    // Linking the nodes
+    head-&gt;next = second;
+    second-&gt;next = third;
+    third-&gt;next = fourth;
+    fourth-&gt;next = fifth;
+
+    // Creating a loop from fifth to second
+    fifth-&gt;next = second;
+
+    // Creating a Solution object
+    Solution obj;
+
+    // Getting the loop length
+    int loopLength = obj.lengthOfLoop(head);
+
+    // Printing the result
+    if (loopLength &gt; 0) {
+        cout &lt;&lt; "Length of the loop: "
+             &lt;&lt; loopLength &lt;&lt; endl;
+    } else {
+        cout &lt;&lt; "No loop found in the linked list."
+             &lt;&lt; endl;
+    }
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">// Node class represents a node in a linked list
+class Node {
+    // Data stored in the node
+    int data;
+
+    // Pointer to the next node
+    Node next;
+
+    // Constructor with both data and next node
+    Node(int data1, Node next1) {
+        data = data1;
+        next = next1;
+    }
+
+    // Constructor with only data
+    Node(int data1) {
+        data = data1;
+        next = null;
+    }
+}
+
+// Solution class containing the loop length function
+class Solution {
+    // Function to return the length of loop using Floyd's Algorithm
+    public int lengthOfLoop(Node head) {
+        // Initialize slow and fast pointers
+        Node slow = head;
+        Node fast = head;
+
+        // Loop until fast and slow meet
+        while (fast != null &amp;&amp; fast.next != null) {
+            // Move slow by one step
+            slow = slow.next;
+
+            // Move fast by two steps
+            fast = fast.next.next;
+
+            // If slow and fast meet, loop detected
+            if (slow == fast) {
+                // Count the length of the loop
+                return countLoopLength(slow);
+            }
+        }
+
+        // No loop found
+        return 0;
+    }
+
+    // Function to count loop length
+    public int countLoopLength(Node meetingPoint) {
+        // Start from meeting point
+        Node temp = meetingPoint;
+        int length = 1;
+
+        // Move until we meet again
+        while (temp.next != meetingPoint) {
+            temp = temp.next;
+            length++;
+        }
+        return length;
+    }
+}
+
+// Main driver class
+public class Main {
+    public static void main(String[] args) {
+        // Creating a sample linked list with a loop
+        Node head = new Node(1);
+        Node second = new Node(2);
+        Node third = new Node(3);
+        Node fourth = new Node(4);
+        Node fifth = new Node(5);
+
+        // Linking the nodes
+        head.next = second;
+        second.next = third;
+        third.next = fourth;
+        fourth.next = fifth;
+
+        // Creating a loop from fifth to second
+        fifth.next = second;
+
+        // Creating a Solution object
+        Solution obj = new Solution();
+
+        // Getting the loop length
+        int loopLength = obj.lengthOfLoop(head);
+
+        // Printing the result
+        if (loopLength &gt; 0) {
+            System.out.println("Length of the loop: " + loopLength);
+        } else {
+            System.out.println("No loop found in the linked list.");
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Node class represents a node in a linked list
+class Node:
+    # Constructor with both data and next node
+    def __init__(self, data1, next1=None):
+        # Data stored in the node
+        self.data = data1
+        # Pointer to the next node
+        self.next = next1
+
+
+# Solution class containing the loop length function
+class Solution:
+    # Function to return the length of loop using Floyd's Algorithm
+    def lengthOfLoop(self, head):
+        # Initialize slow and fast pointers
+        slow = head
+        fast = head
+
+        # Loop until fast and slow meet
+        while fast is not None and fast.next is not None:
+            # Move slow by one step
+            slow = slow.next
+
+            # Move fast by two steps
+            fast = fast.next.next
+
+            # If slow and fast meet, loop detected
+            if slow == fast:
+                # Count the length of the loop
+                return self.countLoopLength(slow)
+
+        # No loop found
+        return 0
+
+    # Function to count loop length
+    def countLoopLength(self, meetingPoint):
+        # Start from meeting point
+        temp = meetingPoint
+        length = 1
+
+        # Move until we meet again
+        while temp.next != meetingPoint:
+            temp = temp.next
+            length += 1
+        return length
+
+
+# Main driver code
+if __name__ == "__main__":
+    # Creating a sample linked list with a loop
+    head = Node(1)
+    second = Node(2)
+    third = Node(3)
+    fourth = Node(4)
+    fifth = Node(5)
+
+    # Linking the nodes
+    head.next = second
+    second.next = third
+    third.next = fourth
+    fourth.next = fifth
+
+    # Creating a loop from fifth to second
+    fifth.next = second
+
+    # Creating a Solution object
+    obj = Solution()
+
+    # Getting the loop length
+    loopLength = obj.lengthOfLoop(head)
+
+    # Printing the result
+    if loopLength &gt; 0:
+        print("Length of the loop:", loopLength)
+    else:
+        print("No loop found in the linked list.")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Node class represents a node in a linked list
+class Node {
+    // Constructor with both data and next node
+    constructor(data1, next1 = null) {
+        // Data stored in the node
+        this.data = data1;
+        // Pointer to the next node
+        this.next = next1;
+    }
+}
+
+// Solution class containing the loop length function
+class Solution {
+    // Function to return the length of loop using Floyd's Algorithm
+    lengthOfLoop(head) {
+        // Initialize slow and fast pointers
+        let slow = head;
+        let fast = head;
+
+        // Loop until fast and slow meet
+        while (fast !== null &amp;&amp; fast.next !== null) {
+            // Move slow by one step
+            slow = slow.next;
+
+            // Move fast by two steps
+            fast = fast.next.next;
+
+            // If slow and fast meet, loop detected
+            if (slow === fast) {
+                // Count the length of the loop
+                return this.countLoopLength(slow);
+            }
+        }
+
+        // No loop found
+        return 0;
+    }
+
+    // Function to count loop length
+    countLoopLength(meetingPoint) {
+        // Start from meeting point
+        let temp = meetingPoint;
+        let length = 1;
+
+        // Move until we meet again
+        while (temp.next !== meetingPoint) {
+            temp = temp.next;
+            length++;
+        }
+        return length;
+    }
+}
+
+// Main driver code
+function main() {
+    // Creating a sample linked list with a loop
+    let head = new Node(1);
+    let second = new Node(2);
+    let third = new Node(3);
+    let fourth = new Node(4);
+    let fifth = new Node(5);
+
+    // Linking the nodes
+    head.next = second;
+    second.next = third;
+    third.next = fourth;
+    fourth.next = fifth;
+
+    // Creating a loop from fifth to second
+    fifth.next = second;
+
+    // Creating a Solution object
+    let obj = new Solution();
+
+    // Getting the loop length
+    let loopLength = obj.lengthOfLoop(head);
+
+    // Printing the result
+    if (loopLength &gt; 0) {
+        console.log("Length of the loop:", loopLength);
+    } else {
+        console.log("No loop found in the linked list.");
+    }
+}
+
+// Calling the main function
+main();
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+<strong>Time Complexity: O(N)</strong>, we traverse the entire linked list atleast once to find the length of the loop.<br/>
+<strong>Space Complexity: O(1) </strong>, we use a constant amount of additional space, regardless of the linked list's length to find the length of the loop.<br/>
+<p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

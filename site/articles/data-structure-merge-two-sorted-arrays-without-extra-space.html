@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Merge two Sorted Arrays Without Extra Space</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Merge two Sorted Arrays Without Extra Space</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/merge-two-sorted-arrays-without-extra-space/</code></div>
+  <p><strong>Problem Statement: </strong>Given two sorted integer arrays nums1 and nums2, merge both the arrays into a single array sorted in non-decreasing order.<br/>
+
+The final sorted array should be stored inside the array nums1 and it should be done in-place.<br/>
+ Array nums1 has a length of m + n, where the first m elements denote the elements of nums1 and rest are 0s whereas nums2 has a length of n.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input : nums1 = [-5, -2, 4, 5, 0, 0, 0], nums2 = [-3, 1, 8]</span>
+<span>Output : [-5, -3, -2, 1, 4, 5, 8]</span>
+<span>Explanation : The merged array is: [-5, -3, -2, 1, 4, 5, 8], where [-5, -2, 4, 5] are from nums1 and [-3, 1, 8] are from nums2</span>
+<p></p>
+<span>Input : nums1 = [0, 2, 7, 8, 0, 0, 0], nums2 = [-7, -3, -1]</span>
+<span>Output :  [-7, -3, -1, 0, 2, 7, 8]</span>
+<span>Explanation :  The merged array is: [-7, -3, -1, 0, 2, 7, 8], where [0, 2, 7, 8] are from nums1 and [-7, -3, -1] are from nums2</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/merge-two-sorted-arrays-without-extra-space" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+    We are given two sorted arrays nums1 and nums2 and nums1 has enough space at the end (filled with zeros) to accommodate all elements from nums2.
+    Now, if we try to insert elements from nums2 into nums1 from the beginning, we would need to shift elements in nums1 every time to make room which becomes time consuming and inefficient.<br/><br/>
+    Since both arrays are sorted in non-decreasing order, the largest elements will be at the end of each array. If we start comparing elements from the back of both arrays and place the largest one at the end of nums1, we won't need to shift anything.<br/><br/>
+    To efficiently insert elements at the end, we will use three pointers.
+    <ul>
+<li>Initialize three pointers: One points at the last valid index (excluding zeros) of nums1, one points at the last valid index of nums2 andd the last pointer points to last index of nums1.</li>
+<li>Compare the elements pointed by the first two pointers and whichever is larger, place it at the third pointer's index. </li>
+<li>Move the respective pointer one step back and also move the third pointer one step back.</li>
+<li>If there are any remaining elements in nums2, then copy them in nums1. If any elements remain in nums1, they’re already in place</li>
+<li>The result is a fully merged and sorted array stored in nums1 itself.</li>
+</ul>
+</div>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/971946b4472fd891.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/83b5a5d405faf86c.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/36f55b754850589a.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/e109281265031b00.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/2d691a878565b0ec.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/49c833b11fb9d256.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/971946b4472fd891.png"/><img alt="Image 2" loading="lazy" src="../assets/img/83b5a5d405faf86c.png"/><img alt="Image 3" loading="lazy" src="../assets/img/36f55b754850589a.png"/><img alt="Image 4" loading="lazy" src="../assets/img/e109281265031b00.png"/><img alt="Image 5" loading="lazy" src="../assets/img/2d691a878565b0ec.png"/><img alt="Image 6" loading="lazy" src="../assets/img/49c833b11fb9d256.png"/></div></div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Merges nums2 into nums1 in-place in sorted order.
+    void merge(vector&lt;int&gt;&amp; nums1, int m, vector&lt;int&gt;&amp; nums2, int n) {
+        // i points to last valid element in nums1
+        int i = m - 1;
+
+        // j points to last element in nums2
+        int j = n - 1;
+
+        // k is the last index of nums1 (including 0 placeholders)
+        int k = m + n - 1;
+
+        // Fill nums1 from the end by comparing nums1[i] and nums2[j]
+        while (i &gt;= 0 &amp;&amp; j &gt;= 0) {
+            // Place larger of the two at nums1[k]
+            if (nums1[i] &gt; nums2[j]) {
+                nums1[k--] = nums1[i--];
+            } else {
+                nums1[k--] = nums2[j--];
+            }
+        }
+
+        // If nums2 has remaining elements, copy them
+        while (j &gt;= 0) {
+            nums1[k--] = nums2[j--];
+        }
+
+        // No need to copy remaining nums1 elements, as they are already in place
+    }
+};
+
+int main() {
+    vector&lt;int&gt; nums1 = {1, 3, 5, 0, 0, 0};
+    vector&lt;int&gt; nums2 = {2, 4, 6};
+    int m = 3, n = 3;
+
+    Solution().merge(nums1, m, nums2, n);
+
+    // Print merged array
+    for (int num : nums1) cout &lt;&lt; num &lt;&lt; " ";
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // Merges nums2 into nums1 in-place in sorted order.
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        // i: last valid index in nums1
+        int i = m - 1;
+
+        // j: last index in nums2
+        int j = n - 1;
+
+        // k: last index in nums1 including extra 0s
+        int k = m + n - 1;
+
+        // Fill nums1 from the back
+        while (i &gt;= 0 &amp;&amp; j &gt;= 0) {
+            // Place larger element from end of nums1 or nums2
+            if (nums1[i] &gt; nums2[j]) {
+                nums1[k--] = nums1[i--];
+            } else {
+                nums1[k--] = nums2[j--];
+            }
+        }
+
+        // If nums2 has leftovers, copy them to nums1
+        while (j &gt;= 0) {
+            nums1[k--] = nums2[j--];
+        }
+
+        // Remaining nums1 elements are already in correct position
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[] nums1 = {1, 3, 5, 0, 0, 0};
+        int[] nums2 = {2, 4, 6};
+        int m = 3, n = 3;
+
+        new Solution().merge(nums1, m, nums2, n);
+
+        // Print the merged array
+        for (int num : nums1) {
+            System.out.print(num + " ");
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Merges nums2 into nums1 in-place in sorted order.
+    def merge(self, nums1, m, nums2, n):
+        # i: last valid element index in nums1
+        i = m - 1
+
+        # j: last index of nums2
+        j = n - 1
+
+        # k: end of nums1 array
+        k = m + n - 1
+
+        # Merge from the back to avoid overwriting
+        while i &gt;= 0 and j &gt;= 0:
+            if nums1[i] &gt; nums2[j]:
+                nums1[k] = nums1[i]
+                i -= 1
+            else:
+                nums1[k] = nums2[j]
+                j -= 1
+            k -= 1
+
+        # If any elements remain in nums2, copy them
+        while j &gt;= 0:
+            nums1[k] = nums2[j]
+            k -= 1
+            j -= 1
+
+        # No need to copy nums1 leftovers — already in place
+
+# Example usage
+nums1 = [1, 3, 5, 0, 0, 0]
+nums2 = [2, 4, 6]
+m, n = 3, 3
+Solution().merge(nums1, m, nums2, n)
+print(nums1)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Merges nums2 into nums1 in-place in sorted order.
+    merge(nums1, m, nums2, n) {
+        // i: last valid index in nums1
+        let i = m - 1;
+
+        // j: last index in nums2
+        let j = n - 1;
+
+        // k: final index in nums1 (includes 0s)
+        let k = m + n - 1;
+
+        // Start merging from end to avoid overwriting
+        while (i &gt;= 0 &amp;&amp; j &gt;= 0) {
+            if (nums1[i] &gt; nums2[j]) {
+                nums1[k--] = nums1[i--];
+            } else {
+                nums1[k--] = nums2[j--];
+            }
+        }
+
+        // Copy remaining nums2 elements if any
+        while (j &gt;= 0) {
+            nums1[k--] = nums2[j--];
+        }
+
+        // Remaining nums1 elements are already at correct place
+    }
+}
+
+// Example usage
+let nums1 = [1, 3, 5, 0, 0, 0];
+let nums2 = [2, 4, 6];
+let m = 3, n = 3;
+
+new Solution().merge(nums1, m, nums2, n);
+console.log(nums1);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N+M)</strong>, we traverse both the arrays exactly once.<br/>
+<strong>Space Complexity: O(1)</strong>, constant extra space is used to store pointers.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

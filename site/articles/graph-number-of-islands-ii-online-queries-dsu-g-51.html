@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Number of Islands - II - Online Queries - DSU: G-51</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Number of Islands - II - Online Queries - DSU: G-51</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/graph/number-of-islands-ii-online-queries-dsu-g-51/</code></div>
+  <p><strong>Problem Statement:</strong> You are given an n, m which means the row and column of the 2D matrix, and an
+    array of size k denoting the number of operations. Matrix elements are 0 if there is water or 1 if there is land.
+    Originally, the 2D matrix is all 0 which means there is no land in the matrix. The array has k operator(s) and each
+    operator has two integers A[i][0], A[i][1] means that you can change the cell matrix[A[i][0]][A[i][1]] from sea to
+    island. Return how many islands are there in the matrix after each operation. You need to return an array of size k.
+</p>
+
+
+<p><strong>Note:</strong> An island means a group of 1s such that they share a common side.</p>
+
+
+<p><strong>Pre-requisite: </strong><a href="https://takeuforward.org/data-structure/disjoint-set-union-by-rank-union-by-size-path-compression-g-46/" rel="noopener" target="_blank">Disjoint
+        Set data structure</a></p>
+
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input Format: n = 4 m = 5 k = 4 A = {{1,1},{0,1},{3,3},{3,4}} 
+Output: 1 1 2 2 
+Explanation: The following illustration is the representation of the operation:
+
+Example 2:
+Input Format: n = 4 m = 5 k = 12 A = {{0,0},{0,0},{1,1},{1,0},{0,1},{0,3},{1,3},{0,4}, {3,2}, {2,2},{1,2}, {0,2}} 
+Output: 1 1 2 1 1 2 2 2 3 3 1 1 
+Explanation: If we follow the process like in example 1, we will get the above result.
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/number-of-islands-ii" rel="noopener" target="_blank">practice link</a> to
+        help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+<p>
+                            The problem is to count the number of land cells that cannot reach the boundary of the grid.
+                            If a land cell is connected (directly or indirectly) to the boundary, then it is not an
+                            enclave.
+                            So, the strategy is:
+                        </p><ul>
+<li>First, identify all boundary land cells.</li>
+<li>Mark all land cells connected to them using BFS.</li>
+<li>The remaining unvisited land cells are enclaves.</li>
+</ul>
+<p><strong>Approach</strong></p>
+<p>
+</p><ul>
+<li>Traverse the boundary of the grid (first row, last row, first col, last col).</li>
+<li>Whenever a boundary cell is land (1), run BFS from it and mark all reachable land cells
+                                as visited.</li>
+<li>After BFS traversal, iterate over the entire grid and count the number of land cells
+                                which are still unvisited → these are enclaves.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div>
+<div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Disjoint Set Union (DSU) class
+class DisjointSet {
+    vector&lt;int&gt; rank, parent, size;
+public:
+    DisjointSet(int n) {
+        rank.resize(n + 1, 0);
+        parent.resize(n + 1);
+        size.resize(n + 1, 1);
+        for (int i = 0; i &lt;= n; i++) {
+            parent[i] = i;
+        }
+    }
+
+    int findUPar(int node) {
+        if (node == parent[node])
+            return node;
+        return parent[node] = findUPar(parent[node]); // Path compression
+    }
+
+    void unionByRank(int u, int v) {
+        int ulp_u = findUPar(u);
+        int ulp_v = findUPar(v);
+        if (ulp_u == ulp_v) return;
+        if (rank[ulp_u] &lt; rank[ulp_v]) {
+            parent[ulp_u] = ulp_v;
+        } else if (rank[ulp_v] &lt; rank[ulp_u]) {
+            parent[ulp_v] = ulp_u;
+        } else {
+            parent[ulp_v] = ulp_u;
+            rank[ulp_u]++;
+        }
+    }
+
+    void unionBySize(int u, int v) {
+        int ulp_u = findUPar(u);
+        int ulp_v = findUPar(v);
+        if (ulp_u == ulp_v) return;
+        if (size[ulp_u] &lt; size[ulp_v]) {
+            parent[ulp_u] = ulp_v;
+            size[ulp_v] += size[ulp_u];
+        } else {
+            parent[ulp_v] = ulp_u;
+            size[ulp_u] += size[ulp_v];
+        }
+    }
+};
+
+// Solution to find the number of islands after each operation
+class Solution {
+private:
+    // Helper function to check if a cell is within bounds
+    bool isValid(int adjr, int adjc, int n, int m) {
+        return adjr &gt;= 0 &amp;&amp; adjr &lt; n &amp;&amp; adjc &gt;= 0 &amp;&amp; adjc &lt; m;
+    }
+
+public:
+    // Main function to process all operators and count number of islands
+    vector&lt;int&gt; numOfIslands(int n, int m, vector&lt;vector&lt;int&gt;&gt;&amp; operators) {
+        DisjointSet ds(n * m); // Disjoint set to manage connected land cells
+        int vis[n][m];
+        memset(vis, 0, sizeof vis);
+        int cnt = 0;
+        vector&lt;int&gt; ans;
+
+        for (auto it : operators) {
+            int row = it[0], col = it[1];
+
+            // Skip if the cell is already land
+            if (vis[row][col] == 1) {
+                ans.push_back(cnt);
+                continue;
+            }
+
+            // Mark cell as land
+            vis[row][col] = 1;
+            cnt++;
+
+            // Directions to check for adjacent cells (up, right, down, left)
+            int dr[] = {-1, 0, 1, 0};
+            int dc[] = {0, 1, 0, -1};
+            for (int ind = 0; ind &lt; 4; ind++) {
+                int adjr = row + dr[ind], adjc = col + dc[ind];
+                if (isValid(adjr, adjc, n, m)) {
+                    if (vis[adjr][adjc] == 1) {
+                        int nodeNo = row * m + col;
+                        int adjNodeNo = adjr * m + adjc;
+                        if (ds.findUPar(nodeNo) != ds.findUPar(adjNodeNo)) {
+                            cnt--;
+                            ds.unionBySize(nodeNo, adjNodeNo);
+                        }
+                    }
+                }
+            }
+
+            ans.push_back(cnt);
+        }
+        return ans;
+    }
+};
+
+int main() {
+    int n = 4, m = 5;
+    vector&lt;vector&lt;int&gt;&gt; operators = {{0, 0}, {0, 0}, {1, 1}, {1, 0}, {0, 1},
+        {0, 3}, {1, 3}, {0, 4}, {3, 2}, {2, 2}, {1, 2}, {0, 2}
+    };
+
+    Solution obj;
+    vector&lt;int&gt; ans = obj.numOfIslands(n, m, operators);
+    for (auto res : ans) {
+        cout &lt;&lt; res &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class DisjointSet {
+    private int[] rank, parent, size;
+
+    public DisjointSet(int n) {
+        rank = new int[n + 1];
+        parent = new int[n + 1];
+        size = new int[n + 1];
+        Arrays.fill(size, 1);
+        for (int i = 0; i &lt;= n; i++) {
+            parent[i] = i;
+        }
+    }
+
+    public int findUPar(int node) {
+        if (node == parent[node]) return node;
+        return parent[node] = findUPar(parent[node]); // Path compression
+    }
+
+    public void unionByRank(int u, int v) {
+        int ulp_u = findUPar(u);
+        int ulp_v = findUPar(v);
+        if (ulp_u == ulp_v) return;
+        if (rank[ulp_u] &lt; rank[ulp_v]) {
+            parent[ulp_u] = ulp_v;
+        } else if (rank[ulp_v] &lt; rank[ulp_u]) {
+            parent[ulp_v] = ulp_u;
+        } else {
+            parent[ulp_v] = ulp_u;
+            rank[ulp_u]++;
+        }
+    }
+
+    public void unionBySize(int u, int v) {
+        int ulp_u = findUPar(u);
+        int ulp_v = findUPar(v);
+        if (ulp_u == ulp_v) return;
+        if (size[ulp_u] &lt; size[ulp_v]) {
+            parent[ulp_u] = ulp_v;
+            size[ulp_v] += size[ulp_u];
+        } else {
+            parent[ulp_v] = ulp_u;
+            size[ulp_u] += size[ulp_v];
+        }
+    }
+}
+
+class Solution {
+    private boolean isValid(int adjr, int adjc, int n, int m) {
+        return adjr &gt;= 0 &amp;&amp; adjr &lt; n &amp;&amp; adjc &gt;= 0 &amp;&amp; adjc &lt; m;
+    }
+
+    public int[] numOfIslands(int n, int m, int[][] operators) {
+        DisjointSet ds = new DisjointSet(n * m);
+        int[][] vis = new int[n][m];
+        int cnt = 0;
+        List&lt;Integer&gt; ans = new ArrayList&lt;&gt;();
+        
+        for (int[] it : operators) {
+            int row = it[0], col = it[1];
+            if (vis[row][col] == 1) {
+                ans.add(cnt);
+                continue;
+            }
+
+            vis[row][col] = 1;
+            cnt++;
+
+            int[] dr = {-1, 0, 1, 0};
+            int[] dc = {0, 1, 0, -1};
+            for (int ind = 0; ind &lt; 4; ind++) {
+                int adjr = row + dr[ind], adjc = col + dc[ind];
+                if (isValid(adjr, adjc, n, m)) {
+                    if (vis[adjr][adjc] == 1) {
+                        int nodeNo = row * m + col;
+                        int adjNodeNo = adjr * m + adjc;
+                        if (ds.findUPar(nodeNo) != ds.findUPar(adjNodeNo)) {
+                            cnt--;
+                            ds.unionBySize(nodeNo, adjNodeNo);
+                        }
+                    }
+                }
+            }
+            ans.add(cnt);
+        }
+
+        // Convert List to Array for returning
+        return ans.stream().mapToInt(i -&gt; i).toArray();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int n = 4, m = 5;
+        int[][] operators = {
+            {0, 0}, {0, 0}, {1, 1}, {1, 0}, {0, 1},
+            {0, 3}, {1, 3}, {0, 4}, {3, 2}, {2, 2}, {1, 2}, {0, 2}
+        };
+
+        Solution obj = new Solution();
+        int[] ans = obj.numOfIslands(n, m, operators);
+        for (int res : ans) {
+            System.out.print(res + " ");
+        }
+        System.out.println();
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">from collections import deque
+
+class DisjointSet:
+    def __init__(self, n):
+        self.rank = [0] * (n + 1)
+        self.parent = list(range(n + 1))
+        self.size = [1] * (n + 1)
+
+    def findUPar(self, node):
+        if node == self.parent[node]:
+            return node
+        self.parent[node] = self.findUPar(self.parent[node])  # Path compression
+        return self.parent[node]
+
+    def unionByRank(self, u, v):
+        ulp_u = self.findUPar(u)
+        ulp_v = self.findUPar(v)
+        if ulp_u == ulp_v:
+            return
+        if self.rank[ulp_u] &lt; self.rank[ulp_v]:
+            self.parent[ulp_u] = ulp_v
+        elif self.rank[ulp_v] &lt; self.rank[ulp_u]:
+            self.parent[ulp_v] = ulp_u
+        else:
+            self.parent[ulp_v] = ulp_u
+            self.rank[ulp_u] += 1
+
+    def unionBySize(self, u, v):
+        ulp_u = self.findUPar(u)
+        ulp_v = self.findUPar(v)
+        if ulp_u == ulp_v:
+            return
+        if self.size[ulp_u] &lt; self.size[ulp_v]:
+            self.parent[ulp_u] = ulp_v
+            self.size[ulp_v] += self.size[ulp_u]
+        else:
+            self.parent[ulp_v] = ulp_u
+            self.size[ulp_u] += self.size[ulp_v]
+
+
+class Solution:
+    def isValid(self, adjr, adjc, n, m):
+        return 0 &lt;= adjr &lt; n and 0 &lt;= adjc &lt; m
+
+    def numOfIslands(self, n, m, operators):
+        ds = DisjointSet(n * m)
+        vis = [[0] * m for _ in range(n)]
+        cnt = 0
+        ans = []
+
+        for row, col in operators:
+            if vis[row][col] == 1:
+                ans.append(cnt)
+                continue
+
+            vis[row][col] = 1
+            cnt += 1
+
+            dr = [-1, 0, 1, 0]
+            dc = [0, 1, 0, -1]
+            for i in range(4):
+                adjr = row + dr[i]
+                adjc = col + dc[i]
+                if self.isValid(adjr, adjc, n, m) and vis[adjr][adjc] == 1:
+                    nodeNo = row * m + col
+                    adjNodeNo = adjr * m + adjc
+                    if ds.findUPar(nodeNo) != ds.findUPar(adjNodeNo):
+                        cnt -= 1
+                        ds.unionBySize(nodeNo, adjNodeNo)
+
+            ans.append(cnt)
+        return ans
+
+
+if __name__ == "__main__":
+    n, m = 4, 5
+    operators = [
+        [0, 0], [0, 0], [1, 1], [1, 0], [0, 1],
+        [0, 3], [1, 3], [0, 4], [3, 2], [2, 2], [1, 2], [0, 2]
+    ]
+
+    sol = Solution()
+    ans = sol.numOfIslands(n, m, operators)
+    print(" ".join(map(str, ans)))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class DisjointSet {
+    constructor(n) {
+        this.rank = Array(n + 1).fill(0);
+        this.parent = Array.from({ length: n + 1 }, (_, i) =&gt; i);
+        this.size = Array(n + 1).fill(1);
+    }
+
+    findUPar(node) {
+        if (node === this.parent[node]) return node;
+        this.parent[node] = this.findUPar(this.parent[node]); // Path compression
+        return this.parent[node];
+    }
+
+    unionByRank(u, v) {
+        const ulp_u = this.findUPar(u);
+        const ulp_v = this.findUPar(v);
+        if (ulp_u === ulp_v) return;
+        if (this.rank[ulp_u] &lt; this.rank[ulp_v]) {
+            this.parent[ulp_u] = ulp_v;
+        } else if (this.rank[ulp_v] &lt; this.rank[ulp_u]) {
+            this.parent[ulp_v] = ulp_u;
+        } else {
+            this.parent[ulp_v] = ulp_u;
+            this.rank[ulp_u]++;
+        }
+    }
+
+    unionBySize(u, v) {
+        const ulp_u = this.findUPar(u);
+        const ulp_v = this.findUPar(v);
+        if (ulp_u === ulp_v) return;
+        if (this.size[ulp_u] &lt; this.size[ulp_v]) {
+            this.parent[ulp_u] = ulp_v;
+            this.size[ulp_v] += this.size[ulp_u];
+        } else {
+            this.parent[ulp_v] = ulp_u;
+            this.size[ulp_u] += this.size[ulp_v];
+        }
+    }
+}
+
+class Solution {
+    isValid(adjr, adjc, n, m) {
+        return adjr &gt;= 0 &amp;&amp; adjr &lt; n &amp;&amp; adjc &gt;= 0 &amp;&amp; adjc &lt; m;
+    }
+
+    numOfIslands(n, m, operators) {
+        const ds = new DisjointSet(n * m);
+        const vis = Array.from({ length: n }, () =&gt; Array(m).fill(0));
+        let cnt = 0;
+        const ans = [];
+
+        for (const [row, col] of operators) {
+            if (vis[row][col] === 1) {
+                ans.push(cnt);
+                continue;
+            }
+
+            vis[row][col] = 1;
+            cnt++;
+
+            const dr = [-1, 0, 1, 0];
+            const dc = [0, 1, 0, -1];
+            for (let i = 0; i &lt; 4; i++) {
+                const adjr = row + dr[i];
+                const adjc = col + dc[i];
+                if (this.isValid(adjr, adjc, n, m) &amp;&amp; vis[adjr][adjc] === 1) {
+                    const nodeNo = row * m + col;
+                    const adjNodeNo = adjr * m + adjc;
+                    if (ds.findUPar(nodeNo) !== ds.findUPar(adjNodeNo)) {
+                        cnt--;
+                        ds.unionBySize(nodeNo, adjNodeNo);
+                    }
+                }
+            }
+            ans.push(cnt);
+        }
+        return ans;
+    }
+}
+
+// Driver code
+(function main() {
+    const n = 4, m = 5;
+    const operators = [
+        [0, 0], [0, 0], [1, 1], [1, 0], [0, 1],
+        [0, 3], [1, 3], [0, 4], [3, 2], [2, 2], [1, 2], [0, 2]
+    ];
+
+    const sol = new Solution();
+    const ans = sol.numOfIslands(n, m, operators);
+    console.log(ans.join(" "));
+})();
+</code></pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+</summary>
+<p>
+</p><p><strong>Time Complexity:</strong> O(N × M), Each cell is visited at most once in BFS/DFS
+                        traversal.</p>
+<p><strong>Space Complexity:</strong> O(N × M), Visited array and BFS queue may store all cells in
+                        the worst case.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

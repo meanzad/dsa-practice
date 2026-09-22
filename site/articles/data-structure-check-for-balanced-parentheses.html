@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Check for Balanced Parentheses</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Check for Balanced Parentheses</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/check-for-balanced-parentheses/</code></div>
+  <p><strong>Problem Statement: Check Balanced Parentheses. Given string str containing just the characters '(', ')', '{', '}', '[' and ']', check if the input string is valid and return true if the string is balanced otherwise return false.
+</strong> .</p>
+Note:
+<li>Open brackets must be closed by the same type of brackets.</li>
+<li>Open brackets must be closed in the correct order.</li>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input: str = “( )[ { } ( ) ]”
+Output: True
+Explanation: As every open bracket has its corresponding close bracket. Match parentheses are in correct order hence they are balanced.
+
+
+Example 2:
+Input: str = “[ ( )”
+Output: False
+Explanation: As ‘[‘ does not have ‘]’ hence it is not valid and will return false.
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/balanced-paranthesis" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+<h3>Intuition</h3>
+<ul>
+<li>We have to keep track of previous as well as most recent opening brackets and also keep in mind the sequence, as after opening of the bracket there should be opposite pairs of brackets.</li>
+<li>Also handle the corner cases like [ ) ( ] where closing bracket occurs first and opening bracket after it, which is an invalid sequence, as well as [ ( ] ) where the most recent opening didn't get its opposite pair hence it will also not be valid.</li>
+<li>So we have to use a data structure that will keep track of first in and last out, hence we will use the stack.</li>
+</ul>
+<h3>Approach</h3>
+<ul>
+<li>Whenever we get the opening bracket we will push it into the stack. I.e ‘{‘, ’[’, ’(‘.</li>
+<li>Whenever we get the closing bracket we will check if the stack is non-empty or not.</li>
+<li>If the stack is empty we will return false, else if it is nonempty then we will check if the topmost element of the stack is the opposite pair of the closing bracket or not.</li>
+<li>If it is not the opposite pair of the closing bracket then return false, else move ahead.</li>
+<li>After we move out of the string the stack has to be empty if it is non-empty then return it as invalid else it is a valid string.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/7f244b25eb277c17.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/0f7a9bec82ec6067.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/0d0bb29d787b6e3f.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/757c5014935a9477.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/bfcf05b211ea515b.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/9ef1921109bb47ed.png"/></div><div class="carousel-image"><img alt="Image 7" loading="lazy" src="../assets/img/43f0e626244beb65.png"/></div><div class="carousel-image"><img alt="Image 8" loading="lazy" src="../assets/img/59721f59240b6747.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/7f244b25eb277c17.png"/><img alt="Image 2" loading="lazy" src="../assets/img/0f7a9bec82ec6067.png"/><img alt="Image 3" loading="lazy" src="../assets/img/0d0bb29d787b6e3f.png"/><img alt="Image 4" loading="lazy" src="../assets/img/757c5014935a9477.png"/><img alt="Image 5" loading="lazy" src="../assets/img/bfcf05b211ea515b.png"/><img alt="Image 6" loading="lazy" src="../assets/img/9ef1921109bb47ed.png"/><img alt="Image 7" loading="lazy" src="../assets/img/43f0e626244beb65.png"/><img alt="Image 8" loading="lazy" src="../assets/img/59721f59240b6747.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Class containing the isValid method
+class Solution {
+public:
+    // Function to check if the input string has valid parentheses
+    bool isValid(string s) {
+        stack&lt;char&gt; st;  // Stack to store opening brackets
+
+        for (auto it : s) {
+            if (it == '(' || it == '{' || it == '[')
+                st.push(it);  // Push opening brackets to stack
+            else {
+                if (st.empty()) return false;  // No matching opening bracket
+                char ch = st.top();
+                st.pop();
+
+                // Check for matching pair
+                if ((it == ')' &amp;&amp; ch == '(') ||
+                    (it == ']' &amp;&amp; ch == '[') ||
+                    (it == '}' &amp;&amp; ch == '{'))
+                    continue;
+                else
+                    return false;
+            }
+        }
+        return st.empty();  // True if all brackets matched
+    }
+};
+
+int main() {
+    Solution sol;
+    string s = "()[{}()]";
+
+    if (sol.isValid(s))
+        cout &lt;&lt; "True" &lt;&lt; endl;
+    else
+        cout &lt;&lt; "False" &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.Stack;
+
+public class Solution {
+    // Function to check if the input string has valid parentheses
+    public boolean isValid(String s) {
+        Stack&lt;Character&gt; st = new Stack&lt;&gt;();  // Stack to store opening brackets
+
+        for (char ch : s.toCharArray()) {
+            if (ch == '(' || ch == '{' || ch == '[')
+                st.push(ch);  // Push opening brackets to stack
+            else {
+                if (st.isEmpty()) return false;  // No matching opening bracket
+                char top = st.pop();
+
+                // Check for matching pair
+                if ((ch == ')' &amp;&amp; top == '(') ||
+                    (ch == ']' &amp;&amp; top == '[') ||
+                    (ch == '}' &amp;&amp; top == '{'))
+                    continue;
+                else
+                    return false;
+            }
+        }
+        return st.isEmpty();  // True if all brackets matched
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        String s = "()[{}()]";
+
+        if (sol.isValid(s))
+            System.out.println("True");
+        else
+            System.out.println("False");
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to check if the input string has valid parentheses
+    def isValid(self, s: str) -&gt; bool:
+        stack = []  # Stack to store opening brackets
+
+        for ch in s:
+            if ch in "({[":
+                stack.append(ch)  # Push opening brackets to stack
+            else:
+                if not stack:
+                    return False  # No matching opening bracket
+                top = stack.pop()
+
+                # Check for matching pair
+                if (ch == ')' and top == '(') or \
+                   (ch == ']' and top == '[') or \
+                   (ch == '}' and top == '{'):
+                    continue
+                else:
+                    return False
+
+        return not stack  # True if all brackets matched
+
+# Driver code
+sol = Solution()
+s = "()[{}()]"
+if sol.isValid(s):
+    print("True")
+else:
+    print("False")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to check if the input string has valid parentheses
+    isValid(s) {
+        let stack = [];  // Stack to store opening brackets
+
+        for (let ch of s) {
+            if (ch === '(' || ch === '{' || ch === '[') {
+                stack.push(ch);  // Push opening brackets to stack
+            } else {
+                if (stack.length === 0) return false;  // No matching opening bracket
+                let top = stack.pop();
+
+                // Check for matching pair
+                if ((ch === ')' &amp;&amp; top === '(') ||
+                    (ch === ']' &amp;&amp; top === '[') ||
+                    (ch === '}' &amp;&amp; top === '{')) {
+                    continue;
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        return stack.length === 0;  // True if all brackets matched
+    }
+}
+
+// Driver code
+const sol = new Solution();
+const s = "()[{}()]";
+if (sol.isValid(s)) {
+    console.log("True");
+} else {
+    console.log("False");
+}
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+</summary>
+<p>
+</p><li>Time Complexity: O(n). Single for loop used</li>
+<li>Space Complexity:  O(N). Stack space</li>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

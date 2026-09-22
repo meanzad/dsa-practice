@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Floor in a Binary Search Tree</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Floor in a Binary Search Tree</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/binary-search-tree/floor-in-a-binary-search-tree/</code></div>
+  <p><strong>Problem Statement: </strong> Given a Binary Search Tree and a key, return the floor of the given key in the Binary Search Tree.<br/>
+Floor of a value refers to the value of the largest node in the Binary Search Tree that is smaller than or equal to the given key.
+If the floor node does not exist, return nullptr.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input : Binary Search Tree: 10 5 15 2 6 -1 -1, Key = 7</span>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/42613246978501d6.png" width="439"/></figure>
+<span>Output : 6</span>
+<span>Explanation :  In the given BST, the largest value smaller or equal to 7 is 6. </span>
+<p></p>
+<span>Input : Binary Search Tree: 8 5 12 4 7 10 14 -1 -1 6 -1 -1 -1 13, Key = 9</span>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/a5b3538e37f8243c.png" width="439"/></figure>
+<span>Output : 8</span>
+<span>Explanation : In the given BST, the largest value smaller or equal to 9 is 8. </span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/floor-and-ceil-in-a-bst" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. 
+    It's highly recommend trying to 
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                     Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+  To find the floor value, the approach involves tracking the largest node value encountered that is smaller than or equal to the key. It traverses the tree, either finding the exact key or reaching the nodes that approach the given key’s value. During the traversal, at every node, if the key matches the node’s values, it directly assigns the node’s value as the floor and concludes the search.<br/><br/> If the key is smaller than the current node’s value, the algorithm navigates to the left subtree to potentially find a smaller value and if the key is larger the algorithm updates the floor value with the current node’s values and explores the right subtree for potentially larger values.
+
+<ul>
+<li>Initialise a variable floor to -1 to store the result initially.</li>
+<li>Traverse the Binary Search Tree starting from the root.</li>
+<li>If the key is equal to the current node’s value, assign it to floor and return.</li>
+<li>If the key is greater than the current node’s value, update floor with the current node’s value and move to the right subtree.</li>
+<li>If the key is smaller than the current node’s value, move to the left subtree.</li>
+<li>After traversal, return floor, which represents the largest value smaller than or equal to the key, or -1 if no such value exists.</li>
+</ul>
+
+
+
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/421328f803d40cd2.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/7902cab78cfed324.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/fb8cd2839c358263.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/421328f803d40cd2.png"/><img alt="Image 2" loading="lazy" src="../assets/img/7902cab78cfed324.png"/><img alt="Image 3" loading="lazy" src="../assets/img/fb8cd2839c358263.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Definition of TreeNode structure
+// for a binary tree node
+struct TreeNode {
+    // Value of the node
+    int val;
+    
+    // Pointer to the left child node
+    TreeNode* left;
+    
+    // Pointer to the right child node
+    TreeNode* right;
+
+    // Constructor to initialize the node with a
+    // value and set left and right pointers to null
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+class Solution {
+public:
+    // Function to find the floor of a key
+    // in a Binary Search Tree (BST)
+    int floorInBST(TreeNode* root, int key){
+        // Initialize the floor variable
+        int floor = -1;
+        
+        // Traverse the BST until root becomes null
+        while(root){
+            // If key is equal to current node value
+            // then it is the floor
+            if(root-&gt;val == key){
+                floor = root-&gt;val;
+                return floor;
+            }
+            
+            // If key is greater than current node value
+            // move right and update floor
+            if(key &gt; root-&gt;val){
+                floor = root-&gt;val;
+                root = root-&gt;right;
+            }
+            else{
+                // If key is smaller, move left
+                root = root-&gt;left;
+            }
+        }
+        // Return the computed floor value
+        return floor;
+    }
+};
+
+// Function to perform an in-order traversal
+// of a binary tree and print its nodes
+void printInOrder(TreeNode* root) {
+    // Base case: if node is null
+    if (root == nullptr) return;
+
+    // Left subtree
+    printInOrder(root-&gt;left);
+
+    // Print current node
+    cout &lt;&lt; root-&gt;val &lt;&lt; " ";
+
+    // Right subtree
+    printInOrder(root-&gt;right);
+}
+
+int main() {
+    // Creating a BST
+    TreeNode* root = new TreeNode(10);
+    root-&gt;left = new TreeNode(5);
+    root-&gt;right = new TreeNode(13);
+    root-&gt;left-&gt;left = new TreeNode(3);
+    root-&gt;left-&gt;left-&gt;left = new TreeNode(2);
+    root-&gt;left-&gt;left-&gt;right = new TreeNode(4);
+    root-&gt;left-&gt;right = new TreeNode(6);
+    root-&gt;left-&gt;right-&gt;right = new TreeNode(9);
+    root-&gt;right-&gt;left = new TreeNode(11);
+    root-&gt;right-&gt;right = new TreeNode(14);
+    
+    cout &lt;&lt; "Binary Search Tree (Inorder): "&lt;&lt; endl;
+    printInOrder(root);
+    cout &lt;&lt; endl;
+
+    Solution solution;
+    
+    // Key to find floor
+    int target = 8;
+    int floorVal = solution.floorInBST(root, target);
+    
+    if(floorVal != -1){
+        cout &lt;&lt; "Floor of " &lt;&lt; target &lt;&lt; " is: " &lt;&lt; floorVal &lt;&lt; endl;
+    }
+    else{
+        cout &lt;&lt; "No floor found!" &lt;&lt; endl;
+    }
+    
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Definition of TreeNode class for a binary tree node
+class TreeNode {
+    // Value of the node
+    int val;
+
+    // Pointer to the left child node
+    TreeNode left;
+
+    // Pointer to the right child node
+    TreeNode right;
+
+    // Constructor to initialize the node with a value
+    // and set left and right pointers to null
+    TreeNode(int x) {
+        val = x;
+        left = null;
+        right = null;
+    }
+}
+
+class Solution {
+    // Function to find the floor of a key
+    // in a Binary Search Tree (BST)
+    public int floorInBST(TreeNode root, int key) {
+        // Initialize the floor variable
+        // to store the floor value
+        int floor = -1;
+
+        // Traverse the BST until reaching
+        // the end or finding the key
+        while (root != null) {
+            // If the key is found, assign it
+            // as the floor value and return
+            if (root.val == key) {
+                floor = root.val;
+                return floor;
+            }
+
+            // If the key is greater than the current
+            // node's value, move to the right subtree
+            if (key &gt; root.val) {
+                // Update the floor with the current node's
+                // value and move to the right subtree
+                floor = root.val;
+                root = root.right;
+            } else {
+                // If the key is smaller than the current
+                // node's value, move to the left subtree
+                root = root.left;
+            }
+        }
+        // Return the computed floor value
+        return floor;
+    }
+}
+
+// Main class
+public class Main {
+    // Function to perform an in-order traversal
+    // of a binary tree and print its nodes
+    public static void printInOrder(TreeNode root) {
+        // Check if the current node
+        // is null (base case for recursion)
+        if (root == null) {
+            // If null, return and
+            // terminate the function
+            return;
+        }
+
+        // Recursively call printInOrder
+        // for the left subtree
+        printInOrder(root.left);
+
+        // Print the value of the current node
+        System.out.print(root.val + " ");
+
+        // Recursively call printInOrder
+        // for the right subtree
+        printInOrder(root.right);
+    }
+
+    // Main method
+    public static void main(String[] args) {
+        // Creating a BST
+        TreeNode root = new TreeNode(10);
+        root.left = new TreeNode(5);
+        root.right = new TreeNode(13);
+        root.left.left = new TreeNode(3);
+        root.left.left.left = new TreeNode(2);
+        root.left.left.right = new TreeNode(4);
+        root.left.right = new TreeNode(6);
+        root.left.right.right = new TreeNode(9);
+        root.right.left = new TreeNode(11);
+        root.right.right = new TreeNode(14);
+
+        System.out.println("Binary Search Tree:");
+        printInOrder(root);
+        System.out.println();
+
+        Solution solution = new Solution();
+
+        // Searching for a value in the BST
+        int target = 8;
+        int floorVal = solution.floorInBST(root, target);
+
+        if (floorVal != -1) {
+            System.out.println("Floor of " + target + " is: " + floorVal);
+        } else {
+            System.out.println("No floor found!");
+        }
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Definition of TreeNode structure
+# for a binary tree node
+class TreeNode:
+    # Constructor to initialize the node with a
+    # value and set left and right pointers to null
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
+class Solution:
+    # Function to find the floor of a key
+    # in a Binary Search Tree (BST)
+    def floorInBST(self, root, key):
+        # Initialize the floor variable
+        # to store the floor value
+        floor = -1
+        
+        # Traverse the BST until reaching
+        # the end or finding the key
+        while root:
+            # If the key is found, assign it 
+            # as the floor value and return
+            if root.val == key:
+                floor = root.val
+                return floor
+            
+            # If the key is greater than the current
+            # node's value, move to the right subtree
+            if key &gt; root.val:
+                # Update the floor with the current node's
+                # value and move to the right subtree
+                floor = root.val
+                root = root.right
+            else:
+                # If the key is smaller than the current
+                # node's value, move to the left subtree
+                root = root.left
+        
+        # Return the computed floor value
+        return floor
+
+# Function to perform an in-order traversal
+# of a binary tree and print its nodes
+def printInOrder(root):
+    # Check if the current node
+    # is null (base case for recursion)
+    if root is None:
+        # If null, return and
+        # terminate the function
+        return
+    
+    # Recursively call printInOrder
+    # for the left subtree
+    printInOrder(root.left)
+    
+    # Print the value of the current node
+    print(root.val, end=" ")
+    
+    # Recursively call printInOrder
+    # for the right subtree
+    printInOrder(root.right)
+
+# Creating a BST
+root = TreeNode(10)
+root.left = TreeNode(5)
+root.right = TreeNode(13)
+root.left.left = TreeNode(3)
+root.left.left.left = TreeNode(2)
+root.left.left.right = TreeNode(4)
+root.left.right = TreeNode(6)
+root.left.right.right = TreeNode(9)
+root.right.left = TreeNode(11)
+root.right.right = TreeNode(14)
+
+print("Binary Search Tree:")
+printInOrder(root)
+print()
+
+solution = Solution()
+
+# Searching for a value in the BST
+target = 8
+floorVal = solution.floorInBST(root, target)
+
+if floorVal != -1:
+    print(f"Floor of {target} is: {floorVal}")
+else:
+    print("No floor found!")</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Definition of TreeNode structure
+// for a binary tree node
+class TreeNode {
+    // Constructor to initialize the node with a
+    // value and set left and right pointers to null
+    constructor(x) {
+        this.val = x;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class Solution {
+    // Function to find the floor of a key
+    // in a Binary Search Tree (BST)
+    floorInBST(root, key) {
+        // Initialize the floor variable
+        // to store the floor value
+        let floor = -1;
+        
+        // Traverse the BST until reaching
+        // the end or finding the key
+        while (root) {
+            // If the key is found, assign it 
+            // as the floor value and return
+            if (root.val === key) {
+                floor = root.val;
+                return floor;
+            }
+            
+            // If the key is greater than the current
+            // node's value, move to the right subtree
+            if (key &gt; root.val) {
+                // Update the floor with the current node's
+                // value and move to the right subtree
+                floor = root.val;
+                root = root.right;
+            } else {
+                // If the key is smaller than the current
+                // node's value, move to the left subtree
+                root = root.left;
+            }
+        }
+        // Return the computed floor value
+        return floor;
+    }
+}
+
+// Function to perform an in-order traversal
+// of a binary tree and print its nodes
+function printInOrder(root) {
+    // Check if the current node
+    // is null (base case for recursion)
+    if (!root) {
+        // If null, return and
+        // terminate the function
+        return;
+    }
+
+    // Recursively call printInOrder
+    // for the left subtree
+    printInOrder(root.left);
+
+    // Print the value of the current node
+    console.log(root.val + " ");
+
+    // Recursively call printInOrder
+    // for the right subtree
+    printInOrder(root.right);
+}
+
+// Creating a BST
+let root = new TreeNode(10);
+root.left = new TreeNode(5);
+root.right = new TreeNode(13);
+root.left.left = new TreeNode(3);
+root.left.left.left = new TreeNode(2);
+root.left.left.right = new TreeNode(4);
+root.left.right = new TreeNode(6);
+root.left.right.right = new TreeNode(9);
+root.right.left = new TreeNode(11);
+root.right.right = new TreeNode(14);
+
+console.log("Binary Search Tree:");
+printInOrder(root);
+console.log();
+
+let solution = new Solution();
+
+// Searching for a value in the BST
+let target = 8;
+let floorVal = solution.floorInBST(root, target);
+
+if (floorVal !== -1) {
+    console.log("Floor of " + target + " is: " + floorVal);
+} else {
+    console.log("No floor found!");
+}</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(log<sub>2</sub>N)</strong>, where N is the number of nodes in the Binary Search Tree. The complexity is equivalent to the height of the tree.<br/>
+<strong>Space Complexity: O(1)</strong>, since the algorithm does not use any additional space or data structures.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

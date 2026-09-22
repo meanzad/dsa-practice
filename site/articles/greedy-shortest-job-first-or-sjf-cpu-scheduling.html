@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Shortest Job First (or SJF) CPU Scheduling</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Shortest Job First (or SJF) CPU Scheduling</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/Greedy/shortest-job-first-or-sjf-cpu-scheduling</code></div>
+  <p><strong>Problem Statement: </strong>Given a list of job durations representing the time it takes to complete each job. Implement the Shortest Job First algorithm to find the average waiting time for these jobs.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input:jobs = [3, 1, 4, 2, 5]
+Output: 4           
+Explanation:  
+The first job that will be executed is of duration 1 and the waiting time for it will be 0.
+After the first job, the next shortest job with a duration of 2 will be executed with a waiting time of 1.
+Following the completion of the first two jobs, the next shortest job with a duration of 3 will be executed with a waiting time of 3 (1 + 2).
+Then, the job with a duration of 4 will be executed with a waiting time of 6 (1 + 2 + 3).
+Finally, the job with the longest duration of 5 will be executed with a waiting time of 10 (1 + 2 + 3 + 4). Hence, the average waiting time is calculated as (0 + 1 + 3 + 6 + 10) / 5 = 20 / 5 = 4.
+
+
+Example 2:
+Input: jobs = [4, 3, 7, 1, 2]
+Output: 4
+Explanation: The first job that will be executed is of duration 1, and the waiting time for it will be 0.       
+After the first job, the next shortest job with a duration of 2 will be executed with a waiting time of 1.
+Following the completion of the first two jobs, the next shortest job with a duration of 3 will be executed with a waiting time of 3 (1 + 2).
+Then, the job with a duration of 4 will be executed with a waiting time of 6 (1 + 2 + 3).
+Finally, the job with the longest duration of 7 will be executed with a waiting time of 10 (1 + 2 + 3 + 4).
+Hence, the average waiting time is calculated as (0 + 1 + 3 + 6 + 10) / 5 = 20 / 5 = 4.
+
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/shortest-job-first" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+<ul>
+<li>Sort the jobs in ascending order based on their durations. The jobs array will now contain the job durations arranged from shortest to longest.</li>
+<li>Initialise variables waitTime to 0 (waiting time for that particular job) and totalTime (total waiting time for all jobs).</li>
+<li>Iterate through each job in the sorted array. For each job, its waiting time is the sum of total time taken by all previous jobs. Update the total time taken by adding the duration of the current job to the total waiting time.</li>
+<li>After iterating through each job in the array, the average waiting is total waiting time divided by the number of jobs ie. length of the jobs array.After iterating through each job in the array, the average waiting is total waiting time divided by the number of jobs ie. length of the jobs array.</li>
+</ul>
+<h3>Dry Run</h3>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/26ef4dd22ba4bc5e.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/30941e724bae6df0.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/4799ddc9fdb38020.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/601153ae7d477593.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/dededa03c37f0835.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/26ef4dd22ba4bc5e.png"/><img alt="Image 2" loading="lazy" src="../assets/img/30941e724bae6df0.png"/><img alt="Image 3" loading="lazy" src="../assets/img/4799ddc9fdb38020.png"/><img alt="Image 4" loading="lazy" src="../assets/img/601153ae7d477593.png"/><img alt="Image 5" loading="lazy" src="../assets/img/dededa03c37f0835.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;vector&gt;
+using namespace std;
+
+// Class that implements Shortest Job First (SJF) scheduling
+class ShortestJobFirst {
+public:
+    // Function to calculate average waiting time
+    float calculateAverageWaitTime(vector&lt;int&gt;&amp; jobs) {
+        // Sort jobs in ascending order (Shortest Job First)
+        sort(jobs.begin(), jobs.end());
+
+        float waitTime = 0;  // Stores cumulative waiting time
+        int totalTime = 0;   // Tracks elapsed execution time
+        int n = jobs.size(); // Number of jobs
+
+        // Iterate through each job to calculate waiting time
+        for (int i = 0; i &lt; n; i++) {
+            waitTime += totalTime;  // Add current total time to waiting time
+            totalTime += jobs[i];   // Execute current job
+        }
+
+        // Return the average waiting time
+        return waitTime / n;
+    }
+};
+
+int main() {
+    vector&lt;int&gt; jobs = {4, 3, 7, 1, 2};
+
+    cout &lt;&lt; "Array Representing Job Durations: ";
+    for (int job : jobs) cout &lt;&lt; job &lt;&lt; " ";
+    cout &lt;&lt; endl;
+
+    ShortestJobFirst sjf;
+    float ans = sjf.calculateAverageWaitTime(jobs);
+
+    cout &lt;&lt; "Average waiting time: " &lt;&lt; ans &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.Arrays;
+
+class ShortestJobFirst {
+    // Method to calculate average waiting time
+    public float calculateAverageWaitTime(int[] jobs) {
+        // Sort jobs in ascending order (Shortest Job First)
+        Arrays.sort(jobs);
+
+        float waitTime = 0;  // Stores cumulative waiting time
+        int totalTime = 0;   // Tracks elapsed execution time
+        int n = jobs.length; // Number of jobs
+
+        // Iterate through each job
+        for (int i = 0; i &lt; n; i++) {
+            waitTime += totalTime;  // Add current total time to waiting time
+            totalTime += jobs[i];   // Execute current job
+        }
+
+        // Return the average waiting time
+        return waitTime / n;
+    }
+
+    public static void main(String[] args) {
+        int[] jobs = {4, 3, 7, 1, 2};
+
+        System.out.print("Array Representing Job Durations: ");
+        for (int job : jobs) {
+            System.out.print(job + " ");
+        }
+        System.out.println();
+
+        ShortestJobFirst sjf = new ShortestJobFirst();
+        float ans = sjf.calculateAverageWaitTime(jobs);
+
+        System.out.println("Average waiting time: " + ans);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class ShortestJobFirst:
+    # Method to calculate average waiting time
+    def calculate_average_wait_time(self, jobs):
+        # Sort jobs in ascending order (Shortest Job First)
+        jobs.sort()
+
+        wait_time = 0   # Stores cumulative waiting time
+        total_time = 0  # Tracks elapsed execution time
+        n = len(jobs)   # Number of jobs
+
+        # Iterate through each job
+        for job in jobs:
+            wait_time += total_time   # Add current total time to waiting time
+            total_time += job         # Execute current job
+
+        # Return the average waiting time
+        return wait_time / n
+
+
+# Driver code
+if __name__ == "__main__":
+    jobs = [4, 3, 7, 1, 2]
+    print("Array Representing Job Durations:", jobs)
+
+    sjf = ShortestJobFirst()
+    ans = sjf.calculate_average_wait_time(jobs)
+
+    print("Average waiting time:", ans)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class ShortestJobFirst {
+    // Method to calculate average waiting time
+    calculateAverageWaitTime(jobs) {
+        // Sort jobs in ascending order (Shortest Job First)
+        jobs.sort((a, b) =&gt; a - b);
+
+        let waitTime = 0;   // Stores cumulative waiting time
+        let totalTime = 0;  // Tracks elapsed execution time
+        let n = jobs.length; // Number of jobs
+
+        // Iterate through each job
+        for (let i = 0; i &lt; n; i++) {
+            waitTime += totalTime;   // Add current total time to waiting time
+            totalTime += jobs[i];    // Execute current job
+        }
+
+        // Return the average waiting time
+        return waitTime / n;
+    }
+}
+
+// Driver code
+const jobs = [4, 3, 7, 1, 2];
+console.log("Array Representing Job Durations:", jobs.join(" "));
+
+const sjf = new ShortestJobFirst();
+const ans = sjf.calculateAverageWaitTime(jobs);
+
+console.log("Average waiting time:", ans);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Complexity Analysis
+                    </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p>Time Complexity: O(N logN + N) where N is the length of the jobs array. We sort the jobs array giving complexity O(N log N) and to calculate the waiting time we iterate through the sorted array taking O(N) complexity.</p>
+<p>Space Complexity: O(1) as the algorithm uses only a constant amount of extra space regardless of the size of the input array. It does not require any additional data structures that scale with the input size.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

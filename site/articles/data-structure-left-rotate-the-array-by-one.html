@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Left Rotate the Array by One</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Left Rotate the Array by One</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/left-rotate-the-array-by-one/</code></div>
+  <p><strong>Problem Statement: </strong>
+Given an integer array nums, rotate the array to the left by one.
+<br/><br/>
+<strong>Note:</strong> There is no need to return anything, just modify the given array.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>  
+<strong>Input:</strong> nums = [1, 2, 3, 4, 5]  
+<strong>Output:</strong> [2, 3, 4, 5, 1]  
+<strong>Explanation:</strong> Initially, nums = [1, 2, 3, 4, 5]  
+Rotating once to the left results in nums = [2, 3, 4, 5, 1].
+
+<strong>Example 2:</strong>  
+<strong>Input:</strong> nums = [-1, 0, 3, 6]  
+<strong>Output:</strong> [0, 3, 6, -1]  
+<strong>Explanation:</strong> Initially, nums = [-1, 0, 3, 6]  
+Rotating once to the left results in nums = [0, 3, 6, -1].</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/left-rotate-array-by-one" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Brute Force 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Create a dummy array of the same length as the original array.</li>
+<li>Shift all elements in the original array toward the left, copying them into the dummy array.</li>
+<li>After shifting, place the value of the 0th index of the original array into the last element of the dummy array.</li>
+<li>Finally, print the dummy array which now contains the left-shifted elements with the 0th element moved to the last position.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Function to solve and shift array elements left by one position
+void solve(int arr[], int n) {
+    int temp[n];  // Create a temporary array to store the shifted elements
+
+    // Shift the elements to the left by one position
+    for (int i = 1; i &lt; n; i++) {
+        temp[i - 1] = arr[i];
+    }
+    temp[n - 1] = arr[0];  // The first element moves to the last position
+
+    // Print the rotated array
+    for (int i = 0; i &lt; n; i++) {
+        cout &lt;&lt; temp[i] &lt;&lt; " ";  // Print each element of the rotated array
+    }
+    cout &lt;&lt; endl;
+}
+
+int main() {
+    int n = 5;  // Size of the array
+    int arr[] = {1, 2, 3, 4, 5};  // Original array
+
+    solve(arr, n);  // Call the solve function to rotate and print the result
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">// Class containing the solve method
+class Solution {
+
+    // Function to solve and shift array elements left by one position
+    public static void solve(int[] arr, int n) {
+        int[] temp = new int[n];  // Temporary array to store shifted elements
+
+        // Shift elements to the left by one position
+        for (int i = 1; i &lt; n; i++) {
+            temp[i - 1] = arr[i];
+        }
+        temp[n - 1] = arr[0];  // First element moves to the last position
+
+        // Print the rotated array
+        for (int i = 0; i &lt; n; i++) {
+            System.out.print(temp[i] + " ");
+        }
+        System.out.println();
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+        int n = 5;  // Size of the array
+        int[] arr = {1, 2, 3, 4, 5};  // Original array
+
+        Solution.solve(arr, n);  // Call the solve function from Solution class
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Function to solve and shift array elements left by one position
+def solve(arr, n):
+    temp = [0] * n  # Create a temporary array to store the shifted elements
+
+    # Shift the elements to the left by one position
+    for i in range(1, n):
+        temp[i - 1] = arr[i]
+    temp[n - 1] = arr[0]  # The first element moves to the last position
+
+    # Print the rotated array
+    for num in temp:
+        print(num, end=" ")  # Print each element of the rotated array
+    print()
+
+# Main function
+if __name__ == "__main__":
+    n = 5  # Size of the array
+    arr = [1, 2, 3, 4, 5]  # Original array
+
+    solve(arr, n)  # Call the solve function to rotate and print the result</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Function to solve and shift array elements left by one position
+function solve(arr, n) {
+    let temp = new Array(n);  // Create a temporary array to store the shifted elements
+
+    // Shift the elements to the left by one position
+    for (let i = 1; i &lt; n; i++) {
+        temp[i - 1] = arr[i];
+    }
+    temp[n - 1] = arr[0];  // The first element moves to the last position
+
+    // Print the rotated array
+    for (let i = 0; i &lt; n; i++) {
+        process.stdout.write(temp[i] + " ");  // Print each element of the rotated array
+    }
+    console.log();
+}
+
+// Main function
+function main() {
+    let n = 5;  // Size of the array
+    let arr = [1, 2, 3, 4, 5];  // Original array
+
+    solve(arr, n);  // Call the solve function to rotate and print the result
+}
+
+// Call the main function
+main();</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(N)</strong>, where N is the size of the array. This is because we traverse the array once to shift the elements.<br/><br/>
+<strong>Space Complexity: O(N)</strong>, as we are using a temporary array of the same size as the input array to store the shifted elements.
+
+                    </p>
+</details>
+</div>
+</details>
+</div>
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Optimal Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Store the value of the first element of the array in a temporary variable.</li>
+<li>Iterate through the array starting from the second element.</li>
+<li>Shift each element one position to the left by assigning the current element to the position of its predecessor.</li>
+<li>After completing the iteration, place the value from the temporary variable into the last position of the array.</li>
+</ul>
+<p><img height="457" loading="lazy" src="../assets/img/469d47bce65bc6c7.png" width="481"/></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    void rotateArrayByOne(vector&lt;int&gt;&amp; nums) {
+        // Store the first element in a temporary variable
+        int temp = nums[0];
+        
+        // Shift elements to the left
+        for (int i = 1; i &lt; nums.size(); ++i) {
+            nums[i - 1] = nums[i];
+        }
+
+        // Place the first element at the end
+        nums[nums.size() - 1] = temp;
+    }
+};
+
+int main() {
+    Solution solution;
+    vector&lt;int&gt; nums = {1, 2, 3, 4, 5};
+
+    solution.rotateArrayByOne(nums);
+
+    for (int num : nums) {
+        cout &lt;&lt; num &lt;&lt; " "; // Output the rotated array
+    }
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    public void rotateArrayByOne(int[] nums) {
+        // Store the first element in a temporary variable
+        int temp = nums[0];
+        
+        // Shift elements to the left
+        for (int i = 1; i &lt; nums.length; i++) {
+            nums[i - 1] = nums[i];
+        }
+
+        // Place the first element at the end
+        nums[nums.length - 1] = temp;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        int[] nums = {1, 2, 3, 4, 5};
+
+        solution.rotateArrayByOne(nums);
+
+        // Output the rotated array
+        for (int num : nums) {
+            System.out.print(num + " ");
+        }
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    def rotateArrayByOne(self, nums):
+        # Store the first element in a temporary variable
+        temp = nums[0]
+        
+        # Shift elements to the left
+        for i in range(1, len(nums)):
+            nums[i - 1] = nums[i]
+        
+        # Place the first element at the end
+        nums[-1] = temp
+
+# Main method for testing
+if __name__ == "__main__":
+    solution = Solution()
+    nums = [1, 2, 3, 4, 5]
+    
+    solution.rotateArrayByOne(nums)
+    
+    print(nums)  # Output the rotated array</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    rotateArrayByOne(nums) {
+        // Store the first element in a temporary variable
+        const temp = nums[0];
+        
+        // Shift elements to the left
+        for (let i = 1; i &lt; nums.length; i++) {
+            nums[i - 1] = nums[i];
+        }
+
+        // Place the first element at the end
+        nums[nums.length - 1] = temp;
+    }
+}
+
+// Main method for testing
+const solution = new Solution();
+const nums = [1, 2, 3, 4, 5];
+
+solution.rotateArrayByOne(nums);
+
+console.log(nums);  // Output the rotated array</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(N)</strong>, where N is the size of the input array. This is because we traverse the array once to shift the elements.<br/><br/>
+<strong>Space Complexity: O(1)</strong>, as we are using only a constant amount of extra space for the temporary variable.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+
+
+</div>
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

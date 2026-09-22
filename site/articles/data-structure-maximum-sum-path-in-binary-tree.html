@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Maximum Sum Path in Binary Tree</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Maximum Sum Path in Binary Tree</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/maximum-sum-path-in-binary-tree/</code></div>
+  <p><strong>Problem Statement: </strong> <br/>Given a Binary Tree, determine the maximum sum achievable along any path within the tree.
+A path in a binary tree is defined as a sequence of nodes where each pair of adjacent nodes is connected by an edge. Nodes can only appear once in the sequence, and the path is not required to start from the root. 
+Identify and compute the maximum sum possible along any path within the given binary tree.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: Binary Tree: -10 9 20 -1 -1 15 7</span>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/4ca8157e2fde0571.png" width="439"/></figure>
+<span>Output: 42</span>
+<span>Explanation: 
+Out of all the paths possible in the Binary Tree, 15 -&gt; 20 -&gt; 7 has the greatest sum ie. 42.</span>
+				<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/beb6cb83ec1e8bef.png" width="439"/></figure>
+<p></p>
+<span>Input: Binary Tree: -2 2 1</span>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/86575517bc482a98.png" width="439"/></figure>
+<span>Output: 2</span>
+<span>Explanation: 
+Out of all the paths possible in the Binary Tree, a path starting and ending at the node with value 2 has the greatest sum ie. 2.</span>
+				<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/026eb9a0da35fff2.png" width="439"/></figure>
+            </pre>
+</div>
+</details>
+</div><strong><em>Disclaimer</em></strong>: <em>
+     Here is the <a href="https://takeuforward.org/plus/dsa/problems/maximum-path-sum-" rel="noopener" target="_blank">practice link </a> to help you assess your knowledge better.
+           It's highly recommend trying to
+        solve it before looking at the solution. </em>
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+To find the maximum sum path in a binary tree, we treat every node as a possible turning point. At each node, we calculate the maximum path sum by adding the node’s value to the maximum path sums from its left and right subtrees.
+<p><figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/b391e3658a2b0aa6.png" width="439"/></figure></p>
+We can solve the maximum path sum problem using recursively traversing the tree and treating each node as a possible turning point. At every node, we calculate two things:<ol>
+<li>The maximum path sum that passes through the current node (left + right + node value). This is used to update our global maximum.</li>
+<li>The maximum path sum from the current node down one side (either left or right), which we return to the parent call.</li></ol>
+If a node is null, we return 0 since it doesn’t contribute to the path. This way, we explore all possible paths and keep track of the highest one found.
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/658a5a14031ce3b5.png" width="439"/></figure>
+<ul>
+<li>Use a recursive function that explores each node in the tree, calculating the best path sum from its left and right branches. If a node is null, treat its path sum as zero.</li>
+<li>For each node, calculate the total path sum by adding the current node's value and the sums from both its left and right branches.</li>
+<li>Update the tracked maximum path sum if this total is larger than what we had before.</li>
+
+<li>Return the best one-sided path (either left or right plus the current node) to be used in calculations above in the recursion.</li>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/ddd3319f87c9e05c.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/d7b0f5bb4c6eeacd.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/7b531499ba30aeb8.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/fc78f713a7110268.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/78edc4a26262bdd5.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/f9a4457684ce21f7.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/ddd3319f87c9e05c.png"/><img alt="Image 2" loading="lazy" src="../assets/img/d7b0f5bb4c6eeacd.png"/><img alt="Image 3" loading="lazy" src="../assets/img/7b531499ba30aeb8.png"/><img alt="Image 4" loading="lazy" src="../assets/img/fc78f713a7110268.png"/><img alt="Image 5" loading="lazy" src="../assets/img/78edc4a26262bdd5.png"/><img alt="Image 6" loading="lazy" src="../assets/img/f9a4457684ce21f7.png"/></div></div>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Tree Node Definition
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+
+    TreeNode(int x) {
+        val = x;
+        left = NULL;
+        right = NULL;
+    }
+};
+
+class Solution {
+public:
+    // Function to find max path sum in the tree
+    int maxPathSum(TreeNode* root) {
+        int maxSum = INT_MIN;
+        dfs(root, maxSum);
+        return maxSum;
+    }
+
+    // Helper function for recursive DFS
+    int dfs(TreeNode* node, int &amp;maxSum) {
+        if (!node) return 0;
+
+        // Recursively find left and right max path sums
+        int left = max(0, dfs(node-&gt;left, maxSum));
+        int right = max(0, dfs(node-&gt;right, maxSum));
+
+        // Update global max sum considering node as turning point
+        maxSum = max(maxSum, left + right + node-&gt;val);
+
+        // Return the best one-sided path sum
+        return max(left, right) + node-&gt;val;
+    }
+};
+
+// Driver Code
+int main() {
+    TreeNode* root = new TreeNode(-10);
+    root-&gt;left = new TreeNode(9);
+    root-&gt;right = new TreeNode(20);
+    root-&gt;right-&gt;left = new TreeNode(15);
+    root-&gt;right-&gt;right = new TreeNode(7);
+
+    Solution obj;
+    cout &lt;&lt; "Maximum Path Sum: "
+         &lt;&lt; obj.maxPathSum(root) &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">// Tree Node Definition
+class TreeNode {
+    int val;
+    TreeNode left, right;
+
+    TreeNode(int x) {
+        val = x;
+    }
+}
+
+class Solution {
+    // Global variable to store max path sum
+    int maxSum = Integer.MIN_VALUE;
+
+    // Main function
+    public int maxPathSum(TreeNode root) {
+        dfs(root);
+        return maxSum;
+    }
+
+    // DFS recursive function
+    private int dfs(TreeNode node) {
+        if (node == null) return 0;
+
+        // Calculate left and right subtree max path
+        int left = Math.max(0, dfs(node.left));
+        int right = Math.max(0, dfs(node.right));
+
+        // Update max sum considering current node
+        maxSum = Math.max(
+            maxSum,
+            left + right + node.val
+        );
+
+        // Return one-sided path
+        return Math.max(left, right) + node.val;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Creating test tree
+        TreeNode root = new TreeNode(-10);
+        root.left = new TreeNode(9);
+        root.right = new TreeNode(20);
+        root.right.left = new TreeNode(15);
+        root.right.right = new TreeNode(7);
+
+        Solution sol = new Solution();
+        System.out.println(
+            "Maximum Path Sum: " +
+            sol.maxPathSum(root)
+        );
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Tree Node Definition
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    # Main function to call
+    def maxPathSum(self, root):
+        self.max_sum = float('-inf')
+        self.dfs(root)
+        return self.max_sum
+
+    # Recursive DFS helper
+    def dfs(self, node):
+        if not node:
+            return 0
+
+        # Recursively find left and right max path sum
+        left = max(0, self.dfs(node.left))
+        right = max(0, self.dfs(node.right))
+
+        # Update max sum if path through node is better
+        self.max_sum = max(
+            self.max_sum,
+            left + right + node.val
+        )
+
+        # Return one-sided path
+        return max(left, right) + node.val
+
+# Driver Code
+if __name__ == "__main__":
+    # Build test tree
+    root = TreeNode(-10)
+    root.left = TreeNode(9)
+    root.right = TreeNode(20)
+    root.right.left = TreeNode(15)
+    root.right.right = TreeNode(7)
+
+    sol = Solution()
+    print("Maximum Path Sum:",
+          sol.maxPathSum(root))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Tree Node Definition
+class TreeNode {
+    constructor(val = 0, left = null, right = null) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+class Solution {
+    constructor() {
+        this.maxSum = -Infinity;
+    }
+
+    // Main function to call
+    maxPathSum(root) {
+        this.dfs(root);
+        return this.maxSum;
+    }
+
+    // DFS function to compute max sum
+    dfs(node) {
+        if (node === null) return 0;
+
+        // Get left and right subtree max path sum
+        const left = Math.max(0, this.dfs(node.left));
+        const right = Math.max(0, this.dfs(node.right));
+
+        // Update max path if node is turning point
+        this.maxSum = Math.max(
+            this.maxSum,
+            left + right + node.val
+        );
+
+        // Return best one-sided path
+        return Math.max(left, right) + node.val;
+    }
+}
+
+// Driver Code
+const root = new TreeNode(-10);
+root.left = new TreeNode(9);
+root.right = new TreeNode(20);
+root.right.left = new TreeNode(15);
+root.right.right = new TreeNode(7);
+
+const sol = new Solution();
+console.log(
+    "Maximum Path Sum:",
+    sol.maxPathSum(root)
+);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+<strong>Time Complexity: O(N)</strong>, each node is processed once in DFS Traversal.<br/>
+<strong>Space Complexity: O(H)</strong>, auxiliary stack space, where H is height of Binary Tree.<br/>
+<p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

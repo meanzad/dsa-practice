@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Topological Sort Algorithm | DFS: G-21</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Topological Sort Algorithm | DFS: G-21</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/topological-sort-algorithm-dfs-g-21/</code></div>
+  <p><strong>Problem Statement: </strong> Given a Directed Acyclic Graph (DAG) with V vertices labeled from 0 to V-1.The graph is represented using an adjacency list where adj[i] lists all nodes connected to node. Find any Topological Sorting of that Graph.
+
+
+<br/><br/>
+In topological sorting, node u will always appear before node v if there is a directed edge from node u towards node v(u -&gt; v).
+
+
+<br/>
+The Output will be True if your topological sort is correct otherwise it will be False.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p>
+<strong>Input:</strong> V = 6, adj = [[], [], [3], [1], [0, 1], [0, 2]]  
+<strong>Output:</strong> [5, 4, 2, 3, 1, 0]  
+<strong>Explanation:</strong> A graph may have multiple topological sortings. The result is one of them. The necessary conditions for the ordering are:  
+According to edge 5 -&gt; 0, node 5 must appear before node 0 in the ordering.  
+According to edge 4 -&gt; 0, node 4 must appear before node 0 in the ordering.  
+According to edge 5 -&gt; 2, node 5 must appear before node 2 in the ordering.  
+According to edge 2 -&gt; 3, node 2 must appear before node 3 in the ordering.  
+According to edge 3 -&gt; 1, node 3 must appear before node 1 in the ordering.  
+According to edge 4 -&gt; 1, node 4 must appear before node 1 in the ordering.  
+The above result satisfies all the necessary conditions. [4, 5, 2, 3, 1, 0] is also one such topological sorting that satisfies all the conditions.<br/>
+</p><p><img height="457" loading="lazy" src="../assets/img/9b79324580b1a9e2.png" width="481"/></p>
+<strong>Input:</strong> V = 4, adj = [[], [0], [0], [0]]  
+<strong>Output:</strong> [3, 2, 1, 0]  
+<strong>Explanation:</strong> The necessary conditions for the ordering are:  
+For edge 1 -&gt; 0, node 1 must appear before node 0.  
+For edge 2 -&gt; 0, node 2 must appear before node 0.  
+For edge 3 -&gt; 0, node 3 must appear before node 0.</pre>
+<p><img height="457" loading="lazy" src="../assets/img/d01ed8e8d9737de1.png" width="481"/></p>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/topological-sort-or-kahns-algorithm" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Using DFS (Depth first Search)
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+Topological sorting is a linear ordering of vertices in a Directed Acyclic Graph (DAG) such that for every directed edge from a vertex u to a vertex v (u → v), u appears before v in the ordering. Since the graph is acyclic, we can process vertices in a way that ensures dependencies are respected. The DFS-based approach works by exploring each vertex’s outgoing edges fully before marking it as finished. Once a vertex has no unvisited neighbors, we record it. This guarantees that all dependencies of a vertex are placed earlier in the order. At the end, reversing this finishing order yields a valid topological sorting.
+
+<ul>
+<li>Initialize a visited array to mark whether each vertex has been visited.</li>
+<li>Create a stack to store vertices in their finishing order.</li>
+<li>For each vertex, if it has not been visited, perform a DFS starting from it.</li>
+<li>In DFS, mark the current vertex as visited.</li>
+<li>For each neighbor of the current vertex, if unvisited, recursively call DFS on it.</li>
+<li>After exploring all neighbors, push the current vertex onto the stack.</li>
+<li>After DFS finishes for all vertices, pop all elements from the stack to get the topological ordering.</li>
+</ul>
+</div>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/a9ae44cb5183849c.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/addb040950a47f98.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/e51578eb94edf147.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/3604cc07e5cbf939.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/0f42e304c3a432a5.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/78f2d87fe2b71c91.png"/></div><div class="carousel-image"><img alt="Image 7" loading="lazy" src="../assets/img/a074307fd8c0089f.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/a9ae44cb5183849c.png"/><img alt="Image 2" loading="lazy" src="../assets/img/addb040950a47f98.png"/><img alt="Image 3" loading="lazy" src="../assets/img/e51578eb94edf147.png"/><img alt="Image 4" loading="lazy" src="../assets/img/3604cc07e5cbf939.png"/><img alt="Image 5" loading="lazy" src="../assets/img/0f42e304c3a432a5.png"/><img alt="Image 6" loading="lazy" src="../assets/img/78f2d87fe2b71c91.png"/><img alt="Image 7" loading="lazy" src="../assets/img/a074307fd8c0089f.png"/></div></div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Class containing the solution logic
+class Solution {
+public:
+    // Function to perform DFS
+    void dfs(int node, vector&lt;int&gt; adj[], vector&lt;int&gt;&amp; vis, stack&lt;int&gt;&amp; st) {
+        // Mark the current node as visited
+        vis[node] = 1;
+
+        // Explore all neighbors of this node
+        for (auto it : adj[node]) {
+            // If the neighbor is not visited, recursively perform DFS
+            if (!vis[it]) {
+                dfs(it, adj, vis, st);
+            }
+        }
+
+        // After visiting all neighbors, push this node into the stack
+        st.push(node);
+    }
+
+    // Function to perform Topological Sort
+    vector&lt;int&gt; topoSort(int V, vector&lt;int&gt; adj[]) {
+        // Create a visited array to mark visited vertices
+        vector&lt;int&gt; vis(V, 0);
+
+        // Stack to store vertices in finishing order
+        stack&lt;int&gt; st;
+
+        // Perform DFS from each unvisited vertex
+        for (int i = 0; i &lt; V; i++) {
+            if (!vis[i]) {
+                dfs(i, adj, vis, st);
+            }
+        }
+
+        // Prepare the result array
+        vector&lt;int&gt; ans;
+        while (!st.empty()) {
+            ans.push_back(st.top());
+            st.pop();
+        }
+
+        // Return the topological ordering
+        return ans;
+    }
+};
+
+// Driver code
+int main() {
+    // Number of vertices and edges
+    int V = 6, E = 6;
+
+    // Adjacency list representation of the graph
+    vector&lt;int&gt; adj[V];
+    adj[5].push_back(0);
+    adj[5].push_back(2);
+    adj[4].push_back(0);
+    adj[4].push_back(1);
+    adj[2].push_back(3);
+    adj[3].push_back(1);
+
+    // Create an object of Solution
+    Solution obj;
+
+    // Get the topological order
+    vector&lt;int&gt; res = obj.topoSort(V, adj);
+
+    // Print the result
+    cout &lt;&lt; "Topological Sort: ";
+    for (auto it : res) {
+        cout &lt;&lt; it &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Class containing the solution logic
+class Solution {
+    // Function to perform DFS
+    void dfs(int node, ArrayList&lt;ArrayList&lt;Integer&gt;&gt; adj, int[] vis, Stack&lt;Integer&gt; st) {
+        // Mark the current node as visited
+        vis[node] = 1;
+
+        // Explore all neighbors of this node
+        for (int it : adj.get(node)) {
+            // If the neighbor is not visited, recursively perform DFS
+            if (vis[it] == 0) {
+                dfs(it, adj, vis, st);
+            }
+        }
+
+        // After visiting all neighbors, push this node into the stack
+        st.push(node);
+    }
+
+    // Function to perform Topological Sort
+    ArrayList&lt;Integer&gt; topoSort(int V, ArrayList&lt;ArrayList&lt;Integer&gt;&gt; adj) {
+        // Create a visited array to mark visited vertices
+        int[] vis = new int[V];
+
+        // Stack to store vertices in finishing order
+        Stack&lt;Integer&gt; st = new Stack&lt;&gt;();
+
+        // Perform DFS from each unvisited vertex
+        for (int i = 0; i &lt; V; i++) {
+            if (vis[i] == 0) {
+                dfs(i, adj, vis, st);
+            }
+        }
+
+        // Prepare the result array
+        ArrayList&lt;Integer&gt; ans = new ArrayList&lt;&gt;();
+        while (!st.isEmpty()) {
+            ans.add(st.pop());
+        }
+
+        // Return the topological ordering
+        return ans;
+    }
+}
+
+// Driver class
+public class Main {
+    public static void main(String[] args) {
+        // Number of vertices
+        int V = 6;
+
+        // Create adjacency list for the graph
+        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; adj = new ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; V; i++) {
+            adj.add(new ArrayList&lt;&gt;());
+        }
+
+        // Adding edges
+        adj.get(5).add(0);
+        adj.get(5).add(2);
+        adj.get(4).add(0);
+        adj.get(4).add(1);
+        adj.get(2).add(3);
+        adj.get(3).add(1);
+
+        // Create object of Solution class
+        Solution obj = new Solution();
+
+        // Get the topological order
+        ArrayList&lt;Integer&gt; res = obj.topoSort(V, adj);
+
+        // Print result
+        System.out.print("Topological Sort: ");
+        for (int node : res) {
+            System.out.print(node + " ");
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Class containing the solution logic
+class Solution:
+    # Function to perform DFS
+    def dfs(self, node, adj, vis, st):
+        # Mark the current node as visited
+        vis[node] = 1
+        
+        # Explore all neighbors of this node
+        for it in adj[node]:
+            # If the neighbor is not visited, recursively perform DFS
+            if vis[it] == 0:
+                self.dfs(it, adj, vis, st)
+        
+        # After visiting all neighbors, push this node into the stack
+        st.append(node)
+
+    # Function to perform Topological Sort
+    def topoSort(self, V, adj):
+        # Create a visited array to mark visited vertices
+        vis = [0] * V
+        
+        # List to act as stack
+        st = []
+        
+        # Perform DFS from each unvisited vertex
+        for i in range(V):
+            if vis[i] == 0:
+                self.dfs(i, adj, vis, st)
+        
+        # Reverse the stack to get topological order
+        return st[::-1]
+
+# Driver code
+if __name__ == "__main__":
+    # Number of vertices
+    V = 6
+    
+    # Adjacency list
+    adj = [[] for _ in range(V)]
+    
+    # Adding edges
+    adj[5].append(0)
+    adj[5].append(2)
+    adj[4].append(0)
+    adj[4].append(1)
+    adj[2].append(3)
+    adj[3].append(1)
+    
+    # Create object of Solution
+    obj = Solution()
+    
+    # Get the topological order
+    res = obj.topoSort(V, adj)
+    
+    # Print result
+    print("Topological Sort:", *res)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Class containing the solution logic
+class Solution {
+    // Function to perform DFS
+    dfs(node, adj, vis, st) {
+        // Mark the current node as visited
+        vis[node] = 1;
+
+        // Explore all neighbors of this node
+        for (let it of adj[node]) {
+            // If the neighbor is not visited, recursively perform DFS
+            if (vis[it] === 0) {
+                this.dfs(it, adj, vis, st);
+            }
+        }
+
+        // After visiting all neighbors, push this node into the stack
+        st.push(node);
+    }
+
+    // Function to perform Topological Sort
+    topoSort(V, adj) {
+        // Create a visited array to mark visited vertices
+        let vis = new Array(V).fill(0);
+
+        // Array to act as stack
+        let st = [];
+
+        // Perform DFS from each unvisited vertex
+        for (let i = 0; i &lt; V; i++) {
+            if (vis[i] === 0) {
+                this.dfs(i, adj, vis, st);
+            }
+        }
+
+        // Reverse the stack to get topological order
+        return st.reverse();
+    }
+}
+
+// Driver code
+(function () {
+    // Number of vertices
+    let V = 6;
+
+    // Adjacency list
+    let adj = Array.from({ length: V }, () =&gt; []);
+
+    // Adding edges
+    adj[5].push(0);
+    adj[5].push(2);
+    adj[4].push(0);
+    adj[4].push(1);
+    adj[2].push(3);
+    adj[3].push(1);
+
+    // Create object of Solution
+    let obj = new Solution();
+
+    // Get the topological order
+    let res = obj.topoSort(V, adj);
+
+    // Print result
+    console.log("Topological Sort:", res.join(" "));
+})();
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O(V + E),This is because in a topological sort using DFS, each vertex is visited exactly once, and each directed edge is explored exactly once during the DFS traversal. The cost of visiting all vertices is O(V) and the cost of exploring all edges is O(E). Since both happen sequentially and not nested, the total time complexity is O(V + E). For example, if V = 6 and E = 6, the DFS will make exactly 6 vertex visits and 6 edge explorations, leading to a total of O(6 + 6) = O(12), which simplifies to O(V + E).</p>
+<p><strong>Space Complexity:</strong> O(V + E),The space complexity comes from three parts: the adjacency list (which stores all vertices and edges, taking O(V + E) space), the visited array (O(V) space), and the recursion stack (O(V) in the worst case for a DFS if the graph is like a chain). The stack used to store the topological order will also take O(V) space. Therefore, the dominant space usage is O(V + E). For example, if V = 6 and E = 6, the adjacency list will store all 6 vertices and 6 edges (O(12) space), the visited array takes O(6), and the recursion stack may take up to O(6) in the worst case, keeping the total within O(V + E).</p>
+</details>
+</div>
+</details></div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Using BFS ( Breadth First Search )
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+                        
+ Topological sorting can also be achieved using a Breadth-First Search (BFS) technique known as Kahn’s Algorithm.
+ <br/><br/>
+ Instead of relying on DFS and recursion, this method works by keeping track of the in-degree of each vertex, which represents the number of incoming edges to that vertex. Any vertex with an in-degree of zero has no prerequisites and can therefore safely appear first in the topological order. 
+                      
+<ul>
+<li>Initialize an array to store the in-degree of each vertex as zero.</li>
+<li>Build the adjacency list for the graph.</li>
+<li>For each directed edge, increment the in-degree of the destination vertex.</li>
+<li>Create a queue and enqueue all vertices with in-degree zero.</li>
+<li>Initialize an empty list to store the topological order.</li>
+<li>While the queue is not empty:
+    <ul>
+<li>Remove the front vertex from the queue and add it to the order list.</li>
+<li>For each neighbor of this vertex, reduce its in-degree by one.</li>
+<li>If a neighbor’s in-degree becomes zero, enqueue it.</li>
+</ul>
+</li>
+<li>Return the order list as the topological sort.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/e1ac574e37dea390.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/fca9053085e8ebdf.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/45a42da599447dfb.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/0cd8bdadc4872db9.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/e1ac574e37dea390.png"/><img alt="Image 2" loading="lazy" src="../assets/img/fca9053085e8ebdf.png"/><img alt="Image 3" loading="lazy" src="../assets/img/45a42da599447dfb.png"/><img alt="Image 4" loading="lazy" src="../assets/img/0cd8bdadc4872db9.png"/></div></div>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Creating a class named Solution
+class Solution {
+public:
+    // Function to perform BFS-based Topological Sort
+    vector&lt;int&gt; topologicalSort(int V, vector&lt;int&gt; adj[]) {
+        // Create a vector to store the in-degree of each vertex
+        vector&lt;int&gt; indegree(V, 0);
+        
+        // Loop through all vertices to calculate in-degree
+        for (int i = 0; i &lt; V; i++) {
+            // Traverse all adjacent vertices of the current vertex
+            for (auto it : adj[i]) {
+                // Increase in-degree of the connected vertex
+                indegree[it]++;
+            }
+        }
+        
+        // Create a queue to store vertices with in-degree zero
+        queue&lt;int&gt; q;
+        
+        // Loop through all vertices
+        for (int i = 0; i &lt; V; i++) {
+            // If in-degree is zero, add to queue
+            if (indegree[i] == 0) {
+                q.push(i);
+            }
+        }
+        
+        // Vector to store the topological order
+        vector&lt;int&gt; topo;
+        
+        // Process until queue is empty
+        while (!q.empty()) {
+            // Get the front vertex from the queue
+            int node = q.front();
+            q.pop();
+            
+            // Add it to the topological order
+            topo.push_back(node);
+            
+            // Reduce in-degree of its adjacent vertices
+            for (auto it : adj[node]) {
+                indegree[it]--;
+                // If in-degree becomes zero, push it into queue
+                if (indegree[it] == 0) {
+                    q.push(it);
+                }
+            }
+        }
+        
+        // Return the topological ordering
+        return topo;
+    }
+};
+
+// Driver code
+int main() {
+    // Number of vertices and edges
+    int V = 6, E = 6;
+    
+    // Creating adjacency list
+    vector&lt;int&gt; adj[V];
+    
+    // Adding edges
+    adj[5].push_back(0);
+    adj[5].push_back(2);
+    adj[4].push_back(0);
+    adj[4].push_back(1);
+    adj[2].push_back(3);
+    adj[3].push_back(1);
+    
+    // Creating Solution object
+    Solution obj;
+    
+    // Getting the topological sort result
+    vector&lt;int&gt; ans = obj.topologicalSort(V, adj);
+    
+    // Printing the result
+    for (auto it : ans) {
+        cout &lt;&lt; it &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+    
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import.java.util.*;
+// Class that contains the topological sort logic
+class Solution {
+
+    // Function to perform BFS-based topological sort
+    public int[] topologicalSort(int V, java.util.ArrayList&lt;java.util.ArrayList&lt;Integer&gt;&gt; adj) {
+        // Create an array to store the in-degree of each vertex
+        int[] indegree = new int[V];
+
+        // Loop over all vertices to calculate in-degree
+        for (int i = 0; i &lt; V; i++) {
+            // Loop over all adjacent vertices of current vertex
+            for (int it : adj.get(i)) {
+                // Increase in-degree of connected vertex
+                indegree[it]++;
+            }
+        }
+
+        // Create a queue to store vertices with in-degree zero
+        java.util.Queue&lt;Integer&gt; q = new java.util.LinkedList&lt;&gt;();
+
+        // Loop through all vertices
+        for (int i = 0; i &lt; V; i++) {
+            // If in-degree is zero, add it to queue
+            if (indegree[i] == 0) {
+                q.add(i);
+            }
+        }
+
+        // Array to store the topological order
+        int[] topo = new int[V];
+        // Index to track position in topo array
+        int idx = 0;
+
+        // Process vertices in queue
+        while (!q.isEmpty()) {
+            // Remove vertex from queue
+            int node = q.poll();
+
+            // Add it to the topological order
+            topo[idx++] = node;
+
+            // Loop through adjacent vertices of the current node
+            for (int it : adj.get(node)) {
+                // Reduce in-degree of connected vertex
+                indegree[it]--;
+                // If in-degree becomes zero, push it to queue
+                if (indegree[it] == 0) {
+                    q.add(it);
+                }
+            }
+        }
+
+        // Return the topological ordering
+        return topo;
+    }
+}
+
+// Driver class
+public class Main {
+    public static void main(String[] args) {
+        // Number of vertices
+        int V = 6;
+
+        // Create adjacency list
+        java.util.ArrayList&lt;java.util.ArrayList&lt;Integer&gt;&gt; adj = new java.util.ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; V; i++) {
+            adj.add(new java.util.ArrayList&lt;&gt;());
+        }
+
+        // Adding edges
+        adj.get(5).add(0);
+        adj.get(5).add(2);
+        adj.get(4).add(0);
+        adj.get(4).add(1);
+        adj.get(2).add(3);
+        adj.get(3).add(1);
+
+        // Create Solution object
+        Solution obj = new Solution();
+
+        // Call the function to get topological sort
+        int[] ans = obj.topologicalSort(V, adj);
+
+        // Print the result
+        for (int val : ans) {
+            System.out.print(val + " ");
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Class that contains the topological sort logic
+class Solution:
+    # Function to perform BFS-based topological sort
+    def topologicalSort(self, V, adj):
+        # Create a list to store in-degree of each vertex
+        indegree = [0] * V
+
+        # Loop over all vertices to calculate in-degree
+        for i in range(V):
+            # Loop through adjacent vertices
+            for it in adj[i]:
+                # Increase in-degree of connected vertex
+                indegree[it] += 1
+
+        # Create a queue to store vertices with in-degree zero
+        from collections import deque
+        q = deque()
+
+        # Loop through all vertices
+        for i in range(V):
+            # If in-degree is zero, add to queue
+            if indegree[i] == 0:
+                q.append(i)
+
+        # List to store topological order
+        topo = []
+
+        # Process vertices until queue is empty
+        while q:
+            # Remove vertex from queue
+            node = q.popleft()
+
+            # Add it to the topological order
+            topo.append(node)
+
+            # Loop through adjacent vertices of the current node
+            for it in adj[node]:
+                # Reduce in-degree of connected vertex
+                indegree[it] -= 1
+                # If in-degree becomes zero, push into queue
+                if indegree[it] == 0:
+                    q.append(it)
+
+        # Return the topological ordering
+        return topo
+
+
+# Driver code
+if __name__ == "__main__":
+    # Number of vertices
+    V = 6
+
+    # Create adjacency list
+    adj = [[] for _ in range(V)]
+
+    # Adding edges
+    adj[5].append(0)
+    adj[5].append(2)
+    adj[4].append(0)
+    adj[4].append(1)
+    adj[2].append(3)
+    adj[3].append(1)
+
+    # Create Solution object
+    obj = Solution()
+
+    # Get topological sort
+    ans = obj.topologicalSort(V, adj)
+
+    # Print the result
+    print(*ans)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Class that contains the topological sort logic
+class Solution {
+    // Function to perform BFS-based topological sort
+    topologicalSort(V, adj) {
+        // Create an array to store in-degree of each vertex
+        let indegree = new Array(V).fill(0);
+
+        // Loop over all vertices to calculate in-degree
+        for (let i = 0; i &lt; V; i++) {
+            // Loop over adjacent vertices
+            for (let it of adj[i]) {
+                // Increase in-degree of connected vertex
+                indegree[it]++;
+            }
+        }
+
+        // Create a queue to store vertices with in-degree zero
+        let q = [];
+
+        // Loop through all vertices
+        for (let i = 0; i &lt; V; i++) {
+            // If in-degree is zero, add to queue
+            if (indegree[i] === 0) {
+                q.push(i);
+            }
+        }
+
+        // Array to store topological order
+        let topo = [];
+
+        // Process until queue is empty
+        while (q.length &gt; 0) {
+            // Remove vertex from queue
+            let node = q.shift();
+
+            // Add it to the topological order
+            topo.push(node);
+
+            // Loop through adjacent vertices
+            for (let it of adj[node]) {
+                // Reduce in-degree of connected vertex
+                indegree[it]--;
+                // If in-degree becomes zero, add to queue
+                if (indegree[it] === 0) {
+                    q.push(it);
+                }
+            }
+        }
+
+        // Return the topological ordering
+        return topo;
+    }
+}
+
+// Driver code
+let V = 6;
+
+// Create adjacency list
+let adj = Array.from({ length: V }, () =&gt; []);
+
+// Adding edges
+adj[5].push(0);
+adj[5].push(2);
+adj[4].push(0);
+adj[4].push(1);
+adj[2].push(3);
+adj[3].push(1);
+
+// Create Solution object
+let obj = new Solution();
+
+// Get topological sort
+let ans = obj.topologicalSort(V, adj);
+
+// Print the result
+console.log(ans.join(" "));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O(V + E) because we visit each vertex exactly once and process all outgoing edges from each vertex exactly once. The in-degree calculation takes O(E), and each vertex is enqueued and dequeued exactly once in O(V). Thus, total time is linear in the sum of vertices and edges.</p> <p><strong>Space Complexity:</strong> O(V + E) because we store the adjacency list which takes O(E) space, the in-degree array which takes O(V), the queue which can store up to O(V) vertices at a time, and the topological order array which takes O(V). Overall, the space requirement is proportional to the size of the graph.</p>
+</details>
+</div>
+</details></div>
+
+</div>
+</article>
+<script src="../article.js"></script>
+</body></html>

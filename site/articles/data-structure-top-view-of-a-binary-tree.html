@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Top view of a Binary Tree</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Top view of a Binary Tree</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/top-view-of-a-binary-tree/</code></div>
+  <p><strong>Problem Statement: </strong> Given a Binary Tree, return its Top View. The Top View of a Binary Tree is the set of nodes visible when we see the tree from the top.
+
+ 
+</p>
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p>
+<strong>Input:</strong>Binary Tree: 1 2 3 4 10 9 11 -1 5 -1 -1 -1 -1 -1 -1 -1 6
+<img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/ebf72d380539b91b.png" width="439"/>
+<strong>Output:</strong> Top View: [4, 2, 1, 3, 11]
+<strong>Explanation: </strong>
+<img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/830f16b9b4f0ce4d.png" width="439"/>
+<strong>Input:</strong>Binary Tree: 2 7 5 2 6 -1 9 -1 -1 5 11 4 -1
+<img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/f1c0638801deab97.png" width="439"/>
+<strong>Output :</strong> Top View: [2, 7, 2, 5, 9]
+<strong>Explanation: </strong>
+<img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/fe4bac5d75260816.png" width="439"/></p></pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Don’t jump directly to the solution, try it out
+        yourself first. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                Approach 
+            </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Algorithm 
+                    </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<p>To imagine the Binary Tree from above, we visualise vertical lines passing through the tree. Each vertical line represents a unique vertical position.
+                    Nodes to the right of the tree’s centre are assigned positive vertical indexes. As we move to the right, the vertical index increases. Nodes to the left of the tree’s centre are assigned negative vertical indexes. As we move to the left, the vertical index decreases.</p>
+
+<p>We use a map data structure to store the nodes corresponding to each vertical level of the tree as the map automatically sorts the elements based on their ascending value. Against each vertical level, the node highest in the tree at that vertical level is added by traversing the tree level order wise (BFS).</p>
+
+<ul>
+<li>Create a vector `ans` to store the result. Check if the tree is empty. If it is, return an empty vector.</li>
+<li>Create a map to store the top view of nodes based on their vertical positions. The key of this map is the vertical index and the value is the node’s data.</li>
+<li>Initialise a queue to perform breadth first traversal. Each element of this queue is the node of the binary tree along with its vertical coordinate. Enqueue the root node into the queue with its vertical position initialised to 0.</li>
+</ul>
+<p><strong>While the queue is not empty, pop the front node of the queue and for this node:</strong>
+</p><ol><li>Get its vertical position. If this vertical position is not in the map, add the node’s data to the map. This means that this node is the first node encountered at this vertical position during the traversal.</li><li>If the vertical position of this node is already a key in the map, it implies that a node higher in the tree with the same vertical position has already been processed.</li><li>Enqueue the left child with a decreased vertical position ie. current vertical index -1. As when we move to the left child, we are moving towards the left column in the vertical order traversal.</li><li>Enqueue the right child with an increased vertical position ie. current vertical index + 1. As when we move to the right child, we are moving towards the right column in the vertical order traversal.</li></ol>
+<strong>Iterate over the map and push the values of each node into the top view traversal.</strong>
+<ol><li>Since the keys of the map are sorted based on their keys (vertical positions), the nodes added to the `ans` vector will be sorted left to right.</li><li>Return the ‘ans’ vector.</li></ol>
+
+
+</div>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/51d4947c554bb213.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/662ae6f629569e88.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/58b9030517c0f514.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/534a8c3357ab3ef3.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/31f38568408aedb3.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/158882e90410497b.png"/></div><div class="carousel-image"><img alt="Image 7" loading="lazy" src="../assets/img/6575b0898d7d8f0b.png"/></div><div class="carousel-image"><img alt="Image 8" loading="lazy" src="../assets/img/676eb1a2de468a48.png"/></div><div class="carousel-image"><img alt="Image 9" loading="lazy" src="../assets/img/2807567e7e0c70d8.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/51d4947c554bb213.png"/><img alt="Image 2" loading="lazy" src="../assets/img/662ae6f629569e88.png"/><img alt="Image 3" loading="lazy" src="../assets/img/58b9030517c0f514.png"/><img alt="Image 4" loading="lazy" src="../assets/img/534a8c3357ab3ef3.png"/><img alt="Image 5" loading="lazy" src="../assets/img/31f38568408aedb3.png"/><img alt="Image 6" loading="lazy" src="../assets/img/158882e90410497b.png"/><img alt="Image 7" loading="lazy" src="../assets/img/6575b0898d7d8f0b.png"/><img alt="Image 8" loading="lazy" src="../assets/img/676eb1a2de468a48.png"/><img alt="Image 9" loading="lazy" src="../assets/img/2807567e7e0c70d8.png"/></div></div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Structure representing each node of the binary tree
+struct Node {
+    // Value stored in the node
+    int data;
+    // Pointer to the left child
+    Node* left;
+    // Pointer to the right child
+    Node* right;
+    // Constructor to initialize a node with a value
+    Node(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+
+// Class containing the logic for top view
+class Solution {
+public:
+    // Function to return the top view of the binary tree
+    vector&lt;int&gt; topView(Node* root) {
+        // Create a vector to store the final answer
+        vector&lt;int&gt; ans;
+
+        // If the tree is empty, return an empty result
+        if (root == NULL) {
+            return ans;
+        }
+
+        // Create a map to store vertical level -&gt; node value (only first encountered)
+        map&lt;int, int&gt; mpp;
+
+        // Create a queue for BFS that stores {node, vertical_level}
+        queue&lt;pair&lt;Node*, int&gt;&gt; q;
+
+        // Push the root node with vertical level 0
+        q.push({root, 0});
+
+        // Start BFS traversal
+        while (!q.empty()) {
+            // Extract the front element of the queue
+            auto it = q.front();
+            q.pop();
+
+            // Get the node and its vertical position
+            Node* node = it.first;
+            int line = it.second;
+
+            // If this vertical position is being visited for the first time, store it
+            if (mpp.find(line) == mpp.end()) {
+                mpp[line] = node-&gt;data;
+            }
+
+            // If there is a left child, push it with vertical level - 1
+            if (node-&gt;left != NULL) {
+                q.push({node-&gt;left, line - 1});
+            }
+
+            // If there is a right child, push it with vertical level + 1
+            if (node-&gt;right != NULL) {
+                q.push({node-&gt;right, line + 1});
+            }
+        }
+
+        // Traverse the map and store values in the answer vector
+        for (auto it : mpp) {
+            ans.push_back(it.second);
+        }
+
+        // Return the result
+        return ans;
+    }
+};
+
+// Driver code
+int main() {
+    // Create the sample binary tree
+    Node* root = new Node(1);
+    root-&gt;left = new Node(2);
+    root-&gt;left-&gt;left = new Node(4);
+    root-&gt;left-&gt;right = new Node(10);
+    root-&gt;left-&gt;left-&gt;right = new Node(5);
+    root-&gt;left-&gt;left-&gt;right-&gt;right = new Node(6);
+    root-&gt;right = new Node(3);
+    root-&gt;right-&gt;right = new Node(10);
+    root-&gt;right-&gt;left = new Node(9);
+
+    // Create a Solution object
+    Solution solution;
+
+    // Get the top view
+    vector&lt;int&gt; result = solution.topView(root);
+
+    // Print the top view traversal
+    cout &lt;&lt; "Top View Traversal: ";
+    for (auto node : result) {
+        cout &lt;&lt; node &lt;&lt; " ";
+    }
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import.java.util.*;
+// Class representing a single node of the binary tree
+class Node {
+    // Value stored in the node
+    int data;
+    // Reference to the left child
+    Node left;
+    // Reference to the right child
+    Node right;
+    // Constructor to initialize a node with a value
+    Node(int val) {
+        data = val;
+        left = null;
+        right = null;
+    }
+}
+
+// Class containing the logic for top view
+class Solution {
+    // Function to return the top view of the binary tree
+    public java.util.List&lt;Integer&gt; topView(Node root) {
+        // Create a list to store the final result
+        java.util.List&lt;Integer&gt; ans = new java.util.ArrayList&lt;&gt;();
+
+        // If the tree is empty, return empty result
+        if (root == null) {
+            return ans;
+        }
+
+        // Map to store vertical level -&gt; node value (only first encountered)
+        java.util.Map&lt;Integer, Integer&gt; mpp = new java.util.TreeMap&lt;&gt;();
+
+        // Queue for BFS storing {node, vertical_level}
+        java.util.Queue&lt;java.util.AbstractMap.SimpleEntry&lt;Node, Integer&gt;&gt; q = new java.util.LinkedList&lt;&gt;();
+
+        // Push the root node with vertical level 0
+        q.add(new java.util.AbstractMap.SimpleEntry&lt;&gt;(root, 0));
+
+        // Start BFS traversal
+        while (!q.isEmpty()) {
+            // Get the front element of the queue
+            java.util.AbstractMap.SimpleEntry&lt;Node, Integer&gt; entry = q.poll();
+
+            // Extract node and vertical position
+            Node node = entry.getKey();
+            int line = entry.getValue();
+
+            // If vertical position is visited for the first time, store the value
+            if (!mpp.containsKey(line)) {
+                mpp.put(line, node.data);
+            }
+
+            // If left child exists, push it with vertical level - 1
+            if (node.left != null) {
+                q.add(new java.util.AbstractMap.SimpleEntry&lt;&gt;(node.left, line - 1));
+            }
+
+            // If right child exists, push it with vertical level + 1
+            if (node.right != null) {
+                q.add(new java.util.AbstractMap.SimpleEntry&lt;&gt;(node.right, line + 1));
+            }
+        }
+
+        // Transfer values from the map to the answer list
+        for (int val : mpp.values()) {
+            ans.add(val);
+        }
+
+        // Return the result
+        return ans;
+    }
+}
+
+// Driver class
+public class Main {
+    public static void main(String[] args) {
+        // Create the sample binary tree
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.left.left = new Node(4);
+        root.left.right = new Node(10);
+        root.left.left.right = new Node(5);
+        root.left.left.right.right = new Node(6);
+        root.right = new Node(3);
+        root.right.right = new Node(10);
+        root.right.left = new Node(9);
+
+        // Create Solution object
+        Solution solution = new Solution();
+
+        // Get the top view
+        java.util.List&lt;Integer&gt; result = solution.topView(root);
+
+        // Print the result
+        System.out.print("Top View Traversal: ");
+        for (int val : result) {
+            System.out.print(val + " ");
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Class representing a single node of the binary tree
+class Node:
+    # Constructor to initialize node with value
+    def __init__(self, val):
+        self.data = val
+        self.left = None
+        self.right = None
+
+# Class containing the logic for top view
+class Solution:
+    # Function to return the top view of the binary tree
+    def topView(self, root):
+        # Create a list to store final answer
+        ans = []
+
+        # If tree is empty, return empty list
+        if root is None:
+            return ans
+
+        # Dictionary to store vertical_level -&gt; node value
+        mpp = {}
+
+        # Queue for BFS storing (node, vertical_level)
+        from collections import deque
+        q = deque()
+
+        # Push the root with vertical level 0
+        q.append((root, 0))
+
+        # Start BFS traversal
+        while q:
+            # Pop the front element from queue
+            node, line = q.popleft()
+
+            # If vertical level is first time visited, store value
+            if line not in mpp:
+                mpp[line] = node.data
+
+            # If left child exists, push with vertical level - 1
+            if node.left:
+                q.append((node.left, line - 1))
+
+            # If right child exists, push with vertical level + 1
+            if node.right:
+                q.append((node.right, line + 1))
+
+        # Extract values from dictionary in sorted order of vertical levels
+        for key in sorted(mpp.keys()):
+            ans.append(mpp[key])
+
+        # Return the result
+        return ans
+
+# Driver code
+if __name__ == "__main__":
+    # Create the sample binary tree
+    root = Node(1)
+    root.left = Node(2)
+    root.left.left = Node(4)
+    root.left.right = Node(10)
+    root.left.left.right = Node(5)
+    root.left.left.right.right = Node(6)
+    root.right = Node(3)
+    root.right.right = Node(10)
+    root.right.left = Node(9)
+
+    # Create Solution object
+    solution = Solution()
+
+    # Get the top view
+    result = solution.topView(root)
+
+    # Print the result
+    print("Top View Traversal:", *result)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Class representing a single node of the binary tree
+class Node {
+    // Constructor to initialize node with value
+    constructor(val) {
+        this.data = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+// Class containing the logic for top view
+class Solution {
+    // Function to return the top view of the binary tree
+    topView(root) {
+        // Create an array to store the final answer
+        let ans = [];
+
+        // If tree is empty, return empty result
+        if (!root) {
+            return ans;
+        }
+
+        // Map to store vertical_level -&gt; node value
+        let mpp = new Map();
+
+        // Queue for BFS storing [node, vertical_level]
+        let q = [];
+        q.push([root, 0]);
+
+        // Start BFS traversal
+        while (q.length &gt; 0) {
+            // Remove the front element from queue
+            let [node, line] = q.shift();
+
+            // If vertical level is visited first time, store it
+            if (!mpp.has(line)) {
+                mpp.set(line, node.data);
+            }
+
+            // If left child exists, push with vertical level - 1
+            if (node.left) {
+                q.push([node.left, line - 1]);
+            }
+
+            // If right child exists, push with vertical level + 1
+            if (node.right) {
+                q.push([node.right, line + 1]);
+            }
+        }
+
+        // Extract values in sorted order of vertical levels
+        let sortedKeys = Array.from(mpp.keys()).sort((a, b) =&gt; a - b);
+        for (let key of sortedKeys) {
+            ans.push(mpp.get(key));
+        }
+
+        // Return the result
+        return ans;
+    }
+}
+
+// Driver code
+(function () {
+    // Create the sample binary tree
+    let root = new Node(1);
+    root.left = new Node(2);
+    root.left.left = new Node(4);
+    root.left.right = new Node(10);
+    root.left.left.right = new Node(5);
+    root.left.left.right.right = new Node(6);
+    root.right = new Node(3);
+    root.right.right = new Node(10);
+    root.right.left = new Node(9);
+
+    // Create Solution object
+    let solution = new Solution();
+
+    // Get the top view
+    let result = solution.topView(root);
+
+    // Print the result
+    console.log("Top View Traversal:", ...result);
+})();
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Complexity Analysis
+                    </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity: O(N)</strong> where N is the number of nodes in the Binary Tree. This complexity arises from visiting each node exactly once during the BFS traversal.</p>
+<p><strong>Space Complexity:  O(N/2 + N/2)</strong>  where N represents the number of nodes in the Binary Tree.
+					The main space consuming data structure is the queue used for BFS traversal. It acquires space proportional to the number of nodes in the level it is exploring hence in the worst case of a balanced binary tree, the queue will have at most N/2 nodes which is the maximum width.Additionally, the map is used to store the top view nodes based on their vertical positions hence its complexity will also be proportional to the greatest width level. In the worst case, it may have N/2 entries as well. </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Quick Sort Algorithm</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Quick Sort Algorithm</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/quick-sort-algorithm/</code></div>
+  <p><strong>Problem Statement: </strong>Given an array of n integers, sort the array using the Quicksort method.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: N = 5, Arr[] = {4,1,7,9,3}</span>
+<span>Output: {1, 3, 4, 7, 9}</span>
+<span>Explanation: After sorting the array in ascending order it becomes 1, 3, 4, 7, 9</span>
+<p></p>
+<span>Input: N = 8, Arr[] = {4,6,2,5,7,9,1,3}</span>
+<span>Output: {1, 2, 3, 4, 5, 6, 7, 9}</span>
+<span>Explanation: After sorting the array in ascending order it becomes 1, 2, 3, 4, 5, 6, 7, 9</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/quick-sorting" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better.
+            It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                 Quick Sort 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+The core idea behind Quicksort lies in partitioning the array around a pivot element such that all elements smaller than the pivot lie to its left and all greater elements lie to its right. This positioning ensures that the pivot is in its correct sorted place. By doing this for each recursive call, the problem is broken down into smaller subproblems where each side of the pivot can be independently sorted. This divide-and-conquer strategy allows Quicksort to sort parts of the array separately.
+<ul>
+<li> Select a pivot element from the array (commonly the last element, but can be first, middle, or random). </li>
+<li> Rearrange the elements in the array such that all elements smaller than the pivot are placed before it and all greater elements are placed after it (this step is called partitioning). </li>
+<li> After partitioning, the pivot is in its correct sorted position. </li>
+<li> Recursively apply the same process to the subarrays on the left and right of the pivot. </li>
+<li> Base condition for recursion is when the subarray has zero or one element, as it's already sorted. </li>
+<li> Combine the results of the recursive calls to obtain the fully sorted array. </li>
+</ul>
+<br/>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/984bed9db67b1b30.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/eafe71de147fd760.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/6cf75a446144cd93.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/9dd6b281c1092323.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/49da1a474df66525.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/984bed9db67b1b30.png"/><img alt="Image 2" loading="lazy" src="../assets/img/eafe71de147fd760.png"/><img alt="Image 3" loading="lazy" src="../assets/img/6cf75a446144cd93.png"/><img alt="Image 4" loading="lazy" src="../assets/img/9dd6b281c1092323.png"/><img alt="Image 5" loading="lazy" src="../assets/img/49da1a474df66525.png"/></div></div>
+<br/>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to perform quicksort
+    void quickSort(vector&lt;int&gt;&amp; arr, int low, int high) {
+        // Base case: if low is not less than high
+        if (low &lt; high) {
+            // Find pivot index after partitioning
+            int pivotIndex = partition(arr, low, high);
+
+            // Recursively sort elements before pivot
+            quickSort(arr, low, pivotIndex - 1);
+
+            // Recursively sort elements after pivot
+            quickSort(arr, pivotIndex + 1, high);
+        }
+    }
+
+    // Function to partition the array
+    int partition(vector&lt;int&gt;&amp; arr, int low, int high) {
+        // Choose the last element as pivot
+        int pivot = arr[high];
+
+        // Initialize i to place smaller elements
+        int i = low - 1;
+
+        // Traverse the array
+        for (int j = low; j &lt; high; j++) {
+            // If element is smaller than or equal to pivot
+            if (arr[j] &lt;= pivot) {
+                // Increment i and swap with j
+                i++;
+                swap(arr[i], arr[j]);
+            }
+        }
+
+        // Place pivot in correct position
+        swap(arr[i + 1], arr[high]);
+
+        // Return pivot index
+        return i + 1;
+    }
+};
+
+int main() {
+    // Sample array
+    vector&lt;int&gt; arr = {10, 7, 8, 9, 1, 5};
+
+    // Create solution object
+    Solution sol;
+
+    // Apply quicksort
+    sol.quickSort(arr, 0, arr.size() - 1);
+
+    // Print sorted array
+    for (int num : arr)
+        cout &lt;&lt; num &lt;&lt; " ";
+    
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // Function to perform quicksort
+    public void quickSort(int[] arr, int low, int high) {
+        // Base case
+        if (low &lt; high) {
+            // Find pivot index
+            int pivotIndex = partition(arr, low, high);
+
+            // Sort left subarray
+            quickSort(arr, low, pivotIndex - 1);
+
+            // Sort right subarray
+            quickSort(arr, pivotIndex + 1, high);
+        }
+    }
+
+    // Function to partition array
+    private int partition(int[] arr, int low, int high) {
+        // Choose last element as pivot
+        int pivot = arr[high];
+
+        // Initialize i
+        int i = low - 1;
+
+        // Traverse from low to high-1
+        for (int j = low; j &lt; high; j++) {
+            // If element &lt;= pivot
+            if (arr[j] &lt;= pivot) {
+                // Increment i and swap
+                i++;
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+
+        // Place pivot in correct position
+        int temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+
+        // Return pivot index
+        return i + 1;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Input array
+        int[] arr = {10, 7, 8, 9, 1, 5};
+
+        // Create object
+        Solution sol = new Solution();
+
+        // Call quickSort
+        sol.quickSort(arr, 0, arr.length - 1);
+
+        // Print sorted array
+        for (int num : arr)
+            System.out.print(num + " ");
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to perform quicksort
+    def quickSort(self, arr, low, high):
+        # Base case
+        if low &lt; high:
+            # Partition and get pivot index
+            pivotIndex = self.partition(arr, low, high)
+
+            # Sort left part
+            self.quickSort(arr, low, pivotIndex - 1)
+
+            # Sort right part
+            self.quickSort(arr, pivotIndex + 1, high)
+
+    # Function to partition the array
+    def partition(self, arr, low, high):
+        # Take pivot as last element
+        pivot = arr[high]
+
+        # i will track smaller elements
+        i = low - 1
+
+        # Loop through the array
+        for j in range(low, high):
+            # If element &lt;= pivot
+            if arr[j] &lt;= pivot:
+                # Move i forward
+                i += 1
+
+                # Swap arr[i] and arr[j]
+                arr[i], arr[j] = arr[j], arr[i]
+
+        # Put pivot in correct position
+        arr[i + 1], arr[high] = arr[high], arr[i + 1]
+
+        # Return pivot index
+        return i + 1
+
+# Driver code
+arr = [10, 7, 8, 9, 1, 5]
+
+# Create object
+sol = Solution()
+
+# Call quicksort
+sol.quickSort(arr, 0, len(arr) - 1)
+
+# Print sorted array
+print(*arr)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to perform quicksort
+    quickSort(arr, low, high) {
+        // Base case
+        if (low &lt; high) {
+            // Partition the array
+            let pivotIndex = this.partition(arr, low, high);
+
+            // Sort left part
+            this.quickSort(arr, low, pivotIndex - 1);
+
+            // Sort right part
+            this.quickSort(arr, pivotIndex + 1, high);
+        }
+    }
+
+    // Function to partition array
+    partition(arr, low, high) {
+        // Choose pivot as last element
+        let pivot = arr[high];
+
+        // Initialize i
+        let i = low - 1;
+
+        // Traverse array
+        for (let j = low; j &lt; high; j++) {
+            // If current element &lt;= pivot
+            if (arr[j] &lt;= pivot) {
+                // Move i and swap
+                i++;
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+        }
+
+        // Place pivot at correct position
+        [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
+
+        // Return pivot index
+        return i + 1;
+    }
+}
+
+// Driver code
+let arr = [10, 7, 8, 9, 1, 5];
+
+// Create object
+let sol = new Solution();
+
+// Call quickSort
+sol.quickSort(arr, 0, arr.length - 1);
+
+// Print sorted array
+console.log(arr.join(" "));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N*logN)</strong>, At each step, we divide the whole array, for that we take logN time and n steps are taken for the partitioning. In worst case i.e. when our pivot is always the greatest or the smallest element of the array, the time complexity can be O(N^2).<br/>
+<strong>Space Complexity: O(N)</strong>, auxiliary stack space.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

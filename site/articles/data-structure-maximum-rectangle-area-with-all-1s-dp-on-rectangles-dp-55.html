@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Maximum Rectangle Area with all 1&#x27;s | DP on Rectangles: DP 55</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Maximum Rectangle Area with all 1&#x27;s | DP on Rectangles: DP 55</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/maximum-rectangle-area-with-all-1s-dp-on-rectangles-dp-55/</code></div>
+  <p><strong>Problem Statement: </strong> Given a m x n binary matrix filled with 0's and 1's, find the largest rectangle containing only 1's and return its area. 
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: matrix = [[1,0,1,0,0],[1,0,1,1,1],[1,1,1,1,1],[1,0,0,1,0]]
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-7260" loading="lazy" src="../assets/img/849826b658255607.png"/></figure></span>
+<span>Output: 6</span>
+<span>Explanation: The highlighted part depicts the rectangle with the largest area i.e. 6
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-7261" loading="lazy" src="../assets/img/6343c4d285657e92.png"/></figure></span>
+<span>Input:  matrix = [[1]]</span>
+<span>Output: 1</span>
+<span>Explanation: In this case, there is only one rectangle with area 1.</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/detect-a-cycle-in-an-undirected-graph" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. 
+    It's highly recommend trying to 
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">In the article, <a href="https://takeuforward.org/data-structure/area-of-largest-rectangle-in-histogram/" rel="noopener" target="_blank" title="">Area of largest rectangle in Histogram</a>, we have learned how to figure out the area of the largest rectangle in a given histogram. Here, in order to solve this problem, we are going to use a similar approach. Consider the following example:
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-7262" loading="lazy" src="../assets/img/c0f6dad02a235ba4.png"/></figure>
+<p></p>
+If we carefully observe, we can convert each row of the given matrix into a histogram. Let’s try it out with the first row: We can consider the first and third columns to be rectangles with height 1 and the rest to be rectangles with height 0. The histogram will look like the following:<br/>[1, 0, 1, 0, 0]
+
+
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-7263" loading="lazy" src="../assets/img/d7208f22ced39af0.png"/></figure>
+
+<p></p>
+
+Similarly, if we try for the second row, we can observe the following:<br/>[2, 0, 2, 1, 1]
+
+
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-7264" loading="lazy" src="../assets/img/6f4552ffad84eb9e.png"/></figure>
+
+<p></p>The first and third columns represent rectangles of height 2, the second column represents a rectangle of height 0 and the fourth and fifth columns represent rectangles of height 1.<br/>For the third row, it will be like [3, 1, 3, 2, 2] and for the fourth, it will be [4, 0, 0, 3, 0].<br/><br/>
+Similarly, following the same process, we can convert every row of any matrix into a histogram. Now, if we pass each histogram(i.e. Each row) to the function used in finding the<a href="https://takeuforward.org/data-structure/area-of-largest-rectangle-in-histogram/" rel="noopener" target="_blank" title=""> Area of the largest rectangle in the Histogram</a>, it will give us the maximum area for each histogram. Among all the answers to the histograms, we will consider the maximum one.
+<ul>
+<li>Create an array to store heights of histogram bars, one for each column in the matrix.</li>
+<li>Traverse the matrix row by row and for each cell in the row:</li>
+<ul>
+<li>If the value is '1', increase the height at that column by 1.</li>
+<li>If the value is '0', reset the height at that column to 0.</li>
+</ul>
+<li>After updating the histogram for the current row, calculate the largest rectangle area in that histogram.</li>
+<li>Keep track of the maximum area seen so far across all rows. After processing all rows, the stored maximum will be the area of the largest rectangle consisting of only 1s.</li>
+</ul>
+<p></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Class containing the solution functions
+class Solution {
+public:
+
+    // Function to calculate largest rectangle area in a histogram
+    int largestRectangleArea(vector&lt;int&gt;&amp; heights) {
+
+        // Stack to store indices of histogram bars
+        stack&lt;int&gt; st;
+
+        // Variable to store the max area
+        int maxArea = 0;
+
+        // Add a sentinel zero height at the end
+        heights.push_back(0);
+
+        // Iterate through all bars
+        for (int i = 0; i &lt; heights.size(); i++) {
+
+            // While current bar is smaller than the bar at stack top
+            while (!st.empty() &amp;&amp; heights[i] &lt; heights[st.top()]) {
+
+                // Pop the top height
+                int height = heights[st.top()];
+                st.pop();
+
+                // Calculate width
+                int width = st.empty() ? i : i - st.top() - 1;
+
+                // Update max area
+                maxArea = max(maxArea, height * width);
+            }
+
+            // Push current index
+            st.push(i);
+        }
+
+        return maxArea;
+    }
+
+    // Function to find maximal rectangle in binary matrix
+    int maximalRectangle(vector&lt;vector&lt;char&gt;&gt;&amp; matrix) {
+
+        // Return 0 if matrix is empty
+        if (matrix.empty()) return 0;
+
+        // Get number of columns
+        int m = matrix[0].size();
+
+        // Height array to build histogram row-wise
+        vector&lt;int&gt; height(m, 0);
+
+        // Variable to track max rectangle area
+        int maxArea = 0;
+
+        // Traverse each row of the matrix
+        for (auto&amp; row : matrix) {
+
+            // Update histogram based on current row
+            for (int i = 0; i &lt; m; i++) {
+                if (row[i] == '1') height[i]++;
+                else height[i] = 0;
+            }
+
+            // Compute area for this histogram
+            maxArea = max(maxArea, largestRectangleArea(height));
+        }
+
+        return maxArea;
+    }
+};
+
+// Main driver function
+int main() {
+
+    // Sample matrix input
+    vector&lt;vector&lt;char&gt;&gt; matrix = {
+        {'1','0','1','0','0'},
+        {'1','0','1','1','1'},
+        {'1','1','1','1','1'},
+        {'1','0','0','1','0'}
+    };
+
+    Solution sol;
+
+    // Call the function and print result
+    cout &lt;&lt; sol.maximalRectangle(matrix) &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Solution class containing all methods
+class Solution {
+
+    // Function to calculate largest rectangle area in histogram
+    public int largestRectangleArea(int[] heights) {
+
+        // Stack to store indices
+        Stack&lt;Integer&gt; stack = new Stack&lt;&gt;();
+
+        // Variable to store max area
+        int maxArea = 0;
+
+        // Append a sentinel height
+        int[] newHeights = Arrays.copyOf(heights, heights.length + 1);
+
+        // Loop over bars
+        for (int i = 0; i &lt; newHeights.length; i++) {
+
+            // While current bar is less than stack top
+            while (!stack.isEmpty() &amp;&amp; newHeights[i] &lt; newHeights[stack.peek()]) {
+
+                // Pop and calculate area
+                int height = newHeights[stack.pop()];
+                int width = stack.isEmpty() ? i : i - stack.peek() - 1;
+                maxArea = Math.max(maxArea, height * width);
+            }
+
+            // Push current index
+            stack.push(i);
+        }
+
+        return maxArea;
+    }
+
+    // Function to find the maximal rectangle in binary matrix
+    public int maximalRectangle(char[][] matrix) {
+
+        // Return 0 if matrix is empty
+        if (matrix.length == 0) return 0;
+
+        // Column count
+        int m = matrix[0].length;
+
+        // Histogram array
+        int[] height = new int[m];
+
+        // Variable to track max area
+        int maxArea = 0;
+
+        // Iterate each row
+        for (char[] row : matrix) {
+
+            // Update histogram
+            for (int i = 0; i &lt; m; i++) {
+                if (row[i] == '1') height[i]++;
+                else height[i] = 0;
+            }
+
+            // Calculate max area
+            maxArea = Math.max(maxArea, largestRectangleArea(height));
+        }
+
+        return maxArea;
+    }
+}
+
+// Main class to run the code
+public class Main {
+    public static void main(String[] args) {
+
+        // Sample matrix input
+        char[][] matrix = {
+            {'1','0','1','0','0'},
+            {'1','0','1','1','1'},
+            {'1','1','1','1','1'},
+            {'1','0','0','1','0'}
+        };
+
+        Solution sol = new Solution();
+
+        // Call the function and print result
+        System.out.println(sol.maximalRectangle(matrix));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Solution class containing both functions
+class Solution:
+
+    # Function to calculate largest rectangle area in histogram
+    def largestRectangleArea(self, heights):
+
+        # Add a sentinel bar
+        heights.append(0)
+
+        # Stack for indices
+        stack = []
+        max_area = 0
+
+        # Traverse through histogram bars
+        for i in range(len(heights)):
+
+            # Pop and calculate while current is smaller
+            while stack and heights[i] &lt; heights[stack[-1]]:
+                height = heights[stack.pop()]
+                width = i if not stack else i - stack[-1] - 1
+                max_area = max(max_area, height * width)
+
+            # Push current index
+            stack.append(i)
+
+        return max_area
+
+    # Function to find the maximal rectangle in binary matrix
+    def maximalRectangle(self, matrix):
+
+        # Return 0 if matrix is empty
+        if not matrix: return 0
+
+        # Get column count
+        m = len(matrix[0])
+
+        # Initialize histogram
+        height = [0] * m
+        max_area = 0
+
+        # Traverse each row
+        for row in matrix:
+
+            # Update histogram
+            for i in range(m):
+                if row[i] == '1':
+                    height[i] += 1
+                else:
+                    height[i] = 0
+
+            # Update max area
+            max_area = max(max_area, self.largestRectangleArea(height))
+
+        return max_area
+
+# Driver code
+if __name__ == "__main__":
+
+    # Sample matrix
+    matrix = [
+        ['1','0','1','0','0'],
+        ['1','0','1','1','1'],
+        ['1','1','1','1','1'],
+        ['1','0','0','1','0']
+    ]
+
+    sol = Solution()
+
+    # Print result
+    print(sol.maximalRectangle(matrix))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Solution class with both functions
+class Solution {
+
+    // Function to compute largest rectangle in histogram
+    largestRectangleArea(heights) {
+
+        // Add a sentinel bar
+        heights.push(0);
+
+        // Stack for indices
+        const stack = [];
+        let maxArea = 0;
+
+        // Traverse histogram
+        for (let i = 0; i &lt; heights.length; i++) {
+
+            // Pop and calculate area
+            while (stack.length &amp;&amp; heights[i] &lt; heights[stack[stack.length - 1]]) {
+                const height = heights[stack.pop()];
+                const width = stack.length === 0 ? i : i - stack[stack.length - 1] - 1;
+                maxArea = Math.max(maxArea, height * width);
+            }
+
+            // Push current index
+            stack.push(i);
+        }
+
+        return maxArea;
+    }
+
+    // Function to compute maximal rectangle in binary matrix
+    maximalRectangle(matrix) {
+
+        // Return 0 for empty matrix
+        if (matrix.length === 0) return 0;
+
+        const m = matrix[0].length;
+        const height = new Array(m).fill(0);
+        let maxArea = 0;
+
+        // Traverse each row
+        for (let row of matrix) {
+
+            // Update histogram
+            for (let i = 0; i &lt; m; i++) {
+                if (row[i] === '1') height[i]++;
+                else height[i] = 0;
+            }
+
+            // Update max area
+            maxArea = Math.max(maxArea, this.largestRectangleArea([...height]));
+        }
+
+        return maxArea;
+    }
+}
+
+// Sample usage
+const matrix = [
+    ['1','0','1','0','0'],
+    ['1','0','1','1','1'],
+    ['1','1','1','1','1'],
+    ['1','0','0','1','0']
+];
+
+const sol = new Solution();
+console.log(sol.maximalRectangle(matrix));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+<strong>Time Complexity: O(N*(M+M))</strong>, where N = total no. of rows and M = total no. of columns.<br/>
+<strong>Space Complexity: O(M)</strong>, used for storing heights in array and stack.<br/>
+<p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

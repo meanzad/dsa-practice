@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Check if the given String is Palindrome or not</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Check if the given String is Palindrome or not</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/check-if-the-given-string-is-palindrome-or-not/</code></div>
+  <p><strong>Problem Statement: </strong> Given a string, check if the string is palindrome or not. A string is said to be
+    palindrome if the reverse of the string is the same as the string.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input: Str =  “ABCDCBA”
+Output: Palindrome
+Explanation: String when reversed is the same as string.
+
+Example 2:
+Input: Str = “TAKE U FORWARD”
+Output: Not Palindrome
+Explanation: String when reversed is not the same as string.
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/check-if-string-is-palindrome-or-not-" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Brute Force Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+<ul>
+<li>To check whether a string is a palindrome, we only need to compare characters from the
+                                start and end, moving towards the center.</li>
+<li>Run a <code>for</code> loop from <code>i = 0</code> to
+                                <code>i &lt; str.length() / 2</code>. This ensures that each character is compared with
+                                its corresponding character from the end.
+                            </li>
+<li>In each iteration, compare the character at the front <code>str[i]</code> with the
+                                character at the back <code>str[str.length() - i - 1]</code>.</li>
+<li>If at any point these characters do not match, return <code>false</code> as the string
+                                is not a palindrome.</li>
+<li>If the loop completes without returning <code>false</code>, then the string is a
+                                palindrome, and we return <code>true</code>.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div>
+<div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Function to check if a string is a palindrome
+bool isPalindrome(string s) {
+    int left = 0, right = s.length() - 1;
+
+    // Loop to check if the string is a palindrome
+    while (left &lt; right) {
+        // Skip non-alphanumeric characters on the left side
+        if (!isalnum(s[left])) 
+            left++;
+        // Skip non-alphanumeric characters on the right side
+        else if (!isalnum(s[right])) 
+            right--;
+        // If characters are different, it's not a palindrome
+        else if (tolower(s[left]) != tolower(s[right])) 
+            return false;
+        else {
+            // Move towards the middle if characters are the same
+            left++; 
+            right--;
+        }
+    }
+    return true;  // The string is a palindrome if the loop completes
+}
+
+int main() {
+    string str = "ABCDCBA";  // String to check for palindrome
+    bool ans = isPalindrome(str);  // Check if the string is a palindrome
+
+    // Output the result
+    if (ans == true) {
+        cout &lt;&lt; "Palindrome";
+    } else {
+        cout &lt;&lt; "Not Palindrome";
+    }
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">// Solution class to check if a string is a palindrome
+class Solution {
+    // Function to check if a string is a palindrome
+    public boolean isPalindrome(String s) {
+        int left = 0, right = s.length() - 1;
+
+        // Loop to check if the string is a palindrome
+        while (left &lt; right) {
+            // Skip non-alphanumeric characters on the left side
+            if (!Character.isLetterOrDigit(s.charAt(left))) 
+                left++;
+            // Skip non-alphanumeric characters on the right side
+            else if (!Character.isLetterOrDigit(s.charAt(right))) 
+                right--;
+            // If characters are different, it's not a palindrome
+            else if (Character.toLowerCase(s.charAt(left)) != Character.toLowerCase(s.charAt(right))) 
+                return false;
+            else {
+                // Move towards the middle if characters are the same
+                left++; 
+                right--;
+            }
+        }
+        return true;  // The string is a palindrome if the loop completes
+    }
+}
+
+// Main class to test the Solution class
+public class Main {
+    public static void main(String[] args) {
+        Solution solution = new Solution();  // Create an instance of the Solution class
+        String str = "ABCDCBA";  // String to check for palindrome
+
+        // Check if the string is a palindrome using the Solution class
+        boolean ans = solution.isPalindrome(str);
+
+        // Output the result
+        if (ans) {
+            System.out.println("Palindrome");
+        } else {
+            System.out.println("Not Palindrome");
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Function to check if a string is a palindrome
+def is_palindrome(s):
+    left, right = 0, len(s) - 1
+
+    # Loop to check if the string is a palindrome
+    while left &lt; right:
+        # Skip non-alphanumeric characters on the left side
+        if not s[left].isalnum():
+            left += 1
+        # Skip non-alphanumeric characters on the right side
+        elif not s[right].isalnum():
+            right -= 1
+        # If characters are different, it's not a palindrome
+        elif s[left].lower() != s[right].lower():
+            return False
+        else:
+            # Move towards the middle if characters are the same
+            left += 1
+            right -= 1
+    return True  # The string is a palindrome if the loop completes
+
+# Driver code
+if __name__ == "__main__":
+    str = "ABCDCBA"  # String to check for palindrome
+    ans = is_palindrome(str)  # Check if the string is a palindrome
+
+    # Output the result
+    if ans:
+        print("Palindrome")
+    else:
+        print("Not Palindrome")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Function to check if a string is a palindrome
+function isPalindrome(s) {
+    let left = 0, right = s.length - 1;
+
+    // Loop to check if the string is a palindrome
+    while (left &lt; right) {
+        // Skip non-alphanumeric characters on the left side
+        if (!/[a-zA-Z0-9]/.test(s[left])) {
+            left++;
+        }
+        // Skip non-alphanumeric characters on the right side
+        else if (!/[a-zA-Z0-9]/.test(s[right])) {
+            right--;
+        }
+        // If characters are different, it's not a palindrome
+        else if (s[left].toLowerCase() !== s[right].toLowerCase()) {
+            return false;
+        }
+        else {
+            // Move towards the middle if characters are the same
+            left++;
+            right--;
+        }
+    }
+    return true;  // The string is a palindrome if the loop completes
+}
+
+// Driver code
+const str = "ABCDCBA";  // String to check for palindrome
+const ans = isPalindrome(str);  // Check if the string is a palindrome
+
+// Output the result
+if (ans) {
+    console.log("Palindrome");
+} else {
+    console.log("Not Palindrome");
+}
+</code></pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+</summary>
+<p>
+</p><p><strong>Time Complexity:</strong> O(N), where N is the length of the string. Each character is
+                        compared at most once till the middle of the string.</p>
+<p><strong>Space Complexity:</strong> O(1), since no extra space is used apart from a few variables
+                        for iteration.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+<ul>
+<li>Use recursion to compare characters at the start and end of the string.</li>
+<li>If the characters are not equal, return false indicating the string is not a palindrome.
+                            </li>
+<li>If they are equal, recursively call the function with the next set of indices: start + 1
+                                and end - 1.</li>
+<li>Base Case: If the start index becomes greater than or equal to the end index, return
+                                true as it means the entire string has been checked and is a palindrome.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div>
+<div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Function to check if a string is a palindrome using recursion
+bool palindrome(int i, string&amp; s) {
+    // Base Condition: If i exceeds half of the string, all the elements have been compared
+    // and the string is a palindrome, return true.
+    if (i &gt;= s.length() / 2) return true;
+
+    // If the start and end characters are not equal, it's not a palindrome.
+    if (s[i] != s[s.length() - i - 1]) return false;
+
+    // If both characters are the same, increment i and check start+1 and end-1.
+    return palindrome(i + 1, s);
+}
+
+int main() {
+    // Example string.
+    string s = "madam";
+    
+    // Check if the string is a palindrome and output the result
+    cout &lt;&lt; palindrome(0, s);  // Output 1 if palindrome, 0 if not
+    cout &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">// Solution class to check if a string is a palindrome using recursion
+class Solution {
+    // Function to check if a string is a palindrome using recursion
+    public boolean palindrome(int i, String s) {
+        // Base Condition: If i exceeds half of the string, all the elements have been compared
+        // and the string is a palindrome, return true.
+        if (i &gt;= s.length() / 2) return true;
+
+        // If the start and end characters are not equal, it's not a palindrome.
+        if (s.charAt(i) != s.charAt(s.length() - i - 1)) return false;
+
+        // If both characters are the same, increment i and check start+1 and end-1.
+        return palindrome(i + 1, s);
+    }
+}
+
+// Main class to test the Solution class
+public class Main {
+    public static void main(String[] args) {
+        Solution solution = new Solution();  // Create an instance of the Solution class
+        String s = "madam";  // Example string to check
+
+        // Check if the string is a palindrome using the Solution class
+        System.out.println(solution.palindrome(0, s));  // Output true if palindrome, false if not
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Function to check if a string is a palindrome using recursion
+def palindrome(i, s):
+    # Base Condition: If i exceeds half of the string, all the elements have been compared
+    # and the string is a palindrome, return True.
+    if i &gt;= len(s) // 2:
+        return True
+
+    # If the start and end characters are not equal, it's not a palindrome.
+    if s[i] != s[len(s) - i - 1]:
+        return False
+
+    # If both characters are the same, increment i and check start+1 and end-1.
+    return palindrome(i + 1, s)
+
+# Driver code
+if __name__ == "__main__":
+    s = "madam"  # Example string to check
+    
+    # Check if the string is a palindrome and output the result
+    print(palindrome(0, s))  # Output True if palindrome, False if not
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Function to check if a string is a palindrome using recursion
+function palindrome(i, s) {
+    // Base Condition: If i exceeds half of the string, all the elements have been compared
+    // and the string is a palindrome, return true.
+    if (i &gt;= s.length / 2) return true;
+
+    // If the start and end characters are not equal, it's not a palindrome.
+    if (s[i] !== s[s.length - i - 1]) return false;
+
+    // If both characters are the same, increment i and check start+1 and end-1.
+    return palindrome(i + 1, s);
+}
+
+// Driver code
+const s = "madam";  // Example string to check
+
+// Check if the string is a palindrome and output the result
+console.log(palindrome(0, s));  // Output true if palindrome, false if not
+</code></pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+</summary>
+<p>
+</p><p><strong>Time Complexity:</strong> O(N), where N is the length of the string. Each character is
+                        checked once.</p>
+<p><strong>Space Complexity:</strong> O(N), due to the recursion stack in the worst case (no early
+                        termination).</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

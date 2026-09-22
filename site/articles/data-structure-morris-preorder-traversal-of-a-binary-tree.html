@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Morris Preorder Traversal of a Binary Tree</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Morris Preorder Traversal of a Binary Tree</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/morris-preorder-traversal-of-a-binary-tree/</code></div>
+  <p><strong>Problem Statement: </strong> Given a Binary Tree, implement Morris Preorder Traversal and return the array containing its preorder sequence. <br/><br/>
+Morris Preorder Traversal is a tree traversal algorithm aiming to achieve a space complexity of O(1) without recursion or an external data structure. The algorithm should efficiently visit each node in the binary tree in preorder sequence, printing or processing the node values as it traverses, without using a stack or recursion.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input:Binary Tree: 4 2 5 3 -1 7 6 -1 9 -1 -1 8 -1 1</span>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/907286e468f293a0.png" width="439"/></figure>
+<span>Output: [4 2 3 9 1 5 7 6 8]</span>
+<span>Explanation: We traverse the binary tree in the order of Left, Root then Right.</span>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/e6630b10f0e892b7.png" width="439"/></figure>
+<p></p>
+<span>Input : Binary Tree: 1 2 3 4 5 6 7 -1 -1 8 -1 -1 -1 9 10</span>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/8be992e685a0b045.png" width="439"/></figure>
+<span>Output: [1 2 4 5 8 3 6 7 9 10]</span>
+<span>Explanation : We traverse the binary tree in the order of Left, Root then Right.</span>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/d08002556b58a004.png" width="439"/></figure>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/morris-preorder-traversal-" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better.
+            It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+  A prerequisite to this problem is Morris Inorder Traversal of Binary Tree. We extend Morris Inorder Traversal to Preorder Morris Traversal and modify the algorithm to print the current node’s value before moving to the left child when the right child of the inorder predecessor is null.<br/><br/>
+  This change ensures that the nodes are processed in the desired order for Preorder Traversal. The basic structure of Morris Traversal remains intact, but the printing step is adjusted, resulting in a Preorder Traversal that is still in-place and has a constant space complexity.<br/>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/c70f244eee880742.png" width="439"/></figure><p></p>
+In Morris Inorder Traversal, we are traversing the tree in the way: Left, Root, Right. In Morris Preorder traversal we want to traverse the tree in the way: Root, Left, Right. Therefore, the following code changes are required:<br/><br/>
+When the current node has a left child:<br/>In Morris Inorder Traversal, a new thread is created by establishing a temporary link between the current node and its in-order predecessor. In Morris Preorder Traversal, we want to print the root before visiting the left child. Therefore, after setting the thread (establishing the link), we print the current node's value before moving it to its left child.<br/>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/4ae787ed604b0aec.png" width="439"/></figure><p></p>
+When the current node has no left child:<br/>
+This case remains unchanged from Morris Inorder Traversal. If the current node has no left child, there is nothing to visit on the left side. In both Inorder and Preorder traversals, we want to print the current node's value and move to the right child. Therefore, there is no code modification needed for this scenario.<br/>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/8382118a4c27282c.png" width="439"/></figure>
+<ul>
+<li>Initialise a current to traverse the tree. Set current to the root of the Binary Tree.</li>
+<li>While the current is not null: If the current node has no left child, print the current node's value and move to the right child ie. set current to its right child.</li>
+<li>If the current node has a left child, we find the in-order predecessor of the current node. This in-order predecessor is the rightmost node in the left subtree or the left subtree's rightmost node.</li>
+<li>If the right child of the in-order predecessor is null, set the right child to the current node. Print the value of the current node as preorder traverses the tree in the order: Root, Left then Right. Move to the left child (i.e., set current to its left child).</li>
+<li>If the right child of the in-order predecessor is not null, revert the changes made in the previous step by setting the right child as null. Move to the right child (i.e., set current to its right child).</li>
+<li>Repeat the steps until the entire tree is not traversed.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/ab8e235991cfa7b0.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/3514a5af5976bd67.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/5db4a4cda37c0a80.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/55385aa8440db036.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/773c266fdb40912a.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/f14b18d2b64632c2.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/ab8e235991cfa7b0.png"/><img alt="Image 2" loading="lazy" src="../assets/img/3514a5af5976bd67.png"/><img alt="Image 3" loading="lazy" src="../assets/img/5db4a4cda37c0a80.png"/><img alt="Image 4" loading="lazy" src="../assets/img/55385aa8440db036.png"/><img alt="Image 5" loading="lazy" src="../assets/img/773c266fdb40912a.png"/><img alt="Image 6" loading="lazy" src="../assets/img/f14b18d2b64632c2.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// TreeNode structure
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+class Solution {
+public:
+    // Function to perform iterative Morris
+    // preorder traversal of a binary tree
+    vector&lt;int&gt; getPreorder(TreeNode* root) {
+        // Vector to store the
+        // preorder traversal result
+        vector&lt;int&gt; preorder;
+        
+        // Pointer to the current node,
+        // starting with the root
+        TreeNode* cur = root;
+
+        // Iterate until the
+        // current node becomes NULL
+        while (cur != NULL) {
+            // If the current node
+            // has no left child
+            if (cur-&gt;left == NULL) {
+                // Add the value of the
+                // current node to the preorder vector
+                preorder.push_back(cur-&gt;val);
+                
+                // Move to the right child
+                cur = cur-&gt;right;
+            } else {
+                // If the current node has a left child
+                // Create a pointer to traverse to the
+                // rightmost node in the left subtree
+                TreeNode* prev = cur-&gt;left;
+                
+                // Traverse to the rightmost node in the
+                // left subtree or until we find a node 
+                // whose right child is not yet processed
+                while (prev-&gt;right &amp;&amp; prev-&gt;right != cur) {
+                    prev = prev-&gt;right;
+                }
+                
+                // If the right child of the
+                // rightmost node is NULL
+                if (prev-&gt;right == NULL) {
+                    // Set the right child of the
+                    // rightmost node to the current node
+                    prev-&gt;right = cur;
+                    
+                    // Move to the left child
+                    cur = cur-&gt;left;
+                } else {
+                    // If the right child of the
+                    // rightmost node is not NULL
+                    // Reset the right child to NULL
+                    prev-&gt;right = NULL;
+                    
+                    // Add the value of the
+                    // current node to the preorder vector
+                    preorder.push_back(cur-&gt;val);
+                    
+                    // Move to the right child
+                    cur = cur-&gt;right;
+                }
+            }
+        }
+        
+        // Return the resulting
+        //preorder traversal vector
+        return preorder;
+    }
+};
+
+
+int main() {
+
+    TreeNode* root = new TreeNode(1);
+    root-&gt;left = new TreeNode(2);
+    root-&gt;right = new TreeNode(3);
+    root-&gt;left-&gt;left = new TreeNode(4);
+    root-&gt;left-&gt;right = new TreeNode(5);
+    root-&gt;left-&gt;right-&gt;right = new TreeNode(6);
+
+    Solution sol;
+    
+    vector&lt;int&gt; preorder = sol.getPreorder(root);
+
+    cout &lt;&lt; "Binary Tree Morris Preorder Traveral: ";
+    for(int i = 0; i&lt; preorder.size(); i++){
+        cout &lt;&lt; preorder[i] &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.ArrayList;
+import java.util.List;
+
+// TreeNode structure
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    public TreeNode(int x) {
+        val = x;
+        left = null;
+        right = null;
+    }
+}
+
+// Solution class with Morris preorder traversal
+class Solution {
+    // Function to perform iterative Morris
+    // preorder traversal of a binary tree
+    public List&lt;Integer&gt; getPreorder(TreeNode root) {
+        // List to store the
+        // preorder traversal result
+        List&lt;Integer&gt; preorder = new ArrayList&lt;&gt;();
+
+        // Pointer to the current node,
+        // starting with the root
+        TreeNode cur = root;
+
+        // Iterate until the
+        // current node becomes null
+        while (cur != null) {
+            // If the current node
+            // has no left child
+            if (cur.left == null) {
+                // Add the value of the
+                // current node to the preorder list
+                preorder.add(cur.val);
+
+                // Move to the right child
+                cur = cur.right;
+            } else {
+                // If the current node has a left child
+                // Create a pointer to traverse to the
+                // rightmost node in the left subtree
+                TreeNode prev = cur.left;
+
+                // Traverse to the rightmost node in the
+                // left subtree or until we find a node
+                // whose right child is not yet processed
+                while (prev.right != null &amp;&amp; prev.right != cur) {
+                    prev = prev.right;
+                }
+
+                // If the right child of the
+                // rightmost node is null
+                if (prev.right == null) {
+                    // Set the right child of the
+                    // rightmost node to the current node
+                    prev.right = cur;
+
+                    // Add the value of the
+                    // current node to the preorder list
+                    preorder.add(cur.val);
+
+                    // Move to the left child
+                    cur = cur.left;
+                } else {
+                    // If the right child of the
+                    // rightmost node is not null
+                    // Reset the right child to null
+                    prev.right = null;
+
+                    // Move to the right child
+                    cur = cur.right;
+                }
+            }
+        }
+
+        // Return the resulting
+        // preorder traversal list
+        return preorder;
+    }
+}
+
+// Public Main class for execution
+public class Main {
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        root.left.right.right = new TreeNode(6);
+
+        Solution sol = new Solution();
+
+        List&lt;Integer&gt; preorder = sol.getPreorder(root);
+
+        System.out.print("Binary Tree Morris Preorder Traversal: ");
+        for (int i = 0; i &lt; preorder.size(); i++) {
+            System.out.print(preorder.get(i) + " ");
+        }
+        System.out.println();
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># TreeNode class definition
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
+class Solution:
+    def getPreorder(self, root):
+        # List to store the preorder traversal result
+        preorder = []
+
+        # Pointer to the current node, starting with the root
+        cur = root
+
+        # Iterate until the current node becomes None
+        while cur is not None:
+            # If the current node has no left child
+            if cur.left is None:
+                # Add the value of the current node to the preorder list
+                preorder.append(cur.val)
+
+                # Move to the right child
+                cur = cur.right
+            else:
+                # If the current node has a left child
+                # Create a pointer to traverse to the rightmost node in the left subtree
+                prev = cur.left
+
+                # Traverse to the rightmost node in the left subtree
+                # or until we find a node whose right child is not yet processed
+                while prev.right and prev.right != cur:
+                    prev = prev.right
+
+                # If the right child of the rightmost node is None
+                if prev.right is None:
+                    # Set the right child of the rightmost node to the current node
+                    prev.right = cur
+
+                    # Move to the left child
+                    cur = cur.left
+                else:
+                    # If the right child of the rightmost node is not None
+                    # Reset the right child to None
+                    prev.right = None
+
+                    # Add the value of the current node to the preorder list
+                    preorder.append(cur.val)
+
+                    # Move to the right child
+                    cur = cur.right
+
+        # Return the resulting preorder traversal list
+        return preorder
+
+
+# Main function
+if __name__ == "__main__":
+    # Construct the binary tree
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.right = TreeNode(3)
+    root.left.left = TreeNode(4)
+    root.left.right = TreeNode(5)
+    root.left.right.right = TreeNode(6)
+
+    # Create an instance of the Solution class
+    sol = Solution()
+
+    # Perform Morris Preorder Traversal
+    preorder = sol.getPreorder(root)
+
+    # Print the result
+    print("Binary Tree Morris Preorder Traversal:", end=" ")
+    for val in preorder:
+        print(val, end=" ")
+    print()</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// TreeNode structure
+class TreeNode {
+    constructor(x) {
+        this.val = x;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class Solution {
+    // Function to perform iterative Morris
+    // preorder traversal of a binary tree
+    getPreorder(root) {
+        // Vector to store the
+        // preorder traversal result
+        const preorder = [];
+
+        // Pointer to the current node,
+        // starting with the root
+        let cur = root;
+
+        // Iterate until the
+        // current node becomes null
+        while (cur !== null) {
+            // If the current node
+            // has no left child
+            if (cur.left === null) {
+                // Add the value of the
+                // current node to the preorder array
+                preorder.push(cur.val);
+
+                // Move to the right child
+                cur = cur.right;
+            } else {
+                // If the current node has a left child
+                // Create a pointer to traverse to the
+                // rightmost node in the left subtree
+                let prev = cur.left;
+
+                // Traverse to the rightmost node in the
+                // left subtree or until we find a node 
+                // whose right child is not yet processed
+                while (prev.right &amp;&amp; prev.right !== cur) {
+                    prev = prev.right;
+                }
+
+                // If the right child of the
+                // rightmost node is null
+                if (prev.right === null) {
+                    // Set the right child of the
+                    // rightmost node to the current node
+                    prev.right = cur;
+
+                    // Move to the left child
+                    cur = cur.left;
+                } else {
+                    // If the right child of the
+                    // rightmost node is not null
+                    // Reset the right child to null
+                    prev.right = null;
+
+                    // Add the value of the
+                    // current node to the preorder array
+                    preorder.push(cur.val);
+
+                    // Move to the right child
+                    cur = cur.right;
+                }
+            }
+        }
+
+        // Return the resulting
+        //preorder traversal array
+        return preorder;
+    }
+}
+
+// Main function
+function main() {
+    const root = new TreeNode(1);
+    root.left = new TreeNode(2);
+    root.right = new TreeNode(3);
+    root.left.left = new TreeNode(4);
+    root.left.right = new TreeNode(5);
+    root.left.right.right = new TreeNode(6);
+
+    const sol = new Solution();
+
+    const preorder = sol.getPreorder(root);
+
+    console.log("Binary Tree Morris Preorder Traveral: " + preorder.join(" "));
+}
+
+// Execute the main function
+main();</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(2N)</strong>, the time complexity is linear, as each node is visited at most twice (once for establishing the temporary link and once for reverting it).<br/>
+<strong>Space Complexity:  O(1)</strong>, the space complexity is constant, as the algorithm uses only a constant amount of extra space irrespective of the input size.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Shortest Path in Undirected Graph with unit distance: G-28</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Shortest Path in Undirected Graph with unit distance: G-28</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/shortest-path-in-undirected-graph-with-unit-distance-g-28/</code></div>
+  <p><strong>Problem Statement: </strong>Given an Undirected Graph having unit weight, find the shortest path from the source to all other nodes in this graph. In this problem statement, we have assumed the source vertex to be ‘0’. If a vertex is unreachable from the source node, then return -1 for that vertex.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p><strong>Input:</strong> n = 9, m = 10 edges = [[0,1],[0,3],[3,4],[4 ,5],[5,6],[1,2],[2,6],[6,7],[7,8],[6,8]] src = 0 
+<strong>Output:</strong> 0 1 2 1 2 3 3 4 4 
+<strong>Explanation:</strong> The above output array shows the shortest path to all the nodes from the source vertex (0). Dist[0] = 0, Dist[1] = 1, Dist[2] = 2, … Dist[8] = 4 Where Dist[node] is the shortest distance from the source to that node. If Dist[node] = -1, then that node is unreachable from the source.
+<figure class="wp-block-image size-full"> <img alt="Graph Example 1" class="wp-image-6785" loading="lazy" src="../assets/img/9bd9e90fb7e07172.png"/> </figure></p><p>
+<strong>Input:</strong> n = 8, m = 10 edges = [[1,0],[2,1],[0,3],[3,7],[3,4],[7,4],[7,6],[4,5],[4,6],[6,5]] src = 0
+<strong>Output:</strong> 0 1 2 1 2 3 3 2 
+<strong>Explanation:</strong> The above output list shows the shortest path to all the nodes from the source vertex (0). Dist[0] = 0, Dist[1] = 1, Dist[2] = 2, … Dist[7] = 2 Again, any node with Dist[node] = -1 is unreachable from the source. <figure class="wp-block-image size-full"> <img alt="Graph Example 2" class="wp-image-6786" loading="lazy" src="../assets/img/d247c0226a7a7259.png"/> </figure></p></pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/shortest-path-in-undirected-graph-with-unit-weights" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+
+
+We calculate the shortest path in an undirected graph with unit weights using Breadth First Search (BFS).
+BFS visits all nodes level-by-level (same level first), which ensures we always get the shortest path in terms of number of edges.
+
+<br/><br/>
+<strong>Initial configuration:</strong>
+<ul> <li><strong>Adjacency List:</strong> A list where each index represents a node, and the value is a list of pairs (adjacent node, distance from current node).</li> <li><strong>Queue:</strong> Standard queue to help perform BFS traversal level by level.</li> <li><strong>Distance Array:</strong> Initialized with `INT_MAX` or a very large number to represent "unreachable". Updated during traversal.</li> <li><strong>Resultant Array:</strong> Initialized with -1 to store the shortest distance from source to every node. If a node is unreachable, it stays -1.</li> </ul>
+<br/>
+<strong>Steps to find shortest path in undirected graph:</strong>
+<ul> <li>Convert the graph to an adjacency list.</li> <li>Create a distance array of size N initialized with a very large number.</li> <li>Perform BFS traversal starting from the source.</li> <li>For each node in the queue, check its neighbors.</li> <li>If the path to a neighbor through the current node is shorter (i.e., current distance + 1 &lt; neighbor's recorded distance), update the neighbor's distance and push it to the queue.</li> </ul>
+<br/>
+<strong>Post traversal:</strong>
+<ul> <li>After BFS completes, the distance array holds the shortest path lengths from the source.</li> <li>Create a final result array initialized with -1.</li> <li>For all nodes where distance was updated from the initial large value, update the result array with actual distance.</li> <li>Nodes that remain -1 are unreachable.</li> </ul>
+<br/>
+<strong>Why BFS is used:</strong>
+<ul> <li>All edges have unit weight. So as we explore adjacent nodes, they are at a fixed increment of distance (1, 2, 3…).</li> <li>This behavior naturally fits BFS because the queue automatically ensures we’re processing closer nodes first.</li> <li>BFS acts like a sorted queue for level-wise distances, so we don’t need extra data structures like a min-heap (unlike Dijkstra).</li> </ul>
+<br/>
+
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/7044147ce1c9a7a0.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/a39213fdaed6921b.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/66bc01507718d1e0.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/aa6d5e15d21ecd69.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/bf41f49c4856ed82.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/a007d781f0900187.png"/></div><div class="carousel-image"><img alt="Image 7" loading="lazy" src="../assets/img/2b01e90a4fb80f80.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/7044147ce1c9a7a0.png"/><img alt="Image 2" loading="lazy" src="../assets/img/a39213fdaed6921b.png"/><img alt="Image 3" loading="lazy" src="../assets/img/66bc01507718d1e0.png"/><img alt="Image 4" loading="lazy" src="../assets/img/aa6d5e15d21ecd69.png"/><img alt="Image 5" loading="lazy" src="../assets/img/bf41f49c4856ed82.png"/><img alt="Image 6" loading="lazy" src="../assets/img/a007d781f0900187.png"/><img alt="Image 7" loading="lazy" src="../assets/img/2b01e90a4fb80f80.png"/></div></div>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find the shortest path from source to all vertices
+    vector&lt;int&gt; shortestPath(vector&lt;vector&lt;int&gt;&gt;&amp; edges, int N, int M, int src) {
+
+        // Create an adjacency list of size N to store the undirected graph
+        vector&lt;int&gt; adj[N]; 
+
+        // Build the graph by adding edges to the adjacency list
+        for (auto it : edges) {
+            adj[it[0]].push_back(it[1]); 
+            adj[it[1]].push_back(it[0]); 
+        }
+
+        // Initialize the distance array with a large value (treated as infinity)
+        int dist[N];
+        for (int i = 0; i &lt; N; i++) 
+            dist[i] = 1e9;
+
+        // Set the source node distance to 0
+        dist[src] = 0;
+
+        // Use a queue to perform BFS traversal
+        queue&lt;int&gt; q;
+
+        // Start BFS from the source node
+        q.push(src); 
+
+        // Loop until queue is empty
+        while (!q.empty()) {
+
+            // Get the front node from the queue
+            int node = q.front(); 
+            q.pop(); 
+
+            // Traverse all adjacent nodes
+            for (auto it : adj[node]) {
+
+                // If a shorter path to neighbor is found
+                if (dist[node] + 1 &lt; dist[it]) {
+                    dist[it] = 1 + dist[node]; 
+                    q.push(it); 
+                }
+            }
+        }
+
+        // Initialize the result array with -1 for unreachable nodes
+        vector&lt;int&gt; ans(N, -1);
+
+        // Fill in the result array with distances where reachable
+        for (int i = 0; i &lt; N; i++) {
+            if (dist[i] != 1e9) {
+                ans[i] = dist[i]; 
+            }
+        }
+
+        // Return the final shortest distances
+        return ans; 
+    }
+};
+
+// Driver code
+int main() {
+
+    // Number of vertices and edges
+    int N = 9, M = 10;
+
+    // Edge list representing the undirected graph
+    vector&lt;vector&lt;int&gt;&gt; edges = {
+        {0, 1}, {0, 3}, {3, 4}, {4, 5}, {5, 6},
+        {1, 2}, {2, 6}, {6, 7}, {7, 8}, {6, 8}
+    };
+
+    // Create object of Solution class
+    Solution obj;
+
+    // Call the shortestPath function with source as node 0
+    vector&lt;int&gt; ans = obj.shortestPath(edges, N, M, 0);
+
+    // Print the shortest distances from source to each node
+    for (int i = 0; i &lt; ans.size(); i++) {
+        cout &lt;&lt; ans[i] &lt;&lt; " ";
+    }
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to compute shortest path using BFS
+    public int[] shortestPath(int[][] edges, int N, int M, int src) {
+
+        // Create adjacency list for undirected graph
+        List&lt;List&lt;Integer&gt;&gt; adj = new ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; N; i++) {
+            adj.add(new ArrayList&lt;&gt;());
+        }
+
+        // Fill adjacency list from edge list
+        for (int[] edge : edges) {
+            adj.get(edge[0]).add(edge[1]);
+            adj.get(edge[1]).add(edge[0]);
+        }
+
+        // Initialize distance array with large value (infinity)
+        int[] dist = new int[N];
+        Arrays.fill(dist, (int) 1e9);
+
+        // Set source distance to 0
+        dist[src] = 0;
+
+        // Initialize queue for BFS
+        Queue&lt;Integer&gt; q = new LinkedList&lt;&gt;();
+        q.add(src);
+
+        // BFS traversal
+        while (!q.isEmpty()) {
+            int node = q.poll();
+
+            // Traverse neighbors
+            for (int neighbor : adj.get(node)) {
+                if (dist[node] + 1 &lt; dist[neighbor]) {
+                    dist[neighbor] = dist[node] + 1;
+                    q.add(neighbor);
+                }
+            }
+        }
+
+        // Prepare result, replacing infinity with -1
+        for (int i = 0; i &lt; N; i++) {
+            if (dist[i] == (int) 1e9) {
+                dist[i] = -1;
+            }
+        }
+
+        return dist;
+    }
+}
+
+// Driver code
+class Main {
+    public static void main(String[] args) {
+
+        int N = 9, M = 10;
+        int[][] edges = {
+            {0, 1}, {0, 3}, {3, 4}, {4, 5}, {5, 6},
+            {1, 2}, {2, 6}, {6, 7}, {7, 8}, {6, 8}
+        };
+
+        Solution obj = new Solution();
+        int[] result = obj.shortestPath(edges, N, M, 0);
+
+        for (int val : result) {
+            System.out.print(val + " ");
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">from collections import deque, defaultdict
+
+class Solution:
+    # Function to find shortest path using BFS
+    def shortestPath(self, edges, N, M, src):
+        # Create adjacency list
+        adj = defaultdict(list)
+        for u, v in edges:
+            adj[u].append(v)
+            adj[v].append(u)
+
+        # Initialize distance array with infinity
+        dist = [float('inf')] * N
+
+        # Distance from src to itself is 0
+        dist[src] = 0
+
+        # Queue for BFS
+        q = deque()
+        q.append(src)
+
+        # Perform BFS
+        while q:
+            node = q.popleft()
+            for neighbor in adj[node]:
+                if dist[node] + 1 &lt; dist[neighbor]:
+                    dist[neighbor] = dist[node] + 1
+                    q.append(neighbor)
+
+        # Replace unreachable distances with -1
+        for i in range(N):
+            if dist[i] == float('inf'):
+                dist[i] = -1
+
+        return dist
+
+# Driver code
+N = 9
+M = 10
+edges = [
+    [0, 1], [0, 3], [3, 4], [4, 5], [5, 6],
+    [1, 2], [2, 6], [6, 7], [7, 8], [6, 8]
+]
+
+obj = Solution()
+result = obj.shortestPath(edges, N, M, 0)
+print(" ".join(map(str, result)))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find shortest path using BFS
+    shortestPath(edges, N, M, src) {
+        // Create adjacency list
+        const adj = Array.from({ length: N }, () =&gt; []);
+        for (let [u, v] of edges) {
+            adj[u].push(v);
+            adj[v].push(u);
+        }
+
+        // Initialize distances with Infinity
+        const dist = Array(N).fill(Infinity);
+        dist[src] = 0;
+
+        // Queue for BFS
+        const q = [];
+        q.push(src);
+
+        // Perform BFS
+        while (q.length &gt; 0) {
+            const node = q.shift();
+            for (let neighbor of adj[node]) {
+                if (dist[node] + 1 &lt; dist[neighbor]) {
+                    dist[neighbor] = dist[node] + 1;
+                    q.push(neighbor);
+                }
+            }
+        }
+
+        // Replace unreachable nodes with -1
+        for (let i = 0; i &lt; N; i++) {
+            if (dist[i] === Infinity) {
+                dist[i] = -1;
+            }
+        }
+
+        return dist;
+    }
+}
+
+// Driver code
+const N = 9, M = 10;
+const edges = [
+    [0, 1], [0, 3], [3, 4], [4, 5], [5, 6],
+    [1, 2], [2, 6], [6, 7], [7, 8], [6, 8]
+];
+
+const obj = new Solution();
+const result = obj.shortestPath(edges, N, M, 0);
+console.log(result.join(" "));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+</summary>
+<p>
+</p><p><strong>Time Complexity: </strong>O(M) { for creating the adjacency list from given list ‘edges’} + O(N + 2M) { for the BFS Algorithm} + O(N) { for adding the final values of the shortest path in the resultant array} ~ O(N+2M). Where N= number of vertices and M= number of edges.</p>
+<p><strong>Space Complexity:  </strong>O(N) {for the stack storing the BFS} + O(N) {for the resultant array} + O(N) {for the dist array storing updated shortest paths} + O( N+2M) {for the adjacency list} ~ O(N+M),Where N= number of vertices and M= number of edges.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

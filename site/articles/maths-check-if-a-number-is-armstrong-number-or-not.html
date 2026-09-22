@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Check if a number is Armstrong Number or not</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Check if a number is Armstrong Number or not</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/maths/check-if-a-number-is-armstrong-number-or-not/</code></div>
+  <p><strong>Problem Statement:</strong>Given an integer N, return true it is an Armstrong number otherwise return false.</p>
+An Amrstrong number is a number that is equal to the sum of its own digits each raised to the power of the number of digits.
+
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input:N = 153
+Output:True
+Explanation: 1^3+5^3+3^3 = 1 + 125 + 27 = 153
+                                        
+Example 2:
+Input:N = 371                
+Output: True
+Explanation: 3^3+7^3+1^3 = 27 + 343 + 1 = 371
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/check-if-the-number-if-armstrong" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                Approach
+            </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Algorithm
+                    </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<ul>
+<li>Calculate the number of digits in the input number and store it in k.</li>
+<li>Initialise a variable sum to 0. This variable will store the sum of each digit raised to the power of number of digits in number.</li>
+<li>Make a copy of the original number to store it in a temporary variable.</li>
+<li>Run a while loop with the condition n&gt;0 and at each iteration:</li>
+<ul>
+<li>Get the last digit of n by using the modulus operator % with 10 and store it in a temporary variable ld.</li>
+<li>Add the digit ld raised to the power of k of the sum.</li>
+<li>Update n by integer division with 10 effectively removing the last digit.</li>
+</ul>
+<li>After the loop, check if the original input number is equal to the sum of the digits raised to the power of the number of digits in the number.</li>
+<ul>
+<li>If they are equal, return true indicating the number is an Armstrong number.</li>
+<li>If they are not equal, return false indicating that the number is not an Armstrong number.</li>
+</ul>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Class to check Armstrong number
+class ArmstrongChecker {
+public:
+    // Static method to check if a number is an Armstrong number
+    static bool isArmstrong(int num) {
+        int k = to_string(num).length(); // Get number of digits
+        int sum = 0;
+        int n = num;
+
+        while (n &gt; 0) {
+            int ld = n % 10;            // Get last digit
+            sum += pow(ld, k);          // Add ld^k to sum
+            n /= 10;                    // Remove last digit
+        }
+
+        return sum == num; // Return true if sum equals original number
+    }
+};
+
+int main() {
+    int number = 153;
+
+    // Use class method to check
+    if (ArmstrongChecker::isArmstrong(number)) {
+        cout &lt;&lt; number &lt;&lt; " is an Armstrong number." &lt;&lt; endl;
+    } else {
+        cout &lt;&lt; number &lt;&lt; " is not an Armstrong number." &lt;&lt; endl;
+    }
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">public class ArmstrongChecker {
+
+    // Static method to check if a number is an Armstrong number
+    public static boolean isArmstrong(int num) {
+        int k = String.valueOf(num).length(); // Get number of digits
+        int sum = 0;
+        int n = num;
+
+        while (n &gt; 0) {
+            int ld = n % 10;             // Last digit
+            sum += Math.pow(ld, k);      // Add ld^k
+            n /= 10;                     // Remove digit
+        }
+
+        return sum == num;
+    }
+
+    public static void main(String[] args) {
+        int number = 153;
+
+        // Use class method to check
+        if (isArmstrong(number)) {
+            System.out.println(number + " is an Armstrong number.");
+        } else {
+            System.out.println(number + " is not an Armstrong number.");
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Define a class to check Armstrong numbers
+class ArmstrongChecker:
+
+    @staticmethod
+    def is_armstrong(num):
+        k = len(str(num))  # Number of digits
+        sum = 0
+        n = num
+
+        while n &gt; 0:
+            ld = n % 10             # Last digit
+            sum += ld ** k          # Add ld^k
+            n = n // 10             # Remove digit
+
+        return sum == num
+
+# Test the class method
+number = 153
+
+if ArmstrongChecker.is_armstrong(number):
+    print(f"{number} is an Armstrong number.")
+else:
+    print(f"{number} is not an Armstrong number.")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Define a class to check Armstrong numbers
+class ArmstrongChecker {
+    // Static method to check if a number is an Armstrong number
+    static isArmstrong(num) {
+        const k = num.toString().length; // Number of digits
+        let sum = 0;
+        let n = num;
+
+        while (n &gt; 0) {
+            const ld = n % 10;               // Last digit
+            sum += Math.pow(ld, k);          // Add ld^k
+            n = Math.floor(n / 10);          // Remove digit
+        }
+
+        return sum === num;
+    }
+}
+
+// Test the class method
+const number = 153;
+
+if (ArmstrongChecker.isArmstrong(number)) {
+    console.log(`${number} is an Armstrong number.`);
+} else {
+    console.log(`${number} is not an Armstrong number.`);
+}
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Complexity Analysis
+                    </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>Time Complexity: O(log10N + 1) where N is the input number. The time complexity is determined by the number of digits in the input integer N. In the worst case when N is a multiple of 10 the number of digits in N is log10 N + 1.</p>
+<p>Space Complexity:  O(1) as only a constant amount of additional memory for the reversed number regardless of size of the input number.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Striver's A2Z DSA Sheet - Offline Archive</title>
+<link rel="stylesheet" href="style.css">
+</head><body>
+<header><div class="wrap hd">
+  <h1>Striver's A2Z DSA Sheet</h1>
+  <span class="sub">offline archive &middot; 288 articles</span>
+  <span class="spacer"></span>
+  <button class="btn" id="expand">Expand / collapse all</button>
+  <button class="btn" id="export">Export progress</button>
+  <button class="btn" id="import">Import</button>
+  <input type="file" id="file" accept="application/json" style="display:none">
+</div></header>
+
+<div class="wrap">
+  <div class="stats">
+    <div class="stat"><div class="k">Overall</div><div class="v" id="p-total">0 / 0</div></div>
+    <div class="stat easy"><div class="k">Easy</div><div class="v" id="p-easy">0 / 0</div></div>
+    <div class="stat medium"><div class="k">Medium</div><div class="v" id="p-medium">0 / 0</div></div>
+    <div class="stat hard"><div class="k">Hard</div><div class="v" id="p-hard">0 / 0</div></div>
+    <div class="stat" style="flex:1;min-width:210px">
+      <div class="k">Progress <span id="p-pct" style="float:right">0.0%</span></div>
+      <div class="bar"><i id="p-bar"></i></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <input type="search" id="q" placeholder="Search problems...">
+    <select id="f-diff">
+      <option value="">All difficulties</option>
+      <option>Easy</option><option>Medium</option><option>Hard</option>
+    </select>
+    <select id="f-status">
+      <option value="">All problems</option>
+      <option value="unsolved">Unsolved</option>
+      <option value="solved">Solved</option>
+      <option value="revision">Marked for revision</option>
+    </select>
+  </div>
+
+  <div id="sections"></div>
+  <footer>
+    Personal offline archive of takeuforward.org content, rebuilt from the Wayback Machine.<br>
+    Progress is stored in this browser only. Export it to keep a backup.
+  </footer>
+</div>
+<script src="app.js"></script>
+</body></html>

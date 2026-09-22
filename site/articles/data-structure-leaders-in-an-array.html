@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Leaders in an Array</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Leaders in an Array</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/leaders-in-an-array/</code></div>
+  <p><strong>Problem Statement: </strong> .</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>  
+<strong>Input:</strong> arr = [4, 7, 1, 0]  
+<strong>Output:</strong> 7 1 0  
+<strong>Explanation:</strong> The rightmost element (0) is always a leader.  
+7 and 1 are greater than the elements to their right, making them leaders as well.
+
+<strong>Example 2:</strong>  
+<strong>Input:</strong> arr = [10, 22, 12, 3, 0, 6]  
+<strong>Output:</strong> 22 12 6  
+<strong>Explanation:</strong> 6 is a leader because there are no elements after it.  
+12 is greater than all the elements to its right (3, 0, 6), and 22 is greater than 12, 3, 0, 6, making them leaders as well.</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/leaders-in-an-array" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Brute Force 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>In this brute force approach, we start by checking all the elements from the start of the array to the end to determine if an element is greater than all the elements to its right (i.e., the leader).</li>
+<li>We use nested loops for this:
+    <ul>
+<li>The outer loop checks each element in the array to see if it is a leader.</li>
+<li>The inner loop checks if there is any element to the right that is greater than the element being currently processed by the outer loop.</li>
+</ul>
+</li>
+<li>Begin by initializing the outer loop pointer at the start element and set it as the current leader.</li>
+<li>If any element traversed is found to be greater than the current leader, the element is not considered a leader, and the outer loop pointer is incremented by 1, setting the next element as the current leader.</li>
+<li>If no other element to the right is greater than the current element, it is added to the answer array as a leader element.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    //Function to find leaders in an array.
+    vector&lt;int&gt; leaders(vector&lt;int&gt;&amp; nums) {
+        vector&lt;int&gt; ans;
+
+        // Iterate through each element in nums
+        for (int i = 0; i &lt; nums.size(); i++) {
+            bool leader = true;
+
+            /* Check whether nums[i] is greater
+            than all elements to its right*/
+            for (int j = i + 1; j &lt; nums.size(); j++) {
+                if (nums[j] &gt;= nums[i]) {
+                    /* If any element to the right is greater 
+                    or equal, nums[i] is not a leader*/
+                    leader = false;
+                    break;
+                }
+            }
+
+            // If nums[i] is a leader, add it to the ans vector
+            if (leader) {
+                ans.push_back(nums[i]);
+            }
+        }
+
+       //Return the leaders 
+        return ans;
+    }
+};
+
+int main() {
+    vector&lt;int&gt; nums = {1, 2, 5, 3, 1, 2};
+
+    // Create an instance of the Solution class
+    Solution finder;
+
+    // Get leaders using class method
+    vector&lt;int&gt; ans = finder.leaders(nums);
+
+    cout &lt;&lt; "Leaders in the array are: ";
+    for (int i = 0; i &lt; ans.size(); i++) {
+        cout &lt;&lt; ans[i] &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    //Function to find leaders in an array.
+    public ArrayList&lt;Integer&gt; leaders(int[] nums) {
+        ArrayList&lt;Integer&gt; ans = new ArrayList&lt;&gt;();
+
+        // Iterate through each element in nums
+        for (int i = 0; i &lt; nums.length; i++) {
+            boolean leader = true;
+
+            /* Check whether nums[i] is greater
+            than all elements to its right */
+            for (int j = i + 1; j &lt; nums.length; j++) {
+                if (nums[j] &gt;= nums[i]) {
+                    /* If any element to the right is greater 
+                    or equal, nums[i] is not a leader */
+                    leader = false;
+                    break;
+                }
+            }
+
+            // If nums[i] is a leader, add it to the ans list
+            if (leader) {
+                ans.add(nums[i]);
+            }
+        }
+
+        // Return the leaders 
+        return ans;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        int[] nums = {1, 2, 5, 3, 1, 2};
+
+        // Create an instance of the Solution class
+        Solution finder = new Solution();
+
+        // Get leaders using class method
+        ArrayList&lt;Integer&gt; ans = finder.leaders(nums);
+
+        System.out.print("Leaders in the array are: ");
+        for (int leader : ans) {
+            System.out.print(leader + " ");
+        }
+        System.out.println();
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to find leaders in an array.
+    def leaders(self, nums):
+        ans = []
+
+        # Iterate through each element in nums
+        for i in range(len(nums)):
+            leader = True
+
+            '''Check whether nums[i] is greater
+            than all elements to its right'''
+            for j in range(i + 1, len(nums)):
+                if nums[j] &gt;= nums[i]:
+                    '''If any element to the right is greater 
+                    or equal, nums[i] is not a leader'''
+                    leader = False
+                    break
+
+            # If nums[i] is a leader, add it to the ans list
+            if leader:
+                ans.append(nums[i])
+
+        # Return the leaders
+        return ans
+
+
+# Main method
+nums = [1, 2, 5, 3, 1, 2]
+
+# Create an instance of the Solution class
+finder = Solution()
+
+# Get leaders using class method
+ans = finder.leaders(nums)
+
+print("Leaders in the array are: ", end="")
+for leader in ans:
+    print(leader, end=" ")
+print()</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find leaders in an array.
+    leaders(nums) {
+        let ans = [];
+
+        // Iterate through each element in nums
+        for (let i = 0; i &lt; nums.length; i++) {
+            let leader = true;
+
+            /* Check whether nums[i] is greater
+            than all elements to its right */
+            for (let j = i + 1; j &lt; nums.length; j++) {
+                if (nums[j] &gt;= nums[i]) {
+                    /* If any element to the right is greater 
+                    or equal, nums[i] is not a leader */
+                    leader = false;
+                    break;
+                }
+            }
+
+            // If nums[i] is a leader, add it to the ans array
+            if (leader) {
+                ans.push(nums[i]);
+            }
+        }
+
+        // Return the leaders
+        return ans;
+    }
+}
+
+// Main method
+let nums = [1, 2, 5, 3, 1, 2];
+
+// Create an instance of the Solution class
+let finder = new Solution();
+
+// Get leaders using class method
+let ans = finder.leaders(nums);
+
+console.log("Leaders in the array are: " + ans.join(" "));</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(N<sup>2</sup>)</strong>, where N is the size of the input array. This is because we have a nested loop where the outer loop runs N times and the inner loop runs up to N times in the worst case.<br/><br/>
+<strong>Space Complexity: O(1)</strong>, as we are using only a constant amount of extra space for the answer array, which does not depend on the input size.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Set a variable <code>max</code> to the last element of the array (<code>nums[sizeOfArray - 1]</code>), as the last element is always a leader.</li>
+<li>Create an empty list <code>ans</code> to store the leader elements, and initially add the last element of the array to this list, as it is always a leader.</li>
+<li>Start from the second last element (index = <code>sizeOfArray - 2</code>) and move towards the first element (index = 0).</li>
+<li>For each element, compare it with the <code>max</code> variable. If the current element is greater than <code>max</code>, add this element to the <code>ans</code> list and update <code>max</code> to the current element.</li>
+<li>After processing all elements, the <code>ans</code> list will contain all the leader elements in reverse order. Reverse the <code>ans</code> list and return it.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/40a7e5f2e873e04f.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/e5b4c5a2b40ad97b.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/7057efe07cd2687f.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/a4a69ca0f43b2944.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/40a7e5f2e873e04f.png"/><img alt="Image 2" loading="lazy" src="../assets/img/e5b4c5a2b40ad97b.png"/><img alt="Image 3" loading="lazy" src="../assets/img/7057efe07cd2687f.png"/><img alt="Image 4" loading="lazy" src="../assets/img/a4a69ca0f43b2944.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    //Function to find the leaders in an array.
+    vector&lt;int&gt; leaders(vector&lt;int&gt;&amp; nums) {
+        vector&lt;int&gt; ans;
+        
+        if(nums.empty()) {
+            return ans;
+        }
+        
+        // Last element of the vector is always a leader
+        int max = nums[nums.size() - 1];
+        ans.push_back(nums[nums.size() - 1]);
+        
+        // Check elements from right to left
+        for (int i = nums.size() - 2; i &gt;= 0; i--) {
+            if (nums[i] &gt; max) {
+                ans.push_back(nums[i]);
+                max = nums[i];
+            }
+        }
+        
+        /* Reverse the vector to match
+        the required output order*/
+        reverse(ans.begin(), ans.end());
+        
+        //Return the leaders
+        return ans;
+    }
+};
+
+int main() {
+    vector&lt;int&gt; nums = {10, 22, 12, 3, 0, 6};
+    
+    // Create an instance of the Solution class
+    Solution finder;
+    
+    // Get leaders using class method
+    vector&lt;int&gt; ans = finder.leaders(nums);
+    
+    cout &lt;&lt; "Leaders in the array are: ";
+    for (int i = 0; i &lt; ans.size(); i++) {
+        cout &lt;&lt; ans[i] &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+    
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to find the leaders in an array.
+    public ArrayList&lt;Integer&gt; leaders(int[] nums) {
+        ArrayList&lt;Integer&gt; ans = new ArrayList&lt;&gt;();
+        
+        if (nums.length == 0) {
+            return ans;
+        }
+        
+        // Last element of the array is always a leader
+        int max = nums[nums.length - 1];
+        ans.add(nums[nums.length - 1]);
+        
+        // Check elements from right to left
+        for (int i = nums.length - 2; i &gt;= 0; i--) {
+            if (nums[i] &gt; max) {
+                ans.add(nums[i]);
+                max = nums[i];
+            }
+        }
+        
+        /* Reverse the list to match
+        the required output order */
+        Collections.reverse(ans);
+        
+        // Return the leaders
+        return ans;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        int[] nums = {10, 22, 12, 3, 0, 6};
+        
+        // Create an instance of the Solution class
+        Solution finder = new Solution();
+        
+        // Get leaders using class method
+        ArrayList&lt;Integer&gt; ans = finder.leaders(nums);
+        
+        System.out.print("Leaders in the array are: ");
+        for (int leader : ans) {
+            System.out.print(leader + " ");
+        }
+        System.out.println();
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to find the leaders in an array.
+    def leaders(self, nums):
+        ans = []
+        
+        if not nums:
+            return ans
+        
+        # Last element of the list is always a leader
+        max_val = nums[-1]
+        ans.append(nums[-1])
+        
+        # Check elements from right to left
+        for i in range(len(nums) - 2, -1, -1):
+            if nums[i] &gt; max_val:
+                ans.append(nums[i])
+                max_val = nums[i]
+        
+        '''Reverse the list to match
+        the required output order'''
+        ans.reverse()
+        
+        # Return the leaders
+        return ans
+
+# Main method
+nums = [10, 22, 12, 3, 0, 6]
+
+# Create an instance of the Solution class
+finder = Solution()
+
+# Get leaders using class method
+ans = finder.leaders(nums)
+
+print("Leaders in the array are: ", end="")
+for leader in ans:
+    print(leader, end=" ")
+print()</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find the leaders in an array.
+    leaders(nums) {
+        let ans = [];
+        
+        if (nums.length === 0) {
+            return ans;
+        }
+        
+        // Last element of the array is always a leader
+        let max = nums[nums.length - 1];
+        ans.push(nums[nums.length - 1]);
+        
+        // Check elements from right to left
+        for (let i = nums.length - 2; i &gt;= 0; i--) {
+            if (nums[i] &gt; max) {
+                ans.push(nums[i]);
+                max = nums[i];
+            }
+        }
+        
+        /* Reverse the array to match
+        the required output order */
+        ans.reverse();
+        
+        // Return the leaders
+        return ans;
+    }
+}
+
+// Main method
+let nums = [10, 22, 12, 3, 0, 6];
+
+// Create an instance of the Solution class
+let finder = new Solution();
+
+// Get leaders using class method
+let ans = finder.leaders(nums);
+
+console.log("Leaders in the array are: " + ans.join(" "));</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(N)</strong>, where N is the size of the input array. This is because we traverse the array only once.<br/><br/>
+<strong>Space Complexity: O(1)</strong>, as we are using only a constant amount of extra space.
+
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

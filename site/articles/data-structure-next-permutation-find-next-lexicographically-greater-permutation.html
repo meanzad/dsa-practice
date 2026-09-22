@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>next_permutation : find next lexicographically greater permutation</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>next_permutation : find next lexicographically greater permutation</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/next_permutation-find-next-lexicographically-greater-permutation/</code></div>
+  <p><strong>Problem Statement: </strong> Given an array Arr[] of integers, rearrange the numbers of the given array into the lexicographically next greater permutation of numbers.<br/><br/>If such an arrangement is not possible, it must rearrange to the lowest possible order (i.e., sorted in ascending order).
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: Arr[] = {1,3,2}</span>
+<span>Output: {2,1,3}</span>
+<span>Explanation: All permutations of {1,2,3} are {{1,2,3} , {1,3,2}, {2,13} , {2,3,1} , {3,1,2} , {3,2,1}}. So, the next permutation just after {1,3,2} is {2,1,3}.</span>
+<p></p>
+<span>Input : Arr[] = {3,2,1}</span>
+<span>Output: {1,2,3}</span>
+<span>Explanation : As we see all permutations of {1,2,3}, we find {3,2,1} at the last position. So, we have to return the lowest permutation.</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/next-permutation" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better.
+            It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                Brute-Force Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+  The brute force approach to find the next permutation is to find all possible permutations of the array and then look for next permutation.
+  <ul>
+<li>Find all possible permutations of elements present and store them.</li>
+    Sort the permutations and search input from all possible permutations.
+    Print the next permutation present right after it.
+    <li>If the current permutation is the last, return the first permutation in the list.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find the next permutation
+    vector&lt;int&gt; nextPermutation(vector&lt;int&gt;&amp; nums) {
+        // Store all permutations
+        vector&lt;vector&lt;int&gt;&gt; all;
+
+        // Generate all permutations
+        sort(nums.begin(), nums.end());
+        do {
+            all.push_back(nums);
+        } while (next_permutation(nums.begin(), nums.end()));
+
+        // Traverse the list to find current permutation
+        for (int i = 0; i &lt; all.size(); i++) {
+            if (all[i] == nums) {
+                // If it's the last permutation
+                if (i == all.size() - 1)
+                    return all[0];
+                // Return the next one
+                return all[i + 1];
+            }
+        }
+
+        // Return original if not found (shouldn't happen)
+        return nums;
+    }
+};
+
+int main() {
+    Solution sol;
+    vector&lt;int&gt; nums = {1, 2, 3};
+
+    vector&lt;int&gt; result = sol.nextPermutation(nums);
+
+    for (int x : result) cout &lt;&lt; x &lt;&lt; " ";
+    cout &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to find the next permutation
+    public List&lt;Integer&gt; nextPermutation(int[] nums) {
+        // List to hold all permutations
+        List&lt;List&lt;Integer&gt;&gt; all = new ArrayList&lt;&gt;();
+
+        // Sort the input to start from the smallest
+        Arrays.sort(nums);
+
+        // Generate all permutations
+        permute(nums, 0, all);
+
+        // Convert array to list for comparison
+        List&lt;Integer&gt; current = new ArrayList&lt;&gt;();
+        for (int num : nums)
+            current.add(num);
+
+        // Find and return the next permutation
+        for (int i = 0; i &lt; all.size(); i++) {
+            if (all.get(i).equals(current)) {
+                if (i == all.size() - 1)
+                    return all.get(0);
+                return all.get(i + 1);
+            }
+        }
+
+        return current;
+    }
+
+    // Backtracking permutation generator
+    private void permute(int[] nums, int start, List&lt;List&lt;Integer&gt;&gt; all) {
+        if (start == nums.length) {
+            List&lt;Integer&gt; temp = new ArrayList&lt;&gt;();
+            for (int num : nums) temp.add(num);
+            all.add(new ArrayList&lt;&gt;(temp));
+            return;
+        }
+        for (int i = start; i &lt; nums.length; i++) {
+            swap(nums, i, start);
+            permute(nums, start + 1, all);
+            swap(nums, i, start);
+        }
+    }
+
+    // Swap helper
+    private void swap(int[] arr, int i, int j) {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        int[] nums = {1, 2, 3};
+
+        List&lt;Integer&gt; result = sol.nextPermutation(nums);
+        for (int x : result)
+            System.out.print(x + " ");
+        System.out.println();
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">from itertools import permutations
+
+class Solution:
+    # Function to find the next permutation
+    def nextPermutation(self, nums):
+        # Generate all unique permutations
+        perms = sorted(set(permutations(nums)))
+
+        # Convert list to tuple for comparison
+        current = tuple(nums)
+
+        # Traverse the list
+        for i in range(len(perms)):
+            if perms[i] == current:
+                # If last permutation, return first
+                if i == len(perms) - 1:
+                    return list(perms[0])
+                # Else return next
+                return list(perms[i + 1])
+
+        return nums
+
+# Driver code
+sol = Solution()
+nums = [1, 2, 3]
+result = sol.nextPermutation(nums)
+print(" ".join(map(str, result)))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Helper to generate all permutations
+    permute(nums) {
+        const res = [];
+        const backtrack = (start) =&gt; {
+            if (start === nums.length) {
+                res.push([...nums]);
+                return;
+            }
+            for (let i = start; i &lt; nums.length; i++) {
+                [nums[i], nums[start]] = [nums[start], nums[i]];
+                backtrack(start + 1);
+                [nums[i], nums[start]] = [nums[start], nums[i]];
+            }
+        };
+        nums.sort((a, b) =&gt; a - b);
+        backtrack(0);
+        return res;
+    }
+
+    // Main function to get next permutation
+    nextPermutation(nums) {
+        const perms = this.permute([...nums]);
+
+        for (let i = 0; i &lt; perms.length; i++) {
+            let equal = true;
+            for (let j = 0; j &lt; nums.length; j++) {
+                if (perms[i][j] !== nums[j]) {
+                    equal = false;
+                    break;
+                }
+            }
+            if (equal) {
+                if (i === perms.length - 1)
+                    return perms[0];
+                return perms[i + 1];
+            }
+        }
+        return nums;
+    }
+}
+
+// Driver
+const sol = new Solution();
+let nums = [1, 2, 3];
+let result = sol.nextPermutation(nums);
+console.log(result.join(" "));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N!*N)</strong>, since we are generating all possible permutations, it takes N! time.<br/>
+<strong>Space Complexity: O(N!)</strong>, storing all permutations.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                Optimal Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+  We want to rearrange the array to form the next greater permutation.
+If that's not possible (i.e., it's the last permutation), we return the smallest one (i.e., sorted ascendingly).<br/><br/>
+
+To find this next permutation with minimal change, we need to find a digit that can be increased slightly to make the number bigger and then rearrange the remaining part to be the smallest possible.
+<ul>
+<li>Traverse from the end and find the first index where the current digit is smaller than the next one (this is the "breaking point").</li>
+
+<li>Then again traverse from the end to find the first digit greater than the breaking point digit and swap them.</li>
+
+
+<li>Finally, reverse the part of the array to the right of the breaking point to get the smallest next permutation.</li>
+
+<li>If no such breaking point exists (entire array is descending), just reverse the whole array.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/9244dea153516f56.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/628488bb968619d8.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/2d880352d08d99d2.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/b01401d773893394.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/9244dea153516f56.png"/><img alt="Image 2" loading="lazy" src="../assets/img/628488bb968619d8.png"/><img alt="Image 3" loading="lazy" src="../assets/img/2d880352d08d99d2.png"/><img alt="Image 4" loading="lazy" src="../assets/img/b01401d773893394.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Solution class
+class Solution {
+public:
+    // Function to find next permutation
+    void nextPermutation(vector&lt;int&gt;&amp; nums) {
+        // Set index to -1
+        int index = -1;
+
+        // Find the first decreasing element from end
+        for (int i = nums.size() - 2; i &gt;= 0; i--) {
+            // If a smaller element found
+            if (nums[i] &lt; nums[i + 1]) {
+                // Store index
+                index = i;
+                break;
+            }
+        }
+
+        // If no such index found
+        if (index == -1) {
+            // Reverse the entire array
+            reverse(nums.begin(), nums.end());
+            return;
+        }
+
+        // Find element just greater than nums[index]
+        for (int i = nums.size() - 1; i &gt; index; i--) {
+            // Swap the two
+            if (nums[i] &gt; nums[index]) {
+                swap(nums[i], nums[index]);
+                break;
+            }
+        }
+
+        // Reverse the part after index
+        reverse(nums.begin() + index + 1, nums.end());
+    }
+};
+
+// Main function
+int main() {
+    // Input array
+    vector&lt;int&gt; nums = {1, 2, 3};
+
+    // Create object
+    Solution sol;
+
+    // Call the function
+    sol.nextPermutation(nums);
+
+    // Print result
+    for (int num : nums) {
+        cout &lt;&lt; num &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Solution class
+class Solution {
+    // Function to find next permutation
+    public void nextPermutation(int[] nums) {
+        // Set index to -1
+        int index = -1;
+
+        // Find the first decreasing element from end
+        for (int i = nums.length - 2; i &gt;= 0; i--) {
+            // If smaller found
+            if (nums[i] &lt; nums[i + 1]) {
+                // Store index
+                index = i;
+                break;
+            }
+        }
+
+        // If no index found
+        if (index == -1) {
+            // Reverse the entire array
+            reverse(nums, 0, nums.length - 1);
+            return;
+        }
+
+        // Find just larger element
+        for (int i = nums.length - 1; i &gt; index; i--) {
+            // Swap them
+            if (nums[i] &gt; nums[index]) {
+                swap(nums, i, index);
+                break;
+            }
+        }
+
+        // Reverse part after index
+        reverse(nums, index + 1, nums.length - 1);
+    }
+
+    // Helper to reverse array
+    private void reverse(int[] arr, int start, int end) {
+        while (start &lt; end) {
+            swap(arr, start, end);
+            start++;
+            end--;
+        }
+    }
+
+    // Helper to swap
+    private void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+        // Input array
+        int[] nums = {1, 2, 3};
+
+        // Create object
+        Solution sol = new Solution();
+
+        // Call function
+        sol.nextPermutation(nums);
+
+        // Print result
+        for (int num : nums) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Solution class
+class Solution:
+    # Function to find next permutation
+    def nextPermutation(self, nums):
+        # Set index
+        index = -1
+
+        # Find decreasing point
+        for i in range(len(nums) - 2, -1, -1):
+            # If smaller found
+            if nums[i] &lt; nums[i + 1]:
+                index = i
+                break
+
+        # If no such index
+        if index == -1:
+            # Reverse whole list
+            nums.reverse()
+            return
+
+        # Find just greater element
+        for i in range(len(nums) - 1, index, -1):
+            if nums[i] &gt; nums[index]:
+                # Swap them
+                nums[i], nums[index] = nums[index], nums[i]
+                break
+
+        # Reverse part after index
+        nums[index + 1:] = reversed(nums[index + 1:])
+
+# Main driver
+def main():
+    # Input list
+    nums = [1, 2, 3]
+
+    # Create object
+    sol = Solution()
+
+    # Call function
+    sol.nextPermutation(nums)
+
+    # Print result
+    print(" ".join(map(str, nums)))
+
+# Run main
+main()
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Solution class
+class Solution {
+    // Function to find next permutation
+    nextPermutation(nums) {
+        // Set index
+        let index = -1;
+
+        // Find decreasing point
+        for (let i = nums.length - 2; i &gt;= 0; i--) {
+            if (nums[i] &lt; nums[i + 1]) {
+                index = i;
+                break;
+            }
+        }
+
+        // If no index found
+        if (index === -1) {
+            // Reverse full array
+            nums.reverse();
+            return;
+        }
+
+        // Find just larger element
+        for (let i = nums.length - 1; i &gt; index; i--) {
+            if (nums[i] &gt; nums[index]) {
+                // Swap them
+                [nums[i], nums[index]] = [nums[index], nums[i]];
+                break;
+            }
+        }
+
+        // Reverse part after index
+        let left = index + 1, right = nums.length - 1;
+        while (left &lt; right) {
+            [nums[left], nums[right]] = [nums[right], nums[left]];
+            left++;
+            right--;
+        }
+    }
+}
+
+// Main driver
+function main() {
+    // Input array
+    let nums = [1, 2, 3];
+
+    // Create object
+    const sol = new Solution();
+
+    // Call function
+    sol.nextPermutation(nums);
+
+    // Print result
+    console.log(nums.join(" "));
+}
+
+// Run main
+main();
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N)</strong>, we find the breaking point and reverse the subarray in linear time.<br/>
+<strong>Space Complexity: O(1)</strong>, constant additional space is used.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Rat in a Maze</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Rat in a Maze</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/rat-in-a-maze/</code></div>
+  <p><strong>Problem Statement: </strong> Given a grid of dimensions n x n. A rat is placed at coordinates (0, 0) and wants to reach at coordinates (n-1, n-1). Find all possible paths that rat can take to travel from (0, 0) to (n-1, n-1). The directions in which rat can move are 'U' (up) , 'D' (down) , 'L' (left) , 'R' (right). <br/>The value 0 in grid denotes that the cell is blocked and rat cannot use that cell for travelling, whereas value 1 represents that rat can travel through the cell. If the cell (0, 0) has 0 value, then mouse cannot move to any other cell.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: n = 4 , grid = [ [1, 0, 0, 0] , [1, 1, 0, 1], [1, 1, 0, 0], [0, 1, 1, 1] ]</span>
+<span>Output: ["DDRDRR" , "DRDDRR"]</span>
+<span>Explanation: The rat has two different path to reach (3, 3).
+The first path is (0, 0) =&gt; (1, 0) =&gt; (2, 0) =&gt; (2, 1) =&gt; (3, 1) =&gt; (3, 2) =&gt; (3, 3).
+The second path is (0,0) =&gt; (1,0) =&gt; (1,1) =&gt; (2,1) =&gt; (3,1) =&gt; (3,2) =&gt; (3,3).</span>
+<img height="227" loading="lazy" src="../assets/img/0d31b62a1c77135b.png" width="227"/>
+<span>Input: n = 2 , grid = [[1, 0] , [1, 0]]</span>
+<span>Output: []</span>
+<span>Explanation: There is no path that rat can choose to travel from (0,0) to (1,1).</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/rat-in-a-maze" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better.
+            It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                  Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+Since the rat need to find all the paths to reach destination it should explore the maze step by step, trying every possible direction at each junction. If it reaches a dead end or an already visited cell, it backs up to the last decision point and tries another route. This way, it explores all possible paths from the start to the destination without missing any options. By marking cells as visited when moving forward and unmarking them when stepping back, the rat avoids infinite loops and ensures every path is explored exactly once.
+<ul>
+<li>Start at the source(0,0) with an empty string and try every possible path i.e upwards(U), downwards(D), leftwards(L) and rightwards(R).</li>
+<li>As the answer should be in lexicographical order so it's better to try the directions in lexicographical order i.e (D,L,R,U)</li>
+<li>Declare a 2D-array named visited because the question states that a single cell should be included only once in the path,so it's important to keep track of the visited cells in a particular path.</li><p></p>
+<img height="296" loading="lazy" src="../assets/img/d292a0e93a94e5ca.png" width="271"/>
+<li>If a cell is in path, mark it in the visited array. Also keep a check of the “out of bound” conditions while going in a particular direction in the matrix. </li>
+<li>Whenever we reach the destination(n,n), store the path in your answer and backtrack to find more available paths.</li><p></p>
+<img height="303" loading="lazy" src="../assets/img/49594396e3d0cf56.png" width="288"/>
+<li>While getting back, keep on unmarking the visited array for the respective direction. Also check whether there is a different path possible while getting back and if yes, then mark that cell in the visited array.</li><p></p>
+<img height="420" loading="lazy" src="../assets/img/5dd71327668697c9.png" width="624"/><p></p>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Class to solve the Rat in a Maze problem
+class Solution {
+public:
+    // Function to check if the cell is within maze and valid to move
+    bool isSafe(int x, int y, int n, vector&lt;vector&lt;int&gt;&gt; &amp;maze, 
+                vector&lt;vector&lt;int&gt;&gt; &amp;visited) {
+        return (x &gt;= 0 &amp;&amp; x &lt; n &amp;&amp; y &gt;= 0 &amp;&amp; y &lt; n &amp;&amp; 
+                maze[x][y] == 1 &amp;&amp; visited[x][y] == 0);
+    }
+
+    // Function to solve maze using backtracking
+    void solve(int x, int y, int n, vector&lt;vector&lt;int&gt;&gt; &amp;maze, 
+               vector&lt;vector&lt;int&gt;&gt; &amp;visited, string path, 
+               vector&lt;string&gt; &amp;res) {
+
+        // If destination reached, store the path
+        if (x == n - 1 &amp;&amp; y == n - 1) {
+            res.push_back(path);
+            return;
+        }
+
+        // Mark the cell visited
+        visited[x][y] = 1;
+
+        // Try moving Down
+        if (isSafe(x + 1, y, n, maze, visited)) {
+            solve(x + 1, y, n, maze, visited, path + "D", res);
+        }
+        // Try moving Left
+        if (isSafe(x, y - 1, n, maze, visited)) {
+            solve(x, y - 1, n, maze, visited, path + "L", res);
+        }
+        // Try moving Right
+        if (isSafe(x, y + 1, n, maze, visited)) {
+            solve(x, y + 1, n, maze, visited, path + "R", res);
+        }
+        // Try moving Up
+        if (isSafe(x - 1, y, n, maze, visited)) {
+            solve(x - 1, y, n, maze, visited, path + "U", res);
+        }
+
+        // Backtrack: unmark cell as visited
+        visited[x][y] = 0;
+    }
+
+    // Main function to find all paths
+    vector&lt;string&gt; findPath(vector&lt;vector&lt;int&gt;&gt; &amp;maze, int n) {
+        vector&lt;string&gt; res;
+        vector&lt;vector&lt;int&gt;&gt; visited(n, vector&lt;int&gt;(n, 0));
+        if (maze[0][0] == 1) {
+            solve(0, 0, n, maze, visited, "", res);
+        }
+        return res;
+    }
+};
+
+// Driver code
+int main() {
+    vector&lt;vector&lt;int&gt;&gt; maze = {
+        {1, 0, 0, 0},
+        {1, 1, 0, 1},
+        {1, 1, 0, 0},
+        {0, 1, 1, 1}
+    };
+    int n = maze.size();
+    Solution obj;
+    vector&lt;string&gt; paths = obj.findPath(maze, n);
+
+    for (auto &amp;p : paths) cout &lt;&lt; p &lt;&lt; " ";
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Class to solve the Rat in a Maze problem
+class Solution {
+
+    // Function to check if the cell is within maze and valid to move
+    boolean isSafe(int x, int y, int n, int[][] maze, int[][] visited) {
+        return (x &gt;= 0 &amp;&amp; x &lt; n &amp;&amp; y &gt;= 0 &amp;&amp; y &lt; n &amp;&amp;
+                maze[x][y] == 1 &amp;&amp; visited[x][y] == 0);
+    }
+
+    // Function to solve maze using backtracking
+    void solve(int x, int y, int n, int[][] maze, int[][] visited,
+               String path, List&lt;String&gt; res) {
+
+        // If destination reached, store the path
+        if (x == n - 1 &amp;&amp; y == n - 1) {
+            res.add(path);
+            return;
+        }
+
+        // Mark the cell visited
+        visited[x][y] = 1;
+
+        // Try moving Down
+        if (isSafe(x + 1, y, n, maze, visited)) {
+            solve(x + 1, y, n, maze, visited, path + "D", res);
+        }
+        // Try moving Left
+        if (isSafe(x, y - 1, n, maze, visited)) {
+            solve(x, y - 1, n, maze, visited, path + "L", res);
+        }
+        // Try moving Right
+        if (isSafe(x, y + 1, n, maze, visited)) {
+            solve(x, y + 1, n, maze, visited, path + "R", res);
+        }
+        // Try moving Up
+        if (isSafe(x - 1, y, n, maze, visited)) {
+            solve(x - 1, y, n, maze, visited, path + "U", res);
+        }
+
+        // Backtrack: unmark cell as visited
+        visited[x][y] = 0;
+    }
+
+    // Main function to find all paths
+    List&lt;String&gt; findPath(int[][] maze, int n) {
+        List&lt;String&gt; res = new ArrayList&lt;&gt;();
+        int[][] visited = new int[n][n];
+        if (maze[0][0] == 1) {
+            solve(0, 0, n, maze, visited, "", res);
+        }
+        return res;
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+        int[][] maze = {
+            {1, 0, 0, 0},
+            {1, 1, 0, 1},
+            {1, 1, 0, 0},
+            {0, 1, 1, 1}
+        };
+        int n = maze.length;
+        Solution obj = new Solution();
+        List&lt;String&gt; paths = obj.findPath(maze, n);
+
+        for (String p : paths) {
+            System.out.print(p + " ");
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Class to solve the Rat in a Maze problem
+class Solution:
+
+    # Function to check if the cell is within maze and valid to move
+    def isSafe(self, x, y, n, maze, visited):
+        return (0 &lt;= x &lt; n and 0 &lt;= y &lt; n and 
+                maze[x][y] == 1 and visited[x][y] == 0)
+
+    # Function to solve maze using backtracking
+    def solve(self, x, y, n, maze, visited, path, res):
+
+        # If destination reached, store the path
+        if x == n - 1 and y == n - 1:
+            res.append(path)
+            return
+
+        # Mark the cell visited
+        visited[x][y] = 1
+
+        # Try moving Down
+        if self.isSafe(x + 1, y, n, maze, visited):
+            self.solve(x + 1, y, n, maze, visited, path + "D", res)
+        # Try moving Left
+        if self.isSafe(x, y - 1, n, maze, visited):
+            self.solve(x, y - 1, n, maze, visited, path + "L", res)
+        # Try moving Right
+        if self.isSafe(x, y + 1, n, maze, visited):
+            self.solve(x, y + 1, n, maze, visited, path + "R", res)
+        # Try moving Up
+        if self.isSafe(x - 1, y, n, maze, visited):
+            self.solve(x - 1, y, n, maze, visited, path + "U", res)
+
+        # Backtrack: unmark cell as visited
+        visited[x][y] = 0
+
+    # Main function to find all paths
+    def findPath(self, maze, n):
+        res = []
+        visited = [[0] * n for _ in range(n)]
+        if maze[0][0] == 1:
+            self.solve(0, 0, n, maze, visited, "", res)
+        return res
+
+
+# Driver code
+maze = [
+    [1, 0, 0, 0],
+    [1, 1, 0, 1],
+    [1, 1, 0, 0],
+    [0, 1, 1, 1]
+]
+n = len(maze)
+obj = Solution()
+paths = obj.findPath(maze, n)
+print(" ".join(paths))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Class to solve the Rat in a Maze problem
+class Solution {
+
+    // Function to check if the cell is within maze and valid to move
+    isSafe(x, y, n, maze, visited) {
+        return (x &gt;= 0 &amp;&amp; x &lt; n &amp;&amp; y &gt;= 0 &amp;&amp; y &lt; n &amp;&amp;
+                maze[x][y] === 1 &amp;&amp; visited[x][y] === 0);
+    }
+
+    // Function to solve maze using backtracking
+    solve(x, y, n, maze, visited, path, res) {
+
+        // If destination reached, store the path
+        if (x === n - 1 &amp;&amp; y === n - 1) {
+            res.push(path);
+            return;
+        }
+
+        // Mark the cell visited
+        visited[x][y] = 1;
+
+        // Try moving Down
+        if (this.isSafe(x + 1, y, n, maze, visited)) {
+            this.solve(x + 1, y, n, maze, visited, path + "D", res);
+        }
+        // Try moving Left
+        if (this.isSafe(x, y - 1, n, maze, visited)) {
+            this.solve(x, y - 1, n, maze, visited, path + "L", res);
+        }
+        // Try moving Right
+        if (this.isSafe(x, y + 1, n, maze, visited)) {
+            this.solve(x, y + 1, n, maze, visited, path + "R", res);
+        }
+        // Try moving Up
+        if (this.isSafe(x - 1, y, n, maze, visited)) {
+            this.solve(x - 1, y, n, maze, visited, path + "U", res);
+        }
+
+        // Backtrack: unmark cell as visited
+        visited[x][y] = 0;
+    }
+
+    // Main function to find all paths
+    findPath(maze, n) {
+        const res = [];
+        const visited = Array.from({ length: n }, () =&gt; Array(n).fill(0));
+        if (maze[0][0] === 1) {
+            this.solve(0, 0, n, maze, visited, "", res);
+        }
+        return res;
+    }
+}
+
+// Driver code
+const maze = [
+    [1, 0, 0, 0],
+    [1, 1, 0, 1],
+    [1, 1, 0, 0],
+    [0, 1, 1, 1]
+];
+const n = maze.length;
+const obj = new Solution();
+const paths = obj.findPath(maze, n);
+console.log(paths.join(" "));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(4^(N*N)),</strong>, because on every cell we need to try 4 different directions.<br/>
+<strong>Space Complexity: O(N*N)</strong>, additional space for visited array and maximum Depth of the recursion tree(auxiliary space).
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

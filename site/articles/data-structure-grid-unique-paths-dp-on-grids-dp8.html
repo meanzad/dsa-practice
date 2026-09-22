@@ -1,0 +1,890 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Grid Unique Paths : DP on Grids (DP8)</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Grid Unique Paths : DP on Grids (DP8)</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/grid-unique-paths-dp-on-grids-dp8/</code></div>
+  <p><strong>Problem Statement: </strong>
+Given two integers m and n, representing the number of rows and columns of a 2d array named matrix. Return the number of unique ways to go from the top-left cell (matrix[0][0]) to the bottom-right cell (matrix[m-1][n-1]).
+<br/><br/>
+Movement is allowed only in two directions from a cell: right and bottom.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>  
+<strong>Input:</strong> m = 3, n = 2  
+<strong>Output:</strong> 3  
+<strong>Explanation:</strong> There are 3 unique ways to go from the top-left to the bottom-right cell:
+1) right → down → down  
+2) down → right → down  
+3) down → down → right  
+
+<strong>Example 2:</strong>  
+<strong>Input:</strong> m = 2, n = 4  
+<strong>Output:</strong> 4  
+<strong>Explanation:</strong> There are 4 unique ways to go from the top-left to the bottom-right cell:
+1) down → right → right → right  
+2) right → down → right → right  
+3) right → right → down → right  
+4) right → right → right → down</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/grid-unique-paths" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Memoization Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Declare a <code>dp[]</code> array of size <code>[m][n]</code>, where <code>m</code> and <code>n</code> are the dimensions of the grid. This array stores the results of subproblems, where <code>dp[i][j]</code> represents the total number of ways to reach from <code>(0,0)</code> to <code>(i,j)</code>.</li>
+<li>Initially, fill the <code>dp</code> array with <code>-1</code> to indicate that no subproblem has been solved yet.</li>
+<li>While encountering an overlapping subproblem, check if the value in <code>dp[i][j]</code> is not <code>-1</code>. If the value is not <code>-1</code>, it means this subproblem has already been solved, and you can directly return the stored value from the <code>dp</code> array instead of recalculating it.</li>
+<li>Whenever a subproblem is encountered and it is not solved yet (i.e., the value at <code>dp[i][j]</code> is <code>-1</code>), calculate the value of the subproblem and store it in the <code>dp</code> array for future reference. This ensures that future overlapping subproblems can be solved in constant time by retrieving the value from the array.</li>
+</ul>
+<p><img height="457" loading="lazy" src="../assets/img/13bc4318476dbf86.png" width="481"/></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+private:
+    //Function to solve the problem using recursion
+    int func(int i, int j, vector&lt;vector&lt;int&gt;&gt;&amp; dp){
+        // Base case
+        if (i == 0 &amp;&amp; j == 0)  return 1;
+
+        /* If we go out of bounds or reach 
+        a blocked cell, there are no ways.*/
+        if (i &lt; 0 || j &lt; 0)  return 0;
+        
+        /* If we have already computed the number 
+        of ways for this cell, return it.*/
+        if (dp[i][j] != -1)  return dp[i][j];
+
+        /* Calculate the number of ways by
+        moving up and left recursively.*/
+        int up = func(i - 1, j, dp);
+        int left = func(i, j - 1, dp);
+
+        // Store the result in dp table and return it.
+        return dp[i][j] = up + left;
+    }
+public:
+    /*Function to count the total ways
+    to reach (0,0) from (m-1,n-1)*/
+    int uniquePaths(int m, int n) {
+        /* Initialize a memoization table (dp) to
+        store the results of subproblems.*/
+        vector&lt;vector&lt;int&gt;&gt; dp(m, vector&lt;int&gt;(n, -1));
+        
+        //Return the total count(0 based indexing)
+        return func(m-1,n-1, dp);
+    }
+};
+int main() {
+    int m = 3;
+    int n = 2;
+    
+    //Create an instance of Solution class
+    Solution sol;
+    
+    // Call the countWays function and print the result.
+    cout &lt;&lt; "Number of ways: " &lt;&lt; sol.uniquePaths(m, n) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to solve the problem using recursion
+    private int func(int i, int j, int[][] dp) {
+        // Base case
+        if (i == 0 &amp;&amp; j == 0) return 1;
+
+        // If we go out of bounds, there are no ways
+        if (i &lt; 0 || j &lt; 0) return 0;
+        
+        // If already computed, return it
+        if (dp[i][j] != -1)
+            return dp[i][j];
+
+        // Recursive calls for up and left moves
+        int up = func(i - 1, j, dp);
+        int left = func(i, j - 1, dp);
+
+        // Store the result and return
+        return dp[i][j] = up + left;
+    }
+
+    // Function to count total unique paths
+    public int uniquePaths(int m, int n) {
+        // DP array initialized with -1
+        int[][] dp = new int[m][n];
+        for (int[] row : dp)
+            Arrays.fill(row, -1);
+
+        return func(m - 1, n - 1, dp);
+    }
+}
+
+// Separate main class
+public class Main {
+    public static void main(String[] args) {
+        int m = 3;
+        int n = 2;
+
+        // Create Solution object
+        Solution sol = new Solution();
+
+        // Call the method and print result
+        System.out.println("Number of ways: " + sol.uniquePaths(m, n));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    #Function to solve the problem using recursion
+    def func(self, i, j, dp):
+        # Base case
+        if i == 0 and j == 0:
+            return 1
+        
+        # If we go out of bounds, there are no ways
+        if i &lt; 0 or j &lt; 0:
+            return 0
+        
+        """ If we have already calculated the number
+        of ways for this cell, return it from dp array."""
+        if dp[i][j] != -1:
+            return dp[i][j]
+        
+        """ Calculate the number of ways by
+        moving up and left recursively"""
+        up = self.func(i - 1, j, dp)
+        left = self.func(i, j - 1, dp)
+        
+        # Store the result in dp array and return it.
+        dp[i][j] = up + left
+        return dp[i][j]
+    
+    """Function to count the total ways
+    to reach (0,0) from (m-1,n-1)"""
+    def uniquePaths(self, m, n):
+        """ Initialize a memoization array
+        to store intermediate results."""
+        dp = [[-1 for j in range(n)] for i in range(m)]
+    
+        # Return the total count (0-based indexing)
+        return self.func(m - 1, n - 1, dp)
+
+if __name__ == "__main__":
+    m = 3
+    n = 2
+    
+    # Create an instance of Solution class
+    sol = Solution()
+    
+    # Call the uniquePaths function and print the result
+    print("Number of ways:", sol.uniquePaths(m, n))</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    //Function to solve the problem using recursion
+    func(i, j, dp) {
+        // Base case
+        if (i === 0 &amp;&amp; j === 0) return 1;
+
+        // If we go out of bounds, there are no ways
+        if (i &lt; 0 || j &lt; 0) return 0;
+        
+        /* If we have already computed the number 
+        of ways for this cell, return it.*/
+        if (dp[i][j] !== -1) return dp[i][j];
+
+        /* Calculate the number of ways by
+        moving up and left recursively*/
+        let up = this.func(i - 1, j, dp);
+        let left = this.func(i, j - 1, dp);
+
+        // Store the result in dp table and return it.
+        dp[i][j] = up + left;
+        return dp[i][j];
+    }
+    
+    //Function to solve the problem using recursion
+    uniquePaths(m, n) {
+        /* Initialize a memoization table (dp)
+        to store the results of subproblems.*/
+        const dp = Array.from(Array(m), () =&gt; Array(n).fill(-1));
+        
+        // Return the total count (0-based indexing)
+        return this.func(m - 1, n - 1, dp);
+    }
+}
+
+let m = 3;
+let n = 2;
+
+// Create an instance of Solution class
+let sol = new Solution();
+
+// Call the uniquePaths function and print the result
+console.log("Number of ways: " + sol.uniquePaths(m, n));</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(m * n)</strong>, where m is the number of rows and n is the number of columns in the grid. This is because we are filling up a 2D DP array of size m x n, and each cell takes constant time to compute.
+                        <br/><br/>
+<strong>Space Complexity: O(m * n)</strong>, due to the storage of the DP array which keeps track of the number of unique paths to each cell in the grid.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="better-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Tabulation Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Declare a <code>dp[]</code> array of size <code>[m][n]</code>, where <code>m</code> and <code>n</code> represent the number of rows and columns of the grid, respectively. The <code>dp[i][j]</code> stores the total number of ways to reach from the start <code>(0,0)</code> to the cell <code>(i,j)</code>.</li>
+<li>Set the base case: As per the recursive approach, <code>dp[0][0]</code> is 1, indicating there is only one way to reach the starting position. So, initialize <code>dp[0][0] = 1</code>.</li>
+<li>Use two nested loops to fill the <code>dp</code> array iteratively. The outer loop iterates through rows (i from 0 to m-1), and the inner loop iterates through columns (j from 0 to n-1).</li>
+<li>For each cell <code>dp[i][j]</code>, calculate the number of ways to reach it from the top (<code>dp[i-1][j]</code>) and from the left (<code>dp[i][j-1]</code>). Add the values of <code>dp[i-1][j]</code> and <code>dp[i][j-1]</code> to get the total number of ways to reach <code>dp[i][j]</code>.</li>
+<li>As the question asks for the total number of ways, update <code>dp[i][j]</code> as the sum of <code>dp[i-1][j]</code> (ways from above) and <code>dp[i][j-1]</code> (ways from left).</li>
+<li>Once all cells are processed, the last element <code>dp[m-1][n-1]</code> will contain the total number of ways to reach the destination (bottom-right corner) of the grid. Return this value as the result after the bottom-up computation.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+private:
+    //Function to solve the problem using tabulation
+    int func(int m, int n, vector&lt;vector&lt;int&gt;&gt;&amp; dp){
+        // Loop through the grid using two nested loops
+        for (int i = 0; i &lt; m; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                
+            // Base condition
+            if (i == 0 &amp;&amp; j == 0) {
+                dp[i][j] = 1;
+                /* Skip the rest of the loop and 
+                continue with the next iteration.*/
+                continue; 
+            }
+
+            /* Initialize variables to store the number 
+            of ways from cell above (up) and left (left)*/
+            int up = 0;
+            int left = 0;
+
+            /* If we are not at first row (i &gt; 0), update 
+            'up' with the value from the cell above.*/
+            if (i &gt; 0)
+                up = dp[i - 1][j];
+
+            /* If we are not at the first column (j &gt; 0),
+            update 'left' with value from the cell to left.*/
+            if (j &gt; 0)
+                left = dp[i][j - 1];
+
+            /* Calculate the number of ways to reach the 
+            current cell by adding 'up' and 'left'.*/
+            dp[i][j] = up + left;
+        }
+    }
+
+    // The result is stored in bottom-right cell (m-1, n-1).
+    return dp[m - 1][n - 1];
+}
+public:
+    /*Function to count the total ways
+    to reach (0,0) from (m-1,n-1)*/
+    int uniquePaths(int m, int n) {
+        /* Initialize a memoization table (dp) to
+        store the results of subproblems.*/
+        vector&lt;vector&lt;int&gt;&gt; dp(m, vector&lt;int&gt;(n, -1));
+        
+        //Return the total count(0 based indexing)
+        return func(m, n, dp);
+    }
+};
+int main() {
+    int m = 3;
+    int n = 2;
+    
+    //Create an instance of Solution class
+    Solution sol;
+    
+    // Call the countWays function and print the result.
+    cout &lt;&lt; "Number of ways: " &lt;&lt; sol.uniquePaths(m, n) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // Function to solve the problem using tabulation
+    int func(int m, int n, int[][] dp) {
+        // Loop through the grid using two nested loops
+        for (int i = 0; i &lt; m; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                // Base condition
+                if (i == 0 &amp;&amp; j == 0) {
+                    dp[i][j] = 1;
+                    continue; 
+                }
+
+                int up = 0;
+                int left = 0;
+
+                // Check cell above
+                if (i &gt; 0)
+                    up = dp[i - 1][j];
+
+                // Check cell to the left
+                if (j &gt; 0)
+                    left = dp[i][j - 1];
+
+                // Total ways to reach this cell
+                dp[i][j] = up + left;
+            }
+        }
+        return dp[m - 1][n - 1];
+    }
+
+    // Function to count total ways
+    public int uniquePaths(int m, int n) {
+        int[][] dp = new int[m][n];
+        return func(m, n, dp);
+    }
+}
+
+// Separate main class
+public class Main {
+    public static void main(String[] args) {
+        int m = 3;
+        int n = 2;
+
+        // Create Solution object
+        Solution sol = new Solution();
+
+        // Call and print result
+        System.out.println("Number of ways: " + sol.uniquePaths(m, n));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to solve the problem using tabulation
+    def func(self, m, n, dp):
+        # Loop through the grid using two nested loops
+        for i in range(m):
+            for j in range(n):
+                # Base condition
+                if i == 0 and j == 0:
+                    dp[i][j] = 1
+                    """Skip the rest of the loop and 
+                    continue with the next iteration."""
+                    continue
+
+                """ Initialize variables to store the number
+                of ways from cell above (up) and left (left)"""
+                up = 0
+                left = 0
+
+                """ If we are not at first row (i &gt; 0), update 
+                'up' with the value from the cell above"""
+                if i &gt; 0:
+                    up = dp[i - 1][j]
+
+                """ If we are not at the first column (j &gt; 0),
+                update 'left' with value from the cell to left"""
+                if j &gt; 0:
+                    left = dp[i][j - 1]
+
+                """ Calculate the number of ways to reach the
+                current cell by adding 'up' and 'left'"""
+                dp[i][j] = up + left
+
+        # The result is stored in bottom-right cell (m-1, n-1)
+        return dp[m - 1][n - 1]
+
+    """ Function to count the total ways
+    to reach (0,0) from (m-1,n-1)"""
+    def uniquePaths(self, m, n):
+        """ Initialize a memoization table (dp)
+        to store the results of subproblems"""
+        dp = [[0 for _ in range(n)] for _ in range(m)]
+
+        # Return the total count (0-based indexing)
+        return self.func(m, n, dp)
+
+if __name__ == "__main__":
+    m = 3
+    n = 2
+
+    # Create an instance of Solution class
+    sol = Solution()
+
+    # Call the uniquePaths function and print the result
+    print("Number of ways:", sol.uniquePaths(m, n))</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to solve the problem using tabulation
+    func(m, n, dp) {
+        // Loop through the grid using two nested loops
+        for (let i = 0; i &lt; m; i++) {
+            for (let j = 0; j &lt; n; j++) {
+                // Base condition
+                if (i === 0 &amp;&amp; j === 0) {
+                    dp[i][j] = 1;
+                    /* Skip the rest of the loop and 
+                    continue with the next iteration.*/
+                    continue; 
+                }
+
+                /* Initialize variables to store the number
+                of ways from cell above (up) and left (left)*/
+                let up = 0;
+                let left = 0;
+
+                /* If we are not at first row (i &gt; 0), update '
+                up' with the value from the cell above*/
+                if (i &gt; 0)
+                    up = dp[i - 1][j];
+
+                /* If we are not at the first column (j &gt; 0),
+                update 'left' with value from the cell to left*/
+                if (j &gt; 0)
+                    left = dp[i][j - 1];
+
+                /* Calculate the number of ways to reach
+                the current cell by adding 'up' and 'left'*/
+                dp[i][j] = up + left;
+            }
+        }
+
+        // The result is stored in bottom-right cell (m-1, n-1)
+        return dp[m - 1][n - 1];
+    }
+
+    /* Function to count the total ways
+    to reach (0,0) from (m-1,n-1)*/
+    uniquePaths(m, n) {
+        /* Initialize a memoization table (dp)
+        to store the results of subproblems*/
+        let dp = new Array(m).fill().map(() =&gt; new Array(n).fill(0));
+
+        // Return the total count (0-based indexing)
+        return this.func(m, n, dp);
+    }
+}
+
+let m = 3;
+let n = 2;
+
+// Create an instance of Solution class
+let sol = new Solution();
+
+// Call the uniquePaths function and print the result
+console.log("Number of ways:", sol.uniquePaths(m, n));</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(m * n)</strong>, where m is the number of rows and n is the number of columns in the grid. This is because we are filling up a 2D DP array of size m x n, and each cell takes constant time to compute.
+                        <br/><br/>
+<strong>Space Complexity: O(m * n)</strong>, as we are using a 2D array to store the results of subproblems. However, we can optimize this to O(n) by using a 1D array and updating it in place.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Space Optimized Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Observe the relationship obtained in the tabulation approach: <code>dp[i][j] = dp[i-1][j] + dp[i][j-1]</code>. We notice that to calculate <code>dp[i][j]</code>, we only need the values from the previous row and the current row. This allows us to optimize the space usage.</li>
+<li>Instead of maintaining the entire 2D <code>dp</code> array, we can use two arrays, one for the current row (let's call it <code>temp</code>) and one for the previous row (let's call it <code>prev</code>).</li>
+<li>Initially, initialize the <code>prev</code> array to all zeros to represent the starting point. The <code>temp</code> array will hold the current row's values during the iteration.</li>
+<li>For each row, use the <code>prev</code> array (representing the previous row) and the <code>temp</code> array (representing the current row) to compute the values of <code>dp[i][j]</code>.</li>
+<li>After processing the current row, set <code>prev</code> to be equal to <code>temp</code>, so that in the next iteration, <code>prev</code> will represent the previous row, and <code>temp</code> will be ready to hold the new row's values.</li>
+<li>At the end of the process, <code>prev[n-1]</code> will store the final result, which contains the total number of ways to reach the destination in the grid. This provides the answer in a space-efficient manner using only two rows.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/bc310956069274cb.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/cc5eef908da13a3d.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/bc310956069274cb.png"/><img alt="Image 2" loading="lazy" src="../assets/img/cc5eef908da13a3d.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+private:
+    //Function to solve the problem using space optimization.
+    int func(int m, int n){
+        /* Initialize a vector to represent 
+        the previous row of the grid.*/
+        vector&lt;int&gt; prev(n, 0);
+
+        // Iterate through the rows of the grid.
+        for (int i = 0; i &lt; m; i++) {
+            /* Create a temporary vector to
+            represent the current row.*/
+            vector&lt;int&gt; temp(n, 0);
+
+            for (int j = 0; j &lt; n; j++) {
+                // Base case
+                if (i == 0 &amp;&amp; j == 0) {
+                    temp[j] = 1;
+                    continue;
+                }
+
+            /* Initialize variables to store the number
+            of ways from the cell above (up) and left (left).*/
+            int up = 0;
+            int left = 0;
+
+            /* If we are not at the first row (i &gt; 0), update
+            'up' with the value from the previous row.*/
+            if (i &gt; 0)
+                up = prev[j];
+
+            /* If we are not at the first column (j &gt; 0),
+            update 'left' with the value from current row.*/
+            if (j &gt; 0)
+                left = temp[j - 1];
+
+            /* Calculate the number of ways to reach the
+            current cell by adding 'up' and 'left'.*/
+            temp[j] = up + left;
+        }
+
+        /* Update the previous row with values 
+        calculated for the current row.*/
+        prev = temp;
+    }
+
+    /* The result is stored in the last
+    cell of the previous row (n-1).*/
+    return prev[n - 1];
+}
+public:
+    /*Function to count the total ways
+    to reach (0,0) from (m-1,n-1)*/
+    int uniquePaths(int m, int n) {
+        
+        //Return the total count(0 based indexing)
+        return func(m, n);
+    }
+};
+int main() {
+    int m = 3;
+    int n = 2;
+    
+    //Create an instance of Solution class
+    Solution sol;
+    
+    // Call the countWays function and print the result.
+    cout &lt;&lt; "Number of ways: " &lt;&lt; sol.uniquePaths(m, n) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // Function to solve the problem using space optimization
+    int func(int m, int n) {
+        // Array for the previous row
+        int[] prev = new int[n];
+
+        // Iterate through rows
+        for (int i = 0; i &lt; m; i++) {
+            // Array for the current row
+            int[] temp = new int[n];
+
+            for (int j = 0; j &lt; n; j++) {
+                // Base case
+                if (i == 0 &amp;&amp; j == 0) {
+                    temp[j] = 1;
+                    continue;
+                }
+
+                // Ways from above and left
+                int up = (i &gt; 0) ? prev[j] : 0;
+                int left = (j &gt; 0) ? temp[j - 1] : 0;
+
+                // Total ways for current cell
+                temp[j] = up + left;
+            }
+
+            // Update previous row
+            prev = temp;
+        }
+        return prev[n - 1];
+    }
+
+    // Function to count total ways
+    public int uniquePaths(int m, int n) {
+        return func(m, n);
+    }
+}
+
+// Separate main class
+public class Main {
+    public static void main(String[] args) {
+        int m = 3;
+        int n = 2;
+
+        // Create Solution object
+        Solution sol = new Solution();
+
+        // Call and print result
+        System.out.println("Number of ways: " + sol.uniquePaths(m, n));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to solve the problem using space optimization
+    def func(self, m, n):
+        """ Create a list to represent
+        the previous row of the grid"""
+        prev = [0] * n
+        
+        # Iterate through the rows of the grid
+        for i in range(m):
+            """ Create a temporary list 
+            to represent the current row"""
+            temp = [0] * n
+            
+            for j in range(n):
+                # Base case
+                if i == 0 and j == 0:
+                    temp[j] = 1
+                    continue
+                
+                """ Initialize variables to store the number 
+                of ways from the cell above (up) and left (left)"""
+                up = prev[j] if i &gt; 0 else 0
+                left = temp[j - 1] if j &gt; 0 else 0
+                
+                """ Calculate the number of ways to reach 
+                the current cell by adding 'up' and 'left'"""
+                temp[j] = up + left
+            
+            """ Update the previous list with 
+            values calculated for the current row"""
+            prev = temp
+        
+        """ The result is stored in the last
+        cell of the previous row (n-1)"""
+        return prev[-1]
+    
+    """ Function to count the total ways 
+    to reach (0,0) from (m-1,n-1)"""
+    def uniquePaths(self, m, n):
+        # Return the total count (0-based indexing)
+        return self.func(m, n)
+
+if __name__ == "__main__":
+    m = 3
+    n = 2
+    
+    # Create an instance of Solution class
+    sol = Solution()
+    
+    # Call the uniquePaths function and print the result
+    print("Number of ways:", sol.uniquePaths(m, n))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to solve the problem using space optimization
+    func(m, n) {
+        /* Create an array to represent
+        the previous row of the grid*/
+        let prev = new Array(n).fill(0);
+
+        // Iterate through the rows of the grid
+        for (let i = 0; i &lt; m; i++) {
+            /* Create a temporary array 
+            to represent the current row*/
+            let temp = new Array(n).fill(0);
+
+            for (let j = 0; j &lt; n; j++) {
+                // Base case
+                if (i === 0 &amp;&amp; j === 0) {
+                    temp[j] = 1;
+                    continue;
+                }
+
+                /* Initialize variables to store the number
+                of ways from the cell above (up) and left (left)*/
+                let up = (i &gt; 0) ? prev[j] : 0;
+                let left = (j &gt; 0) ? temp[j - 1] : 0;
+
+                /* Calculate the number of ways to reach
+                the current cell by adding 'up' and 'left'*/
+                temp[j] = up + left;
+            }
+
+            /* Update the previous array with 
+            values calculated for the current row*/
+            prev = temp.slice();
+        }
+
+        /* The result is stored in the 
+        last cell of the previous row (n-1)*/
+        return prev[n - 1];
+    }
+
+    /* Function to count the total ways
+    to reach (0,0) from (m-1,n-1)*/
+    uniquePaths(m, n) {
+        // Return the total count (0-based indexing)
+        return this.func(m, n);
+    }
+}
+
+let m = 3;
+let n = 2;
+
+// Create an instance of Solution class
+let sol = new Solution();
+
+// Call the uniquePaths function and print the result
+console.log("Number of ways:", sol.uniquePaths(m, n));</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(m * n)</strong>, where m is the number of rows and n is the number of columns in the grid. This is because we are iterating through each cell in the grid once.
+                        <br/><br/>
+<strong>Space Complexity: O(n)</strong>, as we are using two arrays of size n to store the current and previous rows. This is an optimization from the previous approaches that used a 2D array.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

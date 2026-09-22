@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Implement Stack using single Queue</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Implement Stack using single Queue</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/implement-stack-using-single-queue</code></div>
+  <p><strong>Problem Statement: </strong>
+Implement a Last-In-First-Out (LIFO) stack using a single queue. The implemented stack should support the following operations: push, pop, top, and isEmpty.
+<br/><br/>
+Implement the QueueStack class:
+</p><li><strong>push</strong>(int x): Pushes element x onto the stack.</li>
+<li><strong>pop</strong>(): Removes and returns the top element of the stack.</li>
+<li><strong>top</strong>(): Returns the top element of the stack without removing it.</li>
+<li><strong>isEmpty</strong>(): Returns true if the stack is empty, false otherwise.</li>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>  
+<strong>Input:</strong>  
+["QueueStack", "push", "push", "pop", "top", "isEmpty"]  
+[[], [4], [8], [], [], []]  
+<strong>Output:</strong>  [null, null, null, 8, 4, false]  
+<strong>Explanation:</strong>  QueueStack stack = new QueueStack();  
+- stack.push(4);  
+- stack.push(8);  
+- stack.pop(); // returns 8  
+- stack.top(); // returns 4  
+- stack.isEmpty(); // returns false  
+
+<strong>Example 2:</strong>  
+<strong>Input:</strong>  
+["QueueStack", "isEmpty"]  
+[[]]  
+<strong>Output:</strong>  [null, true]  
+<strong>Explanation:</strong> QueueStack stack = new QueueStack();  
+- stack.isEmpty(); // returns true</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/implement-stack-using-queue" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li><strong>Data Structure Used:</strong> A single queue will be used to store the elements.</li>
+<li><strong>Push(x):</strong> Insert the element x into the queue. To maintain the stack order:</li>
+<ul>
+<li>Run a loop that iterates <code>size() - 1</code> times, where <code>size()</code> is the current number of elements in the queue.</li>
+<li>In each iteration, remove the front element and add it back to the rear of the queue. This ensures that the most recently added element is always at the front of the queue.</li>
+</ul>
+<li><strong>Pop():</strong> Remove and return the front element of the queue, which corresponds to the top of the stack.</li>
+<li><strong>isEmpty():</strong> Return <code>true</code> if the queue is empty, and <code>false</code> otherwise.</li>
+</ul>
+<p><img height="457" loading="lazy" src="../assets/img/0e5c0150c1020ab1.png" width="481"/></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Stack implementation using Queue
+class QueueStack {
+    // Queue
+    queue&lt;int&gt; q;
+
+public:
+    // Method to push element in the stack
+    void push(int x) {
+        // Get size 
+        int s = q.size(); 
+        // Add element
+        q.push(x); 
+
+        // Move elements before new element to back
+        for (int i = 0; i &lt; s; i++) {
+            q.push(q.front()); 
+            q.pop(); 
+        }
+    }
+
+    // Method to pop element from stack
+    int pop() {
+        // Get front element 
+        int n = q.front(); 
+        // Remove front element
+        q.pop(); 
+        // Return removed element
+        return n; 
+    }
+
+    // Method to return the top of stack
+    int top() {
+        // Return front element
+        return q.front(); 
+    }
+
+    // Method to check if the stack is empty
+    bool isEmpty() {
+        return q.empty(); 
+    }
+};
+
+int main() {
+    QueueStack st;
+    
+    // List of commands
+    vector&lt;string&gt; commands = {"QueueStack", "push", "push", 
+                               "pop", "top", "isEmpty"};
+    // List of inputs
+    vector&lt;vector&lt;int&gt;&gt; inputs = {{}, {4}, {8}, {}, {}, {}};
+
+    for (int i = 0; i &lt; commands.size(); ++i) {
+        if (commands[i] == "push") {
+            st.push(inputs[i][0]);
+            cout &lt;&lt; "null ";
+        } else if (commands[i] == "pop") {
+            cout &lt;&lt; st.pop() &lt;&lt; " ";
+        } else if (commands[i] == "top") {
+            cout &lt;&lt; st.top() &lt;&lt; " ";
+        } else if (commands[i] == "isEmpty") {
+            cout &lt;&lt; (st.isEmpty() ? "true" : "false") &lt;&lt; " ";
+        } else if (commands[i] == "QueueStack") {
+            cout &lt;&lt; "null ";
+        }
+    }
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Stack implementation using Queue
+class QueueStack {
+    // Queue
+    Queue&lt;Integer&gt; q = new LinkedList&lt;&gt;();
+
+    // Method to push element in the stack
+    public void push(int x) {
+        // Get size
+        int s = q.size();
+        // Add element
+        q.add(x);
+
+        // Move elements before new element to back
+        for (int i = 0; i &lt; s; i++) {
+            q.add(q.poll());
+        }
+    }
+
+    // Method to pop element from stack
+    public int pop() {
+        // Get front element
+        int n = q.peek();
+        // Remove front element
+        q.poll();
+        // Return removed element
+        return n;
+    }
+
+    // Method to return the top of stack
+    public int top() {
+        // Return front element
+        return q.peek();
+    }
+
+    // Method to check if the stack is empty
+    public boolean isEmpty() {
+        return q.isEmpty();
+    }
+}
+
+// Main class
+class Main {
+    public static void main(String[] args) {
+        QueueStack st = new QueueStack();
+        
+        // Array of commands
+        String[] commands = {"QueueStack", "push", "push", 
+                             "pop", "top", "isEmpty"};
+        int[][] inputs = {{}, {4}, {8}, {}, {}, {}};
+
+        for (int i = 0; i &lt; commands.length; ++i) {
+            switch (commands[i]) {
+                case "push":
+                    st.push(inputs[i][0]);
+                    System.out.print("null ");
+                    break;
+                case "pop":
+                    System.out.print(st.pop() + " ");
+                    break;
+                case "top":
+                    System.out.print(st.top() + " ");
+                    break;
+                case "isEmpty":
+                    System.out.print(st.isEmpty() ? "true " : "false ");
+                    break;
+                case "QueueStack":
+                    System.out.print("null ");
+                    break;
+            }
+        }
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">from queue import Queue
+
+# Stack implementation using Queue
+class QueueStack:
+    def __init__(self):
+        # Queue
+        self.q = Queue()
+
+    # Method to push element in the stack
+    def push(self, x):
+        # Get size
+        s = self.q.qsize()
+        # Add element
+        self.q.put(x)
+
+        # Move elements before new element to back
+        for _ in range(s):
+            self.q.put(self.q.get())
+
+    # Method to pop element from stack
+    def pop(self):
+        # Get front element
+        n = self.q.queue[0]
+        # Remove front element
+        self.q.get()
+        # Return removed element
+        return n
+
+    # Method to return the top of stack
+    def top(self):
+        # Return front element
+        return self.q.queue[0]
+
+    # Method to check if the stack is empty
+    def isEmpty(self):
+        return self.q.empty()
+
+if __name__ == "__main__":
+    st = QueueStack()
+
+    # List of commands
+    commands = ["QueueStack", "push", "push", "pop", "top", "isEmpty"]
+    inputs = [[], [4], [8], [], [], []]
+
+    for i in range(len(commands)):
+        if commands[i] == "push":
+            st.push(inputs[i][0])
+            print("null", end=" ")
+        elif commands[i] == "pop":
+            print(st.pop(), end=" ")
+        elif commands[i] == "top":
+            print(st.top(), end=" ")
+        elif commands[i] == "isEmpty":
+            print("true" if st.isEmpty() else "false", end=" ")
+        elif commands[i] == "QueueStack":
+            print("null", end=" ")</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Stack implementation using Queue
+class QueueStack {
+    constructor() {
+        // Queue
+        this.q = [];
+    }
+
+    // Method to push element in the stack
+    push(x) {
+        // Get size
+        let s = this.q.length;
+        // Add element
+        this.q.push(x);
+
+        // Move elements before new element to back
+        for (let i = 0; i &lt; s; i++) {
+            this.q.push(this.q.shift());
+        }
+    }
+
+    // Method to pop element from stack
+    pop() {
+        // Get front element
+        let n = this.q[0];
+        // Remove front element
+        this.q.shift();
+        // Return removed element
+        return n;
+    }
+
+    // Method to return the top of stack
+    top() {
+        // Return front element
+        return this.q[0];
+    }
+
+    // Method to check if the stack is empty
+    isEmpty() {
+        return this.q.length === 0;
+    }
+}
+
+const st = new QueueStack();
+
+// List of commands
+const commands = ["QueueStack", "push", "push", "pop", "top", "isEmpty"];
+const inputs = [[], [4], [8], [], [], []];
+
+for (let i = 0; i &lt; commands.length; ++i) {
+    switch (commands[i]) {
+        case "push":
+            st.push(inputs[i][0]);
+            console.log("null ");
+            break;
+        case "pop":
+            console.log(st.pop() + " ");
+            break;
+        case "top":
+            console.log(st.top() + " ");
+            break;
+        case "isEmpty":
+            console.log(st.isEmpty() ? "true " : "false ");
+            break;
+        case "QueueStack":
+            console.log("null ");
+            break;
+    }
+}</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity:</strong><br/>
+Push operation: O(n) (where n is the number of elements in the queue at that time) because every time an element is pushed, all the elements in the queue are popped from the front and pushed in the back again.<br/>
+Pop operation: O(1) as constant operations are performed.<br/>
+Top operation: O(1) as constant operations are performed.<br/>
+IsEmpty operation: O(1) as constant operations are performed.<br/><br/>
+<strong>Space Complexity: O(k)</strong> for storing k elements in the queue.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

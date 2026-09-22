@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Boundary Traversal of a Binary Tree</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Boundary Traversal of a Binary Tree</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/boundary-traversal-of-a-binary-tree/</code></div>
+  <p><strong>Boundary Traversal of a Binary Tree
+</strong> .</p>
+<p>Problem Statement: Given a Binary Tree, perform the boundary traversal of the tree. The boundary traversal is the process of visiting the boundary nodes of the binary tree in the anticlockwise direction, starting from the root.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input:Binary Tree: 1 2 7 3 -1 -1 8 -1 4 9 -1 5 6 10 11
+<p><img height="457" loading="lazy" src="../assets/img/a57ead3ebc815a53.png" width="481"/></p>
+Output: Boundary Traversal: [1, 2, 3, 4, 5, 6, 10, 11, 9, 8, 7]
+Explanation: The boundary traversal of a binary tree involves visiting its boundary nodes in an anticlockwise direction:
+<p>Starting from the root, we traverse from: 1</p>
+<p>The left side traversal includes the nodes: 2, 3, 4</p>
+<p>The bottom traversal include the leaf nodes: 5, 6, 10, 11</p>
+<p>The right side traversal includes the nodes: 9, 8, 7</p>
+<p>We return to the  root and the boundary traversal is complete.</p>
+<p><img height="457" loading="lazy" src="../assets/img/de1e183e106d7f1f.png" width="481"/></p>
+
+
+Example-2
+Input:Binary Tree: 10 5 20 3 8 18 25 -1 7 -1 -1
+<p><img height="457" loading="lazy" src="../assets/img/bba04d57bda2a6e4.png" width="481"/></p>
+Output : Boundary Traversal: [10, 5, 3, 7, 8, 18, 25, 20]
+Explanation: The boundary traversal of a binary tree involves visiting its boundary nodes in an anticlockwise direction:
+<p>Starting from the root, we traverse from: 10</p>
+<p>The left side traversal includes the nodes: 5</p>
+<p>The bottom traversal include the leaf nodes: 3, 7, 8, 18, 25</p>
+<p>The right side traversal includes the nodes: 20</p>
+<p>We return to the  root and the boundary traversal is complete.</p>
+<p><img height="457" loading="lazy" src="../assets/img/bc66e9f7a40e0d32.png" width="481"/></p>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/boundary-traversal" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<h2>Intuition</h2>
+<p>The boundary traversal algorithm should be divided into three main parts traversed in the anti-clockwise direction:</p>
+<p><img height="457" loading="lazy" src="../assets/img/f9526ae87e58dc2b.png" width="481"/></p>
+<p><strong>Left Boundary:</strong> Traverse the left boundary of the tree. Start from the root and keep moving to the left child; if unavailable, move to the right child. Continue this until we reach a leaf node.</p>
+<p><strong>Bottom Boundary:</strong> Traverse the bottom boundary of the tree by traversing the leaf nodes using a simple preorder traversal. We check if the current node is a lead, and if so, its value is added to the boundary traversal array. </p>
+<p><strong>Right Boundary:</strong> The right boundary is traversed in the reverse direction, similar to the left boundary traversal starting from the root node and keep moving to the right child; if unavailable, move to the left child. Nodes that are not leaves are pushed into the right boundary array from end to start to ensure that they are added in the reverse direction.</p>
+<h2>Algorithm</h2>
+<ul>
+<li>Initialise an empty array to store the boundary traversal nodes.</li>
+<li>Create a helper function to check if a node is a leaf. This is to avoid cases where there will be an overlap in the traversal of nodes. We exclude leaf nodes when adding left and right boundaries as they will already be added when in the bottom boundary. </li>
+<li>Initialise a recursive function `addLeftBoundary` and a vector to store the left traversal.</li>
+<li>Start from the root of the tree.</li>
+<li>Traverse down the left side of the tree until we reach a leaf node. For each non-leaf node, add its value to the result list.</li>
+<li>Traverse to its left child. If unavailable, call the recursion function to its right child.</li>
+<li>If the current node is a leaf, add its value to the result list.</li>
+<li>Recursively travel to the current nodes left and right subtrees in a preorder fashion.</li>
+<li>Implement a recursive function `addRightBoundary` and a vector to store the right traversal.</li>
+<li>Start from the root of the tree.</li>
+<li>Traverse to the right most side of the tree until we reach a leaf node.</li>
+<li>For each non-leaf node, call the recursive function to its right child; if unavailable, call to its left child.</li>
+<li>While the recursion backtracks, add the current node’s value to the result list.</li>
+</ul>
+<h3>Dry Run</h3>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/2bd4ad0c758c9438.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/661ae02fc3b19e64.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/93dc1a1ca232a4f1.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/2bd4ad0c758c9438.png"/><img alt="Image 2" loading="lazy" src="../assets/img/661ae02fc3b19e64.png"/><img alt="Image 3" loading="lazy" src="../assets/img/93dc1a1ca232a4f1.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+// Node structure for the binary tree
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+    // Constructor to initialize
+    // the node with a value
+    Node(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+
+class Solution {
+public:
+    // Function to check
+    // if a node is a leaf
+    bool isLeaf(Node* root) {
+        return !root-&gt;left &amp;&amp; !root-&gt;right;
+    }
+
+    // Function to add the
+    // left boundary of the tree
+    void addLeftBoundary(Node* root, vector&lt;int&gt;&amp; res) {
+        Node* curr = root-&gt;left;
+        while (curr) {
+            // If the current node is not a leaf,
+            // add its value to the result
+            if (!isLeaf(curr)) {
+                res.push_back(curr-&gt;data);
+            }
+            // Move to the left child if it exists,
+            // otherwise move to the right child
+            if (curr-&gt;left) {
+                curr = curr-&gt;left;
+            } else {
+                curr = curr-&gt;right;
+            }
+        }
+    }
+
+    // Function to add the
+    // right boundary of the tree
+    void addRightBoundary(Node* root, vector&lt;int&gt;&amp; res) {
+        Node* curr = root-&gt;right;
+        vector&lt;int&gt; temp;
+        while (curr) {
+            // If the current node is not a leaf,
+            // add its value to a temporary vector
+            if (!isLeaf(curr)) {
+                temp.push_back(curr-&gt;data);
+            }
+            // Move to the right child if it exists,
+            // otherwise move to the left child
+            if (curr-&gt;right) {
+                curr = curr-&gt;right;
+            } else {
+                curr = curr-&gt;left;
+            }
+        }
+        // Reverse and add the values from
+        // the temporary vector to the result
+        for (int i = temp.size() - 1; i &gt;= 0; --i) {
+            res.push_back(temp[i]);
+        }
+    }
+
+    // Function to add the
+    // leaves of the tree
+    void addLeaves(Node* root, vector&lt;int&gt;&amp; res) {
+        // If the current node is a
+        // leaf, add its value to the result
+        if (isLeaf(root)) {
+            res.push_back(root-&gt;data);
+            return;
+        }
+        // Recursively add leaves of
+        // the left and right subtrees
+        if (root-&gt;left) {
+            addLeaves(root-&gt;left, res);
+        }
+        if (root-&gt;right) {
+            addLeaves(root-&gt;right, res);
+        }
+    }
+
+    // Main function to perform the
+    // boundary traversal of the binary tree
+    vector&lt;int&gt; printBoundary(Node* root) {
+        vector&lt;int&gt; res;
+        if (!root) {
+            return res;
+        }
+        // If the root is not a leaf,
+        // add its value to the result
+        if (!isLeaf(root)) {
+            res.push_back(root-&gt;data);
+        }
+
+        // Add the left boundary, leaves,
+        // and right boundary in order
+        addLeftBoundary(root, res);
+        addLeaves(root, res);
+        addRightBoundary(root, res);
+
+        return res;
+    }
+};
+
+// Helper function to
+// print the result
+void printResult(const vector&lt;int&gt;&amp; result) {
+    for (int val : result) {
+        cout &lt;&lt; val &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+}
+
+int main() {
+    // Creating a sample binary tree
+    Node* root = new Node(1);
+    root-&gt;left = new Node(2);
+    root-&gt;right = new Node(3);
+    root-&gt;left-&gt;left = new Node(4);
+    root-&gt;left-&gt;right = new Node(5);
+    root-&gt;right-&gt;left = new Node(6);
+    root-&gt;right-&gt;right = new Node(7);
+
+    Solution solution;
+
+    // Get the boundary traversal
+    vector&lt;int&gt; result = solution.printBoundary(root);
+
+    // Print the result
+    cout &lt;&lt; "Boundary Traversal: ";
+    printResult(result);
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.ArrayList;
+import java.util.List;
+
+// Node structure for the binary tree
+class Node {
+    int data;
+    Node left;
+    Node right;
+
+    // Constructor to initialize
+    // the node with a value
+    Node(int val) {
+        data = val;
+        left = null;
+        right = null;
+    }
+}
+
+public class Solution {
+    // Function to check
+    // if a node is a leaf
+    boolean isLeaf(Node root) {
+        return root.left == null &amp;&amp; root.right == null;
+    }
+
+    // Function to add the
+    // left boundary of the tree
+    void addLeftBoundary(Node root, List&lt;Integer&gt; res) {
+        Node curr = root.left;
+        while (curr != null) {
+            // If the current node is not a leaf,
+            // add its value to the result
+            if (!isLeaf(curr)) {
+                res.add(curr.data);
+            }
+            // Move to the left child if it exists,
+            // otherwise move to the right child
+            if (curr.left != null) {
+                curr = curr.left;
+            } else {
+                curr = curr.right;
+            }
+        }
+    }
+
+    // Function to add the
+    // right boundary of the tree
+    void addRightBoundary(Node root, List&lt;Integer&gt; res) {
+        Node curr = root.right;
+        List&lt;Integer&gt; temp = new ArrayList&lt;&gt;();
+        while (curr != null) {
+            // If the current node is not a leaf,
+            // add its value to a temporary list
+            if (!isLeaf(curr)) {
+                temp.add(curr.data);
+            }
+            // Move to the right child if it exists,
+            // otherwise move to the left child
+            if (curr.right != null) {
+                curr = curr.right;
+            } else {
+                curr = curr.left;
+            }
+        }
+        // Reverse and add the values from
+        // the temporary list to the result
+        for (int i = temp.size() - 1; i &gt;= 0; --i) {
+            res.add(temp.get(i));
+        }
+    }
+
+    // Function to add the
+    // leaves of the tree
+    void addLeaves(Node root, List&lt;Integer&gt; res) {
+        // If the current node is a
+        // leaf, add its value to the result
+        if (isLeaf(root)) {
+            res.add(root.data);
+            return;
+        }
+        // Recursively add leaves of
+        // the left and right subtrees
+        if (root.left != null) {
+            addLeaves(root.left, res);
+        }
+        if (root.right != null) {
+            addLeaves(root.right, res);
+        }
+    }
+
+    // Main function to perform the
+    // boundary traversal of the binary tree
+    List&lt;Integer&gt; printBoundary(Node root) {
+        List&lt;Integer&gt; res = new ArrayList&lt;&gt;();
+        if (root == null) {
+            return res;
+        }
+        // If the root is not a leaf,
+        // add its value to the result
+        if (!isLeaf(root)) {
+            res.add(root.data);
+        }
+
+        // Add the left boundary, leaves,
+        // and right boundary in order
+        addLeftBoundary(root, res);
+        addLeaves(root, res);
+        addRightBoundary(root, res);
+
+        return res;
+    }
+
+    // Helper function to
+    // print the result
+    void printResult(List&lt;Integer&gt; result) {
+        for (int val : result) {
+            System.out.print(val + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        // Creating a sample binary tree
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+        root.right.left = new Node(6);
+        root.right.right = new Node(7);
+
+        Solution solution = new Solution();
+
+        // Get the boundary traversal
+        List&lt;Integer&gt; result = solution.printBoundary(root);
+
+        // Print the result
+        System.out.print("Boundary Traversal: ");
+        solution.printResult(result);
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Node:
+    def __init__(self, val):
+        self.data = val
+        self.left = None
+        self.right = None
+
+class Solution:
+    def isLeaf(self, root):
+        """
+        Function to check if a node is a leaf
+        """
+        return not root.left and not root.right
+
+    def addLeftBoundary(self, root, res):
+        """
+        Function to add the left boundary of the tree
+        """
+        curr = root.left
+        while curr:
+            if not self.isLeaf(curr):
+                # If the current node is not a leaf,
+                # add its value to the result
+                res.append(curr.data)
+            # Move to the left child if it exists,
+            # otherwise move to the right child
+            if curr.left:
+                curr = curr.left
+            else:
+                curr = curr.right
+
+    def addRightBoundary(self, root, res):
+        """
+        Function to add the right boundary of the tree
+        """
+        curr = root.right
+        temp = []
+        while curr:
+            if not self.isLeaf(curr):
+                # If the current node is not a leaf,
+                # add its value to a temporary vector
+                temp.append(curr.data)
+            # Move to the right child if it exists,
+            # otherwise move to the left child
+            if curr.right:
+                curr = curr.right
+            else:
+                curr = curr.left
+        # Reverse and add the values from
+        # the temporary vector to the result
+        for i in range(len(temp) - 1, -1, -1):
+            res.append(temp[i])
+
+    def addLeaves(self, root, res):
+        """
+        Function to add the leaves of the tree
+        """
+        if self.isLeaf(root):
+            # If the current node is a leaf,
+            # add its value to the result
+            res.append(root.data)
+            return
+        # Recursively add leaves of
+        # the left and right subtrees
+        if root.left:
+            self.addLeaves(root.left, res)
+        if root.right:
+            self.addLeaves(root.right, res)
+
+    def printBoundary(self, root):
+        """
+        Main function to perform the
+        boundary traversal of the binary tree
+        """
+        res = []
+        if not root:
+            return res
+        # If the root is not a leaf,
+        # add its value to the result
+        if not self.isLeaf(root):
+            res.append(root.data)
+
+        # Add the left boundary, leaves,
+        # and right boundary in order
+        self.addLeftBoundary(root, res)
+        self.addLeaves(root, res)
+        self.addRightBoundary(root, res)
+
+        return res
+
+# Helper function to
+# print the result
+def printResult(result):
+    for val in result:
+        print(val, end=" ")
+    print()
+
+# Creating a sample binary tree
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.left = Node(6)
+root.right.right = Node(7)
+
+solution = Solution()
+
+# Get the boundary traversal
+result = solution.printBoundary(root)
+
+# Print the result
+print("Boundary Traversal:", end=" ")
+printResult(result)</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Node structure for the binary tree
+class Node {
+    constructor(val) {
+        this.data = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class Solution {
+    // Function to check if a node is a leaf
+    isLeaf(root) {
+        return !root.left &amp;&amp; !root.right;
+    }
+
+    // Function to add the left boundary of the tree
+    addLeftBoundary(root, res) {
+        let curr = root.left;
+        while (curr) {
+            // If the current node is not a leaf, add its value to the result
+            if (!this.isLeaf(curr)) {
+                res.push(curr.data);
+            }
+            // Move to the left child if it exists, otherwise move to the right child
+            if (curr.left) {
+                curr = curr.left;
+            } else {
+                curr = curr.right;
+            }
+        }
+    }
+
+    // Function to add the right boundary of the tree
+    addRightBoundary(root, res) {
+        let curr = root.right;
+        let temp = [];
+        while (curr) {
+            // If the current node is not a leaf, add its value to a temporary vector
+            if (!this.isLeaf(curr)) {
+                temp.push(curr.data);
+            }
+            // Move to the right child if it exists, otherwise move to the left child
+            if (curr.right) {
+                curr = curr.right;
+            } else {
+                curr = curr.left;
+            }
+        }
+        // Reverse and add the values from the temporary vector to the result
+        for (let i = temp.length - 1; i &gt;= 0; --i) {
+            res.push(temp[i]);
+        }
+    }
+
+    // Function to add the leaves of the tree
+    addLeaves(root, res) {
+        // If the current node is a leaf, add its value to the result
+        if (this.isLeaf(root)) {
+            res.push(root.data);
+            return;
+        }
+        // Recursively add leaves of the left and right subtrees
+        if (root.left) {
+            this.addLeaves(root.left, res);
+        }
+        if (root.right) {
+            this.addLeaves(root.right, res);
+        }
+    }
+
+    // Main function to perform the boundary traversal of the binary tree
+    printBoundary(root) {
+        let res = [];
+        if (!root) {
+            return res;
+        }
+        // If the root is not a leaf, add its value to the result
+        if (!this.isLeaf(root)) {
+            res.push(root.data);
+        }
+
+        // Add the left boundary, leaves, and right boundary in order
+        this.addLeftBoundary(root, res);
+        this.addLeaves(root, res);
+        this.addRightBoundary(root, res);
+
+        return res;
+    }
+}
+
+// Helper function to print the result
+function printResult(result) {
+    for (let val of result) {
+        console.log(val + " ");
+    }
+    console.log();
+}
+
+// Creating a sample binary tree
+let root = new Node(1);
+root.left = new Node(2);
+root.right = new Node(3);
+root.left.left = new Node(4);
+root.left.right = new Node(5);
+root.right.left = new Node(6);
+root.right.right = new Node(7);
+
+let solution = new Solution();
+
+// Get the boundary traversal
+let result = solution.printBoundary(root);
+
+// Print the result
+console.log("Boundary Traversal: ");
+printResult(result);</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+</p><li>Time Complexity: O(N) where N is the number of nodes in the Binary Tree.</li>
+<li>Space Complexity: O(N) where N is the number of nodes in the Binary Tree to store the boundary nodes of the tree. O(H) or O(log2N) Recursive stack space while traversing the tree. In the worst case scenario the tree is skewed and the auxiliary recursion stack space would be stacked up to the maximum depth of the tree, resulting in an O(N) auxiliary space complexity.</li>
+</details>
+</div>
+</details>
+</div>
+
+
+</div>
+</article>
+<script src="../article.js"></script>
+</body></html>

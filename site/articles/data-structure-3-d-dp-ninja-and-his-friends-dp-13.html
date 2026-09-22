@@ -1,0 +1,994 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>3-d DP : Ninja and his friends (DP-13)</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>3-d DP : Ninja and his friends (DP-13)</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/3-d-dp-ninja-and-his-friends-dp-13/</code></div>
+  <p><strong>Problem Statement: </strong> We are given an ‘N*M’ matrix. Every cell of the matrix has some chocolates
+    on it, mat[i][j] gives us the number of chocolates. We have two friends ‘Alice’ and ‘Bob’. initially, Alice is
+    standing on the cell(0,0) and Bob is standing on the cell(0, M-1). Both of them can move only to the cells below
+    them in these three directions: to the bottom cell (↓), to the bottom-right cell(↘), or to the bottom-left cell(↙).
+
+    When Alica and Bob visit a cell, they take all the chocolates from that cell with them. It can happen that they
+    visit the same cell, in that case, the chocolates need to be considered only once.
+
+    They cannot go out of the boundary of the given matrix, we need to return the maximum number of chocolates that Bob
+    and Alice can together collect.</p>
+
+
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input: ‘R’ = 3, ‘C’ = 4
+‘GRID’ = [[2, 3, 1, 2], [3, 4, 2, 2], [5, 6, 3, 5]]
+Output: 21
+
+Example 2:
+Input: ‘R’ = 2, ‘C’ = 3
+‘GRID’ = [[4, 1, 2], [7, 3, 5]]
+Output: 22
+</pre>
+<p><img height="457" loading="lazy" src="../assets/img/778eb8dd38a7cf27.png" width="481"/></p>
+</div>
+</details>
+</div>
+
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/ninja's-training" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="horizontal_navbar_dsa_article">
+<div class="grid_container_three">
+<a class="three-boxes box-a" href="#brute-force-approach">
+            Memoization approach
+        </a>
+<a class="three-boxes box-b" href="#better-approach">
+            Tabulation approach
+        </a>
+<a class="three-boxes box-c" href="#optimal-approach">
+            Space Optimization
+        </a>
+<a class="three-boxes box-d" href="#dsa_article_video_explanation">
+<svg fill="none" height="26" viewbox="0 0 20 14" width="26" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 10L13.19 7L8 4V10ZM19.56 2.17C19.69 2.64 19.78 3.27 19.84 4.07C19.91 4.87 19.94 5.56 19.94 6.16L20 7C20 9.19 19.84 10.8 19.56 11.83C19.31 12.73 18.73 13.31 17.83 13.56C17.36 13.69 16.5 13.78 15.18 13.84C13.88 13.91 12.69 13.94 11.59 13.94L10 14C5.81 14 3.2 13.84 2.17 13.56C1.27 13.31 0.69 12.73 0.44 11.83C0.31 11.36 0.22 10.73 0.16 9.93C0.0900001 9.13 0.0599999 8.44 0.0599999 7.84L0 7C0 4.81 0.16 3.2 0.44 2.17C0.69 1.27 1.27 0.69 2.17 0.44C2.64 0.31 3.5 0.22 4.82 0.16C6.12 0.0899998 7.31 0.0599999 8.41 0.0599999L10 0C14.19 0 16.8 0.16 17.83 0.44C18.73 0.69 19.31 1.27 19.56 2.17Z" fill="red"></path>
+</svg>
+</a>
+<div class="box-e tooltip">
+<svg fill="none" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.842 9.25L11.9577 10.17C11.2502 10.89 10.8081 11.5 10.8081 13H8.84297V12.5C8.84297 11.39 9.28511 10.39 9.99255 9.67L11.2109 8.41C11.5745 8.05 11.7906 7.55 11.7906 7C11.7906 6.46957 11.5836 5.96086 11.2151 5.58579C10.8465 5.21071 10.3467 5 9.82552 5C9.30434 5 8.80451 5.21071 8.43598 5.58579C8.06745 5.96086 7.86041 6.46957 7.86041 7H5.89531C5.89531 5.93913 6.30938 4.92172 7.04644 4.17157C7.7835 3.42143 8.78316 3 9.82552 3C10.8679 3 11.8675 3.42143 12.6046 4.17157C13.3417 4.92172 13.7557 5.93913 13.7557 7C13.7543 7.84324 13.4259 8.65183 12.842 9.25ZM10.8081 17H8.84297V15H10.8081M9.82552 0C8.53521 0 7.25754 0.258658 6.06545 0.761205C4.87337 1.26375 3.79021 2.00035 2.87783 2.92893C1.03519 4.8043 0 7.34784 0 10C0 12.6522 1.03519 15.1957 2.87783 17.0711C3.79021 17.9997 4.87337 18.7362 6.06545 19.2388C7.25754 19.7413 8.53521 20 9.82552 20C12.4314 20 14.9306 18.9464 16.7732 17.0711C18.6158 15.1957 19.651 12.6522 19.651 10C19.651 4.47 15.2296 0 9.82552 0Z" fill="black"></path>
+</svg>
+<div class="bottom">
+<p>Expand any one approach by clicking the given options in the bar. Clicking one approach on bar,
+                    closes all other expands. You can manually expand more than one approach at a time</p>
+<i></i>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Memoization Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<p><strong>Problem Overview</strong></p>
+<p>Alice and Bob start from fixed positions and move row by row until the last row. At each step, they need to pick the best moves to collect the highest number of chocolates.</p>
+<p><strong>Why Greedy Fails?</strong></p>
+<p>A greedy method picks the move that gives the most chocolates right away, but this can lead to fewer chocolates later because the matrix values are uneven. So, we must try all possible paths using <strong>recursion</strong>.</p>
+<p><strong>Understanding the Problem</strong></p>
+<p>We have a grid with rows and columns. Alice and Bob move row by row. Their current positions can be thought of as their current row and the two column positions they are standing on.</p>
+<p><strong>Base Case:</strong></p>
+<ul>
+<li>If they reach the last row:  
+     If both are in the same cell, count the chocolates once.  
+     If in different cells, add chocolates from both cells.</li>
+<li>If they move outside the grid, this is not allowed, so we return a very small value to mark it as an invalid path.</li>
+</ul>
+<p><strong>Exploring All Moves</strong></p>
+<p>At every step, both Alice and Bob can move straight down, down-right, or down-left. For every move Alice makes, Bob also has three choices, making nine possible move combinations at each step.</p>
+<p><strong>Choosing the Best Option</strong></p>
+<p>At every step, we check all nine possible moves and take the one that gives the highest total chocolates.</p>
+<p><strong>Memoization</strong></p>
+<p>Because the same moves will be calculated many times, we store the results to save time:</p>
+<ol>
+<li>Make a 3D table to store the best results for each row and column positions of Alice and Bob.</li>
+<li>Before calculating again, check if we already have the answer. If yes, use it.</li>
+<li>If not, calculate, store it, and then return it.</li>
+</ol>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/f6d07471470c76c4.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/dd6c6e1fd9906785.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/922e57d301b06604.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/f6d07471470c76c4.png"/><img alt="Image 2" loading="lazy" src="../assets/img/dd6c6e1fd9906785.png"/><img alt="Image 3" loading="lazy" src="../assets/img/922e57d301b06604.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Class to solve Ninja and his friends using memoization
+class Solution {
+public:
+    // Recursive function with memoization
+    int solve(int i, int j1, int j2, int n, int m,
+              vector&lt;vector&lt;int&gt;&gt;&amp; grid,
+              vector&lt;vector&lt;vector&lt;int&gt;&gt;&gt;&amp; dp) {
+        // Out of boundary check
+        if (j1 &lt; 0 || j1 &gt;= m || j2 &lt; 0 || j2 &gt;= m)
+            return -1e9;
+        
+        // Base case: last row
+        if (i == n - 1) {
+            if (j1 == j2) return grid[i][j1];
+            else return grid[i][j1] + grid[i][j2];
+        }
+        
+        // If already computed return it
+        if (dp[i][j1][j2] != -1) return dp[i][j1][j2];
+        
+        // Take chocolates from current cell(s)
+        int maxi = -1e9;
+        int curr = (j1 == j2) ? grid[i][j1] : grid[i][j1] + grid[i][j2];
+        
+        // Try all 9 moves
+        for (int dj1 = -1; dj1 &lt;= 1; dj1++) {
+            for (int dj2 = -1; dj2 &lt;= 1; dj2++) {
+                int ans = curr + solve(i + 1, j1 + dj1, j2 + dj2,
+                                       n, m, grid, dp);
+                maxi = max(maxi, ans);
+            }
+        }
+        // Store result
+        return dp[i][j1][j2] = maxi;
+    }
+    
+    // Main function to call
+    int maximumChocolates(int n, int m, vector&lt;vector&lt;int&gt;&gt;&amp; grid) {
+        vector&lt;vector&lt;vector&lt;int&gt;&gt;&gt; dp(n,
+            vector&lt;vector&lt;int&gt;&gt;(m, vector&lt;int&gt;(m, -1)));
+        return solve(0, 0, m - 1, n, m, grid, dp);
+    }
+};
+
+// Driver code
+int main() {
+    vector&lt;vector&lt;int&gt;&gt; grid = {
+        {2, 3, 1, 2},
+        {3, 4, 2, 2},
+        {5, 6, 3, 5}
+    };
+    int n = grid.size(), m = grid[0].size();
+    Solution obj;
+    cout &lt;&lt; obj.maximumChocolates(n, m, grid) &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Class to solve Ninja and his friends using memoization
+class Solution {
+    // Recursive function with memoization
+    int solve(int i, int j1, int j2, int n, int m,
+              int[][] grid, int[][][] dp) {
+        // Out of boundary check
+        if (j1 &lt; 0 || j1 &gt;= m || j2 &lt; 0 || j2 &gt;= m)
+            return (int)(-1e9);
+        
+        // Base case: last row
+        if (i == n - 1) {
+            if (j1 == j2) return grid[i][j1];
+            else return grid[i][j1] + grid[i][j2];
+        }
+        
+        // If already computed return it
+        if (dp[i][j1][j2] != -1) return dp[i][j1][j2];
+        
+        // Take chocolates from current cell(s)
+        int maxi = (int)(-1e9);
+        int curr = (j1 == j2) ? grid[i][j1] : grid[i][j1] + grid[i][j2];
+        
+        // Try all 9 moves
+        for (int dj1 = -1; dj1 &lt;= 1; dj1++) {
+            for (int dj2 = -1; dj2 &lt;= 1; dj2++) {
+                int ans = curr + solve(i + 1, j1 + dj1, j2 + dj2,
+                                       n, m, grid, dp);
+                maxi = Math.max(maxi, ans);
+            }
+        }
+        // Store result
+        return dp[i][j1][j2] = maxi;
+    }
+    
+    // Main function to call
+    int maximumChocolates(int n, int m, int[][] grid) {
+        int[][][] dp = new int[n][m][m];
+        for (int[][] arr2d : dp) {
+            for (int[] arr1d : arr2d) {
+                Arrays.fill(arr1d, -1);
+            }
+        }
+        return solve(0, 0, m - 1, n, m, grid, dp);
+    }
+}
+
+// Driver class
+public class Main {
+    public static void main(String[] args) {
+        int[][] grid = {
+            {2, 3, 1, 2},
+            {3, 4, 2, 2},
+            {5, 6, 3, 5}
+        };
+        int n = grid.length, m = grid[0].length;
+        Solution obj = new Solution();
+        System.out.println(obj.maximumChocolates(n, m, grid));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Class to solve Ninja and his friends using memoization
+class Solution:
+    # Recursive function with memoization
+    def solve(self, i, j1, j2, n, m, grid, dp):
+        # Out of boundary check
+        if j1 &lt; 0 or j1 &gt;= m or j2 &lt; 0 or j2 &gt;= m:
+            return -10**9
+        
+        # Base case: last row
+        if i == n - 1:
+            if j1 == j2:
+                return grid[i][j1]
+            else:
+                return grid[i][j1] + grid[i][j2]
+        
+        # If already computed return it
+        if dp[i][j1][j2] != -1:
+            return dp[i][j1][j2]
+        
+        # Take chocolates from current cell(s)
+        curr = grid[i][j1] if j1 == j2 else grid[i][j1] + grid[i][j2]
+        maxi = -10**9
+        
+        # Try all 9 moves
+        for dj1 in [-1, 0, 1]:
+            for dj2 in [-1, 0, 1]:
+                ans = curr + self.solve(i + 1, j1 + dj1, j2 + dj2,
+                                        n, m, grid, dp)
+                maxi = max(maxi, ans)
+        
+        # Store result
+        dp[i][j1][j2] = maxi
+        return maxi
+
+    # Main function to call
+    def maximumChocolates(self, n, m, grid):
+        dp = [[[-1 for _ in range(m)] for _ in range(m)] for _ in range(n)]
+        return self.solve(0, 0, m - 1, n, m, grid, dp)
+
+# Driver code
+if __name__ == "__main__":
+    grid = [
+        [2, 3, 1, 2],
+        [3, 4, 2, 2],
+        [5, 6, 3, 5]
+    ]
+    n, m = len(grid), len(grid[0])
+    obj = Solution()
+    print(obj.maximumChocolates(n, m, grid))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Class to solve Ninja and his friends using memoization
+class Solution {
+    // Recursive function with memoization
+    solve(i, j1, j2, n, m, grid, dp) {
+        // Out of boundary check
+        if (j1 &lt; 0 || j1 &gt;= m || j2 &lt; 0 || j2 &gt;= m)
+            return -1e9;
+        
+        // Base case: last row
+        if (i === n - 1) {
+            if (j1 === j2) return grid[i][j1];
+            else return grid[i][j1] + grid[i][j2];
+        }
+        
+        // If already computed return it
+        if (dp[i][j1][j2] !== -1) return dp[i][j1][j2];
+        
+        // Take chocolates from current cell(s)
+        let curr = (j1 === j2) ? grid[i][j1] : grid[i][j1] + grid[i][j2];
+        let maxi = -1e9;
+        
+        // Try all 9 moves
+        for (let dj1 = -1; dj1 &lt;= 1; dj1++) {
+            for (let dj2 = -1; dj2 &lt;= 1; dj2++) {
+                let ans = curr + this.solve(i + 1, j1 + dj1, j2 + dj2,
+                                            n, m, grid, dp);
+                maxi = Math.max(maxi, ans);
+            }
+        }
+        // Store result
+        dp[i][j1][j2] = maxi;
+        return maxi;
+    }
+
+    // Main function to call
+    maximumChocolates(n, m, grid) {
+        let dp = Array.from({ length: n }, () =&gt;
+                  Array.from({ length: m }, () =&gt;
+                  Array(m).fill(-1)));
+        return this.solve(0, 0, m - 1, n, m, grid, dp);
+    }
+}
+
+// Driver code
+let grid = [
+    [2, 3, 1, 2],
+    [3, 4, 2, 2],
+    [5, 6, 3, 5]
+];
+let n = grid.length, m = grid[0].length;
+let obj = new Solution();
+console.log(obj.maximumChocolates(n, m, grid));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p>
+<p><strong>Time Complexity: O(N*M*M) * 9</strong>, At max, there will be N*M*M calls of recursion to solve a new problem and in every call,
+                        two nested loops together run for 9 times.</p>
+<p><strong>Space Complexity: O(N) + O(N*M*M)</strong>, We are using a recursion stack space: O(N), where N is the path length and an external DP
+                        Array of size ‘N*M*M’.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="better-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Tabulation Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<p><strong>Steps to Convert Recursive Solution to Tabulation</strong></p>
+<p>Tabulation uses the same 3D table as memoization.  
+For example, one cell in the table shows the maximum chocolates collected when Alice and Bob are at specific positions in the same row.</p>
+<p><img height="457" loading="lazy" src="../assets/img/328e8da4fbd08427.png" width="481"/></p>
+<p><strong>Base Setup</strong></p>
+<ul>
+<li>Since the last row is the stopping point in recursion, fill the last row of the table first: If Alice and Bob are in the same cell, count chocolates once. If in different cells, add chocolates from both cells.</li>
+</ul>
+<p><strong>Filling the Table</strong></p>
+<ol>
+<li>Go row by row from the second last row up to the first row.</li>
+<li>For each pair of positions of Alice and Bob, check all 9 possible move combinations (down, down-left, down-right for each).</li>
+<li>For each option, look at the values already stored in the next row and add chocolates collected in the current move.</li>
+<li>Keep the highest value among all 9 options as the best result for that cell.</li>
+</ol>
+<p><strong>Final Answer</strong></p>
+<p>After filling the table, the top row’s starting positions give the maximum chocolates Alice and Bob can collect together.</p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Class to solve Ninja and his friends using tabulation
+class Solution {
+public:
+    int maximumChocolates(int n, int m, vector&lt;vector&lt;int&gt;&gt;&amp; grid) {
+        // 3D DP table
+        vector&lt;vector&lt;vector&lt;int&gt;&gt;&gt; dp(n,
+            vector&lt;vector&lt;int&gt;&gt;(m, vector&lt;int&gt;(m, 0)));
+        
+        // Base case: last row
+        for (int j1 = 0; j1 &lt; m; j1++) {
+            for (int j2 = 0; j2 &lt; m; j2++) {
+                if (j1 == j2) dp[n-1][j1][j2] = grid[n-1][j1];
+                else dp[n-1][j1][j2] = grid[n-1][j1] + grid[n-1][j2];
+            }
+        }
+        
+        // Fill DP table bottom-up
+        for (int i = n - 2; i &gt;= 0; i--) {
+            for (int j1 = 0; j1 &lt; m; j1++) {
+                for (int j2 = 0; j2 &lt; m; j2++) {
+                    int maxi = -1e9;
+                    int curr = (j1 == j2) ? grid[i][j1] 
+                                          : grid[i][j1] + grid[i][j2];
+                    // Try all 9 moves
+                    for (int dj1 = -1; dj1 &lt;= 1; dj1++) {
+                        for (int dj2 = -1; dj2 &lt;= 1; dj2++) {
+                            int newJ1 = j1 + dj1;
+                            int newJ2 = j2 + dj2;
+                            if (newJ1 &gt;= 0 &amp;&amp; newJ1 &lt; m &amp;&amp;
+                                newJ2 &gt;= 0 &amp;&amp; newJ2 &lt; m) {
+                                maxi = max(maxi, curr + 
+                                           dp[i+1][newJ1][newJ2]);
+                            } else {
+                                maxi = max(maxi, (int)-1e9);
+                            }
+                        }
+                    }
+                    dp[i][j1][j2] = maxi;
+                }
+            }
+        }
+        return dp[0][0][m-1];
+    }
+};
+
+// Driver code
+int main() {
+    vector&lt;vector&lt;int&gt;&gt; grid = {
+        {2, 3, 1, 2},
+        {3, 4, 2, 2},
+        {5, 6, 3, 5}
+    };
+    int n = grid.size(), m = grid[0].size();
+    Solution obj;
+    cout &lt;&lt; obj.maximumChocolates(n, m, grid) &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Class to solve Ninja and his friends using tabulation
+class Solution {
+    int maximumChocolates(int n, int m, int[][] grid) {
+        // 3D DP table
+        int[][][] dp = new int[n][m][m];
+        
+        // Base case: last row
+        for (int j1 = 0; j1 &lt; m; j1++) {
+            for (int j2 = 0; j2 &lt; m; j2++) {
+                if (j1 == j2) dp[n-1][j1][j2] = grid[n-1][j1];
+                else dp[n-1][j1][j2] = grid[n-1][j1] + grid[n-1][j2];
+            }
+        }
+        
+        // Fill DP table bottom-up
+        for (int i = n - 2; i &gt;= 0; i--) {
+            for (int j1 = 0; j1 &lt; m; j1++) {
+                for (int j2 = 0; j2 &lt; m; j2++) {
+                    int maxi = (int)(-1e9);
+                    int curr = (j1 == j2) ? grid[i][j1] 
+                                          : grid[i][j1] + grid[i][j2];
+                    // Try all 9 moves
+                    for (int dj1 = -1; dj1 &lt;= 1; dj1++) {
+                        for (int dj2 = -1; dj2 &lt;= 1; dj2++) {
+                            int newJ1 = j1 + dj1;
+                            int newJ2 = j2 + dj2;
+                            if (newJ1 &gt;= 0 &amp;&amp; newJ1 &lt; m &amp;&amp;
+                                newJ2 &gt;= 0 &amp;&amp; newJ2 &lt; m) {
+                                maxi = Math.max(maxi, curr + 
+                                       dp[i+1][newJ1][newJ2]);
+                            } else {
+                                maxi = Math.max(maxi, (int)(-1e9));
+                            }
+                        }
+                    }
+                    dp[i][j1][j2] = maxi;
+                }
+            }
+        }
+        return dp[0][0][m-1];
+    }
+}
+
+// Driver class
+public class Main {
+    public static void main(String[] args) {
+        int[][] grid = {
+            {2, 3, 1, 2},
+            {3, 4, 2, 2},
+            {5, 6, 3, 5}
+        };
+        int n = grid.length, m = grid[0].length;
+        Solution obj = new Solution();
+        System.out.println(obj.maximumChocolates(n, m, grid));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Class to solve Ninja and his friends using tabulation
+class Solution:
+    def maximumChocolates(self, n, m, grid):
+        # 3D DP table
+        dp = [[[0 for _ in range(m)] for _ in range(m)] for _ in range(n)]
+        
+        # Base case: last row
+        for j1 in range(m):
+            for j2 in range(m):
+                if j1 == j2:
+                    dp[n-1][j1][j2] = grid[n-1][j1]
+                else:
+                    dp[n-1][j1][j2] = grid[n-1][j1] + grid[n-1][j2]
+        
+        # Fill DP table bottom-up
+        for i in range(n-2, -1, -1):
+            for j1 in range(m):
+                for j2 in range(m):
+                    maxi = -10**9
+                    curr = grid[i][j1] if j1 == j2 else grid[i][j1] + grid[i][j2]
+                    for dj1 in [-1, 0, 1]:
+                        for dj2 in [-1, 0, 1]:
+                            newJ1, newJ2 = j1 + dj1, j2 + dj2
+                            if 0 &lt;= newJ1 &lt; m and 0 &lt;= newJ2 &lt; m:
+                                maxi = max(maxi, curr + dp[i+1][newJ1][newJ2])
+                            else:
+                                maxi = max(maxi, -10**9)
+                    dp[i][j1][j2] = maxi
+        return dp[0][0][m-1]
+
+# Driver code
+if __name__ == "__main__":
+    grid = [
+        [2, 3, 1, 2],
+        [3, 4, 2, 2],
+        [5, 6, 3, 5]
+    ]
+    n, m = len(grid), len(grid[0])
+    obj = Solution()
+    print(obj.maximumChocolates(n, m, grid))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Class to solve Ninja and his friends using tabulation
+class Solution {
+    maximumChocolates(n, m, grid) {
+        // 3D DP table
+        let dp = Array.from({ length: n }, () =&gt;
+                  Array.from({ length: m }, () =&gt;
+                  Array(m).fill(0)));
+        
+        // Base case: last row
+        for (let j1 = 0; j1 &lt; m; j1++) {
+            for (let j2 = 0; j2 &lt; m; j2++) {
+                if (j1 === j2) dp[n-1][j1][j2] = grid[n-1][j1];
+                else dp[n-1][j1][j2] = grid[n-1][j1] + grid[n-1][j2];
+            }
+        }
+        
+        // Fill DP table bottom-up
+        for (let i = n - 2; i &gt;= 0; i--) {
+            for (let j1 = 0; j1 &lt; m; j1++) {
+                for (let j2 = 0; j2 &lt; m; j2++) {
+                    let maxi = -1e9;
+                    let curr = (j1 === j2) ? grid[i][j1] 
+                                           : grid[i][j1] + grid[i][j2];
+                    for (let dj1 = -1; dj1 &lt;= 1; dj1++) {
+                        for (let dj2 = -1; dj2 &lt;= 1; dj2++) {
+                            let newJ1 = j1 + dj1;
+                            let newJ2 = j2 + dj2;
+                            if (newJ1 &gt;= 0 &amp;&amp; newJ1 &lt; m &amp;&amp;
+                                newJ2 &gt;= 0 &amp;&amp; newJ2 &lt; m) {
+                                maxi = Math.max(maxi, curr + dp[i+1][newJ1][newJ2]);
+                            } else {
+                                maxi = Math.max(maxi, -1e9);
+                            }
+                        }
+                    }
+                    dp[i][j1][j2] = maxi;
+                }
+            }
+        }
+        return dp[0][0][m-1];
+    }
+}
+
+// Driver code
+let grid = [
+    [2, 3, 1, 2],
+    [3, 4, 2, 2],
+    [5, 6, 3, 5]
+];
+let n = grid.length, m = grid[0].length;
+let obj = new Solution();
+console.log(obj.maximumChocolates(n, m, grid));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p>
+<p><strong>Time Complexity: O(N*M*M)*9</strong>, The outer nested loops run for (N*M*M) times and the inner two nested loops run for 9
+                        times.</p>
+<p><strong>Space Complexity: O(N*M*M)</strong>, We are using an external array of size ‘N*M*M’. The stack space will be eliminated.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Space Optimization Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<p><strong>Space Optimization Idea</strong></p>
+<p>To fill each cell, we only need values from the next row. So, instead of keeping a full 3D table, we can use two 2D tables and update them as we move row by row.</p>
+<p><strong>Steps to Space Optimize the Tabulation Approach</strong></p>
+<ul>
+<li>First, create one 2D table (call it "front") and fill it like we did for the last row in the normal tabulation method.</li>
+<li>Create another 2D table (call it "cur") that we will use while going through the rows.</li>
+<li>Move row by row (starting from the second last row), just like in tabulation, checking all possible moves to find the highest chocolates for each cell. Use values from the "front" table for calculations.</li>
+<li>Instead of filling a 3D table, store the best value directly in "cur".</li>
+<li>After finishing one row, copy "cur" into "front", as "front" will now represent the next row for the upcoming calculation.</li>
+</ul>
+<p><strong>Final Answer</strong></p>
+<p>After completing all rows, the answer will be in <code>front[0][m-1]</code>, which represents Alice starting at column 0 and Bob at the last column in the first row.</p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Class to solve Ninja and his friends using space optimization
+class Solution {
+public:
+    int maximumChocolates(int n, int m, vector&lt;vector&lt;int&gt;&gt;&amp; grid) {
+        // Next row dp array
+        vector&lt;vector&lt;int&gt;&gt; next(m, vector&lt;int&gt;(m, 0));
+        // Current row dp array
+        vector&lt;vector&lt;int&gt;&gt; curr(m, vector&lt;int&gt;(m, 0));
+        
+        // Base case: last row
+        for (int j1 = 0; j1 &lt; m; j1++) {
+            for (int j2 = 0; j2 &lt; m; j2++) {
+                if (j1 == j2) next[j1][j2] = grid[n-1][j1];
+                else next[j1][j2] = grid[n-1][j1] + grid[n-1][j2];
+            }
+        }
+        
+        // Fill DP table bottom-up
+        for (int i = n - 2; i &gt;= 0; i--) {
+            for (int j1 = 0; j1 &lt; m; j1++) {
+                for (int j2 = 0; j2 &lt; m; j2++) {
+                    int maxi = -1e9;
+                    int currChoco = (j1 == j2) ? grid[i][j1] 
+                                               : grid[i][j1] + grid[i][j2];
+                    // Try all 9 moves
+                    for (int dj1 = -1; dj1 &lt;= 1; dj1++) {
+                        for (int dj2 = -1; dj2 &lt;= 1; dj2++) {
+                            int newJ1 = j1 + dj1;
+                            int newJ2 = j2 + dj2;
+                            if (newJ1 &gt;= 0 &amp;&amp; newJ1 &lt; m &amp;&amp;
+                                newJ2 &gt;= 0 &amp;&amp; newJ2 &lt; m) {
+                                maxi = max(maxi, currChoco + 
+                                           next[newJ1][newJ2]);
+                            } else {
+                                maxi = max(maxi, (int)-1e9);
+                            }
+                        }
+                    }
+                    curr[j1][j2] = maxi;
+                }
+            }
+            // Move current row to next row
+            next = curr;
+        }
+        // Answer is starting position
+        return next[0][m-1];
+    }
+};
+
+// Driver code
+int main() {
+    vector&lt;vector&lt;int&gt;&gt; grid = {
+        {2, 3, 1, 2},
+        {3, 4, 2, 2},
+        {5, 6, 3, 5}
+    };
+    int n = grid.size(), m = grid[0].size();
+    Solution obj;
+    cout &lt;&lt; obj.maximumChocolates(n, m, grid) &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Class to solve Ninja and his friends using space optimization
+class Solution {
+    int maximumChocolates(int n, int m, int[][] grid) {
+        // Next row dp array
+        int[][] next = new int[m][m];
+        // Current row dp array
+        int[][] curr = new int[m][m];
+        
+        // Base case: last row
+        for (int j1 = 0; j1 &lt; m; j1++) {
+            for (int j2 = 0; j2 &lt; m; j2++) {
+                if (j1 == j2) next[j1][j2] = grid[n-1][j1];
+                else next[j1][j2] = grid[n-1][j1] + grid[n-1][j2];
+            }
+        }
+        
+        // Fill DP table bottom-up
+        for (int i = n - 2; i &gt;= 0; i--) {
+            for (int j1 = 0; j1 &lt; m; j1++) {
+                for (int j2 = 0; j2 &lt; m; j2++) {
+                    int maxi = (int)(-1e9);
+                    int currChoco = (j1 == j2) ? grid[i][j1] 
+                                               : grid[i][j1] + grid[i][j2];
+                    // Try all 9 moves
+                    for (int dj1 = -1; dj1 &lt;= 1; dj1++) {
+                        for (int dj2 = -1; dj2 &lt;= 1; dj2++) {
+                            int newJ1 = j1 + dj1;
+                            int newJ2 = j2 + dj2;
+                            if (newJ1 &gt;= 0 &amp;&amp; newJ1 &lt; m &amp;&amp;
+                                newJ2 &gt;= 0 &amp;&amp; newJ2 &lt; m) {
+                                maxi = Math.max(maxi, currChoco + 
+                                                next[newJ1][newJ2]);
+                            } else {
+                                maxi = Math.max(maxi, (int)(-1e9));
+                            }
+                        }
+                    }
+                    curr[j1][j2] = maxi;
+                }
+            }
+            // Move current row to next row
+            for (int j1 = 0; j1 &lt; m; j1++) {
+                for (int j2 = 0; j2 &lt; m; j2++) {
+                    next[j1][j2] = curr[j1][j2];
+                }
+            }
+        }
+        // Answer is starting position
+        return next[0][m-1];
+    }
+}
+
+// Driver class
+public class Main {
+    public static void main(String[] args) {
+        int[][] grid = {
+            {2, 3, 1, 2},
+            {3, 4, 2, 2},
+            {5, 6, 3, 5}
+        };
+        int n = grid.length, m = grid[0].length;
+        Solution obj = new Solution();
+        System.out.println(obj.maximumChocolates(n, m, grid));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Class to solve Ninja and his friends using space optimization
+class Solution:
+    def maximumChocolates(self, n, m, grid):
+        # Next row dp array
+        next_dp = [[0 for _ in range(m)] for _ in range(m)]
+        # Current row dp array
+        curr_dp = [[0 for _ in range(m)] for _ in range(m)]
+        
+        # Base case: last row
+        for j1 in range(m):
+            for j2 in range(m):
+                if j1 == j2:
+                    next_dp[j1][j2] = grid[n-1][j1]
+                else:
+                    next_dp[j1][j2] = grid[n-1][j1] + grid[n-1][j2]
+        
+        # Fill DP table bottom-up
+        for i in range(n-2, -1, -1):
+            for j1 in range(m):
+                for j2 in range(m):
+                    maxi = -10**9
+                    curr_choco = grid[i][j1] if j1 == j2 else grid[i][j1] + grid[i][j2]
+                    for dj1 in [-1, 0, 1]:
+                        for dj2 in [-1, 0, 1]:
+                            newJ1, newJ2 = j1 + dj1, j2 + dj2
+                            if 0 &lt;= newJ1 &lt; m and 0 &lt;= newJ2 &lt; m:
+                                maxi = max(maxi, curr_choco + next_dp[newJ1][newJ2])
+                            else:
+                                maxi = max(maxi, -10**9)
+                    curr_dp[j1][j2] = maxi
+            # Move current row to next row
+            next_dp = [row[:] for row in curr_dp]
+        
+        # Answer is starting position
+        return next_dp[0][m-1]
+
+# Driver code
+if __name__ == "__main__":
+    grid = [
+        [2, 3, 1, 2],
+        [3, 4, 2, 2],
+        [5, 6, 3, 5]
+    ]
+    n, m = len(grid), len(grid[0])
+    obj = Solution()
+    print(obj.maximumChocolates(n, m, grid))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Class to solve Ninja and his friends using space optimization
+class Solution {
+    maximumChocolates(n, m, grid) {
+        // Next row dp array
+        let next = Array.from({ length: m }, () =&gt; Array(m).fill(0));
+        // Current row dp array
+        let curr = Array.from({ length: m }, () =&gt; Array(m).fill(0));
+        
+        // Base case: last row
+        for (let j1 = 0; j1 &lt; m; j1++) {
+            for (let j2 = 0; j2 &lt; m; j2++) {
+                if (j1 === j2) next[j1][j2] = grid[n-1][j1];
+                else next[j1][j2] = grid[n-1][j1] + grid[n-1][j2];
+            }
+        }
+        
+        // Fill DP table bottom-up
+        for (let i = n - 2; i &gt;= 0; i--) {
+            for (let j1 = 0; j1 &lt; m; j1++) {
+                for (let j2 = 0; j2 &lt; m; j2++) {
+                    let maxi = -1e9;
+                    let currChoco = (j1 === j2) ? grid[i][j1] 
+                                                : grid[i][j1] + grid[i][j2];
+                    for (let dj1 = -1; dj1 &lt;= 1; dj1++) {
+                        for (let dj2 = -1; dj2 &lt;= 1; dj2++) {
+                            let newJ1 = j1 + dj1;
+                            let newJ2 = j2 + dj2;
+                            if (newJ1 &gt;= 0 &amp;&amp; newJ1 &lt; m &amp;&amp;
+                                newJ2 &gt;= 0 &amp;&amp; newJ2 &lt; m) {
+                                maxi = Math.max(maxi, currChoco + next[newJ1][newJ2]);
+                            } else {
+                                maxi = Math.max(maxi, -1e9);
+                            }
+                        }
+                    }
+                    curr[j1][j2] = maxi;
+                }
+            }
+            // Move current row to next row
+            next = curr.map(row =&gt; row.slice());
+        }
+        // Answer is starting position
+        return next[0][m-1];
+    }
+}
+
+// Driver code
+let grid = [
+    [2, 3, 1, 2],
+    [3, 4, 2, 2],
+    [5, 6, 3, 5]
+];
+let n = grid.length, m = grid[0].length;
+let obj = new Solution();
+console.log(obj.maximumChocolates(n, m, grid));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p>
+<p><strong>Time Complexity: O(N*M*M)*9</strong>, The outer nested loops run for (N*M*M) times and the inner two nested loops run for 9
+                        times.</p>
+<p><strong>Space Complexity: O(M*M)</strong>, We are using an external array of size ‘M*M’.</p>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

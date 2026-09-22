@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Morris Inorder Traversal of a Binary tree</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Morris Inorder Traversal of a Binary tree</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/morris-inorder-traversal-of-a-binary-tree/</code></div>
+  <p><strong>Problem Statement: </strong> Given a Binary Tree, implement Morris Inorder Traversal and return the array containing its inorder sequence.<br/><br/>
+Morris Inorder Traversal is a tree traversal algorithm aiming to achieve a space complexity of O(1) without recursion or an external data structure. The algorithm should efficiently visit each node in the binary tree in inorder sequence, printing or processing the node values as it traverses, without using a stack or recursion.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input:Binary Tree: 4 2 5 3 -1 7 6 -1 9 -1 -1 8 -1 1</span>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/c5dc071a2cbdf172.png" width="439"/></figure>
+<span>Output: [3, 1, 9, 2, 4, 7, 5, 8, 6]</span>
+<span>Explanation: We traverse the binary tree in the order of Left, Root then Right.</span>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/dc0902c5171ce48f.png" width="439"/></figure>
+<p></p>
+<span>Input : Binary Tree: 1 2 3 4 5 6 7 -1 -1 8 -1 -1 -1 9 10</span>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/b71ed61756d23595.png" width="439"/></figure>
+<span>Output: [4,2,8,5,1,6,3,9,7,10]</span>
+<span>Explanation : We traverse the binary tree in the order of Left, Root then Right.</span>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/cdaa66b0c9ea5e03.png" width="439"/></figure>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/morris-inorder-traversal-" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better.
+            It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+  Morris Traversal is a tree traversal algorithm that allows for an in-order traversal of a binary tree without using recursion or a stack. It uses threading to traverse the tree efficiently. The key idea is to establish a temporary link between the current node and its in-order successor<br/>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/e73bfe3aeb449c71.png" width="439"/></figure><p></p>
+  The inorder predecessor of a node is the rightmost node in the left subtree. So when we traverse the left subtree, we encounter a node whose right child is null, this is the last node in that subtree.Hence, we observe a pattern whenever we are at the last node of a subtree such that the right child is pointing to none, we move to the parent of this subtree.<br/>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/cd807a3d058956cf.png" width="439"/></figure><p></p>
+  When we are currently at a node, the following cases can arise:<br/><br/>
+  Case 1: The current node has no left subtree.<br/>
+  If there is no left subtree, we simply print the value of the current node because there are no nodes to traverse on the left side. After that, we move to the right child to continue the traversal.<br/>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/d37ddcc6a7b8f6f7.png" width="439"/></figure><p></p>
+  Case 2: There is a left subtree, and the right-most child of this left subtree is pointing to null.<br/>
+  In this case, we haven't visited the left subtree yet. We establish a temporary link from the rightmost node of the left subtree to the current node. This link helps us later to identify when we've completed the in-order traversal of the left subtree. After setting the link, we move to the left child to explore the left subtree.<br/>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/2c40006b1d88a0a6.png" width="439"/></figure><p></p>
+  Case 3: There is a left subtree, and the right-most child of this left subtree is already pointing to the current node.<br/>
+  This case is crucial for maintaining the integrity of the tree structure. If the right-most child of the left subtree is already pointing to the current node, it means we've completed the in-order traversal of the left subtree. We print the value of the current node and then revert the temporary link to restore the original tree structure. Finally, we move to the right child to continue the traversal.<br/>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/ba44f18a6249d24b.png" width="439"/></figure>
+<ul>
+<li>Initialise a current to traverse the tree. Set current to the root of the Binary Tree.</li>
+<li>While the current is not null: If the current node has no left child, print the current node's value and move to the right child ie. set the current to its right child.</li>
+<li>If the current node has a left child, we find the in-order predecessor of the current node. This in-order predecessor is the rightmost node in the left subtree or the left subtree's rightmost node.</li>
+<li>If the right child of the in-order predecessor is null, set the right child to the current node. Move to the left child (i.e., set current to its left child).</li>
+<li>If the right child of the in-order predecessor is not null, Revert the changes made in the previous step by setting the right child as null. Print the current node's value. Move to the right child (i.e., set current to its right child).</li>
+<li>Repeat until entire tree is not traversed.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/16bb31e408329545.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/4cf57c166306890c.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/e3bbe44b67c4c056.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/b9ac8f212a996ff6.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/33e718de8c884649.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/08678c7252157e9f.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/16bb31e408329545.png"/><img alt="Image 2" loading="lazy" src="../assets/img/4cf57c166306890c.png"/><img alt="Image 3" loading="lazy" src="../assets/img/e3bbe44b67c4c056.png"/><img alt="Image 4" loading="lazy" src="../assets/img/b9ac8f212a996ff6.png"/><img alt="Image 5" loading="lazy" src="../assets/img/33e718de8c884649.png"/><img alt="Image 6" loading="lazy" src="../assets/img/08678c7252157e9f.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// TreeNode structure
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+class Solution {
+public:
+    // Function to perform iterative Morris
+    // inorder traversal of a binary tree
+    vector&lt;int&gt; getInorder(TreeNode* root) {
+        // Vector to store the
+        // inorder traversal result
+        vector&lt;int&gt; inorder;
+        // Pointer to the current node,
+        // starting from the root
+        TreeNode* cur = root;
+        
+        // Loop until the current
+        // node is not NULL
+        while (cur != NULL) {
+            // If the current node's
+            // left child is NULL
+            if (cur-&gt;left == NULL) {
+                // Add the value of the current
+                // node to the inorder vector
+                inorder.push_back(cur-&gt;val);
+                // Move to the right child
+                cur = cur-&gt;right;
+            } else {
+                // If the left child is not NULL,
+                // find the predecessor (rightmost node
+                // in the left subtree)
+                TreeNode* prev = cur-&gt;left;
+                while (prev-&gt;right &amp;&amp; prev-&gt;right != cur) {
+                    prev = prev-&gt;right;
+                }
+                
+                // If the predecessor's right child
+                // is NULL, establish a temporary link
+                // and move to the left child
+                if (prev-&gt;right == NULL) {
+                    prev-&gt;right = cur;
+                    cur = cur-&gt;left;
+                } else {
+                    // If the predecessor's right child
+                    // is already linked, remove the link,
+                    // add current node to inorder vector,
+                    // and move to the right child
+                    prev-&gt;right = NULL;
+                    inorder.push_back(cur-&gt;val);
+                    cur = cur-&gt;right;
+                }
+            }
+        }
+        
+        // Return the inorder
+        // traversal result
+        return inorder;
+    }
+};
+
+
+int main() {
+
+    TreeNode* root = new TreeNode(1);
+    root-&gt;left = new TreeNode(2);
+    root-&gt;right = new TreeNode(3);
+    root-&gt;left-&gt;left = new TreeNode(4);
+    root-&gt;left-&gt;right = new TreeNode(5);
+    root-&gt;left-&gt;right-&gt;right = new TreeNode(6);
+
+    Solution sol;
+    
+    vector&lt;int&gt; inorder = sol.getInorder(root);
+
+    cout &lt;&lt; "Binary Tree Morris Inorder Traversal: ";
+    for(int i = 0; i&lt; inorder.size(); i++){
+        cout &lt;&lt; inorder[i] &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.ArrayList;
+import java.util.List;
+
+// TreeNode structure
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    public TreeNode(int x) {
+        val = x;
+        left = null;
+        right = null;
+    }
+}
+
+// Solution class
+class Solution {
+    // Function to perform iterative Morris
+    // inorder traversal of a binary tree
+    public List&lt;Integer&gt; getInorder(TreeNode root) {
+        // List to store the
+        // inorder traversal result
+        List&lt;Integer&gt; inorder = new ArrayList&lt;&gt;();
+        // Pointer to the current node,
+        // starting from the root
+        TreeNode cur = root;
+
+        // Loop until the current
+        // node is not NULL
+        while (cur != null) {
+            // If the current node's
+            // left child is NULL
+            if (cur.left == null) {
+                // Add the value of the current
+                // node to the inorder list
+                inorder.add(cur.val);
+                // Move to the right child
+                cur = cur.right;
+            } else {
+                // If the left child is not NULL,
+                // find the predecessor (rightmost node
+                // in the left subtree)
+                TreeNode prev = cur.left;
+                while (prev.right != null &amp;&amp; prev.right != cur) {
+                    prev = prev.right;
+                }
+
+                // If the predecessor's right child
+                // is NULL, establish a temporary link
+                // and move to the left child
+                if (prev.right == null) {
+                    prev.right = cur;
+                    cur = cur.left;
+                } else {
+                    // If the predecessor's right child
+                    // is already linked, remove the link,
+                    // add current node to inorder list,
+                    // and move to the right child
+                    prev.right = null;
+                    inorder.add(cur.val);
+                    cur = cur.right;
+                }
+            }
+        }
+
+        // Return the inorder
+        // traversal result
+        return inorder;
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        root.left.right.right = new TreeNode(6);
+
+        Solution sol = new Solution();
+
+        List&lt;Integer&gt; inorder = sol.getInorder(root);
+
+        System.out.print("Binary Tree Morris Inorder Traversal: ");
+        for (int i = 0; i &lt; inorder.size(); i++) {
+            System.out.print(inorder.get(i) + " ");
+        }
+        System.out.println();
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># TreeNode structure
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
+class Solution:
+    def getInorder(self, root):
+        # Vector to store the
+        # inorder traversal result
+        inorder = []
+        # Pointer to the current node,
+        # starting from the root
+        cur = root
+
+        # Loop until the current
+        # node is not None
+        while cur is not None:
+            # If the current node's
+            # left child is None
+            if cur.left is None:
+                # Add the value of the current
+                # node to the inorder list
+                inorder.append(cur.val)
+                # Move to the right child
+                cur = cur.right
+            else:
+                # If the left child is not None,
+                # find the predecessor (rightmost node
+                # in the left subtree)
+                prev = cur.left
+                while prev.right and prev.right != cur:
+                    prev = prev.right
+
+                # If the predecessor's right child
+                # is None, establish a temporary link
+                # and move to the left child
+                if prev.right is None:
+                    prev.right = cur
+                    cur = cur.left
+                else:
+                    # If the predecessor's right child
+                    # is already linked, remove the link,
+                    # add the current node to inorder list,
+                    # and move to the right child
+                    prev.right = None
+                    inorder.append(cur.val)
+                    cur = cur.right
+
+        # Return the inorder
+        # traversal result
+        return inorder
+
+
+if __name__ == "__main__":
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.right = TreeNode(3)
+    root.left.left = TreeNode(4)
+    root.left.right = TreeNode(5)
+    root.left.right.right = TreeNode(6)
+
+    sol = Solution()
+
+    inorder = sol.getInorder(root)
+
+    print("Binary Tree Morris Inorder Traversal:", end=" ")
+    for val in inorder:
+        print(val, end=" ")
+    print()</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// TreeNode structure
+class TreeNode {
+    constructor(x) {
+        this.val = x;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class Solution {
+    // Function to perform iterative Morris
+    // inorder traversal of a binary tree
+    getInorder(root) {
+        // Array to store the
+        // inorder traversal result
+        const inorder = [];
+        // Pointer to the current node,
+        // starting from the root
+        let cur = root;
+
+        // Loop until the current
+        // node is not null
+        while (cur !== null) {
+            // If the current node's
+            // left child is null
+            if (cur.left === null) {
+                // Add the value of the current
+                // node to the inorder array
+                inorder.push(cur.val);
+                // Move to the right child
+                cur = cur.right;
+            } else {
+                // If the left child is not null,
+                // find the predecessor (rightmost node
+                // in the left subtree)
+                let prev = cur.left;
+                while (prev.right &amp;&amp; prev.right !== cur) {
+                    prev = prev.right;
+                }
+
+                // If the predecessor's right child
+                // is null, establish a temporary link
+                // and move to the left child
+                if (prev.right === null) {
+                    prev.right = cur;
+                    cur = cur.left;
+                } else {
+                    // If the predecessor's right child
+                    // is already linked, remove the link,
+                    // add the current node to the inorder array,
+                    // and move to the right child
+                    prev.right = null;
+                    inorder.push(cur.val);
+                    cur = cur.right;
+                }
+            }
+        }
+
+        // Return the inorder
+        // traversal result
+        return inorder;
+    }
+}
+
+// Main function
+function main() {
+    const root = new TreeNode(1);
+    root.left = new TreeNode(2);
+    root.right = new TreeNode(3);
+    root.left.left = new TreeNode(4);
+    root.left.right = new TreeNode(5);
+    root.left.right.right = new TreeNode(6);
+
+    const sol = new Solution();
+
+    const inorder = sol.getInorder(root);
+
+    console.log("Binary Tree Morris Inorder Traversal: " + inorder.join(" "));
+}
+
+// Run the main function
+main();</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(2N)</strong>, the time complexity is linear, as each node is visited at most twice (once for establishing the temporary link and once for reverting it).<br/>
+<strong>Space Complexity:  O(1)</strong>, the space complexity is constant, as the algorithm uses only a constant amount of extra space irrespective of the input size.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

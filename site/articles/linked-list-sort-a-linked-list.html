@@ -1,0 +1,1063 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Sort a Linked List</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Sort a Linked List</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/linked-list/sort-a-linked-list</code></div>
+  <p><strong>Problem Statement: </strong>Given a linked list, sort its nodes based on the data value in them. Return the head of the sorted linked list.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: 3-&gt;4-&gt;2-&gt;1-&gt;5 </span>
+ <figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="auto;/" loading="lazy" src="../assets/img/2a67c31b004462d3.png" width="890px;"/></figure>
+<span>Output: 1-&gt;2-&gt;3-&gt;4-&gt;5</span>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="auto;/" loading="lazy" src="../assets/img/455ada357dd81ccf.png" width="890px;"/></figure>
+<span>Explanation: The input linked list when sorted from [3, 4, 2, 1, 5] results in a linked list with values [1, 2, 3, 4, 5].</span>
+<p></p>
+<span>Input: 40-&gt;20-&gt;60-&gt;10-&gt;50-&gt;30</span>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="auto;/" loading="lazy" src="../assets/img/44b7cdff90511653.png" width="890px;"/></figure>  
+<span>Output: 10-&gt;20-&gt;30-&gt;40-&gt;50-&gt;60</span>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="auto;/" loading="lazy" src="../assets/img/423b2f5f52db37ba.png" width="890px;"/></figure>
+<span>Explanation: The input linked list when sorted from [40, 20, 60, 10, 50, 30] results in a linked list with values [10, 20, 30, 40, 50, 60].</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+
+
+    It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Brute-Force Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+      To sort a given linked list, we can simply create an array of all the elements of the linked list. Now, we can sort this array using any sorting technique and reassign the values of the sorted array to our linked list. This modified linked list will have all the elements in sorted order.
+<ul>
+<li> Create an empty array to store the node values. Iterate the linked list using a temporary pointer to the head and push the value of temporary node into the array. </li>
+<li>Sort the array containing node values in ascending order.</li>
+<li>Convert the sorted array back to a linked list reassigning the values from the sorted array and overwriting them sequentially according to their order in the array.</li>
+</ul>
+</div>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/bdcf4212c955b3ba.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/ee88ccab08990da9.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/fe3c9f2ef292547b.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/bdcf4212c955b3ba.png"/><img alt="Image 2" loading="lazy" src="../assets/img/ee88ccab08990da9.png"/><img alt="Image 3" loading="lazy" src="../assets/img/fe3c9f2ef292547b.png"/></div></div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt; 
+using namespace std;
+
+// Node class represents a linked list node
+class Node {
+public:
+    // Data stored in the node
+    int data;
+
+    // Pointer to the next node
+    Node* next;
+
+    // Constructor with data and next pointer
+    Node(int data1, Node* next1) {
+        data = data1;
+        next = next1;
+    }
+
+    // Constructor with only data
+    Node(int data1) {
+        data = data1;
+        next = nullptr;
+    }
+};
+
+// Solution class to hold sorting function
+class Solution {
+public:
+    // Function to sort the linked list
+    Node* sortLL(Node* head) {
+        // Vector to store node values
+        vector&lt;int&gt; arr;
+
+        // Pointer to traverse the list
+        Node* temp = head;
+
+        // Traverse and push values into vector
+        while (temp != nullptr) {
+            arr.push_back(temp-&gt;data);
+            temp = temp-&gt;next;
+        }
+
+        // Sort the vector
+        sort(arr.begin(), arr.end());
+
+        // Reassign sorted values to list nodes
+        temp = head;
+        for (int i = 0; i &lt; arr.size(); i++) {
+            temp-&gt;data = arr[i];
+            temp = temp-&gt;next;
+        }
+
+        // Return head of sorted list
+        return head;
+    }
+};
+
+// Function to print linked list
+void printLinkedList(Node* head) {
+    // Pointer to traverse list
+    Node* temp = head;
+
+    // Traverse and print values
+    while (temp != nullptr) {
+        cout &lt;&lt; temp-&gt;data &lt;&lt; " ";
+        temp = temp-&gt;next;
+    }
+    cout &lt;&lt; endl;
+}
+
+int main() {
+    // Create linked list: 3 -&gt; 2 -&gt; 5 -&gt; 4 -&gt; 1
+    Node* head = new Node(3);
+    head-&gt;next = new Node(2);
+    head-&gt;next-&gt;next = new Node(5);
+    head-&gt;next-&gt;next-&gt;next = new Node(4);
+    head-&gt;next-&gt;next-&gt;next-&gt;next = new Node(1);
+
+    // Print original list
+    cout &lt;&lt; "Original Linked List: ";
+    printLinkedList(head);
+
+    // Create Solution object
+    Solution obj;
+
+    // Sort the linked list
+    head = obj.sortLL(head);
+
+    // Print sorted list
+    cout &lt;&lt; "Sorted Linked List: ";
+    printLinkedList(head);
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Node class represents a linked list node
+class Node {
+    // Data stored in the node
+    int data;
+
+    // Pointer to the next node
+    Node next;
+
+    // Constructor with data and next pointer
+    Node(int data1, Node next1) {
+        data = data1;
+        next = next1;
+    }
+
+    // Constructor with only data
+    Node(int data1) {
+        data = data1;
+        next = null;
+    }
+}
+
+// Solution class to hold sorting function
+class Solution {
+    // Function to sort the linked list
+    public Node sortLL(Node head) {
+        // List to store node values
+        ArrayList&lt;Integer&gt; arr = new ArrayList&lt;&gt;();
+
+        // Pointer to traverse the list
+        Node temp = head;
+
+        // Traverse and push values into list
+        while (temp != null) {
+            arr.add(temp.data);
+            temp = temp.next;
+        }
+
+        // Sort the list
+        Collections.sort(arr);
+
+        // Reassign sorted values to list nodes
+        temp = head;
+        for (int i = 0; i &lt; arr.size(); i++) {
+            temp.data = arr.get(i);
+            temp = temp.next;
+        }
+
+        // Return head of sorted list
+        return head;
+    }
+}
+
+// Main class to run the program
+public class Main {
+    // Function to print linked list
+    static void printLinkedList(Node head) {
+        // Pointer to traverse list
+        Node temp = head;
+
+        // Traverse and print values
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        // Create linked list: 3 -&gt; 2 -&gt; 5 -&gt; 4 -&gt; 1
+        Node head = new Node(3);
+        head.next = new Node(2);
+        head.next.next = new Node(5);
+        head.next.next.next = new Node(4);
+        head.next.next.next.next = new Node(1);
+
+        // Print original list
+        System.out.print("Original Linked List: ");
+        printLinkedList(head);
+
+        // Create Solution object
+        Solution obj = new Solution();
+
+        // Sort the linked list
+        head = obj.sortLL(head);
+
+        // Print sorted list
+        System.out.print("Sorted Linked List: ");
+        printLinkedList(head);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Node class represents a linked list node
+class Node:
+    # Constructor with data and next pointer
+    def __init__(self, data1, next1=None):
+        # Data stored in the node
+        self.data = data1
+        # Pointer to the next node
+        self.next = next1
+
+# Solution class to hold sorting function
+class Solution:
+    # Function to sort the linked list
+    def sortLL(self, head):
+        # List to store node values
+        arr = []
+
+        # Pointer to traverse the list
+        temp = head
+
+        # Traverse and push values into list
+        while temp is not None:
+            arr.append(temp.data)
+            temp = temp.next
+
+        # Sort the list
+        arr.sort()
+
+        # Reassign sorted values to list nodes
+        temp = head
+        for val in arr:
+            temp.data = val
+            temp = temp.next
+
+        # Return head of sorted list
+        return head
+
+# Function to print linked list
+def printLinkedList(head):
+    # Pointer to traverse list
+    temp = head
+
+    # Traverse and print values
+    while temp is not None:
+        print(temp.data, end=" ")
+        temp = temp.next
+    print()
+
+# Driver code
+if __name__ == "__main__":
+    # Create linked list: 3 -&gt; 2 -&gt; 5 -&gt; 4 -&gt; 1
+    head = Node(3)
+    head.next = Node(2)
+    head.next.next = Node(5)
+    head.next.next.next = Node(4)
+    head.next.next.next.next = Node(1)
+
+    # Print original list
+    print("Original Linked List:", end=" ")
+    printLinkedList(head)
+
+    # Create Solution object
+    obj = Solution()
+
+    # Sort the linked list
+    head = obj.sortLL(head)
+
+    # Print sorted list
+    print("Sorted Linked List:", end=" ")
+    printLinkedList(head)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Node class represents a linked list node
+class Node {
+    // Constructor with data and next pointer
+    constructor(data1, next1 = null) {
+        // Data stored in the node
+        this.data = data1;
+        // Pointer to the next node
+        this.next = next1;
+    }
+}
+
+// Solution class to hold sorting function
+class Solution {
+    // Function to sort the linked list
+    sortLL(head) {
+        // Array to store node values
+        let arr = [];
+
+        // Pointer to traverse the list
+        let temp = head;
+
+        // Traverse and push values into array
+        while (temp !== null) {
+            arr.push(temp.data);
+            temp = temp.next;
+        }
+
+        // Sort the array
+        arr.sort((a, b) =&gt; a - b);
+
+        // Reassign sorted values to list nodes
+        temp = head;
+        for (let i = 0; i &lt; arr.length; i++) {
+            temp.data = arr[i];
+            temp = temp.next;
+        }
+
+        // Return head of sorted list
+        return head;
+    }
+}
+
+// Function to print linked list
+function printLinkedList(head) {
+    // Pointer to traverse list
+    let temp = head;
+
+    // Traverse and print values
+    let res = "";
+    while (temp !== null) {
+        res += temp.data + " ";
+        temp = temp.next;
+    }
+    console.log(res.trim());
+}
+
+// Driver code
+function main() {
+    // Create linked list: 3 -&gt; 2 -&gt; 5 -&gt; 4 -&gt; 1
+    let head = new Node(3);
+    head.next = new Node(2);
+    head.next.next = new Node(5);
+    head.next.next.next = new Node(4);
+    head.next.next.next.next = new Node(1);
+
+    // Print original list
+    process.stdout.write("Original Linked List: ");
+    printLinkedList(head);
+
+    // Create Solution object
+    let obj = new Solution();
+
+    // Sort the linked list
+    head = obj.sortLL(head);
+
+    // Print sorted list
+    process.stdout.write("Sorted Linked List: ");
+    printLinkedList(head);
+}
+
+main();
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+<strong>Time Complexity: O(2*N + N*LogN)</strong>, we traverse the linked list, store its elements in an array, sort it, and then copy the sorted values back into the original list. <br/>
+<strong>Space Complexity: O(N) </strong>, additional space required to store all the elements of linked list in an array.<br/>
+<p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+      Instead of using an external array to store node values, we can try to implement similar sorting techniques for linked lists as well. In order to sort the linked list, we can try to implement a modified version of <a href="https://takeuforward.org/data-structure/merge-sort-algorithm/" rel="noopener" target="_blank">Merge Sort Algorithm</a>. This algorithm would divide the linked list into halves recursively until single nodes remain. These sorted halves of the linked list are merged back together in a sorted order.
+<ul>
+<li> If the linked list is empty or has only one node, it is already sorted, thus we can return the head directly.</li>
+<li>Use the slow and fast pointer technique to find the middle of the linked list, where slow moves one step and fast moves two steps at a time.</li>
+<li>Split the linked list into two halves at the midpoint by pointing middle to null, where the left half starts from the head and the right half starts from the node after the middle.</li>
+<li>Recursively apply merge sort on both halves of the linked list until each part is broken down into single nodes or empty lists.</li>
+<li>Merge the two sorted halves using a helper function that compares node values from both halves, attaches the smaller one to the result list, and continues until all nodes from both halves are merged.</li>
+<li>Return the head of the merged and fully sorted linked list, which will represent the final sorted list.</li>
+</ul>
+</div>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/0dec465c340e55a7.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/1fbceff6f5632dbb.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/0dec465c340e55a7.png"/><img alt="Image 2" loading="lazy" src="../assets/img/1fbceff6f5632dbb.png"/></div></div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Node class represents a linked list node
+class Node {
+public:
+    // Data stored in the node
+    int data;
+
+    // Pointer to the next node
+    Node* next;
+
+    // Constructor with data and next pointer
+    Node(int data1, Node* next1) {
+        data = data1;
+        next = next1;
+    }
+
+    // Constructor with only data
+    Node(int data1) {
+        data = data1;
+        next = nullptr;
+    }
+};
+
+// Solution class contains merge sort logic
+class Solution {
+public:
+    // Function to merge two sorted linked lists
+    Node* mergeTwoSortedLinkedLists(Node* list1, Node* list2) {
+        // Create a dummy node
+        Node* dummyNode = new Node(-1);
+        
+        // Temp pointer to build merged list
+        Node* temp = dummyNode;
+
+        // Traverse both lists
+        while (list1 != nullptr &amp;&amp; list2 != nullptr) {
+            // Choose smaller node
+            if (list1-&gt;data &lt;= list2-&gt;data) {
+                temp-&gt;next = list1;
+                list1 = list1-&gt;next;
+            } else {
+                temp-&gt;next = list2;
+                list2 = list2-&gt;next;
+            }
+            // Move temp pointer
+            temp = temp-&gt;next;
+        }
+
+        // Attach remaining nodes
+        if (list1 != nullptr) {
+            temp-&gt;next = list1;
+        } else {
+            temp-&gt;next = list2;
+        }
+
+        // Return head of merged list
+        return dummyNode-&gt;next;
+    }
+
+    // Function to find middle of linked list
+    Node* findMiddle(Node* head) {
+        // If list empty or single node
+        if (head == nullptr || head-&gt;next == nullptr) {
+            return head;
+        }
+
+        // Slow and fast pointers
+        Node* slow = head;
+        Node* fast = head-&gt;next;
+
+        // Move fast twice as fast as slow
+        while (fast != nullptr &amp;&amp; fast-&gt;next != nullptr) {
+            slow = slow-&gt;next;
+            fast = fast-&gt;next-&gt;next;
+        }
+
+        // Return middle node
+        return slow;
+    }
+
+    // Function to perform merge sort
+    Node* sortLL(Node* head) {
+        // Base case: empty or single node
+        if (head == nullptr || head-&gt;next == nullptr) {
+            return head;
+        }
+
+        // Find middle node
+        Node* middle = findMiddle(head);
+
+        // Split into two halves
+        Node* right = middle-&gt;next;
+        middle-&gt;next = nullptr;
+        Node* left = head;
+
+        // Recursively sort both halves
+        left = sortLL(left);
+        right = sortLL(right);
+
+        // Merge sorted halves
+        return mergeTwoSortedLinkedLists(left, right);
+    }
+};
+
+// Function to print linked list
+void printLinkedList(Node* head) {
+    // Temp pointer to traverse
+    Node* temp = head;
+
+    // Traverse and print nodes
+    while (temp != nullptr) {
+        cout &lt;&lt; temp-&gt;data &lt;&lt; " ";
+        temp = temp-&gt;next;
+    }
+    cout &lt;&lt; endl;
+}
+
+int main() {
+    // Create linked list: 3 -&gt; 2 -&gt; 5 -&gt; 4 -&gt; 1
+    Node* head = new Node(3);
+    head-&gt;next = new Node(2);
+    head-&gt;next-&gt;next = new Node(5);
+    head-&gt;next-&gt;next-&gt;next = new Node(4);
+    head-&gt;next-&gt;next-&gt;next-&gt;next = new Node(1);
+
+    // Print original list
+    cout &lt;&lt; "Original Linked List: ";
+    printLinkedList(head);
+
+    // Create Solution object
+    Solution obj;
+
+    // Sort the linked list
+    head = obj.sortLL(head);
+
+    // Print sorted list
+    cout &lt;&lt; "Sorted Linked List: ";
+    printLinkedList(head);
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Node class represents a linked list node
+class Node {
+    // Data stored in the node
+    int data;
+
+    // Pointer to the next node
+    Node next;
+
+    // Constructor with data and next pointer
+    Node(int data1, Node next1) {
+        data = data1;
+        next = next1;
+    }
+
+    // Constructor with only data
+    Node(int data1) {
+        data = data1;
+        next = null;
+    }
+}
+
+// Solution class contains merge sort logic
+class Solution {
+    // Function to merge two sorted linked lists
+    public Node mergeTwoSortedLinkedLists(Node list1, Node list2) {
+        // Create a dummy node
+        Node dummyNode = new Node(-1, null);
+
+        // Temp pointer to build merged list
+        Node temp = dummyNode;
+
+        // Traverse both lists
+        while (list1 != null &amp;&amp; list2 != null) {
+            // Choose smaller node
+            if (list1.data &lt;= list2.data) {
+                temp.next = list1;
+                list1 = list1.next;
+            } else {
+                temp.next = list2;
+                list2 = list2.next;
+            }
+            // Move temp pointer
+            temp = temp.next;
+        }
+
+        // Attach remaining nodes
+        if (list1 != null) {
+            temp.next = list1;
+        } else {
+            temp.next = list2;
+        }
+
+        // Return head of merged list
+        return dummyNode.next;
+    }
+
+    // Function to find middle of linked list
+    public Node findMiddle(Node head) {
+        // If list empty or single node
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        // Slow and fast pointers
+        Node slow = head;
+        Node fast = head.next;
+
+        // Move fast twice as fast as slow
+        while (fast != null &amp;&amp; fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // Return middle node
+        return slow;
+    }
+
+    // Function to perform merge sort
+    public Node sortLL(Node head) {
+        // Base case: empty or single node
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        // Find middle node
+        Node middle = findMiddle(head);
+
+        // Split into two halves
+        Node right = middle.next;
+        middle.next = null;
+        Node left = head;
+
+        // Recursively sort both halves
+        left = sortLL(left);
+        right = sortLL(right);
+
+        // Merge sorted halves
+        return mergeTwoSortedLinkedLists(left, right);
+    }
+}
+
+// Main class to run the program
+public class Main {
+    // Function to print linked list
+    static void printLinkedList(Node head) {
+        // Temp pointer to traverse
+        Node temp = head;
+
+        // Traverse and print nodes
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        // Create linked list: 3 -&gt; 2 -&gt; 5 -&gt; 4 -&gt; 1
+        Node head = new Node(3, null);
+        head.next = new Node(2, null);
+        head.next.next = new Node(5, null);
+        head.next.next.next = new Node(4, null);
+        head.next.next.next.next = new Node(1, null);
+
+        // Print original list
+        System.out.print("Original Linked List: ");
+        printLinkedList(head);
+
+        // Create Solution object
+        Solution obj = new Solution();
+
+        // Sort the linked list
+        head = obj.sortLL(head);
+
+        // Print sorted list
+        System.out.print("Sorted Linked List: ");
+        printLinkedList(head);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Node class represents a linked list node
+class Node:
+    # Constructor with data and next pointer
+    def __init__(self, data1, next1=None):
+        # Data stored in the node
+        self.data = data1
+        # Pointer to the next node
+        self.next = next1
+
+# Solution class contains merge sort logic
+class Solution:
+    # Function to merge two sorted linked lists
+    def mergeTwoSortedLinkedLists(self, list1, list2):
+        # Create a dummy node
+        dummyNode = Node(-1)
+        
+        # Temp pointer to build merged list
+        temp = dummyNode
+
+        # Traverse both lists
+        while list1 and list2:
+            # Choose smaller node
+            if list1.data &lt;= list2.data:
+                temp.next = list1
+                list1 = list1.next
+            else:
+                temp.next = list2
+                list2 = list2.next
+            # Move temp pointer
+            temp = temp.next
+
+        # Attach remaining nodes
+        if list1:
+            temp.next = list1
+        else:
+            temp.next = list2
+
+        # Return head of merged list
+        return dummyNode.next
+
+    # Function to find middle of linked list
+    def findMiddle(self, head):
+        # If list empty or single node
+        if not head or not head.next:
+            return head
+
+        # Slow and fast pointers
+        slow = head
+        fast = head.next
+
+        # Move fast twice as fast as slow
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+
+        # Return middle node
+        return slow
+
+    # Function to perform merge sort
+    def sortLL(self, head):
+        # Base case: empty or single node
+        if not head or not head.next:
+            return head
+
+        # Find middle node
+        middle = self.findMiddle(head)
+
+        # Split into two halves
+        right = middle.next
+        middle.next = None
+        left = head
+
+        # Recursively sort both halves
+        left = self.sortLL(left)
+        right = self.sortLL(right)
+
+        # Merge sorted halves
+        return self.mergeTwoSortedLinkedLists(left, right)
+
+# Function to print linked list
+def printLinkedList(head):
+    # Temp pointer to traverse
+    temp = head
+
+    # Traverse and print nodes
+    while temp:
+        print(temp.data, end=" ")
+        temp = temp.next
+    print()
+
+# Driver code
+if __name__ == "__main__":
+    # Create linked list: 3 -&gt; 2 -&gt; 5 -&gt; 4 -&gt; 1
+    head = Node(3)
+    head.next = Node(2)
+    head.next.next = Node(5)
+    head.next.next.next = Node(4)
+    head.next.next.next.next = Node(1)
+
+    # Print original list
+    print("Original Linked List:", end=" ")
+    printLinkedList(head)
+
+    # Create Solution object
+    obj = Solution()
+
+    # Sort the linked list
+    head = obj.sortLL(head)
+
+    # Print sorted list
+    print("Sorted Linked List:", end=" ")
+    printLinkedList(head)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Node class represents a linked list node
+class Node {
+    // Constructor with data and next pointer
+    constructor(data1, next1 = null) {
+        // Data stored in the node
+        this.data = data1;
+        // Pointer to the next node
+        this.next = next1;
+    }
+}
+
+// Solution class contains merge sort logic
+class Solution {
+    // Function to merge two sorted linked lists
+    mergeTwoSortedLinkedLists(list1, list2) {
+        // Create a dummy node
+        let dummyNode = new Node(-1);
+
+        // Temp pointer to build merged list
+        let temp = dummyNode;
+
+        // Traverse both lists
+        while (list1 !== null &amp;&amp; list2 !== null) {
+            // Choose smaller node
+            if (list1.data &lt;= list2.data) {
+                temp.next = list1;
+                list1 = list1.next;
+            } else {
+                temp.next = list2;
+                list2 = list2.next;
+            }
+            // Move temp pointer
+            temp = temp.next;
+        }
+
+        // Attach remaining nodes
+        if (list1 !== null) {
+            temp.next = list1;
+        } else {
+            temp.next = list2;
+        }
+
+        // Return head of merged list
+        return dummyNode.next;
+    }
+
+    // Function to find middle of linked list
+    findMiddle(head) {
+        // If list empty or single node
+        if (head === null || head.next === null) {
+            return head;
+        }
+
+        // Slow and fast pointers
+        let slow = head;
+        let fast = head.next;
+
+        // Move fast twice as fast as slow
+        while (fast !== null &amp;&amp; fast.next !== null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // Return middle node
+        return slow;
+    }
+
+    // Function to perform merge sort
+    sortLL(head) {
+        // Base case: empty or single node
+        if (head === null || head.next === null) {
+            return head;
+        }
+
+        // Find middle node
+        let middle = this.findMiddle(head);
+
+        // Split into two halves
+        let right = middle.next;
+        middle.next = null;
+        let left = head;
+
+        // Recursively sort both halves
+        left = this.sortLL(left);
+        right = this.sortLL(right);
+
+        // Merge sorted halves
+        return this.mergeTwoSortedLinkedLists(left, right);
+    }
+}
+
+// Function to print linked list
+function printLinkedList(head) {
+    // Temp pointer to traverse
+    let temp = head;
+
+    // Traverse and print nodes
+    let res = "";
+    while (temp !== null) {
+        res += temp.data + " ";
+        temp = temp.next;
+    }
+    console.log(res.trim());
+}
+
+// Driver code
+function main() {
+    // Create linked list: 3 -&gt; 2 -&gt; 5 -&gt; 4 -&gt; 1
+    let head = new Node(3);
+    head.next = new Node(2);
+    head.next.next = new Node(5);
+    head.next.next.next = new Node(4);
+    head.next.next.next.next = new Node(1);
+
+    // Print original list
+    process.stdout.write("Original Linked List: ");
+    printLinkedList(head);
+
+    // Create Solution object
+    let obj = new Solution();
+
+    // Sort the linked list
+    head = obj.sortLL(head);
+
+    // Print sorted list
+    process.stdout.write("Sorted Linked List: ");
+    printLinkedList(head);
+}
+
+main();
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+<strong>Time Complexity: O(N*LogN)</strong>, we recursively divide the linked list into two halves and then merge two sorted halves. <br/>
+<strong>Space Complexity: O(1) </strong>, constant additional space is required to sort the entire linked list.<br/>
+<p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

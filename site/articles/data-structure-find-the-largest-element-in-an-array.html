@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Find the Largest element in an array</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Find the Largest element in an array</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/find-the-largest-element-in-an-array/</code></div>
+  <p><strong>Problem Statement: </strong>
+Given an array, we have to find the largest element in the array.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>  
+<strong>Input:</strong> arr[] = {2, 5, 1, 3, 0}  
+<strong>Output:</strong> 5  
+<strong>Explanation:</strong>  
+5 is the largest element in the array.
+
+<strong>Example 2:</strong>  
+<strong>Input:</strong> arr[] = {8, 10, 5, 7, 9}  
+<strong>Output:</strong> 10  
+<strong>Explanation:</strong>  
+10 is the largest element in the array.</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/largest-element" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Brute Force 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Sort the array in ascending order.</li>
+<li>Print the element at the (size of the array - 1)th index, which corresponds to the largest element in the array.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Function to sort the array and return the largest element
+int sortArr(vector&lt;int&gt;&amp; arr) {
+    // Sort the array in ascending order
+    sort(arr.begin(), arr.end());
+    
+    // Return the last element (largest element) after sorting
+    return arr[arr.size() - 1];
+}
+
+int main() {
+    // Initialize arrays
+    vector&lt;int&gt; arr1 = {2, 5, 1, 3, 0};
+    vector&lt;int&gt; arr2 = {8, 10, 5, 7, 9};
+   
+    // Find and output the largest element in both arrays
+    cout &lt;&lt; "The Largest element in the array is: " &lt;&lt; sortArr(arr1) &lt;&lt; endl;
+    cout &lt;&lt; "The Largest element in the array is: " &lt;&lt; sortArr(arr2);
+   
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.Arrays;
+
+class Solution {
+
+    // Function to sort the array and return the largest element
+    public static int sortArr(int[] arr) {
+        // Sort the array in ascending order
+        Arrays.sort(arr);
+        
+        // Return the last element (largest element) after sorting
+        return arr[arr.length - 1];
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+        // Initialize arrays
+        int[] arr1 = {2, 5, 1, 3, 0};
+        int[] arr2 = {8, 10, 5, 7, 9};
+        
+        // Find and output the largest element in both arrays
+        System.out.println("The Largest element in the array is: " + Solution.sortArr(arr1));
+        System.out.println("The Largest element in the array is: " + Solution.sortArr(arr2));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Function to sort the array and return the largest element
+def sortArr(arr):
+    # Sort the array in ascending order
+    arr.sort()
+    
+    # Return the last element (largest element) after sorting
+    return arr[-1]
+
+# Driver code
+if __name__ == "__main__":
+    # Initialize arrays
+    arr1 = [2, 5, 1, 3, 0]
+    arr2 = [8, 10, 5, 7, 9]
+    
+    # Find and output the largest element in both arrays
+    print("The Largest element in the array is:", sortArr(arr1))
+    print("The Largest element in the array is:", sortArr(arr2))</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Function to sort the array and return the largest element
+function sortArr(arr) {
+    // Sort the array in ascending order
+    arr.sort((a, b) =&gt; a - b);
+    
+    // Return the last element (largest element) after sorting
+    return arr[arr.length - 1];
+}
+
+// Main function to handle input and output
+function main() {
+    // Initialize arrays
+    let arr1 = [2, 5, 1, 3, 0];
+    let arr2 = [8, 10, 5, 7, 9];
+    
+    // Find and output the largest element in both arrays
+    console.log("The Largest element in the array is:", sortArr(arr1));
+    console.log("The Largest element in the array is:", sortArr(arr2));
+}
+
+// Call the main function
+main();</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(N log N)</strong>, where N is the size of the array, as we are sorting the array.<br/><br/>
+<strong>Space Complexity: O(1)</strong>, as we are using a constant
+                    </p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Create a variable called max and initialize it with the value of the first element in the array.</li>
+<li>Use a for loop to iterate through the rest of the elements in the array.</li>
+<li>In each iteration, compare the current element with the max variable.</li>
+<li>If the current element is greater than the max value, update the max value with the current element's value.</li>
+<li>After completing the loop, print the max variable, which will hold the largest value in the array.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/722c9e655f894d2b.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/fd968e8112ef2d9a.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/8a213d2f3e2cfde4.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/c5f52d8bdb206c70.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/722c9e655f894d2b.png"/><img alt="Image 2" loading="lazy" src="../assets/img/fd968e8112ef2d9a.png"/><img alt="Image 3" loading="lazy" src="../assets/img/8a213d2f3e2cfde4.png"/><img alt="Image 4" loading="lazy" src="../assets/img/c5f52d8bdb206c70.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Function to find the largest element in the array
+int findLargestElement(int arr[], int n) {
+    int max = arr[0];  // Initialize max with the first element in the array
+
+    // Iterate through the array to find the maximum element
+    for (int i = 1; i &lt; n; i++) {
+        if (max &lt; arr[i]) {  // If the current element is greater than max, update max
+            max = arr[i];
+        }
+    }
+
+    return max;  // Return the largest element found
+}
+
+int main() {
+    // Array 1
+    int arr1[] = {2, 5, 1, 3, 0};
+    int n = 5;  // Size of the array
+    int max = findLargestElement(arr1, n);  // Call the function to find the largest element
+    cout &lt;&lt; "The largest element in the array is: " &lt;&lt; max &lt;&lt; endl;  // Output the result
+
+    // Array 2
+    int arr2[] = {8, 10, 5, 7, 9};
+    n = 5;  // Size of the array
+    max = findLargestElement(arr2, n);  // Call the function to find the largest element
+    cout &lt;&lt; "The largest element in the array is: " &lt;&lt; max &lt;&lt; endl;  // Output the result
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+
+    // Function to find the largest element in the array
+    public static int findLargestElement(int[] arr, int n) {
+        int max = arr[0];  // Initialize max with the first element in the array
+
+        // Iterate through the array to find the maximum element
+        for (int i = 1; i &lt; n; i++) {
+            if (arr[i] &gt; max) {  // If the current element is greater than max, update max
+                max = arr[i];
+            }
+        }
+
+        return max;  // Return the largest element found
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+        // Array 1
+        int[] arr1 = {2, 5, 1, 3, 0};
+        int n = arr1.length;  // Size of the array
+        int max = Solution.findLargestElement(arr1, n);  // Call the function to find the largest element
+        System.out.println("The largest element in the array is: " + max);  // Output the result
+
+        // Array 2
+        int[] arr2 = {8, 10, 5, 7, 9};
+        n = arr2.length;  // Size of the array
+        max = Solution.findLargestElement(arr2, n);  // Call the function to find the largest element
+        System.out.println("The largest element in the array is: " + max);  // Output the result
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Function to find the largest element in the array
+def findLargestElement(arr, n):
+    max = arr[0]  # Initialize max with the first element in the array
+
+    # Iterate through the array to find the maximum element
+    for i in range(1, n):
+        if arr[i] &gt; max:  # If the current element is greater than max, update max
+            max = arr[i]
+
+    return max  # Return the largest element found
+
+# Driver code
+if __name__ == "__main__":
+    # Array 1
+    arr1 = [2, 5, 1, 3, 0]
+    n = len(arr1)  # Size of the array
+    max = findLargestElement(arr1, n)  # Call the function to find the largest element
+    print("The largest element in the array is:", max)  # Output the result
+
+    # Array 2
+    arr2 = [8, 10, 5, 7, 9]
+    n = len(arr2)  # Size of the array
+    max = findLargestElement(arr2, n)  # Call the function to find the largest element
+    print("The largest element in the array is:", max)  # Output the result</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Function to find the largest element in the array
+function findLargestElement(arr, n) {
+    let max = arr[0];  // Initialize max with the first element in the array
+
+    // Iterate through the array to find the maximum element
+    for (let i = 1; i &lt; n; i++) {
+        if (arr[i] &gt; max) {  // If the current element is greater than max, update max
+            max = arr[i];
+        }
+    }
+
+    return max;  // Return the largest element found
+}
+
+// Main function to handle input and output
+function main() {
+    // Array 1
+    let arr1 = [2, 5, 1, 3, 0];
+    let n = arr1.length;  // Size of the array
+    let max = findLargestElement(arr1, n);  // Call the function to find the largest element
+    console.log("The largest element in the array is:", max);  // Output the result
+
+    // Array 2
+    let arr2 = [8, 10, 5, 7, 9];
+    n = arr2.length;  // Size of the array
+    max = findLargestElement(arr2, n);  // Call the function to find the largest element
+    console.log("The largest element in the array is:", max);  // Output the result
+}
+
+// Call the main function
+main();</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(N)</strong>, where N is the size of the array, as we are iterating through the array once.<br/><br/>
+<strong>Space Complexity: O(1)</strong>, as we are using a constant
+
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

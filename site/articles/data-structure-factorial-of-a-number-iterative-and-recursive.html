@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Factorial of a Number : Iterative and Recursive</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Factorial of a Number : Iterative and Recursive</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/factorial-of-a-number-iterative-and-recursive</code></div>
+  <p><strong>Problem Statement: </strong> Given a number <strong>X,</strong>  print its factorial.</p>
+
+
+<p>To obtain the factorial of a number, it has to be multiplied by all the whole numbers preceding it. More precisely X!
+    = X*(X-1)*(X-2) … 1.</p>
+
+
+<p>Note: X  is always a positive number. </p>
+
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>
+<strong>Input:</strong> X = 5
+<strong>Output:</strong> 120
+<strong>Explanation:</strong> 5! = 5*4*3*2*1
+
+<strong>Example 2:</strong>
+<strong>Input:</strong> X = 3
+<strong>Output:</strong> 6
+<strong>Explanation:</strong> 3!=3*2*1</pre>
+
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the practice link for <a href="https://takeuforward.org/plus/dsa/beginner-problem/basic-maths/factorial-of-a-given-number-i" rel="noopener" target="_blank">Iterative</a> and <a href="https://takeuforward.org/plus/dsa/beginner-problem/basic-recursion/factorial-of-a-given-number-ii" rel="noopener" target="_blank">Recursive</a> Problems to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Iterative Solution
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+<ul>
+<li>Since the factorial of a number <code>X</code> is the product of the number itself and
+                                all its preceding positive integers, we can calculate it using a loop.</li>
+<li>We initialize a variable (say <code>fact</code>) to 1, which will hold the running
+                                product.</li>
+<li>We run a loop from <code>i = 1</code> to <code>X</code>.</li>
+<li>In each iteration, we multiply <code>fact</code> by <code>i</code> (i.e.,
+                                <code>fact = fact * i</code>).
+                            </li>
+<li>After the loop ends, <code>fact</code> will contain the factorial of <code>X</code>.
+                            </li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div>
+<div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;iostream&gt;
+using namespace std;
+
+// Function to calculate factorial of a number
+int factorial(int X) {
+    int ans = 1;
+
+    // Loop from 1 to X to compute factorial
+    for (int i = 1; i &lt;= X; i++) {
+        ans = ans * i;
+    }
+
+    // Return the final result
+    return ans;
+}
+
+int main() {
+    // Input value for which factorial is to be calculated
+    int X = 5;
+
+    // Call the factorial function and store the result
+    int result = factorial(X);
+
+    // Print the result
+    cout &lt;&lt; "The factorial of " &lt;&lt; X &lt;&lt; " is " &lt;&lt; result;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">public class Main {
+
+    // Function to calculate factorial of a number
+    public static int factorial(int X) {
+        int ans = 1;
+
+        // Loop from 1 to X to compute factorial
+        for (int i = 1; i &lt;= X; i++) {
+            ans = ans * i;
+        }
+
+        // Return the final result
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        // Input value for which factorial is to be calculated
+        int X = 5;
+
+        // Call the factorial function and store the result
+        int result = factorial(X);
+
+        // Print the result
+        System.out.println("The factorial of " + X + " is " + result);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Function to calculate factorial of a number
+def factorial(X):
+    ans = 1
+
+    # Loop from 1 to X to compute factorial
+    for i in range(1, X + 1):
+        ans *= i
+
+    # Return the final result
+    return ans
+
+# Input value for which factorial is to be calculated
+X = 5
+
+# Call the factorial function and store the result
+result = factorial(X)
+
+# Print the result
+print(f"The factorial of {X} is {result}")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Function to calculate factorial of a number
+function factorial(X) {
+    let ans = 1;
+
+    // Loop from 1 to X to compute factorial
+    for (let i = 1; i &lt;= X; i++) {
+        ans *= i;
+    }
+
+    // Return the final result
+    return ans;
+}
+
+// Input value for which factorial is to be calculated
+const X = 5;
+
+// Call the factorial function and store the result
+const result = factorial(X);
+
+// Print the result
+console.log(`The factorial of ${X} is ${result}`);
+</code></pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity: O(n)</strong></p>
+
+
+<p><strong>Space Complexity: O(1)</strong></p>
+
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Recursive Solution
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+<ul>
+<li>The factorial of a number <code>N</code> can be calculated by multiplying all natural
+                                numbers from 1 to <code>N</code>.</li>
+<li>We can visualize this using recursion:</li>
+<ul>
+<li><code>factorial(N) = N * factorial(N - 1)</code></li>
+<li>This means the factorial of <code>N</code> is the product of <code>N</code> and the
+                                    factorial of <code>N - 1</code>.</li>
+</ul>
+<li>We define a base case:
+                                <ul>
+<li>If <code>N == 0</code>, we return 1, since <code>0! = 1</code> by definition.
+                                    </li>
+</ul>
+</li>
+<li>This approach breaks the problem into smaller subproblems, and the results of each
+                                subproblem are multiplied together as the recursive calls return.</li>
+<li>The final result is stored and printed as the output of the <code>factorial(N)</code>
+                                function.</li>
+</ul>
+</div>
+
+<p><strong>Recursion Tree for the following problem can be represented as follows :</strong></p>
+
+
+<figure class="wp-block-image size-full">
+<p><img height="457" loading="lazy" src="../assets/img/8e15456a0c7517ee.png" width="481"/></p>
+</figure>
+
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div>
+<div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Recursive function to calculate factorial of a number
+int factorial(int n) {
+    // Base case: factorial of 0 is 1
+    if (n == 0) {
+        return 1;
+    }
+
+    // Recursive case: n * factorial of (n-1)
+    return n * factorial(n - 1);
+}
+
+int main() {
+    // Define the number to compute factorial
+    int n = 3;
+
+    // Call the factorial function and print the result
+    cout &lt;&lt; factorial(n) &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">public class Main {
+
+    // Recursive function to calculate factorial of a number
+    public static int factorial(int n) {
+        // Base case: factorial of 0 is 1
+        if (n == 0) {
+            return 1;
+        }
+
+        // Recursive case: n * factorial of (n-1)
+        return n * factorial(n - 1);
+    }
+
+    public static void main(String[] args) {
+        // Define the number to compute factorial
+        int n = 3;
+
+        // Call the factorial function and print the result
+        System.out.println(factorial(n));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Recursive function to calculate factorial of a number
+def factorial(n):
+    # Base case: factorial of 0 is 1
+    if n == 0:
+        return 1
+
+    # Recursive case: n * factorial of (n-1)
+    return n * factorial(n - 1)
+
+# Define the number to compute factorial
+n = 3
+
+# Call the factorial function and print the result
+print(factorial(n))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Recursive function to calculate factorial of a number
+function factorial(n) {
+    // Base case: factorial of 0 is 1
+    if (n === 0) {
+        return 1;
+    }
+
+    // Recursive case: n * factorial of (n-1)
+    return n * factorial(n - 1);
+}
+
+// Define the number to compute factorial
+const n = 3;
+
+// Call the factorial function and print the result
+console.log(factorial(n));
+</code></pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O(N), Since the function is being called n times, and for each
+                        function, we have only one printable line that takes O(1) time, so the cumulative time
+                        complexity would be O(N) </p>
+
+
+<p><strong>Space Complexity:</strong> O(N), In the worst case, the recursion stack space would be
+                        full with all the function calls waiting to get completed and that would make it an O(N)
+                        recursion stack space.</p>
+
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

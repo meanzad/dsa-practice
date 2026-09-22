@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Dijkstra’s Algorithm - Using Set : G-33</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Dijkstra’s Algorithm - Using Set : G-33</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/dijkstras-algorithm-using-set-g-33/</code></div>
+  <p><strong>Problem Statement: </strong> Given a weighted, undirected, and connected graph of V vertices and an adjacency
+    list adj where adj[i] is a list of lists containing two integers where the first integer of each list j denotes
+    there is an <strong>edge</strong> between i and j, second integers corresponds to the weight of that edge. You are
+    given the source vertex S and You have to Find the shortest distance of all the vertex from the source vertex S. You
+    have to return a list of integers denoting the shortest distance between <strong>each node</strong> and Source
+    vertex <strong>S</strong>.</p>
+<p><strong>Note: </strong>The Graph doesn’t contain any negative weight cycle</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input:
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-6940" loading="lazy" src="../assets/img/6ffd2225f3262283.png"/></figure>
+V = 2
+adj [] = {{{1, 9}}, {{0, 9}}}
+S = 0
+Output: 0 9
+Explanation: 
+The source vertex is 0. Hence, the shortest distance of node 0 
+from the source is 0 and the shortest distance of node 1 from 
+source will be 9.
+
+Example 2:
+Input:
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-6941" loading="lazy" src="../assets/img/89648ee93457f44c.png"/></figure>
+V = 3, E = 3
+adj = {{{1, 1}, {2, 6}}, {{2, 3}, {0, 1}}, {{1, 3}, {0, 6}}}
+S = 2
+Output:
+4 3 0
+Explanation: 
+For nodes 2 to 0, we can follow the path 2-1-0. 
+This has a distance of 1+3 = 4, whereas the path 2-0 
+has a distance of 6. So, the Shortest path from 2 to 0 is 4.
+The shortest distance from 0 to 1 is 1.
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/dijkstra's-algorithm" rel="noopener" target="_blank">practice link</a> to
+        help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                Approach
+            </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Algorithm
+                    </span>
+</summary>
+<div class="approach-algorithm">
+<p><strong>Intuition:</strong></p>
+<p>This approach uses a <code>set</code> to implement Dijkstra’s Algorithm for finding the shortest
+                        distances from a source node to all other nodes in a graph.</p>
+<p><strong>Key Components:</strong></p>
+<ul>
+<li><strong>Source Node:</strong> The node from which we calculate all shortest paths.</li>
+<li><strong>Set:</strong> Stores pairs <code>{dist, node}</code>. The node with the smallest
+                            distance is always processed first.</li>
+<li><strong>Distance Array:</strong> Initialized with infinity, stores the minimum known
+                            distances from the source to every node. Distance to the source itself is 0.</li>
+</ul>
+<p><strong>Algorithm:</strong></p>
+<ul>
+<li>Initialize the set with <code>{0, source}</code> and the distance array with INF, except for
+                            the source node which is set to 0.</li>
+<li>While the set is not empty:
+                            <ul>
+<li>Remove the pair with the smallest distance from the set.</li>
+<li>For each adjacent node, check if a shorter path is found using the current node.
+                                </li>
+<li>If yes, update the distance and insert the new pair into the set.</li>
+<li>Remove any existing pair in the set that has the same node but a greater distance.
+                                </li>
+</ul>
+</li>
+<li>Continue until all nodes are processed. The distance array now contains the shortest
+                            distances from the source.</li>
+</ul>
+<p><strong>Important Notes:</strong></p>
+<ul>
+<li>Dijkstra’s Algorithm does not work with negative weights or negative cycles.</li>
+<li>If negative weights are used, the distances will keep getting updated infinitely, leading to
+                            incorrect results.</li>
+<li>A <code>set</code> is preferred here over a priority queue because it allows easier
+                            replacement of older pairs with worse distances.</li>
+</ul>
+<p><strong>Example:</strong> If a node can be reached by two paths (cost 7 and cost 9), the
+                        algorithm ensures only the path with cost 7 is kept. Since sets store elements in sorted order,
+                        the node with the smallest distance is always processed first.</p>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div>
+<div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution
+{
+    public:
+        // Function to find the shortest distance of all the vertices
+        // from the source vertex S.
+        vector&lt;int&gt; dijkstra(int V, vector&lt;vector&lt;int&gt;&gt; adj[], int S)
+        {
+            // Create a set ds for storing the nodes as a pair {dist,node}
+            // where dist is the distance from source to the node.
+            // set stores the nodes in ascending order of the distances.
+            set&lt;pair&lt;int, int&gt;&gt; st; 
+
+            // Initialising dist list with a large number to
+            // indicate the nodes are unvisited initially.
+            // This list contains distance from source to the nodes.
+            vector&lt;int&gt; dist(V, 1e9); 
+
+            // Insert the source node with a distance of 0.
+            st.insert({0, S}); 
+
+            // Source initialised with dist = 0
+            dist[S] = 0;
+
+            // Traverse the graph until the set is empty
+            while(!st.empty()) {
+                // Extract the node with the minimum distance
+                auto it = *(st.begin()); 
+                int node = it.second; 
+                int dis = it.first; 
+                st.erase(it); 
+
+                // Check for all adjacent nodes of the extracted node
+                for(auto it : adj[node]) {
+                    int adjNode = it[0];  // Adjacent node
+                    int edgW = it[1];     // Weight of the edge
+                    
+                    // If the new distance is smaller, update it
+                    if(dis + edgW &lt; dist[adjNode]) {
+                        // Erase the previous entry of the adjacent node
+                        // if it was visited previously with a larger cost.
+                        if(dist[adjNode] != 1e9) 
+                            st.erase({dist[adjNode], adjNode}); 
+
+                        // Update the distance for the adjacent node
+                        dist[adjNode] = dis + edgW; 
+
+                        // Insert the adjacent node with the updated distance into the set
+                        st.insert({dist[adjNode], adjNode}); 
+                    }
+                }
+            }
+
+            // Return the list containing shortest distances
+            // from source to all the nodes.
+            return dist; 
+        }
+};
+
+int main()
+{
+    // Driver code.
+    int V = 3, E = 3, S = 2;  // Number of vertices, edges, and source vertex
+    vector&lt;vector&lt;int&gt;&gt; adj[V]; // Adjacency list representation of the graph
+
+    // Example graph with edges and weights
+    vector&lt;int&gt; v1{1, 1}, v2{2, 6}, v3{2, 3}, v4{0, 1}, v5{1, 3}, v6{0, 6};
+    adj[0].push_back(v1);
+    adj[0].push_back(v2);
+    adj[1].push_back(v3);
+    adj[1].push_back(v4);
+    adj[2].push_back(v5);
+    adj[2].push_back(v6);
+
+    Solution obj;
+    // Call dijkstra function and store the result
+    vector&lt;int&gt; res = obj.dijkstra(V, adj, S);
+
+    // Output the shortest distance from source to all nodes
+    for (int i = 0; i &lt; V; i++)
+    {
+        cout &lt;&lt; res[i] &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">// Solution class to implement Dijkstra's Algorithm
+class Solution {
+
+    // Function to find the shortest distance of all the vertices from the source vertex S
+    public int[] dijkstra(int V, ArrayList&lt;int[]&gt;[] adj, int S) {
+        // Create a priority queue to store the nodes as a pair {dist, node}
+        // The queue will always return the node with the smallest distance first
+        PriorityQueue&lt;int[]&gt; pq = new PriorityQueue&lt;&gt;((a, b) -&gt; a[0] - b[0]);
+
+        // Initialising dist array with a large number to indicate the nodes are unvisited initially
+        int[] dist = new int[V];
+        Arrays.fill(dist, Integer.MAX_VALUE);
+
+        // Source initialised with dist = 0
+        dist[S] = 0;
+        pq.offer(new int[]{0, S});
+
+        // Traverse the graph using the priority queue
+        while (!pq.isEmpty()) {
+            int[] curr = pq.poll();
+            int dis = curr[0];  // Distance of the current node
+            int node = curr[1];  // Current node
+
+            // Traverse all the adjacent nodes
+            for (int[] edge : adj[node]) {
+                int adjNode = edge[0];  // Adjacent node
+                int weight = edge[1];   // Weight of the edge
+
+                // If the new calculated distance is smaller, update it
+                if (dis + weight &lt; dist[adjNode]) {
+                    dist[adjNode] = dis + weight;
+                    pq.offer(new int[]{dist[adjNode], adjNode});
+                }
+            }
+        }
+
+        return dist;
+    }
+}
+
+// Main class to test the Solution class
+public class Main {
+    public static void main(String[] args) {
+        // Number of vertices and edges
+        int V = 3, E = 3, S = 2;
+
+        // Create adjacency list to represent the graph
+        ArrayList&lt;int[]&gt;[] adj = new ArrayList[V];
+        for (int i = 0; i &lt; V; i++) {
+            adj[i] = new ArrayList&lt;&gt;();
+        }
+
+        // Add edges to the graph
+        adj[0].add(new int[]{1, 1});
+        adj[0].add(new int[]{2, 6});
+        adj[1].add(new int[]{2, 3});
+        adj[1].add(new int[]{0, 1});
+        adj[2].add(new int[]{1, 3});
+        adj[2].add(new int[]{0, 6});
+
+        Solution obj = new Solution();
+        // Call dijkstra function and store the result
+        int[] res = obj.dijkstra(V, adj, S);
+
+        // Output the shortest distance from source to all nodes
+        for (int i = 0; i &lt; V; i++) {
+            System.out.print(res[i] + " ");
+        }
+        System.out.println();
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">import heapq
+
+class Solution:
+
+    # Function to find the shortest distance of all the vertices from the source vertex S
+    def dijkstra(self, V, adj, S):
+        # Create a priority queue to store the nodes as a pair {dist, node}
+        # The queue will always return the node with the smallest distance first
+        pq = []
+        
+        # Initialising dist list with a large number to indicate the nodes are unvisited initially
+        dist = [float('inf')] * V
+        dist[S] = 0
+        
+        # Push the source node with distance 0 into the priority queue
+        heapq.heappush(pq, (0, S))
+
+        while pq:
+            # Pop the node with the smallest distance
+            dis, node = heapq.heappop(pq)
+
+            # Traverse all the adjacent nodes
+            for adjNode, weight in adj[node]:
+                # If the new calculated distance is smaller, update it
+                if dis + weight &lt; dist[adjNode]:
+                    dist[adjNode] = dis + weight
+                    heapq.heappush(pq, (dist[adjNode], adjNode))
+
+        return dist
+
+# Driver code
+if __name__ == "__main__":
+    # Number of vertices and edges
+    V = 3
+    E = 3
+    S = 2
+
+    # Create adjacency list to represent the graph
+    adj = [[] for _ in range(V)]
+
+    # Add edges to the graph
+    adj[0].append((1, 1))
+    adj[0].append((2, 6))
+    adj[1].append((2, 3))
+    adj[1].append((0, 1))
+    adj[2].append((1, 3))
+    adj[2].append((0, 6))
+
+    # Create an instance of the Solution class
+    obj = Solution()
+    # Call dijkstra function and store the result
+    res = obj.dijkstra(V, adj, S)
+
+    # Output the shortest distance from source to all nodes
+    print(" ".join(map(str, res)))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+
+    // Function to find the shortest distance of all the vertices from the source vertex S
+    dijkstra(V, adj, S) {
+        // Create a priority queue to store the nodes as a pair {dist, node}
+        // The queue will always return the node with the smallest distance first
+        const pq = [];
+
+        // Initialising dist list with a large number to indicate the nodes are unvisited initially
+        const dist = Array(V).fill(Infinity);
+        dist[S] = 0;
+
+        // Push the source node with distance 0 into the priority queue
+        pq.push([0, S]);
+
+        while (pq.length &gt; 0) {
+            // Pop the node with the smallest distance
+            const [dis, node] = pq.shift();
+
+            // Traverse all the adjacent nodes
+            for (const [adjNode, weight] of adj[node]) {
+                // If the new calculated distance is smaller, update it
+                if (dis + weight &lt; dist[adjNode]) {
+                    dist[adjNode] = dis + weight;
+                    pq.push([dist[adjNode], adjNode]);
+                }
+            }
+        }
+
+        return dist;
+    }
+}
+
+// Driver code
+const V = 3, E = 3, S = 2;
+const adj = [[], [], []];
+
+// Add edges to the graph
+adj[0].push([1, 1]);
+adj[0].push([2, 6]);
+adj[1].push([2, 3]);
+adj[1].push([0, 1]);
+adj[2].push([1, 3]);
+adj[2].push([0, 6]);
+
+const obj = new Solution();
+const res = obj.dijkstra(V, adj, S);
+
+// Output the shortest distance from source to all nodes
+console.log(res.join(" "));
+</code></pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Complexity Analysis
+                    </span>
+</summary>
+<p>
+</p><p><strong>Time Complexity:</strong> O(E log V), as each edge leads to at most one insertion in the
+                    priority queue, which takes log V time.</p>
+<p><strong>Space Complexity:</strong> O(V + E), due to the distance array and adjacency list storing all
+                    vertices and edges.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

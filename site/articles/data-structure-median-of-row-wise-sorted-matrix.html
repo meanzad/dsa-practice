@@ -1,0 +1,741 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Median of Row Wise Sorted Matrix</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Median of Row Wise Sorted Matrix</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/median-of-row-wise-sorted-matrix/</code></div>
+  <p><strong>Problem Statement: </strong> <br/>Given a row-wise sorted matrix of size M*N, where M is no. of rows and N is no.
+    of columns, find the median in the given matrix.<br/>
+    Note: M*N is odd.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: M = 3, N = 3, matrix[][] =</span>
+1 4 9 
+2 5 6
+3 8 7
+<span>Output: 5</span>
+<span>Explanation: 
+If we find the linear sorted array, the array becomes 1 2 3 4 5 6 7 8 9. Therefore, median = 5</span>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/9b9fa0a7a3488470.png" width="439"/></figure>
+<p></p>
+<span>Input: M = 3, N = 3, matrix[][] =</span>
+1 3 8 
+2 3 4
+1 2 5
+<span>Output: 3</span>
+<span>Explanation: 
+If we find the linear sorted array, the array becomes 1 1 2 2 3 3 4 5 7 8. Therefore, median = 3.
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/244274d5691f07b8.png" width="439"/></figure>
+            </span></pre>
+</div>
+</details>
+</div><strong><em>Disclaimer</em></strong>: <em>
+     Here is the <a href="https://takeuforward.org/plus/dsa/problems/matrix-median" rel="noopener" target="_blank">practice link </a> to help you assess your knowledge better.
+           It's highly recommend trying to
+        solve it before looking at the solution. </em>
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Brute-Force Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+The extremely naive approach is to use a linear array or list to store the elements of the given matrix and sort the list. We can return the middle element of sorted list to find the median.<p></p>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/9b9fa0a7a3488470.png" width="439"/></figure>
+<br/>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find the median of a row-wise sorted matrix
+    int findMedian(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) {
+        
+        // Create a list to store all elements
+        vector&lt;int&gt; elements;
+
+        // Traverse each row of the matrix
+        for (auto&amp; row : matrix) {
+
+            // Traverse each element in the current row
+            for (int val : row) {
+
+                // Add the element to the list
+                elements.push_back(val);
+            }
+        }
+
+        // Sort the collected elements
+        sort(elements.begin(), elements.end());
+
+        // Return the middle element (median)
+        int n = elements.size();
+        return elements[n / 2];
+    }
+};
+
+int main() {
+    Solution obj;
+
+    // Define the matrix
+    vector&lt;vector&lt;int&gt;&gt; matrix = {
+        {1, 3, 5},
+        {2, 6, 9},
+        {3, 6, 9}
+    };
+
+    // Print the median
+    cout &lt;&lt; obj.findMedian(matrix) &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to find the median of a row-wise sorted matrix
+    public int findMedian(int[][] matrix) {
+
+        // Create a list to store all elements
+        List&lt;Integer&gt; elements = new ArrayList&lt;&gt;();
+
+        // Traverse each row of the matrix
+        for (int[] row : matrix) {
+
+            // Traverse each element in the current row
+            for (int val : row) {
+
+                // Add element to list
+                elements.add(val);
+            }
+        }
+
+        // Sort the list of elements
+        Collections.sort(elements);
+
+        // Return the middle element (median)
+        int n = elements.size();
+        return elements.get(n / 2);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Solution obj = new Solution();
+
+        // Define the matrix
+        int[][] matrix = {
+            {1, 3, 5},
+            {2, 6, 9},
+            {3, 6, 9}
+        };
+
+        // Print the median
+        System.out.println(obj.findMedian(matrix));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    def findMedian(self, matrix):
+
+        # Create a list to store all elements
+        elements = []
+
+        # Traverse each row
+        for row in matrix:
+
+            # Traverse each value in the row
+            for val in row:
+
+                # Add value to list
+                elements.append(val)
+
+        # Sort all collected elements
+        elements.sort()
+
+        # Return the middle value (median)
+        return elements[len(elements) // 2]
+
+# Driver code
+matrix = [
+    [1, 3, 5],
+    [2, 6, 9],
+    [3, 6, 9]
+]
+
+obj = Solution()
+print(obj.findMedian(matrix))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    findMedian(matrix) {
+
+        // Create an array to store all values
+        let elements = [];
+
+        // Traverse every row
+        for (let row of matrix) {
+
+            // Traverse every value in the row
+            for (let val of row) {
+
+                // Add value to the list
+                elements.push(val);
+            }
+        }
+
+        // Sort the array of elements
+        elements.sort((a, b) =&gt; a - b);
+
+        // Return the middle element (median)
+        return elements[Math.floor(elements.length / 2)];
+    }
+}
+
+// Driver code
+const matrix = [
+    [1, 3, 5],
+    [2, 6, 9],
+    [3, 6, 9]
+];
+
+const obj = new Solution();
+console.log(obj.findMedian(matrix));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+<strong>Time Complexity: O(M*N*(log(M*N)))</strong>, sorting the linear array takes time complexity of O(M*N(logM*N)).<br/>
+<strong>Space Complexity: O(M*N)</strong>, to create a linear array.<br/>
+<p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+    In a row-wise sorted matrix, each row is individually sorted, but the entire matrix isn’t globally sorted. Hence, we can’t just pick the middle element directly to get the median. If we flatten and sort the entire matrix, it would take O(N×M log(N×M)) time, which is inefficient. Instead, we can take advantage of the sorted rows and apply a more optimized method using binary search on the value space (i.e., the range of possible numbers in the matrix).<br/><br/>
+    We start by finding the minimum and maximum elements in the matrix. The smallest element will be in the first column, and the largest element will be in the last column. We then binary search between this range to find the median value.<br/><br/>
+    In each iteration of the binary search, we choose a middle value and count how many elements in the matrix are less than or equal to it. Since each row is sorted, we can do this efficiently using binary search (<a href="https://takeuforward.org/arrays/implement-upper-bound/" rel="noopener" target="_blank">upper bound</a>) on each row. If the count is less than or equal to half of the total number of elements, we move our search range to the right, otherwise, we move it to the left.<p></p>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/89f21982a76fd963.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/7d4d5d01b2cd9602.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/89f21982a76fd963.png"/><img alt="Image 2" loading="lazy" src="../assets/img/7d4d5d01b2cd9602.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to count elements less than or equal to mid in a row
+    int countLessEqual(vector&lt;int&gt;&amp; row, int mid) {
+        // Using upper_bound to find count efficiently
+        return upper_bound(row.begin(), row.end(), mid) - row.begin();
+    }
+
+    // Function to find median
+    int findMedian(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) {
+        // Number of rows and columns
+        int rows = matrix.size();
+        int cols = matrix[0].size();
+
+        // Minimum possible element in matrix
+        int low = matrix[0][0];
+
+        // Maximum possible element in matrix
+        int high = matrix[0][cols - 1];
+        for (int i = 1; i &lt; rows; i++) {
+            low = min(low, matrix[i][0]);
+            high = max(high, matrix[i][cols - 1]);
+        }
+
+        // Binary search over the value range
+        while (low &lt; high) {
+            int mid = (low + high) / 2;
+
+            // Count elements ≤ mid
+            int count = 0;
+            for (int i = 0; i &lt; rows; i++) {
+                count += countLessEqual(matrix[i], mid);
+            }
+
+            // If count is less than half, median is greater
+            if (count &lt; (rows * cols + 1) / 2)
+                low = mid + 1;
+            else
+                high = mid;
+        }
+
+        // Final low is the median
+        return low;
+    }
+};
+
+int main() {
+    Solution obj;
+    vector&lt;vector&lt;int&gt;&gt; matrix = {
+        {1, 3, 5},
+        {2, 6, 9},
+        {3, 6, 9}
+    };
+    cout &lt;&lt; "Median: " &lt;&lt; obj.findMedian(matrix) &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to count elements less than or equal to mid in a row
+    int countLessEqual(int[] row, int mid) {
+        // Binary search in row
+        int low = 0, high = row.length;
+        while (low &lt; high) {
+            int m = (low + high) / 2;
+            if (row[m] &lt;= mid) low = m + 1;
+            else high = m;
+        }
+        return low;
+    }
+
+    // Function to find the median
+    int findMedian(int[][] matrix) {
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+
+        // Initialize low and high values
+        int low = matrix[0][0];
+        int high = matrix[0][cols - 1];
+        for (int i = 1; i &lt; rows; i++) {
+            low = Math.min(low, matrix[i][0]);
+            high = Math.max(high, matrix[i][cols - 1]);
+        }
+
+        // Binary search in value range
+        while (low &lt; high) {
+            int mid = (low + high) / 2;
+            int count = 0;
+
+            // Count number of elements ≤ mid
+            for (int i = 0; i &lt; rows; i++) {
+                count += countLessEqual(matrix[i], mid);
+            }
+
+            if (count &lt; (rows * cols + 1) / 2)
+                low = mid + 1;
+            else
+                high = mid;
+        }
+
+        // Return the median
+        return low;
+    }
+
+    public static void main(String[] args) {
+        Solution obj = new Solution();
+        int[][] matrix = {
+            {1, 3, 5},
+            {2, 6, 9},
+            {3, 6, 9}
+        };
+        System.out.println("Median: " + obj.findMedian(matrix));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">import bisect
+
+class Solution:
+    # Function to count elements &lt;= mid using bisect
+    def countLessEqual(self, row, mid):
+        return bisect.bisect_right(row, mid)
+
+    # Function to find median
+    def findMedian(self, matrix):
+        rows = len(matrix)
+        cols = len(matrix[0])
+
+        # Get the smallest and largest elements
+        low = min(row[0] for row in matrix)
+        high = max(row[-1] for row in matrix)
+
+        # Binary search on value space
+        while low &lt; high:
+            mid = (low + high) // 2
+            count = 0
+
+            # Count elements ≤ mid
+            for row in matrix:
+                count += self.countLessEqual(row, mid)
+
+            if count &lt; (rows * cols + 1) // 2:
+                low = mid + 1
+            else:
+                high = mid
+
+        return low
+
+# Driver code
+matrix = [
+    [1, 3, 5],
+    [2, 6, 9],
+    [3, 6, 9]
+]
+obj = Solution()
+print("Median:", obj.findMedian(matrix))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to count number of elements ≤ mid in a row
+    countLessEqual(row, mid) {
+        let low = 0, high = row.length;
+        while (low &lt; high) {
+            let m = Math.floor((low + high) / 2);
+            if (row[m] &lt;= mid) low = m + 1;
+            else high = m;
+        }
+        return low;
+    }
+
+    // Function to find median
+    findMedian(matrix) {
+        let rows = matrix.length;
+        let cols = matrix[0].length;
+
+        // Find global min and max
+        let low = matrix[0][0];
+        let high = matrix[0][cols - 1];
+        for (let i = 1; i &lt; rows; i++) {
+            low = Math.min(low, matrix[i][0]);
+            high = Math.max(high, matrix[i][cols - 1]);
+        }
+
+        // Binary search on value space
+        while (low &lt; high) {
+            let mid = Math.floor((low + high) / 2);
+            let count = 0;
+
+            // Count elements ≤ mid
+            for (let i = 0; i &lt; rows; i++) {
+                count += this.countLessEqual(matrix[i], mid);
+            }
+
+            if (count &lt; Math.floor((rows * cols + 1) / 2))
+                low = mid + 1;
+            else
+                high = mid;
+        }
+
+        return low;
+    }
+}
+
+// Driver code
+const matrix = [
+    [1, 3, 5],
+    [2, 6, 9],
+    [3, 6, 9]
+];
+const obj = new Solution();
+console.log("Median:", obj.findMedian(matrix));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+<strong>Time Complexity: O(rows × log(max - min) × log(cols))</strong>, Binary search runs on the value space from min to max of the matrix and for each mid in binary search, we count how many numbers are less than or equal to mid<br/>
+<strong>Space Complexity: O(1)</strong>, constant extra space is used.<br/>
+<p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

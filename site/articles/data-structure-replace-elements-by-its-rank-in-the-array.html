@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Replace elements by its rank in the array</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Replace elements by its rank in the array</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/replace-elements-by-its-rank-in-the-array/</code></div>
+  <p><strong>Problem Statement: </strong> Given an array of N integers, the task is to replace each element of the array by its rank in the array.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p><strong>Input:</strong> 20 15 26 2 98 6
+<strong>Output:</strong> 4 3 5 1 6 2
+<strong>Explanation:</strong> When sorted,the array is 2,6,15,20,26,98. So the rank of 2 is 1,rank of 6 is 2,rank of 15 is 3 and so.
+
+<strong>Input:</strong> 1 5 8 15 8 25 9
+<strong>Output:</strong> 1 2 3 5 3 6 4
+<strong>Explanation :</strong>When sorted,the array is 1,5,8,8,9,15,25. So the rank of 1 is 1,rank of 5 is 2,rank of 8 is 3 and so.</p></pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Don’t jump directly to the solution, try it out yourself first. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Brute Force Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+We are aiming to assign a rank to each element in the array based on how many unique elements are smaller than it. For each element, we iterate through the rest of the array, collect all smaller elements, and count the number of distinct ones.
+
+
+<ul> <li>Initialize an empty list to store final ranks</li> <li>Loop over the array from index 0 to n-1</li> <li>For each element: <ul> <li>Initialize an empty set</li> <li>Loop over the array again from 0 to n-1</li> <li>If another element is less than the current, insert into the set (to keep only unique ones)</li> <li>The size of the set gives the number of unique elements smaller than current</li> <li>Rank = size of set + 1</li> <li>Append rank to result</li> </ul> </li> <li>Return or print the rank list</li> </ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/3a0ccd855b5d7cea.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/e54cafda2abb980f.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/577f7579073f0343.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/68cb03dab1ec41e6.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/dc953027e76e4eac.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/665ea2e0a8558a60.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/3a0ccd855b5d7cea.png"/><img alt="Image 2" loading="lazy" src="../assets/img/e54cafda2abb980f.png"/><img alt="Image 3" loading="lazy" src="../assets/img/577f7579073f0343.png"/><img alt="Image 4" loading="lazy" src="../assets/img/68cb03dab1ec41e6.png"/><img alt="Image 5" loading="lazy" src="../assets/img/dc953027e76e4eac.png"/><img alt="Image 6" loading="lazy" src="../assets/img/665ea2e0a8558a60.png"/></div></div>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to replace elements with their rank
+    vector&lt;int&gt; replaceWithRank(vector&lt;int&gt;&amp; arr) {
+        // Final answer vector
+        vector&lt;int&gt; rankArr;
+
+        // Loop through each element of the array
+        for (int i = 0; i &lt; arr.size(); i++) {
+            // Set to store unique elements less than arr[i]
+            unordered_set&lt;int&gt; smaller;
+
+            // Loop again to compare with every other element
+            for (int j = 0; j &lt; arr.size(); j++) {
+                if (arr[j] &lt; arr[i]) {
+                    // Add to set if element is smaller
+                    smaller.insert(arr[j]);
+                }
+            }
+
+            // Rank is number of unique smaller elements + 1
+            int rank = smaller.size() + 1;
+
+            // Store the rank
+            rankArr.push_back(rank);
+        }
+
+        return rankArr;
+    }
+};
+
+// Driver code
+int main() {
+    vector&lt;int&gt; arr = {20, 15, 26, 2, 98, 6};
+    Solution sol;
+    vector&lt;int&gt; result = sol.replaceWithRank(arr);
+
+    for (int r : result) {
+        cout &lt;&lt; r &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to replace elements with their rank
+    public List&lt;Integer&gt; replaceWithRank(int[] arr) {
+        List&lt;Integer&gt; rankList = new ArrayList&lt;&gt;();
+
+        // Loop through each element
+        for (int i = 0; i &lt; arr.length; i++) {
+            // Set to store unique elements smaller than current
+            Set&lt;Integer&gt; smaller = new HashSet&lt;&gt;();
+
+            // Compare with all elements
+            for (int j = 0; j &lt; arr.length; j++) {
+                if (arr[j] &lt; arr[i]) {
+                    smaller.add(arr[j]);
+                }
+            }
+
+            // Rank = count of unique smaller elements + 1
+            int rank = smaller.size() + 1;
+            rankList.add(rank);
+        }
+
+        return rankList;
+    }
+}
+
+// Driver code
+class Main {
+    public static void main(String[] args) {
+        int[] arr = {20, 15, 26, 2, 98, 6};
+        Solution sol = new Solution();
+        List&lt;Integer&gt; result = sol.replaceWithRank(arr);
+        for (int r : result) {
+            System.out.print(r + " ");
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to replace elements with their rank
+    def replaceWithRank(self, arr):
+        result = []
+
+        # Loop through each element
+        for i in range(len(arr)):
+            # Set to hold unique smaller elements
+            smaller = set()
+
+            # Compare with every other element
+            for j in range(len(arr)):
+                if arr[j] &lt; arr[i]:
+                    smaller.add(arr[j])
+
+            # Rank = unique smaller count + 1
+            rank = len(smaller) + 1
+            result.append(rank)
+
+        return result
+
+# Driver code
+arr = [20, 15, 26, 2, 98, 6]
+sol = Solution()
+print(sol.replaceWithRank(arr))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to replace elements with their rank
+    replaceWithRank(arr) {
+        const result = [];
+
+        // Loop through each element
+        for (let i = 0; i &lt; arr.length; i++) {
+            const smaller = new Set();
+
+            // Compare with all other elements
+            for (let j = 0; j &lt; arr.length; j++) {
+                if (arr[j] &lt; arr[i]) {
+                    smaller.add(arr[j]);
+                }
+            }
+
+            // Rank = number of unique smaller + 1
+            result.push(smaller.size + 1);
+        }
+
+        return result;
+    }
+}
+
+// Driver code
+const arr = [20, 15, 26, 2, 98, 6];
+const sol = new Solution();
+console.log(sol.replaceWithRank(arr));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity: O(N²)</strong>,Because for each element (N times), we iterate the full array again (N), making it N² overall.</p> <p><strong>Space Complexity: O(N)</strong>, Each iteration uses a set for unique elements which in worst case can hold up to N elements. Also, final result array uses O(N).</p>
+</details>
+</div>
+</details>
+
+</div>
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+We need to assign a rank to each element of the array based on how small or large it is compared to others. The smallest number gets rank 1, the next smallest gets rank 2, and so on.
+Duplicate elements should get the same rank.
+
+
+<ul> <li>Make a copy of the array to avoid modifying the original.</li> <li>Sort the copied array in ascending order.</li> <li>Use a map or dictionary to assign rank starting from 1, skipping duplicates.</li> <li>Loop through the original array and replace each element with its rank using the map.</li> </ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/742d4b3a8d3c8671.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/6f0e2be92f86d5af.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/87263cf060476f91.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/c15205e31ba58150.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/50e9e0dffa19faef.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/742d4b3a8d3c8671.png"/><img alt="Image 2" loading="lazy" src="../assets/img/6f0e2be92f86d5af.png"/><img alt="Image 3" loading="lazy" src="../assets/img/87263cf060476f91.png"/><img alt="Image 4" loading="lazy" src="../assets/img/c15205e31ba58150.png"/><img alt="Image 5" loading="lazy" src="../assets/img/50e9e0dffa19faef.png"/></div></div>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to replace elements by their rank in the array
+    vector&lt;int&gt; replaceWithRank(vector&lt;int&gt;&amp; arr) {
+        // Copy the original array for sorting
+        vector&lt;int&gt; sortedArr = arr;
+
+        // Sort the array
+        sort(sortedArr.begin(), sortedArr.end());
+
+        // Create a map to store rank of each unique number
+        unordered_map&lt;int, int&gt; rankMap;
+
+        // Initialize rank counter
+        int rank = 1;
+
+        // Assign rank to each unique element in sorted order
+        for (int num : sortedArr) {
+            // If this number is not already assigned a rank
+            if (rankMap.find(num) == rankMap.end()) {
+                rankMap[num] = rank;
+                rank++;
+            }
+        }
+
+        // Replace each element in original array with its rank
+        vector&lt;int&gt; result;
+        for (int num : arr) {
+            result.push_back(rankMap[num]);
+        }
+
+        return result;
+    }
+};
+
+// Driver code
+int main() {
+    Solution obj;
+    vector&lt;int&gt; arr = {1, 5, 8, 15, 8, 25, 9};
+
+    vector&lt;int&gt; res = obj.replaceWithRank(arr);
+
+    for (int x : res) {
+        cout &lt;&lt; x &lt;&lt; " ";
+    }
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to replace elements by their rank in the array
+    public int[] replaceWithRank(int[] arr) {
+        // Create a copy of the original array
+        int[] sortedArr = arr.clone();
+
+        // Sort the copied array
+        Arrays.sort(sortedArr);
+
+        // Map to store rank of each unique number
+        HashMap&lt;Integer, Integer&gt; rankMap = new HashMap&lt;&gt;();
+
+        int rank = 1;
+
+        // Assign rank to each unique number
+        for (int num : sortedArr) {
+            if (!rankMap.containsKey(num)) {
+                rankMap.put(num, rank);
+                rank++;
+            }
+        }
+
+        // Replace elements in original array with their ranks
+        int[] result = new int[arr.length];
+        for (int i = 0; i &lt; arr.length; i++) {
+            result[i] = rankMap.get(arr[i]);
+        }
+
+        return result;
+    }
+}
+
+// Driver code
+class Main {
+    public static void main(String[] args) {
+        Solution obj = new Solution();
+        int[] arr = {1, 5, 8, 15, 8, 25, 9};
+
+        int[] res = obj.replaceWithRank(arr);
+
+        for (int x : res) {
+            System.out.print(x + " ");
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to replace elements by their rank in the array
+    def replaceWithRank(self, arr):
+        # Make a sorted copy of the array
+        sorted_arr = sorted(arr)
+
+        # Create a dictionary to hold ranks
+        rank_map = {}
+
+        # Initialize rank counter
+        rank = 1
+
+        # Assign ranks to unique elements
+        for num in sorted_arr:
+            if num not in rank_map:
+                rank_map[num] = rank
+                rank += 1
+
+        # Build the result using rank map
+        result = [rank_map[num] for num in arr]
+        return result
+
+# Driver code
+obj = Solution()
+arr = [1, 5, 8, 15, 8, 25, 9]
+res = obj.replaceWithRank(arr)
+print(*res)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to replace elements by their rank in the array
+    replaceWithRank(arr) {
+        // Make a sorted copy of the array
+        let sortedArr = [...arr].sort((a, b) =&gt; a - b);
+
+        // Create a map to store rank of each unique number
+        let rankMap = new Map();
+        let rank = 1;
+
+        // Assign ranks to unique elements
+        for (let num of sortedArr) {
+            if (!rankMap.has(num)) {
+                rankMap.set(num, rank);
+                rank++;
+            }
+        }
+
+        // Replace original array values with ranks
+        let result = arr.map(num =&gt; rankMap.get(num));
+        return result;
+    }
+}
+
+// Driver code
+let obj = new Solution();
+let arr = [1, 5, 8, 15, 8, 25, 9];
+let res = obj.replaceWithRank(arr);
+console.log(res.join(" "));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O(N log N), We sort the array which takes O(N log N), then loop over the array multiple times all O(N) operations.</p> <p><strong>Space Complexity:</strong> O(N), We store an extra hash map for ranks and copy of the array.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

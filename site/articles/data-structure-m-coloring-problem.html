@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>M - Coloring Problem</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>M - Coloring Problem</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/m-coloring-problem/</code></div>
+  <p><strong>Problem Statement: </strong>
+Given an undirected graph and a number m, determine if the graph can be colored with at most m colors such that no two adjacent vertices of the graph are colored with the same color.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>  
+<strong>Input:</strong>  
+N = 4  
+M = 3  
+E = 5  
+Edges[] = {  
+  (0, 1),  
+  (1, 2),  
+  (2, 3),  
+  (3, 0),  
+  (0, 2)  
+}  
+<strong>Output:</strong> 1  
+<strong>Explanation:</strong>  
+It is possible to color the given graph using 3 colors, so the answer is 1 (possible).
+
+<strong>Example 2:</strong>  
+<strong>Input:</strong>  
+N = 3  
+M = 2  
+E = 3  
+Edges[] = {  
+  (0, 1),  
+  (1, 2),  
+  (0, 2)  
+}  
+<strong>Output:</strong> 0  
+<strong>Explanation:</strong>  
+It is not possible to color the graph using 2 colors as it forms a triangle, which requires at least 3 colors. Hence, the answer is 0 (not possible).</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/m-coloring-problem" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Try every color from 1 to m using a for loop.</li>
+<li>Use a function <code>isSafe</code> to check if it's safe to color the current node with the current color. This function returns true if none of the adjacent nodes have the same color.</li>
+<li>If <code>isSafe</code> returns true, color the node with the current color and call the recursive function to color the next node.</li>
+<li>If the recursive function returns true, it means the graph can be successfully colored, so return true.</li>
+<li>If the recursive function returns false, remove the current color from the node and try the next color.</li>
+<li>If all colors from 1 to m fail, return false, indicating that it is not possible to color the graph with m colors.</li>
+</ul>
+<p><img height="457" loading="lazy" src="../assets/img/3632c3f0f1c7bdd3.png" width="481"/></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Function to check if it is safe to assign a color to a node
+bool isSafe(int node, int color[], bool graph[101][101], int n, int col) {
+    for (int k = 0; k &lt; n; k++) {
+        // Check if adjacent node has the same color
+        if (k != node &amp;&amp; graph[k][node] == 1 &amp;&amp; color[k] == col) {
+            return false;
+        }
+    }
+    return true;  // Safe to assign the color
+}
+
+// Recursive function to solve the coloring problem
+bool solve(int node, int color[], int m, int N, bool graph[101][101]) {
+    // If all nodes are assigned colors, return true
+    if (node == N) {
+        return true;
+    }
+
+    // Try different colors for the node
+    for (int i = 1; i &lt;= m; i++) {
+        if (isSafe(node, color, graph, N, i)) {
+            color[node] = i;
+            // Recursively check for the next node
+            if (solve(node + 1, color, m, N, graph)) return true;
+            color[node] = 0;  // Backtrack if the color assignment fails
+        }
+    }
+    return false;  // If no solution is found
+}
+
+// Function to check if graph can be colored with m colors
+bool graphColoring(bool graph[101][101], int m, int N) {
+    int color[N] = { 0 };
+    // Start solving from node 0
+    if (solve(0, color, m, N, graph)) return true;
+    return false;
+}
+
+int main() {
+    int N = 4;  // Number of nodes
+    int m = 3;  // Maximum number of colors
+
+    bool graph[101][101];
+    memset(graph, false, sizeof graph);
+
+    // Create a sample graph with edges (0,1), (1,2), (2,3), (3,0), (0,2)
+    graph[0][1] = 1; graph[1][0] = 1;
+    graph[1][2] = 1; graph[2][1] = 1;
+    graph[2][3] = 1; graph[3][2] = 1;
+    graph[3][0] = 1; graph[0][3] = 1;
+    graph[0][2] = 1; graph[2][0] = 1;
+
+    // Output if the graph can be colored with at most m colors
+    cout &lt;&lt; graphColoring(graph, m, N);
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+
+    // Function to check if it is safe to assign a color to a node
+    public static boolean isSafe(int node, int[] color, boolean[][] graph, int n, int col) {
+        for (int k = 0; k &lt; n; k++) {
+            // Check if adjacent node has the same color
+            if (k != node &amp;&amp; graph[k][node] &amp;&amp; color[k] == col) {
+                return false;
+            }
+        }
+        return true;  // Safe to assign the color
+    }
+
+    // Recursive function to solve the coloring problem
+    public static boolean solve(int node, int[] color, int m, int N, boolean[][] graph) {
+        // If all nodes are assigned colors, return true
+        if (node == N) {
+            return true;
+        }
+
+        // Try different colors for the node
+        for (int i = 1; i &lt;= m; i++) {
+            if (isSafe(node, color, graph, N, i)) {
+                color[node] = i;
+                // Recursively check for the next node
+                if (solve(node + 1, color, m, N, graph)) return true;
+                color[node] = 0;  // Backtrack if the color assignment fails
+            }
+        }
+        return false;  // If no solution is found
+    }
+
+    // Function to check if graph can be colored with m colors
+    public static boolean graphColoring(boolean[][] graph, int m, int N) {
+        int[] color = new int[N];
+        Arrays.fill(color, 0);
+        // Start solving from node 0
+        if (solve(0, color, m, N, graph)) return true;
+        return false;
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+        int N = 4;  // Number of nodes
+        int m = 3;  // Maximum number of colors
+
+        // Create a sample graph with edges (0,1), (1,2), (2,3), (3,0), (0,2)
+        boolean[][] graph = new boolean[101][101];
+        graph[0][1] = graph[1][0] = true;
+        graph[1][2] = graph[2][1] = true;
+        graph[2][3] = graph[3][2] = true;
+        graph[3][0] = graph[0][3] = true;
+        graph[0][2] = graph[2][0] = true;
+
+        // Output if the graph can be colored with at most m colors
+        System.out.println(Solution.graphColoring(graph, m, N));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Function to check if it is safe to assign a color to a node
+def isSafe(node, color, graph, n, col):
+    for k in range(n):
+        # Check if adjacent node has the same color
+        if k != node and graph[k][node] == 1 and color[k] == col:
+            return False
+    return True  # Safe to assign the color
+
+# Recursive function to solve the coloring problem
+def solve(node, color, m, N, graph):
+    # If all nodes are assigned colors, return True
+    if node == N:
+        return True
+
+    # Try different colors for the node
+    for i in range(1, m + 1):
+        if isSafe(node, color, graph, N, i):
+            color[node] = i
+            # Recursively check for the next node
+            if solve(node + 1, color, m, N, graph):
+                return True
+            color[node] = 0  # Backtrack if the color assignment fails
+    return False  # If no solution is found
+
+# Function to check if graph can be colored with m colors
+def graphColoring(graph, m, N):
+    color = [0] * N
+    # Start solving from node 0
+    if solve(0, color, m, N, graph):
+        return True
+    return False
+
+# Driver code
+if __name__ == "__main__":
+    N = 4  # Number of nodes
+    m = 3  # Maximum number of colors
+
+    # Create a sample graph with edges (0,1), (1,2), (2,3), (3,0), (0,2)
+    graph = [[False] * 101 for _ in range(101)]
+    graph[0][1] = graph[1][0] = True
+    graph[1][2] = graph[2][1] = True
+    graph[2][3] = graph[3][2] = True
+    graph[3][0] = graph[0][3] = True
+    graph[0][2] = graph[2][0] = True
+
+    # Output if the graph can be colored with at most m colors
+    print(graphColoring(graph, m, N))</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Function to check if it is safe to assign a color to a node
+function isSafe(node, color, graph, n, col) {
+    for (let k = 0; k &lt; n; k++) {
+        // Check if adjacent node has the same color
+        if (k !== node &amp;&amp; graph[k][node] === 1 &amp;&amp; color[k] === col) {
+            return false;
+        }
+    }
+    return true;  // Safe to assign the color
+}
+
+// Recursive function to solve the coloring problem
+function solve(node, color, m, N, graph) {
+    // If all nodes are assigned colors, return true
+    if (node === N) {
+        return true;
+    }
+
+    // Try different colors for the node
+    for (let i = 1; i &lt;= m; i++) {
+        if (isSafe(node, color, graph, N, i)) {
+            color[node] = i;
+            // Recursively check for the next node
+            if (solve(node + 1, color, m, N, graph)) return true;
+            color[node] = 0;  // Backtrack if the color assignment fails
+        }
+    }
+    return false;  // If no solution is found
+}
+
+// Function to check if graph can be colored with m colors
+function graphColoring(graph, m, N) {
+    let color = Array(N).fill(0);
+    // Start solving from node 0
+    if (solve(0, color, m, N, graph)) return true;
+    return false;
+}
+
+// Main function to handle input and output
+function main() {
+    let N = 4;  // Number of nodes
+    let m = 3;  // Maximum number of colors
+
+    // Create a sample graph with edges (0,1), (1,2), (2,3), (3,0), (0,2)
+    let graph = Array.from({ length: 101 }, () =&gt; Array(101).fill(false));
+    graph[0][1] = graph[1][0] = true;
+    graph[1][2] = graph[2][1] = true;
+    graph[2][3] = graph[3][2] = true;
+    graph[3][0] = graph[0][3] = true;
+    graph[0][2] = graph[2][0] = true;
+
+    // Output if the graph can be colored with at most m colors
+    console.log(graphColoring(graph, m, N));
+}
+
+// Call the main function
+main();</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity:</strong> O(m^N), where m is the number of colors and N is the number of nodes in the graph. This is because we try to color each node with m different colors, leading to an exponential time complexity in the worst case.
+                        <br/><br/>
+<strong>Space Complexity:</strong> O(N), where N is the number of nodes in the graph. This is due to the recursion stack and the color array used to store the colors assigned to each node.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

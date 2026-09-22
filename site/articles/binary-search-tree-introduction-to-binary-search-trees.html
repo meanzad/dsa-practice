@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Introduction to Binary Search Trees</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Introduction to Binary Search Trees</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/binary-search-tree/introduction-to-binary-search-trees/</code></div>
+  <h3>Introduction</h3>
+
+<p>Binary Search Trees, popularly known as BST, are the category of Binary Trees used to optimize the operation of searching an element among the Tree Nodes in a Binary Tree.</p>
+
+
+<p>Let’s understand the dynamics of a Binary Search Tree using an illustration below:</p>
+
+
+
+<p><img height="457" loading="lazy" src="../assets/img/113d7a9325d6ad3f.png" width="481"/></p>
+
+
+<p>As we can visualize from the above Tree, the right subtree has all the elements greater than the root element and the left subtree has all the elements lesser than the root element. A point to note here is that <strong>every subtree is itself a Binary Search Tree</strong> as it contains a subtree whose root node is lesser than the value of the current node and another subtree whose root node is greater than the value of the current node.</p>
+
+
+<p>For every given node in a Binary Search Tree if a left or a right child exists then:</p>
+
+
+<pre class="wp-block-preformatted"><strong>Left Child &lt; Node &lt; Right Child</strong></pre>
+
+
+<p>Now, for the general implementation of Binary Search Trees, <strong>duplicate node values are not allowed</strong>. However, in some exceptional cases of Binary Search Tree implementation, we can represent a Binary Search Tree with duplicate node values in the following ways:</p>
+
+
+
+<p><img height="457" loading="lazy" src="../assets/img/115a564678c8737e.png" width="481"/></p>
+
+<br/><hr/>
+<h3>Need for Binary Search Tree</h3>
+
+<p>After understanding how a Binary Search Tree is represented, let us now understand why is there a need to use a Binary Search Tree instead of a simple Binary Tree.</p>
+
+
+<p>So, generally in a BST, the maximum height in almost all cases is kept in order of <strong>log(<sub>2</sub>N)</strong> where N = No. of nodes which is in contrast to the plain Binary Tree whose maximum height can reach the order of <strong>N </strong>when the tree is <strong>skewed.</strong></p>
+
+
+<p>This particularly makes the time of searching for a given node in a Binary Search Tree a lot less than searching in a simple Binary Tree.</p>
+
+
+<p>For example, if we have to search for an element, we can directly compare it to the root node value of the BST, if the value matches then we have found the element, if say the value is greater than the root node, we say that we now move on to searching that element in the right subtree because the right subtree has all the node values greater than the root value. The search process is terminated for the left subtree as it would only search for those nodes which have values lesser than the root.</p>
+
+
+<p>Note that, this is very similar to the <a href="https://takeuforward.org/data-structure/binary-search-analysis/" rel="noopener" target="_blank" title="">Binary Search</a> operation which we perform in Arrays to optimize the time taken to search for an element using Linear Search. Hence this category of trees is named  <strong>Binary Search Trees</strong>.</p>
+
+<hr/>
+</article>
+<script src="../article.js"></script>
+</body></html>

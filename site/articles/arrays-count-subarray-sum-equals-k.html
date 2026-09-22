@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Count Subarray sum Equals K</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Count Subarray sum Equals K</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/arrays/count-subarray-sum-equals-k/</code></div>
+  <p><strong>Problem Statement: </strong> Given an array of integers and an integer k, return the total number of subarrays whose sum equals k.
+
+A subarray is a contiguous non-empty sequence of elements within an array.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p><strong>Input :</strong> N = 4, array[] = {3, 1, 2, 4}, k = 6
+<strong>Output:</strong> 2
+<strong>Explanation:</strong> The subarrays that sum up to 6 are [3, 1, 2] and [2, 4].<br/>
+<strong>Input:</strong> N = 3, array[] = {1,2,3}, k = 3
+<strong>Output:</strong> 2
+<strong>Explanation:</strong> The subarrays that sum up to 3 are [1, 2], and [3].</p></pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Don’t jump directly to the solution, try it out yourself first. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Brute force Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+                         We will check the sum of every possible subarray and count how many of them are equal to k. To get every possible subarray sum, we will be using three nested loops. The first two loops(say i and j) will iterate over every possible starting index and ending index of a subarray. Basically, in each iteration, the subarray range will be from index i to index j. Using another loop we will get the sum of the elements of the subarray <strong>[i…..j]</strong>. Among all values of the sum calculated, we will only consider those that are equal to k.<br/><br/><strong>Note: </strong>We are selecting every possible subarray using two nested loops and for each of them, we add all its elements using another loop.
+                         
+                         <ol><li>First, we will run a loop(<strong><em>say i</em></strong>) that will select every possible starting index of the subarray. The possible starting indices can vary from index 0 to index n-1(n = size of the array).</li><li>Inside the loop, we will run another loop(say j) that will signify the ending index of the subarray. For every subarray starting from the index i, the possible ending index can vary from index i to n-1(n = size of the array).</li><li>After that for each subarray starting from index i and ending at index j <strong>(i.e. arr[i….j]), </strong>we will run another loop to calculate the sum of all the elements(of that particular subarray).</li><li>After calculating the sum, we will check if the sum is equal to the given k. If it is, we will increase the value of the count.</li></ol>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/aa2ef3be05b4c366.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/9369dd88fa93ad93.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/0174906fbab950a9.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/aa2ef3be05b4c366.png"/><img alt="Image 2" loading="lazy" src="../assets/img/9369dd88fa93ad93.png"/><img alt="Image 3" loading="lazy" src="../assets/img/0174906fbab950a9.png"/></div></div>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find count of subarrays with sum equal to k
+    int subarraySum(vector&lt;int&gt;&amp; arr, int k) {
+        // Size of the array
+        int n = arr.size();
+
+        // Initialize count of subarrays
+        int count = 0;
+
+        // Traverse all possible start indices
+        for (int i = 0; i &lt; n; i++) {
+            // Traverse all possible end indices from start
+            for (int j = i; j &lt; n; j++) {
+                // Initialize sum for current subarray
+                int sum = 0;
+
+                // Calculate sum of subarray from i to j
+                for (int m = i; m &lt;= j; m++) {
+                    sum += arr[m];
+                }
+
+                // If sum equals k, increment count
+                if (sum == k) {
+                    count++;
+                }
+            }
+        }
+
+        // Return total count of subarrays
+        return count;
+    }
+};
+
+int main() {
+    // Input array
+    vector&lt;int&gt; arr = {3, 1, 2, 4};
+
+    // Target sum
+    int k = 6;
+
+    // Create Solution object
+    Solution sol;
+
+    // Call function and store result
+    int result = sol.subarraySum(arr, k);
+
+    // Print the count of subarrays
+    cout &lt;&lt; "The number of subarrays is: " &lt;&lt; result &lt;&lt; "\n";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import.java.util.*;
+class Solution {
+    // Function to find count of subarrays with sum equal to k
+    public int subarraySum(int[] arr, int k) {
+        // Size of the array
+        int n = arr.length;
+
+        // Initialize count of subarrays
+        int count = 0;
+
+        // Traverse all possible start indices
+        for (int i = 0; i &lt; n; i++) {
+            // Traverse all possible end indices from start
+            for (int j = i; j &lt; n; j++) {
+                // Initialize sum for current subarray
+                int sum = 0;
+
+                // Calculate sum of subarray from i to j
+                for (int m = i; m &lt;= j; m++) {
+                    sum += arr[m];
+                }
+
+                // If sum equals k, increment count
+                if (sum == k) {
+                    count++;
+                }
+            }
+        }
+
+        // Return total count of subarrays
+        return count;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Input array
+        int[] arr = {3, 1, 2, 4};
+
+        // Target sum
+        int k = 6;
+
+        // Create Solution object
+        Solution sol = new Solution();
+
+        // Call function and store result
+        int result = sol.subarraySum(arr, k);
+
+        // Print the count of subarrays
+        System.out.println("The number of subarrays is: " + result);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to find count of subarrays with sum equal to k
+    def subarraySum(self, arr, k):
+        # Size of the array
+        n = len(arr)
+
+        # Initialize count of subarrays
+        count = 0
+
+        # Traverse all possible start indices
+        for i in range(n):
+            # Traverse all possible end indices from start
+            for j in range(i, n):
+                # Initialize sum for current subarray
+                total = 0
+
+                # Calculate sum of subarray from i to j
+                for m in range(i, j + 1):
+                    total += arr[m]
+
+                # If sum equals k, increment count
+                if total == k:
+                    count += 1
+
+        # Return total count of subarrays
+        return count
+
+
+# Driver code
+if __name__ == "__main__":
+    # Input array
+    arr = [3, 1, 2, 4]
+
+    # Target sum
+    k = 6
+
+    # Create Solution object
+    sol = Solution()
+
+    # Call function and store result
+    result = sol.subarraySum(arr, k)
+
+    # Print the count of subarrays
+    print("The number of subarrays is:", result)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find count of subarrays with sum equal to k
+    subarraySum(arr, k) {
+        // Size of the array
+        let n = arr.length;
+
+        // Initialize count of subarrays
+        let count = 0;
+
+        // Traverse all possible start indices
+        for (let i = 0; i &lt; n; i++) {
+            // Traverse all possible end indices from start
+            for (let j = i; j &lt; n; j++) {
+                // Initialize sum for current subarray
+                let sum = 0;
+
+                // Calculate sum of subarray from i to j
+                for (let m = i; m &lt;= j; m++) {
+                    sum += arr[m];
+                }
+
+                // If sum equals k, increment count
+                if (sum === k) {
+                    count++;
+                }
+            }
+        }
+
+        // Return total count of subarrays
+        return count;
+    }
+}
+
+// Driver code
+const sol = new Solution();
+
+// Input array
+const arr = [3, 1, 2, 4];
+
+// Target sum
+const k = 6;
+
+// Call function and store result
+const result = sol.subarraySum(arr, k);
+
+// Print the count of subarrays
+console.log("The number of subarrays is:", result);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity: </strong>O(N<sup>3</sup>), where N = size of the array.We are using three nested loops here. Though all are not running for exactly N times, the time complexity will be approximately O(N<sup>3</sup>).</p>
+<p><strong>Space Complexity: </strong>O(1) as we are not using any extra space.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="better-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Better Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+If we carefully observe, we can notice that to get the sum of the current subarray we just need to add the current element(i.e. <strong>arr[j]</strong>) to the sum of the previous subarray i.e. <strong>arr[i….j-1]</strong>.
+Assume previous subarray = <strong>arr[i……j-1]</strong><strong><br/></strong>current subarray = <strong>arr[i…..j]</strong><strong><br/></strong>Sum of <strong>arr[i….j]</strong> = <strong>(sum of arr[i….j-1]) + arr[j]</strong>
+This is how we can remove the third loop and while moving j pointer, we can calculate the sum.
+
+<ol><li>First, we will run a loop(say i) that will select every possible starting index of the subarray. The possible starting indices can vary from index 0 to index n-1(n = array size).</li><li>Inside the loop, we will run another loop(say j) that will signify the ending index as well as the current element of the subarray. For every subarray starting from the index i, the possible ending index can vary from index i to n-1(n = size of the array).</li><li>Inside loop j, we will add the current element to the sum of the previous subarray i.e. <strong>sum = sum + arr[j]</strong>. </li><li>After calculating the sum, we will check if the sum is equal to the given k. If it is, we will increase the value of the count.</li></ol><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/14c64863c1877671.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/9a151ade7c18f5ad.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/41be3939ebdf7f05.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/14c64863c1877671.png"/><img alt="Image 2" loading="lazy" src="../assets/img/9a151ade7c18f5ad.png"/><img alt="Image 3" loading="lazy" src="../assets/img/41be3939ebdf7f05.png"/></div></div>
+</details></div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find count of subarrays with sum equal to k
+    int subarraySum(vector&lt;int&gt;&amp; arr, int k) {
+        // Size of the array
+        int n = arr.size();
+
+        // Initialize count of subarrays
+        int count = 0;
+
+        // Traverse all possible start indices
+        for (int i = 0; i &lt; n; i++) {
+            // Initialize sum for current subarray
+            int sum = 0;
+
+            // Traverse all possible end indices from start
+            for (int j = i; j &lt; n; j++) {
+                // Add current element to sum
+                sum += arr[j];
+
+                // If sum equals k, increment count
+                if (sum == k) {
+                    count++;
+                }
+            }
+        }
+
+        // Return total count of subarrays
+        return count;
+    }
+};
+
+int main() {
+    // Input array
+    vector&lt;int&gt; arr = {3, 1, 2, 4};
+
+    // Target sum
+    int k = 6;
+
+    // Create Solution object
+    Solution sol;
+
+    // Call function and store result
+    int result = sol.subarraySum(arr, k);
+
+    // Print the count of subarrays
+    cout &lt;&lt; "The number of subarrays is: " &lt;&lt; result &lt;&lt; "\n";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import.java.util.*;
+class Solution {
+    // Function to find count of subarrays with sum equal to k
+    public int subarraySum(int[] arr, int k) {
+        // Size of the array
+        int n = arr.length;
+
+        // Initialize count of subarrays
+        int count = 0;
+
+        // Traverse all possible start indices
+        for (int i = 0; i &lt; n; i++) {
+            // Initialize sum for current subarray
+            int sum = 0;
+
+            // Traverse all possible end indices from start
+            for (int j = i; j &lt; n; j++) {
+                // Add current element to sum
+                sum += arr[j];
+
+                // If sum equals k, increment count
+                if (sum == k) {
+                    count++;
+                }
+            }
+        }
+
+        // Return total count of subarrays
+        return count;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Input array
+        int[] arr = {3, 1, 2, 4};
+
+        // Target sum
+        int k = 6;
+
+        // Create Solution object
+        Solution sol = new Solution();
+
+        // Call function and store result
+        int result = sol.subarraySum(arr, k);
+
+        // Print the count of subarrays
+        System.out.println("The number of subarrays is: " + result);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to find count of subarrays with sum equal to k
+    def subarraySum(self, arr, k):
+        # Size of the array
+        n = len(arr)
+
+        # Initialize count of subarrays
+        count = 0
+
+        # Traverse all possible start indices
+        for i in range(n):
+            # Initialize sum for current subarray
+            total = 0
+
+            # Traverse all possible end indices from start
+            for j in range(i, n):
+                # Add current element to sum
+                total += arr[j]
+
+                # If sum equals k, increment count
+                if total == k:
+                    count += 1
+
+        # Return total count of subarrays
+        return count
+
+
+# Driver code
+if __name__ == "__main__":
+    # Input array
+    arr = [3, 1, 2, 4]
+
+    # Target sum
+    k = 6
+
+    # Create Solution object
+    sol = Solution()
+
+    # Call function and store result
+    result = sol.subarraySum(arr, k)
+
+    # Print the count of subarrays
+    print("The number of subarrays is:", result)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find count of subarrays with sum equal to k
+    subarraySum(arr, k) {
+        // Size of the array
+        let n = arr.length;
+
+        // Initialize count of subarrays
+        let count = 0;
+
+        // Traverse all possible start indices
+        for (let i = 0; i &lt; n; i++) {
+            // Initialize sum for current subarray
+            let sum = 0;
+
+            // Traverse all possible end indices from start
+            for (let j = i; j &lt; n; j++) {
+                // Add current element to sum
+                sum += arr[j];
+
+                // If sum equals k, increment count
+                if (sum === k) {
+                    count++;
+                }
+            }
+        }
+
+        // Return total count of subarrays
+        return count;
+    }
+}
+
+// Driver code
+const sol = new Solution();
+
+// Input array
+const arr = [3, 1, 2, 4];
+
+// Target sum
+const k = 6;
+
+// Call function and store result
+const result = sol.subarraySum(arr, k);
+
+// Print the count of subarrays
+console.log("The number of subarrays is:", result);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity:</strong> O(n²),We use two nested loops to check all subarrays, where n is the size of the array.<br/><br/>
+<strong>Space Complexity:</strong> O(1),Only a few extra variables are used, so constant extra space regardless of input size.
+
+                    </p>
+</details>
+</div>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+In this approach, we are going to use the concept of the prefix sum to solve this problem. Here, the prefix sum of a subarray ending at index i simply means the sum of all the elements of that subarray.<br/><br/>
+Assume, the prefix sum of a subarray ending at index i is <strong>x</strong>. In that subarray, we will search for another subarray ending at index i, whose sum equals <strong>k</strong>. Here, we need to observe that if there exists another subarray ending at index i with sum k, then the prefix sum of the rest of the subarray will be <strong>x-k</strong>. The below image will clarify the concept:
+<br/><br/>
+Now, <em>for a subarray ending at index i with the prefix sum x, if we remove the part with the prefix sum x-k, we will be left with the part whose sum is equal to k. And that is what we want.</em>
+Now, there may exist multiple subarrays with the prefix sum x-k. So, the number of subarrays with sum k that we can generate from the entire subarray ending at index i, is exactly equal to the number of subarrays with the prefix sum x-k, that we can remove from the entire subarray.<br/><br/>
+That is why, instead of searching the subarrays with sum k, we will keep the occurrence of the prefix sum of the subarrays using a map data structure. <br/><br/>
+In the map, we will store every prefix sum calculated, with its occurrence in a &lt;key, value&gt; pair. Now, at index i, we just need to check the map data structure to get the number of times that the subarrays with the prefix sum x-k occur. Then we will simply add that number to our answer.<br/><br/>
+We will apply the above process for all possible indices of the given array. The possible values of the index i can be from 0 to n-1(where n = size of the array)
+                        <ol><li>First, we will declare a map to store the prefix sums and their counts.</li><li>Then, we will set the value of 0 as 1 on the map.</li><li>Then we will run a loop(say i) from index 0 to n-1(n = size of the array).</li><li>For each index i, we will do the following:<ol><li>We will add the current element i.e. arr[i] to the prefix sum.</li><li>We will calculate the prefix sum i.e. x-k, for which we need the occurrence.</li><li>We will add the occurrence of the prefix sum x-k i.e. mpp[x-k] to our answer.</li><li>Then we will store the current prefix sum in the map increasing its occurrence by 1.</li></ol></li></ol>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/7cf9858b114fe2fc.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/edca22a82a28aec6.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/ffc5c187b10ed930.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/7cf9858b114fe2fc.png"/><img alt="Image 2" loading="lazy" src="../assets/img/edca22a82a28aec6.png"/><img alt="Image 3" loading="lazy" src="../assets/img/ffc5c187b10ed930.png"/></div></div>
+<strong>Question: Why do we need to set the value of 0?</strong><strong><br/></strong>Let’s understand this using an example. Assume the given array is [3, -3, 1, 1, 1] and k is 3. Now, for index 0, we get the total prefix sum as 3, and k is also 3. So, the prefix sum of the remove-part should be x-k = 3-3 = 0. Now, if the value is not previously set for the key 0 in the map, we will get the default value 0 for the key 0 and we will add 0 to our answer. This will mean that we have not found any subarray with sum 3 till now. But this should not be the case as index 0 itself is a subarray with sum k i.e. 3.<br/>So, in order to avoid this situation we need to set the value of 0 as 1 on the map beforehand.
+
+
+<p><img height="457" loading="lazy" src="../assets/img/7113a6d51b74d9b0.png" width="481"/></p>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find count of subarrays with sum equal to k using prefix sums and hashmap
+    int subarraySum(vector&lt;int&gt;&amp; arr, int k) {
+        // Size of the array
+        int n = arr.size();
+
+        // Map to store frequency of prefix sums
+        unordered_map&lt;int, int&gt; prefixSumCount;
+
+        // Initialize prefix sum and count of subarrays
+        int prefixSum = 0;
+        int count = 0;
+
+        // Base case: prefix sum 0 has occurred once
+        prefixSumCount[0] = 1;
+
+        // Traverse through the array
+        for (int i = 0; i &lt; n; i++) {
+            // Add current element to prefix sum
+            prefixSum += arr[i];
+
+            // Calculate the prefix sum that needs to be removed
+            int remove = prefixSum - k;
+
+            // If this prefix sum has been seen before,
+            // add its count to the result
+            if (prefixSumCount.find(remove) != prefixSumCount.end()) {
+                count += prefixSumCount[remove];
+            }
+
+            // Update the frequency of the current prefix sum
+            prefixSumCount[prefixSum]++;
+        }
+
+        // Return the total count of subarrays
+        return count;
+    }
+};
+
+int main() {
+    // Input array
+    vector&lt;int&gt; arr = {3, 1, 2, 4};
+
+    // Target sum
+    int k = 6;
+
+    // Create Solution object
+    Solution sol;
+
+    // Call function and store result
+    int result = sol.subarraySum(arr, k);
+
+    // Print the count of subarrays
+    cout &lt;&lt; "The number of subarrays is: " &lt;&lt; result &lt;&lt; "\n";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.HashMap;
+
+class Solution {
+    // Function to find count of subarrays with sum equal to k using prefix sums and hashmap
+    public int subarraySum(int[] arr, int k) {
+        // Size of the array
+        int n = arr.length;
+
+        // Map to store frequency of prefix sums
+        HashMap&lt;Integer, Integer&gt; prefixSumCount = new HashMap&lt;&gt;();
+
+        // Initialize prefix sum and count of subarrays
+        int prefixSum = 0;
+        int count = 0;
+
+        // Base case: prefix sum 0 has occurred once
+        prefixSumCount.put(0, 1);
+
+        // Traverse through the array
+        for (int i = 0; i &lt; n; i++) {
+            // Add current element to prefix sum
+            prefixSum += arr[i];
+
+            // Calculate the prefix sum that needs to be removed
+            int remove = prefixSum - k;
+
+            // If this prefix sum has been seen before,
+            // add its count to the result
+            if (prefixSumCount.containsKey(remove)) {
+                count += prefixSumCount.get(remove);
+            }
+
+            // Update the frequency of the current prefix sum
+            prefixSumCount.put(prefixSum, prefixSumCount.getOrDefault(prefixSum, 0) + 1);
+        }
+
+        // Return the total count of subarrays
+        return count;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Input array
+        int[] arr = {3, 1, 2, 4};
+
+        // Target sum
+        int k = 6;
+
+        // Create Solution object
+        Solution sol = new Solution();
+
+        // Call function and store result
+        int result = sol.subarraySum(arr, k);
+
+        // Print the count of subarrays
+        System.out.println("The number of subarrays is: " + result);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to find count of subarrays with sum equal to k using prefix sums and hashmap
+    def subarraySum(self, arr, k):
+        # Size of the array
+        n = len(arr)
+
+        # Dictionary to store frequency of prefix sums
+        prefixSumCount = {}
+
+        # Initialize prefix sum and count of subarrays
+        prefixSum = 0
+        count = 0
+
+        # Base case: prefix sum 0 has occurred once
+        prefixSumCount[0] = 1
+
+        # Traverse through the array
+        for i in range(n):
+            # Add current element to prefix sum
+            prefixSum += arr[i]
+
+            # Calculate the prefix sum that needs to be removed
+            remove = prefixSum - k
+
+            # If this prefix sum has been seen before,
+            # add its count to the result
+            if remove in prefixSumCount:
+                count += prefixSumCount[remove]
+
+            # Update the frequency of the current prefix sum
+            prefixSumCount[prefixSum] = prefixSumCount.get(prefixSum, 0) + 1
+
+        # Return the total count of subarrays
+        return count
+
+
+# Driver code
+if __name__ == "__main__":
+    # Input array
+    arr = [3, 1, 2, 4]
+
+    # Target sum
+    k = 6
+
+    # Create Solution object
+    sol = Solution()
+
+    # Call function and store result
+    result = sol.subarraySum(arr, k)
+
+    # Print the count of subarrays
+    print("The number of subarrays is:", result)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find count of subarrays with sum equal to k using prefix sums and hashmap
+    subarraySum(arr, k) {
+        // Size of the array
+        let n = arr.length;
+
+        // Map to store frequency of prefix sums
+        const prefixSumCount = new Map();
+
+        // Initialize prefix sum and count of subarrays
+        let prefixSum = 0;
+        let count = 0;
+
+        // Base case: prefix sum 0 has occurred once
+        prefixSumCount.set(0, 1);
+
+        // Traverse through the array
+        for (let i = 0; i &lt; n; i++) {
+            // Add current element to prefix sum
+            prefixSum += arr[i];
+
+            // Calculate the prefix sum that needs to be removed
+            const remove = prefixSum - k;
+
+            // If this prefix sum has been seen before,
+            // add its count to the result
+            if (prefixSumCount.has(remove)) {
+                count += prefixSumCount.get(remove);
+            }
+
+            // Update the frequency of the current prefix sum
+            prefixSumCount.set(prefixSum, (prefixSumCount.get(prefixSum) || 0) + 1);
+        }
+
+        // Return the total count of subarrays
+        return count;
+    }
+}
+
+// Driver code
+const sol = new Solution();
+
+// Input array
+const arr = [3, 1, 2, 4];
+
+// Target sum
+const k = 6;
+
+// Call function and store result
+const result = sol.subarraySum(arr, k);
+
+// Print the count of subarrays
+console.log("The number of subarrays is:", result);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity:</strong> O(n) We traverse the array once, where n is the size of the array. Each prefix sum operation and hashmap lookup is O(1) on average.<br/><br/>
+<strong>Space Complexity:</strong> O(n) In the worst case, all prefix sums are distinct and stored in the hashmap, so space grows linearly with input size.
+
+                    </p>
+</details>
+</div>
+</details>
+</div>
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

@@ -1,0 +1,934 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Set Matrix Zero</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Set Matrix Zero</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/set-matrix-zero/</code></div>
+  <p><strong>Problem Statement: </strong> Given a matrix if an element in the matrix is 0 then you will have to set its entire column and row to 0 and then return the matrix..</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p><strong>Input:</strong> matrix=[[1,1,1],[1,0,1],[1,1,1]]
+<strong>Output:</strong> [[1,0,1],[0,0,0],[1,0,1]]
+<strong>Explanation:</strong> Since matrix[2][2]=0.Therfore the 2nd column and 2nd row wil be set to 0.<br/>
+<strong>Input:</strong> matrix=[[0,1,2,0],[3,4,5,2],[1,3,1,5]]
+<strong>Output:</strong>[[0,0,0,0],[0,4,5,0],[0,3,1,0]]
+<strong>Explanation:</strong>Since matrix[0][0]=0 and matrix[0][3]=0. Therefore 1st row, 1st column and 4th column will be set to 0</p></pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/set-matrix-zeroes" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Brute force Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+                        
+Think of the matrix as a chessboard. If you see a zero somewhere, you need to wipe out its whole row and column to zero.
+In brute force, the moment you find a zero, you immediately mark its entire row and column.
+But here’s the trap if you set them to zero immediately, we might mess up future checks because a newly placed zero could cause extra unwanted zeroing.
+
+To avoid that, we use a special marker value (like -1 or something that can’t exist in the input) to mark places where zeros should be placed later. Once the scanning is done, we do a second pass and replace all markers with 0.
+
+<ul> <li>Traverse the entire matrix.</li> <li>If an element is zero:</li> <ul> <li>Mark all elements in its row (except already zero) as -1.</li> <li>Mark all elements in its column (except already zero) as -1.</li> </ul> <li>Once the full traversal is complete, replace all -1 with 0.</li> </ul>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+     // Function to set entire row and column to 0 if an element in the matrix is 0
+    void setZeroes(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) {
+        // Get number of rows
+        int m = matrix.size();
+        // Get number of columns
+        int n = matrix[0].size();
+
+        // Traverse each cell of the matrix
+        for (int i = 0; i &lt; m; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                // If current cell is zero
+                if (matrix[i][j] == 0) {
+                    // Mark all elements in this row as -1 (except existing zeros)
+                    for (int col = 0; col &lt; n; col++) {
+                        if (matrix[i][col] != 0)
+                            matrix[i][col] = -1;
+                    }
+                    // Mark all elements in this column as -1 (except existing zeros)
+                    for (int row = 0; row &lt; m; row++) {
+                        if (matrix[row][j] != 0)
+                            matrix[row][j] = -1;
+                    }
+                }
+            }
+        }
+
+        // Second pass: replace all -1 markers with 0
+        for (int i = 0; i &lt; m; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                if (matrix[i][j] == -1)
+                    matrix[i][j] = 0;
+            }
+        }
+    }
+};
+
+int main() {
+    // Example matrix
+    vector&lt;vector&lt;int&gt;&gt; matrix = {{1,1,1},{1,0,1},{1,1,1}};
+    
+    // Create Solution object
+    Solution sol;
+    // Call function to modify matrix
+    sol.setZeroes(matrix);
+    
+    // Print final matrix
+    for (auto row : matrix) {
+        for (auto val : row) {
+            cout &lt;&lt; val &lt;&lt; " ";
+        }
+        cout &lt;&lt; endl;
+    }
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to set entire row and column to 0 if an element in the matrix is 0
+    public void setZeroes(int[][] matrix) {
+        // Get number of rows
+        int m = matrix.length;
+        // Get number of columns
+        int n = matrix[0].length;
+
+        // First pass: mark rows and columns
+        for (int i = 0; i &lt; m; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                // If the cell is zero
+                if (matrix[i][j] == 0) {
+                    // Mark entire row as -1 (except zeros)
+                    for (int col = 0; col &lt; n; col++) {
+                        if (matrix[i][col] != 0)
+                            matrix[i][col] = -1;
+                    }
+                    // Mark entire column as -1 (except zeros)
+                    for (int row = 0; row &lt; m; row++) {
+                        if (matrix[row][j] != 0)
+                            matrix[row][j] = -1;
+                    }
+                }
+            }
+        }
+
+        // Second pass: replace -1 with 0
+        for (int i = 0; i &lt; m; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                if (matrix[i][j] == -1)
+                    matrix[i][j] = 0;
+            }
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Example matrix
+        int[][] matrix = {{1,1,1},{1,0,1},{1,1,1}};
+        
+        // Create Solution object
+        Solution sol = new Solution();
+        // Modify matrix
+        sol.setZeroes(matrix);
+        
+        // Print result
+        for (int[] row : matrix) {
+            for (int val : row) {
+                System.out.print(val + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+     # Function to set entire row and column to 0 if an element in the matrix is 0
+    def setZeroes(self, matrix):
+        # Get number of rows
+        m = len(matrix)
+        # Get number of columns
+        n = len(matrix[0])
+
+        # First pass: mark rows and columns
+        for i in range(m):
+            for j in range(n):
+                # If current cell is zero
+                if matrix[i][j] == 0:
+                    # Mark entire row
+                    for col in range(n):
+                        if matrix[i][col] != 0:
+                            matrix[i][col] = -1
+                    # Mark entire column
+                    for row in range(m):
+                        if matrix[row][j] != 0:
+                            matrix[row][j] = -1
+
+        # Second pass: replace -1 with 0
+        for i in range(m):
+            for j in range(n):
+                if matrix[i][j] == -1:
+                    matrix[i][j] = 0
+
+# Driver code
+matrix = [[1,1,1],[1,0,1],[1,1,1]]
+sol = Solution()
+sol.setZeroes(matrix)
+for row in matrix:
+    print(row)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to set entire row and column to 0 if an element in the matrix is 0
+    setZeroes(matrix) {
+        // Get number of rows
+        let m = matrix.length;
+        // Get number of columns
+        let n = matrix[0].length;
+
+        // First pass: mark with -1
+        for (let i = 0; i &lt; m; i++) {
+            for (let j = 0; j &lt; n; j++) {
+                if (matrix[i][j] === 0) {
+                    // Mark row
+                    for (let col = 0; col &lt; n; col++) {
+                        if (matrix[i][col] !== 0)
+                            matrix[i][col] = -1;
+                    }
+                    // Mark column
+                    for (let row = 0; row &lt; m; row++) {
+                        if (matrix[row][j] !== 0)
+                            matrix[row][j] = -1;
+                    }
+                }
+            }
+        }
+
+        // Second pass: replace -1 with 0
+        for (let i = 0; i &lt; m; i++) {
+            for (let j = 0; j &lt; n; j++) {
+                if (matrix[i][j] === -1)
+                    matrix[i][j] = 0;
+            }
+        }
+    }
+}
+
+// Driver code
+let matrix = [[1,1,1],[1,0,1],[1,1,1]];
+let sol = new Solution();
+sol.setZeroes(matrix);
+console.log(matrix);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+<strong>Time Complexity:</strong> O(m * n * (m + n)), We iterate through every cell (m * n), and for each zero, we potentially mark its entire row (O(n)) and column (O(m)), leading to O(m * n * (m + n)) overall.<br/><br/>
+<strong>Space Complexity:</strong> O(1), We are not using any extra data structures, only modifying the matrix in place (apart from a few variables).
+
+                    </p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="better-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Better Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+Instead of marking directly in the matrix, keep two extra arrays:
+<ul>
+<li>One to track which rows need to be zeroed.</li>
+<li>One to track which columns need to be zeroed.</li>
+</ul>
+
+
+
+When you find a zero, mark its row index in the row array and column index in the col array.
+After the scan, you go back and zero out all marked rows and columns.
+
+This avoids accidental over-zeroing in the first pass.
+
+
+<ul> <li>Create a row array of size m (rows) and a col array of size n (columns) initialized to false.</li> <li>First pass: Traverse the matrix, and when you find a zero:</li> <ul> <li>Mark the corresponding row index in row array.</li> <li>Mark the corresponding col index in col array.</li> </ul> <li>Second pass: Traverse the matrix again, and if either the row or col is marked, set the cell to zero.</li> </ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/2123d8d02c9a9e13.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/ac4d6bad0abe464f.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/6a1c58a0095d1149.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/2123d8d02c9a9e13.png"/><img alt="Image 2" loading="lazy" src="../assets/img/ac4d6bad0abe464f.png"/><img alt="Image 3" loading="lazy" src="../assets/img/6a1c58a0095d1149.png"/></div></div>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to set entire row and column to 0 if an element in the matrix is 0
+    void setZeroes(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) {
+        // Get number of rows
+        int m = matrix.size();
+        // Get number of columns
+        int n = matrix[0].size();
+
+        // Create row marker array
+        vector&lt;int&gt; row(m, 0);
+        // Create column marker array
+        vector&lt;int&gt; col(n, 0);
+
+        // First pass: mark rows and columns that need to be zeroed
+        for (int i = 0; i &lt; m; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                // If element is zero, mark its row and column
+                if (matrix[i][j] == 0) {
+                    row[i] = 1;
+                    col[j] = 1;
+                }
+            }
+        }
+
+        // Second pass: set cells to zero based on markers
+        for (int i = 0; i &lt; m; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                // If the row or column is marked, set cell to zero
+                if (row[i] == 1 || col[j] == 1) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+    }
+};
+
+int main() {
+    // Create the matrix
+    vector&lt;vector&lt;int&gt;&gt; matrix = {{1,1,1},{1,0,1},{1,1,1}};
+    
+    // Create Solution object
+    Solution obj;
+    // Call function
+    obj.setZeroes(matrix);
+    
+    // Print the updated matrix
+    for (auto row : matrix) {
+        for (auto val : row) {
+            cout &lt;&lt; val &lt;&lt; " ";
+        }
+        cout &lt;&lt; endl;
+    }
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to set entire row and column to 0 if an element in the matrix is 0
+    public void setZeroes(int[][] matrix) {
+        // Get number of rows
+        int m = matrix.length;
+        // Get number of columns
+        int n = matrix[0].length;
+
+        // Create row marker array
+        boolean[] row = new boolean[m];
+        // Create column marker array
+        boolean[] col = new boolean[n];
+
+        // First pass: mark rows and columns that need to be zeroed
+        for (int i = 0; i &lt; m; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                // If element is zero, mark its row and column
+                if (matrix[i][j] == 0) {
+                    row[i] = true;
+                    col[j] = true;
+                }
+            }
+        }
+
+        // Second pass: set cells to zero based on markers
+        for (int i = 0; i &lt; m; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                // If the row or column is marked, set cell to zero
+                if (row[i] || col[j]) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Create the matrix
+        int[][] matrix = {{1,1,1},{1,0,1},{1,1,1}};
+        
+        // Create Solution object
+        Solution obj = new Solution();
+        // Call function
+        obj.setZeroes(matrix);
+        
+        // Print the updated matrix
+        for (int[] row : matrix) {
+            for (int val : row) {
+                System.out.print(val + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to set entire row and column to 0 if an element in the matrix is 0
+    def setZeroes(self, matrix):
+        # Get number of rows
+        m = len(matrix)
+        # Get number of columns
+        n = len(matrix[0])
+
+        # Create row marker array
+        row = [0] * m
+        # Create column marker array
+        col = [0] * n
+
+        # First pass: mark rows and columns that need to be zeroed
+        for i in range(m):
+            for j in range(n):
+                # If element is zero, mark its row and column
+                if matrix[i][j] == 0:
+                    row[i] = 1
+                    col[j] = 1
+
+        # Second pass: set cells to zero based on markers
+        for i in range(m):
+            for j in range(n):
+                # If the row or column is marked, set cell to zero
+                if row[i] == 1 or col[j] == 1:
+                    matrix[i][j] = 0
+
+# Driver code
+matrix = [[1,1,1],[1,0,1],[1,1,1]]
+obj = Solution()
+obj.setZeroes(matrix)
+for r in matrix:
+    print(r)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to set entire row and column to 0 if an element in the matrix is 0
+    setZeroes(matrix) {
+        // Get number of rows
+        const m = matrix.length;
+        // Get number of columns
+        const n = matrix[0].length;
+
+        // Create row marker array
+        const row = new Array(m).fill(false);
+        // Create column marker array
+        const col = new Array(n).fill(false);
+
+        // First pass: mark rows and columns that need to be zeroed
+        for (let i = 0; i &lt; m; i++) {
+            for (let j = 0; j &lt; n; j++) {
+                // If element is zero, mark its row and column
+                if (matrix[i][j] === 0) {
+                    row[i] = true;
+                    col[j] = true;
+                }
+            }
+        }
+
+        // Second pass: set cells to zero based on markers
+        for (let i = 0; i &lt; m; i++) {
+            for (let j = 0; j &lt; n; j++) {
+                // If the row or column is marked, set cell to zero
+                if (row[i] || col[j]) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+    }
+}
+
+// Driver code
+let matrix = [[1,1,1],[1,0,1],[1,1,1]];
+let obj = new Solution();
+obj.setZeroes(matrix);
+console.log(matrix);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity:</strong> O(m × n),We make two passes over the matrix.First pass to identify rows and columns to be zeroed (O(m × n)).Second pass to update the matrix using the markers (O(m × n)).Total time is proportional to the number of cells in the matrix, so O(m × n).
+<br/>
+<strong>Space Complexity:</strong> O(m + n),We store two extra arrays one for m rows and one for n columns.  
+No other extra space is used besides these arrays.
+
+                    </p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+
+
+Instead of using separate arrays, we use the first row and first column of the matrix itself to store whether a row or column needs to be zeroed.
+We also store two flags:
+<ul>
+<li>firstRowZero:Was the first row supposed to be all zero?</li>
+<li>firstColZero:Was the first column supposed to be all zero?</li>
+</ul>
+
+
+
+
+
+Then:
+<ul>
+<li>First pass: Mark zeros in the first row and column for any zero found in the rest of the matrix.</li>
+<li>Second pass: Use those markers to set rows and columns to zero.</li>
+</ul>
+
+
+
+
+Finally, handle the first row and column separately based on the flags.
+
+This is super space-efficient because we’re reusing the input matrix itself to store markers.
+
+
+<ul> <li>Check if the first row has any zero and store in a boolean flag.</li> <li>Check if the first column has any zero and store in a boolean flag.</li> <li>Traverse the rest of the matrix:</li> <ul> <li>If a cell is zero, mark its row in the first column and its column in the first row as zero.</li> </ul> <li>Traverse again (excluding first row and column), setting cells to zero if their row marker or column marker is zero.</li> <li>Finally, update the first row and first column based on the stored flags.</li> </ul>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to set entire row and column to 0 if an element in the matrix is 0 (Optimal O(1) space)
+    void setZeroes(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) {
+        // Get dimensions of matrix
+        int m = matrix.size();
+        int n = matrix[0].size();
+
+        // Flag to track if first row should be zeroed
+        bool firstRowZero = false;
+        // Flag to track if first column should be zeroed
+        bool firstColZero = false;
+
+        // Check if first row has any zero
+        for (int j = 0; j &lt; n; j++) {
+            if (matrix[0][j] == 0) {
+                firstRowZero = true;
+                break;
+            }
+        }
+
+        // Check if first column has any zero
+        for (int i = 0; i &lt; m; i++) {
+            if (matrix[i][0] == 0) {
+                firstColZero = true;
+                break;
+            }
+        }
+
+        // Mark rows and columns in first row/column
+        for (int i = 1; i &lt; m; i++) {
+            for (int j = 1; j &lt; n; j++) {
+                if (matrix[i][j] == 0) {
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
+                }
+            }
+        }
+
+        // Set matrix cells to zero based on markers
+        for (int i = 1; i &lt; m; i++) {
+            for (int j = 1; j &lt; n; j++) {
+                if (matrix[i][0] == 0 || matrix[0][j] == 0) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+
+        // Handle first row
+        if (firstRowZero) {
+            for (int j = 0; j &lt; n; j++) {
+                matrix[0][j] = 0;
+            }
+        }
+
+        // Handle first column
+        if (firstColZero) {
+            for (int i = 0; i &lt; m; i++) {
+                matrix[i][0] = 0;
+            }
+        }
+    }
+};
+
+int main() {
+    Solution obj;
+    vector&lt;vector&lt;int&gt;&gt; matrix = {{0,1,2,0},{3,4,5,2},{1,3,1,5}};
+    obj.setZeroes(matrix);
+    for (auto row : matrix) {
+        for (auto val : row) {
+            cout &lt;&lt; val &lt;&lt; " ";
+        }
+        cout &lt;&lt; endl;
+    }
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import.java.util.*;
+class Solution {
+    // Function to set entire row and column to 0 if an element in the matrix 
+    public void setZeroes(int[][] matrix) {
+        // Get dimensions of matrix
+        int m = matrix.length;
+        int n = matrix[0].length;
+
+        // Flag to track if first row should be zeroed
+        boolean firstRowZero = false;
+        // Flag to track if first column should be zeroed
+        boolean firstColZero = false;
+
+        // Check if first row has any zero
+        for (int j = 0; j &lt; n; j++) {
+            if (matrix[0][j] == 0) {
+                firstRowZero = true;
+                break;
+            }
+        }
+
+        // Check if first column has any zero
+        for (int i = 0; i &lt; m; i++) {
+            if (matrix[i][0] == 0) {
+                firstColZero = true;
+                break;
+            }
+        }
+
+        // Use first row/column as markers
+        for (int i = 1; i &lt; m; i++) {
+            for (int j = 1; j &lt; n; j++) {
+                if (matrix[i][j] == 0) {
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
+                }
+            }
+        }
+
+        // Set cells to zero based on markers
+        for (int i = 1; i &lt; m; i++) {
+            for (int j = 1; j &lt; n; j++) {
+                if (matrix[i][0] == 0 || matrix[0][j] == 0) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+
+        // Zero the first row if needed
+        if (firstRowZero) {
+            for (int j = 0; j &lt; n; j++) {
+                matrix[0][j] = 0;
+            }
+        }
+
+        // Zero the first column if needed
+        if (firstColZero) {
+            for (int i = 0; i &lt; m; i++) {
+                matrix[i][0] = 0;
+            }
+        }
+    }
+}
+
+// Main class to run the program
+public class Main {
+    public static void main(String[] args) {
+        Solution obj = new Solution();
+        int[][] matrix = {{0,1,2,0},{3,4,5,2},{1,3,1,5}};
+        obj.setZeroes(matrix);
+        for (int[] row : matrix) {
+            for (int val : row) {
+                System.out.print(val + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to set entire row and column to 0 if an element in the matrix 
+    def setZeroes(self, matrix):
+        # Get dimensions of matrix
+        m = len(matrix)
+        n = len(matrix[0])
+
+        # Flag to track if first row should be zeroed
+        first_row_zero = False
+        # Flag to track if first column should be zeroed
+        first_col_zero = False
+
+        # Check if first row has any zero
+        for j in range(n):
+            if matrix[0][j] == 0:
+                first_row_zero = True
+                break
+
+        # Check if first column has any zero
+        for i in range(m):
+            if matrix[i][0] == 0:
+                first_col_zero = True
+                break
+
+        # Use first row/column as markers
+        for i in range(1, m):
+            for j in range(1, n):
+                if matrix[i][j] == 0:
+                    matrix[i][0] = 0
+                    matrix[0][j] = 0
+
+        # Set cells to zero based on markers
+        for i in range(1, m):
+            for j in range(1, n):
+                if matrix[i][0] == 0 or matrix[0][j] == 0:
+                    matrix[i][j] = 0
+
+        # Zero the first row if needed
+        if first_row_zero:
+            for j in range(n):
+                matrix[0][j] = 0
+
+        # Zero the first column if needed
+        if first_col_zero:
+            for i in range(m):
+                matrix[i][0] = 0
+
+
+# Driver code
+matrix = [[0,1,2,0],[3,4,5,2],[1,3,1,5]]
+Solution().setZeroes(matrix)
+for row in matrix:
+    print(row)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to set entire row and column to 0 if an element in the matrix 
+    setZeroes(matrix) {
+        // Get dimensions of matrix
+        let m = matrix.length;
+        let n = matrix[0].length;
+
+        // Flag to track if first row should be zeroed
+        let firstRowZero = false;
+        // Flag to track if first column should be zeroed
+        let firstColZero = false;
+
+        // Check if first row has any zero
+        for (let j = 0; j &lt; n; j++) {
+            if (matrix[0][j] === 0) {
+                firstRowZero = true;
+                break;
+            }
+        }
+
+        // Check if first column has any zero
+        for (let i = 0; i &lt; m; i++) {
+            if (matrix[i][0] === 0) {
+                firstColZero = true;
+                break;
+            }
+        }
+
+        // Use first row/column as markers
+        for (let i = 1; i &lt; m; i++) {
+            for (let j = 1; j &lt; n; j++) {
+                if (matrix[i][j] === 0) {
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
+                }
+            }
+        }
+
+        // Set cells to zero based on markers
+        for (let i = 1; i &lt; m; i++) {
+            for (let j = 1; j &lt; n; j++) {
+                if (matrix[i][0] === 0 || matrix[0][j] === 0) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+
+        // Zero the first row if needed
+        if (firstRowZero) {
+            for (let j = 0; j &lt; n; j++) {
+                matrix[0][j] = 0;
+            }
+        }
+
+        // Zero the first column if needed
+        if (firstColZero) {
+            for (let i = 0; i &lt; m; i++) {
+                matrix[i][0] = 0;
+            }
+        }
+    }
+}
+
+// Driver code
+let matrix = [[0,1,2,0],[3,4,5,2],[1,3,1,5]];
+new Solution().setZeroes(matrix);
+console.log(matrix);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity:</strong> O(m × n),We iterate over the entire matrix a constant number of times (first pass for markers, second pass for zeroing, final pass for first row/col), where m = number of rows and n = number of columns.<br/><br/>
+<strong>Space Complexity:</strong> O(1),No extra space is used apart from a few boolean flags; all marker information is stored within the first row and column of the matrix itself.
+
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

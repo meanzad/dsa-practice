@@ -1,0 +1,905 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Two Sum : Check if a pair with given sum exists in Array</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Two Sum : Check if a pair with given sum exists in Array</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/two-sum-check-if-a-pair-with-given-sum-exists-in-array/</code></div>
+  <p><strong>Problem Statement: </strong> Given an array of integers arr[] and an integer target.
+
+</p><p><strong>1st variant: </strong>Return <strong>YES</strong> if there exist two numbers such that their sum is equal to the target. Otherwise, return <strong>NO.</strong></p>
+<p><strong>2nd variant: </strong>Return indices of the two numbers such that their sum is equal to the target. Otherwise, we will return {-1, -1}.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p>
+<strong>Input:</strong> N = 5, arr[] = {2,6,5,8,11}, target = 14
+<strong>Output :</strong> YES
+<strong>Explanation:</strong> arr[1] + arr[3] = 14. So, the answer is “YES” for first variant for second variant output will be : [1,3].<br/>
+<strong>Input:</strong> N = 5, arr[] = {2,6,5,8,11}, target = 15
+<strong>Output :</strong> NO.
+<strong>Explanation:</strong> There exist no such two numbers whose sum is equal to the target. </p></pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Don’t jump directly to the solution, try it out yourself first. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Brute force Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+                         For each element of the given array, we will try to search for another element such that its sum is equal to the target. If such two numbers exist, we will return the indices or “YES” accordingly.
+
+<ul>
+<li>First, we will use a loop (say i) to select the indices of the array one by one.</li>
+<li>For every index i, we will traverse through the remaining array using another loop (say j) to find the other number such that the sum is equal to the target (i.e. arr[i] + arr[j] = target).</li>
+<li>Observation: In every iteration, if the inner loop starts from index 0, we will be checking the same pair of numbers multiple times. For example, in iteration 1, for i = 0, we will check for the pair arr[0] and arr[1]. Again in iteration 2, for i = 1, we will check arr[1] and arr[0]. So, to eliminate these same pairs, we will start the inner loop from i + 1.</li>
+</ul>
+<p><img height="457" loading="lazy" src="../assets/img/73e39d12f9ba7b05.png" width="481"/></p>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to check if any two numbers sum up to target (variant 1)
+    string twoSumExists(vector&lt;int&gt;&amp; arr, int target) {
+        int n = arr.size();
+        // Outer loop picks one element at a time
+        for (int i = 0; i &lt; n; i++) {
+            // Inner loop searches for another element that complements arr[i]
+            for (int j = i + 1; j &lt; n; j++) {
+                // If sum equals target, return "YES"
+                if (arr[i] + arr[j] == target) {
+                    return "YES";
+                }
+            }
+        }
+        // No pair found that sums to target
+        return "NO";
+    }
+
+    // Function to return indices of two numbers that sum to target (variant 2)
+    vector&lt;int&gt; twoSumIndices(vector&lt;int&gt;&amp; arr, int target) {
+        int n = arr.size();
+        // Outer loop picks one element at a time
+        for (int i = 0; i &lt; n; i++) {
+            // Inner loop searches for another element that complements arr[i]
+            for (int j = i + 1; j &lt; n; j++) {
+                // If sum equals target, return the pair of indices
+                if (arr[i] + arr[j] == target) {
+                    return {i, j};
+                }
+            }
+        }
+        // No such pair found
+        return {-1, -1};
+    }
+};
+
+int main() {
+    Solution sol;
+
+    vector&lt;int&gt; arr = {2, 6, 5, 8, 11};
+    int target = 14;
+
+    // Variant 1
+    cout &lt;&lt; sol.twoSumExists(arr, target) &lt;&lt; "\n";
+
+    // Variant 2
+    vector&lt;int&gt; res = sol.twoSumIndices(arr, target);
+    cout &lt;&lt; "[" &lt;&lt; res[0] &lt;&lt; ", " &lt;&lt; res[1] &lt;&lt; "]\n";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import.java.util.*;
+class Solution {
+    // Function to check if any two numbers sum up to target (variant 1)
+    public String twoSumExists(int[] arr, int target) {
+        int n = arr.length;
+        // Outer loop picks one element at a time
+        for (int i = 0; i &lt; n; i++) {
+            // Inner loop searches for another element that complements arr[i]
+            for (int j = i + 1; j &lt; n; j++) {
+                // If sum equals target, return "YES"
+                if (arr[i] + arr[j] == target) {
+                    return "YES";
+                }
+            }
+        }
+        // No pair found that sums to target
+        return "NO";
+    }
+
+    // Function to return indices of two numbers that sum to target (variant 2)
+    public int[] twoSumIndices(int[] arr, int target) {
+        int n = arr.length;
+        // Outer loop picks one element at a time
+        for (int i = 0; i &lt; n; i++) {
+            // Inner loop searches for another element that complements arr[i]
+            for (int j = i + 1; j &lt; n; j++) {
+                // If sum equals target, return the pair of indices
+                if (arr[i] + arr[j] == target) {
+                    return new int[]{i, j};
+                }
+            }
+        }
+        // No such pair found
+        return new int[]{-1, -1};
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+
+        int[] arr = {2, 6, 5, 8, 11};
+        int target = 14;
+
+        // Variant 1
+        System.out.println(sol.twoSumExists(arr, target));
+
+        // Variant 2
+        int[] res = sol.twoSumIndices(arr, target);
+        System.out.println("[" + res[0] + ", " + res[1] + "]");
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to check if any two numbers sum up to target (variant 1)
+    def two_sum_exists(self, arr, target):
+        n = len(arr)
+        # Outer loop picks one element at a time
+        for i in range(n):
+            # Inner loop searches for another element that complements arr[i]
+            for j in range(i + 1, n):
+                # If sum equals target, return "YES"
+                if arr[i] + arr[j] == target:
+                    return "YES"
+        # No pair found that sums to target
+        return "NO"
+
+    # Function to return indices of two numbers that sum to target (variant 2)
+    def two_sum_indices(self, arr, target):
+        n = len(arr)
+        # Outer loop picks one element at a time
+        for i in range(n):
+            # Inner loop searches for another element that complements arr[i]
+            for j in range(i + 1, n):
+                # If sum equals target, return the pair of indices
+                if arr[i] + arr[j] == target:
+                    return [i, j]
+        # No such pair found
+        return [-1, -1]
+
+if __name__ == "__main__":
+    sol = Solution()
+
+    arr = [2, 6, 5, 8, 11]
+    target = 14
+
+    # Variant 1
+    print(sol.two_sum_exists(arr, target))
+
+    # Variant 2
+    print(sol.two_sum_indices(arr, target))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to check if any two numbers sum up to target (variant 1)
+    twoSumExists(arr, target) {
+        const n = arr.length;
+        // Outer loop picks one element at a time
+        for (let i = 0; i &lt; n; i++) {
+            // Inner loop searches for another element that complements arr[i]
+            for (let j = i + 1; j &lt; n; j++) {
+                // If sum equals target, return "YES"
+                if (arr[i] + arr[j] === target) {
+                    return "YES";
+                }
+            }
+        }
+        // No pair found that sums to target
+        return "NO";
+    }
+
+    // Function to return indices of two numbers that sum to target (variant 2)
+    twoSumIndices(arr, target) {
+        const n = arr.length;
+        // Outer loop picks one element at a time
+        for (let i = 0; i &lt; n; i++) {
+            // Inner loop searches for another element that complements arr[i]
+            for (let j = i + 1; j &lt; n; j++) {
+                // If sum equals target, return the pair of indices
+                if (arr[i] + arr[j] === target) {
+                    return [i, j];
+                }
+            }
+        }
+        // No such pair found
+        return [-1, -1];
+    }
+}
+
+// Driver code
+const sol = new Solution();
+
+const arr = [2, 6, 5, 8, 11];
+const target = 14;
+
+// Variant 1
+console.log(sol.twoSumExists(arr, target));
+
+// Variant 2
+console.log(sol.twoSumIndices(arr, target));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+</p><p><b>Time Complexity:</b> O(N²) because we use two nested loops to check every possible pair of elements in the array, where N is the size of the array.</p>
+<p><b>Space Complexity:</b> O(1) as we use a constant amount of extra space regardless of input size.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="better-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Better Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+Basically, in the previous approach we selected one element and then searched for the other one using a loop. Here instead of using a loop, we will use the HashMap to check if the other element i.e. target  (selected element) exists. Thus we can trim down the time complexity of the problem.<br/><br/>
+And for the second variant, we will store the element along with its index in the HashMap. Thus we can easily retrieve the index of the other element i.e. target (selected element) without iterating the array.
+
+<ul>
+<li>We will select the element of the array one by one using a loop (say i).</li>
+<li>Then we will check if the other required element (i.e. target - arr[i]) exists in the HashMap.</li>
+<li>If that element exists, then we will return “YES” for the first variant or we will return the current index i.e. i, and the index of the element found using map i.e. mp[target - arr[i]].</li>
+<li>If that element does not exist, then we will just store the current element in the HashMap along with its index. Because in the future, the current element might be a part of our answer.</li>
+<li>Finally, if we are out of the loop, that means there is no such pair whose sum is equal to the target. In this case, we will return either “NO” or {-1, -1} as per the variant of the question.</li>
+</ul>
+<p><img height="457" loading="lazy" src="../assets/img/caf16b103cbb80a9.png" width="481"/></p>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Variant 1: Check if two numbers sum to target using hashing
+    string twoSumExists(vector&lt;int&gt;&amp; arr, int target) {
+        unordered_map&lt;int, int&gt; mp;  // Map to store element -&gt; index
+        int n = arr.size();
+        // Iterate over all elements
+        for (int i = 0; i &lt; n; i++) {
+            int complement = target - arr[i];  // Needed value to reach target sum
+            // Check if complement is already in map
+            if (mp.find(complement) != mp.end()) {
+                return "YES";  // Pair found
+            }
+            // Store current element with its index for future reference
+            mp[arr[i]] = i;
+        }
+        // No pair found
+        return "NO";
+    }
+
+    // Variant 2: Return indices of two numbers that sum to target using hashing
+    vector&lt;int&gt; twoSumIndices(vector&lt;int&gt;&amp; arr, int target) {
+        unordered_map&lt;int, int&gt; mp;  // Map to store element -&gt; index
+        int n = arr.size();
+        for (int i = 0; i &lt; n; i++) {
+            int complement = target - arr[i];
+            // If complement found, return indices
+            if (mp.find(complement) != mp.end()) {
+                return {mp[complement], i};
+            }
+            // Store current element and index
+            mp[arr[i]] = i;
+        }
+        return {-1, -1};  // No pair found
+    }
+};
+
+int main() {
+    Solution sol;
+    vector&lt;int&gt; arr = {2, 6, 5, 8, 11};
+    int target = 14;
+
+    cout &lt;&lt; sol.twoSumExists(arr, target) &lt;&lt; "\n";
+    vector&lt;int&gt; res = sol.twoSumIndices(arr, target);
+    cout &lt;&lt; "[" &lt;&lt; res[0] &lt;&lt; ", " &lt;&lt; res[1] &lt;&lt; "]\n";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.HashMap;
+
+class Solution {
+    // Variant 1: Check if two numbers sum to target using hashing
+    public String twoSumExists(int[] arr, int target) {
+        HashMap&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();
+        // Iterate over all elements
+        for (int i = 0; i &lt; arr.length; i++) {
+            int complement = target - arr[i];
+            // Check if complement exists in map
+            if (map.containsKey(complement)) {
+                return "YES";  // Pair found
+            }
+            // Store current element and its index
+            map.put(arr[i], i);
+        }
+        // No pair found
+        return "NO";
+    }
+
+    // Variant 2: Return indices of two numbers that sum to target using hashing
+    public int[] twoSumIndices(int[] arr, int target) {
+        HashMap&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();
+        for (int i = 0; i &lt; arr.length; i++) {
+            int complement = target - arr[i];
+            // If complement found, return indices
+            if (map.containsKey(complement)) {
+                return new int[] { map.get(complement), i };
+            }
+            // Store current element and index
+            map.put(arr[i], i);
+        }
+        // No pair found
+        return new int[] { -1, -1 };
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        int[] arr = {2, 6, 5, 8, 11};
+        int target = 14;
+
+        System.out.println(sol.twoSumExists(arr, target));
+        int[] res = sol.twoSumIndices(arr, target);
+        System.out.println("[" + res[0] + ", " + res[1] + "]");
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Variant 1: Check if two numbers sum to target using hashing
+    def two_sum_exists(self, arr, target):
+        mp = {}  # Dictionary to store element -&gt; index
+        # Iterate over all elements
+        for i, num in enumerate(arr):
+            complement = target - num
+            # Check if complement exists in dictionary
+            if complement in mp:
+                return "YES"  # Pair found
+            # Store current element and its index
+            mp[num] = i
+        # No pair found
+        return "NO"
+
+    # Variant 2: Return indices of two numbers that sum to target using hashing
+    def two_sum_indices(self, arr, target):
+        mp = {}  # Dictionary to store element -&gt; index
+        for i, num in enumerate(arr):
+            complement = target - num
+            # If complement found, return indices
+            if complement in mp:
+                return [mp[complement], i]
+            # Store current element and index
+            mp[num] = i
+        # No pair found
+        return [-1, -1]
+
+if __name__ == "__main__":
+    sol = Solution()
+    arr = [2, 6, 5, 8, 11]
+    target = 14
+
+    print(sol.two_sum_exists(arr, target))
+    print(sol.two_sum_indices(arr, target))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Variant 1: Check if two numbers sum to target using hashing
+    twoSumExists(arr, target) {
+        const map = new Map();  // Map to store element -&gt; index
+        // Iterate over all elements
+        for (let i = 0; i &lt; arr.length; i++) {
+            const complement = target - arr[i];
+            // Check if complement exists in map
+            if (map.has(complement)) {
+                return "YES";  // Pair found
+            }
+            // Store current element and index
+            map.set(arr[i], i);
+        }
+        // No pair found
+        return "NO";
+    }
+
+    // Variant 2: Return indices of two numbers that sum to target using hashing
+    twoSumIndices(arr, target) {
+        const map = new Map();  // Map to store element -&gt; index
+        for (let i = 0; i &lt; arr.length; i++) {
+            const complement = target - arr[i];
+            // If complement found, return indices
+            if (map.has(complement)) {
+                return [map.get(complement), i];
+            }
+            // Store current element and index
+            map.set(arr[i], i);
+        }
+        // No pair found
+        return [-1, -1];
+    }
+}
+
+// Driver code
+const sol = new Solution();
+const arr = [2, 6, 5, 8, 11];
+const target = 14;
+
+console.log(sol.twoSumExists(arr, target));
+console.log(sol.twoSumIndices(arr, target));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><b>Time Complexity:</b> O(N) because we traverse the array only once, and each lookup or insertion in the hash map takes O(1) on average, where N is the size of the array.</p>
+<p><b>Space Complexity:</b> O(N) since in the worst case we may store all elements of the array in the hash map.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+In this approach, we will first sort the array and will try to choose the numbers in a greedy way.<br/><br/>We will keep a left pointer at the first index and a right pointer at the last index. Now until left &lt; right, we will check the sum of arr[left] and arr[right]. Now if the sum &lt; target, we need bigger numbers and so we will increment the left pointer. But if sum &gt; target, we need to consider lesser numbers and so we will decrement the right pointer.<br/><br/>
+If sum == target we will return either “YES” or the indices as per the question. But if the left crosses the right pointer, we will return “NO” or {-1, -1}.
+
+<ul>
+<li>We will sort the given array first.</li>
+<li>Now, we will take two pointers i.e. left, which points to the first index, and right, which points to the last index.</li>
+<li>Now using a loop we will check the sum of arr[left] and arr[right] until left &lt; right.</li>
+<li>If arr[left] + arr[right] &gt; sum, we will decrement the right pointer.</li>
+<li>If arr[left] + arr[right] &lt; sum, we will increment the left pointer.</li>
+<li>If arr[left] + arr[right] == sum, we will return the result.</li>
+<li>Finally, if no results are found we will return “NO” or {-1, -1}.</li>
+</ul>
+<p><img height="457" loading="lazy" src="../assets/img/3b7ac92141b48e46.png" width="481"/></p>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Variant 1: Check if two numbers sum to target using two-pointer approach
+    string twoSumExists(vector&lt;int&gt; arr, int target) {
+        int n = arr.size();
+        // Create a vector of pairs to remember original indices after sorting
+        vector&lt;pair&lt;int, int&gt;&gt; numsWithIndex;
+        for (int i = 0; i &lt; n; i++) {
+            numsWithIndex.push_back({arr[i], i});
+        }
+        // Sort based on the element values
+        sort(numsWithIndex.begin(), numsWithIndex.end());
+
+        int left = 0, right = n - 1;
+        // Loop until pointers cross
+        while (left &lt; right) {
+            int sum = numsWithIndex[left].first + numsWithIndex[right].first;
+            if (sum == target) {
+                return "YES";  // Pair found
+            } else if (sum &lt; target) {
+                left++;  // Need bigger sum, move left pointer right
+            } else {
+                right--; // Need smaller sum, move right pointer left
+            }
+        }
+        return "NO";  // No pair found
+    }
+
+    // Variant 2: Return original indices of two numbers that sum to target
+    vector&lt;int&gt; twoSumIndices(vector&lt;int&gt; arr, int target) {
+        int n = arr.size();
+        vector&lt;pair&lt;int, int&gt;&gt; numsWithIndex;
+        for (int i = 0; i &lt; n; i++) {
+            numsWithIndex.push_back({arr[i], i});
+        }
+        sort(numsWithIndex.begin(), numsWithIndex.end());
+
+        int left = 0, right = n - 1;
+        while (left &lt; right) {
+            int sum = numsWithIndex[left].first + numsWithIndex[right].first;
+            if (sum == target) {
+                // Return original indices
+                return {numsWithIndex[left].second, numsWithIndex[right].second};
+            } else if (sum &lt; target) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        return {-1, -1};  // No pair found
+    }
+};
+
+int main() {
+    Solution sol;
+    vector&lt;int&gt; arr = {2, 6, 5, 8, 11};
+    int target = 14;
+
+    cout &lt;&lt; sol.twoSumExists(arr, target) &lt;&lt; "\n";
+    vector&lt;int&gt; res = sol.twoSumIndices(arr, target);
+    cout &lt;&lt; "[" &lt;&lt; res[0] &lt;&lt; ", " &lt;&lt; res[1] &lt;&lt; "]\n";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.Arrays;
+
+class Solution {
+    // Variant 1: Check if two numbers sum to target using two-pointer approach
+    public String twoSumExists(int[] arr, int target) {
+        int n = arr.length;
+        
+        // Create an array of pairs [value, original_index]
+        int[][] numsWithIndex = new int[n][2];
+        
+        // Store each element with its original index
+        for (int i = 0; i &lt; n; i++) {
+            numsWithIndex[i][0] = arr[i]; // value
+            numsWithIndex[i][1] = i;      // original index
+        }
+        
+        // Sort the array based on the value, not index
+        Arrays.sort(numsWithIndex, (a, b) -&gt; Integer.compare(a[0], b[0]));
+
+        // Initialize two pointers: one at start, one at end
+        int left = 0, right = n - 1;
+        
+        // Run loop until pointers cross
+        while (left &lt; right) {
+            // Calculate the sum of values at pointers
+            int sum = numsWithIndex[left][0] + numsWithIndex[right][0];
+            
+            if (sum == target) {
+                // Found the pair, return "YES"
+                return "YES";
+            } else if (sum &lt; target) {
+                // Sum is less than target, so move left pointer right to increase sum
+                left++;
+            } else {
+                // Sum is greater than target, so move right pointer left to decrease sum
+                right--;
+            }
+        }
+        
+        // If loop ends without returning, no pair found
+        return "NO";
+    }
+
+    // Variant 2: Return indices of two numbers that sum to target
+    public int[] twoSumIndices(int[] arr, int target) {
+        int n = arr.length;
+        int[][] numsWithIndex = new int[n][2];
+        
+        // Store element with original index
+        for (int i = 0; i &lt; n; i++) {
+            numsWithIndex[i][0] = arr[i];
+            numsWithIndex[i][1] = i;
+        }
+        
+        // Sort by the value to apply two-pointer
+        Arrays.sort(numsWithIndex, (a, b) -&gt; Integer.compare(a[0], b[0]));
+
+        int left = 0, right = n - 1;
+        while (left &lt; right) {
+            int sum = numsWithIndex[left][0] + numsWithIndex[right][0];
+            if (sum == target) {
+                // Return original indices of the two numbers found
+                return new int[] {numsWithIndex[left][1], numsWithIndex[right][1]};
+            } else if (sum &lt; target) {
+                // Increase sum by moving left pointer forward
+                left++;
+            } else {
+                // Decrease sum by moving right pointer backward
+                right--;
+            }
+        }
+        
+        // No pair found
+        return new int[] {-1, -1};
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        int[] arr = {2, 6, 5, 8, 11};
+        int target = 14;
+
+        System.out.println(sol.twoSumExists(arr, target)); // Output: YES
+        int[] res = sol.twoSumIndices(arr, target);
+        System.out.println("[" + res[0] + ", " + res[1] + "]"); // Output: [1, 3]
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Variant 1: Check if two numbers sum to target using two-pointer approach
+    def two_sum_exists(self, arr, target):
+        # Create list of tuples (value, original_index)
+        nums_with_index = [(num, idx) for idx, num in enumerate(arr)]
+        
+        # Sort list based on the values (to apply two-pointer technique)
+        nums_with_index.sort(key=lambda x: x[0])
+
+        # Initialize two pointers: left at start, right at end
+        left, right = 0, len(arr) - 1
+        
+        # Continue until pointers cross
+        while left &lt; right:
+            # Calculate sum of values at pointers
+            current_sum = nums_with_index[left][0] + nums_with_index[right][0]
+            
+            if current_sum == target:
+                # Found a pair
+                return "YES"
+            elif current_sum &lt; target:
+                # Sum too small, move left pointer to right to increase sum
+                left += 1
+            else:
+                # Sum too large, move right pointer to left to decrease sum
+                right -= 1
+        
+        # No pair found
+        return "NO"
+
+    # Variant 2: Return indices of two numbers that sum to target
+    def two_sum_indices(self, arr, target):
+        # Create list of tuples (value, original_index)
+        nums_with_index = [(num, idx) for idx, num in enumerate(arr)]
+        
+        # Sort the list by values
+        nums_with_index.sort(key=lambda x: x[0])
+
+        left, right = 0, len(arr) - 1
+        
+        while left &lt; right:
+            current_sum = nums_with_index[left][0] + nums_with_index[right][0]
+            if current_sum == target:
+                # Return original indices of found elements
+                return [nums_with_index[left][1], nums_with_index[right][1]]
+            elif current_sum &lt; target:
+                # Move left pointer right to increase sum
+                left += 1
+            else:
+                # Move right pointer left to decrease sum
+                right -= 1
+        
+        # No valid pair found
+        return [-1, -1]
+
+if __name__ == "__main__":
+    sol = Solution()
+    arr = [2, 6, 5, 8, 11]
+    target = 14
+
+    print(sol.two_sum_exists(arr, target))  # Output: YES
+    print(sol.two_sum_indices(arr, target)) # Output: [1, 3]
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Variant 1: Check if two numbers sum to target using two-pointer approach
+    twoSumExists(arr, target) {
+        // Create array of [value, originalIndex] pairs to keep track of original positions
+        let numsWithIndex = arr.map((val, idx) =&gt; [val, idx]);
+        
+        // Sort array by the value to apply two-pointer technique
+        numsWithIndex.sort((a, b) =&gt; a[0] - b[0]);
+
+        // Initialize pointers at start and end of the array
+        let left = 0, right = arr.length - 1;
+
+        // Loop until pointers cross
+        while (left &lt; right) {
+            // Calculate current sum of the two values
+            let sum = numsWithIndex[left][0] + numsWithIndex[right][0];
+
+            if (sum === target) {
+                // Found a pair with sum equal to target
+                return "YES";
+            } else if (sum &lt; target) {
+                // Sum too small, move left pointer to right to increase sum
+                left++;
+            } else {
+                // Sum too large, move right pointer to left to decrease sum
+                right--;
+            }
+        }
+        
+        // No pair found
+        return "NO";
+    }
+
+    // Variant 2: Return indices of two numbers that sum to target
+    twoSumIndices(arr, target) {
+        // Create array of [value, originalIndex] pairs
+        let numsWithIndex = arr.map((val, idx) =&gt; [val, idx]);
+        
+        // Sort array based on value
+        numsWithIndex.sort((a, b) =&gt; a[0] - b[0]);
+
+        let left = 0, right = arr.length - 1;
+
+        while (left &lt; right) {
+            let sum = numsWithIndex[left][0] + numsWithIndex[right][0];
+
+            if (sum === target) {
+                // Return original indices of the found pair
+                return [numsWithIndex[left][1], numsWithIndex[right][1]];
+            } else if (sum &lt; target) {
+                // Increase sum by moving left pointer right
+                left++;
+            } else {
+                // Decrease sum by moving right pointer left
+                right--;
+            }
+        }
+        
+        // No pair found
+        return [-1, -1];
+    }
+}
+
+// Driver code
+const sol = new Solution();
+const arr = [2, 6, 5, 8, 11];
+const target = 14;
+
+console.log(sol.twoSumExists(arr, target));  // Output: YES
+console.log(sol.twoSumIndices(arr, target)); // Output: [1, 3]
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><b>Time Complexity:</b> O(N log N) due to sorting the array initially, where N is the number of elements. The two-pointer traversal runs in O(N).</p>
+<p><b>Space Complexity:</b> O(N) because we store the array elements along with their original indices in a separate list or vector for sorting, maintaining original positions.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>

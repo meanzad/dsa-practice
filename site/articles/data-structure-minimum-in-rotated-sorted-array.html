@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Minimum in Rotated Sorted Array</title>
+<link rel="stylesheet" href="../style.css">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Minimum in Rotated Sorted Array</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/minimum-in-rotated-sorted-array/</code></div>
+  <p><strong>Problem Statement: </strong> <br/>Given an integer array arr of size N, sorted in ascending order (with distinct values), the array is rotated at any index which is unknown. Find the minimum element in the array. 
+</p>
+<p><strong>Pre-requisites: </strong><a href="https://takeuforward.org/data-structure/search-element-in-a-rotated-sorted-array/" rel="noopener" target="_blank" title="">Search in Rotated Sorted Array I</a>,  <a href="https://takeuforward.org/arrays/search-element-in-rotated-sorted-array-ii/" rel="noopener" target="_blank" title="">Search in Rotated Sorted Array II</a> &amp; <a href="https://takeuforward.org/data-structure/binary-search-explained/" rel="noopener" target="_blank" title="">Binary Search algorithm</a></p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: arr = [4,5,6,7,0,1,2,3]</span>
+<span>Output: 0</span>
+<span>Explanation: The minimum element in the array is 0.</span>
+<p></p>
+<span>Input : arr = [3,4,5,1,2]</span>
+<span>Output: 1</span>
+<span>Explanation : The minimum element in the array is 1.</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+
+
+            It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Brute-Force Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<strong>How does rotation occurs?</strong><br/><br/>
+  Let's consider a sorted array: {1, 2, 3, 4, 5}. If we rotate this array at index 3, it will become: {4, 5, 1, 2, 3}. In essence, we moved the element at the last index to the front, while shifting the remaining elements to the right. We performed this process twice.
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/f164df5fa659023e.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/d2dbd79e54a9f98b.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/0bb11c441024d4a0.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/f164df5fa659023e.png"/><img alt="Image 2" loading="lazy" src="../assets/img/d2dbd79e54a9f98b.png"/><img alt="Image 3" loading="lazy" src="../assets/img/0bb11c441024d4a0.png"/></div></div>
+One straight forward approach we can use is linear search algorithm. We can simply traverse the entire array and check for the minimum element in the array.
+
+                    </div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find the minimum element using linear search
+    int findMin(vector&lt;int&gt;&amp; nums) {
+
+        // Initialize answer with a large number
+        int minVal = INT_MAX;
+
+        // Traverse each element
+        for (int i = 0; i &lt; nums.size(); i++) {
+
+            // Update minimum value
+            minVal = min(minVal, nums[i]);
+        }
+
+        // Return the result
+        return minVal;
+    }
+};
+
+int main() {
+
+    // Input array
+    vector&lt;int&gt; nums = {4, 5, 6, 7, 0, 1, 2};
+
+    // Create object of Solution
+    Solution sol;
+
+    // Call function and store result
+    int result = sol.findMin(nums);
+
+    // Output the result
+    cout &lt;&lt; "Minimum element is " &lt;&lt; result &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // Function to find the minimum element using linear search
+    public int findMin(int[] nums) {
+
+        // Initialize answer with a large number
+        int minVal = Integer.MAX_VALUE;
+
+        // Traverse each element
+        for (int i = 0; i &lt; nums.length; i++) {
+
+            // Update minimum value
+            minVal = Math.min(minVal, nums[i]);
+        }
+
+        // Return the result
+        return minVal;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        // Input array
+        int[] nums = {4, 5, 6, 7, 0, 1, 2};
+
+        // Create object of Solution
+        Solution sol = new Solution();
+
+        // Call function and store result
+        int result = sol.findMin(nums);
+
+        // Output the result
+        System.out.println("Minimum element is " + result);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to find the minimum element using linear search
+    def findMin(self, nums):
+
+        # Initialize answer with a large number
+        min_val = float('inf')
+
+        # Traverse each element
+        for i in range(len(nums)):
+
+            # Update minimum value
+            min_val = min(min_val, nums[i])
+
+        # Return the result
+        return min_val
+
+# Input array
+nums = [4, 5, 6, 7, 0, 1, 2]
+
+# Create object of Solution
+sol = Solution()
+
+# Call function and store result
+result = sol.findMin(nums)
+
+# Output the result
+print("Minimum element is", result)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find the minimum element using linear search
+    findMin(nums) {
+
+        // Initialize answer with a large number
+        let minVal = Infinity;
+
+        // Traverse each element
+        for (let i = 0; i &lt; nums.length; i++) {
+
+            // Update minimum value
+            minVal = Math.min(minVal, nums[i]);
+        }
+
+        // Return the result
+        return minVal;
+    }
+}
+
+// Input array
+const nums = [4, 5, 6, 7, 0, 1, 2];
+
+// Create object of Solution
+const sol = new Solution();
+
+// Call function and store result
+const result = sol.findMin(nums);
+
+// Output the result
+console.log("Minimum element is", result);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N)</strong>, we check every element once.<br/>
+<strong>Space Complexity: O(1)</strong>, constant additonal space is used.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+                        In a rotated sorted array, the smallest element represents the point of rotation. It is the only element that is smaller than its previous element. Since the array is sorted in two segments, we can use binary search to efficiently find this pivot point. By comparing the middle element with the rightmost element in the current search space, we can determine which half of the array contains the minimum element.
+                        <ul>
+<li>Initialize pointers to the start and end of the array.</li>
+<li>While start is less than end, calculate the middle index.</li>
+<li>If the middle element is greater than the rightmost element, move the start to mid + 1.</li>
+<li>Else, move the end to mid (because mid can be the minimum).</li>
+<li>When the loop ends, start will point to the minimum element.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/317a084634e6a9eb.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/5da5d4ac525ff8d7.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/317a084634e6a9eb.png"/><img alt="Image 2" loading="lazy" src="../assets/img/5da5d4ac525ff8d7.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find the minimum element using binary search
+    int findMin(vector&lt;int&gt;&amp; nums) {
+
+        // Initialize low and high pointers
+        int low = 0, high = nums.size() - 1;
+
+        // Binary search loop
+        while (low &lt; high) {
+
+            // Calculate mid index
+            int mid = low + (high - low) / 2;
+
+            // Check which half to discard
+            if (nums[mid] &gt; nums[high]) {
+
+                // Minimum lies in right half
+                low = mid + 1;
+
+            } else {
+
+                // Minimum lies in left half (including mid)
+                high = mid;
+            }
+        }
+
+        // Return the minimum element
+        return nums[low];
+    }
+};
+
+int main() {
+
+    // Input array
+    vector&lt;int&gt; nums = {4, 5, 6, 7, 0, 1, 2};
+
+    // Create object of Solution
+    Solution sol;
+
+    // Call function and store result
+    int result = sol.findMin(nums);
+
+    // Output the result
+    cout &lt;&lt; "Minimum element is " &lt;&lt; result &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // Function to find the minimum element using binary search
+    public int findMin(int[] nums) {
+
+        // Initialize low and high pointers
+        int low = 0, high = nums.length - 1;
+
+        // Binary search loop
+        while (low &lt; high) {
+
+            // Calculate mid index
+            int mid = low + (high - low) / 2;
+
+            // Check which half to discard
+            if (nums[mid] &gt; nums[high]) {
+
+                // Minimum lies in right half
+                low = mid + 1;
+
+            } else {
+
+                // Minimum lies in left half (including mid)
+                high = mid;
+            }
+        }
+
+        // Return the minimum element
+        return nums[low];
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        // Input array
+        int[] nums = {4, 5, 6, 7, 0, 1, 2};
+
+        // Create object of Solution
+        Solution sol = new Solution();
+
+        // Call function and store result
+        int result = sol.findMin(nums);
+
+        // Output the result
+        System.out.println("Minimum element is " + result);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to find the minimum element using binary search
+    def findMin(self, nums):
+
+        # Initialize low and high pointers
+        low, high = 0, len(nums) - 1
+
+        # Binary search loop
+        while low &lt; high:
+
+            # Calculate mid index
+            mid = low + (high - low) // 2
+
+            # Check which half to discard
+            if nums[mid] &gt; nums[high]:
+
+                # Minimum lies in right half
+                low = mid + 1
+
+            else:
+
+                # Minimum lies in left half (including mid)
+                high = mid
+
+        # Return the minimum element
+        return nums[low]
+
+# Input array
+nums = [4, 5, 6, 7, 0, 1, 2]
+
+# Create object of Solution
+sol = Solution()
+
+# Call function and store result
+result = sol.findMin(nums)
+
+# Output the result
+print("Minimum element is", result)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find the minimum element using binary search
+    findMin(nums) {
+
+        // Initialize low and high pointers
+        let low = 0, high = nums.length - 1;
+
+        // Binary search loop
+        while (low &lt; high) {
+
+            // Calculate mid index
+            let mid = Math.floor(low + (high - low) / 2);
+
+            // Check which half to discard
+            if (nums[mid] &gt; nums[high]) {
+
+                // Minimum lies in right half
+                low = mid + 1;
+
+            } else {
+
+                // Minimum lies in left half (including mid)
+                high = mid;
+            }
+        }
+
+        // Return the minimum element
+        return nums[low];
+    }
+}
+
+// Input array
+const nums = [4, 5, 6, 7, 0, 1, 2];
+
+// Create object of Solution
+const sol = new Solution();
+
+// Call function and store result
+const result = sol.findMin(nums);
+
+// Output the result
+console.log("Minimum element is", result);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(logN)</strong>, at every step the search space is reduced to half using binary search.<br/>
+<strong>Space Complexity: O(1)</strong>, constant additonal space is used.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js"></script>
+</body></html>
