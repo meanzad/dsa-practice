@@ -52,10 +52,16 @@
     el.dataset.diff = p.difficulty;
     el.dataset.name = (p.name || '').toLowerCase();
 
-    // Archived article; absent for problems the Wayback Machine never captured.
+    // "Article" = full archived editorial with code. "Statement" = recovered
+    // from the relaunched site, which keeps its solutions behind a login.
+    const stmt = p.article_kind === 'statement';
     const art = p.article_available
-      ? '<a class="pill" href="articles/' + encodeURIComponent(p.article_slug) + '.html">Article</a>'
-      : '<span class="pill off" title="No archived article for this problem">Article</span>';
+      ? '<a class="pill' + (stmt ? ' stmt' : '') + '" href="articles/'
+        + encodeURIComponent(p.article_slug) + '.html" title="'
+        + (stmt ? 'Problem statement, examples and hints (no solution)'
+                : 'Full article with solutions and code')
+        + '">' + (stmt ? 'Statement' : 'Article') + '</a>'
+      : '<span class="pill off" title="No article available for this problem">Article</span>';
     // These deliberately point at the LIVE sites, never the archive.
     const yt = p.youtube
       ? '<a class="pill" href="' + esc(p.youtube) + '" target="_blank" rel="noopener">YouTube</a>' : '';
@@ -159,7 +165,7 @@
     fr.readAsText(file);
   }
 
-  fetch('data/sheet.json')
+  fetch('data/sheet.json?v=' + (window.__V || ''))
     .then(r => r.json())
     .then(d => {
       SHEET = d;

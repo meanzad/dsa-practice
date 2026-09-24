@@ -2,6 +2,7 @@
 import html as htmllib
 import json
 import re
+import time
 import sys
 from pathlib import Path
 
@@ -19,7 +20,7 @@ INDEX_TMPL = """<!doctype html>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Striver's A2Z DSA Sheet - Offline Archive</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=%(ver)s">
 </head><body>
 <header><div class="wrap hd">
   <h1>Striver's A2Z DSA Sheet</h1>
@@ -63,7 +64,8 @@ INDEX_TMPL = """<!doctype html>
     Progress is stored in this browser only. Export it to keep a backup.
   </footer>
 </div>
-<script src="app.js"></script>
+<script>window.__V="%(ver)s";</script>
+<script src="app.js?v=%(ver)s"></script>
 </body></html>
 """
 
@@ -73,7 +75,7 @@ ARTICLE_TMPL = """<!doctype html>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>%(title)s</title>
-<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../style.css?v=%(ver)s">
 </head><body>
 <header><div class="wrap hd">
   <a class="btn" href="../index.html">&larr; Back to sheet</a>
@@ -85,7 +87,7 @@ ARTICLE_TMPL = """<!doctype html>
   <div class="meta">Archived from <code>%(source)s</code></div>
   %(body)s
 </article>
-<script src="../article.js"></script>
+<script src="../article.js?v=%(ver)s"></script>
 </body></html>
 """
 
@@ -192,10 +194,24 @@ def clean_article(raw_html: str) -> str:
     return "".join(str(c) for c in body.contents)
 
 
+# Bumped every build so browsers never serve a stale app.js/sheet.json.
+VER = str(int(time.time()))
+
+
 def main():
     sheet = json.loads((DATA / "sheet.json").read_text(encoding="utf-8"))
     adir = DATA / "articles"
     have = {p.stem for p in adir.glob("*.json")} if adir.exists() else set()
+    # Archived articles carry the full editorial; pages recovered from the
+    # relaunched site are statement-only, since the solution tab needs a login.
+    kind = {}
+    for p in adir.glob("*.json"):
+        try:
+            kind[p.stem] = ("statement"
+                            if json.loads(p.read_text(encoding="utf-8")).get(
+                                "extracted_by") == "live-ssr" else "article")
+        except Exception:
+            kind[p.stem] = "article"
 
     (SITE / "articles").mkdir(parents=True, exist_ok=True)
     (SITE / "data").mkdir(parents=True, exist_ok=True)
@@ -207,6 +223,7 @@ def main():
             for p in sub["problems"]:
                 ok = bool(p.get("article_slug")) and p["article_slug"] in have
                 p["article_available"] = ok
+                p["article_kind"] = kind.get(p.get("article_slug")) if ok else None
                 if not ok:
                     missing += 1
     (SITE / "data" / "sheet.json").write_text(
@@ -219,13 +236,13 @@ def main():
         out = ARTICLE_TMPL % {
             "title": htmllib.escape(rec["title"]),
             "source": htmllib.escape(rec["source_url"]),
-            "body": body,
+            "body": body, "ver": VER,
         }
         (SITE / "articles" / f"{rec['slug']}.html").write_text(out, encoding="utf-8")
         n += 1
 
     (SITE / "index.html").write_text(
-        INDEX_TMPL % {"narticles": n}, encoding="utf-8")
+        INDEX_TMPL % {"narticles": n, "ver": VER}, encoding="utf-8")
 
     print(f"built {n} article pages")
     print(f"problems without a usable article: {missing}")

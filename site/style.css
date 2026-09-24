@@ -78,6 +78,9 @@ header{border-bottom:1px solid var(--line);background:var(--bg-2);position:stick
 }
 .pill:hover{border-color:var(--accent);color:var(--fg);text-decoration:none}
 .pill.off{opacity:.3;cursor:not-allowed;pointer-events:none}
+/* statement-only pages recovered from the relaunched site (no solution) */
+.pill.stmt{border-style:dashed;color:var(--fg-mute)}
+.pill.stmt:hover{border-color:var(--medium);color:var(--fg)}
 .diff{font-size:11.5px;font-weight:600;width:58px;text-align:right;flex:none}
 .diff.Easy{color:var(--easy)} .diff.Medium{color:var(--medium)} .diff.Hard{color:var(--hard)}
 .star{cursor:pointer;color:var(--fg-mute);font-size:15px;flex:none;background:none;border:0;padding:0 2px}

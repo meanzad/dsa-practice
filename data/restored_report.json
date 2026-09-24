@@ -1,0 +1,79 @@
+{
+ "matched": 13,
+ "added": 1,
+ "failed": [],
+ "thin": [
+  {
+   "name": "Java Collections",
+   "url": "https://takeuforward.org/learning/dsa/java-collections",
+   "len": 0
+  },
+  {
+   "name": "Count Number of Substrings",
+   "url": "https://takeuforward.org/learning/dsa/count-number-of-substrings",
+   "len": 0
+  },
+  {
+   "name": "Learn All Patterns of Subsequences (Theory)",
+   "url": "https://takeuforward.org/learning/dsa/learn-all-patterns-of-subsequences",
+   "len": 0
+  },
+  {
+   "name": "Introduction to Bits and Tricks",
+   "url": "https://takeuforward.org/learning/dsa/introduction-to-bits-and-tricks",
+   "len": 0
+  },
+  {
+   "name": "Set/Unset the rightmost unset bit",
+   "url": "https://takeuforward.org/learning/dsa/setunset-the-rightmost-unset-bit",
+   "len": 0
+  },
+  {
+   "name": "Heaps (Theory Video)",
+   "url": "https://takeuforward.org/learning/dsa/heaps-theory",
+   "len": 0
+  },
+  {
+   "name": "Sort K sorted array",
+   "url": "https://takeuforward.org/learning/dsa/sort-k-sorted-array",
+   "len": 0
+  },
+  {
+   "name": "Find Min/Max in BST",
+   "url": "https://takeuforward.org/learning/dsa/find-minmax-in-bst",
+   "len": 0
+  },
+  {
+   "name": "Introduction to Graph",
+   "url": "https://takeuforward.org/learning/dsa/introduction-to-graph",
+   "len": 0
+  },
+  {
+   "name": "Count Square Submatrices with All Ones|(DP-56)",
+   "url": "https://takeuforward.org/learning/dsa/count-square-submatrices-with-all-ones",
+   "len": 0
+  },
+  {
+   "name": "Bit PreRequisites for TRIE Problems",
+   "url": "https://takeuforward.org/learning/dsa/bit-prerequisites-for-trie-problems",
+   "len": 0
+  },
+  {
+   "name": "Hashing In Strings | Theory",
+   "url": "https://takeuforward.org/learning/dsa/hashing-in-strings-theory",
+   "len": 0
+  }
+ ],
+ "unmatched": [
+  "For loops",
+  "While loops",
+  "Recursive Implementation of atoi()",
+  "Sort a stack using recursion",
+  "Print Prime Factors of a Number",
+  "Program for Least Recently Used (LRU) Page Replacement Algorithm",
+  "Merge 2 BST's",
+  "Graph Representation | C++",
+  "Graph Representation | Java",
+  "Connected Components Problem in Matrix"
+ ]
+}

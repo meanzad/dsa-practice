@@ -1,0 +1,4601 @@
+[
+ {
+  "id": 17136,
+  "label": "Breaking The Myth",
+  "kind": "problem",
+  "href": "/learning/dsa/breaking-the-myth?category=fundamentals-of-programming&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 17132,
+  "label": "Programming and What Are Computers?",
+  "kind": "problem",
+  "href": "/learning/dsa/programming-and-what-are-computers?category=fundamentals-of-programming&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 17133,
+  "label": "How to Think Like a Programmer",
+  "kind": "problem",
+  "href": "/learning/dsa/how-to-think-like-a-programmer?category=fundamentals-of-programming&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 17134,
+  "label": "Flowcharts and Pseudocode",
+  "kind": "problem",
+  "href": "/learning/dsa/flowcharts-and-pseudocode?category=fundamentals-of-programming&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 17135,
+  "label": "Flowchart Problem-Solving ",
+  "kind": "problem",
+  "href": "/learning/dsa/flowchart-problem-solving?category=fundamentals-of-programming&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 17137,
+  "label": "Dry Runs, Edge Cases and Debugging",
+  "kind": "problem",
+  "href": "/learning/dsa/dry-runs-edge-cases-and-debugging?category=fundamentals-of-programming&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 17138,
+  "label": "Programming Languages and Choosing a Path",
+  "kind": "problem",
+  "href": "/learning/dsa/programming-languages-and-choosing-a-path?category=fundamentals-of-programming&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 17083,
+  "label": "Learn C++",
+  "kind": "problem",
+  "href": "/learning/dsa/learn-cpp?category=language-basics&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 17084,
+  "label": "Learn Java",
+  "kind": "problem",
+  "href": "/learning/dsa/learn-java?category=language-basics&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 17085,
+  "label": "Learn Python",
+  "kind": "problem",
+  "href": "/learning/dsa/learn-python?category=language-basics&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1216,
+  "label": "Easy and Medium",
+  "kind": "problem",
+  "href": "/learning/dsa/easy-and-medium?category=logic-building-patterns&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1205,
+  "label": "Hard",
+  "kind": "problem",
+  "href": "/learning/dsa/hard?category=logic-building-patterns&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 401,
+  "label": "Pattern 1",
+  "kind": "problem",
+  "href": "/practice/dsa/pattern-1?category=patterns&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 412,
+  "label": "Pattern 2",
+  "kind": "problem",
+  "href": "/practice/dsa/pattern-2?category=patterns&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 416,
+  "label": "Pattern 3",
+  "kind": "problem",
+  "href": "/practice/dsa/pattern-3?category=patterns&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 417,
+  "label": "Pattern 4",
+  "kind": "problem",
+  "href": "/practice/dsa/pattern-4?category=patterns&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 418,
+  "label": "Pattern 5",
+  "kind": "problem",
+  "href": "/practice/dsa/pattern-5?category=patterns&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 419,
+  "label": "Pattern 6",
+  "kind": "problem",
+  "href": "/practice/dsa/pattern-6?category=patterns&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 420,
+  "label": "Pattern 7",
+  "kind": "problem",
+  "href": "/practice/dsa/pattern-7?category=patterns&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 421,
+  "label": "Pattern 8",
+  "kind": "problem",
+  "href": "/practice/dsa/pattern-8?category=patterns&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 422,
+  "label": "Pattern 9",
+  "kind": "problem",
+  "href": "/practice/dsa/pattern-9?category=patterns&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 402,
+  "label": "Pattern 10",
+  "kind": "problem",
+  "href": "/practice/dsa/pattern-10?category=patterns&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 403,
+  "label": "Pattern 11",
+  "kind": "problem",
+  "href": "/practice/dsa/pattern-11?category=patterns&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 404,
+  "label": "Pattern 12",
+  "kind": "problem",
+  "href": "/practice/dsa/pattern-12?category=patterns&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 405,
+  "label": "Pattern 13",
+  "kind": "problem",
+  "href": "/practice/dsa/pattern-13?category=patterns&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 406,
+  "label": "Pattern 14",
+  "kind": "problem",
+  "href": "/practice/dsa/pattern-14?category=patterns&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 407,
+  "label": "Pattern 15",
+  "kind": "problem",
+  "href": "/practice/dsa/pattern-15?category=patterns&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 408,
+  "label": "Pattern 16",
+  "kind": "problem",
+  "href": "/practice/dsa/pattern-16?category=patterns&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 409,
+  "label": "Pattern 17",
+  "kind": "problem",
+  "href": "/practice/dsa/pattern-17?category=patterns&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 410,
+  "label": "Pattern 18",
+  "kind": "problem",
+  "href": "/practice/dsa/pattern-18?category=patterns&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 411,
+  "label": "Pattern 19",
+  "kind": "problem",
+  "href": "/practice/dsa/pattern-19?category=patterns&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 413,
+  "label": "Pattern 20",
+  "kind": "problem",
+  "href": "/practice/dsa/pattern-20?category=patterns&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 414,
+  "label": "Pattern 21",
+  "kind": "problem",
+  "href": "/practice/dsa/pattern-21?category=patterns&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 415,
+  "label": "Pattern 22",
+  "kind": "problem",
+  "href": "/practice/dsa/pattern-22?category=patterns&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1219,
+  "label": "Theory with examples",
+  "kind": "problem",
+  "href": "/learning/dsa/theory-with-examples?category=time-complexity&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1218,
+  "label": "STL",
+  "kind": "problem",
+  "href": "/learning/dsa/stl?category=standard-libraries-and-collections&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1217,
+  "label": "Java Collections",
+  "kind": "problem",
+  "href": "/learning/dsa/java-collections?category=standard-libraries-and-collections&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1193,
+  "label": "Python Libraries Part 1",
+  "kind": "problem",
+  "href": "/learning/dsa/python-libraries-part-1?category=standard-libraries-and-collections&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1194,
+  "label": "Python Libraries Part 2",
+  "kind": "problem",
+  "href": "/learning/dsa/python-libraries-part-2?category=standard-libraries-and-collections&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1214,
+  "label": "Basic Maths",
+  "kind": "problem",
+  "href": "/learning/dsa/basic-maths?category=concept-basics&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1213,
+  "label": "Basic Arrays",
+  "kind": "problem",
+  "href": "/learning/dsa/basic-arrays-hashing-and-strings?category=concept-basics&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1203,
+  "label": "Basic Hashing",
+  "kind": "problem",
+  "href": "/learning/dsa/basic-hashing?category=concept-basics&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1204,
+  "label": "Basic String",
+  "kind": "problem",
+  "href": "/learning/dsa/basic-string?category=concept-basics&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 367,
+  "label": "Count all Digits of a Number",
+  "kind": "problem",
+  "href": "/practice/dsa/count-all-digits-of-a-number?category=basic-maths&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 368,
+  "label": "Count number of odd digits in a number",
+  "kind": "problem",
+  "href": "/practice/dsa/count-number-of-odd-digits-in-a-number?category=basic-maths&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 376,
+  "label": "Reverse a number",
+  "kind": "problem",
+  "href": "/practice/dsa/reverse-a-number?category=basic-maths&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 374,
+  "label": "Palindrome Number",
+  "kind": "problem",
+  "href": "/practice/dsa/palindrome-number?category=basic-maths&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 375,
+  "label": "Return the Largest Digit in a Number",
+  "kind": "problem",
+  "href": "/practice/dsa/return-the-largest-digit-in-a-number?category=basic-maths&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 371,
+  "label": "Factorial of a given number",
+  "kind": "problem",
+  "href": "/practice/dsa/factorial-of-a-given-number-i?category=basic-maths&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 366,
+  "label": "Check if the Number is Armstrong",
+  "kind": "problem",
+  "href": "/practice/dsa/check-if-the-number-if-armstrong?category=basic-maths&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 364,
+  "label": "Check for Perfect Number",
+  "kind": "problem",
+  "href": "/practice/dsa/check-for-perfect-number?category=basic-maths&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 365,
+  "label": "Check for Prime Number",
+  "kind": "problem",
+  "href": "/practice/dsa/check-for-prime-number?category=basic-maths&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 369,
+  "label": "Count of Prime Numbers till N",
+  "kind": "problem",
+  "href": "/practice/dsa/count-of-prime-numbers-till-n?category=basic-maths&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 372,
+  "label": "GCD of Two Numbers",
+  "kind": "problem",
+  "href": "/practice/dsa/gcd-of-two-numbers?category=basic-maths&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 373,
+  "label": "LCM of two numbers",
+  "kind": "problem",
+  "href": "/practice/dsa/lcm-of-two-numbers?category=basic-maths&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 370,
+  "label": "Divisors of a Number",
+  "kind": "problem",
+  "href": "/practice/dsa/divisors-of-a-number?category=basic-maths&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 343,
+  "label": "Sum of Array Elements",
+  "kind": "problem",
+  "href": "/practice/dsa/sum-of-array-elements?category=basic-arrays&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 341,
+  "label": "Count of odd numbers in Array",
+  "kind": "problem",
+  "href": "/practice/dsa/count-of-odd-numbers-in-array?category=basic-arrays&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 340,
+  "label": "Check if the Array is Sorted I",
+  "kind": "problem",
+  "href": "/practice/dsa/check-if-the-array-is-sorted-i?category=basic-arrays&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 342,
+  "label": "Reverse an array",
+  "kind": "problem",
+  "href": "/practice/dsa/reverse-an-array?category=basic-arrays&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 344,
+  "label": "Highest Occurring Element in an Array",
+  "kind": "problem",
+  "href": "/practice/dsa/highest-occurring-element-in-an-array?category=basic-hashing&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 345,
+  "label": "Second Highest Occurring Element",
+  "kind": "problem",
+  "href": "/practice/dsa/second-highest-occurring-element?category=basic-hashing&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 346,
+  "label": "Sum of Highest and Lowest Frequency",
+  "kind": "problem",
+  "href": "/practice/dsa/sum-of-highest-and-lowest-frequency?category=basic-hashing&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 397,
+  "label": "Reverse a String II",
+  "kind": "problem",
+  "href": "/practice/dsa/reverse-a-string-ii?category=basic-strings&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 396,
+  "label": "Palindrome Check",
+  "kind": "problem",
+  "href": "/practice/dsa/palindrome-check?category=basic-strings&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 394,
+  "label": "Largest Odd Number in a String",
+  "kind": "problem",
+  "href": "/practice/dsa/largest-odd-number-in-a-string?category=basic-strings&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 395,
+  "label": "Longest Common Prefix",
+  "kind": "problem",
+  "href": "/practice/dsa/longest-common-prefix?category=basic-strings&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 393,
+  "label": "Isomorphic Strings",
+  "kind": "problem",
+  "href": "/practice/dsa/isomorphic-string?category=basic-strings&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 398,
+  "label": "Rotate String",
+  "kind": "problem",
+  "href": "/practice/dsa/rotate-string?category=basic-strings&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 400,
+  "label": "Valid Anagram",
+  "kind": "problem",
+  "href": "/practice/dsa/valid-anagram?category=basic-strings&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 399,
+  "label": "Sort Characters by Frequency",
+  "kind": "problem",
+  "href": "/practice/dsa/sort-characters-by-frequency?category=basic-strings&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1199,
+  "label": "Recursion Theory",
+  "kind": "problem",
+  "href": "/learning/dsa/recursion-theory?category=basic-recursion&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1198,
+  "label": "Recursion Concepts with Parameters",
+  "kind": "problem",
+  "href": "/learning/dsa/recursion-concepts-with-parameters?category=basic-recursion&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 386,
+  "label": "Sum of First N Numbers",
+  "kind": "problem",
+  "href": "/practice/dsa/sum-of-first-n-numbers?category=basic-recursion&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 380,
+  "label": "Factorial of a Given Number",
+  "kind": "problem",
+  "href": "/practice/dsa/factorial-of-a-given-number-ii?category=basic-recursion&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 384,
+  "label": "Sum of Array Elements II",
+  "kind": "problem",
+  "href": "/practice/dsa/sum-of-array-elements-ii?category=basic-recursion&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 383,
+  "label": "Reverse a String I",
+  "kind": "problem",
+  "href": "/practice/dsa/reverse-a-string-i?category=basic-recursion&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 378,
+  "label": "Check if String is Palindrome or Not ",
+  "kind": "problem",
+  "href": "/practice/dsa/check-if-string-is-palindrome-or-not-?category=basic-recursion&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 377,
+  "label": "Check if a Number is Prime or Not",
+  "kind": "problem",
+  "href": "/practice/dsa/check-if-a-number-is-prime-or-not?category=basic-recursion&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 382,
+  "label": "Reverse an array 2",
+  "kind": "problem",
+  "href": "/practice/dsa/reverse-an-array-ii?category=basic-recursion&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 379,
+  "label": "Check if the Array is Sorted II",
+  "kind": "problem",
+  "href": "/practice/dsa/check-if-the-array-is-sorted-ii?category=basic-recursion&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 385,
+  "label": "Sum of Digits in a Given Number",
+  "kind": "problem",
+  "href": "/practice/dsa/sum-of-digits-in-a-given-number?category=basic-recursion&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 381,
+  "label": "Fibonacci Number",
+  "kind": "problem",
+  "href": "/practice/dsa/fibonacci-number?category=basic-recursion&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 947,
+  "label": "Selection Sort",
+  "kind": "problem",
+  "href": "/practice/dsa/selection-sort?category=algorithms&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 943,
+  "label": "Bubble Sort",
+  "kind": "problem",
+  "href": "/practice/dsa/bubble-sort?category=algorithms&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 944,
+  "label": "Insertion Sorting",
+  "kind": "problem",
+  "href": "/practice/dsa/insertion-sorting?category=algorithms&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 945,
+  "label": "Merge Sorting",
+  "kind": "problem",
+  "href": "/practice/dsa/merge-sorting?category=algorithms&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 946,
+  "label": "Quick Sorting",
+  "kind": "problem",
+  "href": "/practice/dsa/quick-sorting?category=algorithms&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 881,
+  "label": "Recursive Bubble Sort",
+  "kind": "problem",
+  "href": "/practice/dsa/recursive-bubble-sort?category=algorithms&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 882,
+  "label": "Recursive Insertion Sort",
+  "kind": "problem",
+  "href": "/practice/dsa/recursive-insertion-sort?category=algorithms&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 41,
+  "label": "Linear Search",
+  "kind": "problem",
+  "href": "/practice/dsa/linear-search?category=fundamentals&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 38,
+  "label": "Largest Element ",
+  "kind": "problem",
+  "href": "/practice/dsa/largest-element?category=fundamentals&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 43,
+  "label": "Second Largest Element",
+  "kind": "problem",
+  "href": "/practice/dsa/second-largest-element?category=fundamentals&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 42,
+  "label": "Maximum Consecutive Ones",
+  "kind": "problem",
+  "href": "/practice/dsa/maximum-consecutive-ones?category=fundamentals&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 40,
+  "label": "Left Rotate Array by One",
+  "kind": "problem",
+  "href": "/practice/dsa/left-rotate-array-by-one?category=fundamentals&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 39,
+  "label": "Left Rotate Array by K Places",
+  "kind": "problem",
+  "href": "/practice/dsa/left-rotate-array?category=fundamentals&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 46,
+  "label": "Move Zeros to End",
+  "kind": "problem",
+  "href": "/practice/dsa/move-zeros-to-end?category=logic-building&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 47,
+  "label": "Remove duplicates from sorted array",
+  "kind": "problem",
+  "href": "/practice/dsa/remove-duplicates-from-sorted-array?category=logic-building&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 44,
+  "label": "Find missing number",
+  "kind": "problem",
+  "href": "/practice/dsa/find-missing-number?category=logic-building&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 48,
+  "label": "Union of two sorted arrays",
+  "kind": "problem",
+  "href": "/practice/dsa/union-of-two-sorted-arrays?category=logic-building&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 45,
+  "label": "Intersection of two sorted arrays",
+  "kind": "problem",
+  "href": "/practice/dsa/intersection-of-two-sorted-arrays?category=logic-building&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 22,
+  "label": "Majority Element-I",
+  "kind": "problem",
+  "href": "/practice/dsa/majority-element-i?category=faqs-medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 30,
+  "label": "Leaders in an Array",
+  "kind": "problem",
+  "href": "/practice/dsa/leaders-in-an-array?category=faqs-medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 34,
+  "label": "Rearrange array elements by sign",
+  "kind": "problem",
+  "href": "/practice/dsa/rearrange-array-elements-by-sign?category=faqs-medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 33,
+  "label": "Print the matrix in spiral manner",
+  "kind": "problem",
+  "href": "/practice/dsa/print-the-matrix-in-spiral-manner?category=faqs-medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 813,
+  "label": "Pascal's Triangle I",
+  "kind": "problem",
+  "href": "/practice/dsa/pascals-triangle-i?category=faqs-medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 812,
+  "label": "Pascal's Triangle II",
+  "kind": "problem",
+  "href": "/practice/dsa/pascals-triangle-ii?category=faqs-medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 32,
+  "label": "Pascal's Triangle III",
+  "kind": "problem",
+  "href": "/practice/dsa/pascals-triangle-iii?category=faqs-medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 35,
+  "label": "Rotate matrix by 90 degrees",
+  "kind": "problem",
+  "href": "/practice/dsa/rotate-matrix-by-90-degrees?category=faqs-medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 911,
+  "label": "Set Matrix Zeroes",
+  "kind": "problem",
+  "href": "/practice/dsa/set-matrix-zeroes?category=faqs-medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 37,
+  "label": "Two Sum",
+  "kind": "problem",
+  "href": "/practice/dsa/two-sum?category=faqs-medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 27,
+  "label": "3 Sum",
+  "kind": "problem",
+  "href": "/practice/dsa/3-sum?category=faqs-medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 28,
+  "label": "4 Sum",
+  "kind": "problem",
+  "href": "/practice/dsa/4-sum?category=faqs-medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 36,
+  "label": "Sort an array of 0's 1's and 2's",
+  "kind": "problem",
+  "href": "/practice/dsa/sort-an-array-of-0's-1's-and-2's?category=faqs-medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 29,
+  "label": "Kadane's Algorithm",
+  "kind": "problem",
+  "href": "/practice/dsa/kadane's-algorithm?category=faqs-medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 31,
+  "label": "Next Permutation",
+  "kind": "problem",
+  "href": "/practice/dsa/next-permutation?category=faqs-medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 23,
+  "label": "Majority Element-II",
+  "kind": "problem",
+  "href": "/practice/dsa/majority-element-ii?category=faqs-hard&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 21,
+  "label": "Find the repeating and missing number",
+  "kind": "problem",
+  "href": "/practice/dsa/find-the-repeating-and-missing-number?category=faqs-hard&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 20,
+  "label": "Count Inversions",
+  "kind": "problem",
+  "href": "/practice/dsa/count-inversions?category=faqs-hard&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 26,
+  "label": "Reverse Pairs",
+  "kind": "problem",
+  "href": "/practice/dsa/reverse-pairs?category=faqs-hard&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 24,
+  "label": "Maximum Product Subarray in an Array",
+  "kind": "problem",
+  "href": "/practice/dsa/maximum-product-subarray-in-an-array?category=faqs-hard&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 25,
+  "label": "Merge two sorted arrays without extra space",
+  "kind": "problem",
+  "href": "/practice/dsa/merge-two-sorted-arrays-without-extra-space?category=faqs-hard&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 275,
+  "label": "Contest",
+  "kind": "problem",
+  "href": "/practice/dsa/contest/275?category=arrays&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 3,
+  "children": []
+ },
+ {
+  "id": 1203,
+  "label": "Basic Hashing",
+  "kind": "problem",
+  "href": "/learning/dsa/basic-hashing?category=theory&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 563,
+  "label": "Longest Consecutive Sequence in an Array",
+  "kind": "problem",
+  "href": "/practice/dsa/longest-consecutive-sequence-in-an-array?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 564,
+  "label": "Longest subarray with sum K",
+  "kind": "problem",
+  "href": "/practice/dsa/longest-subarray-with-sum-k?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 605,
+  "label": "Largest Subarray with Sum 0",
+  "kind": "problem",
+  "href": "/practice/dsa/largest-subarray-with-sum-0?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 561,
+  "label": "Count subarrays with given sum",
+  "kind": "problem",
+  "href": "/practice/dsa/count-subarrays-with-given-sum?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 562,
+  "label": "Count subarrays with given xor K",
+  "kind": "problem",
+  "href": "/practice/dsa/count-subarrays-with-given-xor-k?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 380,
+  "label": "Contest",
+  "kind": "problem",
+  "href": "/practice/dsa/contest/380?category=hashing&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 3,
+  "children": []
+ },
+ {
+  "id": 81,
+  "label": "Search X in sorted array",
+  "kind": "problem",
+  "href": "/practice/dsa/search-x-in-sorted-array?category=fundamentals&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 80,
+  "label": "Lower Bound ",
+  "kind": "problem",
+  "href": "/practice/dsa/lower-bound-?category=fundamentals&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 82,
+  "label": "Upper Bound",
+  "kind": "problem",
+  "href": "/practice/dsa/upper-bound?category=fundamentals&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 89,
+  "label": "Search insert position",
+  "kind": "problem",
+  "href": "/practice/dsa/search-insert-position?category=logic-building&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 86,
+  "label": "Floor and Ceil in Sorted Array",
+  "kind": "problem",
+  "href": "/practice/dsa/floor-and-ceil-in-sorted-array?category=logic-building&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 85,
+  "label": "First and last occurrence",
+  "kind": "problem",
+  "href": "/practice/dsa/first-and-last-occurrence?category=logic-building&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 87,
+  "label": "Search in rotated sorted array-I",
+  "kind": "problem",
+  "href": "/practice/dsa/search-in-rotated-sorted-array-i?category=logic-building&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 88,
+  "label": "Search in rotated sorted array-II",
+  "kind": "problem",
+  "href": "/practice/dsa/search-in-rotated-sorted-array-2?category=logic-building&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 83,
+  "label": "Find minimum in Rotated Sorted Array",
+  "kind": "problem",
+  "href": "/practice/dsa/find-minimum-in-rotated-sorted-array?category=logic-building&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 84,
+  "label": "Find out how many times the array is rotated",
+  "kind": "problem",
+  "href": "/practice/dsa/find-out-how-many-times-the-array-is-rotated?category=logic-building&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 90,
+  "label": "Single element in sorted array",
+  "kind": "problem",
+  "href": "/practice/dsa/single-element-in-sorted-array?category=logic-building&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 229,
+  "label": "Count Occurrences in a Sorted Array",
+  "kind": "problem",
+  "href": "/practice/dsa/count-occurrences-in-a-sorted-array?category=logic-building&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 92,
+  "label": "Find square root of a number",
+  "kind": "problem",
+  "href": "/practice/dsa/find-square-root-of-a-number?category=on-answers&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 91,
+  "label": "Find Nth root of a number",
+  "kind": "problem",
+  "href": "/practice/dsa/find-nth-root-of-a-number?category=on-answers&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 93,
+  "label": "Find the smallest divisor",
+  "kind": "problem",
+  "href": "/practice/dsa/find-the-smallest-divisor?category=on-answers&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 94,
+  "label": "Koko eating bananas",
+  "kind": "problem",
+  "href": "/practice/dsa/koko-eating-bananas?category=on-answers&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 95,
+  "label": "Minimum days to make M bouquets",
+  "kind": "problem",
+  "href": "/practice/dsa/minimum-days-to-make-m-bouquets?category=on-answers&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 161,
+  "label": "Capacity to Ship Packages Within D Days",
+  "kind": "problem",
+  "href": "/practice/dsa/capacity-to-ship-packages-within-d-days?category=on-answers&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 600,
+  "label": "Kth Missing Positive Number",
+  "kind": "problem",
+  "href": "/practice/dsa/kth-missing-positive-number?category=on-answers&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 805,
+  "label": "Painter's Partition",
+  "kind": "problem",
+  "href": "/practice/dsa/painters-partition?category=on-answers&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 73,
+  "label": "Aggressive Cows",
+  "kind": "problem",
+  "href": "/practice/dsa/aggressive-cows?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 74,
+  "label": "Book Allocation Problem",
+  "kind": "problem",
+  "href": "/practice/dsa/book-allocation-problem?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 75,
+  "label": "Find peak element",
+  "kind": "problem",
+  "href": "/practice/dsa/find-peak-element?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 77,
+  "label": "Median of 2 sorted arrays",
+  "kind": "problem",
+  "href": "/practice/dsa/median-of-2-sorted-arrays?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 76,
+  "label": "Kth element of 2 sorted arrays",
+  "kind": "problem",
+  "href": "/practice/dsa/kth-element-of-2-sorted-arrays?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 78,
+  "label": "Minimize Max Distance to Gas Station",
+  "kind": "problem",
+  "href": "/practice/dsa/minimise-max-distance-to-gas-stations?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 79,
+  "label": "Split array - largest sum",
+  "kind": "problem",
+  "href": "/practice/dsa/split-array---largest-sum?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 66,
+  "label": "Find row with maximum 1's",
+  "kind": "problem",
+  "href": "/practice/dsa/find-row-with-maximum-1's?category=2d-arrays&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 69,
+  "label": "Search in a 2D Matrix",
+  "kind": "problem",
+  "href": "/practice/dsa/search-in-a-2d-matrix?category=2d-arrays&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 68,
+  "label": "Search in 2D matrix - II",
+  "kind": "problem",
+  "href": "/practice/dsa/search-in-2d-matrix-ii?category=2d-arrays&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 65,
+  "label": "Find Peak Element - II",
+  "kind": "problem",
+  "href": "/practice/dsa/find-peak-element-ii?category=2d-arrays&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 67,
+  "label": "Matrix Median",
+  "kind": "problem",
+  "href": "/practice/dsa/matrix-median?category=2d-arrays&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 328,
+  "label": "Contest",
+  "kind": "problem",
+  "href": "/practice/dsa/contest/328?category=binary-search&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 3,
+  "children": []
+ },
+ {
+  "id": 892,
+  "label": "Remove Outermost Parentheses",
+  "kind": "problem",
+  "href": "/practice/dsa/remove-outermost-parentheses?category=parentheses&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 674,
+  "label": "Maximum Nesting Depth of the Parentheses",
+  "kind": "problem",
+  "href": "/practice/dsa/maximum-nesting-depth-of-the-parentheses?category=parentheses&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 903,
+  "label": "Roman to Integer",
+  "kind": "problem",
+  "href": "/practice/dsa/roman-to-integer?category=string-conversions&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 974,
+  "label": "String to Integer (atoi)",
+  "kind": "problem",
+  "href": "/practice/dsa/string-to-integer-atoi?category=string-conversions&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 2394,
+  "label": "Count Number of Substrings",
+  "kind": "problem",
+  "href": "/learning/dsa/count-number-of-substrings?category=substring-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 638,
+  "label": "Longest Palindromic Substring",
+  "kind": "problem",
+  "href": "/practice/dsa/longest-palindromic-substring?category=substring-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 993,
+  "label": "Sum of Beauty of All Substrings",
+  "kind": "problem",
+  "href": "/practice/dsa/sum-of-beauty-of-all-substrings?category=substring-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 877,
+  "label": "Pow(x,n)",
+  "kind": "problem",
+  "href": "/practice/dsa/pow(x%2Cn)?category=implementation-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 876,
+  "label": "Generate Parentheses",
+  "kind": "problem",
+  "href": "/practice/dsa/generate-parentheses?category=implementation-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 878,
+  "label": "Power Set",
+  "kind": "problem",
+  "href": "/practice/dsa/power-set?category=implementation-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 222,
+  "label": "Count Good Numbers",
+  "kind": "problem",
+  "href": "/practice/dsa/count-good-numbers?category=implementation-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 901,
+  "label": "Reverse a Stack",
+  "kind": "problem",
+  "href": "/practice/dsa/reverse-a-stack?category=implementation-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 2400,
+  "label": "Learn All Patterns of Subsequences (Theory)",
+  "kind": "problem",
+  "href": "/learning/dsa/learn-all-patterns-of-subsequences?category=subsequence-pattern-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 879,
+  "label": "Check if there exists a subsequence with sum K",
+  "kind": "problem",
+  "href": "/practice/dsa/check-if-there-exists-a-subsequence-with-sum-k?category=subsequence-pattern-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 880,
+  "label": "Count all subsequences with sum K",
+  "kind": "problem",
+  "href": "/practice/dsa/count-all-subsequences-with-sum-k?category=subsequence-pattern-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 493,
+  "label": "Generate Binary Strings Without Consecutive 1s",
+  "kind": "problem",
+  "href": "/practice/dsa/generate-binary-strings-without-consecutive-1s?category=subsequence-pattern-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 864,
+  "label": "Combination Sum",
+  "kind": "problem",
+  "href": "/practice/dsa/combination-sum?category=faqs-medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 865,
+  "label": "Combination Sum II",
+  "kind": "problem",
+  "href": "/practice/dsa/combination-sum-ii?category=faqs-medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 867,
+  "label": "Subsets I",
+  "kind": "problem",
+  "href": "/practice/dsa/subsets-i?category=faqs-medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 868,
+  "label": "Subsets II",
+  "kind": "problem",
+  "href": "/practice/dsa/subsets-ii?category=faqs-medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 866,
+  "label": "Combination Sum III",
+  "kind": "problem",
+  "href": "/practice/dsa/combination-sum-iii?category=faqs-medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 875,
+  "label": "Letter Combinations of a Phone Number",
+  "kind": "problem",
+  "href": "/practice/dsa/letter-combinations-of-a-phone-number?category=hard&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 871,
+  "label": "Palindrome partitioning",
+  "kind": "problem",
+  "href": "/practice/dsa/palindrome-partitioning?category=faqs-hard&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 874,
+  "label": "Word Search",
+  "kind": "problem",
+  "href": "/practice/dsa/word-search?category=faqs-hard&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 870,
+  "label": "N Queen",
+  "kind": "problem",
+  "href": "/practice/dsa/n-queen?category=faqs-hard&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 872,
+  "label": "Rat in a Maze",
+  "kind": "problem",
+  "href": "/practice/dsa/rat-in-a-maze?category=faqs-hard&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 869,
+  "label": "M Coloring Problem",
+  "kind": "problem",
+  "href": "/practice/dsa/m-coloring-problem?category=faqs-hard&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 873,
+  "label": "Sudoku Solver",
+  "kind": "problem",
+  "href": "/practice/dsa/sudoko-solver?category=faqs-hard&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 3,
+  "label": "Expression Add Operators",
+  "kind": "problem",
+  "href": "/practice/dsa/expression-add-operators?category=faqs-hard&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 398,
+  "label": "Contest",
+  "kind": "problem",
+  "href": "/practice/dsa/contest/398?category=recursion&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 2,
+  "children": []
+ },
+ {
+  "id": 1237,
+  "label": "Introduction to Singly LinkedList",
+  "kind": "problem",
+  "href": "/learning/dsa/introduction-to-singly-linkedlist?category=fundamentals-single-ll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 624,
+  "label": "Traversal in Linked List",
+  "kind": "problem",
+  "href": "/practice/dsa/traversal-in-linked-list?category=fundamentals-single-ll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1235,
+  "label": "Deletion in Linked List",
+  "kind": "problem",
+  "href": "/learning/dsa/deletion-in-linked-list?category=fundamentals-single-ll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1236,
+  "label": "Insertion in Linked List",
+  "kind": "problem",
+  "href": "/learning/dsa/insertion-in-linked-list?category=fundamentals-single-ll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 352,
+  "label": "Deletion of the head of LL",
+  "kind": "problem",
+  "href": "/practice/dsa/deletion-of-the-head-of-ll?category=fundamentals-single-ll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 354,
+  "label": "Deletion of the tail of Linked List",
+  "kind": "problem",
+  "href": "/practice/dsa/deletion-of-the-tail-of-ll?category=fundamentals-single-ll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 353,
+  "label": "Deletion of the Kth element of Linked List",
+  "kind": "problem",
+  "href": "/practice/dsa/deletion-of-the-kth-element-of-ll?category=fundamentals-single-ll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 351,
+  "label": "Delete the element with value X",
+  "kind": "problem",
+  "href": "/practice/dsa/delete-the-element-with-value-x?category=fundamentals-single-ll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 356,
+  "label": "Insertion at the head of Linked List",
+  "kind": "problem",
+  "href": "/practice/dsa/insertion-at-the-head-of-ll?category=fundamentals-single-ll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 358,
+  "label": "Insertion at the tail of Linked List",
+  "kind": "problem",
+  "href": "/practice/dsa/insertion-at-the-tail-of-ll?category=fundamentals-single-ll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 357,
+  "label": "Insertion at the Kth position of Linked List",
+  "kind": "problem",
+  "href": "/practice/dsa/insertion-at-the-kth-position-of-ll?category=fundamentals-single-ll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 359,
+  "label": "Insertion before the value X in Linked List",
+  "kind": "problem",
+  "href": "/practice/dsa/insertion-before-the-value-x-in-ll?category=fundamentals-single-ll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 470,
+  "label": "Find the length of the Linked List",
+  "kind": "problem",
+  "href": "/practice/dsa/find-the-length-of-the-linked-list?category=fundamentals-single-ll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 905,
+  "label": "Search in Linked List",
+  "kind": "problem",
+  "href": "/practice/dsa/search-in-linked-list?category=fundamentals-single-ll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1234,
+  "label": "Introduction to Doubly LL",
+  "kind": "problem",
+  "href": "/learning/dsa/introduction-to-doubly-ll?category=fundamentals-doubly-ll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1232,
+  "label": "Deletion in Doubly LL",
+  "kind": "problem",
+  "href": "/learning/dsa/deletion-in-doubly-ll?category=fundamentals-doubly-ll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1233,
+  "label": "Insertion in DLL",
+  "kind": "problem",
+  "href": "/learning/dsa/insertion-in-dll?category=fundamentals-doubly-ll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 347,
+  "label": "Convert Array to Doubly Linked List",
+  "kind": "problem",
+  "href": "/practice/dsa/convert-array-to-dll?category=fundamentals-doubly-ll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 350,
+  "label": "Delete Tail of Doubly Linked List",
+  "kind": "problem",
+  "href": "/practice/dsa/delete-tail-of-dll?category=fundamentals-doubly-ll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 349,
+  "label": "Delete Kth Element of Doubly Linked List",
+  "kind": "problem",
+  "href": "/practice/dsa/delete-kth-element-of-dll?category=fundamentals-doubly-ll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 363,
+  "label": "Removing given node in Doubly Linked List",
+  "kind": "problem",
+  "href": "/practice/dsa/removing-given-node-in-dll?category=fundamentals-doubly-ll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 361,
+  "label": "Insert node before head in Doubly Linked List",
+  "kind": "problem",
+  "href": "/practice/dsa/insert-node-before-head-in-dll?category=fundamentals-doubly-ll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 362,
+  "label": "Insert node before tail in Doubly Linked List",
+  "kind": "problem",
+  "href": "/practice/dsa/insert-node-before-tail-in-dll?category=fundamentals-doubly-ll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 360,
+  "label": "Insert node before (kth node) in Doubly Linked List",
+  "kind": "problem",
+  "href": "/practice/dsa/insert-node-before-kth-node-in-dll?category=fundamentals-doubly-ll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 355,
+  "label": "Insert before given node in Doubly Linked List",
+  "kind": "problem",
+  "href": "/practice/dsa/insert-before-given-node-in-dll?category=fundamentals-doubly-ll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 348,
+  "label": "Delete head of Doubly Linked List",
+  "kind": "problem",
+  "href": "/practice/dsa/delete-head-of-dll?category=fundamentals-doubly-ll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 900,
+  "label": "Reverse a Doubly Linked List",
+  "kind": "problem",
+  "href": "/practice/dsa/reverse-a-doubly-linked-list?category=fundamentals-doubly-ll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 625,
+  "label": "Add two numbers in Linked List",
+  "kind": "problem",
+  "href": "/practice/dsa/add-two-numbers-in-ll?category=logic-building&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 628,
+  "label": "Segregate odd and even nodes in Linked List",
+  "kind": "problem",
+  "href": "/practice/dsa/segregate-odd-and-even-nodes-in-ll?category=logic-building&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 629,
+  "label": "Sort a Linked List of 0's 1's and 2's",
+  "kind": "problem",
+  "href": "/practice/dsa/sort-a-ll-of-0's-1's-and-2's?category=logic-building&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 626,
+  "label": "Remove Nth node from the back of the LL",
+  "kind": "problem",
+  "href": "/practice/dsa/remove-nth-node-from-the-back-of-the-ll?category=logic-building&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 627,
+  "label": "Reverse a LL",
+  "kind": "problem",
+  "href": "/practice/dsa/reverse-a-ll?category=logic-building&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 617,
+  "label": "Add one to a number represented by LL",
+  "kind": "problem",
+  "href": "/practice/dsa/add-one-to-a-number-represented-by-ll?category=faqs--medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 448,
+  "label": "Find Middle of Linked List",
+  "kind": "problem",
+  "href": "/practice/dsa/find-middle-of-linked-list?category=faqs--medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 619,
+  "label": "Delete the middle node in LL",
+  "kind": "problem",
+  "href": "/practice/dsa/delete-the-middle-node-in-ll?category=faqs--medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 618,
+  "label": "Check if LL is palindrome or not",
+  "kind": "problem",
+  "href": "/practice/dsa/check-if-ll-is-palindrome-or-not?category=faqs--medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 621,
+  "label": "Find the intersection point of Y LL",
+  "kind": "problem",
+  "href": "/practice/dsa/find-the-intersection-point-of-y-ll?category=faqs--medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 620,
+  "label": "Detect a loop in LL",
+  "kind": "problem",
+  "href": "/practice/dsa/detect-a-loop-in-ll?category=faqs--medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 622,
+  "label": "Find the starting point in LL",
+  "kind": "problem",
+  "href": "/practice/dsa/find-the-starting-point-in-ll?category=faqs--medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 623,
+  "label": "Length of loop in LL",
+  "kind": "problem",
+  "href": "/practice/dsa/length-of-loop-in-ll?category=faqs--medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 614,
+  "label": "Reverse LL in group of given size K",
+  "kind": "problem",
+  "href": "/practice/dsa/reverse-ll-in-group-of-given-size-k?category=faqs--hard&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 615,
+  "label": "Rotate a LL",
+  "kind": "problem",
+  "href": "/practice/dsa/rotate-a-ll?category=faqs--hard&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 613,
+  "label": "Merge two Sorted Lists ",
+  "kind": "problem",
+  "href": "/practice/dsa/merge-sorted-lists-?category=faqs--hard&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 612,
+  "label": "Flattening of LL",
+  "kind": "problem",
+  "href": "/practice/dsa/flattening-of-ll?category=faqs--hard&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 616,
+  "label": "Sort LL",
+  "kind": "problem",
+  "href": "/practice/dsa/sort-ll?category=faqs--hard&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 611,
+  "label": "Clone a LL with random and next pointer",
+  "kind": "problem",
+  "href": "/practice/dsa/clone-a-ll-with-random-and-next-pointer?category=faqs--hard&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 609,
+  "label": "Delete all occurrences of a key in DLL",
+  "kind": "problem",
+  "href": "/practice/dsa/delete-all-occurrences-of-a-key-in-dll?category=faqs--dll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 610,
+  "label": "Remove duplicates from sorted DLL",
+  "kind": "problem",
+  "href": "/practice/dsa/remove-duplicated-from-sorted-dll?category=faqs--dll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 452,
+  "label": "Find Pairs with Given Sum in Doubly Linked List",
+  "kind": "problem",
+  "href": "/practice/dsa/find-pairs-with-given-sum-in-doubly-linked-list?category=faqs--dll&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 385,
+  "label": "Contest",
+  "kind": "problem",
+  "href": "/practice/dsa/contest/385?category=linked-list&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 3,
+  "children": []
+ },
+ {
+  "id": 1155,
+  "label": "Introduction to Bits and Tricks",
+  "kind": "problem",
+  "href": "/learning/dsa/introduction-to-bits-and-tricks?category=theory&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 177,
+  "label": "Check if the i-th bit is Set or Not",
+  "kind": "problem",
+  "href": "/practice/dsa/check-if-the-i-th-bit-is-set-or-not?category=bit-fundamentals&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 171,
+  "label": "Check if a Number is Odd or Not",
+  "kind": "problem",
+  "href": "/practice/dsa/check-if-a-number-is-odd-or-not?category=bit-fundamentals&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 172,
+  "label": "Check if a Number is Power of 2 or Not",
+  "kind": "problem",
+  "href": "/practice/dsa/check-if-a-number-is-power-of-2-or-not?category=bit-fundamentals&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 243,
+  "label": "Count the Number of Set Bits",
+  "kind": "problem",
+  "href": "/practice/dsa/count-the-number-of-set-bits?category=bit-fundamentals&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 2410,
+  "label": "Set/Unset the rightmost unset bit",
+  "kind": "problem",
+  "href": "/learning/dsa/setunset-the-rightmost-unset-bit?category=bit-fundamentals&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1005,
+  "label": "Swap Two Numbers",
+  "kind": "problem",
+  "href": "/practice/dsa/swap-two-numbers?category=bit-fundamentals&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 141,
+  "label": "Minimum Bit Flips to Convert Number",
+  "kind": "problem",
+  "href": "/practice/dsa/minimum-bit-flips-to-convert-number?category=problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 143,
+  "label": "Single Number - I",
+  "kind": "problem",
+  "href": "/practice/dsa/single-number---i?category=problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 144,
+  "label": "Single Number - II",
+  "kind": "problem",
+  "href": "/practice/dsa/single-number---ii?category=problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 145,
+  "label": "Single Number - III",
+  "kind": "problem",
+  "href": "/practice/dsa/single-number---iii?category=problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 140,
+  "label": "Divide two numbers without multiplication and division",
+  "kind": "problem",
+  "href": "/practice/dsa/divide-two-numbers-without-multiplication-and-division?category=problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 142,
+  "label": "Power Set Bit Manipulation",
+  "kind": "problem",
+  "href": "/practice/dsa/power-set-bit-manipulation?category=problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 146,
+  "label": "XOR of numbers in a given range",
+  "kind": "problem",
+  "href": "/practice/dsa/xor-of-numbers-in-a-given-range?category=problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 343,
+  "label": "Contest",
+  "kind": "problem",
+  "href": "/practice/dsa/contest/343?category=bit-manipulation&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 3,
+  "children": []
+ },
+ {
+  "id": 541,
+  "label": "Assign Cookies",
+  "kind": "problem",
+  "href": "/practice/dsa/assign-cookies?category=easy&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 543,
+  "label": "Lemonade Change",
+  "kind": "problem",
+  "href": "/practice/dsa/lemonade-change?category=easy&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 489,
+  "label": "Fractional Knapsack",
+  "kind": "problem",
+  "href": "/practice/dsa/fractional-knapsack?category=easy&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 542,
+  "label": "Jump Game - I",
+  "kind": "problem",
+  "href": "/practice/dsa/jump-game---i?category=easy&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 551,
+  "label": "Shortest Job First",
+  "kind": "problem",
+  "href": "/practice/dsa/shortest-job-first?category=scheduling-and-interval-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 547,
+  "label": "Job sequencing Problem",
+  "kind": "problem",
+  "href": "/practice/dsa/job-sequencing-problem?category=scheduling-and-interval-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 549,
+  "label": "N meetings in one room",
+  "kind": "problem",
+  "href": "/practice/dsa/n-meetings-in-one-room?category=scheduling-and-interval-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 550,
+  "label": "Non-overlapping Intervals",
+  "kind": "problem",
+  "href": "/practice/dsa/non-overlapping-intervals?category=scheduling-and-interval-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 546,
+  "label": "Insert Interval",
+  "kind": "problem",
+  "href": "/practice/dsa/insert-interval?category=scheduling-and-interval-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 712,
+  "label": "Merge Intervals",
+  "kind": "problem",
+  "href": "/practice/dsa/merge-intervals?category=scheduling-and-interval-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 548,
+  "label": "Minimum number of platforms required for a railway",
+  "kind": "problem",
+  "href": "/practice/dsa/minimum-number-of-platforms-required-for-a-railway?category=scheduling-and-interval-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 545,
+  "label": "Valid Paranthesis Checker",
+  "kind": "problem",
+  "href": "/practice/dsa/valid-paranthesis-checker?category=hard&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 544,
+  "label": "Candy",
+  "kind": "problem",
+  "href": "/practice/dsa/candy?category=hard&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 595,
+  "label": "Jump Game II",
+  "kind": "problem",
+  "href": "/practice/dsa/jump-game-ii?category=hard&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 376,
+  "label": "Contest",
+  "kind": "problem",
+  "href": "/practice/dsa/contest/376?category=greedy-algorithms&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 3,
+  "children": []
+ },
+ {
+  "id": 1254,
+  "label": "Theory",
+  "kind": "problem",
+  "href": "/learning/dsa/theory?category=pattern-and-template&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 922,
+  "label": "Maximum Points You Can Obtain from Cards ",
+  "kind": "problem",
+  "href": "/practice/dsa/maximum-points-you-can-obtain-from-cards-?category=constant-window&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 929,
+  "label": "Longest Substring Without Repeating Characters",
+  "kind": "problem",
+  "href": "/practice/dsa/longest-substring-without-repeating-characters?category=longest-and-smallest-window-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 930,
+  "label": " Max Consecutive Ones III",
+  "kind": "problem",
+  "href": "/practice/dsa/max-consecutive-ones-iii?category=longest-and-smallest-window-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 926,
+  "label": " Fruit Into Baskets",
+  "kind": "problem",
+  "href": "/practice/dsa/fruit-into-baskets?category=longest-and-smallest-window-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 928,
+  "label": "Longest Substring With At Most K Distinct Characters",
+  "kind": "problem",
+  "href": "/practice/dsa/longest-substring-with-at-most-k-distinct-characters?category=longest-and-smallest-window-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 927,
+  "label": "Longest Repeating Character Replacement",
+  "kind": "problem",
+  "href": "/practice/dsa/longest-repeating-character-replacement?category=longest-and-smallest-window-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 931,
+  "label": "Minimum Window Substring ",
+  "kind": "problem",
+  "href": "/practice/dsa/minimum-window-substring-?category=longest-and-smallest-window-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 754,
+  "label": "Minimum Window Subsequence",
+  "kind": "problem",
+  "href": "/practice/dsa/minimum-window-subsequence?category=longest-and-smallest-window-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 925,
+  "label": "Number of Substrings Containing All Three Characters",
+  "kind": "problem",
+  "href": "/practice/dsa/number-of-substrings-containing-all-three-characters?category=counting-subarrays-and-substrings-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 923,
+  "label": "Binary Subarrays With Sum",
+  "kind": "problem",
+  "href": "/practice/dsa/binary-subarrays-with-sum?category=counting-subarrays-and-substrings-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 924,
+  "label": "Count number of Nice subarrays",
+  "kind": "problem",
+  "href": "/practice/dsa/count-number-of-nice-subarrays?category=counting-subarrays-and-substrings-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 988,
+  "label": "Subarrays with K Different Integers",
+  "kind": "problem",
+  "href": "/practice/dsa/subarrays-with-k-different-integers?category=counting-subarrays-and-substrings-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 405,
+  "label": "Contest",
+  "kind": "problem",
+  "href": "/practice/dsa/contest/405?category=sliding-window-and-2-pointer&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 3,
+  "children": []
+ },
+ {
+  "id": 1256,
+  "label": "Implementation using different DS",
+  "kind": "problem",
+  "href": "/learning/dsa/implementation-using-different-ds?category=implementation&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 390,
+  "label": "Implement Stack using Arrays",
+  "kind": "problem",
+  "href": "/practice/dsa/implement-stack-using-arrays?category=implementation&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 387,
+  "label": "Implement Queue using Arrays",
+  "kind": "problem",
+  "href": "/practice/dsa/implement-queue-using-arrays?category=implementation&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 392,
+  "label": "Implement Stack using Queue",
+  "kind": "problem",
+  "href": "/practice/dsa/implement-stack-using-queue?category=implementation&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 389,
+  "label": "Implement Queue using Stack",
+  "kind": "problem",
+  "href": "/practice/dsa/implement-queue-using-stack?category=implementation&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 391,
+  "label": "Implement stack using Linkedlist",
+  "kind": "problem",
+  "href": "/practice/dsa/implement-stack-using-linkedlist?category=implementation&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 388,
+  "label": "Implement queue using Linkedlist",
+  "kind": "problem",
+  "href": "/practice/dsa/implement-queue-using-linkedlist?category=implementation&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 966,
+  "label": "Balanced Paranthesis",
+  "kind": "problem",
+  "href": "/practice/dsa/balanced-paranthesis?category=implementation&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 586,
+  "label": "Infix to Postfix Conversion",
+  "kind": "problem",
+  "href": "/practice/dsa/infix-to-postfix-conversion?category=expression-conversions&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 587,
+  "label": "Infix to Prefix Conversion",
+  "kind": "problem",
+  "href": "/practice/dsa/infix-to-prefix-conversion?category=expression-conversions&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 848,
+  "label": "Prefix to Infix Conversion",
+  "kind": "problem",
+  "href": "/practice/dsa/prefix-to-infix-conversion?category=expression-conversions&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 849,
+  "label": "Prefix to Postfix Conversion",
+  "kind": "problem",
+  "href": "/practice/dsa/prefix-to-postfix-conversion?category=expression-conversions&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 824,
+  "label": "Postfix to Infix Conversion",
+  "kind": "problem",
+  "href": "/practice/dsa/postfix-to-infix-conversion?category=expression-conversions&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 825,
+  "label": "Postfix to Prefix Conversion",
+  "kind": "problem",
+  "href": "/practice/dsa/postfix-to-prefix-conversion?category=expression-conversions&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 968,
+  "label": "Next Greater Element",
+  "kind": "problem",
+  "href": "/practice/dsa/next-greater-element?category=monotonic-stack&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 969,
+  "label": "Next Greater Element - 2",
+  "kind": "problem",
+  "href": "/practice/dsa/next-greater-element---2?category=monotonic-stack&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 967,
+  "label": "Asteroid Collision",
+  "kind": "problem",
+  "href": "/practice/dsa/asteroid-collision?category=monotonic-stack&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 971,
+  "label": "Sum of Subarray Minimums",
+  "kind": "problem",
+  "href": "/practice/dsa/sum-of-subarray-minimums?category=monotonic-stack&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 972,
+  "label": "Sum of Subarray Ranges",
+  "kind": "problem",
+  "href": "/practice/dsa/sum-of-subarray-ranges?category=monotonic-stack&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 970,
+  "label": "Remove K Digits",
+  "kind": "problem",
+  "href": "/practice/dsa/remove-k-digits?category=monotonic-stack&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 768,
+  "label": "Next Smaller Element",
+  "kind": "problem",
+  "href": "/practice/dsa/next-smaller-element?category=monotonic-stack&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 958,
+  "label": "Implement Min Stack",
+  "kind": "problem",
+  "href": "/practice/dsa/implement-min-stack?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 963,
+  "label": "Sliding Window Maximum",
+  "kind": "problem",
+  "href": "/practice/dsa/sliding-window-maximum?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 965,
+  "label": "Trapping Rainwater",
+  "kind": "problem",
+  "href": "/practice/dsa/trapping-rainwater?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 959,
+  "label": "Largest rectangle in a histogram",
+  "kind": "problem",
+  "href": "/practice/dsa/largest-rectangle-in-a-histogram?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 962,
+  "label": "Maximum Rectangles",
+  "kind": "problem",
+  "href": "/practice/dsa/maximum-rectangles?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 964,
+  "label": "Stock span problem",
+  "kind": "problem",
+  "href": "/practice/dsa/stock-span-problem?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 957,
+  "label": "Celebrity Problem",
+  "kind": "problem",
+  "href": "/practice/dsa/celebrity-problem?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 961,
+  "label": "LRU Cache",
+  "kind": "problem",
+  "href": "/practice/dsa/lru-cache?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 960,
+  "label": "LFU Cache",
+  "kind": "problem",
+  "href": "/practice/dsa/lfu-cache?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 285,
+  "label": "Number of Greater Elements to the Right",
+  "kind": "problem",
+  "href": "/practice/dsa/number-of-greater-elements-to-the-right?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 410,
+  "label": "Contest",
+  "kind": "problem",
+  "href": "/practice/dsa/contest/410?category=stack-and-queues&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 3,
+  "children": []
+ },
+ {
+  "id": 1154,
+  "label": "Introduction ",
+  "kind": "problem",
+  "href": "/learning/dsa/introduction-?category=theory-and-traversals&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 133,
+  "label": "Inorder Traversal",
+  "kind": "problem",
+  "href": "/practice/dsa/inorder-traversal?category=theory-and-traversals&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 137,
+  "label": "Preorder Traversal",
+  "kind": "problem",
+  "href": "/practice/dsa/preorder-traversal?category=theory-and-traversals&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 135,
+  "label": "Postorder Traversal",
+  "kind": "problem",
+  "href": "/practice/dsa/postorder-traversal?category=theory-and-traversals&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 134,
+  "label": "Level Order Traversal",
+  "kind": "problem",
+  "href": "/practice/dsa/level-order-traversal?category=theory-and-traversals&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 136,
+  "label": "Pre, Post, Inorder in one traversal",
+  "kind": "problem",
+  "href": "/practice/dsa/pre%2C-post%2C-inorder-in-one-traversal?category=theory-and-traversals&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 131,
+  "label": "Maximum Depth in BT",
+  "kind": "problem",
+  "href": "/practice/dsa/maximum-depth-in-bt?category=medium-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 129,
+  "label": "Check if two trees are identical or not",
+  "kind": "problem",
+  "href": "/practice/dsa/check-if-two-trees-are-identical-or-not?category=medium-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 127,
+  "label": "Check for balanced binary tree",
+  "kind": "problem",
+  "href": "/practice/dsa/check-for-balanced-binary-tree?category=medium-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 130,
+  "label": "Diameter of Binary Tree",
+  "kind": "problem",
+  "href": "/practice/dsa/diameter-of-binary-tree?category=medium-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 132,
+  "label": "Maximum path sum ",
+  "kind": "problem",
+  "href": "/practice/dsa/maximum-path-sum-?category=medium-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 128,
+  "label": "Check for symmetrical BTs",
+  "kind": "problem",
+  "href": "/practice/dsa/check-for-symmetrical-bts?category=medium-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 185,
+  "label": "Children Sum Property in Binary Tree",
+  "kind": "problem",
+  "href": "/practice/dsa/children-sum-property-in-binary-tree?category=medium-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 126,
+  "label": "Zig Zag or Spiral Traversal",
+  "kind": "problem",
+  "href": "/practice/dsa/zig-zag-or-spiral-traversal?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 116,
+  "label": "Boundary Traversal",
+  "kind": "problem",
+  "href": "/practice/dsa/boundary-traversal?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 125,
+  "label": "Vertical Order Traversal",
+  "kind": "problem",
+  "href": "/practice/dsa/vertical-order-traversal?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 124,
+  "label": "Top View of BT",
+  "kind": "problem",
+  "href": "/practice/dsa/top-view-of-bt?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 115,
+  "label": "Bottom view of BT",
+  "kind": "problem",
+  "href": "/practice/dsa/bottom-view-of-bt?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 123,
+  "label": "Right/Left View of BT",
+  "kind": "problem",
+  "href": "/practice/dsa/right-left-view-of-bt?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 122,
+  "label": "Print root to leaf path in BT",
+  "kind": "problem",
+  "href": "/practice/dsa/print-root-to-leaf-path-in-bt?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 118,
+  "label": "LCA in BT",
+  "kind": "problem",
+  "href": "/practice/dsa/lca-in-bt?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 119,
+  "label": "Maximum Width of BT",
+  "kind": "problem",
+  "href": "/practice/dsa/maximum-width-of-bt?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 121,
+  "label": "Print all nodes at a distance of K in BT",
+  "kind": "problem",
+  "href": "/practice/dsa/print-all-nodes-at-a-distance-of-k-in-bt?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 120,
+  "label": "Minimum time taken to burn the BT from a given Node",
+  "kind": "problem",
+  "href": "/practice/dsa/minimum-time-taken-to-burn-the-bt-from-a-given-node?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 117,
+  "label": "Count total nodes in a complete BT",
+  "kind": "problem",
+  "href": "/practice/dsa/count-total-nodes-in-a-complete-bt?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 486,
+  "label": "Flatten Binary Tree to Linked List",
+  "kind": "problem",
+  "href": "/practice/dsa/flatten-binary-tree-to-linked-list?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 111,
+  "label": "Requirements needed to construct a unique BT",
+  "kind": "problem",
+  "href": "/practice/dsa/requirements-needed-to-construct-a-unique-bt?category=construction-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 110,
+  "label": "Construct a BT from Preorder and Inorder",
+  "kind": "problem",
+  "href": "/practice/dsa/construct-a-bt-from-preorder-and-inorder?category=construction-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 109,
+  "label": "Construct a BT from Postorder and Inorder",
+  "kind": "problem",
+  "href": "/practice/dsa/construct-a-bt-from-postorder-and-inorder?category=construction-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 112,
+  "label": "Serialize and De-serialize BT",
+  "kind": "problem",
+  "href": "/practice/dsa/serialize-and-de-serialize-bt?category=construction-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 139,
+  "label": "Morris Inorder Traversal ",
+  "kind": "problem",
+  "href": "/practice/dsa/morris-inorder-traversal-?category=traversal-in-constant-space&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 138,
+  "label": "Morris Preorder Traversal ",
+  "kind": "problem",
+  "href": "/practice/dsa/morris-preorder-traversal-?category=traversal-in-constant-space&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 338,
+  "label": "Contest",
+  "kind": "problem",
+  "href": "/practice/dsa/contest/338?category=binary-trees&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 3,
+  "children": []
+ },
+ {
+  "id": 1153,
+  "label": "Introduction to BST",
+  "kind": "problem",
+  "href": "/learning/dsa/introduction-to-bst?category=theory-and-basics&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 108,
+  "label": "Search in BST",
+  "kind": "problem",
+  "href": "/practice/dsa/search-in-bst?category=theory-and-basics&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 107,
+  "label": "Floor and Ceil in a BST",
+  "kind": "problem",
+  "href": "/practice/dsa/floor-and-ceil-in-a-bst?category=theory-and-basics&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 2398,
+  "label": "Find Min/Max in BST",
+  "kind": "problem",
+  "href": "/learning/dsa/find-minmax-in-bst?category=theory-and-basics&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 104,
+  "label": "Insert a given node in BST",
+  "kind": "problem",
+  "href": "/practice/dsa/insert-a-given-node-in-bst?category=medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 102,
+  "label": "Delete a node in BST",
+  "kind": "problem",
+  "href": "/practice/dsa/delete-a-node-in-bst?category=medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 105,
+  "label": "Kth Smallest and Largest element in BST",
+  "kind": "problem",
+  "href": "/practice/dsa/kth-smallest-and-largest-element-in-bst?category=medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 100,
+  "label": "Check if a tree is a BST or not",
+  "kind": "problem",
+  "href": "/practice/dsa/check-if-a-tree-is-a-bst-or-not?category=medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 106,
+  "label": "LCA in BST",
+  "kind": "problem",
+  "href": "/practice/dsa/lca-in-bst?category=medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 101,
+  "label": "Construct a BST from a preorder traversal",
+  "kind": "problem",
+  "href": "/practice/dsa/construct-a-bst-from-a-preorder-traversal?category=medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 103,
+  "label": "Inorder successor and predecessor in BST",
+  "kind": "problem",
+  "href": "/practice/dsa/inorder-successor-and-predecessor-in-bst?category=medium&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 96,
+  "label": "BST iterator",
+  "kind": "problem",
+  "href": "/practice/dsa/bst-iterator?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 99,
+  "label": "Two sum in BST",
+  "kind": "problem",
+  "href": "/practice/dsa/two-sum-in-bst?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 97,
+  "label": "Correct BST with two nodes swapped",
+  "kind": "problem",
+  "href": "/practice/dsa/correct-bst-with-two-nodes-swapped?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 98,
+  "label": "Largest BST in Binary Tree",
+  "kind": "problem",
+  "href": "/practice/dsa/largest-bst-in-binary-tree?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 333,
+  "label": "Contest",
+  "kind": "problem",
+  "href": "/practice/dsa/contest/333?category=binary-search-trees&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 2,
+  "children": []
+ },
+ {
+  "id": 1223,
+  "label": "Heaps (Theory Video)",
+  "kind": "problem",
+  "href": "/learning/dsa/heaps-theory?category=theory-and-implementation&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 573,
+  "label": "Heapify Algorithm",
+  "kind": "problem",
+  "href": "/practice/dsa/heapify-algorithm?category=theory-and-implementation&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 570,
+  "label": "Build heap from a given Array",
+  "kind": "problem",
+  "href": "/practice/dsa/build-heap-from-a-given-array?category=theory-and-implementation&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 576,
+  "label": "Implement Min Heap",
+  "kind": "problem",
+  "href": "/practice/dsa/implement-min-heap?category=theory-and-implementation&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 575,
+  "label": "Implement Max Heap",
+  "kind": "problem",
+  "href": "/practice/dsa/implement-max-heap?category=theory-and-implementation&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 571,
+  "label": "Check if an array represents a min heap ",
+  "kind": "problem",
+  "href": "/practice/dsa/check-if-an-array-represents-a-min-heap-?category=theory-and-implementation&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 572,
+  "label": "Convert Min Heap to Max Heap",
+  "kind": "problem",
+  "href": "/practice/dsa/convert-min-heap-to-max-heap?category=theory-and-implementation&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 574,
+  "label": "Heap Sort",
+  "kind": "problem",
+  "href": "/practice/dsa/heap-sort?category=theory-and-implementation&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 578,
+  "label": "K-th Largest element in an array",
+  "kind": "problem",
+  "href": "/practice/dsa/k-th-largest-element-in-an-array?category=theory-and-implementation&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 567,
+  "label": "Kth largest element in a stream of running integers",
+  "kind": "problem",
+  "href": "/practice/dsa/kth-largest-element-in-a-stream-of-running-integers?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 2409,
+  "label": "Sort K sorted array",
+  "kind": "problem",
+  "href": "/learning/dsa/sort-k-sorted-array?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 569,
+  "label": "Merge K sorted Lists",
+  "kind": "problem",
+  "href": "/practice/dsa/merge-k-sorted-lists?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 898,
+  "label": "Replace Elements by Their Rank",
+  "kind": "problem",
+  "href": "/practice/dsa/replace-elements-by-their-rank?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1008,
+  "label": "Task Scheduler",
+  "kind": "problem",
+  "href": "/practice/dsa/task-scheduler?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 556,
+  "label": "Hand of Straights",
+  "kind": "problem",
+  "href": "/practice/dsa/hand-of-straights?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 565,
+  "label": "Design Twitter",
+  "kind": "problem",
+  "href": "/practice/dsa/design-twitter?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 755,
+  "label": "Minimum Cost to Connect Sticks",
+  "kind": "problem",
+  "href": "/practice/dsa/minimum-cost-to-connect-sticks?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 568,
+  "label": "Maximum Sum Combination",
+  "kind": "problem",
+  "href": "/practice/dsa/maximum-sum-combination?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 566,
+  "label": "Find Median from Data Stream",
+  "kind": "problem",
+  "href": "/practice/dsa/find-median-from-data-stream?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1018,
+  "label": "Top K Frequent Elements",
+  "kind": "problem",
+  "href": "/practice/dsa/top-k-frequent-elements?category=faqs&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 382,
+  "label": "Contest",
+  "kind": "problem",
+  "href": "/practice/dsa/contest/382?category=heaps&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 3,
+  "children": []
+ },
+ {
+  "id": 1222,
+  "label": "Introduction to Graph",
+  "kind": "problem",
+  "href": "/learning/dsa/introduction-to-graph?category=theory-and-traversals&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 529,
+  "label": "Traversal Techniques",
+  "kind": "problem",
+  "href": "/practice/dsa/traversal-techniques?category=theory-and-traversals&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 528,
+  "label": "Connected Components",
+  "kind": "problem",
+  "href": "/practice/dsa/connected-components?category=theory-and-traversals&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 535,
+  "label": "Number of provinces",
+  "kind": "problem",
+  "href": "/practice/dsa/number-of-provinces?category=traversal-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 534,
+  "label": "Number of islands",
+  "kind": "problem",
+  "href": "/practice/dsa/number-of-islands?category=traversal-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 531,
+  "label": "Flood fill algorithm",
+  "kind": "problem",
+  "href": "/practice/dsa/flood-fill-algorithm?category=traversal-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 533,
+  "label": "Number of enclaves",
+  "kind": "problem",
+  "href": "/practice/dsa/number-of-enclaves?category=traversal-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 536,
+  "label": "Rotten Oranges",
+  "kind": "problem",
+  "href": "/practice/dsa/rotten-oranges?category=traversal-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 530,
+  "label": "Distance of nearest cell having one",
+  "kind": "problem",
+  "href": "/practice/dsa/distance-of-nearest-cell-having-one?category=traversal-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 537,
+  "label": "Surrounded Regions",
+  "kind": "problem",
+  "href": "/practice/dsa/surrounded-regions?category=traversal-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 532,
+  "label": "Number of distinct islands",
+  "kind": "problem",
+  "href": "/practice/dsa/number-of-distinct-islands?category=traversal-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 501,
+  "label": "Detect a cycle in an undirected graph",
+  "kind": "problem",
+  "href": "/practice/dsa/detect-a-cycle-in-an-undirected-graph?category=cycles&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 499,
+  "label": "Bipartite graph",
+  "kind": "problem",
+  "href": "/practice/dsa/bipartite-graph?category=cycles&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 502,
+  "label": "Topological sort or Kahn's algorithm",
+  "kind": "problem",
+  "href": "/practice/dsa/topological-sort-or-kahns-algorithm?category=cycles&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 500,
+  "label": "Detect a cycle in a directed graph",
+  "kind": "problem",
+  "href": "/practice/dsa/detect-a-cycle-in-a-directed-graph?category=cycles&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 506,
+  "label": "Find eventual safe states",
+  "kind": "problem",
+  "href": "/practice/dsa/find-eventual-safe-states?category=hard-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 504,
+  "label": "Course Schedule I",
+  "kind": "problem",
+  "href": "/practice/dsa/course-schedule-i?category=hard-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 505,
+  "label": "Course Schedule II",
+  "kind": "problem",
+  "href": "/practice/dsa/course-schedule-ii?category=hard-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 503,
+  "label": "Alien Dictionary",
+  "kind": "problem",
+  "href": "/practice/dsa/alient-dictionary?category=hard-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 507,
+  "label": "Shortest path in DAG",
+  "kind": "problem",
+  "href": "/practice/dsa/shortest-path-in-dag?category=hard-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 508,
+  "label": "Shortest path in undirected graph with unit weights",
+  "kind": "problem",
+  "href": "/practice/dsa/shortest-path-in-undirected-graph-with-unit-weights?category=hard-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 509,
+  "label": "Word ladder I",
+  "kind": "problem",
+  "href": "/practice/dsa/word-ladder-i?category=hard-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 510,
+  "label": "Word ladder II",
+  "kind": "problem",
+  "href": "/practice/dsa/word-ladder-ii?category=hard-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 520,
+  "label": "Dijkstra's algorithm",
+  "kind": "problem",
+  "href": "/practice/dsa/dijkstra's-algorithm?category=shortest-path-algorithms&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 526,
+  "label": "Print Shortest Path ",
+  "kind": "problem",
+  "href": "/practice/dsa/print-shortest-path-?category=shortest-path-algorithms&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 527,
+  "label": "Shortest Distance in a Binary Maze",
+  "kind": "problem",
+  "href": "/practice/dsa/shortest-path-with-minimum-effort?category=shortest-path-algorithms&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 525,
+  "label": "Path with minimum effort",
+  "kind": "problem",
+  "href": "/practice/dsa/path-with-minimum-effort?category=shortest-path-algorithms&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 519,
+  "label": "Cheapest flight within K stops",
+  "kind": "problem",
+  "href": "/practice/dsa/cheapest-flight-within-k-stops?category=shortest-path-algorithms&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 523,
+  "label": "Minimum multiplications to reach end",
+  "kind": "problem",
+  "href": "/practice/dsa/minimum-multiplications-to-reach-end?category=shortest-path-algorithms&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 524,
+  "label": "Number of ways to arrive at destination",
+  "kind": "problem",
+  "href": "/practice/dsa/number-of-ways-to-arrive-at-destination?category=shortest-path-algorithms&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 518,
+  "label": "Bellman ford algorithm",
+  "kind": "problem",
+  "href": "/practice/dsa/bellman-ford-algorithm?category=shortest-path-algorithms&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 522,
+  "label": "Floyd warshall algorithm",
+  "kind": "problem",
+  "href": "/practice/dsa/floyd-warshall-algorithm?category=shortest-path-algorithms&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 521,
+  "label": "Find the city with the smallest number of neighbors",
+  "kind": "problem",
+  "href": "/practice/dsa/find-the-city-with-the-smallest-number-of-neighbors?category=shortest-path-algorithms&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 764,
+  "label": "Network Delay Time",
+  "kind": "problem",
+  "href": "/practice/dsa/network-delay-time?category=shortest-path-algorithms&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1006,
+  "label": "Swim in Rising Water",
+  "kind": "problem",
+  "href": "/practice/dsa/swim-in-rising-water?category=shortest-path-algorithms&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1221,
+  "label": "MST theory",
+  "kind": "problem",
+  "href": "/learning/dsa/mst-theory?category=minimum-spanning-tree&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 516,
+  "label": "Disjoint Set ",
+  "kind": "problem",
+  "href": "/practice/dsa/disjoint-set-?category=minimum-spanning-tree&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 517,
+  "label": "Find the MST weight",
+  "kind": "problem",
+  "href": "/practice/dsa/find-the-mst-weight?category=minimum-spanning-tree&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 515,
+  "label": "Number of operations to make network connected",
+  "kind": "problem",
+  "href": "/practice/dsa/number-of-operations-to-make-network-connected?category=hard-problems-ii&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 511,
+  "label": "Accounts merge",
+  "kind": "problem",
+  "href": "/practice/dsa/accounts-merge?category=hard-problems-ii&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 514,
+  "label": "Number of islands II",
+  "kind": "problem",
+  "href": "/practice/dsa/number-of-islands-ii?category=hard-problems-ii&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 512,
+  "label": "Making a large island",
+  "kind": "problem",
+  "href": "/practice/dsa/making-a-large-island?category=hard-problems-ii&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 513,
+  "label": "Most stones removed with same row or column",
+  "kind": "problem",
+  "href": "/practice/dsa/most-stones-removed-with-same-row-or-column?category=hard-problems-ii&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 498,
+  "label": "Kosaraju's algorithm",
+  "kind": "problem",
+  "href": "/practice/dsa/kosaraju's-algorithm?category=additional-algorithms&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 497,
+  "label": "Bridges in graph",
+  "kind": "problem",
+  "href": "/practice/dsa/bridges-in-graph?category=additional-algorithms&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 496,
+  "label": "Articulation point in graph",
+  "kind": "problem",
+  "href": "/practice/dsa/articulation-point-in-graph?category=additional-algorithms&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 368,
+  "label": "Contest",
+  "kind": "problem",
+  "href": "/practice/dsa/contest/368?category=graph&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 3,
+  "children": []
+ },
+ {
+  "id": 1195,
+  "label": "Introduction to DP",
+  "kind": "problem",
+  "href": "/learning/dsa/introduction-to-dp?category=introduction&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 287,
+  "label": "Climbing stairs",
+  "kind": "problem",
+  "href": "/practice/dsa/climbing-stairs?category=1d-dp&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 288,
+  "label": "Frog Jump",
+  "kind": "problem",
+  "href": "/practice/dsa/frog-jump?category=1d-dp&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 289,
+  "label": "Frog jump with K distances",
+  "kind": "problem",
+  "href": "/practice/dsa/frog-jump-with-k-distances?category=1d-dp&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 291,
+  "label": "Maximum sum of non adjacent elements",
+  "kind": "problem",
+  "href": "/practice/dsa/maximum-sum-of-non-adjacent-elements?category=1d-dp&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 290,
+  "label": "House robber",
+  "kind": "problem",
+  "href": "/practice/dsa/house-robber?category=1d-dp&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 292,
+  "label": "Ninja's training",
+  "kind": "problem",
+  "href": "/practice/dsa/ninja's-training?category=2d-dp&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 297,
+  "label": "Grid unique paths",
+  "kind": "problem",
+  "href": "/practice/dsa/grid-unique-paths?category=dp-on-grids&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 300,
+  "label": "Unique paths II",
+  "kind": "problem",
+  "href": "/practice/dsa/unique-paths-ii?category=dp-on-grids&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 298,
+  "label": "Minimum Falling Path Sum",
+  "kind": "problem",
+  "href": "/practice/dsa/minimum-falling-path-sum?category=dp-on-grids&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 299,
+  "label": "Triangle",
+  "kind": "problem",
+  "href": "/practice/dsa/triangle?category=dp-on-grids&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 296,
+  "label": "Cherry pickup II",
+  "kind": "problem",
+  "href": "/practice/dsa/cherry-pickup-ii?category=dp-on-grids&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 2395,
+  "label": "Count Square Submatrices with All Ones|(DP-56)",
+  "kind": "problem",
+  "href": "/learning/dsa/count-square-submatrices-with-all-ones?category=dp-on-grids&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 301,
+  "label": "Best time to buy and sell stock",
+  "kind": "problem",
+  "href": "/practice/dsa/best-time-to-buy-and-sell-stock?category=dp-on-stocks&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 302,
+  "label": "Best time to buy and sell stock II",
+  "kind": "problem",
+  "href": "/practice/dsa/best-time-to-buy-and-sell-stock-ii?category=dp-on-stocks&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 303,
+  "label": "Best time to buy and sell stock III",
+  "kind": "problem",
+  "href": "/practice/dsa/best-time-to-buy-and-sell-stock-iii?category=dp-on-stocks&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 304,
+  "label": "Best time to buy and sell stock IV",
+  "kind": "problem",
+  "href": "/practice/dsa/best-time-to-buy-and-sell-stock-iv?category=dp-on-stocks&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 305,
+  "label": "Best time to buy and sell stock with transaction fees",
+  "kind": "problem",
+  "href": "/practice/dsa/best-time-to-buy-and-sell-stock-with-cooldown-and-transaction-fees?category=dp-on-stocks&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 56,
+  "label": "Best Time to Buy and Sell Stock with Cooldown",
+  "kind": "problem",
+  "href": "/practice/dsa/best-time-to-buy-and-sell-stock-with-cooldown?category=dp-on-stocks&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 323,
+  "label": "Subset sum equals to target",
+  "kind": "problem",
+  "href": "/practice/dsa/subset-sum-equals-to-target?category=dp-on-subsequences&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 321,
+  "label": "Partition equal subset sum",
+  "kind": "problem",
+  "href": "/practice/dsa/partition-equal-subset-sum?category=dp-on-subsequences&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 320,
+  "label": "Partition a set into two subsets with minimum absolute sum difference",
+  "kind": "problem",
+  "href": "/practice/dsa/partition-a-set-into-two-subsets-with-minimum-absolute-sum-difference?category=dp-on-subsequences&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 318,
+  "label": "Count subsets with sum K",
+  "kind": "problem",
+  "href": "/practice/dsa/count-subsets-with-sum-k?category=dp-on-subsequences&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 317,
+  "label": "Count partitions with given difference",
+  "kind": "problem",
+  "href": "/practice/dsa/count-partitions-with-given-difference?category=dp-on-subsequences&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 315,
+  "label": "0 and 1 Knapsack",
+  "kind": "problem",
+  "href": "/practice/dsa/0-and-1-knapsack?category=dp-on-subsequences&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 319,
+  "label": "Minimum coins",
+  "kind": "problem",
+  "href": "/practice/dsa/minimum-coins?category=dp-on-subsequences&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 324,
+  "label": "Target sum",
+  "kind": "problem",
+  "href": "/practice/dsa/target-sum?category=dp-on-subsequences&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 316,
+  "label": "Coin change II",
+  "kind": "problem",
+  "href": "/practice/dsa/coin-change-ii?category=dp-on-subsequences&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 325,
+  "label": "Unbounded knapsack",
+  "kind": "problem",
+  "href": "/practice/dsa/unbounded-knapsack?category=dp-on-subsequences&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 322,
+  "label": "Rod cutting problem",
+  "kind": "problem",
+  "href": "/practice/dsa/rod-cutting-problem?category=dp-on-subsequences&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 636,
+  "label": "Longest Increasing Subsequence",
+  "kind": "problem",
+  "href": "/practice/dsa/longest-increasing-subsequence?category=lis-dp&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 851,
+  "label": "Print Longest Increasing Subsequence",
+  "kind": "problem",
+  "href": "/practice/dsa/print-longest-increasing-subsequence?category=lis-dp&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 603,
+  "label": "Largest Divisible Subset",
+  "kind": "problem",
+  "href": "/practice/dsa/largest-divisible-subset?category=lis-dp&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 640,
+  "label": "Longest String Chain",
+  "kind": "problem",
+  "href": "/practice/dsa/longest-string-chain?category=lis-dp&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 633,
+  "label": "Longest Bitonic Subsequence",
+  "kind": "problem",
+  "href": "/practice/dsa/longest-bitonic-subsequence?category=lis-dp&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 780,
+  "label": "Number of Longest Increasing Subsequences",
+  "kind": "problem",
+  "href": "/practice/dsa/number-of-longest-increasing-subsequences?category=lis-dp&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 308,
+  "label": "Longest common subsequence",
+  "kind": "problem",
+  "href": "/practice/dsa/longest-common-subsequence?category=dp-on-strings&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 309,
+  "label": "Longest common substring",
+  "kind": "problem",
+  "href": "/practice/dsa/longest-common-substring?category=dp-on-strings&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 310,
+  "label": "Longest palindromic subsequence",
+  "kind": "problem",
+  "href": "/practice/dsa/longest-palindromic-subsequence?category=dp-on-strings&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 312,
+  "label": "Minimum insertions to make string palindrome",
+  "kind": "problem",
+  "href": "/practice/dsa/minimum-insertions-to-make-string-palindrome?category=dp-on-strings&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 311,
+  "label": "Minimum insertions or deletions to convert string A to B",
+  "kind": "problem",
+  "href": "/practice/dsa/minimum-insertions-or-deletions-to-convert-string-a-to-b?category=dp-on-strings&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 313,
+  "label": "Shortest common supersequence",
+  "kind": "problem",
+  "href": "/practice/dsa/shortest-common-supersequence?category=dp-on-strings&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 306,
+  "label": "Distinct subsequences",
+  "kind": "problem",
+  "href": "/practice/dsa/distinct-subsequences?category=dp-on-strings&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 307,
+  "label": "Edit distance",
+  "kind": "problem",
+  "href": "/practice/dsa/edit-distance?category=dp-on-strings&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 314,
+  "label": "Wildcard matching",
+  "kind": "problem",
+  "href": "/practice/dsa/wildcard-matching?category=dp-on-strings&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 4,
+  "label": "Word Break",
+  "kind": "problem",
+  "href": "/practice/dsa/word-break?category=dp-on-strings&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 231,
+  "label": "Count Palindromic Subsequences",
+  "kind": "problem",
+  "href": "/practice/dsa/count-palindromic-subsequences?category=dp-on-strings&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 327,
+  "label": "Matrix chain multiplication",
+  "kind": "problem",
+  "href": "/practice/dsa/matrix-chain-multiplication?category=mcm-dp&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 326,
+  "label": "Burst balloons",
+  "kind": "problem",
+  "href": "/practice/dsa/burst-balloons?category=mcm-dp&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 329,
+  "label": "Palindrome partitioning II ",
+  "kind": "problem",
+  "href": "/practice/dsa/palindrome-partitioning-ii-?category=mcm-dp&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 810,
+  "label": "Partition Array for Maximum Sum",
+  "kind": "problem",
+  "href": "/practice/dsa/partition-array-for-maximum-sum?category=mcm-dp&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 328,
+  "label": "Minimum cost to cut the stick",
+  "kind": "problem",
+  "href": "/practice/dsa/minimum-cost-to-cut-the-stick?category=mcm-dp&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 276,
+  "label": "Different Ways to Evaluate a Boolean Expression",
+  "kind": "problem",
+  "href": "/practice/dsa/different-ways-to-evaluate-a-boolean-expression?category=mcm-dp&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 348,
+  "label": "Contest",
+  "kind": "problem",
+  "href": "/practice/dsa/contest/348?category=dynamic-programming&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 2,
+  "children": []
+ },
+ {
+  "id": 2390,
+  "label": "Bit PreRequisites for TRIE Problems",
+  "kind": "problem",
+  "href": "/learning/dsa/bit-prerequisites-for-trie-problems?category=triessubc&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1028,
+  "label": "Trie Implementation and Operations",
+  "kind": "problem",
+  "href": "/practice/dsa/trie-implementation-and-operations?category=triessubc&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1027,
+  "label": "Trie Implementation and Advanced Operations",
+  "kind": "problem",
+  "href": "/practice/dsa/trie-implementation-and-advanced-operations?category=triessubc&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1023,
+  "label": "Longest Word with All Prefixes",
+  "kind": "problem",
+  "href": "/practice/dsa/longest-word-with-all-prefixes?category=problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1026,
+  "label": "Number of distinct substrings in a string",
+  "kind": "problem",
+  "href": "/practice/dsa/number-of-distinct-substrings-in-a-string?category=problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1024,
+  "label": "Maximum XOR of two numbers in an array",
+  "kind": "problem",
+  "href": "/practice/dsa/maximum-xor-of-two-numbers-in-an-array?category=problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 1025,
+  "label": "Maximum Xor with an element from an array",
+  "kind": "problem",
+  "href": "/practice/dsa/maximum-xor-with-an-element-from-an-array?category=problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 984,
+  "label": "Reverse every word in a string",
+  "kind": "problem",
+  "href": "/practice/dsa/reverse-every-word-in-a-string?category=medium-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 983,
+  "label": "Minimum number of bracket reversals to make an expression balanced",
+  "kind": "problem",
+  "href": "/practice/dsa/minimum-number-of-bracket-reversals-to-make-an-expression-balanced?category=medium-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 982,
+  "label": "Count and say",
+  "kind": "problem",
+  "href": "/practice/dsa/count-and-say?category=medium-problems&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 2399,
+  "label": "Hashing In Strings | Theory",
+  "kind": "problem",
+  "href": "/learning/dsa/hashing-in-strings-theory?category=advanced-problems-%28less-asked%29&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 979,
+  "label": "Rabin Karp Algorithm",
+  "kind": "problem",
+  "href": "/practice/dsa/rabin-karp-algorithm?category=advanced-problems-%28less-asked%29&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 981,
+  "label": "Z function",
+  "kind": "problem",
+  "href": "/practice/dsa/z-function?category=advanced-problems-%28less-asked%29&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 977,
+  "label": "KMP Algorithm or LPS array",
+  "kind": "problem",
+  "href": "/practice/dsa/kmp-algorithm-or-lps-array?category=advanced-problems-%28less-asked%29&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 980,
+  "label": "Shortest Palindrome",
+  "kind": "problem",
+  "href": "/practice/dsa/shortest-palindrome?category=advanced-problems-%28less-asked%29&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 978,
+  "label": "Longest happy prefix",
+  "kind": "problem",
+  "href": "/practice/dsa/longest-happy-prefix?category=advanced-problems-%28less-asked%29&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 415,
+  "label": "Contest",
+  "kind": "problem",
+  "href": "/practice/dsa/contest/415?category=strings--advanced-algo&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 3,
+  "children": []
+ },
+ {
+  "id": 653,
+  "label": "Print all primes till N",
+  "kind": "problem",
+  "href": "/practice/dsa/print-all-primes-till-n?category=sieve-of-eratosthenes&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 652,
+  "label": "Prime factorisation of a Number",
+  "kind": "problem",
+  "href": "/practice/dsa/prime-factorisation-of-a-number?category=sieve-of-eratosthenes&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 651,
+  "label": "Count primes in range L to R",
+  "kind": "problem",
+  "href": "/practice/dsa/count-primes-in-range-l-to-r?category=sieve-of-eratosthenes&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 1,
+  "children": []
+ },
+ {
+  "id": 393,
+  "label": "Contest",
+  "kind": "problem",
+  "href": "/practice/dsa/contest/393?category=maths&source=strivers-a2z-dsa-sheet",
+  "moduleCount": 0,
+  "problemCount": 2,
+  "children": []
+ }
+]
