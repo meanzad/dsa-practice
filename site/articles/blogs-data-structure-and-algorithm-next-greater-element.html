@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Next Greater Element Using a Monotonic Stack</title>
+<link rel="stylesheet" href="../style.css?v=1790281487">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Next Greater Element Using a Monotonic Stack</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/blogs/data-structure-and-algorithm/next-greater-element</code></div>
+  <div class="ArticleParser-module__R__VNG__article" data-article-segment="html-0"><p>An integer array <code>arr</code> is given. For every position, find the first later element with a value strictly greater than the value at the current position.</p><p>Store <code>-1</code> for every position without a greater value on the right. Return all answers in the original array order.</p></div><div><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 1</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>arr = [4, 5, 2, 10, 8]</code><br/><strong>Output:</strong> <code>[5, 10, 10, -1, -1]</code><br/><strong>Explanation:</strong> Value <code>5</code> is the first greater value after <code>4</code>. Value <code>10</code> is the first greater value after both <code>5</code> and <code>2</code>. No greater value appears after <code>10</code> or <code>8</code>.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 2</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>arr = [3, 3, 2]</code><br/><strong>Output:</strong> <code>[-1, -1, -1]</code><br/><strong>Explanation:</strong> Equal values are not strictly greater. No position has a strictly greater value on the right.</p></div></div></section></div><div><div class="BlogDetail-module__HEfJva__practiceCallout"><a class="BlogDetail-module__HEfJva__practiceLink" data-mobile-prefetch="normal" href="https://takeuforward.org/practice/dsa/next-greater-element" rel="noopener" target="_blank"><span>Practice it by yourself before moving onto the solution</span><span class="BlogDetail-module__HEfJva__practiceAction">Try now</span></a></div></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-3"><h2 id="blog-toc-brute-force-approach">Brute Force Approach</h2><p>The nearest greater element must appear somewhere to the right of the current value. Checking the right side in order ensures that the first greater value found is also the nearest one.</p><p>The search stops after finding that value. If no greater value exists, the answer remains <code>-1</code>. This method is easy to understand but uses nested loops.</p><h3 id="blog-toc-algorithm">Algorithm</h3><ul><li><p>Create an answer array of size <code>N</code> and initialize every position with <code>-1</code>, covering cases where no greater value exists on the right.</p></li><li><p>Select each array index from left to right as the current position requiring a next greater element.</p></li><li><p>Scan all later positions in increasing index order, because the first valid value encountered is the nearest greater element.</p></li><li><p>Compare every right-side value with the current array value and accept only a strictly larger value.</p></li><li><p>Store the first accepted value at the corresponding answer index and stop the inner scan, because every remaining candidate appears farther to the right.</p></li><li><p>Keep the initial value <code>-1</code> when the complete right-side scan finds no strictly greater value.</p></li><li><p>Return the completed answer array after processing every index.</p></li></ul><h3 id="blog-toc-dry-run">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Next Greater Element Brute" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/9ad4b9d3ab0085e2.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Next Greater Element Brute</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-4"><h3 id="blog-toc-solution">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Finds the next greater value for every position.
+    vector&lt;int&gt; nextGreaterElements(vector&lt;int&gt;&amp; arr) {
+        int n = arr.size();
+        vector&lt;int&gt; answer(n, -1);
+
+        // Match each position with the nearest greater value.
+        for (int i = 0; i &lt; n; i++) {
+            // Check right-side positions from nearest to farthest.
+            for (int j = i + 1; j &lt; n; j++) {
+                // A larger value ends the search at the nearest match.
+                if (arr[j] &gt; arr[i]) {
+                    answer[i] = arr[j];
+                    break;
+                }
+            }
+        }
+
+        return answer;
+    }
+};
+
+// Driver code
+int main() {
+    vector&lt;int&gt; arr = {2, 1, 2, 4, 3};
+
+    Solution obj;
+
+    vector&lt;int&gt; answer = obj.nextGreaterElements(arr);
+    for (int value : answer) {
+        cout &lt;&lt; value &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+    # Finds the next greater value for every position.
+    def nextGreaterElements(self, arr: list[int]) -&gt; list[int]:
+        n = len(arr)
+        answer = [-1] * n
+
+        # Match each position with the nearest greater value.
+        for i in range(n):
+            # Check right-side positions from nearest to farthest.
+            for j in range(i + 1, n):
+                # A larger value ends the search at the nearest match.
+                if arr[j] &gt; arr[i]:
+                    answer[i] = arr[j]
+                    break
+
+        return answer
+
+
+# Driver code
+def main() -&gt; None:
+    arr = [2, 1, 2, 4, 3]
+    obj = Solution()
+    answer = obj.nextGreaterElements(arr)
+    print(answer)
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Finds the next greater value for every position.
+    public int[] nextGreaterElements(int[] arr) {
+        int n = arr.length;
+        int[] answer = new int[n];
+        Arrays.fill(answer, -1);
+
+        // Match each position with the nearest greater value.
+        for (int i = 0; i &lt; n; i++) {
+            // Check right-side positions from nearest to farthest.
+            for (int j = i + 1; j &lt; n; j++) {
+                // A larger value ends the search at the nearest match.
+                if (arr[j] &gt; arr[i]) {
+                    answer[i] = arr[j];
+                    break;
+                }
+            }
+        }
+
+        return answer;
+    }
+}
+
+// Driver code
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {2, 1, 2, 4, 3};
+
+        Solution obj = new Solution();
+
+        int[] answer = obj.nextGreaterElements(arr);
+        System.out.println(Arrays.toString(answer));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Finds the next greater value for every position.
+    nextGreaterElements(arr) {
+        const n = arr.length;
+        const answer = new Array(n).fill(-1);
+
+        // Match each position with the nearest greater value.
+        for (let i = 0; i &lt; n; i++) {
+            // Check right-side positions from nearest to farthest.
+            for (let j = i + 1; j &lt; n; j++) {
+                // A larger value ends the search at the nearest match.
+                if (arr[j] &gt; arr[i]) {
+                    answer[i] = arr[j];
+                    break;
+                }
+            }
+        }
+
+        return answer;
+    }
+}
+
+// Driver code
+function main() {
+    const arr = [2, 1, 2, 4, 3];
+    const obj = new Solution();
+    const answer = obj.nextGreaterElements(arr);
+    console.log(answer);
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-5"><p>Note: Brute force may fail for large arrays. Repeated right-side scans create quadratic work, so an online judge may report Time Limit Exceeded.</p><h3 id="blog-toc-complexity-analysis">Complexity Analysis</h3><p>Time Complexity: <code>O(N</code><sup>2</sup><code>)</code>, every index may scan all later positions in the worst case.</p><p>Space Complexity: <code>O(N)</code>, the returned answer array stores one result per position, while auxiliary working space is <code>O(1)</code>.</p></div><div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-7"><h2 id="blog-toc-optimal-approach">Optimal Approach</h2><p>While moving from right to left, every value already processed lies on the right side of the current element. We maintain a <strong>monotonic stack</strong> to efficiently find the Next Greater Element (NGE). A monotonic stack keeps its values in a consistent increasing or decreasing order, which helps remove elements that can no longer be useful.</p><p>For the current element, first remove stack values that are smaller than or equal to it. After this, if the stack is empty, no greater element exists on the right, so its NGE is <code>-1</code>. Otherwise, the stack top is its NGE.</p><p>After finding the NGE, update the stack so it can help elements further to the left. Remove values that cannot serve as a greater element in the future, then push the current value as a new possible candidate.</p><h3 id="blog-toc-algorithm-2">Algorithm</h3><ul><li><p>Create an answer array of size <code>N</code> and initialize every position with <code>-1</code>.</p></li><li><p>Create an empty <strong>monotonic stack</strong> to store potential greater elements.</p></li><li><p>Traverse the array from index <code>N - 1</code> to <code>0</code>, because the stack must contain only elements appearing to the right of the current index.</p></li><li><p>For each current element:</p><ul><li><p>Remove values from the stack while the top is smaller than or equal to the current value, because they cannot be its Next Greater Element.</p></li><li><p>If the stack is empty, keep the answer as <code>-1</code>, because no greater element exists on the right. Otherwise, store the stack top as the NGE.</p></li><li><p>Push the current value into the stack so it can become a potential greater element for elements further to the left.</p></li></ul></li><li><p>Return the completed answer array.</p></li></ul><h3 id="blog-toc-dry-run-2">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Next Greater Element Optimal" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/0833e17b9b27c0e0.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Next Greater Element Optimal</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-8"><h3 id="blog-toc-solution-2">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Finds next greater values with a monotonic stack.
+    vector&lt;int&gt; nextGreaterElements(vector&lt;int&gt;&amp; arr) {
+        int n = arr.size();
+        vector&lt;int&gt; answer(n, -1);
+        stack&lt;int&gt; candidates;
+
+        // Scan right to left to prepare valid candidates.
+        for (int i = n - 1; i &gt;= 0; i--) {
+            // Remove values failing the strict greater condition.
+            while (!candidates.empty() &amp;&amp; candidates.top() &lt;= arr[i]) {
+                candidates.pop();
+            }
+
+            // Use the nearest greater candidate at the stack top.
+            if (!candidates.empty()) {
+                answer[i] = candidates.top();
+            }
+
+            candidates.push(arr[i]);
+        }
+
+        return answer;
+    }
+};
+
+// Driver code
+int main() {
+    vector&lt;int&gt; arr = {2, 1, 2, 4, 3};
+
+    Solution obj;
+
+    vector&lt;int&gt; answer = obj.nextGreaterElements(arr);
+    for (int value : answer) {
+        cout &lt;&lt; value &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+    # Finds next greater values with a monotonic stack.
+    def nextGreaterElements(self, arr: list[int]) -&gt; list[int]:
+        n = len(arr)
+        answer = [-1] * n
+        candidates = []
+
+        # Scan right to left to prepare valid candidates.
+        for i in range(n - 1, -1, -1):
+            # Remove values failing the strict greater condition.
+            while candidates and candidates[-1] &lt;= arr[i]:
+                candidates.pop()
+
+            # Use the nearest greater candidate at the stack top.
+            if candidates:
+                answer[i] = candidates[-1]
+
+            candidates.append(arr[i])
+
+        return answer
+
+
+# Driver code
+def main() -&gt; None:
+    arr = [2, 1, 2, 4, 3]
+    obj = Solution()
+    answer = obj.nextGreaterElements(arr)
+    print(answer)
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Finds next greater values with a monotonic stack.
+    public int[] nextGreaterElements(int[] arr) {
+        int n = arr.length;
+        int[] answer = new int[n];
+        Arrays.fill(answer, -1);
+        Deque&lt;Integer&gt; candidates = new ArrayDeque&lt;&gt;();
+
+        // Scan right to left to prepare valid candidates.
+        for (int i = n - 1; i &gt;= 0; i--) {
+            // Remove values failing the strict greater condition.
+            while (!candidates.isEmpty() &amp;&amp; candidates.peek() &lt;= arr[i]) {
+                candidates.pop();
+            }
+
+            // Use the nearest greater candidate at the stack top.
+            if (!candidates.isEmpty()) {
+                answer[i] = candidates.peek();
+            }
+
+            candidates.push(arr[i]);
+        }
+
+        return answer;
+    }
+}
+
+// Driver code
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {2, 1, 2, 4, 3};
+
+        Solution obj = new Solution();
+
+        int[] answer = obj.nextGreaterElements(arr);
+        System.out.println(Arrays.toString(answer));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Finds next greater values with a monotonic stack.
+    nextGreaterElements(arr) {
+        const n = arr.length;
+        const answer = new Array(n).fill(-1);
+        const candidates = [];
+
+        // Scan right to left to prepare valid candidates.
+        for (let i = n - 1; i &gt;= 0; i--) {
+            // Remove values failing the strict greater condition.
+            while (
+                candidates.length &gt; 0 &amp;&amp;
+                candidates[candidates.length - 1] &lt;= arr[i]
+            ) {
+                candidates.pop();
+            }
+
+            // Use the nearest greater candidate at the stack top.
+            if (candidates.length &gt; 0) {
+                answer[i] = candidates[candidates.length - 1];
+            }
+
+            candidates.push(arr[i]);
+        }
+
+        return answer;
+    }
+}
+
+// Driver code
+function main() {
+    const arr = [2, 1, 2, 4, 3];
+    const obj = new Solution();
+    const answer = obj.nextGreaterElements(arr);
+    console.log(answer);
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-9"><h3 id="blog-toc-complexity-analysis-2">Complexity Analysis</h3><p>Time Complexity: <code>O(N)</code>, every array value enters the stack once and leaves the stack at most once.</p><p>Space Complexity: <code>O(N)</code>, the monotonic stack and returned answer array each use linear space.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div><section aria-label="Interview follow-up Questions" class="BlogDetail-module__HEfJva__faqSection" id="blog-toc-faqs"><h2 class="BlogDetail-module__HEfJva__faqHeading">Interview follow-up Questions</h2><div class="flex w-full flex-col BlogDetail-module__HEfJva__faqList" data-orientation="vertical" data-slot="accordion"><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="open"><h3 class="flex" data-orientation="vertical" data-state="open"></h3><div aria-labelledby="radix-_R_1kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="open" id="radix-_R_9kcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"><div class="h-auto pt-0 pb-2.5 [&amp;_a]:underline [&amp;_a]:underline-offset-3 [&amp;_a]:hover:text-foreground [&amp;_p:not(:last-child)]:mb-4 BlogDetail-module__HEfJva__faqAnswer"><p>No. Next greater means the first strictly greater value encountered while moving right. For arr = [2, 3, 10], the answer for 2 is 3, not 10.</p></div></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_2kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_akcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_3kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_bkcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_4kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_ckcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_5kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_dkcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div></div></section></div>
+</article>
+<script src="../article.js?v=1790281487"></script>
+</body></html>

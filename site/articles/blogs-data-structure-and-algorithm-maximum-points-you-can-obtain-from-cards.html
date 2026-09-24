@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Maximum Points You Can Obtain from Cards</title>
+<link rel="stylesheet" href="../style.css?v=1790281487">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Maximum Points You Can Obtain from Cards</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/blogs/data-structure-and-algorithm/maximum-points-you-can-obtain-from-cards</code></div>
+  <div class="ArticleParser-module__R__VNG__article" data-article-segment="html-0"><p>Given an integer array cardPoints and an integer k, you have to pick exactly k cards.</p><p>In one move, you can pick a card either from the beginning or from the end of the array.</p><p>Return the maximum score you can obtain after picking exactly k cards.</p></div><div><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 1</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> cardPoints = [1, 2, 3, 4, 5, 6, 1], k = 3</p><p><strong>Output:</strong> 12</p><p><strong>Explanation:</strong> We can pick 6 and 1 from the end, and 5 from the end before them. The selected cards are 5, 6, and 1. Their total score is 12.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 2</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> cardPoints = [2, 2, 2], k = 2</p><p><strong>Output:</strong> 4</p><p><strong>Explanation:</strong> Any two cards can be picked, and the maximum score will be 4.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 3</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> cardPoints = [9, 7, 7, 9, 7, 7, 9], k = 7</p><p><strong>Output:</strong> 55</p><p><strong>Explanation:</strong> Since k is equal to the number of cards, all cards are picked. The total score is 55.</p></div></div></section></div><div><div class="BlogDetail-module__HEfJva__practiceCallout"><a class="BlogDetail-module__HEfJva__practiceLink" data-mobile-prefetch="normal" href="https://takeuforward.org/practice/dsa/maximum-points-you-can-obtain-from-cards-" rel="noopener" target="_blank"><span>Practice it by yourself before moving onto the solution</span><span class="BlogDetail-module__HEfJva__practiceAction">Try now</span></a></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-2"><h2 id="blog-toc-brute-force-approach">Brute Force Approach</h2><p>Every valid selection contains some cards from the left end and the remaining cards from the right end. For k selections, the number of left cards can range from 0 to k.</p><p>Each possible split can be evaluated independently by recalculating the corresponding left and right sums. Complete split examination guarantees the maximum score, but repeated summation increases the running time.</p><h3 id="blog-toc-algorithm">Algorithm</h3><ul><li><p>Store the array size in n and return -1 when <code>k &lt; 0</code> or <code>k &gt; n</code>.</p></li><li><p>Return 0 when k equals 0, and return the total array sum when k equals n.</p></li><li><p>Initialize maxScore with the smallest possible value to support negative card values.</p></li><li><p>Traverse leftCount from 0 to k and calculate <code>rightCount = k - leftCount</code>.</p></li><li><p>Add the first leftCount values and the final rightCount values to obtain currentScore.</p></li><li><p>Update maxScore with the larger value between maxScore and currentScore, then return maxScore after checking every split.</p></li></ul><h3 id="blog-toc-dry-run">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Maximum Points You Can Obtain from Cards Brute Force Dry Run.png" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/d8ad12e40e34128b.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Maximum Points You Can Obtain from Cards Brute Force Dry Run.png</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-3"><h3 id="blog-toc-solution">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Finds the maximum score by evaluating every left-right split.
+    int maxScore(vector&lt;int&gt;&amp; cardPoints, int k) {
+        int n = cardPoints.size();
+
+        // Invalid k cannot form a valid selection.
+        if (k &lt; 0 || k &gt; n) {
+            return -1;
+        }
+
+        // Picking no cards gives a score of zero.
+        if (k == 0) {
+            return 0;
+        }
+
+        // Picking all cards requires the complete array sum.
+        if (k == n) {
+            return accumulate(cardPoints.begin(), cardPoints.end(), 0);
+        }
+
+        int maxScore = INT_MIN;
+
+        // Try every possible number of cards taken from the left.
+        for (int leftCount = 0; leftCount &lt;= k; leftCount++) {
+            int rightCount = k - leftCount;
+            int currentScore = 0;
+
+            // Add the selected cards from the left end.
+            for (int i = 0; i &lt; leftCount; i++) {
+                currentScore += cardPoints[i];
+            }
+
+            // Add the remaining selected cards from the right end.
+            for (int i = 0; i &lt; rightCount; i++) {
+                currentScore += cardPoints[n - 1 - i];
+            }
+
+            // Keep the best score among all valid splits.
+            if (currentScore &gt; maxScore) {
+                maxScore = currentScore;
+            }
+        }
+
+        return maxScore;
+    }
+};
+
+int main() {
+    vector&lt;int&gt; cardPoints = {1, 2, 3, 4, 5, 6, 1};
+    int k = 3;
+
+    Solution solution;
+    cout &lt;&lt; solution.maxScore(cardPoints, k) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+
+    # Finds the maximum score by evaluating every left-right split.
+    def max_score(self, card_points: list[int], k: int) -&gt; int:
+        n = len(card_points)
+
+        # Invalid k cannot form a valid selection.
+        if k &lt; 0 or k &gt; n:
+            return -1
+
+        # Picking no cards gives a score of zero.
+        if k == 0:
+            return 0
+
+        # Picking all cards requires the complete array sum.
+        if k == n:
+            return sum(card_points)
+
+        max_score = float("-inf")
+
+        # Try every possible number of cards taken from the left.
+        for left_count in range(k + 1):
+            right_count = k - left_count
+            current_score = 0
+
+            # Add the selected cards from the left end.
+            for i in range(left_count):
+                current_score += card_points[i]
+
+            # Add the remaining selected cards from the right end.
+            for i in range(right_count):
+                current_score += card_points[n - 1 - i]
+
+            # Keep the best score among all valid splits.
+            if current_score &gt; max_score:
+                max_score = current_score
+
+        return int(max_score)
+
+
+if __name__ == "__main__":
+    card_points = [1, 2, 3, 4, 5, 6, 1]
+    k = 3
+
+    solution = Solution()
+
+    print(solution.max_score(card_points, k))</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+
+    // Finds the maximum score by evaluating every left-right split.
+    public int maxScore(int[] cardPoints, int k) {
+        int n = cardPoints.length;
+
+        // Invalid k cannot form a valid selection.
+        if (k &lt; 0 || k &gt; n) {
+            return -1;
+        }
+
+        // Picking no cards gives a score of zero.
+        if (k == 0) {
+            return 0;
+        }
+
+        // Picking all cards requires the complete array sum.
+        if (k == n) {
+            int total = 0;
+
+            // Add every card because all of them must be selected.
+            for (int value : cardPoints) {
+                total += value;
+            }
+
+            return total;
+        }
+
+        int maxScore = Integer.MIN_VALUE;
+
+        // Try every possible number of cards taken from the left.
+        for (int leftCount = 0; leftCount &lt;= k; leftCount++) {
+            int rightCount = k - leftCount;
+            int currentScore = 0;
+
+            // Add the selected cards from the left end.
+            for (int i = 0; i &lt; leftCount; i++) {
+                currentScore += cardPoints[i];
+            }
+
+            // Add the remaining selected cards from the right end.
+            for (int i = 0; i &lt; rightCount; i++) {
+                currentScore += cardPoints[n - 1 - i];
+            }
+
+            // Keep the best score among all valid splits.
+            if (currentScore &gt; maxScore) {
+                maxScore = currentScore;
+            }
+        }
+
+        return maxScore;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[] cardPoints = {1, 2, 3, 4, 5, 6, 1};
+        int k = 3;
+
+        Solution solution = new Solution();
+
+        System.out.println(
+            solution.maxScore(cardPoints, k)
+        );
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+
+    // Finds the maximum score by evaluating every left-right split.
+    maxScore(cardPoints, k) {
+        const n = cardPoints.length;
+
+        // Invalid k cannot form a valid selection.
+        if (k &lt; 0 || k &gt; n) {
+            return -1;
+        }
+
+        // Picking no cards gives a score of zero.
+        if (k === 0) {
+            return 0;
+        }
+
+        // Picking all cards requires the complete array sum.
+        if (k === n) {
+            let total = 0;
+
+            // Add every card because all of them must be selected.
+            for (const value of cardPoints) {
+                total += value;
+            }
+
+            return total;
+        }
+
+        let maxScore = -Infinity;
+
+        // Try every possible number of cards taken from the left.
+        for (let leftCount = 0; leftCount &lt;= k; leftCount++) {
+            const rightCount = k - leftCount;
+            let currentScore = 0;
+
+            // Add the selected cards from the left end.
+            for (let i = 0; i &lt; leftCount; i++) {
+                currentScore += cardPoints[i];
+            }
+
+            // Add the remaining selected cards from the right end.
+            for (let i = 0; i &lt; rightCount; i++) {
+                currentScore += cardPoints[n - 1 - i];
+            }
+
+            // Keep the best score among all valid splits.
+            if (currentScore &gt; maxScore) {
+                maxScore = currentScore;
+            }
+        }
+
+        return maxScore;
+    }
+}
+
+const cardPoints = [1, 2, 3, 4, 5, 6, 1];
+const k = 3;
+
+const solution = new Solution();
+
+console.log(solution.maxScore(cardPoints, k));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-4"><h3 id="blog-toc-complexity-analysis">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(K²), because K + 1 splits receive examination and up to K selected values may require summation for every split.</p><p><strong>Space Complexity:</strong> O(1), because only counters and sum variables require auxiliary storage.</p><h2 id="blog-toc-better-approach">Better Approach</h2><p>Repeated summation can be removed by precomputing scores for every possible number of cards selected from each end.</p><p>Array leftSum stores sums of the first i cards, while rightSum stores sums of the final i cards. Any split score can then be obtained in constant time by combining one prefix value and one suffix value.</p><h3 id="blog-toc-algorithm-2">Algorithm</h3><ul><li><p>Store the array size in n and return -1 when <code>k &lt; 0</code> or <code>k &gt; n</code>.</p></li><li><p>Return 0 when k equals 0, and return the total array sum when k equals n.</p></li><li><p>Create leftSum and rightSum with size <code>k + 1</code>, with position 0 initialized to 0.</p></li><li><p>Build <code>leftSum[i]</code> using the first i cards and <code>rightSum[i]</code> using the final i cards.</p></li><li><p>Traverse leftCount from 0 to k, calculate <code>rightCount = k - leftCount</code>, and obtain <code>currentScore = leftSum[leftCount] + rightSum[rightCount]</code>.</p></li><li><p>Update maxScore for every split and return maxScore after complete traversal.</p></li></ul><h3 id="blog-toc-dry-run-2">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Maximum Points You Can Obtain from Cards Better Appraoch Dry Run.png" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/ebc6fca5022f8812.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Maximum Points You Can Obtain from Cards Better Appraoch Dry Run.png</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-5"><h3 id="blog-toc-solution-2">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Finds the maximum score using precomputed left and right sums.
+    int maxScore(vector&lt;int&gt;&amp; cardPoints, int k) {
+        int n = cardPoints.size();
+
+        // Invalid k cannot form a valid selection.
+        if (k &lt; 0 || k &gt; n) {
+            return -1;
+        }
+
+        // Picking no cards gives a score of zero.
+        if (k == 0) {
+            return 0;
+        }
+
+        // Picking all cards requires the complete array sum.
+        if (k == n) {
+            return accumulate(cardPoints.begin(), cardPoints.end(), 0);
+        }
+
+        vector&lt;int&gt; leftSum(k + 1, 0);
+        vector&lt;int&gt; rightSum(k + 1, 0);
+
+        // Store sums for every possible number of left cards.
+        for (int i = 1; i &lt;= k; i++) {
+            leftSum[i] = leftSum[i - 1] + cardPoints[i - 1];
+        }
+
+        // Store sums for every possible number of right cards.
+        for (int i = 1; i &lt;= k; i++) {
+            rightSum[i] = rightSum[i - 1] + cardPoints[n - i];
+        }
+
+        int maxScore = INT_MIN;
+
+        // Combine each valid left count with its matching right count.
+        for (int leftCount = 0; leftCount &lt;= k; leftCount++) {
+            int rightCount = k - leftCount;
+
+            int currentScore =
+                leftSum[leftCount] + rightSum[rightCount];
+
+            // Keep the maximum score among all possible splits.
+            if (currentScore &gt; maxScore) {
+                maxScore = currentScore;
+            }
+        }
+
+        return maxScore;
+    }
+};
+
+int main() {
+    vector&lt;int&gt; cardPoints = {1, 2, 3, 4, 5, 6, 1};
+    int k = 3;
+
+    Solution solution;
+    cout &lt;&lt; solution.maxScore(cardPoints, k) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+
+    # Finds the maximum score using precomputed left and right sums.
+    def max_score(self, card_points: list[int], k: int) -&gt; int:
+        n = len(card_points)
+
+        # Invalid k cannot form a valid selection.
+        if k &lt; 0 or k &gt; n:
+            return -1
+
+        # Picking no cards gives a score of zero.
+        if k == 0:
+            return 0
+
+        # Picking all cards requires the complete array sum.
+        if k == n:
+            return sum(card_points)
+
+        left_sum = [0] * (k + 1)
+        right_sum = [0] * (k + 1)
+
+        # Store sums for every possible number of left cards.
+        for i in range(1, k + 1):
+            left_sum[i] = (
+                left_sum[i - 1] + card_points[i - 1]
+            )
+
+        # Store sums for every possible number of right cards.
+        for i in range(1, k + 1):
+            right_sum[i] = (
+                right_sum[i - 1] + card_points[n - i]
+            )
+
+        max_score = float("-inf")
+
+        # Combine each valid left count with its matching right count.
+        for left_count in range(k + 1):
+            right_count = k - left_count
+
+            current_score = (
+                left_sum[left_count]
+                + right_sum[right_count]
+            )
+
+            # Keep the maximum score among all possible splits.
+            if current_score &gt; max_score:
+                max_score = current_score
+
+        return int(max_score)
+
+
+if __name__ == "__main__":
+    card_points = [1, 2, 3, 4, 5, 6, 1]
+    k = 3
+
+    solution = Solution()
+
+    print(solution.max_score(card_points, k))</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">class Solution {
+
+    // Finds the maximum score using precomputed left and right sums.
+    public int maxScore(int[] cardPoints, int k) {
+        int n = cardPoints.length;
+
+        // Invalid k cannot form a valid selection.
+        if (k &lt; 0 || k &gt; n) {
+            return -1;
+        }
+
+        // Picking no cards gives a score of zero.
+        if (k == 0) {
+            return 0;
+        }
+
+        // Picking all cards requires the complete array sum.
+        if (k == n) {
+            int total = 0;
+
+            // Add every card because all of them must be selected.
+            for (int value : cardPoints) {
+                total += value;
+            }
+
+            return total;
+        }
+
+        int[] leftSum = new int[k + 1];
+        int[] rightSum = new int[k + 1];
+
+        // Store sums for every possible number of left cards.
+        for (int i = 1; i &lt;= k; i++) {
+            leftSum[i] =
+                leftSum[i - 1] + cardPoints[i - 1];
+        }
+
+        // Store sums for every possible number of right cards.
+        for (int i = 1; i &lt;= k; i++) {
+            rightSum[i] =
+                rightSum[i - 1] + cardPoints[n - i];
+        }
+
+        int maxScore = Integer.MIN_VALUE;
+
+        // Combine each valid left count with its matching right count.
+        for (int leftCount = 0; leftCount &lt;= k; leftCount++) {
+            int rightCount = k - leftCount;
+
+            int currentScore =
+                leftSum[leftCount] + rightSum[rightCount];
+
+            // Keep the maximum score among all possible splits.
+            if (currentScore &gt; maxScore) {
+                maxScore = currentScore;
+            }
+        }
+
+        return maxScore;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[] cardPoints = {1, 2, 3, 4, 5, 6, 1};
+        int k = 3;
+
+        Solution solution = new Solution();
+
+        System.out.println(
+            solution.maxScore(cardPoints, k)
+        );
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+
+    // Finds the maximum score using precomputed left and right sums.
+    maxScore(cardPoints, k) {
+        const n = cardPoints.length;
+
+        // Invalid k cannot form a valid selection.
+        if (k &lt; 0 || k &gt; n) {
+            return -1;
+        }
+
+        // Picking no cards gives a score of zero.
+        if (k === 0) {
+            return 0;
+        }
+
+        // Picking all cards requires the complete array sum.
+        if (k === n) {
+            let total = 0;
+
+            // Add every card because all of them must be selected.
+            for (const value of cardPoints) {
+                total += value;
+            }
+
+            return total;
+        }
+
+        const leftSum = new Array(k + 1).fill(0);
+        const rightSum = new Array(k + 1).fill(0);
+
+        // Store sums for every possible number of left cards.
+        for (let i = 1; i &lt;= k; i++) {
+            leftSum[i] =
+                leftSum[i - 1] + cardPoints[i - 1];
+        }
+
+        // Store sums for every possible number of right cards.
+        for (let i = 1; i &lt;= k; i++) {
+            rightSum[i] =
+                rightSum[i - 1] + cardPoints[n - i];
+        }
+
+        let maxScore = -Infinity;
+
+        // Combine each valid left count with its matching right count.
+        for (let leftCount = 0; leftCount &lt;= k; leftCount++) {
+            const rightCount = k - leftCount;
+
+            const currentScore =
+                leftSum[leftCount] + rightSum[rightCount];
+
+            // Keep the maximum score among all possible splits.
+            if (currentScore &gt; maxScore) {
+                maxScore = currentScore;
+            }
+        }
+
+        return maxScore;
+    }
+}
+
+const cardPoints = [1, 2, 3, 4, 5, 6, 1];
+const k = 3;
+
+const solution = new Solution();
+
+console.log(solution.maxScore(cardPoints, k));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-6"><h3 id="blog-toc-complexity-analysis-2">Complexity Analysis</h3></div><div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-7"><p><strong>Time Complexity:</strong> O(K), because construction of both sum arrays and examination of all K + 1 splits require linear time.</p><p><strong>Space Complexity:</strong> O(K), because leftSum and rightSum each contain K + 1 values.</p><h2 id="blog-toc-optimal-approach">Optimal Approach</h2><p>Selecting the first k cards forms one valid split. Replacing one selected left card with one card from the right creates the next possible split.</p><p>Every replacement removes the rightmost card from the current left selection and adds the next available card from the right end. Repeating the replacement k times generates all possible left-right distributions without extra arrays.</p><h3 id="blog-toc-algorithm-3">Algorithm</h3><ul><li><p>Store the array size in n and return -1 when <code>k &lt; 0</code> or <code>k &gt; n</code>.</p></li><li><p>Return 0 when k equals 0, and return the total array sum when k equals n.</p></li><li><p>Calculate the sum of the first k cards and store the result in currentScore.</p></li><li><p>Initialize maxScore with currentScore and rightIndex with <code>n - 1</code>.</p></li><li><p>Traverse <code>leftIndex</code> from <code>k - 1</code> down to <code>0</code>. During each step, subtract <code>cardPoints[leftIndex]</code> because that card leaves the left selection, add <code>cardPoints[rightIndex]</code> because the next card from the right enters the selection, then decrement <code>rightIndex</code>.</p></li><li><p>Update maxScore after every replacement, then return maxScore after generating all possible splits.</p></li></ul><p></p><h3 id="blog-toc-dry-run-3">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Maximum Points You Can Obtain from Cards Optimal Appraoch Dry Run.png" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/9102902b5d7637db.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Maximum Points You Can Obtain from Cards Optimal Appraoch Dry Run.png</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-8"><h3 id="blog-toc-solution-3">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Finds the maximum score by shifting selections between both ends.
+    int maxScore(vector&lt;int&gt;&amp; cardPoints, int k) {
+        int n = cardPoints.size();
+
+        // Invalid k cannot form a valid selection.
+        if (k &lt; 0 || k &gt; n) {
+            return -1;
+        }
+
+        // Picking no cards gives a score of zero.
+        if (k == 0) {
+            return 0;
+        }
+
+        // Picking all cards requires the complete array sum.
+        if (k == n) {
+            return accumulate(cardPoints.begin(), cardPoints.end(), 0);
+        }
+
+        int currentScore = 0;
+
+        // Start with all k selected cards taken from the left.
+        for (int i = 0; i &lt; k; i++) {
+            currentScore += cardPoints[i];
+        }
+
+        int maxScore = currentScore;
+        int rightIndex = n - 1;
+
+        // Replace one left card with one right card in each step.
+        for (int leftIndex = k - 1; leftIndex &gt;= 0; leftIndex--) {
+            currentScore -= cardPoints[leftIndex];
+            currentScore += cardPoints[rightIndex];
+            rightIndex--;
+
+            // Keep the best score after each new split.
+            if (currentScore &gt; maxScore) {
+                maxScore = currentScore;
+            }
+        }
+
+        return maxScore;
+    }
+};
+
+int main() {
+    vector&lt;int&gt; cardPoints = {1, 2, 3, 4, 5, 6, 1};
+    int k = 3;
+
+    Solution solution;
+    cout &lt;&lt; solution.maxScore(cardPoints, k) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+
+    # Finds the maximum score by shifting selections between both ends.
+    def max_score(self, card_points: list[int], k: int) -&gt; int:
+        n = len(card_points)
+
+        # Invalid k cannot form a valid selection.
+        if k &lt; 0 or k &gt; n:
+            return -1
+
+        # Picking no cards gives a score of zero.
+        if k == 0:
+            return 0
+
+        # Picking all cards requires the complete array sum.
+        if k == n:
+            return sum(card_points)
+
+        current_score = 0
+
+        # Start with all k selected cards taken from the left.
+        for i in range(k):
+            current_score += card_points[i]
+
+        max_score = current_score
+        right_index = n - 1
+
+        # Replace one left card with one right card in each step.
+        for left_index in range(k - 1, -1, -1):
+            current_score -= card_points[left_index]
+            current_score += card_points[right_index]
+            right_index -= 1
+
+            # Keep the best score after each new split.
+            if current_score &gt; max_score:
+                max_score = current_score
+
+        return max_score
+
+
+if __name__ == "__main__":
+    card_points = [1, 2, 3, 4, 5, 6, 1]
+    k = 3
+
+    solution = Solution()
+
+    print(solution.max_score(card_points, k))</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">class Solution {
+
+    // Finds the maximum score by shifting selections between both ends.
+    public int maxScore(int[] cardPoints, int k) {
+        int n = cardPoints.length;
+
+        // Invalid k cannot form a valid selection.
+        if (k &lt; 0 || k &gt; n) {
+            return -1;
+        }
+
+        // Picking no cards gives a score of zero.
+        if (k == 0) {
+            return 0;
+        }
+
+        // Picking all cards requires the complete array sum.
+        if (k == n) {
+            int total = 0;
+
+            // Add every card because all of them must be selected.
+            for (int value : cardPoints) {
+                total += value;
+            }
+
+            return total;
+        }
+
+        int currentScore = 0;
+
+        // Start with all k selected cards taken from the left.
+        for (int i = 0; i &lt; k; i++) {
+            currentScore += cardPoints[i];
+        }
+
+        int maxScore = currentScore;
+        int rightIndex = n - 1;
+
+        // Replace one left card with one right card in each step.
+        for (int leftIndex = k - 1; leftIndex &gt;= 0; leftIndex--) {
+            currentScore -= cardPoints[leftIndex];
+            currentScore += cardPoints[rightIndex];
+            rightIndex--;
+
+            // Keep the best score after each new split.
+            if (currentScore &gt; maxScore) {
+                maxScore = currentScore;
+            }
+        }
+
+        return maxScore;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[] cardPoints = {1, 2, 3, 4, 5, 6, 1};
+        int k = 3;
+
+        Solution solution = new Solution();
+
+        System.out.println(
+            solution.maxScore(cardPoints, k)
+        );
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+
+    // Finds the maximum score by shifting selections between both ends.
+    maxScore(cardPoints, k) {
+        const n = cardPoints.length;
+
+        // Invalid k cannot form a valid selection.
+        if (k &lt; 0 || k &gt; n) {
+            return -1;
+        }
+
+        // Picking no cards gives a score of zero.
+        if (k === 0) {
+            return 0;
+        }
+
+        // Picking all cards requires the complete array sum.
+        if (k === n) {
+            let total = 0;
+
+            // Add every card because all of them must be selected.
+            for (const value of cardPoints) {
+                total += value;
+            }
+
+            return total;
+        }
+
+        let currentScore = 0;
+
+        // Start with all k selected cards taken from the left.
+        for (let i = 0; i &lt; k; i++) {
+            currentScore += cardPoints[i];
+        }
+
+        let maxScore = currentScore;
+        let rightIndex = n - 1;
+
+        // Replace one left card with one right card in each step.
+        for (
+            let leftIndex = k - 1;
+            leftIndex &gt;= 0;
+            leftIndex--
+        ) {
+            currentScore -= cardPoints[leftIndex];
+            currentScore += cardPoints[rightIndex];
+            rightIndex--;
+
+            // Keep the best score after each new split.
+            if (currentScore &gt; maxScore) {
+                maxScore = currentScore;
+            }
+        }
+
+        return maxScore;
+    }
+}
+
+const cardPoints = [1, 2, 3, 4, 5, 6, 1];
+const k = 3;
+
+const solution = new Solution();
+
+console.log(solution.maxScore(cardPoints, k));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-9"><h3 id="blog-toc-complexity-analysis-3">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(K), because the first K cards require one summation and K replacements generate all remaining splits.</p><p><strong>Space Complexity:</strong> O(1), because only score variables and index variables require auxiliary storage.</p><h3 id="blog-toc-faqs">FAQS</h3><p><strong>Q1. Why does every valid selection correspond to a left-right split?</strong></p><p>Card removal is allowed only from either end. After exactly K removals, selected cards must contain a prefix, a suffix, or a combination of both.</p><p><strong>Q2. Why does the Brute Force Approach require O(K²) time?</strong></p><p>Every one of the K + 1 splits recalculates up to K selected values.</p><p><strong>Q3. Why do prefix and suffix sums improve the Better Approach?</strong></p><p>Precomputed sums provide every split score through two array accesses and one addition.</p><p><strong>Q4. Why does the Optimal Approach begin with the first K cards?</strong></p><p>Starting with the first <code>K</code> cards is only one convenient choice. We can also begin with the last <code>K</code> cards and gradually replace cards from the right selection with cards from the beginning. Both directions generate all <code>K + 1</code> possible left-right splits and give the same <code>O(K)</code> time and <code>O(1)</code> auxiliary space.</p><p><strong>Q5. Why does every replacement preserve exactly K selected cards?</strong></p><p>One selected left card leaves the score while one right card enters the score during the same step.</p><p><strong>Q6. Does the method support negative card values?</strong></p><p>Yes. Initializing maxScore from a valid selection prevents an incorrect default score of 0 when every valid score is negative.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div>
+</article>
+<script src="../article.js?v=1790281487"></script>
+</body></html>

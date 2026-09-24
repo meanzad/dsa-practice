@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Count Nice Subarrays with Exactly K Odd Numbers</title>
+<link rel="stylesheet" href="../style.css?v=1790281487">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Count Nice Subarrays with Exactly K Odd Numbers</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/blogs/data-structure-and-algorithm/count-nice-subarrays</code></div>
+  <div class="ArticleParser-module__R__VNG__article" data-article-segment="html-0"><p>Given an integer array nums and an integer k, return the number of nice subarrays.</p><p>A nice subarray is a <strong>contiguous</strong> subarray that contains exactly <code>k</code> odd numbers.</p><p>A subarray is a <strong>contiguous</strong> part of the array.</p></div><div><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 1</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p>Input: nums = [1, 1, 2, 1, 1], k = 3</p><p>Output: 2</p><p>Explanation: The nice subarrays are [1, 1, 2, 1] and [1, 2, 1, 1]. Both contain exactly 3 odd numbers.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 2</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p>Input: nums = [2, 4, 6], k = 1</p><p>Output: 0</p><p>Explanation: There is no odd number in the array, so no subarray can contain exactly 1 odd number.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 3</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p>Input: nums = [2, 2, 2, 1, 2, 2, 1, 2, 2, 2], k = 2</p><p>Output: 16</p><p>Explanation: Every valid subarray must contain exactly 2 odd numbers.</p></div></div></section></div><div><div class="BlogDetail-module__HEfJva__practiceCallout"><a class="BlogDetail-module__HEfJva__practiceLink" data-mobile-prefetch="normal" href="https://takeuforward.org/practice/dsa/count-number-of-nice-subarrays" rel="noopener" target="_blank"><span>Practice it by yourself before moving onto the solution</span><span class="BlogDetail-module__HEfJva__practiceAction">Try now</span></a></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-2"><h2 id="blog-toc-brute-force-approach">Brute Force Approach</h2><p>Every possible subarray can be checked independently. For each selected range, count its odd elements from scratch and increase the answer when that count equals <code>k</code>.</p><p>This guarantees that every nice subarray is found, but overlapping ranges repeatedly process the same elements.</p><h3 id="blog-toc-algorithm">Algorithm</h3><ul><li><p>The size of the array is stored in n. If n is 0, 0 is returned because no subarray can be formed from an empty array.</p></li><li><p>A helper function is used to count odd numbers inside a subarray from start to end. This keeps the brute force logic clear because every subarray is checked separately.</p></li><li><p>Inside the helper function, the elements from start to end are traversed. Whenever an element is odd, the odd count is increased.</p></li><li><p>A variable count is initialized with 0. This stores the total number of nice subarrays found so far.</p></li><li><p>Two loops are used to generate every possible subarray. The first loop chooses the starting index start, and the second loop chooses the ending index end.</p></li><li><p>For every subarray, the helper function returns the number of odd elements. If this odd count is exactly equal to k, count is increased by 1. After all subarrays are checked, count is returned.</p></li></ul><h3 id="blog-toc-dry-run">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Count Number of Nice Subarrays Brute Force Dry Run.png" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/c700eb00c6ca30cd.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Count Number of Nice Subarrays Brute Force Dry Run.png</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-3"><h3 id="blog-toc-solution">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+private:
+    // Counts odd numbers inside the selected subarray.
+    int countOdds(const vector&lt;int&gt;&amp; nums, int start, int end) {
+        int oddCount = 0;
+
+        // Check every element inside the selected range.
+        for (int i = start; i &lt;= end; i++) {
+
+            // Increase the count when the current value is odd.
+            if (nums[i] % 2 != 0) {
+                oddCount++;
+            }
+        }
+
+        return oddCount;
+    }
+
+public:
+    // Counts subarrays containing exactly k odd numbers.
+    int numberOfSubarrays(vector&lt;int&gt;&amp; nums, int k) {
+        int n = nums.size();
+
+        // No non-empty subarray can be formed.
+        if (n == 0) {
+            return 0;
+        }
+
+        int count = 0;
+
+        // Choose every possible starting index.
+        for (int start = 0; start &lt; n; start++) {
+
+            // Choose every possible ending index for the current start.
+            for (int end = start; end &lt; n; end++) {
+                int oddCount = countOdds(
+                    nums,
+                    start,
+                    end
+                );
+
+                // Count the subarray when it contains exactly k odd values.
+                if (oddCount == k) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+};
+
+int main() {
+    vector&lt;int&gt; nums = {1, 1, 2, 1, 1};
+    int k = 3;
+
+    Solution solution;
+
+    cout &lt;&lt; solution.numberOfSubarrays(nums, k)
+         &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+
+    # Counts odd numbers inside the selected subarray.
+    def count_odds(
+        self,
+        nums: list[int],
+        start: int,
+        end: int
+    ) -&gt; int:
+        odd_count = 0
+
+        # Check every element inside the selected range.
+        for i in range(start, end + 1):
+
+            # Increase the count when the current value is odd.
+            if nums[i] % 2 != 0:
+                odd_count += 1
+
+        return odd_count
+
+    # Counts subarrays containing exactly k odd numbers.
+    def number_of_subarrays(
+        self,
+        nums: list[int],
+        k: int
+    ) -&gt; int:
+        n = len(nums)
+
+        # No non-empty subarray can be formed.
+        if n == 0:
+            return 0
+
+        count = 0
+
+        # Choose every possible starting index.
+        for start in range(n):
+
+            # Choose every possible ending index for the current start.
+            for end in range(start, n):
+                odd_count = self.count_odds(
+                    nums,
+                    start,
+                    end
+                )
+
+                # Count the subarray when it contains exactly k odd values.
+                if odd_count == k:
+                    count += 1
+
+        return count
+
+
+if __name__ == "__main__":
+    nums = [1, 1, 2, 1, 1]
+    k = 3
+
+    solution = Solution()
+
+    print(solution.number_of_subarrays(nums, k))</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">class Solution {
+
+    // Counts odd numbers inside the selected subarray.
+    private int countOdds(int[] nums, int start, int end) {
+        int oddCount = 0;
+
+        // Check every element inside the selected range.
+        for (int i = start; i &lt;= end; i++) {
+
+            // Increase the count when the current value is odd.
+            if (nums[i] % 2 != 0) {
+                oddCount++;
+            }
+        }
+
+        return oddCount;
+    }
+
+    // Counts subarrays containing exactly k odd numbers.
+    public int numberOfSubarrays(int[] nums, int k) {
+        int n = nums.length;
+
+        // No non-empty subarray can be formed.
+        if (n == 0) {
+            return 0;
+        }
+
+        int count = 0;
+
+        // Choose every possible starting index.
+        for (int start = 0; start &lt; n; start++) {
+
+            // Choose every possible ending index for the current start.
+            for (int end = start; end &lt; n; end++) {
+                int oddCount = countOdds(
+                    nums,
+                    start,
+                    end
+                );
+
+                // Count the subarray when it contains exactly k odd values.
+                if (oddCount == k) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[] nums = {1, 1, 2, 1, 1};
+        int k = 3;
+
+        Solution solution = new Solution();
+
+        System.out.println(
+            solution.numberOfSubarrays(nums, k)
+        );
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+
+    // Counts odd numbers inside the selected subarray.
+    countOdds(nums, start, end) {
+        let oddCount = 0;
+
+        // Check every element inside the selected range.
+        for (let i = start; i &lt;= end; i++) {
+
+            // Increase the count when the current value is odd.
+            if (nums[i] % 2 !== 0) {
+                oddCount++;
+            }
+        }
+
+        return oddCount;
+    }
+
+    // Counts subarrays containing exactly k odd numbers.
+    numberOfSubarrays(nums, k) {
+        const n = nums.length;
+
+        // No non-empty subarray can be formed.
+        if (n === 0) {
+            return 0;
+        }
+
+        let count = 0;
+
+        // Choose every possible starting index.
+        for (let start = 0; start &lt; n; start++) {
+
+            // Choose every possible ending index for the current start.
+            for (let end = start; end &lt; n; end++) {
+                const oddCount = this.countOdds(
+                    nums,
+                    start,
+                    end
+                );
+
+                // Count the subarray when it contains exactly k odd values.
+                if (oddCount === k) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+}
+
+const nums = [1, 1, 2, 1, 1];
+const k = 3;
+
+const solution = new Solution();
+
+console.log(solution.numberOfSubarrays(nums, k));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-4"><h3 id="blog-toc-complexity-analysis">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(N³), where N is the size of the array. There are O(N²) possible subarrays, and counting odd numbers inside each subarray can take O(N) time.</p><p><strong>Space Complexity:</strong> O(1), because only a few variables are used and no extra data structure is required.</p><h3></h3><h2 id="blog-toc-better-approach">Better Approach</h2><p>Instead of recounting odd elements for every range, fix <code>start</code> and maintain <code>oddCount</code> while <code>end</code> moves right.</p><p>Because extending a subarray can never decrease its number of odd elements, expansion can stop once <code>oddCount &gt; k</code>.</p><h3 id="blog-toc-algorithm-2">Algorithm</h3><ul><li><p>The size of the array is stored in n. If n is 0, 0 is returned because no subarray can exist.</p></li><li><p>A variable count is initialized with 0. This stores the number of subarrays that contain exactly k odd numbers.</p></li><li><p>The array is traversed using start as the starting index of the subarray. For every start, oddCount is initialized with 0 because a new subarray is being built.</p></li><li><p>The end pointer moves from start to the end of the array. If nums[end] is odd, oddCount is increased.</p></li><li><p>If oddCount becomes exactly equal to k, the current subarray from start to end is nice, so count is increased by 1.</p></li><li><p>If oddCount becomes greater than k, the loop stops for this start. This is safe because adding more elements can only keep the odd count same or increase it, never decrease it. After all starting positions are checked, count is returned.</p></li></ul><h3 id="blog-toc-dry-run-2">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Count Number of Nice Subarrays Better Appraoch Dry Run.png" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/6559ffd5ffa42521.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Count Number of Nice Subarrays Better Appraoch Dry Run.png</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-5"><h3 id="blog-toc-solution-2">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Counts nice subarrays using a running odd count from every start.
+    int numberOfSubarrays(vector&lt;int&gt;&amp; nums, int k) {
+        int n = nums.size();
+
+        // No non-empty subarray can be formed.
+        if (n == 0) {
+            return 0;
+        }
+
+        int count = 0;
+
+        // Choose every possible starting index.
+        for (int start = 0; start &lt; n; start++) {
+            int oddCount = 0;
+
+            // Extend the current subarray while maintaining its odd count.
+            for (int end = start; end &lt; n; end++) {
+
+                // Include the current value when it is odd.
+                if (nums[end] % 2 != 0) {
+                    oddCount++;
+                }
+
+                // Count the range when exactly k odd values are present.
+                if (oddCount == k) {
+                    count++;
+                }
+
+                // Further expansion cannot reduce the number of odd values.
+                if (oddCount &gt; k) {
+                    break;
+                }
+            }
+        }
+
+        return count;
+    }
+};
+
+int main() {
+    vector&lt;int&gt; nums = {1, 1, 2, 1, 1};
+    int k = 3;
+
+    Solution solution;
+
+    cout &lt;&lt; solution.numberOfSubarrays(nums, k)
+         &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+
+    # Counts nice subarrays using a running odd count from every start.
+    def number_of_subarrays(
+        self,
+        nums: list[int],
+        k: int
+    ) -&gt; int:
+        n = len(nums)
+
+        # No non-empty subarray can be formed.
+        if n == 0:
+            return 0
+
+        count = 0
+
+        # Choose every possible starting index.
+        for start in range(n):
+            odd_count = 0
+
+            # Extend the current subarray while maintaining its odd count.
+            for end in range(start, n):
+
+                # Include the current value when it is odd.
+                if nums[end] % 2 != 0:
+                    odd_count += 1
+
+                # Count the range when exactly k odd values are present.
+                if odd_count == k:
+                    count += 1
+
+                # Further expansion cannot reduce the number of odd values.
+                if odd_count &gt; k:
+                    break
+
+        return count
+
+
+if __name__ == "__main__":
+    nums = [1, 1, 2, 1, 1]
+    k = 3
+
+    solution = Solution()
+
+    print(solution.number_of_subarrays(nums, k))</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">class Solution {
+
+    // Counts nice subarrays using a running odd count from every start.
+    public int numberOfSubarrays(int[] nums, int k) {
+        int n = nums.length;
+
+        // No non-empty subarray can be formed.
+        if (n == 0) {
+            return 0;
+        }
+
+        int count = 0;
+
+        // Choose every possible starting index.
+        for (int start = 0; start &lt; n; start++) {
+            int oddCount = 0;
+
+            // Extend the current subarray while maintaining its odd count.
+            for (int end = start; end &lt; n; end++) {
+
+                // Include the current value when it is odd.
+                if (nums[end] % 2 != 0) {
+                    oddCount++;
+                }
+
+                // Count the range when exactly k odd values are present.
+                if (oddCount == k) {
+                    count++;
+                }
+
+                // Further expansion cannot reduce the number of odd values.
+                if (oddCount &gt; k) {
+                    break;
+                }
+            }
+        }
+
+        return count;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[] nums = {1, 1, 2, 1, 1};
+        int k = 3;
+
+        Solution solution = new Solution();
+
+        System.out.println(
+            solution.numberOfSubarrays(nums, k)
+        );
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+
+    // Counts nice subarrays using a running odd count from every start.
+    numberOfSubarrays(nums, k) {
+        const n = nums.length;
+
+        // No non-empty subarray can be formed.
+        if (n === 0) {
+            return 0;
+        }
+
+        let count = 0;
+
+        // Choose every possible starting index.
+        for (let start = 0; start &lt; n; start++) {
+            let oddCount = 0;
+
+            // Extend the current subarray while maintaining its odd count.
+            for (let end = start; end &lt; n; end++) {
+
+                // Include the current value when it is odd.
+                if (nums[end] % 2 !== 0) {
+                    oddCount++;
+                }
+
+                // Count the range when exactly k odd values are present.
+                if (oddCount === k) {
+                    count++;
+                }
+
+                // Further expansion cannot reduce the number of odd values.
+                if (oddCount &gt; k) {
+                    break;
+                }
+            }
+        }
+
+        return count;
+    }
+}
+
+const nums = [1, 1, 2, 1, 1];
+const k = 3;
+
+const solution = new Solution();
+
+console.log(solution.numberOfSubarrays(nums, k));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-6"><h3 id="blog-toc-complexity-analysis-2">Complexity Analysis</h3></div><div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-7"><p><strong>Time Complexity:</strong> O(N²), where N is the size of the array. For every starting index, the ending index may move toward the right until the odd count becomes greater than k.</p><p><strong>Space Complexity:</strong> O(1), because only variables like oddCount and count are used.</p><h2 id="blog-toc-optimal-approach">Optimal Approach</h2><p>Counting exactly <code>k</code> odd elements directly is inconvenient because even values can create several valid starting positions.</p><p>Instead, count subarrays with <strong>at most </strong><code>k</code><strong> odds</strong> and subtract those with <strong>at most </strong><code>k - 1</code><strong> odds</strong>. A sliding window can count each at-most group efficiently because shrinking from the left reduces or preserves the odd count.</p><h3 id="blog-toc-algorithm-3">Algorithm</h3><ul><li><p>A helper function countAtMost is created to count the number of subarrays that contain at most limit odd numbers. If limit is less than 0, 0 is returned because a subarray cannot contain a negative number of odd elements.</p></li><li><p>Inside countAtMost, three variables are initialized: left is set to 0 to represent the left boundary of the window, oddCount is set to 0 to store the number of odd numbers in the current window, and count is set to 0 to store valid subarrays.</p></li><li><p>The right pointer moves from 0 to n - 1. If nums[right] is odd, oddCount is increased because this odd number is now included in the window.</p></li><li><p>If oddCount becomes greater than limit, the window is shrunk from the left. While shrinking, if nums[left] is odd, oddCount is decreased. Then left is moved forward.</p></li><li><p>After the window becomes valid, every subarray ending at right and starting from any index between left and right contains at most limit odd numbers. So, right - left + 1 is added to count.</p></li><li><p>Finally, the answer is returned as countAtMost(k) - countAtMost(k - 1), which gives the number of subarrays containing exactly k odd numbers.</p></li></ul><p></p><h3 id="blog-toc-dry-run-3">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Count Number of Nice Subarrays Optimal Appraoch Dry Run.png" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/c53240ab3995b4f6.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Count Number of Nice Subarrays Optimal Appraoch Dry Run.png</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-8"><h3 id="blog-toc-solution-3">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+private:
+    // Counts subarrays containing at most the given number of odd values.
+    int countAtMost(vector&lt;int&gt;&amp; nums, int limit) {
+
+        // A subarray cannot contain a negative number of odd values.
+        if (limit &lt; 0) {
+            return 0;
+        }
+
+        int left = 0;
+        int oddCount = 0;
+        int count = 0;
+
+        // Expand the window using each index as the right boundary.
+        for (int right = 0; right &lt; nums.size(); right++) {
+
+            // Count the new value when it is odd.
+            if (nums[right] % 2 != 0) {
+                oddCount++;
+            }
+
+            // Shrink until the window contains at most limit odd values.
+            while (oddCount &gt; limit) {
+
+                // Remove an odd value from the count when it leaves.
+                if (nums[left] % 2 != 0) {
+                    oddCount--;
+                }
+
+                left++;
+            }
+
+            // Every start from left to right forms a valid subarray.
+            count += right - left + 1;
+        }
+
+        return count;
+    }
+
+public:
+    // Counts subarrays containing exactly k odd numbers.
+    int numberOfSubarrays(vector&lt;int&gt;&amp; nums, int k) {
+        return countAtMost(nums, k)
+             - countAtMost(nums, k - 1);
+    }
+};
+
+int main() {
+    vector&lt;int&gt; nums = {1, 1, 2, 1, 1};
+    int k = 3;
+
+    Solution solution;
+
+    cout &lt;&lt; solution.numberOfSubarrays(nums, k)
+         &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+
+    # Counts subarrays containing at most the given number of odd values.
+    def count_at_most(
+        self,
+        nums: list[int],
+        limit: int
+    ) -&gt; int:
+
+        # A subarray cannot contain a negative number of odd values.
+        if limit &lt; 0:
+            return 0
+
+        left = 0
+        odd_count = 0
+        count = 0
+
+        # Expand the window using each index as the right boundary.
+        for right in range(len(nums)):
+
+            # Count the new value when it is odd.
+            if nums[right] % 2 != 0:
+                odd_count += 1
+
+            # Shrink until the window contains at most limit odd values.
+            while odd_count &gt; limit:
+
+                # Remove an odd value from the count when it leaves.
+                if nums[left] % 2 != 0:
+                    odd_count -= 1
+
+                left += 1
+
+            # Every start from left to right forms a valid subarray.
+            count += right - left + 1
+
+        return count
+
+    # Counts subarrays containing exactly k odd numbers.
+    def number_of_subarrays(
+        self,
+        nums: list[int],
+        k: int
+    ) -&gt; int:
+        return (
+            self.count_at_most(nums, k)
+            - self.count_at_most(nums, k - 1)
+        )
+
+
+if __name__ == "__main__":
+    nums = [1, 1, 2, 1, 1]
+    k = 3
+
+    solution = Solution()
+
+    print(solution.number_of_subarrays(nums, k))</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">class Solution {
+
+    // Counts subarrays containing at most the given number of odd values.
+    private int countAtMost(int[] nums, int limit) {
+
+        // A subarray cannot contain a negative number of odd values.
+        if (limit &lt; 0) {
+            return 0;
+        }
+
+        int left = 0;
+        int oddCount = 0;
+        int count = 0;
+
+        // Expand the window using each index as the right boundary.
+        for (int right = 0; right &lt; nums.length; right++) {
+
+            // Count the new value when it is odd.
+            if (nums[right] % 2 != 0) {
+                oddCount++;
+            }
+
+            // Shrink until the window contains at most limit odd values.
+            while (oddCount &gt; limit) {
+
+                // Remove an odd value from the count when it leaves.
+                if (nums[left] % 2 != 0) {
+                    oddCount--;
+                }
+
+                left++;
+            }
+
+            // Every start from left to right forms a valid subarray.
+            count += right - left + 1;
+        }
+
+        return count;
+    }
+
+    // Counts subarrays containing exactly k odd numbers.
+    public int numberOfSubarrays(int[] nums, int k) {
+        return countAtMost(nums, k)
+             - countAtMost(nums, k - 1);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[] nums = {1, 1, 2, 1, 1};
+        int k = 3;
+
+        Solution solution = new Solution();
+
+        System.out.println(
+            solution.numberOfSubarrays(nums, k)
+        );
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+
+    // Counts subarrays containing at most the given number of odd values.
+    countAtMost(nums, limit) {
+
+        // A subarray cannot contain a negative number of odd values.
+        if (limit &lt; 0) {
+            return 0;
+        }
+
+        let left = 0;
+        let oddCount = 0;
+        let count = 0;
+
+        // Expand the window using each index as the right boundary.
+        for (let right = 0; right &lt; nums.length; right++) {
+
+            // Count the new value when it is odd.
+            if (nums[right] % 2 !== 0) {
+                oddCount++;
+            }
+
+            // Shrink until the window contains at most limit odd values.
+            while (oddCount &gt; limit) {
+
+                // Remove an odd value from the count when it leaves.
+                if (nums[left] % 2 !== 0) {
+                    oddCount--;
+                }
+
+                left++;
+            }
+
+            // Every start from left to right forms a valid subarray.
+            count += right - left + 1;
+        }
+
+        return count;
+    }
+
+    // Counts subarrays containing exactly k odd numbers.
+    numberOfSubarrays(nums, k) {
+        return (
+            this.countAtMost(nums, k)
+            - this.countAtMost(nums, k - 1)
+        );
+    }
+}
+
+const nums = [1, 1, 2, 1, 1];
+const k = 3;
+
+const solution = new Solution();
+
+console.log(solution.numberOfSubarrays(nums, k));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-9"><h3 id="blog-toc-complexity-analysis-3">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(N), where N is the size of the array. The helper function countAtMost runs in O(N), and it is called twice. So, the overall time complexity is O(2N), which simplifies to O(N).</p><p><strong>Space Complexity:</strong> O(1), because only a few variables are used.</p><h3 id="blog-toc-faqs">FAQs</h3><p><strong>Q1. Why does the better approach stop when oddCount becomes greater than k?</strong></p><p>Adding more elements can only keep the odd count same or increase it. It can never reduce the odd count, so the current start cannot give any more nice subarrays.</p><p><strong>Q2. Why do we use countAtMost(k) - countAtMost(k - 1)?</strong></p><p>countAtMost(k) includes subarrays with 0 to k odd numbers. countAtMost(k - 1) removes all subarrays with fewer than k odd numbers. The remaining subarrays have exactly k odd numbers.</p><p><strong>Q3. Why does sliding window work inside countAtMost?</strong></p><p>When the right pointer expands, the odd count can only stay the same or increase. If it becomes too large, moving the left pointer forward can reduce it.</p><p><strong>Q4. Why do we add right - left + 1 in countAtMost?</strong></p><p>After the window becomes valid, every subarray ending at right and starting from any index between left and right has at most limit odd numbers.</p><p><strong>Q5. What happens if there are no odd numbers?</strong></p><p>If k is greater than 0, the answer is 0 because no subarray can contain exactly k odd numbers.</p><p><strong>Q6. What happens if k is 0?</strong></p><p>Then the task becomes counting subarrays that contain no odd numbers, which means subarrays made only of even numbers.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div>
+</article>
+<script src="../article.js?v=1790281487"></script>
+</body></html>

@@ -1,0 +1,278 @@
+[
+ {
+  "id": "44",
+  "name": "Find missing number",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/missing-number",
+  "how": "fuzzy"
+ },
+ {
+  "id": "562",
+  "name": "Count subarrays with given xor K",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/count-subarrays-with-a-given-xor-k",
+  "how": "fuzzy"
+ },
+ {
+  "id": "78",
+  "name": "Minimize Max Distance to Gas Station",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/minimize-maximum-distance-between-gas-stations",
+  "how": "fuzzy"
+ },
+ {
+  "id": "77",
+  "name": "Median of 2 sorted arrays",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/median-of-2-sorted-arrays",
+  "how": "fuzzy"
+ },
+ {
+  "id": "399",
+  "name": "Sort Characters by Frequency",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/sort-characters-by-frequency",
+  "how": "fuzzy"
+ },
+ {
+  "id": "452",
+  "name": "Find Pairs with Given Sum in Doubly Linked List",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/find-pairs-with-given-sum-in-doubly-linked-list",
+  "how": "fuzzy"
+ },
+ {
+  "id": "222",
+  "name": "Count Good Numbers",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/count-good-numbers",
+  "how": "exact"
+ },
+ {
+  "id": "140",
+  "name": "Divide two numbers without multiplication and division",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/divide-two-integers-without-multiplication-division-modulo",
+  "how": "fuzzy"
+ },
+ {
+  "id": "145",
+  "name": "Single Number - III",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/single-number-iii",
+  "how": "exact"
+ },
+ {
+  "id": "969",
+  "name": "Next Greater Element - 2",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/next-greater-element",
+  "how": "fuzzy"
+ },
+ {
+  "id": "971",
+  "name": "Sum of Subarray Minimums",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/sum-of-subarray-minimums",
+  "how": "fuzzy"
+ },
+ {
+  "id": "967",
+  "name": "Asteroid Collision",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/asteroid-collision",
+  "how": "exact"
+ },
+ {
+  "id": "972",
+  "name": "Sum of Subarray Ranges",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/sum-of-subarray-ranges",
+  "how": "fuzzy"
+ },
+ {
+  "id": "970",
+  "name": "Remove K Digits",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/remove-k-digits",
+  "how": "exact"
+ },
+ {
+  "id": "964",
+  "name": "Stock span problem",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/stock-span-problem",
+  "how": "exact"
+ },
+ {
+  "id": "930",
+  "name": "Max Consecutive Ones III",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/max-consecutive-ones-iii",
+  "how": "exact"
+ },
+ {
+  "id": "926",
+  "name": "Fruit Into Baskets",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/fruit-into-baskets",
+  "how": "exact"
+ },
+ {
+  "id": "927",
+  "name": "Longest Repeating Character Replacement",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/longest-repeating-character-replacement",
+  "how": "exact"
+ },
+ {
+  "id": "923",
+  "name": "Binary Subarrays With Sum",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/binary-subarrays-with-sum",
+  "how": "fuzzy"
+ },
+ {
+  "id": "924",
+  "name": "Count number of Nice subarrays",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/count-nice-subarrays",
+  "how": "fuzzy"
+ },
+ {
+  "id": "922",
+  "name": "Maximum Points You Can Obtain from Cards",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/maximum-points-you-can-obtain-from-cards",
+  "how": "fuzzy"
+ },
+ {
+  "id": "988",
+  "name": "Subarrays with K Different Integers",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/subarrays-with-k-different-integers",
+  "how": "fuzzy"
+ },
+ {
+  "id": "931",
+  "name": "Minimum Window Substring",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/minimum-window-substring",
+  "how": "exact"
+ },
+ {
+  "id": "569",
+  "name": "Merge K sorted Lists",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/merge-k-sorted-linked-lists",
+  "how": "fuzzy"
+ },
+ {
+  "id": "1008",
+  "name": "Task Scheduler",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/task-scheduler",
+  "how": "exact"
+ },
+ {
+  "id": "566",
+  "name": "Find Median from Data Stream",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/find-median-data-stream",
+  "how": "exact"
+ },
+ {
+  "id": "1018",
+  "name": "Top K Frequent Elements",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/top-k-frequent-elements",
+  "how": "exact"
+ },
+ {
+  "id": "2834",
+  "name": "Assign Cookies",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/assign-cookies",
+  "how": "exact"
+ },
+ {
+  "id": "595",
+  "name": "Jump Game II",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/jump-game",
+  "how": "fuzzy"
+ },
+ {
+  "id": "546",
+  "name": "Insert Interval",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/insert-interval",
+  "how": "exact"
+ },
+ {
+  "id": "550",
+  "name": "Non-overlapping Intervals",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/non-overlapping-intervals",
+  "how": "exact"
+ },
+ {
+  "id": "111",
+  "name": "Requirements needed to construct a unique BT",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/requirements-needed-to-construct-a-unique-binary-tree",
+  "how": "fuzzy"
+ },
+ {
+  "id": "102",
+  "name": "Delete a node in BST",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/delete-node-in-a-bst",
+  "how": "fuzzy"
+ },
+ {
+  "id": "101",
+  "name": "Construct a BST from a preorder traversal",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/construct-a-bst-from-preorder-traversal",
+  "how": "fuzzy"
+ },
+ {
+  "id": "2775",
+  "name": "Inorder Successor/Predecessor in BST",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/inorder-successor-and-predecessor-in-a-bst",
+  "how": "fuzzy"
+ },
+ {
+  "id": "2774",
+  "name": "Two Sum In BST | Check if there exists a pair with Sum K",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/two-sum-in-bst",
+  "how": "fuzzy"
+ },
+ {
+  "id": "98",
+  "name": "Largest BST in Binary Tree",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/largest-bst-in-binary-tree",
+  "how": "fuzzy"
+ },
+ {
+  "id": "1222",
+  "name": "Introduction to Graph",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/introduction-to-graph",
+  "how": "fuzzy"
+ },
+ {
+  "id": "531",
+  "name": "Flood fill algorithm",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/flood-fill-algorithm",
+  "how": "exact"
+ },
+ {
+  "id": "527",
+  "name": "Shortest Distance in a Binary Maze",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/shortest-distance-binary-maze",
+  "how": "exact"
+ },
+ {
+  "id": "764",
+  "name": "Network Delay Time",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/network-delay-time",
+  "how": "exact"
+ },
+ {
+  "id": "541",
+  "name": "Assign Cookies",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/assign-cookies",
+  "how": "exact"
+ },
+ {
+  "id": "1023",
+  "name": "Longest Word with All Prefixes",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/longest-word-with-all-prefixes",
+  "how": "fuzzy"
+ },
+ {
+  "id": "981",
+  "name": "Z function",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/z-function",
+  "how": "exact"
+ },
+ {
+  "id": "980",
+  "name": "Shortest Palindrome",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/shortest-palindrome",
+  "how": "exact"
+ },
+ {
+  "id": "978",
+  "name": "Longest happy prefix",
+  "url": "https://takeuforward.org/blogs/data-structure-and-algorithm/longest-happy-prefix",
+  "how": "exact"
+ }
+]

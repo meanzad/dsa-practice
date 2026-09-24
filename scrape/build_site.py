@@ -142,6 +142,12 @@ def group_code_blocks(soup):
     """
     done = set()
 
+    # Blog-sourced articles arrive with their widgets already built; grouping
+    # them again would nest a codewrap inside a codewrap and double the tabs.
+    for built in soup.find_all("div", class_="codewrap"):
+        for pre in built.find_all("pre"):
+            done.add(id(pre))
+
     for holder in soup.find_all("div", class_="code-content"):
         entries = []
         for block in holder.find_all("div", class_="code-block"):

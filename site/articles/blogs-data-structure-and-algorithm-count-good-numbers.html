@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Count Good Numbers Using Modular Exponentiation</title>
+<link rel="stylesheet" href="../style.css?v=1790281487">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Count Good Numbers Using Modular Exponentiation</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/blogs/data-structure-and-algorithm/count-good-numbers</code></div>
+  <div class="ArticleParser-module__R__VNG__article" data-article-segment="html-0"><p>A digit string is called <strong>good</strong> if:</p><ul><li><p>digits at even indices (<code>0</code>, <code>2</code>, <code>4</code>, ...) are even, so they can be <code>0</code>, <code>2</code>, <code>4</code>, <code>6</code>, or <code>8</code></p></li><li><p>digits at odd indices (<code>1</code>, <code>3</code>, <code>5</code>, ...) are prime, so they can be <code>2</code>, <code>3</code>, <code>5</code>, or <code>7</code></p></li></ul><p>Given an integer <code>n</code>, return the total number of good digit strings of length <code>n</code>. Since the answer can be very large, return it modulo 10<sup>9</sup> + 7. Leading zeros are allowed in the string.</p></div><div><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 1</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>n = 1</code></p><p><strong>Output:</strong> <code>5</code></p><p><strong>Explanation: </strong>There is only one position, and it is index <code>0</code>, which is an even index. So the digit can be <code>0</code>, <code>2</code>, <code>4</code>, <code>6</code>, or <code>8</code>. That gives <code>5</code> valid strings.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 2</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>n = 4</code></p><p><strong>Output:</strong> <code>400</code></p><p><strong>Explanation: </strong>Indices <code>0</code> and <code>2</code> are even, so each of them has <code>5</code> choices. Indices <code>1</code> and <code>3</code> are odd, so each of them has <code>4</code> choices. So the total number of good strings is: 400</p></div></div></section></div><div><div class="BlogDetail-module__HEfJva__practiceCallout"><a class="BlogDetail-module__HEfJva__practiceLink" data-mobile-prefetch="normal" href="https://takeuforward.org/practice/dsa/count-good-numbers?subject=recursion" rel="noopener" target="_blank"><span>Practice it by yourself before moving onto the solution</span><span class="BlogDetail-module__HEfJva__practiceAction">Try now</span></a></div></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-3"><h2 id="blog-toc-brute-force-approach">Brute Force Approach</h2><p>The most direct thought is to try building every possible string of length <code>n</code> and check whether it is good. That idea is easy to understand, but it becomes useless very quickly. Every position can branch into several choices, so the number of generated strings grows exponentially.</p><p>The constraint n &lt;= 10<sup>15</sup> makes this approach completely impossible. Still, this first thought is useful because it reveals something important: the choice made at one position does not restrict the choice made at another position, as long as the index type is known.</p><p>That independence is exactly what leads to the optimal counting formula.</p><h3 id="blog-toc-algorithm">Algorithm</h3><ul><li><p>Try to build all possible digit strings of length <code>n</code> because this will give us total possibilities.</p></li><li><p>For every generated string, check each index and verify whether even indices contain even digits and odd indices contain prime digits.</p></li><li><p>Count the strings that satisfy the rule.</p></li><li><p>Return the final count.</p></li></ul><h3 id="blog-toc-dry-run">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Count Good Numbers Brute Dry Run" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/d8e1c06d8c82460e.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Count Good Numbers Brute Dry Run</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-4"><h3 id="blog-toc-solution">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+private:
+    /*
+     * Checks whether a digit is valid for the given index.
+     */
+    bool isValidDigit(int index, int digit) {
+        // If the index is even, only even digits are allowed here.
+        if (index % 2 == 0) {
+            return digit == 0 || digit == 2 || digit == 4 ||
+                   digit == 6 || digit == 8;
+        }
+
+        // If the index is odd, only prime digits are allowed here.
+        return digit == 2 || digit == 3 || digit == 5 || digit == 7;
+    }
+
+    /*
+     * Tries every possible digit choice recursively
+     * and counts the valid good strings.
+     */
+    long long generateStrings(int index, int n) {
+        // If all positions have been filled,
+        // one valid string has been formed.
+        if (index == n) {
+            return 1;
+        }
+
+        // This stores how many valid strings can be built
+        // from the current position onward.
+        long long totalWays = 0;
+
+        for (int digit = 0; digit &lt;= 9; digit++) {
+            // Only continue with digits that satisfy
+            // the rule for the current index.
+            if (isValidDigit(index, digit)) {
+                totalWays += generateStrings(index + 1, n);
+            }
+        }
+
+        return totalWays;
+    }
+
+public:
+    /*
+     * Counts good digit strings by trying all valid
+     * digit choices recursively.
+     */
+    long long countGoodNumbers(int n) {
+        return generateStrings(0, n);
+    }
+};
+
+// Driver code starts
+int main() {
+    int n = 4;
+
+    Solution sol;
+    cout &lt;&lt; sol.countGoodNumbers(n) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+    """
+    Counts good digit strings by trying all valid
+    digit choices recursively.
+    """
+    def is_valid_digit(self, index: int, digit: int) -&gt; bool:
+        # If the index is even, only even digits are allowed here.
+        if index % 2 == 0:
+            return digit in [0, 2, 4, 6, 8]
+
+        # If the index is odd, only prime digits are allowed here.
+        return digit in [2, 3, 5, 7]
+
+    def generate_strings(self, index: int, n: int) -&gt; int:
+        # If all positions have been filled,
+        # one valid string has been formed.
+        if index == n:
+            return 1
+
+        # This stores how many valid strings can be built
+        # from the current position onward.
+        total_ways = 0
+
+        for digit in range(10):
+            # Only continue with digits that satisfy
+            # the rule for the current index.
+            if self.is_valid_digit(index, digit):
+                total_ways += self.generate_strings(index + 1, n)
+
+        return total_ways
+
+    def countGoodNumbers(self, n: int) -&gt; int:
+        return self.generate_strings(0, n)
+
+
+# Driver code starts
+def main() -&gt; None:
+    n = 4
+
+    sol = Solution()
+    print(sol.countGoodNumbers(n))
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">class Solution {
+    /*
+     * Checks whether a digit is valid for the given index.
+     */
+    private boolean isValidDigit(int index, int digit) {
+        // If the index is even, only even digits are allowed here.
+        if (index % 2 == 0) {
+            return digit == 0 || digit == 2 || digit == 4 ||
+                   digit == 6 || digit == 8;
+        }
+
+        // If the index is odd, only prime digits are allowed here.
+        return digit == 2 || digit == 3 || digit == 5 || digit == 7;
+    }
+
+    /*
+     * Tries every possible digit choice recursively
+     * and counts the valid good strings.
+     */
+    private long generateStrings(int index, int n) {
+        // If all positions have been filled,
+        // one valid string has been formed.
+        if (index == n) {
+            return 1;
+        }
+
+        // This stores how many valid strings can be built
+        // from the current position onward.
+        long totalWays = 0;
+
+        for (int digit = 0; digit &lt;= 9; digit++) {
+            // Only continue with digits that satisfy
+            // the rule for the current index.
+            if (isValidDigit(index, digit)) {
+                totalWays += generateStrings(index + 1, n);
+            }
+        }
+
+        return totalWays;
+    }
+
+    /*
+     * Counts good digit strings by trying all valid
+     * digit choices recursively.
+     */
+    public long countGoodNumbers(int n) {
+        return generateStrings(0, n);
+    }
+}
+
+class Main {
+    // Driver code starts
+    public static void main(String[] args) {
+        int n = 4;
+
+        Solution sol = new Solution();
+        System.out.println(sol.countGoodNumbers(n));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    /*
+     * Checks whether a digit is valid for the given index.
+     */
+    isValidDigit(index, digit) {
+        // If the index is even, only even digits are allowed here.
+        if (index % 2 === 0) {
+            return digit === 0 || digit === 2 || digit === 4 ||
+                   digit === 6 || digit === 8;
+        }
+
+        // If the index is odd, only prime digits are allowed here.
+        return digit === 2 || digit === 3 || digit === 5 || digit === 7;
+    }
+
+    /*
+     * Tries every possible digit choice recursively
+     * and counts the valid good strings.
+     */
+    generateStrings(index, n) {
+        // If all positions have been filled,
+        // one valid string has been formed.
+        if (index === n) {
+            return 1;
+        }
+
+        // This stores how many valid strings can be built
+        // from the current position onward.
+        let totalWays = 0;
+
+        for (let digit = 0; digit &lt;= 9; digit++) {
+            // Only continue with digits that satisfy
+            // the rule for the current index.
+            if (this.isValidDigit(index, digit)) {
+                totalWays += this.generateStrings(index + 1, n);
+            }
+        }
+
+        return totalWays;
+    }
+
+    /*
+     * Counts good digit strings by trying all valid
+     * digit choices recursively.
+     */
+    countGoodNumbers(n) {
+        return this.generateStrings(0, n);
+    }
+}
+
+// Driver code starts
+function main() {
+    const n = 4;
+
+    const sol = new Solution();
+    console.log(sol.countGoodNumbers(n));
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-5"><h3 id="blog-toc-complexity-analysis">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(9<sup>n</sup>), exponential as we are checking all possible digits at all index that is n.</p><p><strong>Space Complexity:</strong> O(1) since constant extra space is used.</p></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-6"><h2 id="blog-toc-optimal-approach">Optimal Approach</h2><p>The key observation is that this problem does not really need string construction. Only the <strong>type of index</strong> matters.</p><p>Every even index always has the same <code>5</code> choices: 0, 2, 4, 6, 8</p><p>Every odd index always has the same <code>4</code> choices: 2, 3, 5, 7</p></div><div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-7"><p>So instead of building strings, just count how many even positions and odd positions exist. If the string length is <code>n</code>:</p><ul><li><p>even positions = <code>(n + 1) / 2</code></p></li><li><p>odd positions = <code>n / 2</code></p></li></ul><p>This works because indexing starts from <code>0</code>, so when <code>n</code> is odd, the extra position always belongs to the even-index side. Now apply the multiplication principle:</p><ul><li><p>each even position contributes <code>5</code> choices</p></li><li><p>each odd position contributes <code>4</code> choices</p></li></ul><p>So the answer becomes: 5<sup>(number of even positions)</sup> * 4<sup>(number of odd positions)</sup></p><p>That solves the counting part. But one more problem remains: the powers can be extremely large because <code>n</code> can be as big as 10<sup>15</sup>. Normal repeated multiplication would take too long. That is why fast exponentiation is needed. It reduces power calculation from linear time to logarithmic time by repeatedly squaring the base and cutting the exponent in half.</p><h3 id="blog-toc-algorithm-2">Algorithm</h3><ul><li><p>Count how many even-index positions exist using <code>(n + 1) / 2</code>. This is done because index <code>0</code> is even, so an odd-length string always gives one extra even position.</p></li><li><p>Count how many odd-index positions exist using <code>n / 2</code>. This gives the remaining positions after the even positions are accounted for.</p></li><li><p>Compute 5<sup>(even positions)</sup> % mod because every even position can take any one of <code>5</code> valid even digits.</p></li><li><p>Compute 4<sup>(odd positions) </sup>% mod because every odd position can take any one of <code>4</code> valid prime digits.</p></li><li><p>Multiply both results and again take modulo 10<sup>9 </sup>+ 7. This is needed because the choices for even and odd positions are independent, so the final count is their product.</p></li><li><p>Use fast exponentiation while computing powers so the exponent is reduced quickly instead of multiplying one time per position.</p></li></ul><h3 id="blog-toc-dry-run-2">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Count Good Number Optimal Dry Run" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/dd70ce54e0a30e94.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Count Good Number Optimal Dry Run</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-8"><h3 id="blog-toc-solution-2">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+private:
+    static const long long MOD = 1000000007;
+
+    /*
+     * Computes base raised to exponent under modulo
+     * using binary exponentiation.
+     */
+    long long modPower(long long base, long long exponent) {
+        // This stores the running answer for the power calculation.
+        long long result = 1;
+
+        while (exponent &gt; 0) {
+            // If the current bit of the exponent is 1,
+            // include the current base in the answer.
+            if (exponent % 2 == 1) {
+                result = (result * base) % MOD;
+            }
+
+            // Square the base so it represents the next power block.
+            base = (base * base) % MOD;
+
+            // Move to the next bit by cutting the exponent in half.
+            exponent /= 2;
+        }
+
+        return result;
+    }
+
+public:
+    /*
+     * Counts how many good digit strings of length n
+     * can be formed under the given rules.
+     */
+    int countGoodNumbers(long long n) {
+        // This stores how many positions use even-digit choices.
+        long long evenPositions = (n + 1) / 2;
+
+        // This stores how many positions use prime-digit choices.
+        long long oddPositions = n / 2;
+
+        // This stores all valid ways to fill even indices.
+        long long evenWays = modPower(5, evenPositions);
+
+        // This stores all valid ways to fill odd indices.
+        long long oddWays = modPower(4, oddPositions);
+
+        return (evenWays * oddWays) % MOD;
+    }
+};
+
+// Driver code starts
+int main() {
+    long long n = 4;
+
+    Solution sol;
+    cout &lt;&lt; sol.countGoodNumbers(n) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+    """
+    Counts how many good digit strings of length n
+    can be formed under the given rules.
+    """
+    def mod_power(self, base: int, exponent: int) -&gt; int:
+        """
+        Computes base raised to exponent under modulo
+        using binary exponentiation.
+        """
+        mod = 10**9 + 7
+
+        # This stores the running answer for the power calculation.
+        result = 1
+
+        while exponent &gt; 0:
+            # If the current bit of the exponent is 1,
+            # include the current base in the answer.
+            if exponent % 2 == 1:
+                result = (result * base) % mod
+
+            # Square the base so it represents the next power block.
+            base = (base * base) % mod
+
+            # Move to the next bit by cutting the exponent in half.
+            exponent //= 2
+
+        return result
+
+    def countGoodNumbers(self, n: int) -&gt; int:
+        # This stores how many positions use even-digit choices.
+        even_positions = (n + 1) // 2
+
+        # This stores how many positions use prime-digit choices.
+        odd_positions = n // 2
+
+        # This stores all valid ways to fill even indices.
+        even_ways = self.mod_power(5, even_positions)
+
+        # This stores all valid ways to fill odd indices.
+        odd_ways = self.mod_power(4, odd_positions)
+
+        return (even_ways * odd_ways) % (10**9 + 7)
+
+
+# Driver code starts
+def main() -&gt; None:
+    n = 4
+
+    sol = Solution()
+    print(sol.countGoodNumbers(n))
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">class Solution {
+    private static final long MOD = 1000000007L;
+
+    /*
+     * Computes base raised to exponent under modulo
+     * using binary exponentiation.
+     */
+    private long modPower(long base, long exponent) {
+        // This stores the running answer for the power calculation.
+        long result = 1;
+
+        while (exponent &gt; 0) {
+            // If the current bit of the exponent is 1,
+            // include the current base in the answer.
+            if (exponent % 2 == 1) {
+                result = (result * base) % MOD;
+            }
+
+            // Square the base so it represents the next power block.
+            base = (base * base) % MOD;
+
+            // Move to the next bit by cutting the exponent in half.
+            exponent /= 2;
+        }
+
+        return result;
+    }
+
+    /*
+     * Counts how many good digit strings of length n
+     * can be formed under the given rules.
+     */
+    public int countGoodNumbers(long n) {
+        // This stores how many positions use even-digit choices.
+        long evenPositions = (n + 1) / 2;
+
+        // This stores how many positions use prime-digit choices.
+        long oddPositions = n / 2;
+
+        // This stores all valid ways to fill even indices.
+        long evenWays = modPower(5, evenPositions);
+
+        // This stores all valid ways to fill odd indices.
+        long oddWays = modPower(4, oddPositions);
+
+        return (int) ((evenWays * oddWays) % MOD);
+    }
+}
+
+class Main {
+    // Driver code starts
+    public static void main(String[] args) {
+        long n = 4;
+
+        Solution sol = new Solution();
+        System.out.println(sol.countGoodNumbers(n));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    /*
+     * Computes base raised to exponent under modulo
+     * using binary exponentiation.
+     */
+    modPower(base, exponent) {
+        const mod = 1000000007n;
+
+        // This stores the running answer for the power calculation.
+        let result = 1n;
+
+        while (exponent &gt; 0n) {
+            // If the current bit of the exponent is 1,
+            // include the current base in the answer.
+            if (exponent % 2n === 1n) {
+                result = (result * base) % mod;
+            }
+
+            // Square the base so it represents the next power block.
+            base = (base * base) % mod;
+
+            // Move to the next bit by cutting the exponent in half.
+            exponent /= 2n;
+        }
+
+        return result;
+    }
+
+    /*
+     * Counts how many good digit strings of length n
+     * can be formed under the given rules.
+     */
+    countGoodNumbers(n) {
+        // This stores how many positions use even-digit choices.
+        const evenPositions = (n + 1n) / 2n;
+
+        // This stores how many positions use prime-digit choices.
+        const oddPositions = n / 2n;
+
+        // This stores all valid ways to fill even indices.
+        const evenWays = this.modPower(5n, evenPositions);
+
+        // This stores all valid ways to fill odd indices.
+        const oddWays = this.modPower(4n, oddPositions);
+
+        return Number((evenWays * oddWays) % 1000000007n);
+    }
+}
+
+// Driver code starts
+function main() {
+    const n = 4n;
+
+    const sol = new Solution();
+    console.log(sol.countGoodNumbers(n));
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-9"><h3 id="blog-toc-complexity-analysis-2">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(log n)</code>, because fast exponentiation halves the exponent at every step.</p><p><strong>Space Complexity:</strong> <code>O(1)</code>, because constant extra space is used.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div><section aria-label="Interview follow-up Questions" class="BlogDetail-module__HEfJva__faqSection" id="blog-toc-faqs"><h2 class="BlogDetail-module__HEfJva__faqHeading">Interview follow-up Questions</h2><div class="flex w-full flex-col BlogDetail-module__HEfJva__faqList" data-orientation="vertical" data-slot="accordion"><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="open"><h3 class="flex" data-orientation="vertical" data-state="open"></h3><div aria-labelledby="radix-_R_1kkqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="open" id="radix-_R_9kkqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"><div class="h-auto pt-0 pb-2.5 [&amp;_a]:underline [&amp;_a]:underline-offset-3 [&amp;_a]:hover:text-foreground [&amp;_p:not(:last-child)]:mb-4 BlogDetail-module__HEfJva__faqAnswer"><p>Even indices can contain only even digits, and the valid even digits are 0, 2, 4, 6, and 8. That gives exactly 5 choices.</p></div></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_2kkqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_akkqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_3kkqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_bkkqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_4kkqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_ckkqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div></div></section></div>
+</article>
+<script src="../article.js?v=1790281487"></script>
+</body></html>

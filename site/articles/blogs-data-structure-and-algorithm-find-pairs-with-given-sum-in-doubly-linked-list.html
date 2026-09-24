@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Find pairs with given sum in Doubly Linked List</title>
+<link rel="stylesheet" href="../style.css?v=1790281487">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Find pairs with given sum in Doubly Linked List</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/blogs/data-structure-and-algorithm/find-pairs-with-given-sum-in-doubly-linked-list</code></div>
+  <div class="ArticleParser-module__R__VNG__article" data-article-segment="html-0"><p>Given a sorted doubly linked list containing positive distinct integers and an integer target, find every pair of node values whose sum equals target. Return pairs in increasing order based on the first value of each pair.</p><p>A doubly linked list node contains a value, a next pointer, and a previous pointer. Sorted order enables movement from both ends during the optimal solution.</p></div><div><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 1</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>DLL = [1, 2, 4, 5, 6, 8], target = 7</code></p><p><strong>Output:</strong> <code>[[1, 6], [2, 5]]</code></p><p><strong>Explanation:</strong> Values 1 and 6 form sum 7. Values 2 and 5 also form sum 7.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 2</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>DLL = [1, 3, 5, 7, 9], target = 10</code></p><p><strong>Output:</strong> <code>[[1, 9], [3, 7]]</code></p><p><strong>Explanation:</strong> Values 1 and 9 form sum 10. Values 3 and 7 also form sum 10.</p></div></div></section></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-2"><h2 id="blog-toc-brute-force-approach">Brute Force Approach</h2><p>A complement lookup can detect pair values during a single forward traversal. For every node value, target minus current value gives the needed partner. A hash set stores previously visited values, so a matching complement proves a valid pair.</p><p>Sorted output order still matters. Since complement matches can be discovered based on traversal order, collected pairs are sorted before returning. Knowledge of hash sets and pair sorting is enough for the hashing approach.</p><h3 id="blog-toc-algorithm">Algorithm</h3><ul><li><p>Initialize an empty <code>answer</code> list and a hash set, where the hash set stores previously visited values and the answer list stores the valid pairs.</p></li><li><p>Traverse the doubly linked list from <code>head</code> to tail, as every node value can potentially form a pair with a previously visited value.</p></li><li><p>Calculate <code>complement = target - current-&gt;data</code>, since this is the value required to make the current value sum to the target.</p></li><li><p>If the complement already exists in the hash set, append the pair <code>{complement, current-&gt;data}</code> to <code>answer</code>, as both values have now been encountered and together satisfy the target sum.</p></li><li><p>Insert <code>current-&gt;data</code> into the hash set, so it becomes available as a possible complement for subsequent nodes.</p></li><li><p>Continue until the entire list has been traversed, ensuring all possible pairs are considered.</p></li><li><p>Sort <code>answer</code> by the first value, as the pairs need to be returned in the required sorted order.</p></li><li><p>Return <code>answer</code> after sorting, since it now contains all valid pairs in the expected order.</p></li></ul><h3 id="blog-toc-dry-run">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="pair sum" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/c3ffe134b75754c8.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">pair sum</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-3"><h3 id="blog-toc-solution">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+    Node* prev;
+
+    // Constructor for a doubly linked list node.
+    Node(int value) {
+        data = value;
+        next = nullptr;
+        prev = nullptr;
+    }
+};
+
+class Solution {
+public:
+    // Finds all pairs whose sum equals the target.
+    vector&lt;pair&lt;int, int&gt;&gt; findPairsWithGivenSum(Node* head, int target) {
+        vector&lt;pair&lt;int, int&gt;&gt; answer;
+        unordered_set&lt;int&gt; seen;
+        Node* current = head;
+
+        // Traverse the list and search for the required complement.
+        while (current != nullptr) {
+            int complement = target - current-&gt;data;
+
+            // Add the pair if its complement was already visited.
+            if (seen.find(complement) != seen.end()) {
+                answer.push_back({complement, current-&gt;data});
+            }
+
+            seen.insert(current-&gt;data);
+            current = current-&gt;next;
+        }
+
+        // Arrange pairs in increasing order.
+        sort(answer.begin(), answer.end());
+
+        return answer;
+    }
+};
+
+// Builds a doubly linked list from the given array.
+Node* buildList(vector&lt;int&gt;&amp; values) {
+    if (values.empty()) {
+        return nullptr;
+    }
+
+    Node* head = new Node(values[0]);
+    Node* tail = head;
+
+    for (int index = 1; index &lt; (int)values.size(); index++) {
+        Node* node = new Node(values[index]);
+
+        tail-&gt;next = node;
+        node-&gt;prev = tail;
+
+        tail = node;
+    }
+
+    return head;
+}
+
+// Driver code.
+int main() {
+    vector&lt;int&gt; values = {1, 2, 4, 5, 6, 8};
+    int target = 7;
+    Node* head = buildList(values);
+
+    Solution solution;
+    vector&lt;pair&lt;int, int&gt;&gt; result =
+        solution.findPairsWithGivenSum(head, target);
+
+    for (auto pairValue : result) {
+        cout &lt;&lt; pairValue.first &lt;&lt; " "
+             &lt;&lt; pairValue.second &lt;&lt; endl;
+    }
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">from typing import List, Optional
+
+
+class Node:
+    # Constructor for a doubly linked list node.
+    def __init__(self, value: int) -&gt; None:
+        self.data = value
+        self.next: Optional["Node"] = None
+        self.prev: Optional["Node"] = None
+
+
+class Solution:
+    # Finds all pairs whose sum equals the target.
+    def findPairsWithGivenSum(
+        self,
+        head: Optional[Node],
+        target: int
+    ) -&gt; List[List[int]]:
+        answer: List[List[int]] = []
+        seen = set()
+        current = head
+
+        # Traverse the list and search for the required complement.
+        while current is not None:
+            complement = target - current.data
+
+            # Add the pair if its complement was already visited.
+            if complement in seen:
+                answer.append([complement, current.data])
+
+            seen.add(current.data)
+            current = current.next
+
+        # Arrange pairs in increasing order.
+        answer.sort()
+
+        return answer
+
+
+# Builds a doubly linked list from the given array.
+def build_list(values: List[int]) -&gt; Optional[Node]:
+    if not values:
+        return None
+
+    head = Node(values[0])
+    tail = head
+
+    for value in values[1:]:
+        node = Node(value)
+
+        tail.next = node
+        node.prev = tail
+
+        tail = node
+
+    return head
+
+
+# Driver code.
+def main() -&gt; None:
+    values = [1, 2, 4, 5, 6, 8]
+    target = 7
+    head = build_list(values)
+
+    solution = Solution()
+    result = solution.findPairsWithGivenSum(head, target)
+
+    for pair_value in result:
+        print(pair_value[0], pair_value[1])
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class Node {
+    int data;
+    Node next;
+    Node prev;
+
+    // Constructor for a doubly linked list node.
+    Node(int value) {
+        data = value;
+        next = null;
+        prev = null;
+    }
+}
+
+class Solution {
+    // Finds all pairs whose sum equals the target.
+    public ArrayList&lt;ArrayList&lt;Integer&gt;&gt; findPairsWithGivenSum(Node head, int target) {
+        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; answer = new ArrayList&lt;&gt;();
+        HashSet&lt;Integer&gt; seen = new HashSet&lt;&gt;();
+        Node current = head;
+
+        // Traverse the list and search for the required complement.
+        while (current != null) {
+            int complement = target - current.data;
+
+            // Add the pair if its complement was already visited.
+            if (seen.contains(complement)) {
+                ArrayList&lt;Integer&gt; pair = new ArrayList&lt;&gt;();
+                pair.add(complement);
+                pair.add(current.data);
+                answer.add(pair);
+            }
+
+            seen.add(current.data);
+            current = current.next;
+        }
+
+        // Arrange pairs in increasing order.
+        answer.sort((first, second) -&gt; first.get(0) - second.get(0));
+
+        return answer;
+    }
+}
+
+class Main {
+    // Builds a doubly linked list from the given array.
+    static Node buildList(int[] values) {
+        if (values.length == 0) {
+            return null;
+        }
+
+        Node head = new Node(values[0]);
+        Node tail = head;
+
+        for (int index = 1; index &lt; values.length; index++) {
+            Node node = new Node(values[index]);
+
+            tail.next = node;
+            node.prev = tail;
+
+            tail = node;
+        }
+
+        return head;
+    }
+
+    // Driver code.
+    public static void main(String[] args) {
+        int[] values = {1, 2, 4, 5, 6, 8};
+        int target = 7;
+        Node head = buildList(values);
+
+        Solution solution = new Solution();
+        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; result =
+            solution.findPairsWithGivenSum(head, target);
+
+        for (ArrayList&lt;Integer&gt; pairValue : result) {
+            System.out.println(
+                pairValue.get(0) + " " + pairValue.get(1)
+            );
+        }
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">function createNode(value) {
+    return { data: value, next: null, prev: null };
+}
+
+class Solution {
+    // Finds all pairs whose sum equals the target.
+    findPairsWithGivenSum(head, target) {
+        const answer = [];
+        const seen = new Set();
+        let current = head;
+
+        // Traverse the list and search for the required complement.
+        while (current !== null) {
+            const complement = target - current.data;
+
+            // Add the pair if its complement was already visited.
+            if (seen.has(complement)) {
+                answer.push([complement, current.data]);
+            }
+
+            seen.add(current.data);
+            current = current.next;
+        }
+
+        // Arrange pairs in increasing order.
+        answer.sort((first, second) =&gt; first[0] - second[0]);
+
+        return answer;
+    }
+}
+
+// Builds a doubly linked list from the given array.
+function buildList(values) {
+    if (values.length === 0) {
+        return null;
+    }
+
+    const head = createNode(values[0]);
+    let tail = head;
+
+    for (let index = 1; index &lt; values.length; index++) {
+        const node = createNode(values[index]);
+
+        tail.next = node;
+        node.prev = tail;
+
+        tail = node;
+    }
+
+    return head;
+}
+
+// Driver code.
+function main() {
+    const values = [1, 2, 4, 5, 6, 8];
+    const target = 7;
+    const head = buildList(values);
+
+    const solution = new Solution();
+    const result = solution.findPairsWithGivenSum(head, target);
+
+    for (const pairValue of result) {
+        console.log(pairValue[0] + " " + pairValue[1]);
+    }
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-4"><h3 id="blog-toc-complexity-analysis">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(N log N)</code>, traversal costs <code>O(N)</code> and sorting collected pairs costs up to <code>O(N log N)</code>.</p><p><strong>Space Complexity:</strong> <code>O(N)</code>, hash set storage can contain every list value.</p></div><div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-6"><h2 id="blog-toc-optimal-approach">Optimal Approach</h2><p>The sorted doubly linked list allows pair search from both ends. A left pointer starts at the head and a right pointer starts at the tail. Current sum decides the next movement because increasing the smaller side raises the sum and decreasing the larger side lowers the sum.</p><p>The previous pointer gives direct movement from tail toward head, so no extra container is required. The process naturally returns pairs in increasing first-value order because the left pointer only moves forward.</p><h3 id="blog-toc-algorithm-2">Algorithm</h3><ul><li><p>Return an empty list when <code>head</code> is <code>NULL</code>, as there are no nodes available to form a pair.</p></li><li><p>Initialize <code>left</code> at <code>head</code> and move <code>right</code> to the tail node, as the sorted list allows the pair search to begin from both extremes.</p></li><li><p>Traverse while <code>left</code> and <code>right</code> have not met or crossed, since a valid pair requires two distinct nodes.</p></li><li><p>Calculate <code>sum</code> using the values of <code>left</code> and <code>right</code>, as their combined value determines whether the current pair can satisfy the target.</p></li><li><p>If <code>sum</code> equals the target, add the pair to the answer and move both pointers inward, since the current pair is valid and neither node needs to be considered again.</p></li><li><p>If <code>sum</code> is smaller than the target, move <code>left</code> forward, as increasing the smaller value is what can raise the sum toward the target.</p></li><li><p>If <code>sum</code> is greater than the target, move <code>right</code> backward, as decreasing the larger value is what can bring the sum down toward the target.</p></li><li><p>Continue until the pointers meet or cross, ensuring all possible valid pairs have been considered.</p></li><li><p>Return the collected pairs, which naturally appear in increasing order of their first value because <code>left</code> moves only forward.</p></li></ul><h3 id="blog-toc-dry-run-2">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="pair sum by two pointers" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/34531cf65652ac97.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">pair sum by two pointers</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-7"><h3 id="blog-toc-solution-2">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+    Node* prev;
+
+    Node(int value) {
+        data = value;
+        next = nullptr;
+        prev = nullptr;
+    }
+};
+
+class Solution {
+public:
+    // Find all pairs with target sum using two pointers.
+    vector&lt;pair&lt;int, int&gt;&gt; findPairsWithGivenSum(Node* head, int target) {
+        vector&lt;pair&lt;int, int&gt;&gt; answer;
+        if (head == nullptr) {
+            return answer;
+        }
+
+        Node* left = head;
+        Node* right = head;
+
+        // Move right pointer to final node.
+        while (right-&gt;next != nullptr) {
+            right = right-&gt;next;
+        }
+
+        // Move pointers inward until meeting or crossing.
+        while (left != right &amp;&amp; right-&gt;next != left) {
+            int sum = left-&gt;data + right-&gt;data;
+
+            if (sum == target) {
+                answer.push_back({left-&gt;data, right-&gt;data});
+                left = left-&gt;next;
+                right = right-&gt;prev;
+            } else if (sum &lt; target) {
+                left = left-&gt;next;
+            } else {
+                right = right-&gt;prev;
+            }
+        }
+
+        return answer;
+    }
+};
+
+// Build a doubly linked list from array values.
+Node* buildList(vector&lt;int&gt;&amp; values) {
+    if (values.empty()) {
+        return nullptr;
+    }
+
+    Node* head = new Node(values[0]);
+    Node* tail = head;
+
+    for (int index = 1; index &lt; (int)values.size(); index++) {
+        Node* node = new Node(values[index]);
+        tail-&gt;next = node;
+        node-&gt;prev = tail;
+        tail = node;
+    }
+
+    return head;
+}
+
+// Driver code with a fixed sample.
+int main() {
+    vector&lt;int&gt; values = {1, 2, 4, 5, 6, 8};
+    int target = 7;
+    Node* head = buildList(values);
+
+    Solution solution;
+    vector&lt;pair&lt;int, int&gt;&gt; result = solution.findPairsWithGivenSum(head, target);
+
+    for (auto pairValue : result) {
+        cout &lt;&lt; pairValue.first &lt;&lt; " " &lt;&lt; pairValue.second &lt;&lt; endl;
+    }
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">from typing import List, Optional
+
+
+class Node:
+    def __init__(self, value: int) -&gt; None:
+        self.data = value
+        self.next: Optional["Node"] = None
+        self.prev: Optional["Node"] = None
+
+
+class Solution:
+    # Find all pairs with target sum using two pointers.
+    def findPairsWithGivenSum(self, head: Optional[Node], target: int) -&gt; List[List[int]]:
+        answer: List[List[int]] = []
+        if head is None:
+            return answer
+
+        left = head
+        right = head
+
+        # Move right pointer to final node.
+        while right.next is not None:
+            right = right.next
+
+        # Move pointers inward until meeting or crossing.
+        while left != right and right.next != left:
+            current_sum = left.data + right.data
+
+            if current_sum == target:
+                answer.append([left.data, right.data])
+                left = left.next
+                right = right.prev
+            elif current_sum &lt; target:
+                left = left.next
+            else:
+                right = right.prev
+
+        return answer
+
+
+# Build a doubly linked list from array values.
+def build_list(values: List[int]) -&gt; Optional[Node]:
+    if not values:
+        return None
+
+    head = Node(values[0])
+    tail = head
+
+    for value in values[1:]:
+        node = Node(value)
+        tail.next = node
+        node.prev = tail
+        tail = node
+
+    return head
+
+
+# Driver code with a fixed sample.
+def main() -&gt; None:
+    values = [1, 2, 4, 5, 6, 8]
+    target = 7
+    head = build_list(values)
+
+    solution = Solution()
+    result = solution.findPairsWithGivenSum(head, target)
+
+    for pair_value in result:
+        print(pair_value[0], pair_value[1])
+
+
+if __name__ == "__main__":
+    main()
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class Node {
+    int data;
+    Node next;
+    Node prev;
+
+    Node(int value) {
+        data = value;
+        next = null;
+        prev = null;
+    }
+}
+
+class Solution {
+    // Find all pairs with target sum using two pointers.
+    public ArrayList&lt;ArrayList&lt;Integer&gt;&gt; findPairsWithGivenSum(Node head, int target) {
+        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; answer = new ArrayList&lt;&gt;();
+        if (head == null) {
+            return answer;
+        }
+
+        Node left = head;
+        Node right = head;
+
+        // Move right pointer to final node.
+        while (right.next != null) {
+            right = right.next;
+        }
+
+        // Move pointers inward until meeting or crossing.
+        while (left != right &amp;&amp; right.next != left) {
+            int sum = left.data + right.data;
+
+            if (sum == target) {
+                ArrayList&lt;Integer&gt; pair = new ArrayList&lt;&gt;();
+                pair.add(left.data);
+                pair.add(right.data);
+                answer.add(pair);
+                left = left.next;
+                right = right.prev;
+            } else if (sum &lt; target) {
+                left = left.next;
+            } else {
+                right = right.prev;
+            }
+        }
+
+        return answer;
+    }
+}
+
+class Main {
+    // Build a doubly linked list from array values.
+    static Node buildList(int[] values) {
+        if (values.length == 0) {
+            return null;
+        }
+
+        Node head = new Node(values[0]);
+        Node tail = head;
+
+        for (int index = 1; index &lt; values.length; index++) {
+            Node node = new Node(values[index]);
+            tail.next = node;
+            node.prev = tail;
+            tail = node;
+        }
+
+        return head;
+    }
+
+    // Driver code with a fixed sample.
+    public static void main(String[] args) {
+        int[] values = {1, 2, 4, 5, 6, 8};
+        int target = 7;
+        Node head = buildList(values);
+
+        Solution solution = new Solution();
+        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; result = solution.findPairsWithGivenSum(head, target);
+
+        for (ArrayList&lt;Integer&gt; pairValue : result) {
+            System.out.println(pairValue.get(0) + " " + pairValue.get(1));
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">function createNode(value) {
+    return { data: value, next: null, prev: null };
+}
+
+class Solution {
+    // Find all pairs with target sum using two pointers.
+    findPairsWithGivenSum(head, target) {
+        let answer = [];
+        if (head === null) {
+            return answer;
+        }
+
+        let left = head;
+        let right = head;
+
+        // Move right pointer to final node.
+        while (right.next !== null) {
+            right = right.next;
+        }
+
+        // Move pointers inward until meeting or crossing.
+        while (left !== right &amp;&amp; right.next !== left) {
+            let sum = left.data + right.data;
+
+            if (sum === target) {
+                answer.push([left.data, right.data]);
+                left = left.next;
+                right = right.prev;
+            } else if (sum &lt; target) {
+                left = left.next;
+            } else {
+                right = right.prev;
+            }
+        }
+
+        return answer;
+    }
+}
+
+// Build a doubly linked list from array values.
+function buildList(values) {
+    if (values.length === 0) {
+        return null;
+    }
+
+    let head = createNode(values[0]);
+    let tail = head;
+
+    for (let index = 1; index &lt; values.length; index++) {
+        let node = createNode(values[index]);
+        tail.next = node;
+        node.prev = tail;
+        tail = node;
+    }
+
+    return head;
+}
+
+// Driver code with a fixed sample.
+function main() {
+    let values = [1, 2, 4, 5, 6, 8];
+    let target = 7;
+    let head = buildList(values);
+
+    let solution = new Solution();
+    let result = solution.findPairsWithGivenSum(head, target);
+
+    for (let pairValue of result) {
+        console.log(pairValue[0] + " " + pairValue[1]);
+    }
+}
+
+main();
+</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-8"><h3 id="blog-toc-complexity-analysis-2">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(N)</code>, tail discovery and inward pointer traversal visit nodes linearly.</p><p><strong>Space Complexity:</strong> <code>O(1)</code>, only pointer variables and answer storage are used.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div><section aria-label="Interview follow-up Questions" class="BlogDetail-module__HEfJva__faqSection" id="blog-toc-faqs"><h2 class="BlogDetail-module__HEfJva__faqHeading">Interview follow-up Questions</h2><div class="flex w-full flex-col BlogDetail-module__HEfJva__faqList" data-orientation="vertical" data-slot="accordion"><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="open"><h3 class="flex" data-orientation="vertical" data-state="open"></h3><div aria-labelledby="radix-_R_1k4qnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="open" id="radix-_R_9k4qnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"><div class="h-auto pt-0 pb-2.5 [&amp;_a]:underline [&amp;_a]:underline-offset-3 [&amp;_a]:hover:text-foreground [&amp;_p:not(:last-child)]:mb-4 BlogDetail-module__HEfJva__faqAnswer"><p>No. The two pointer movement depends on sorted order. An unsorted list needs hashing or sorting before two pointer usage.</p></div></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_2k4qnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_ak4qnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_3k4qnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_bk4qnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_4k4qnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_ck4qnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div></div></section></div>
+</article>
+<script src="../article.js?v=1790281487"></script>
+</body></html>

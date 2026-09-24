@@ -26,7 +26,9 @@
        "article_slug": "c-c-basic-input-output",
        "youtube": "https://youtu.be/EAR7De6Goz4?t=250",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "1211",
@@ -36,7 +38,9 @@
        "article_slug": "data-structure-what-are-arrays-strings",
        "youtube": "https://youtu.be/EAR7De6Goz4?t=2415",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "424",
@@ -46,7 +50,9 @@
        "article_slug": "if-else-if-else-statements",
        "youtube": "https://youtu.be/EAR7De6Goz4?t=1259",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "429",
@@ -56,7 +62,9 @@
        "article_slug": "switch-case-switch-case-statements",
        "youtube": "https://youtu.be/EAR7De6Goz4",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2869",
@@ -66,7 +74,9 @@
        "article_slug": "data-structure-what-are-arrays-strings",
        "youtube": "https://youtu.be/EAR7De6Goz4?t=2415",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2867",
@@ -76,7 +86,9 @@
        "article_slug": "for-loop-understanding-for-loop",
        "youtube": "https://youtu.be/EAR7De6Goz4?t=3096",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "2868",
@@ -86,7 +98,9 @@
        "article_slug": "while-loop-while-loops-in-programming",
        "youtube": "https://youtu.be/EAR7De6Goz4?t=3459",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "2866",
@@ -96,7 +110,9 @@
        "article_slug": "data-structure-functions-pass-by-reference-and-value",
        "youtube": "https://youtu.be/EAR7De6Goz4?t=3677",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "1219",
@@ -106,7 +122,9 @@
        "article_slug": "time-complexity-time-and-space-complexity-strivers-a2z-dsa-course",
        "youtube": "https://youtu.be/FPu9Uld7W-E",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -122,7 +140,9 @@
        "article_slug": "strivers-a2z-dsa-course-must-do-pattern-problems-before-starting-dsa",
        "youtube": "https://www.youtube.com/watch?v=tNm_NNSB3_w&list=PLgUwDviBIf0oF6QL8m22w1hIDC1vJ_BHz&index=3",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -138,7 +158,9 @@
        "article_slug": "c-c-stl-tutorial-most-frequent-used-stl-containers",
        "youtube": "https://www.youtube.com/watch?v=RRVYpIET_RU",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "1217",
@@ -148,7 +170,9 @@
        "article_slug": "data-structure-java-collections",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       }
      ]
     },
@@ -164,7 +188,9 @@
        "article_slug": "data-structure-count-digits-in-a-number",
        "youtube": "https://youtu.be/1xNbjMdbjug",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "376",
@@ -174,7 +200,9 @@
        "article_slug": "maths-reverse-digits-of-a-number",
        "youtube": "https://youtu.be/1xNbjMdbjug?t=930",
        "leetcode": "https://leetcode.com/problems/reverse-integer/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "374",
@@ -184,7 +212,9 @@
        "article_slug": "data-structure-check-if-a-number-is-palindrome-or-not",
        "youtube": "https://youtu.be/1xNbjMdbjug?t=1230",
        "leetcode": "https://leetcode.com/problems/palindrome-number/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "372",
@@ -194,7 +224,9 @@
        "article_slug": "data-structure-find-gcd-of-two-numbers",
        "youtube": "https://youtu.be/1xNbjMdbjug?t=2684",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "366",
@@ -204,7 +236,9 @@
        "article_slug": "maths-check-if-a-number-is-armstrong-number-or-not",
        "youtube": "https://youtu.be/1xNbjMdbjug?t=1418",
        "leetcode": "https://leetcode.com/problems/armstrong-number/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2807",
@@ -214,7 +248,9 @@
        "article_slug": "data-structure-print-all-divisors-of-a-given-number",
        "youtube": "https://youtu.be/1xNbjMdbjug?t=1580",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "365",
@@ -224,7 +260,9 @@
        "article_slug": "data-structure-check-if-a-number-is-prime-or-not",
        "youtube": "https://youtu.be/1xNbjMdbjug?t=2381",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -240,7 +278,9 @@
        "article_slug": "recursion-introduction-to-recursion-understand-recursion-by-printing-something-n-times",
        "youtube": "https://www.youtube.com/watch?v=yVdKa8dnKiE&list=PLgUwDviBIf0rGlzIn_7rsaR2FQ5e6ZOL9",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2405",
@@ -250,7 +290,9 @@
        "article_slug": "recursion-print-name-n-times-using-recursion",
        "youtube": "https://www.youtube.com/watch?v=un6PLygfXrA&list=PLgUwDviBIf0rGlzIn_7rsaR2FQ5e6ZOL9&index=2",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "850",
@@ -260,7 +302,9 @@
        "article_slug": "recursion-print-1-to-n-using-recursion",
        "youtube": "https://www.youtube.com/watch?v=un6PLygfXrA&list=PLgUwDviBIf0rGlzIn_7rsaR2FQ5e6ZOL9&index=2",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "852",
@@ -270,7 +314,9 @@
        "article_slug": "recursion-print-n-to-1-using-recursion",
        "youtube": "https://www.youtube.com/watch?v=un6PLygfXrA&list=PLgUwDviBIf0rGlzIn_7rsaR2FQ5e6ZOL9&index=2",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "386",
@@ -280,7 +326,9 @@
        "article_slug": "data-structure-sum-of-first-n-natural-numbers",
        "youtube": "https://www.youtube.com/watch?v=69ZCDFy-OUo&list=PLgUwDviBIf0rGlzIn_7rsaR2FQ5e6ZOL9&index=3",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "371",
@@ -290,7 +338,9 @@
        "article_slug": "data-structure-factorial-of-a-number-iterative-and-recursive",
        "youtube": "https://www.youtube.com/watch?v=69ZCDFy-OUo&list=PLgUwDviBIf0rGlzIn_7rsaR2FQ5e6ZOL9&index=3",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "342",
@@ -300,7 +350,9 @@
        "article_slug": "data-structure-reverse-a-given-array",
        "youtube": "https://www.youtube.com/watch?v=twuC1F6gLI8&list=PLgUwDviBIf0rGlzIn_7rsaR2FQ5e6ZOL9&index=4",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "378",
@@ -310,7 +362,9 @@
        "article_slug": "data-structure-check-if-the-given-string-is-palindrome-or-not",
        "youtube": "https://www.youtube.com/watch?v=twuC1F6gLI8&list=PLgUwDviBIf0rGlzIn_7rsaR2FQ5e6ZOL9&index=4",
        "leetcode": "https://leetcode.com/problems/valid-palindrome/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "381",
@@ -320,7 +374,9 @@
        "article_slug": "arrays-print-fibonacci-series-up-to-nth-term",
        "youtube": "https://www.youtube.com/watch?v=kvRjNm4rVBE&list=PLgUwDviBIf0rGlzIn_7rsaR2FQ5e6ZOL9&index=5",
        "leetcode": "https://leetcode.com/problems/fibonacci-number/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -336,7 +392,9 @@
        "article_slug": "hashing-hashing-maps-time-complexity-collisions-division-rule-of-hashing-strivers-a2z-dsa-course",
        "youtube": "https://www.youtube.com/watch?v=KEs5UyBJ39g",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "252",
@@ -346,7 +404,9 @@
        "article_slug": "data-structure-count-frequency-of-each-element-in-the-array",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "344",
@@ -356,7 +416,9 @@
        "article_slug": "arrays-find-the-highest-lowest-frequency-element",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/frequency-of-the-most-frequent-element/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     }
@@ -378,7 +440,9 @@
        "article_slug": "sorting-selection-sort-algorithm",
        "youtube": "https://youtu.be/HGk_ypEuS24?t=167",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "943",
@@ -388,7 +452,9 @@
        "article_slug": "data-structure-bubble-sort-algorithm",
        "youtube": "https://youtu.be/HGk_ypEuS24?t=1061",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "944",
@@ -398,7 +464,9 @@
        "article_slug": "data-structure-insertion-sort-algorithm",
        "youtube": "https://youtu.be/HGk_ypEuS24?t=1900",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -414,7 +482,9 @@
        "article_slug": "data-structure-merge-sort-algorithm",
        "youtube": "https://youtu.be/ogjf7ORKfd8",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "881",
@@ -424,7 +494,9 @@
        "article_slug": "arrays-recursive-bubble-sort-algorithm",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "882",
@@ -434,7 +506,9 @@
        "article_slug": "arrays-recursive-insertion-sort-algorithm",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "946",
@@ -444,7 +518,9 @@
        "article_slug": "data-structure-quick-sort-algorithm",
        "youtube": "https://youtu.be/WIrA4YexLRQ",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     }
@@ -466,7 +542,9 @@
        "article_slug": "data-structure-find-the-largest-element-in-an-array",
        "youtube": "https://youtu.be/37E9ckMDdTk?t=526",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "43",
@@ -476,7 +554,9 @@
        "article_slug": "data-structure-find-second-smallest-and-second-largest-element-in-an-array",
        "youtube": "https://youtu.be/37E9ckMDdTk?t=810",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "379",
@@ -486,7 +566,9 @@
        "article_slug": "data-structure-check-if-an-array-is-sorted",
        "youtube": "https://youtu.be/37E9ckMDdTk?t=17224",
        "leetcode": "https://leetcode.com/problems/check-if-array-is-sorted-and-rotated/#:~:text=Input%3A%20nums%20%3D%20%5B2%2C,no%20rotation)%20to%20make%20nums.",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2764",
@@ -496,7 +578,9 @@
        "article_slug": "data-structure-remove-duplicates-in-place-from-sorted-array",
        "youtube": "https://youtu.be/37E9ckMDdTk?t=1887",
        "leetcode": "https://leetcode.com/problems/remove-duplicates-from-sorted-array/#:~:text=Input%3A%20nums%20%3D%20%5B0%2C,%2C%203%2C%20and%204%20respectively.",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "40",
@@ -506,7 +590,9 @@
        "article_slug": "data-structure-left-rotate-the-array-by-one",
        "youtube": "https://youtu.be/wvcQg43_V8U?t=61",
        "leetcode": "https://leetcode.com/problems/rotate-array/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "39",
@@ -516,7 +602,9 @@
        "article_slug": "data-structure-rotate-array-by-k-elements",
        "youtube": "https://youtu.be/wvcQg43_V8U?t=485",
        "leetcode": "https://leetcode.com/problems/rotate-array/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "46",
@@ -526,7 +614,9 @@
        "article_slug": "data-structure-move-all-zeros-to-the-end-of-the-array",
        "youtube": "https://youtu.be/wvcQg43_V8U?t=1633",
        "leetcode": "https://leetcode.com/problems/move-zeroes/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "41",
@@ -536,7 +626,9 @@
        "article_slug": "data-structure-linear-search-in-c",
        "youtube": "https://youtu.be/wvcQg43_V8U?t=2465",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "48",
@@ -546,17 +638,21 @@
        "article_slug": "data-structure-union-of-two-sorted-arrays",
        "youtube": "https://youtu.be/wvcQg43_V8U?t=2584",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "44",
        "name": "Find missing number",
        "difficulty": "Easy",
-       "article": "https://takeuforward.org/practice/dsa/find-missing-number",
-       "article_slug": "practice-dsa-find-missing-number",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/missing-number",
+       "article_slug": "blogs-data-structure-and-algorithm-missing-number",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "42",
@@ -566,7 +662,9 @@
        "article_slug": "data-structure-count-maximum-consecutive-ones-in-the-array",
        "youtube": "https://youtu.be/bYWLJb3vCWY?t=1124",
        "leetcode": "https://leetcode.com/problems/max-consecutive-ones/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2793",
@@ -576,7 +674,9 @@
        "article_slug": "arrays-find-the-number-that-appears-once-and-the-other-numbers-twice",
        "youtube": "https://youtu.be/bYWLJb3vCWY?t=1369",
        "leetcode": "https://leetcode.com/problems/single-number/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2836",
@@ -586,7 +686,9 @@
        "article_slug": "data-structure-longest-subarray-with-given-sum-k",
        "youtube": "https://www.youtube.com/watch?v=frf7qxiN2qU&feature=youtu.be",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "564",
@@ -596,7 +698,9 @@
        "article_slug": "data-structure-length-of-the-longest-subarray-with-zero-sum",
        "youtube": "https://youtu.be/frf7qxiN2qU",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -612,7 +716,9 @@
        "article_slug": "data-structure-two-sum-check-if-a-pair-with-given-sum-exists-in-array",
        "youtube": "https://youtu.be/UXDSeD9mN-k",
        "leetcode": "https://leetcode.com/problems/two-sum/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2762",
@@ -622,7 +728,9 @@
        "article_slug": "data-structure-sort-an-array-of-0s-1s-and-2s",
        "youtube": "https://youtu.be/tp8JIuCXBaU",
        "leetcode": "https://leetcode.com/problems/sort-colors/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "22",
@@ -632,7 +740,9 @@
        "article_slug": "data-structure-find-the-majority-element-that-occurs-more-than-n-2-times",
        "youtube": "https://youtu.be/nP_ns3uSh80",
        "leetcode": "https://leetcode.com/problems/majority-element/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "29",
@@ -642,7 +752,9 @@
        "article_slug": "data-structure-kadanes-algorithm-maximum-subarray-sum-in-an-array",
        "youtube": "https://youtu.be/AHZpyENo7k4?si=QJpof4R1hHokm1hw",
        "leetcode": "https://leetcode.com/problems/maximum-subarray/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2761",
@@ -652,7 +764,9 @@
        "article_slug": "data-structure-kadanes-algorithm-maximum-subarray-sum-in-an-array",
        "youtube": "https://youtu.be/AHZpyENo7k4",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2798",
@@ -662,7 +776,9 @@
        "article_slug": "data-structure-stock-buy-and-sell",
        "youtube": "https://youtu.be/excAOvwF_Wk",
        "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "34",
@@ -672,7 +788,9 @@
        "article_slug": "arrays-rearrange-array-elements-by-sign",
        "youtube": "https://youtu.be/h4aBagy4Uok",
        "leetcode": "https://leetcode.com/problems/rearrange-array-elements-by-sign/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "31",
@@ -682,7 +800,9 @@
        "article_slug": "data-structure-next-permutation-find-next-lexicographically-greater-permutation",
        "youtube": "https://youtu.be/JDOXKqF60RQ",
        "leetcode": "https://leetcode.com/problems/next-permutation/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "30",
@@ -692,7 +812,9 @@
        "article_slug": "data-structure-leaders-in-an-array",
        "youtube": "https://youtu.be/cHrH9CQ8pmY",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2835",
@@ -702,7 +824,9 @@
        "article_slug": "data-structure-longest-consecutive-sequence-in-an-array",
        "youtube": "https://youtu.be/oO5uLE7EUlM",
        "leetcode": "https://leetcode.com/problems/longest-consecutive-sequence/solution/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "911",
@@ -712,7 +836,9 @@
        "article_slug": "data-structure-set-matrix-zero",
        "youtube": "https://youtu.be/N0MgLvceX7M",
        "leetcode": "https://leetcode.com/problems/set-matrix-zeroes/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "35",
@@ -722,7 +848,9 @@
        "article_slug": "data-structure-rotate-image-by-90-degree",
        "youtube": "https://youtu.be/Z0R2u6gd3GU",
        "leetcode": "https://leetcode.com/problems/rotate-image/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "33",
@@ -732,7 +860,9 @@
        "article_slug": "data-structure-spiral-traversal-of-matrix",
        "youtube": "https://youtu.be/3Zv-s9UUrFM",
        "leetcode": "https://leetcode.com/problems/spiral-matrix/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "561",
@@ -742,7 +872,9 @@
        "article_slug": "arrays-count-subarray-sum-equals-k",
        "youtube": "https://www.youtube.com/watch?v=xvNwoz-ufXA&list=PLgUwDviBIf0oF6QL8m22w1hIDC1vJ_BHz&index=32",
        "leetcode": "https://leetcode.com/problems/subarray-sum-equals-k/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -758,7 +890,9 @@
        "article_slug": "data-structure-program-to-generate-pascals-triangle",
        "youtube": "https://youtu.be/bR7mQgwQ_o8",
        "leetcode": "https://leetcode.com/problems/pascals-triangle/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "23",
@@ -768,7 +902,9 @@
        "article_slug": "data-structure-majority-elementsn-3-times-find-the-elements-that-appears-more-than-n-3-times-in-the-array",
        "youtube": "https://youtu.be/vwZj1K0e9U8",
        "leetcode": "https://leetcode.com/problems/majority-element-ii/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "27",
@@ -778,7 +914,9 @@
        "article_slug": "data-structure-3-sum-find-triplets-that-add-up-to-a-zero",
        "youtube": "https://youtu.be/DhFh8Kw7ymk",
        "leetcode": "https://leetcode.com/problems/3sum/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "28",
@@ -788,7 +926,9 @@
        "article_slug": "data-structure-4-sum-find-quads-that-add-up-to-a-target-value",
        "youtube": "https://youtu.be/eD95WRfh81c",
        "leetcode": "https://leetcode.com/problems/4sum/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "605",
@@ -798,17 +938,21 @@
        "article_slug": "data-structure-length-of-the-longest-subarray-with-zero-sum",
        "youtube": "https://www.youtube.com/watch?v=xmguZ6GbatA&list=PLgUwDviBIf0p4ozDR_kJJkONnb1wdx2Ma&index=23",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "562",
        "name": "Count subarrays with given xor K",
        "difficulty": "Hard",
-       "article": "https://takeuforward.org/practice/dsa/count-subarrays-with-given-xor-k",
-       "article_slug": "practice-dsa-count-subarrays-with-given-xor-k",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/count-subarrays-with-a-given-xor-k",
+       "article_slug": "blogs-data-structure-and-algorithm-count-subarrays-with-a-given-xor-k",
        "youtube": "https://youtu.be/eZr-6p0B7ME",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "715",
@@ -818,7 +962,9 @@
        "article_slug": "data-structure-merge-overlapping-sub-intervals",
        "youtube": "https://youtu.be/IexN60k62jo",
        "leetcode": "https://leetcode.com/problems/merge-intervals/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "25",
@@ -828,7 +974,9 @@
        "article_slug": "data-structure-merge-two-sorted-arrays-without-extra-space",
        "youtube": "https://youtu.be/n7uwj04E0I4",
        "leetcode": "https://leetcode.com/problems/merge-sorted-array/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "21",
@@ -838,7 +986,9 @@
        "article_slug": "data-structure-find-the-repeating-and-missing-numbers",
        "youtube": "https://youtu.be/2D0D8HE6uak",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "20",
@@ -848,7 +998,9 @@
        "article_slug": "data-structure-count-inversions-in-an-array",
        "youtube": "https://youtu.be/AseUmwVNaoY",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "26",
@@ -858,7 +1010,9 @@
        "article_slug": "data-structure-count-reverse-pairs",
        "youtube": "https://youtu.be/0e4bZaP3MDI",
        "leetcode": "https://leetcode.com/problems/reverse-pairs/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "24",
@@ -868,7 +1022,9 @@
        "article_slug": "data-structure-maximum-product-subarray-in-an-array",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/maximum-product-subarray/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     }
@@ -890,7 +1046,9 @@
        "article_slug": "data-structure-binary-search-explained",
        "youtube": "https://youtu.be/MHf6awe89xw",
        "leetcode": "https://leetcode.com/problems/binary-search/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "80",
@@ -900,7 +1058,9 @@
        "article_slug": "arrays-implement-lower-bound-bs-2",
        "youtube": "https://youtu.be/6zhGS79oQ4k",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "82",
@@ -910,7 +1070,9 @@
        "article_slug": "arrays-implement-upper-bound",
        "youtube": "https://youtu.be/6zhGS79oQ4k",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "89",
@@ -920,7 +1082,9 @@
        "article_slug": "arrays-search-insert-position",
        "youtube": "https://youtu.be/6zhGS79oQ4k",
        "leetcode": "https://leetcode.com/problems/search-insert-position/#:~:text=Search%20Insert%20Position%20%2D%20LeetCode&text=Given%20a%20sorted%20array%20of,(log%20n)%20runtime%20complexity.",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "86",
@@ -930,7 +1094,9 @@
        "article_slug": "arrays-floor-and-ceil-in-sorted-array",
        "youtube": "https://www.youtube.com/watch?v=6zhGS79oQ4k&list=PLgUwDviBIf0pMFMWuuvDNMAkoQFi-h0ZF&index=3",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "85",
@@ -940,7 +1106,9 @@
        "article_slug": "data-structure-last-occurrence-in-a-sorted-array",
        "youtube": "https://youtu.be/hjR1IYVx9lY",
        "leetcode": "https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "229",
@@ -950,7 +1118,9 @@
        "article_slug": "data-structure-count-occurrences-in-sorted-array",
        "youtube": "https://youtu.be/hjR1IYVx9lY",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "87",
@@ -960,7 +1130,9 @@
        "article_slug": "data-structure-search-element-in-a-rotated-sorted-array",
        "youtube": "https://www.youtube.com/watch?v=r3pMQ8-Ad5s&list=PLgUwDviBIf0p4ozDR_kJJkONnb1wdx2Ma&index=64",
        "leetcode": "https://leetcode.com/problems/search-in-rotated-sorted-array/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "88",
@@ -970,7 +1142,9 @@
        "article_slug": "arrays-search-element-in-rotated-sorted-array-ii",
        "youtube": "https://youtu.be/w2G2W8l__pc",
        "leetcode": "https://leetcode.com/problems/search-in-rotated-sorted-array-ii/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "83",
@@ -980,7 +1154,9 @@
        "article_slug": "data-structure-minimum-in-rotated-sorted-array",
        "youtube": "https://youtu.be/nhEMDKMB44g",
        "leetcode": "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "84",
@@ -990,7 +1166,9 @@
        "article_slug": "arrays-find-out-how-many-times-the-array-has-been-rotated",
        "youtube": "https://youtu.be/jtSiWTPLwd0",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2770",
@@ -1000,7 +1178,9 @@
        "article_slug": "data-structure-search-single-element-in-a-sorted-array",
        "youtube": "https://youtu.be/AZOmHuHadxQ",
        "leetcode": "https://leetcode.com/problems/single-element-in-a-sorted-array/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "75",
@@ -1010,7 +1190,9 @@
        "article_slug": "data-structure-peak-element-in-array",
        "youtube": "https://youtu.be/cXxmbemS6XM",
        "leetcode": "https://leetcode.com/problems/find-peak-element/#:~:text=Find%20Peak%20Element%20%2D%20LeetCode&text=A%20peak%20element%20is%20an,to%20any%20of%20the%20peaks.",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -1026,7 +1208,9 @@
        "article_slug": "binary-search-finding-sqrt-of-a-number-using-binary-search",
        "youtube": "https://youtu.be/Bsv3FPUX_BA",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "91",
@@ -1036,7 +1220,9 @@
        "article_slug": "data-structure-nth-root-of-a-number-using-binary-search",
        "youtube": "https://www.youtube.com/watch?v=WjpswYrS2nY&list=PLgUwDviBIf0p4ozDR_kJJkONnb1wdx2Ma&index=62",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "94",
@@ -1046,7 +1232,9 @@
        "article_slug": "binary-search-koko-eating-bananas",
        "youtube": "https://youtu.be/qyfekrNni90",
        "leetcode": "https://leetcode.com/problems/koko-eating-bananas/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "95",
@@ -1056,7 +1244,9 @@
        "article_slug": "arrays-minimum-days-to-make-m-bouquets",
        "youtube": "https://youtu.be/TXAuxeYBTdg",
        "leetcode": "https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "93",
@@ -1066,7 +1256,9 @@
        "article_slug": "arrays-find-the-smallest-divisor-given-a-threshold",
        "youtube": "https://youtu.be/UvBKTVaG6U8",
        "leetcode": "https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "161",
@@ -1076,7 +1268,9 @@
        "article_slug": "arrays-capacity-to-ship-packages-within-d-days",
        "youtube": "https://youtu.be/MG-Ac4TAvTY",
        "leetcode": "https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "600",
@@ -1086,7 +1280,9 @@
        "article_slug": "arrays-kth-missing-positive-number",
        "youtube": "https://youtu.be/uZ0N_hZpyps",
        "leetcode": "https://leetcode.com/problems/kth-missing-positive-number/#:~:text=Given%20an%20array%20arr%20of,13%2C...%5D.",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "73",
@@ -1096,7 +1292,9 @@
        "article_slug": "data-structure-aggressive-cows-detailed-solution",
        "youtube": "https://youtu.be/R_Mfw4ew-Vo",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "74",
@@ -1106,7 +1304,9 @@
        "article_slug": "data-structure-allocate-minimum-number-of-pages",
        "youtube": "https://www.youtube.com/watch?v=gYmWHvRHu-s&list=PLgUwDviBIf0p4ozDR_kJJkONnb1wdx2Ma&index=69",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "79",
@@ -1116,7 +1316,9 @@
        "article_slug": "arrays-split-array-largest-sum",
        "youtube": "https://www.youtube.com/watch?v=thUd_WJn6wk&list=PLgUwDviBIf0pMFMWuuvDNMAkoQFi-h0ZF&index=20",
        "leetcode": "https://leetcode.com/problems/split-array-largest-sum/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "805",
@@ -1126,27 +1328,33 @@
        "article_slug": "arrays-painters-partition-problem",
        "youtube": "https://www.youtube.com/watch?v=thUd_WJn6wk&list=PLgUwDviBIf0pMFMWuuvDNMAkoQFi-h0ZF&index=20",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "78",
        "name": "Minimize Max Distance to Gas Station",
        "difficulty": "Hard",
-       "article": "https://takeuforward.org/practice/dsa/minimise-max-distance-to-gas-stations",
-       "article_slug": "practice-dsa-minimise-max-distance-to-gas-stations",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/minimize-maximum-distance-between-gas-stations",
+       "article_slug": "blogs-data-structure-and-algorithm-minimize-maximum-distance-between-gas-stations",
        "youtube": "https://www.youtube.com/watch?v=kMSBvlZ-_HA&list=PLgUwDviBIf0pMFMWuuvDNMAkoQFi-h0ZF&index=21",
        "leetcode": "https://leetcode.com/problems/minimize-max-distance-to-gas-station/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "77",
        "name": "Median of 2 sorted arrays",
        "difficulty": "Hard",
-       "article": "https://takeuforward.org/practice/dsa/median-of-2-sorted-arrays",
-       "article_slug": "practice-dsa-median-of-2-sorted-arrays",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/median-of-2-sorted-arrays",
+       "article_slug": "blogs-data-structure-and-algorithm-median-of-2-sorted-arrays",
        "youtube": "https://www.youtube.com/watch?v=NTop3VTjmxk&list=PLgUwDviBIf0p4ozDR_kJJkONnb1wdx2Ma&index=65",
        "leetcode": "https://leetcode.com/problems/median-of-two-sorted-arrays/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "2767",
@@ -1156,7 +1364,9 @@
        "article_slug": "data-structure-k-th-element-of-two-sorted-arrays",
        "youtube": "https://youtu.be/D1oDwWCq50g",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -1172,7 +1382,9 @@
        "article_slug": "arrays-find-the-row-with-maximum-number-of-1s",
        "youtube": "https://youtu.be/SCz-1TtYxDI",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "69",
@@ -1182,7 +1394,9 @@
        "article_slug": "data-structure-search-in-a-sorted-2d-matrix",
        "youtube": "https://youtu.be/ZYpYur0znng",
        "leetcode": "https://leetcode.com/problems/search-a-2d-matrix/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "68",
@@ -1192,17 +1406,21 @@
        "article_slug": "arrays-search-in-a-row-and-column-wise-sorted-matrix",
        "youtube": "https://youtu.be/9ZbB397jU4k",
        "leetcode": "https://leetcode.com/problems/search-a-2d-matrix-ii/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "65",
        "name": "Find Peak Element - II",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/find-peak-element-ii",
-       "article_slug": "practice-dsa-find-peak-element-ii",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/find-a-peak-element-in-an-array",
+       "article_slug": "blogs-data-structure-and-algorithm-find-a-peak-element-in-an-array",
        "youtube": "https://youtu.be/nGGp5XBzC4g?si=WCop5C6Azj5gAELH",
        "leetcode": "https://leetcode.com/problems/find-a-peak-element-ii/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "67",
@@ -1212,7 +1430,9 @@
        "article_slug": "data-structure-median-of-row-wise-sorted-matrix",
        "youtube": "https://youtu.be/Q9wXgdxJq48?si=ScI_0uzJh7yg8nrX",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     }
@@ -1234,7 +1454,9 @@
        "article_slug": "practice-dsa-remove-outermost-parentheses",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/remove-outermost-parentheses/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "2863",
@@ -1244,7 +1466,9 @@
        "article_slug": "data-structure-reverse-words-in-a-string",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/reverse-words-in-a-string/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "394",
@@ -1254,7 +1478,9 @@
        "article_slug": "practice-dsa-largest-odd-number-in-a-string",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/largest-odd-number-in-string/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "395",
@@ -1264,7 +1490,9 @@
        "article_slug": "practice-dsa-longest-common-prefix",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/longest-common-prefix/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "393",
@@ -1274,7 +1502,9 @@
        "article_slug": "practice-dsa-isomorphic-string",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/isomorphic-strings/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "398",
@@ -1284,7 +1514,9 @@
        "article_slug": "data-structure-check-if-one-string-is-rotation-of-another",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/rotate-string/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2809",
@@ -1294,7 +1526,9 @@
        "article_slug": "data-structure-check-if-two-strings-are-anagrams-of-each-other",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/valid-anagram/#:~:text=Given%20two%20strings%20s%20and,the%20original%20letters%20exactly%20once.&text=Constraints%3A,.length%20%3C%3D%205%20*%2010",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -1306,11 +1540,13 @@
        "id": "399",
        "name": "Sort Characters by Frequency",
        "difficulty": "Easy",
-       "article": "https://takeuforward.org/practice/dsa/sort-characters-by-frequency",
-       "article_slug": "practice-dsa-sort-characters-by-frequency",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/sort-characters-by-frequency",
+       "article_slug": "blogs-data-structure-and-algorithm-sort-characters-by-frequency",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/sort-characters-by-frequency/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "674",
@@ -1320,7 +1556,9 @@
        "article_slug": "practice-dsa-maximum-nesting-depth-of-the-parentheses",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/maximum-nesting-depth-of-the-parentheses/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "903",
@@ -1330,7 +1568,9 @@
        "article_slug": "practice-dsa-roman-to-integer",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/roman-to-integer/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "974",
@@ -1340,7 +1580,9 @@
        "article_slug": "practice-dsa-string-to-integer-atoi",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/string-to-integer-atoi/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "2394",
@@ -1350,7 +1592,9 @@
        "article_slug": "data-structure-count-number-of-substrings",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "638",
@@ -1360,7 +1604,9 @@
        "article_slug": "practice-dsa-longest-palindromic-substring",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/longest-palindromic-substring/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "993",
@@ -1370,7 +1616,9 @@
        "article_slug": "practice-dsa-sum-of-beauty-of-all-substrings",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/sum-of-beauty-of-all-substrings/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "984",
@@ -1380,7 +1628,9 @@
        "article_slug": "data-structure-reverse-words-in-a-string",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/reverse-words-in-a-string/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     }
@@ -1402,7 +1652,9 @@
        "article_slug": "linked-list-linked-list-introduction",
        "youtube": "https://youtu.be/Nq7ok-OyEpg?si=9PR1o8OPRWil7fRA",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "356",
@@ -1412,7 +1664,9 @@
        "article_slug": "linked-list-insert-at-the-head-of-a-linked-list",
        "youtube": "https://youtu.be/VaECK03Dz-g?si=vHSwdf9jhE05adKM&t=1934",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "352",
@@ -1422,7 +1676,9 @@
        "article_slug": "practice-dsa-deletion-of-the-head-of-ll",
        "youtube": "https://youtu.be/VaECK03Dz-g?si=CRaBHbOo2bHFbOT5",
        "leetcode": "https://leetcode.com/problems/delete-node-in-a-linked-list/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "470",
@@ -1432,7 +1688,9 @@
        "article_slug": "linked-list-find-the-length-of-a-linked-list",
        "youtube": "https://youtu.be/Nq7ok-OyEpg?si=xqQbukLfo2oZ6C6s&t=2240",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "905",
@@ -1442,7 +1700,9 @@
        "article_slug": "practice-dsa-search-in-linked-list",
        "youtube": "https://youtu.be/Nq7ok-OyEpg?si=WNXcIaXZ_B6cNq0s&t=2524",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       }
      ]
     },
@@ -1458,7 +1718,9 @@
        "article_slug": "linked-list-introduction-to-doubly-linked-list",
        "youtube": "https://youtu.be/0eKMU10uEDI?si=uDnoj_C5ghEpNLvP",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "361",
@@ -1468,7 +1730,9 @@
        "article_slug": "data-structure-insert-at-end-of-doubly-linked-list",
        "youtube": "https://youtu.be/0eKMU10uEDI?si=J5a0pQTosimcO_aA&t=2684",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "348",
@@ -1478,7 +1742,9 @@
        "article_slug": "practice-dsa-delete-head-of-dll",
        "youtube": "https://youtu.be/0eKMU10uEDI?si=sE7jqrW46lfRHVLd&t=853",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "900",
@@ -1488,7 +1754,9 @@
        "article_slug": "data-structure-reverse-a-doubly-linked-list",
        "youtube": "https://youtu.be/u3WUW2qe6ww?si=96Wwlju72IvmzkxE",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -1504,7 +1772,9 @@
        "article_slug": "data-structure-find-middle-element-in-a-linked-list",
        "youtube": "https://youtu.be/7LjQ57RqgEc?si=ir_rRDio38rhamU_",
        "leetcode": "https://leetcode.com/problems/middle-of-the-linked-list/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2850",
@@ -1514,7 +1784,9 @@
        "article_slug": "data-structure-reverse-a-linked-list",
        "youtube": "https://youtu.be/D2vI2DNJGd8?si=RCaLSx01qR21IBdh",
        "leetcode": "https://leetcode.com/problems/reverse-linked-list/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "627",
@@ -1524,7 +1796,9 @@
        "article_slug": "data-structure-reverse-a-linked-list",
        "youtube": "https://youtu.be/D2vI2DNJGd8?si=RCaLSx01qR21IBdh",
        "leetcode": "https://leetcode.com/problems/reverse-linked-list/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2845",
@@ -1534,7 +1808,9 @@
        "article_slug": "data-structure-detect-a-cycle-in-a-linked-list",
        "youtube": "https://youtu.be/wiOo4DC5GGA?si=zagt6O6tFXc4_3cx",
        "leetcode": "https://leetcode.com/problems/linked-list-cycle/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2847",
@@ -1544,7 +1820,9 @@
        "article_slug": "data-structure-starting-point-of-loop-in-a-linked-list",
        "youtube": "https://youtu.be/2Kd0KKmmHFc?si=7UreDPRjRvapeVB0",
        "leetcode": "https://leetcode.com/problems/linked-list-cycle-ii/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "623",
@@ -1554,7 +1832,9 @@
        "article_slug": "linked-list-length-of-loop-in-linked-list",
        "youtube": "https://youtu.be/I4g1qbkTPus?si=ONktpqewvx57T8pF",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2844",
@@ -1564,7 +1844,9 @@
        "article_slug": "data-structure-check-if-given-linked-list-is-plaindrome",
        "youtube": "https://youtu.be/lRY_G-u_8jk?si=BpM8hRYvXSYyjl-G",
        "leetcode": "https://leetcode.com/problems/palindrome-linked-list/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "628",
@@ -1574,7 +1856,9 @@
        "article_slug": "data-structure-segregate-even-and-odd-nodes-in-linkedlist",
        "youtube": "https://youtu.be/qf6qp7GzD5Q?si=JozAyXUdT8EJMSCQ",
        "leetcode": "https://leetcode.com/problems/odd-even-linked-list/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2849",
@@ -1584,7 +1868,9 @@
        "article_slug": "data-structure-remove-n-th-node-from-the-end-of-a-linked-list",
        "youtube": "https://youtu.be/3kMKYQ2wNIU?si=DtFDnPU7z9HMz_GM",
        "leetcode": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "619",
@@ -1594,7 +1880,9 @@
        "article_slug": "linked-list-delete-the-middle-node-of-the-linked-list",
        "youtube": "https://youtu.be/ePpV-_pfOeI?si=Au9GsZkVO57j6SiN",
        "leetcode": "https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/#:~:text=You%20are%20given%20the%20head,than%20or%20equal%20to%20x%20.",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "616",
@@ -1604,17 +1892,21 @@
        "article_slug": "linked-list-sort-a-linked-list",
        "youtube": "https://youtu.be/8ocB7a_c-Cc?si=Gv-Y8q8-WyARoV35",
        "leetcode": "https://leetcode.com/problems/sort-list/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "629",
        "name": "Sort a Linked List of 0's 1's and 2's",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/sort-a-ll-of-0's-1's-and-2's",
-       "article_slug": "practice-dsa-sort-a-ll-of-0-s-1-s-and-2-s",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/sort-linked-list-0s-1s-2s-changing-links",
+       "article_slug": "blogs-data-structure-and-algorithm-sort-linked-list-0s-1s-2s-changing-links",
        "youtube": "https://youtu.be/gRII7LhdJWc?si=l3qRC7w3NhY7OAqw",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "2846",
@@ -1624,17 +1916,21 @@
        "article_slug": "data-structure-find-intersection-of-two-linked-lists",
        "youtube": "https://youtu.be/0DYoPz2Tpt4?si=L-uJs5yXUxj4VJM2",
        "leetcode": "https://leetcode.com/problems/intersection-of-two-linked-lists/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "617",
        "name": "Add one to a number represented by LL",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/add-one-to-a-number-represented-by-ll",
-       "article_slug": "practice-dsa-add-one-to-a-number-represented-by-ll",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/add-one-to-number-linked-list",
+       "article_slug": "blogs-data-structure-and-algorithm-add-one-to-number-linked-list",
        "youtube": "https://youtu.be/aXQWhbvT3w0?si=uRgU9S4r5cVmnUy7",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "625",
@@ -1644,7 +1940,9 @@
        "article_slug": "data-structure-add-two-numbers-represented-as-linked-lists",
        "youtube": "https://www.youtube.com/watch?v=LBVsXSMOIk4&list=PLgUwDviBIf0p4ozDR_kJJkONnb1wdx2Ma&index=32",
        "leetcode": "https://leetcode.com/problems/add-two-numbers/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -1656,31 +1954,37 @@
        "id": "609",
        "name": "Delete all occurrences of a key in DLL",
        "difficulty": "Hard",
-       "article": "https://takeuforward.org/practice/dsa/delete-all-occurrences-of-a-key-in-dll",
-       "article_slug": "practice-dsa-delete-all-occurrences-of-a-key-in-dll",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/delete-all-occurrences-of-a-key-in-a-doubly-linked-list",
+       "article_slug": "blogs-data-structure-and-algorithm-delete-all-occurrences-of-a-key-in-a-doubly-linked-list",
        "youtube": "https://youtu.be/Mh0NH_SD92k?si=tCYshBRi1upMqSVz",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "452",
        "name": "Find Pairs with Given Sum in Doubly Linked List",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/find-pairs-with-given-sum-in-doubly-linked-list",
-       "article_slug": "practice-dsa-find-pairs-with-given-sum-in-doubly-linked-list",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/find-pairs-with-given-sum-in-doubly-linked-list",
+       "article_slug": "blogs-data-structure-and-algorithm-find-pairs-with-given-sum-in-doubly-linked-list",
        "youtube": "https://youtu.be/YitR4dQsddE?si=iZAC259hdngV_OxC",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "610",
        "name": "Remove duplicates from sorted DLL",
        "difficulty": "Hard",
-       "article": "https://takeuforward.org/practice/dsa/remove-duplicated-from-sorted-dll",
-       "article_slug": "practice-dsa-remove-duplicated-from-sorted-dll",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/remove-duplicates-from-a-sorted-array-in-place",
+       "article_slug": "blogs-data-structure-and-algorithm-remove-duplicates-from-a-sorted-array-in-place",
        "youtube": "https://youtu.be/YJKVTnOJXSY?si=AsZoNUoewetsBjr0",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       }
      ]
     },
@@ -1696,7 +2000,9 @@
        "article_slug": "data-structure-reverse-linked-list-in-groups-of-size-k",
        "youtube": "https://youtu.be/lIar1skcQYI?si=_jFghHKX4eaK36a1",
        "leetcode": "https://leetcode.com/problems/reverse-nodes-in-k-group/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2843",
@@ -1706,7 +2012,9 @@
        "article_slug": "data-structure-rotate-a-linked-list",
        "youtube": "https://youtu.be/uT7YI7XbTY8?si=ZaChW3a68c_v54Is",
        "leetcode": "https://leetcode.com/problems/rotate-list/description/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2841",
@@ -1716,7 +2024,9 @@
        "article_slug": "data-structure-flattening-a-linked-list",
        "youtube": "https://youtu.be/ykelywHJWLg?si=InMg9MmTHzY22NSR",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "611",
@@ -1726,7 +2036,9 @@
        "article_slug": "data-structure-clone-linked-list-with-random-and-next-pointer",
        "youtube": "https://youtu.be/q570bKdrnlw?si=epZtpWvtNwuTf23o",
        "leetcode": "https://leetcode.com/problems/copy-list-with-random-pointer/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     }
@@ -1748,7 +2060,9 @@
        "article_slug": "data-structure-recursive-implementation-of-atoi",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/string-to-integer-atoi/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "2855",
@@ -1758,17 +2072,21 @@
        "article_slug": "data-structure-implement-powxn-x-raised-to-the-power-n",
        "youtube": "https://youtu.be/l0YC3876qxg",
        "leetcode": "https://leetcode.com/problems/powx-n/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "222",
        "name": "Count Good Numbers",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/count-good-numbers",
-       "article_slug": "practice-dsa-count-good-numbers",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/count-good-numbers",
+       "article_slug": "blogs-data-structure-and-algorithm-count-good-numbers",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/count-good-numbers/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "2858",
@@ -1778,7 +2096,9 @@
        "article_slug": "data-structure-sort-a-stack",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "901",
@@ -1788,7 +2108,9 @@
        "article_slug": "practice-dsa-reverse-a-stack",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       }
      ]
     },
@@ -1804,7 +2126,9 @@
        "article_slug": "practice-dsa-generate-binary-strings-without-consecutive-1s",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "876",
@@ -1814,7 +2138,9 @@
        "article_slug": "practice-dsa-generate-parentheses",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/generate-parentheses/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "878",
@@ -1824,7 +2150,9 @@
        "article_slug": "data-structure-power-set-print-all-the-possible-subsequences-of-the-string",
        "youtube": "https://www.youtube.com/watch?v=b7AYbpM5YrE&list=PLgUwDviBIf0p4ozDR_kJJkONnb1wdx2Ma&index=67",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2400",
@@ -1834,17 +2162,21 @@
        "article_slug": "data-structure-learn-all-patterns-of-subsequences-theory",
        "youtube": "https://www.youtube.com/watch?v=eQCS_v3bw0Q&list=PLgUwDviBIf0rGlzIn_7rsaR2FQ5e6ZOL9&index=7",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "880",
        "name": "Count all subsequences with sum K",
        "difficulty": "Easy",
-       "article": "https://takeuforward.org/practice/dsa/count-all-subsequences-with-sum-k",
-       "article_slug": "practice-dsa-count-all-subsequences-with-sum-k",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/count-subsets-with-sum-k",
+       "article_slug": "blogs-data-structure-and-algorithm-count-subsets-with-sum-k",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "879",
@@ -1854,7 +2186,9 @@
        "article_slug": "practice-dsa-check-if-there-exists-a-subsequence-with-sum-k",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "864",
@@ -1864,7 +2198,9 @@
        "article_slug": "data-structure-combination-sum-1",
        "youtube": "https://www.youtube.com/watch?v=OyZFFqQtu98&list=PLgUwDviBIf0p4ozDR_kJJkONnb1wdx2Ma&index=49",
        "leetcode": "https://leetcode.com/problems/combination-sum/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "865",
@@ -1874,7 +2210,9 @@
        "article_slug": "data-structure-combination-sum-ii-find-all-unique-combinations",
        "youtube": "https://www.youtube.com/watch?v=G1fRTGRxXU8&list=PLgUwDviBIf0p4ozDR_kJJkONnb1wdx2Ma&index=50",
        "leetcode": "https://leetcode.com/problems/combination-sum-ii/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "867",
@@ -1884,7 +2222,9 @@
        "article_slug": "data-structure-subset-sum-sum-of-all-subsets",
        "youtube": "https://www.youtube.com/watch?v=rYkfBRtMJr8&list=PLgUwDviBIf0p4ozDR_kJJkONnb1wdx2Ma&index=52",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "868",
@@ -1894,7 +2234,9 @@
        "article_slug": "data-structure-subset-ii-print-all-the-unique-subsets",
        "youtube": "https://www.youtube.com/watch?v=RIn3gOkbhQE&list=PLgUwDviBIf0p4ozDR_kJJkONnb1wdx2Ma&index=53",
        "leetcode": "https://leetcode.com/problems/subsets-ii/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "866",
@@ -1904,7 +2246,9 @@
        "article_slug": "practice-dsa-combination-sum-iii",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/combination-sum-iii/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "875",
@@ -1914,7 +2258,9 @@
        "article_slug": "practice-dsa-letter-combinations-of-a-phone-number",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/letter-combinations-of-a-phone-number/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       }
      ]
     },
@@ -1926,11 +2272,13 @@
        "id": "871",
        "name": "Palindrome partitioning",
        "difficulty": "Hard",
-       "article": "https://takeuforward.org/practice/dsa/palindrome-partitioning",
-       "article_slug": "practice-dsa-palindrome-partitioning",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/palindrome-partitioning-ii-minimum-cuts",
+       "article_slug": "blogs-data-structure-and-algorithm-palindrome-partitioning-ii-minimum-cuts",
        "youtube": "https://youtu.be/_H8V5hJUGd0",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "874",
@@ -1940,7 +2288,9 @@
        "article_slug": "data-structure-word-search-leetcode",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/word-search/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "870",
@@ -1950,7 +2300,9 @@
        "article_slug": "data-structure-n-queen-problem-return-all-distinct-solutions-to-the-n-queens-puzzle",
        "youtube": "https://www.youtube.com/watch?v=i05Ju7AftcM&list=PLgUwDviBIf0p4ozDR_kJJkONnb1wdx2Ma&index=57",
        "leetcode": "https://leetcode.com/problems/n-queens/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "872",
@@ -1960,7 +2312,9 @@
        "article_slug": "data-structure-rat-in-a-maze",
        "youtube": "https://www.youtube.com/watch?v=bLGZhJlt4y0&list=PLgUwDviBIf0p4ozDR_kJJkONnb1wdx2Ma&index=60",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "4",
@@ -1970,7 +2324,9 @@
        "article_slug": "practice-dsa-word-break",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "869",
@@ -1980,7 +2336,9 @@
        "article_slug": "data-structure-m-coloring-problem",
        "youtube": "https://www.youtube.com/watch?v=wuVwUK25Rfc&list=PLgUwDviBIf0p4ozDR_kJJkONnb1wdx2Ma&index=59",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "873",
@@ -1990,7 +2348,9 @@
        "article_slug": "data-structure-sudoku-solver",
        "youtube": "https://www.youtube.com/watch?v=FWAIf_EVUKE&list=PLgUwDviBIf0p4ozDR_kJJkONnb1wdx2Ma&index=58",
        "leetcode": "https://leetcode.com/problems/sudoku-solver/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "3",
@@ -2000,7 +2360,9 @@
        "article_slug": "practice-dsa-expression-add-operators",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/expression-add-operators/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       }
      ]
     }
@@ -2022,7 +2384,9 @@
        "article_slug": "data-structure-introduction-to-bit-manipulation-theory",
        "youtube": "https://youtu.be/qQd-ViW7bfk?si=QtdNaRhHmZb08Mr8",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "177",
@@ -2032,7 +2396,9 @@
        "article_slug": "practice-dsa-check-if-the-i-th-bit-is-set-or-not",
        "youtube": "https://youtu.be/nttpF8kwgd4?si=x9o8PsYaA2XVZ9rV",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "171",
@@ -2042,7 +2408,9 @@
        "article_slug": "practice-dsa-check-if-a-number-is-odd-or-not",
        "youtube": "https://youtu.be/nttpF8kwgd4?si=x9o8PsYaA2XVZ9rV",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "172",
@@ -2052,7 +2420,9 @@
        "article_slug": "practice-dsa-check-if-a-number-is-power-of-2-or-not",
        "youtube": "https://youtu.be/nttpF8kwgd4?si=x9o8PsYaA2XVZ9rV",
        "leetcode": "https://leetcode.com/problems/power-of-two/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "243",
@@ -2062,7 +2432,9 @@
        "article_slug": "practice-dsa-count-the-number-of-set-bits",
        "youtube": "https://youtu.be/nttpF8kwgd4?si=x9o8PsYaA2XVZ9rV",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "2410",
@@ -2072,7 +2444,9 @@
        "article_slug": "data-structure-set-the-rightmost-bit",
        "youtube": "https://youtu.be/nttpF8kwgd4?si=x9o8PsYaA2XVZ9rV",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "1005",
@@ -2082,17 +2456,21 @@
        "article_slug": "practice-dsa-swap-two-numbers",
        "youtube": "https://youtu.be/nttpF8kwgd4?si=x9o8PsYaA2XVZ9rV",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "140",
        "name": "Divide two numbers without multiplication and division",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/divide-two-numbers-without-multiplication-and-division",
-       "article_slug": "practice-dsa-divide-two-numbers-without-multiplication-and-division",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/divide-two-integers-without-multiplication-division-modulo",
+       "article_slug": "blogs-data-structure-and-algorithm-divide-two-integers-without-multiplication-division-modulo",
        "youtube": "https://youtu.be/pBD4B1tzgVc?si=G9c5pEE-RrzeU6sz",
        "leetcode": "https://leetcode.com/problems/divide-two-integers/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       }
      ]
     },
@@ -2108,7 +2486,9 @@
        "article_slug": "practice-dsa-minimum-bit-flips-to-convert-number",
        "youtube": "https://youtu.be/OOdrmcfZXd8?si=rnkRVz1UiVBKWC69",
        "leetcode": "https://leetcode.com/problems/minimum-bit-flips-to-convert-number/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "143",
@@ -2118,7 +2498,9 @@
        "article_slug": "arrays-find-the-number-that-appears-once-and-the-other-numbers-twice",
        "youtube": "https://youtu.be/bYWLJb3vCWY?t=1369",
        "leetcode": "https://leetcode.com/problems/single-number/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "142",
@@ -2128,27 +2510,33 @@
        "article_slug": "bit-manipulation-power-set-bit-manipulation",
        "youtube": "https://youtu.be/LqKaUv1G3_I?si=UXU_T5OsHiokPRvP",
        "leetcode": "https://leetcode.com/problems/subsets/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "146",
        "name": "XOR of numbers in a given range",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/xor-of-numbers-in-a-given-range",
-       "article_slug": "practice-dsa-xor-of-numbers-in-a-given-range",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/xor-of-numbers-in-a-range-l-to-r",
+       "article_slug": "blogs-data-structure-and-algorithm-xor-of-numbers-in-a-range-l-to-r",
        "youtube": "https://youtu.be/WqGb7159h7Q?si=uGUEbNUUaIN_6Vvr",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "145",
        "name": "Single Number - III",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/single-number---iii",
-       "article_slug": "practice-dsa-single-number-iii",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/single-number-iii",
+       "article_slug": "blogs-data-structure-and-algorithm-single-number-iii",
        "youtube": "https://youtu.be/UA5JnV1J2sI?si=VFBRJyb3boZvx_r1",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       }
      ]
     },
@@ -2164,7 +2552,9 @@
        "article_slug": "data-structure-find-the-two-numbers-appearing-odd-number-of-times",
        "youtube": "https://youtu.be/LT7XhVdeRyg?si=6HkjQokJRPTFai21",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "370",
@@ -2174,7 +2564,9 @@
        "article_slug": "data-structure-print-all-divisors-of-a-given-number",
        "youtube": "https://youtu.be/1xNbjMdbjug?t=1580",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "651",
@@ -2184,7 +2576,9 @@
        "article_slug": "practice-dsa-count-primes-in-range-l-to-r",
        "youtube": "https://youtu.be/g5Fuxn_AvSk?si=fv6Q-Po7wrMW0a5n",
        "leetcode": "https://leetcode.com/problems/count-primes/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "652",
@@ -2194,7 +2588,9 @@
        "article_slug": "practice-dsa-prime-factorisation-of-a-number",
        "youtube": "https://youtu.be/LT7XhVdeRyg?si=6HkjQokJRPTFai21",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "877",
@@ -2204,7 +2600,9 @@
        "article_slug": "data-structure-implement-powxn-x-raised-to-the-power-n",
        "youtube": "https://youtu.be/l0YC3876qxg",
        "leetcode": "https://leetcode.com/problems/powx-n/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     }
@@ -2226,7 +2624,9 @@
        "article_slug": "data-structure-implement-stack-using-array",
        "youtube": "https://youtu.be/tqQ5fTamIN4?si=ofLt8Zt1ZvhikZ6w",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "387",
@@ -2236,7 +2636,9 @@
        "article_slug": "data-structure-implement-queue-using-array",
        "youtube": "https://youtu.be/tqQ5fTamIN4?si=ofLt8Zt1ZvhikZ6w",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "392",
@@ -2246,7 +2648,9 @@
        "article_slug": "data-structure-implement-stack-using-single-queue",
        "youtube": "https://youtu.be/tqQ5fTamIN4?si=ofLt8Zt1ZvhikZ6w",
        "leetcode": "https://leetcode.com/problems/implement-stack-using-queues/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "389",
@@ -2256,7 +2660,9 @@
        "article_slug": "data-structure-implement-queue-using-stack",
        "youtube": "https://youtu.be/tqQ5fTamIN4?si=ofLt8Zt1ZvhikZ6w",
        "leetcode": "https://leetcode.com/problems/implement-queue-using-stacks/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "391",
@@ -2266,7 +2672,9 @@
        "article_slug": "data-structure-implement-stack-using-linked-list",
        "youtube": "https://youtu.be/tqQ5fTamIN4?si=ofLt8Zt1ZvhikZ6w",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "388",
@@ -2276,7 +2684,9 @@
        "article_slug": "data-structure-implement-queue-using-linked-list",
        "youtube": "https://youtu.be/tqQ5fTamIN4?si=ofLt8Zt1ZvhikZ6w",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "966",
@@ -2286,7 +2696,9 @@
        "article_slug": "data-structure-check-for-balanced-parentheses",
        "youtube": "https://youtu.be/xwjS0iZhw4I?si=UoyKpFn4Q3nf5h2R",
        "leetcode": "https://leetcode.com/problems/valid-parentheses/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "958",
@@ -2296,7 +2708,9 @@
        "article_slug": "data-structure-implement-min-stack-o2n-and-on-space-complexity",
        "youtube": "https://youtu.be/NdDIaH91P0g?si=4_Jbsq5trFvfSdUY",
        "leetcode": "https://leetcode.com/problems/min-stack/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -2312,7 +2726,9 @@
        "article_slug": "data-structure-infix-to-postfix",
        "youtube": "https://youtu.be/4pIc9UBHJtk?si=ryeVvQWpCgwbTQrh",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "848",
@@ -2322,7 +2738,9 @@
        "article_slug": "practice-dsa-prefix-to-infix-conversion",
        "youtube": "https://youtu.be/4pIc9UBHJtk?si=ryeVvQWpCgwbTQrh",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "849",
@@ -2332,7 +2750,9 @@
        "article_slug": "practice-dsa-prefix-to-postfix-conversion",
        "youtube": "https://youtu.be/4pIc9UBHJtk?si=0pWtyDC1GhbiYP3P",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "825",
@@ -2342,7 +2762,9 @@
        "article_slug": "practice-dsa-postfix-to-prefix-conversion",
        "youtube": "https://youtu.be/4pIc9UBHJtk?si=0pWtyDC1GhbiYP3P",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "824",
@@ -2352,7 +2774,9 @@
        "article_slug": "practice-dsa-postfix-to-infix-conversion",
        "youtube": "https://youtu.be/4pIc9UBHJtk?si=0pWtyDC1GhbiYP3P",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "587",
@@ -2362,7 +2786,9 @@
        "article_slug": "data-structure-infix-to-prefix",
        "youtube": "https://youtu.be/4pIc9UBHJtk?si=0pWtyDC1GhbiYP3P",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -2378,17 +2804,21 @@
        "article_slug": "data-structure-next-greater-element-using-stack",
        "youtube": "https://youtu.be/e7XQLtOQM3I?si=QdcHpTtx6gAHsext",
        "leetcode": "https://leetcode.com/problems/next-greater-element-i/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "969",
        "name": "Next Greater Element - 2",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/next-greater-element---2",
-       "article_slug": "practice-dsa-next-greater-element-2",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/next-greater-element",
+       "article_slug": "blogs-data-structure-and-algorithm-next-greater-element",
        "youtube": "https://youtu.be/7PrncD7v9YQ?si=UkBc7eVy9HGlBpeW",
        "leetcode": "https://leetcode.com/problems/next-greater-element-ii/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "768",
@@ -2398,7 +2828,9 @@
        "article_slug": "data-structure-next-smaller-element",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "285",
@@ -2408,7 +2840,9 @@
        "article_slug": "practice-dsa-number-of-greater-elements-to-the-right",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "965",
@@ -2418,47 +2852,57 @@
        "article_slug": "data-structure-trapping-rainwater",
        "youtube": "https://youtu.be/1_5VuquLbXg?si=NFG6df318_6OtGvg",
        "leetcode": "https://leetcode.com/problems/trapping-rain-water/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "971",
        "name": "Sum of Subarray Minimums",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/sum-of-subarray-minimums",
-       "article_slug": "practice-dsa-sum-of-subarray-minimums",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/sum-of-subarray-minimums",
+       "article_slug": "blogs-data-structure-and-algorithm-sum-of-subarray-minimums",
        "youtube": "https://youtu.be/v0e8p9JCgRc?si=XAU7ekECgS5nboRw",
        "leetcode": "https://leetcode.com/problems/sum-of-subarray-minimums/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "967",
        "name": "Asteroid Collision",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/asteroid-collision",
-       "article_slug": "practice-dsa-asteroid-collision",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/asteroid-collision",
+       "article_slug": "blogs-data-structure-and-algorithm-asteroid-collision",
        "youtube": "https://youtu.be/_eYGqw_VDR4?si=YyxibcHq800RqgIQ",
        "leetcode": "https://leetcode.com/problems/asteroid-collision/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "972",
        "name": "Sum of Subarray Ranges",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/sum-of-subarray-ranges",
-       "article_slug": "practice-dsa-sum-of-subarray-ranges",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/sum-of-subarray-ranges",
+       "article_slug": "blogs-data-structure-and-algorithm-sum-of-subarray-ranges",
        "youtube": "https://youtu.be/gIrMptNPf5M?si=Q_GHuBvzZVs27X_U",
        "leetcode": "https://leetcode.com/problems/sum-of-subarray-ranges/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "970",
        "name": "Remove K Digits",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/remove-k-digits",
-       "article_slug": "practice-dsa-remove-k-digits",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/remove-k-digits",
+       "article_slug": "blogs-data-structure-and-algorithm-remove-k-digits",
        "youtube": "https://youtu.be/jmbuRzYPGrg?si=WN387gwQ7aXWkUao",
        "leetcode": "https://leetcode.com/problems/remove-k-digits/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "959",
@@ -2468,7 +2912,9 @@
        "article_slug": "data-structure-area-of-largest-rectangle-in-histogram",
        "youtube": "https://youtu.be/Bzat9vgD0fs?si=DiBlLejXcr6EJoyB",
        "leetcode": "https://leetcode.com/problems/largest-rectangle-in-histogram/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "962",
@@ -2478,7 +2924,9 @@
        "article_slug": "data-structure-maximum-rectangle-area-with-all-1s-dp-on-rectangles-dp-55",
        "youtube": "https://youtu.be/tOylVCugy9k",
        "leetcode": "https://leetcode.com/problems/maximal-rectangle/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -2494,17 +2942,21 @@
        "article_slug": "data-structure-sliding-window-maximum",
        "youtube": "https://youtu.be/NwBvene4Imo?si=eU1PY-bcQfk5wdog",
        "leetcode": "https://leetcode.com/problems/sliding-window-maximum/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "964",
        "name": "Stock span problem",
        "difficulty": "Hard",
-       "article": "https://takeuforward.org/practice/dsa/stock-span-problem",
-       "article_slug": "practice-dsa-stock-span-problem",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/stock-span-problem",
+       "article_slug": "blogs-data-structure-and-algorithm-stock-span-problem",
        "youtube": "https://youtu.be/eay-zoSRkVc?si=deNNe5i38BOAntha",
        "leetcode": "https://leetcode.com/problems/online-stock-span/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "957",
@@ -2514,7 +2966,9 @@
        "article_slug": "practice-dsa-celebrity-problem",
        "youtube": "https://youtu.be/cEadsbTeze4?si=olXYfOs7l-SEn2zl",
        "leetcode": "https://leetcode.com/accounts/login/?next=/problems/find-the-celebrity/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "961",
@@ -2524,7 +2978,9 @@
        "article_slug": "practice-dsa-lru-cache",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "960",
@@ -2534,7 +2990,9 @@
        "article_slug": "practice-dsa-lfu-cache",
        "youtube": "https://www.youtube.com/watch?v=0PSB9y8ehbk&list=PLgUwDviBIf0p4ozDR_kJJkONnb1wdx2Ma&index=79",
        "leetcode": "https://leetcode.com/problems/lfu-cache/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       }
      ]
     }
@@ -2556,77 +3014,93 @@
        "article_slug": "data-structure-length-of-longest-substring-without-any-repeating-character",
        "youtube": "https://youtu.be/-zSxTJkcdAo?si=I2zfR-vlDMg0zU9z",
        "leetcode": "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "930",
        "name": "Max Consecutive Ones III",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/max-consecutive-ones-iii",
-       "article_slug": "practice-dsa-max-consecutive-ones-iii",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/max-consecutive-ones-iii",
+       "article_slug": "blogs-data-structure-and-algorithm-max-consecutive-ones-iii",
        "youtube": "https://youtu.be/3E4JBHSLpYk?si=SoOW64pP6otEKxBw",
        "leetcode": "https://leetcode.com/problems/max-consecutive-ones-iii/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "926",
        "name": "Fruit Into Baskets",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/fruit-into-baskets",
-       "article_slug": "practice-dsa-fruit-into-baskets",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/fruit-into-baskets",
+       "article_slug": "blogs-data-structure-and-algorithm-fruit-into-baskets",
        "youtube": "https://youtu.be/e3bs0uA1NhQ?si=gR8pO62u-nJeFAXk",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "927",
        "name": "Longest Repeating Character Replacement",
        "difficulty": "Hard",
-       "article": "https://takeuforward.org/practice/dsa/longest-repeating-character-replacement",
-       "article_slug": "practice-dsa-longest-repeating-character-replacement",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/longest-repeating-character-replacement",
+       "article_slug": "blogs-data-structure-and-algorithm-longest-repeating-character-replacement",
        "youtube": "https://youtu.be/_eNhaDCr6P0?si=pBWcEjozF5poom0p",
        "leetcode": "https://leetcode.com/problems/longest-repeating-character-replacement/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "923",
        "name": "Binary Subarrays With Sum",
        "difficulty": "Hard",
-       "article": "https://takeuforward.org/practice/dsa/binary-subarrays-with-sum",
-       "article_slug": "practice-dsa-binary-subarrays-with-sum",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/binary-subarrays-with-sum",
+       "article_slug": "blogs-data-structure-and-algorithm-binary-subarrays-with-sum",
        "youtube": "https://youtu.be/XnMdNUkX6VM?si=Nyt8EveeLUg8lmty",
        "leetcode": "https://leetcode.com/problems/binary-subarrays-with-sum/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "924",
        "name": "Count number of Nice subarrays",
        "difficulty": "Hard",
-       "article": "https://takeuforward.org/practice/dsa/count-number-of-nice-subarrays",
-       "article_slug": "practice-dsa-count-number-of-nice-subarrays",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/count-nice-subarrays",
+       "article_slug": "blogs-data-structure-and-algorithm-count-nice-subarrays",
        "youtube": "https://youtu.be/j_QOv9OT9Og?si=Oq5-5hyFkzVSOZpP",
        "leetcode": "https://leetcode.com/problems/count-number-of-nice-subarrays/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "925",
        "name": "Number of Substrings Containing All Three Characters",
        "difficulty": "Hard",
-       "article": "https://takeuforward.org/practice/dsa/number-of-substrings-containing-all-three-characters",
-       "article_slug": "practice-dsa-number-of-substrings-containing-all-three-characters",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/count-substrings-containing-all-three-characters-a-b-and-c",
+       "article_slug": "blogs-data-structure-and-algorithm-count-substrings-containing-all-three-characters-a-b-and-c",
        "youtube": "https://youtu.be/xtqN4qlgr8s?si=kuaLHVOLXhh5Z2tW",
        "leetcode": "https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "922",
        "name": "Maximum Points You Can Obtain from Cards",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/maximum-points-you-can-obtain-from-cards-",
-       "article_slug": "practice-dsa-maximum-points-you-can-obtain-from-cards",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/maximum-points-you-can-obtain-from-cards",
+       "article_slug": "blogs-data-structure-and-algorithm-maximum-points-you-can-obtain-from-cards",
        "youtube": "https://youtu.be/pBWCOCS636U?si=-X64rY67noxvOwrG",
        "leetcode": "https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       }
      ]
     },
@@ -2642,37 +3116,45 @@
        "article_slug": "data-structure-longest-substring-with-at-most-k-distinct-characters",
        "youtube": "https://youtu.be/teM9ZsVRQyc?si=Kh0_u6aCkkBU3Q33",
        "leetcode": "https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "988",
        "name": "Subarrays with K Different Integers",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/subarrays-with-k-different-integers",
-       "article_slug": "practice-dsa-subarrays-with-k-different-integers",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/subarrays-with-k-different-integers",
+       "article_slug": "blogs-data-structure-and-algorithm-subarrays-with-k-different-integers",
        "youtube": "https://youtu.be/7wYGbV_LsX4?si=KWa48RgLDCvdNqRb",
        "leetcode": "https://leetcode.com/problems/subarrays-with-k-different-integers/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "931",
        "name": "Minimum Window Substring",
        "difficulty": "Hard",
-       "article": "https://takeuforward.org/practice/dsa/minimum-window-substring-",
-       "article_slug": "practice-dsa-minimum-window-substring",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/minimum-window-substring",
+       "article_slug": "blogs-data-structure-and-algorithm-minimum-window-substring",
        "youtube": "https://youtu.be/WJaij9ffOIY?si=-xnsWIH84zWU0ICd",
        "leetcode": "https://leetcode.com/problems/minimum-window-substring/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "754",
        "name": "Minimum Window Subsequence",
        "difficulty": "Hard",
-       "article": "https://takeuforward.org/practice/dsa/minimum-window-subsequence",
-       "article_slug": "practice-dsa-minimum-window-subsequence",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/minimum-window-substring",
+       "article_slug": "blogs-data-structure-and-algorithm-minimum-window-substring",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/minimum-window-subsequence/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       }
      ]
     }
@@ -2694,7 +3176,9 @@
        "article_slug": "data-structure-introduction-to-priority-queues-using-binary-heaps",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "576",
@@ -2704,7 +3188,9 @@
        "article_slug": "practice-dsa-implement-min-heap",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "571",
@@ -2714,7 +3200,9 @@
        "article_slug": "practice-dsa-check-if-an-array-represents-a-min-heap",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "572",
@@ -2724,7 +3212,9 @@
        "article_slug": "practice-dsa-convert-min-heap-to-max-heap",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       }
      ]
     },
@@ -2740,7 +3230,9 @@
        "article_slug": "data-structure-kth-largest-smallest-element-in-an-array",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2840",
@@ -2750,7 +3242,9 @@
        "article_slug": "data-structure-kth-largest-smallest-element-in-an-array",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2409",
@@ -2760,17 +3254,21 @@
        "article_slug": "data-structure-sort-k-sorted-array",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "569",
        "name": "Merge K sorted Lists",
        "difficulty": "Hard",
-       "article": "https://takeuforward.org/practice/dsa/merge-k-sorted-lists",
-       "article_slug": "practice-dsa-merge-k-sorted-lists",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/merge-k-sorted-linked-lists",
+       "article_slug": "blogs-data-structure-and-algorithm-merge-k-sorted-linked-lists",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/merge-k-sorted-lists/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "898",
@@ -2780,17 +3278,21 @@
        "article_slug": "data-structure-replace-elements-by-its-rank-in-the-array",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "1008",
        "name": "Task Scheduler",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/task-scheduler",
-       "article_slug": "practice-dsa-task-scheduler",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/task-scheduler",
+       "article_slug": "blogs-data-structure-and-algorithm-task-scheduler",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/task-scheduler/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "556",
@@ -2800,7 +3302,9 @@
        "article_slug": "practice-dsa-hand-of-straights",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/hand-of-straights/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       }
      ]
     },
@@ -2816,7 +3320,9 @@
        "article_slug": "practice-dsa-design-twitter",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/design-twitter/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "755",
@@ -2826,17 +3332,21 @@
        "article_slug": "practice-dsa-minimum-cost-to-connect-sticks",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "2838",
        "name": "Kth largest element in a stream of running integers",
        "difficulty": "Hard",
-       "article": "https://takeuforward.org/practice/dsa/kth-largest-element-in-a-stream-of-running-integers",
-       "article_slug": "practice-dsa-kth-largest-element-in-a-stream-of-running-integers",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/kth-largest-element-stream",
+       "article_slug": "blogs-data-structure-and-algorithm-kth-largest-element-stream",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/kth-largest-element-in-a-stream/#:~:text=Implement%20KthLargest%20class%3A,largest%20element%20in%20the%20stream.",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "568",
@@ -2846,27 +3356,33 @@
        "article_slug": "practice-dsa-maximum-sum-combination",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "566",
        "name": "Find Median from Data Stream",
        "difficulty": "Hard",
-       "article": "https://takeuforward.org/practice/dsa/find-median-from-data-stream",
-       "article_slug": "practice-dsa-find-median-from-data-stream",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/find-median-data-stream",
+       "article_slug": "blogs-data-structure-and-algorithm-find-median-data-stream",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/find-median-from-data-stream/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "1018",
        "name": "Top K Frequent Elements",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/top-k-frequent-elements",
-       "article_slug": "practice-dsa-top-k-frequent-elements",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/top-k-frequent-elements",
+       "article_slug": "blogs-data-structure-and-algorithm-top-k-frequent-elements",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/top-k-frequent-elements/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       }
      ]
     }
@@ -2884,11 +3400,13 @@
        "id": "2834",
        "name": "Assign Cookies",
        "difficulty": "Easy",
-       "article": "https://takeuforward.org/practice/dsa/assign-cookies",
-       "article_slug": "practice-dsa-assign-cookies",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/assign-cookies",
+       "article_slug": "blogs-data-structure-and-algorithm-assign-cookies",
        "youtube": "https://youtu.be/DIX2p7vb9co?si=GofAIDimue-Av0Fi",
        "leetcode": "https://leetcode.com/problems/assign-cookies/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "489",
@@ -2898,7 +3416,9 @@
        "article_slug": "data-structure-fractional-knapsack-problem-greedy-approach",
        "youtube": "https://youtu.be/1ibsQrnuEEg?si=8R2By3wpHo0zZVHE",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "543",
@@ -2908,7 +3428,9 @@
        "article_slug": "greedy-lemonade-change",
        "youtube": "https://youtu.be/n_tmibEhO6Q?si=q1NW8MfPy0QU6fIl",
        "leetcode": "https://leetcode.com/problems/lemonade-change/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "545",
@@ -2918,7 +3440,9 @@
        "article_slug": "practice-dsa-valid-paranthesis-checker",
        "youtube": "https://youtu.be/cHT6sG_hUZI?si=XRHeyh7jOaLaTy3g",
        "leetcode": "https://leetcode.com/problems/valid-parenthesis-string/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       }
      ]
     },
@@ -2934,7 +3458,9 @@
        "article_slug": "data-structure-n-meetings-in-one-room",
        "youtube": "https://youtu.be/mKfhTotEguk?si=2RELeq18mpmIIN3Q",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "542",
@@ -2944,17 +3470,21 @@
        "article_slug": "greedy-jump-game-i",
        "youtube": "https://youtu.be/tZAa_jJ3SwQ?si=voKd7n9VTLDRRNzJ",
        "leetcode": "https://leetcode.com/problems/jump-game/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "595",
        "name": "Jump Game II",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/jump-game-ii",
-       "article_slug": "practice-dsa-jump-game-ii",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/jump-game",
+       "article_slug": "blogs-data-structure-and-algorithm-jump-game",
        "youtube": "https://youtu.be/7SBVnw7GSTk?si=9uUouBELh9K3m2jZ",
        "leetcode": "https://leetcode.com/problems/jump-game-ii/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "548",
@@ -2964,7 +3494,9 @@
        "article_slug": "data-structure-minimum-number-of-platforms-required-for-a-railway",
        "youtube": "https://youtu.be/AsGzwR_FWok?si=165acXU_dtqOHuo9",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "547",
@@ -2974,7 +3506,9 @@
        "article_slug": "data-structure-job-sequencing-problem",
        "youtube": "https://youtu.be/QbwltemZbRg?si=wvcemJ5BLPlTRmkG",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "544",
@@ -2984,7 +3518,9 @@
        "article_slug": "practice-dsa-candy",
        "youtube": "https://youtu.be/IIqVFvKE6RY?si=EjmuXZJNLQLUkEd7",
        "leetcode": "https://leetcode.com/problems/candy/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "551",
@@ -2994,7 +3530,9 @@
        "article_slug": "greedy-shortest-job-first-or-sjf-cpu-scheduling",
        "youtube": "https://youtu.be/3-QbX1iDbXs?si=IH8QZUblr01F7UoQ",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2859",
@@ -3004,17 +3542,21 @@
        "article_slug": "data-structure-program-for-least-recently-used-lru-page-replacement-algorithm",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "546",
        "name": "Insert Interval",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/insert-interval",
-       "article_slug": "practice-dsa-insert-interval",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/insert-interval",
+       "article_slug": "blogs-data-structure-and-algorithm-insert-interval",
        "youtube": "https://youtu.be/xxRE-46OCC8?si=a7aPuIw16zDx2lAa",
        "leetcode": "https://leetcode.com/problems/insert-interval/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "712",
@@ -3024,17 +3566,21 @@
        "article_slug": "data-structure-merge-overlapping-sub-intervals",
        "youtube": "https://www.youtube.com/watch?v=2JzRBPFYbKE&list=PLgUwDviBIf0rPG3Ictpu74YWBQ1CaBkm2&index=6",
        "leetcode": "https://leetcode.com/problems/merge-intervals/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "550",
        "name": "Non-overlapping Intervals",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/non-overlapping-intervals",
-       "article_slug": "practice-dsa-non-overlapping-intervals",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/non-overlapping-intervals",
+       "article_slug": "blogs-data-structure-and-algorithm-non-overlapping-intervals",
        "youtube": "https://youtu.be/HDHQ8lAWakY?si=JVtLqboGdpUTOVjf",
        "leetcode": "https://leetcode.com/problems/non-overlapping-intervals/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       }
      ]
     }
@@ -3056,7 +3602,9 @@
        "article_slug": "binary-tree-introduction-to-trees",
        "youtube": "https://youtu.be/_ANrF3FJm7I",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2864",
@@ -3066,7 +3614,9 @@
        "article_slug": "binary-tree-binary-tree-representation-in-java",
        "youtube": "https://youtu.be/hyLyW7rP24I",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "136",
@@ -3076,7 +3626,9 @@
        "article_slug": "data-structure-preorder-inorder-postorder-traversals-in-one-traversal",
        "youtube": "https://youtu.be/ySp2epYvgTE",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "137",
@@ -3086,7 +3638,9 @@
        "article_slug": "data-structure-preorder-traversal-of-binary-tree",
        "youtube": "https://youtu.be/RlUu72JrOCQ",
        "leetcode": "https://leetcode.com/problems/binary-tree-preorder-traversal/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2785",
@@ -3096,7 +3650,9 @@
        "article_slug": "data-structure-inorder-traversal-of-binary-tree",
        "youtube": "https://youtu.be/Z_NEgBgbRVI",
        "leetcode": "https://leetcode.com/problems/binary-tree-inorder-traversal/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "135",
@@ -3106,7 +3662,9 @@
        "article_slug": "data-structure-iterative-postorder-traversal-of-binary-tree-using-2-stack",
        "youtube": "https://youtu.be/2YBhNLodD8Q",
        "leetcode": "https://leetcode.com/problems/binary-tree-postorder-traversal/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "134",
@@ -3116,7 +3674,9 @@
        "article_slug": "data-structure-level-order-traversal-of-a-binary-tree",
        "youtube": "https://youtu.be/EoAsWbO7sqg",
        "leetcode": "https://leetcode.com/problems/binary-tree-level-order-traversal/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2872",
@@ -3126,7 +3686,9 @@
        "article_slug": "data-structure-iterative-preorder-traversal-of-binary-tree",
        "youtube": "https://youtu.be/Bfqd8BsPVuw",
        "leetcode": "https://leetcode.com/problems/binary-tree-preorder-traversal/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2786",
@@ -3136,7 +3698,9 @@
        "article_slug": "data-structure-inorder-traversal-of-binary-tree",
        "youtube": "https://youtu.be/lxTGsVXjwvM",
        "leetcode": "https://leetcode.com/problems/binary-tree-inorder-traversal/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2788",
@@ -3146,7 +3710,9 @@
        "article_slug": "data-structure-iterative-postorder-traversal-of-binary-tree-using-2-stack",
        "youtube": "https://youtu.be/2YBhNLodD8Q",
        "leetcode": "https://leetcode.com/problems/binary-tree-postorder-traversal/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2787",
@@ -3156,7 +3722,9 @@
        "article_slug": "data-structure-post-order-traversal-of-binary-tree",
        "youtube": "https://youtu.be/NzIGLLwZBS8",
        "leetcode": "https://leetcode.com/problems/binary-tree-postorder-traversal/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2789",
@@ -3166,7 +3734,9 @@
        "article_slug": "data-structure-preorder-inorder-postorder-traversals-in-one-traversal",
        "youtube": "https://youtu.be/ySp2epYvgTE",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -3182,7 +3752,9 @@
        "article_slug": "data-structure-maximum-depth-of-a-binary-tree",
        "youtube": "https://youtu.be/eD3tmO66aBA",
        "leetcode": "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "127",
@@ -3192,7 +3764,9 @@
        "article_slug": "data-structure-check-if-the-binary-tree-is-balanced-binary-tree",
        "youtube": "https://youtu.be/Yt50Jfbd8Po",
        "leetcode": "https://leetcode.com/problems/balanced-binary-tree/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "130",
@@ -3202,7 +3776,9 @@
        "article_slug": "data-structure-calculate-the-diameter-of-a-binary-tree",
        "youtube": "https://youtu.be/Rezetez59Nk",
        "leetcode": "https://leetcode.com/problems/diameter-of-binary-tree/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "132",
@@ -3212,7 +3788,9 @@
        "article_slug": "data-structure-maximum-sum-path-in-binary-tree",
        "youtube": "https://youtu.be/WszrfSwMz58",
        "leetcode": "https://leetcode.com/problems/binary-tree-maximum-path-sum/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "129",
@@ -3222,7 +3800,9 @@
        "article_slug": "data-structure-check-if-two-trees-are-identical",
        "youtube": "https://youtu.be/BhuvF_-PWS0",
        "leetcode": "https://leetcode.com/problems/same-tree/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "126",
@@ -3232,7 +3812,9 @@
        "article_slug": "data-structure-zig-zag-traversal-of-binary-tree",
        "youtube": "https://youtu.be/3OXWEdlIGl4",
        "leetcode": "https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "116",
@@ -3242,7 +3824,9 @@
        "article_slug": "data-structure-boundary-traversal-of-a-binary-tree",
        "youtube": "https://youtu.be/0ca1nvR0be4",
        "leetcode": "https://leetcode.com/problems/boundary-of-binary-tree/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "125",
@@ -3252,7 +3836,9 @@
        "article_slug": "data-structure-vertical-order-traversal-of-binary-tree",
        "youtube": "https://youtu.be/q_a6lpbKJdw",
        "leetcode": "https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "124",
@@ -3262,7 +3848,9 @@
        "article_slug": "data-structure-top-view-of-a-binary-tree",
        "youtube": "https://youtu.be/Et9OCDNvJ78",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "115",
@@ -3272,7 +3860,9 @@
        "article_slug": "data-structure-bottom-view-of-a-binary-tree",
        "youtube": "https://youtu.be/0FtVY6I4pB8",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2782",
@@ -3282,7 +3872,9 @@
        "article_slug": "data-structure-right-left-view-of-binary-tree",
        "youtube": "https://youtu.be/KV4mRzTjlAk",
        "leetcode": "https://leetcode.com/problems/binary-tree-right-side-view/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2784",
@@ -3292,7 +3884,9 @@
        "article_slug": "data-structure-check-for-symmetrical-binary-tree",
        "youtube": "https://youtu.be/nKggiEpBE",
        "leetcode": "https://leetcode.com/problems/symmetric-tree/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -3308,7 +3902,9 @@
        "article_slug": "data-structure-print-root-to-node-path-in-a-binary-tree",
        "youtube": "https://youtu.be/fmflMqVOC7k",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "118",
@@ -3318,7 +3914,9 @@
        "article_slug": "data-structure-lowest-common-ancestor-for-two-given-nodes",
        "youtube": "https://youtu.be/_-QHfMDde90",
        "leetcode": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "119",
@@ -3328,7 +3926,9 @@
        "article_slug": "data-structure-maximum-width-of-a-binary-tree",
        "youtube": "https://youtu.be/ZbybYvcVLks",
        "leetcode": "https://leetcode.com/problems/maximum-width-of-binary-tree/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "185",
@@ -3338,27 +3938,33 @@
        "article_slug": "data-structure-check-for-children-sum-property-in-a-binary-tree",
        "youtube": "https://youtu.be/fnmisPM6cVo",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "121",
        "name": "Print all nodes at a distance of K in BT",
        "difficulty": "Hard",
-       "article": "https://takeuforward.org/practice/dsa/print-all-nodes-at-a-distance-of-k-in-bt",
-       "article_slug": "practice-dsa-print-all-nodes-at-a-distance-of-k-in-bt",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/nodes-distance-k-binary-tree",
+       "article_slug": "blogs-data-structure-and-algorithm-nodes-distance-k-binary-tree",
        "youtube": "https://youtu.be/i9ORlEy6EsI",
        "leetcode": "https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "120",
        "name": "Minimum time taken to burn the BT from a given Node",
        "difficulty": "Hard",
-       "article": "https://takeuforward.org/practice/dsa/minimum-time-taken-to-burn-the-bt-from-a-given-node",
-       "article_slug": "practice-dsa-minimum-time-taken-to-burn-the-bt-from-a-given-node",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/minimum-time-burn-binary-tree",
+       "article_slug": "blogs-data-structure-and-algorithm-minimum-time-burn-binary-tree",
        "youtube": "https://youtu.be/2r5wLmQfD6g",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "117",
@@ -3368,17 +3974,21 @@
        "article_slug": "binary-tree-count-number-of-nodes-in-a-binary-tree",
        "youtube": "https://youtu.be/u-yWemKGWO0",
        "leetcode": "https://leetcode.com/problems/count-complete-tree-nodes/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "111",
        "name": "Requirements needed to construct a unique BT",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/requirements-needed-to-construct-a-unique-bt",
-       "article_slug": "practice-dsa-requirements-needed-to-construct-a-unique-bt",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/requirements-needed-to-construct-a-unique-binary-tree",
+       "article_slug": "blogs-data-structure-and-algorithm-requirements-needed-to-construct-a-unique-binary-tree",
        "youtube": "https://youtu.be/9GMECGQgWrQ",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "110",
@@ -3388,7 +3998,9 @@
        "article_slug": "data-structure-construct-a-binary-tree-from-inorder-and-preorder-traversal",
        "youtube": "https://youtu.be/aZNaLrVebKQ",
        "leetcode": "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2781",
@@ -3398,7 +4010,9 @@
        "article_slug": "data-structure-construct-binary-tree-from-inorder-and-postorder-traversal",
        "youtube": "https://youtu.be/LgLRTaEMRVc",
        "leetcode": "https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "112",
@@ -3408,7 +4022,9 @@
        "article_slug": "data-structure-serialize-and-deserialize-a-binary-tree",
        "youtube": "https://youtu.be/-YbXySKJsX8",
        "leetcode": "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2791",
@@ -3418,7 +4034,9 @@
        "article_slug": "data-structure-morris-preorder-traversal-of-a-binary-tree",
        "youtube": "https://youtu.be/80Zug6D1_r4",
        "leetcode": "https://leetcode.com/problems/binary-tree-inorder-traversal/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2792",
@@ -3428,7 +4046,9 @@
        "article_slug": "data-structure-morris-inorder-traversal-of-a-binary-tree",
        "youtube": "https://youtu.be/80Zug6D1_r4",
        "leetcode": "https://leetcode.com/problems/binary-tree-inorder-traversal/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "486",
@@ -3438,7 +4058,9 @@
        "article_slug": "data-structure-flatten-binary-tree-to-linked-list",
        "youtube": "https://youtu.be/sWf7k1x9XR4",
        "leetcode": "https://leetcode.com/problems/flatten-binary-tree-to-linked-list/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     }
@@ -3460,7 +4082,9 @@
        "article_slug": "binary-search-tree-introduction-to-binary-search-trees",
        "youtube": "https://youtu.be/p7-9UvDQZ3w",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2780",
@@ -3470,7 +4094,9 @@
        "article_slug": "data-structure-search-in-a-binary-search-tree-2",
        "youtube": "https://youtu.be/KcNt6v_56cc",
        "leetcode": "https://leetcode.com/problems/search-in-a-binary-search-tree/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2398",
@@ -3480,7 +4106,9 @@
        "article_slug": "data-structure-find-minmax-in-a-bst",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       }
      ]
     },
@@ -3492,11 +4120,13 @@
        "id": "107",
        "name": "Floor and Ceil in a BST",
        "difficulty": "Easy",
-       "article": "https://takeuforward.org/practice/dsa/floor-and-ceil-in-a-bst",
-       "article_slug": "practice-dsa-floor-and-ceil-in-a-bst",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/floor-and-ceil-in-a-bst",
+       "article_slug": "blogs-data-structure-and-algorithm-floor-and-ceil-in-a-bst",
        "youtube": "https://www.youtube.com/watch?v=xm_W1ub-K-w&list=PLgUwDviBIf0q8Hkd7bK2Bpryj2xVJk8Vk&index=43",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "2778",
@@ -3506,7 +4136,9 @@
        "article_slug": "binary-search-tree-floor-in-a-binary-search-tree",
        "youtube": "https://youtu.be/xm_W1ub-K-w",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "104",
@@ -3516,17 +4148,21 @@
        "article_slug": "practice-dsa-insert-a-given-node-in-bst",
        "youtube": "https://youtu.be/FiFiNvM29ps",
        "leetcode": "https://leetcode.com/problems/insert-into-a-binary-search-tree/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "102",
        "name": "Delete a node in BST",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/delete-a-node-in-bst",
-       "article_slug": "practice-dsa-delete-a-node-in-bst",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/delete-node-in-a-bst",
+       "article_slug": "blogs-data-structure-and-algorithm-delete-node-in-a-bst",
        "youtube": "https://youtu.be/kouxiP_H5WE",
        "leetcode": "https://leetcode.com/problems/delete-node-in-a-bst/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "105",
@@ -3536,7 +4172,9 @@
        "article_slug": "data-structure-kth-largest-smallest-element-in-binary-search-tree",
        "youtube": "https://youtu.be/9TJYWh0adfk",
        "leetcode": "https://leetcode.com/problems/kth-smallest-element-in-a-bst/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "100",
@@ -3546,7 +4184,9 @@
        "article_slug": "practice-dsa-check-if-a-tree-is-a-bst-or-not",
        "youtube": "https://youtu.be/f-sj7I5oXEI",
        "leetcode": "https://leetcode.com/problems/validate-binary-search-tree/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "106",
@@ -3556,27 +4196,33 @@
        "article_slug": "practice-dsa-lca-in-bst",
        "youtube": "https://youtu.be/cX_kPV_foZc",
        "leetcode": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "101",
        "name": "Construct a BST from a preorder traversal",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/construct-a-bst-from-a-preorder-traversal",
-       "article_slug": "practice-dsa-construct-a-bst-from-a-preorder-traversal",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/construct-a-bst-from-preorder-traversal",
+       "article_slug": "blogs-data-structure-and-algorithm-construct-a-bst-from-preorder-traversal",
        "youtube": "https://youtu.be/UmJT3j26t1I",
        "leetcode": "https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "2775",
        "name": "Inorder Successor/Predecessor in BST",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/inorder-successor-and-predecessor-in-bst",
-       "article_slug": "practice-dsa-inorder-successor-and-predecessor-in-bst",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/inorder-successor-and-predecessor-in-a-bst",
+       "article_slug": "blogs-data-structure-and-algorithm-inorder-successor-and-predecessor-in-a-bst",
        "youtube": "https://youtu.be/SXKAD2svfmI",
        "leetcode": "https://leetcode.com/problems/inorder-successor-in-bst/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "2772",
@@ -3586,17 +4232,21 @@
        "article_slug": "data-structure-bst-iterator",
        "youtube": "https://youtu.be/D2jMcmxU4bs",
        "leetcode": "https://leetcode.com/problems/binary-search-tree-iterator/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "2774",
        "name": "Two Sum In BST | Check if there exists a pair with Sum K",
        "difficulty": "Hard",
-       "article": "https://takeuforward.org/practice/dsa/two-sum-in-bst",
-       "article_slug": "practice-dsa-two-sum-in-bst",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/two-sum-in-bst",
+       "article_slug": "blogs-data-structure-and-algorithm-two-sum-in-bst",
        "youtube": "https://youtu.be/ssL3sHwPeb4",
        "leetcode": "https://leetcode.com/problems/two-sum-iv-input-is-a-bst/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "97",
@@ -3606,17 +4256,21 @@
        "article_slug": "practice-dsa-correct-bst-with-two-nodes-swapped",
        "youtube": "https://youtu.be/ZWGW7FminDM",
        "leetcode": "https://leetcode.com/problems/recover-binary-search-tree/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "98",
        "name": "Largest BST in Binary Tree",
        "difficulty": "Hard",
-       "article": "https://takeuforward.org/practice/dsa/largest-bst-in-binary-tree",
-       "article_slug": "practice-dsa-largest-bst-in-binary-tree",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/largest-bst-in-binary-tree",
+       "article_slug": "blogs-data-structure-and-algorithm-largest-bst-in-binary-tree",
        "youtube": "https://youtu.be/X0oXMdtUDwo",
        "leetcode": "https://leetcode.com/problems/maximum-sum-bst-in-binary-tree/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       }
      ]
     }
@@ -3634,11 +4288,13 @@
        "id": "1222",
        "name": "Introduction to Graph",
        "difficulty": "Easy",
-       "article": "https://takeuforward.org/data-structure/graph-representation-in-java",
-       "article_slug": "data-structure-graph-representation-in-java",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/introduction-to-graph",
+       "article_slug": "blogs-data-structure-and-algorithm-introduction-to-graph",
        "youtube": "https://youtu.be/3oI-34aPMWM",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "2870",
@@ -3648,7 +4304,9 @@
        "article_slug": "graph-graph-representation-in-c",
        "youtube": "https://youtu.be/3oI-34aPMWM",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "2871",
@@ -3658,7 +4316,9 @@
        "article_slug": "data-structure-graph-representation-in-java",
        "youtube": "https://youtu.be/3oI-34aPMWM",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "528",
@@ -3668,7 +4328,9 @@
        "article_slug": "practice-dsa-connected-components",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "529",
@@ -3678,7 +4340,9 @@
        "article_slug": "data-structure-depth-first-search-dfs",
        "youtube": "https://youtu.be/Qzf1a--rhp8",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2831",
@@ -3688,7 +4352,9 @@
        "article_slug": "data-structure-depth-first-search-dfs",
        "youtube": "https://youtu.be/Qzf1a--rhp8",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -3704,7 +4370,9 @@
        "article_slug": "data-structure-number-of-provinces",
        "youtube": "https://youtu.be/ACzkVtewUYA",
        "leetcode": "https://leetcode.com/problems/number-of-provinces/#:~:text=A%20province%20is%20a%20group,the%20total%20number%20of%20provinces.",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2830",
@@ -3714,7 +4382,9 @@
        "article_slug": "data-structure-connected-components",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "536",
@@ -3724,17 +4394,21 @@
        "article_slug": "data-structure-rotten-oranges-min-time-to-rot-all-oranges-bfs",
        "youtube": "https://www.youtube.com/watch?v=yf3oUhkvqA0",
        "leetcode": "https://leetcode.com/problems/rotting-oranges/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "531",
        "name": "Flood fill algorithm",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/flood-fill-algorithm",
-       "article_slug": "practice-dsa-flood-fill-algorithm",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/flood-fill-algorithm",
+       "article_slug": "blogs-data-structure-and-algorithm-flood-fill-algorithm",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/flood-fill/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "2817",
@@ -3744,7 +4418,9 @@
        "article_slug": "data-structure-detect-cycle-in-an-undirected-graph-using-bfs",
        "youtube": "https://youtu.be/BPlrALf1LDU",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "501",
@@ -3754,7 +4430,9 @@
        "article_slug": "data-structure-detect-cycle-in-an-undirected-graph-using-dfs",
        "youtube": "https://youtu.be/zQ3zgFypzX4",
        "leetcode": "https://leetcode.com/problems/course-schedule/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "530",
@@ -3764,7 +4442,9 @@
        "article_slug": "graph-distance-of-nearest-cell-having-1",
        "youtube": "https://youtu.be/edXdVwkYHF8",
        "leetcode": "https://leetcode.com/problems/01-matrix/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "537",
@@ -3774,7 +4454,9 @@
        "article_slug": "graph-surrounded-regions-replace-os-with-xs",
        "youtube": "https://youtu.be/BtdgAys4yMk",
        "leetcode": "https://leetcode.com/problems/surrounded-regions/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "533",
@@ -3784,7 +4466,9 @@
        "article_slug": "graph-number-of-enclaves",
        "youtube": "https://youtu.be/rxKcepXQgU4",
        "leetcode": "https://leetcode.com/problems/number-of-enclaves/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "509",
@@ -3794,7 +4478,9 @@
        "article_slug": "graph-word-ladder-i-g-29",
        "youtube": "https://youtu.be/tRPda0rcf8E",
        "leetcode": "https://leetcode.com/problems/word-ladder/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "510",
@@ -3804,7 +4490,9 @@
        "article_slug": "graph-g-30-word-ladder-ii",
        "youtube": "https://youtu.be/AD4SFl7tu7I?si=EpcJQTWm2YeURvEG",
        "leetcode": "https://leetcode.com/problems/word-ladder-ii/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "534",
@@ -3814,7 +4502,9 @@
        "article_slug": "data-structure-number-of-distinct-islands",
        "youtube": "https://www.youtube.com/watch?v=muncqlKJrH0&list=PLgUwDviBIf0oE3gA41TKO2H5bHpPd7fzn&index=8",
        "leetcode": "https://leetcode.com/problems/number-of-islands/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2813",
@@ -3824,7 +4514,9 @@
        "article_slug": "graph-bipartite-graph-dfs-implementation",
        "youtube": "https://youtu.be/KG5YFfR0j8A",
        "leetcode": "https://leetcode.com/problems/is-graph-bipartite/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2814",
@@ -3834,7 +4526,9 @@
        "article_slug": "data-structure-detect-cycle-in-a-directed-graph-using-dfs-g-19",
        "youtube": "https://youtu.be/9twcmtQj4DU",
        "leetcode": "https://leetcode.com/problems/course-schedule-ii/discuss/293048/detecting-cycle-in-directed-graph-problem",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -3850,7 +4544,9 @@
        "article_slug": "data-structure-topological-sort-algorithm-dfs-g-21",
        "youtube": "https://youtu.be/5lZ0iJMrUMk",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "502",
@@ -3860,7 +4556,9 @@
        "article_slug": "data-structure-topological-sort-algorithm-dfs-g-21",
        "youtube": "https://youtu.be/5lZ0iJMrUMk",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "500",
@@ -3870,7 +4568,9 @@
        "article_slug": "data-structure-detect-a-cycle-in-directed-graph-topological-sort-kahns-algorithm-g-23",
        "youtube": "https://www.youtube.com/watch?v=uzVUw90ZFIg&list=PLgUwDviBIf0rGEWe64KWas0Nryn7SCRWw&index=12",
        "leetcode": "https://leetcode.com/problems/course-schedule/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "504",
@@ -3880,7 +4580,9 @@
        "article_slug": "data-structure-course-schedule-i-and-ii-pre-requisite-tasks-topological-sort-g-24",
        "youtube": "https://youtu.be/WAOfKpxYHR8",
        "leetcode": "https://leetcode.com/problems/course-schedule/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "505",
@@ -3890,7 +4592,9 @@
        "article_slug": "data-structure-course-schedule-i-and-ii-pre-requisite-tasks-topological-sort-g-24",
        "youtube": "https://youtu.be/WAOfKpxYHR8",
        "leetcode": "https://leetcode.com/problems/course-schedule-ii/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "506",
@@ -3900,7 +4604,9 @@
        "article_slug": "data-structure-find-eventual-safe-states-bfs-topological-sort-g-25",
        "youtube": "https://youtu.be/2gtg3VsDGyc",
        "leetcode": "https://leetcode.com/problems/find-eventual-safe-states/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "503",
@@ -3910,7 +4616,9 @@
        "article_slug": "data-structure-alien-dictionary-topological-sort-g-26",
        "youtube": "https://youtu.be/U3N_je7tWAs",
        "leetcode": "https://leetcode.com/problems/alien-dictionary/solution/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -3926,7 +4634,9 @@
        "article_slug": "data-structure-shortest-path-in-undirected-graph-with-unit-distance-g-28",
        "youtube": "https://www.youtube.com/watch?v=C4gxoTaI71U&list=PLgUwDviBIf0oE3gA41TKO2H5bHpPd7fzn&index=28",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "507",
@@ -3936,7 +4646,9 @@
        "article_slug": "data-structure-shortest-path-in-directed-acyclic-graph-topological-sort-g-27",
        "youtube": "https://www.youtube.com/watch?v=ZUFQfFaU-8U&list=PLgUwDviBIf0oE3gA41TKO2H5bHpPd7fzn&index=27",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2827",
@@ -3946,7 +4658,9 @@
        "article_slug": "data-structure-dijkstras-algorithm-using-set-g-33",
        "youtube": "https://www.youtube.com/watch?v=rp1SMw7HSO8&list=PLgUwDviBIf0oE3gA41TKO2H5bHpPd7fzn&index=35",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2828",
@@ -3956,17 +4670,21 @@
        "article_slug": "data-structure-dijkstras-algorithm-using-priority-queue-g-32",
        "youtube": "https://www.youtube.com/watch?v=rp1SMw7HSO8&list=PLgUwDviBIf0oE3gA41TKO2H5bHpPd7fzn&index=35",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "527",
        "name": "Shortest Distance in a Binary Maze",
        "difficulty": "Hard",
-       "article": "https://takeuforward.org/practice/dsa/shortest-path-with-minimum-effort",
-       "article_slug": "practice-dsa-shortest-path-with-minimum-effort",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/shortest-distance-binary-maze",
+       "article_slug": "blogs-data-structure-and-algorithm-shortest-distance-binary-maze",
        "youtube": "https://www.youtube.com/watch?v=U5Mw4eyUmw4&list=PLgUwDviBIf0oE3gA41TKO2H5bHpPd7fzn&index=36",
        "leetcode": "https://leetcode.com/problems/shortest-path-in-binary-matrix/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "525",
@@ -3976,7 +4694,9 @@
        "article_slug": "data-structure-g-37-path-with-minimum-effort",
        "youtube": "https://youtu.be/0ytpZyiZFhA",
        "leetcode": "https://leetcode.com/problems/path-with-minimum-effort/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "519",
@@ -3986,17 +4706,21 @@
        "article_slug": "data-structure-g-38-cheapest-flights-within-k-stops",
        "youtube": "https://youtu.be/9XybHVqTHcQ",
        "leetcode": "https://leetcode.com/problems/cheapest-flights-within-k-stops/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "764",
        "name": "Network Delay Time",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/network-delay-time",
-       "article_slug": "practice-dsa-network-delay-time",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/network-delay-time",
+       "article_slug": "blogs-data-structure-and-algorithm-network-delay-time",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/network-delay-time/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "524",
@@ -4006,7 +4730,9 @@
        "article_slug": "data-structure-g-40-number-of-ways-to-arrive-at-destination",
        "youtube": "https://youtu.be/_-0mx0SmYxA",
        "leetcode": "https://leetcode.com/problems/number-of-ways-to-arrive-at-destination/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "523",
@@ -4016,7 +4742,9 @@
        "article_slug": "graph-g-39-minimum-multiplications-to-reach-end",
        "youtube": "https://www.youtube.com/watch?v=_BvEJ3VIDWw&list=PLgUwDviBIf0oE3gA41TKO2H5bHpPd7fzn&index=39",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2826",
@@ -4026,7 +4754,9 @@
        "article_slug": "data-structure-bellman-ford-algorithm-g-41",
        "youtube": "https://youtu.be/0vVofAhAYjc",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "522",
@@ -4036,7 +4766,9 @@
        "article_slug": "data-structure-floyd-warshall-algorithm-g-42",
        "youtube": "https://www.youtube.com/watch?v=YbY8cVwWAvw&list=PLgUwDviBIf0oE3gA41TKO2H5bHpPd7fzn&index=42",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "521",
@@ -4046,7 +4778,9 @@
        "article_slug": "data-structure-find-the-city-with-the-smallest-number-of-neighbours-at-a-threshold-distance-g-43",
        "youtube": "https://youtu.be/9XybHVqTHcQ",
        "leetcode": "https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -4062,7 +4796,9 @@
        "article_slug": "data-structure-minimum-spanning-tree-theory-g-44",
        "youtube": "https://youtu.be/ZSPjZuZWCME",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2825",
@@ -4072,7 +4808,9 @@
        "article_slug": "data-structure-prims-algorithm-minimum-spanning-tree-c-and-java-g-45",
        "youtube": "https://youtu.be/mJcZjjKzeqk",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "516",
@@ -4082,7 +4820,9 @@
        "article_slug": "data-structure-disjoint-set-union-by-rank-union-by-size-path-compression-g-46",
        "youtube": "https://youtu.be/aBxjDBC4M1U",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "517",
@@ -4092,7 +4832,9 @@
        "article_slug": "data-structure-prims-algorithm-minimum-spanning-tree-c-and-java-g-45",
        "youtube": "https://youtu.be/mJcZjjKzeqk",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "515",
@@ -4102,7 +4844,9 @@
        "article_slug": "practice-dsa-number-of-operations-to-make-network-connected",
        "youtube": "https://youtu.be/FYrl7iz9_ZU",
        "leetcode": "https://leetcode.com/problems/number-of-operations-to-make-network-connected/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "513",
@@ -4112,7 +4856,9 @@
        "article_slug": "data-structure-most-stones-removed-with-same-row-or-column-dsu-g-53",
        "youtube": "https://youtu.be/OwMNX8SPavM",
        "leetcode": "https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "511",
@@ -4122,7 +4868,9 @@
        "article_slug": "data-structure-accounts-merge-dsu-g-50",
        "youtube": "https://youtu.be/FMwpt_aQOGw",
        "leetcode": "https://leetcode.com/problems/accounts-merge/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "514",
@@ -4132,7 +4880,9 @@
        "article_slug": "graph-number-of-islands-ii-online-queries-dsu-g-51",
        "youtube": "https://youtu.be/Rn6B-Q4SNyA",
        "leetcode": "https://leetcode.com/problems/number-of-islands-ii/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "512",
@@ -4142,7 +4892,9 @@
        "article_slug": "data-structure-making-a-large-island-dsu-g-52",
        "youtube": "https://youtu.be/lgiz0Oup6gM",
        "leetcode": "https://leetcode.com/problems/making-a-large-island/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "1006",
@@ -4152,7 +4904,9 @@
        "article_slug": "practice-dsa-swim-in-rising-water",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/swim-in-rising-water/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       }
      ]
     },
@@ -4168,7 +4922,9 @@
        "article_slug": "graph-bridges-in-graph-using-tarjans-algorithm-of-time-in-and-low-time-g-55",
        "youtube": "https://youtu.be/qrAub5z8FeA",
        "leetcode": "https://leetcode.com/problems/critical-connections-in-a-network/discuss/382385/find-bridges-in-a-graph",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "496",
@@ -4178,7 +4934,9 @@
        "article_slug": "data-structure-articulation-point-in-graph-g-56",
        "youtube": "https://youtu.be/j1QDfU21iZk",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "498",
@@ -4188,7 +4946,9 @@
        "article_slug": "graph-strongly-connected-components-kosarajus-algorithm-g-54",
        "youtube": "https://www.youtube.com/watch?v=V8qIqJxCioo&list=PLgUwDviBIf0rGEWe64KWas0Nryn7SCRWw&index=27",
        "leetcode": "https://leetcode.com/problems/maximum-number-of-non-overlapping-substrings/discuss/766485/kosaraju-algorithm-on",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     }
@@ -4210,7 +4970,9 @@
        "article_slug": "data-structure-dynamic-programming-introduction",
        "youtube": "https://youtu.be/tyB0ztf0DNY",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -4226,7 +4988,9 @@
        "article_slug": "data-structure-dynamic-programming-climbing-stairs",
        "youtube": "https://youtu.be/mLfjzJsN8us",
        "leetcode": "https://leetcode.com/problems/climbing-stairs/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "288",
@@ -4236,7 +5000,9 @@
        "article_slug": "data-structure-dynamic-programming-frog-jump-dp-3",
        "youtube": "https://www.youtube.com/watch?v=EgG3jsGoPvQ",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "289",
@@ -4246,7 +5012,9 @@
        "article_slug": "data-structure-dynamic-programming-frog-jump-with-k-distances-dp-4",
        "youtube": "https://www.youtube.com/watch?v=Kmh3rhyEtB8",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "291",
@@ -4256,7 +5024,9 @@
        "article_slug": "data-structure-maximum-sum-of-non-adjacent-elements-dp-5",
        "youtube": "https://www.youtube.com/watch?v=GrMBfJNk_NY",
        "leetcode": "https://leetcode.com/problems/house-robber/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "290",
@@ -4266,7 +5036,9 @@
        "article_slug": "data-structure-dynamic-programming-house-robber-dp-6",
        "youtube": "https://www.youtube.com/watch?v=3WaxQMELSkw",
        "leetcode": "https://leetcode.com/problems/house-robber-ii/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -4282,7 +5054,9 @@
        "article_slug": "data-structure-dynamic-programming-ninjas-training-dp-7",
        "youtube": "https://www.youtube.com/watch?v=AE39gJYuRog",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2795",
@@ -4292,7 +5066,9 @@
        "article_slug": "data-structure-grid-unique-paths-dp-on-grids-dp8",
        "youtube": "https://www.youtube.com/watch?v=sdE0A2Oxofw",
        "leetcode": "https://leetcode.com/problems/unique-paths/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "300",
@@ -4302,7 +5078,9 @@
        "article_slug": "data-structure-grid-unique-paths-2-dp-9",
        "youtube": "https://www.youtube.com/watch?v=TmhpgXScLyY",
        "leetcode": "https://leetcode.com/problems/unique-paths-ii/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "298",
@@ -4312,7 +5090,9 @@
        "article_slug": "data-structure-minimum-path-sum-in-a-grid-dp-10",
        "youtube": "https://youtu.be/_rgTlyky1uQ",
        "leetcode": "https://leetcode.com/problems/minimum-path-sum/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "299",
@@ -4322,7 +5102,9 @@
        "article_slug": "data-structure-minimum-path-sum-in-triangular-grid-dp-11",
        "youtube": "https://www.youtube.com/watch?v=SrP-PiLSYC0",
        "leetcode": "https://leetcode.com/problems/triangle/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "769",
@@ -4332,7 +5114,9 @@
        "article_slug": "data-structure-3-d-dp-ninja-and-his-friends-dp-13",
        "youtube": "https://www.youtube.com/watch?v=QGfn7JeXK54",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -4348,7 +5132,9 @@
        "article_slug": "data-structure-subset-sum-equal-to-target-dp-14",
        "youtube": "https://www.youtube.com/watch?v=fWX9xDmIzRI",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "321",
@@ -4358,7 +5144,9 @@
        "article_slug": "data-structure-partition-equal-subset-sum-dp-15",
        "youtube": "https://www.youtube.com/watch?v=7win3dcgo3k",
        "leetcode": "https://leetcode.com/problems/partition-equal-subset-sum/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "320",
@@ -4368,7 +5156,9 @@
        "article_slug": "data-structure-partition-set-into-2-subsets-with-min-absolute-sum-diff-dp-16",
        "youtube": "https://www.youtube.com/watch?v=GS_OqZb2CWc",
        "leetcode": "https://leetcode.com/problems/partition-array-into-two-arrays-to-minimize-sum-difference/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "318",
@@ -4378,7 +5168,9 @@
        "article_slug": "data-structure-count-subsets-with-sum-k-dp-17",
        "youtube": "https://www.youtube.com/watch?v=ZHyb-A2Mte4",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "317",
@@ -4388,27 +5180,33 @@
        "article_slug": "data-structure-count-partitions-with-given-difference-dp-18",
        "youtube": "https://www.youtube.com/watch?v=zoilQD1kYSg",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "541",
        "name": "Assign Cookies",
        "difficulty": "Easy",
-       "article": "https://takeuforward.org/practice/dsa/assign-cookies",
-       "article_slug": "practice-dsa-assign-cookies",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/assign-cookies",
+       "article_slug": "blogs-data-structure-and-algorithm-assign-cookies",
        "youtube": "https://youtu.be/DIX2p7vb9co?si=GofAIDimue-Av0Fi",
        "leetcode": "https://leetcode.com/problems/assign-cookies/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "2802",
        "name": "Minimum Coins (DP - 20)",
        "difficulty": "Hard",
-       "article": "https://takeuforward.org/practice/dsa/minimum-coins",
-       "article_slug": "practice-dsa-minimum-coins",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/minimum-number-of-coins",
+       "article_slug": "blogs-data-structure-and-algorithm-minimum-number-of-coins",
        "youtube": "https://www.youtube.com/watch?v=myPeWb3Y68A",
        "leetcode": "https://leetcode.com/problems/coin-change/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "324",
@@ -4418,7 +5216,9 @@
        "article_slug": "data-structure-target-sum-dp-21",
        "youtube": "https://www.youtube.com/watch?v=b3GD8263-PQ",
        "leetcode": "https://leetcode.com/problems/target-sum/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2801",
@@ -4428,7 +5228,9 @@
        "article_slug": "data-structure-coin-change-2-dp-22",
        "youtube": "https://www.youtube.com/watch?v=HgyouUi11zk",
        "leetcode": "https://leetcode.com/problems/coin-change-2/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "325",
@@ -4438,7 +5240,9 @@
        "article_slug": "data-structure-unbounded-knapsack-dp-23",
        "youtube": "https://youtu.be/OgvOZ6OrJoY",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2803",
@@ -4448,7 +5252,9 @@
        "article_slug": "data-structure-rod-cutting-problem-dp-24",
        "youtube": "https://youtu.be/mO8XpGoJwuo",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -4464,7 +5270,9 @@
        "article_slug": "data-structure-print-longest-common-subsequence-dp-26",
        "youtube": "https://youtu.be/-zI4mrF2Pb4",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2799",
@@ -4474,7 +5282,9 @@
        "article_slug": "data-structure-print-longest-common-subsequence-dp-26",
        "youtube": "https://youtu.be/-zI4mrF2Pb4",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "309",
@@ -4484,7 +5294,9 @@
        "article_slug": "practice-dsa-longest-common-substring",
        "youtube": "https://youtu.be/_wP9mWNPL5w",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "310",
@@ -4494,7 +5306,9 @@
        "article_slug": "data-structure-longest-palindromic-subsequence-dp-28",
        "youtube": "https://youtu.be/6i_T5kkfv4A",
        "leetcode": "https://leetcode.com/problems/longest-palindromic-subsequence/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2800",
@@ -4504,7 +5318,9 @@
        "article_slug": "data-structure-minimum-insertions-to-make-string-palindrome-dp-29",
        "youtube": "https://www.youtube.com/watch?v=xPBLEj41rFU",
        "leetcode": "https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "311",
@@ -4514,7 +5330,9 @@
        "article_slug": "data-structure-minimum-insertions-deletions-to-convert-string-dp-30",
        "youtube": "https://www.youtube.com/watch?v=yMnH0jrir0Q",
        "leetcode": "https://leetcode.com/problems/delete-operation-for-two-strings/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "313",
@@ -4524,7 +5342,9 @@
        "article_slug": "data-structure-shortest-common-supersequence-dp-31",
        "youtube": "https://youtu.be/xElxAuBcvsU",
        "leetcode": "https://leetcode.com/problems/shortest-common-supersequence/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "306",
@@ -4534,7 +5354,9 @@
        "article_slug": "data-structure-distinct-subsequences-dp-32",
        "youtube": "https://youtu.be/nVG7eTiD2bY",
        "leetcode": "https://leetcode.com/problems/distinct-subsequences/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "307",
@@ -4544,7 +5366,9 @@
        "article_slug": "data-structure-edit-distance-dp-33",
        "youtube": "https://youtu.be/fJaKO8FbDdo",
        "leetcode": "https://leetcode.com/problems/edit-distance/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "314",
@@ -4554,7 +5378,9 @@
        "article_slug": "data-structure-wildcard-matching-dp-34",
        "youtube": "https://youtu.be/ZmlQ3vgAOMo",
        "leetcode": "https://leetcode.com/problems/wildcard-matching/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -4570,7 +5396,9 @@
        "article_slug": "data-structure-stock-buy-and-sell",
        "youtube": "https://youtu.be/excAOvwF_Wk",
        "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "302",
@@ -4580,7 +5408,9 @@
        "article_slug": "data-structure-buy-and-sell-stock-ii-dp-36",
        "youtube": "https://youtu.be/nGJmxkUJQGs",
        "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "303",
@@ -4590,7 +5420,9 @@
        "article_slug": "data-structure-buy-and-sell-stock-iii-dp-37",
        "youtube": "https://youtu.be/-uQGzhYj8BQ",
        "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/description/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "304",
@@ -4600,7 +5432,9 @@
        "article_slug": "data-structure-buy-and-sell-stock-iv-dp-38",
        "youtube": "https://youtu.be/IV1dHbk5CDc",
        "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "56",
@@ -4610,7 +5444,9 @@
        "article_slug": "data-structure-buy-and-sell-stocks-with-cooldown-dp-39",
        "youtube": "https://youtu.be/IGIe46xw3YY",
        "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "305",
@@ -4620,7 +5456,9 @@
        "article_slug": "data-structure-buy-and-sell-stocks-with-transaction-fees-dp-40",
        "youtube": "https://youtu.be/k4eK-vEmnKg",
        "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -4636,7 +5474,9 @@
        "article_slug": "data-structure-longest-increasing-subsequence-binary-search-dp-43",
        "youtube": "https://youtu.be/on2hvxBXJH4",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "851",
@@ -4646,7 +5486,9 @@
        "article_slug": "data-structure-printing-longest-increasing-subsequence-dp-42",
        "youtube": "https://youtu.be/IFfYfonAFGc",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2851",
@@ -4656,7 +5498,9 @@
        "article_slug": "data-structure-longest-increasing-subsequence-binary-search-dp-43",
        "youtube": "https://youtu.be/on2hvxBXJH4",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "603",
@@ -4666,7 +5510,9 @@
        "article_slug": "data-structure-longest-divisible-subset-dp-44",
        "youtube": "https://youtu.be/gDuZwBW9VvM",
        "leetcode": "https://leetcode.com/problems/largest-divisible-subset/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "640",
@@ -4676,7 +5522,9 @@
        "article_slug": "data-structure-longest-string-chain-dp-45",
        "youtube": "https://youtu.be/YY8iBaYcc4g",
        "leetcode": "https://leetcode.com/problems/longest-string-chain/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "633",
@@ -4686,7 +5534,9 @@
        "article_slug": "practice-dsa-longest-bitonic-subsequence",
        "youtube": "https://youtu.be/y4vN0WNdrlg",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "780",
@@ -4696,7 +5546,9 @@
        "article_slug": "data-structure-number-of-longest-increasing-subsequences-dp-47",
        "youtube": "https://youtu.be/cKVl1TFdNXg",
        "leetcode": "https://leetcode.com/problems/number-of-longest-increasing-subsequence/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -4712,7 +5564,9 @@
        "article_slug": "dynamic-programming-matrix-chain-multiplication-dp-48",
        "youtube": "https://youtu.be/vRVfmbCFW7Y",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2806",
@@ -4722,7 +5576,9 @@
        "article_slug": "data-structure-matrix-chain-multiplication-tabulation-method-dp-49",
        "youtube": "https://youtu.be/pDCXsbAw5Cg",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "328",
@@ -4732,7 +5588,9 @@
        "article_slug": "data-structure-minimum-cost-to-cut-the-stick-dp-50",
        "youtube": "https://youtu.be/xwomavsC86c",
        "leetcode": "https://leetcode.com/problems/minimum-cost-to-cut-a-stick/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "326",
@@ -4742,7 +5600,9 @@
        "article_slug": "data-structure-burst-balloons-partition-dp-dp-51",
        "youtube": "https://youtu.be/Yz4LlDSlkns",
        "leetcode": "https://leetcode.com/problems/burst-balloons/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "276",
@@ -4752,17 +5612,21 @@
        "article_slug": "data-structure-evaluate-boolean-expression-to-true-partition-dp-dp-52",
        "youtube": "https://youtu.be/MM7fXopgyjw",
        "leetcode": "https://leetcode.com/problems/parsing-a-boolean-expression/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "329",
        "name": "Palindrome partitioning II",
        "difficulty": "Hard",
-       "article": "https://takeuforward.org/practice/dsa/palindrome-partitioning-ii-",
-       "article_slug": "practice-dsa-palindrome-partitioning-ii",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/palindrome-partitioning-ii-minimum-cuts",
+       "article_slug": "blogs-data-structure-and-algorithm-palindrome-partitioning-ii-minimum-cuts",
        "youtube": "https://youtu.be/_H8V5hJUGd0",
        "leetcode": "https://leetcode.com/problems/palindrome-partitioning-ii/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "810",
@@ -4772,7 +5636,9 @@
        "article_slug": "data-structure-partition-array-for-maximum-sum-front-partition-dp-54",
        "youtube": "https://youtu.be/PhWWJmaKfMc",
        "leetcode": "https://leetcode.com/problems/partition-array-for-maximum-sum/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -4788,7 +5654,9 @@
        "article_slug": "data-structure-maximum-rectangle-area-with-all-1s-dp-on-rectangles-dp-55",
        "youtube": "https://youtu.be/tOylVCugy9k",
        "leetcode": "https://leetcode.com/problems/maximal-rectangle/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2395",
@@ -4798,7 +5666,9 @@
        "article_slug": "data-structure-count-square-submatrices-with-all-1s-dp-on-rectangles-dp-56",
        "youtube": "https://youtu.be/auS1fynpnjo",
        "leetcode": "https://leetcode.com/problems/count-square-submatrices-with-all-ones/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       }
      ]
     }
@@ -4820,7 +5690,9 @@
        "article_slug": "data-structure-implement-trie-1",
        "youtube": "https://www.youtube.com/watch?v=dBGUmUQhjaM&list=PLgUwDviBIf0pcIDCZnxhv0LkHf5KzG9zp",
        "leetcode": "https://leetcode.com/problems/implement-trie-prefix-tree/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     },
@@ -4836,17 +5708,21 @@
        "article_slug": "data-structure-implement-trie-ii",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "1023",
        "name": "Longest Word with All Prefixes",
        "difficulty": "Medium",
-       "article": "https://takeuforward.org/practice/dsa/longest-word-with-all-prefixes",
-       "article_slug": "practice-dsa-longest-word-with-all-prefixes",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/longest-word-with-all-prefixes",
+       "article_slug": "blogs-data-structure-and-algorithm-longest-word-with-all-prefixes",
        "youtube": "https://www.youtube.com/watch?v=AWnBa91lThI&list=PLgUwDviBIf0pcIDCZnxhv0LkHf5KzG9zp&index=3",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "1026",
@@ -4856,7 +5732,9 @@
        "article_slug": "data-structure-number-of-distinct-substrings-in-a-string-using-trie",
        "youtube": "https://www.youtube.com/watch?v=RV0QeTyHZxo&list=PLgUwDviBIf0pcIDCZnxhv0LkHf5KzG9zp&index=4",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "2390",
@@ -4866,7 +5744,9 @@
        "article_slug": null,
        "youtube": "https://youtu.be/5iyuU4hQFrw",
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "1024",
@@ -4876,7 +5756,9 @@
        "article_slug": "data-structure-maximum-xor-of-two-numbers-in-an-array",
        "youtube": "https://www.youtube.com/watch?v=EIhAwfHubE8&list=PLgUwDviBIf0pcIDCZnxhv0LkHf5KzG9zp&index=6",
        "leetcode": "https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       },
       {
        "id": "1025",
@@ -4886,7 +5768,9 @@
        "article_slug": "trie-maximum-xor-queries-trie",
        "youtube": "https://www.youtube.com/watch?v=Q8LhG9Pi5KM&list=PLgUwDviBIf0pcIDCZnxhv0LkHf5KzG9zp&index=7",
        "leetcode": "https://leetcode.com/problems/maximum-xor-with-an-element-from-array/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "article"
       }
      ]
     }
@@ -4908,17 +5792,21 @@
        "article_slug": "practice-dsa-minimum-number-of-bracket-reversals-to-make-an-expression-balanced",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "982",
        "name": "Count and say",
        "difficulty": "Hard",
-       "article": "https://takeuforward.org/practice/dsa/count-and-say",
-       "article_slug": "practice-dsa-count-and-say",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/count-and-say",
+       "article_slug": "blogs-data-structure-and-algorithm-count-and-say",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/count-and-say/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "2399",
@@ -4928,7 +5816,9 @@
        "article_slug": "data-structure-hashing-in-strings",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "979",
@@ -4938,17 +5828,21 @@
        "article_slug": "practice-dsa-rabin-karp-algorithm",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/repeated-string-match/discuss/416144/Rabin-Karp-algorithm-C%2B%2B-implementation",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "981",
        "name": "Z function",
        "difficulty": "Hard",
-       "article": "https://takeuforward.org/practice/dsa/z-function",
-       "article_slug": "practice-dsa-z-function",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/z-function",
+       "article_slug": "blogs-data-structure-and-algorithm-z-function",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "977",
@@ -4958,27 +5852,33 @@
        "article_slug": "practice-dsa-kmp-algorithm-or-lps-array",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/implement-strstr/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       },
       {
        "id": "980",
        "name": "Shortest Palindrome",
        "difficulty": "Hard",
-       "article": "https://takeuforward.org/practice/dsa/shortest-palindrome",
-       "article_slug": "practice-dsa-shortest-palindrome",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/shortest-palindrome",
+       "article_slug": "blogs-data-structure-and-algorithm-shortest-palindrome",
        "youtube": null,
        "leetcode": null,
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "978",
        "name": "Longest happy prefix",
        "difficulty": "Hard",
-       "article": "https://takeuforward.org/practice/dsa/longest-happy-prefix",
-       "article_slug": "practice-dsa-longest-happy-prefix",
+       "article": "https://takeuforward.org/blogs/data-structure-and-algorithm/longest-happy-prefix",
+       "article_slug": "blogs-data-structure-and-algorithm-longest-happy-prefix",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/longest-happy-prefix/",
-       "practice": null
+       "practice": null,
+       "article_available": false,
+       "article_kind": null
       },
       {
        "id": "231",
@@ -4988,7 +5888,9 @@
        "article_slug": "practice-dsa-count-palindromic-subsequences",
        "youtube": null,
        "leetcode": "https://leetcode.com/problems/palindromic-substrings/",
-       "practice": null
+       "practice": null,
+       "article_available": true,
+       "article_kind": "statement"
       }
      ]
     }

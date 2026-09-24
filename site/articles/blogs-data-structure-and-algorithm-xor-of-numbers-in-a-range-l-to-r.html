@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>XOR of Numbers in a Range L to R</title>
+<link rel="stylesheet" href="../style.css?v=1790281487">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>XOR of Numbers in a Range L to R</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/blogs/data-structure-and-algorithm/xor-of-numbers-in-a-range-l-to-r</code></div>
+  <div class="ArticleParser-module__R__VNG__article" data-article-segment="html-0"><p>Given two non-negative integers <code>L</code> and <code>R</code>, return the bitwise XOR of all integers in the inclusive range from <code>L</code> to <code>R</code>.</p></div><div><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 1</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>L = 4</code>, <code>R = 8</code></p><p><strong>Output:</strong> <code>8</code></p><p><strong>Explanation:</strong> The numbers in the range are 4, 5, 6, 7, and 8. The operation is <code>4 ^ 5 ^ 6 ^ 7 ^ 8</code>. Calculating this sequentially gives a final result of 8.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 2</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>L = 3</code>, <code>R = 4</code></p><p><strong>Output:</strong> <code>7</code></p><p><strong>Explanation:</strong> The only numbers in the range are 3 and 4. The operation <code>3 ^ 4</code> evaluates to 7.</p></div></div></section></div><div><div class="BlogDetail-module__HEfJva__practiceCallout"><a class="BlogDetail-module__HEfJva__practiceLink" data-mobile-prefetch="normal" href="https://takeuforward.org/practice/dsa/xor-of-numbers-in-a-given-range" rel="noopener" target="_blank"><span>Practice it by yourself before moving onto the solution</span><span class="BlogDetail-module__HEfJva__practiceAction">Try now</span></a></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-2"><p></p><h2 id="blog-toc-brute-force-approach">Brute Force Approach</h2><p>The most direct approach is to process every number in the required range and keep XORing it with a running result.</p><p>Starting with <code>0</code> is useful because <code>x ^ 0 = x</code>. After every value from <code>L</code> to <code>R</code> has been included, the running XOR represents the XOR of the complete range.</p><h3 id="blog-toc-algorithm">Algorithm</h3><ul><li><p>If <code>L &gt; R</code>, return <code>0</code> because the given range is invalid.</p></li><li><p>Initialize <code>result = 0</code> to store the cumulative XOR of the numbers processed so far.</p></li><li><p>Traverse every integer <code>i</code> from <code>L</code> to <code>R</code>, inclusive.</p></li><li><p>Update <code>result</code> as <code>result ^ i</code> so the current number becomes part of the range XOR.</p></li><li><p>Return <code>result</code> after every number in the range has been processed.</p></li></ul><h3 id="blog-toc-dry-run">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="XOR of Numbers in Range Brute Force Appraoch Dry Run .png" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/e4c6b7c4ad35dfa6.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">XOR of Numbers in Range Brute Force Appraoch Dry Run .png</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-3"><h3 id="blog-toc-solution">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    long long findRangeXOR(long long L, long long R) {
+        if (L &gt; R) {
+            return 0;
+        }
+
+        long long result = 0;
+
+        /*
+         * Include every value in the range once so result
+         * gradually becomes the XOR from L through R.
+         */
+        for (long long value = L; value &lt;= R; value++) {
+            result ^= value;
+        }
+
+        return result;
+    }
+};
+
+int main() {
+    long long L = 3;
+    long long R = 6;
+
+    Solution solution;
+    cout &lt;&lt; solution.findRangeXOR(L, R) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+    def find_range_xor(self, L: int, R: int) -&gt; int:
+        if L &gt; R:
+            return 0
+
+        result = 0
+
+        # Include every value from L through R
+        # in the running XOR exactly once.
+        for value in range(L, R + 1):
+            result ^= value
+
+        return result
+
+
+if __name__ == "__main__":
+    L = 3
+    R = 6
+
+    solution = Solution()
+    print(solution.find_range_xor(L, R))</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">class Solution {
+    public long findRangeXOR(long L, long R) {
+        if (L &gt; R) {
+            return 0;
+        }
+
+        long result = 0;
+
+        /*
+         * Include every value in the range once so result
+         * gradually becomes the XOR from L through R.
+         */
+        for (long value = L; value &lt;= R; value++) {
+            result ^= value;
+        }
+
+        return result;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        long L = 3;
+        long R = 6;
+
+        Solution solution = new Solution();
+        System.out.println(solution.findRangeXOR(L, R));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    findRangeXOR(L, R) {
+        if (L &gt; R) {
+            return 0n;
+        }
+
+        let result = 0n;
+
+        /*
+         * BigInt keeps bitwise operations accurate even when
+         * the values exceed JavaScript's 32-bit XOR range.
+         */
+        for (let value = L; value &lt;= R; value++) {
+            result ^= value;
+        }
+
+        return result;
+    }
+}
+
+const L = 3n;
+const R = 6n;
+
+const solution = new Solution();
+console.log(solution.findRangeXOR(L, R).toString());</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-4"><h3 id="blog-toc-complexity-analysis">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(R - L + 1)</code>, because every integer in the range is processed once.</p><p><strong>Space Complexity:</strong> <code>O(1)</code>, because only a few variables are used.</p><p></p><p></p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-5"><h2 id="blog-toc-optimal-approach">Optimal Approach</h2><p>Computing every value in the range is unnecessary because the XOR from <code>0</code> to any number <code>N</code> follows a repeating pattern based on <code>N % 4</code>.</p><p>Let:</p><p><code>prefixXOR(N) = 0 ^ 1 ^ 2 ^ ... ^ N</code></p><p>Then the XOR of the range <code>L</code> to <code>R</code> can be obtained as:</p><p><code>prefixXOR(R) ^ prefixXOR(L - 1)</code></p></div><div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-6"><p>This works because every value from <code>0</code> to <code>L - 1</code> appears in both prefix XORs. XORing the two results cancels those common values using <code>x ^ x = 0</code>, leaving only the numbers from <code>L</code> to <code>R</code>.</p><p>The prefix XOR follows this four-case pattern:</p><ul><li><p>If <code>N % 4 == 0</code>, <code>prefixXOR(N) = N</code></p></li><li><p>If <code>N % 4 == 1</code>, <code>prefixXOR(N) = 1</code></p></li><li><p>If <code>N % 4 == 2</code>, <code>prefixXOR(N) = N + 1</code></p></li><li><p>If <code>N % 4 == 3</code>, <code>prefixXOR(N) = 0</code></p></li></ul><p>Because this pattern gives a prefix XOR in constant time, the complete range XOR can also be found in constant time.</p><p></p><h3 id="blog-toc-algorithm-2">Algorithm</h3><ul><li><p>If <code>L &gt; R</code>, return <code>0</code> because the range is invalid.</p></li><li><p>Create a helper function <code>prefixXOR(N)</code> that returns the XOR of all integers from <code>0</code> to <code>N</code>.</p></li><li><p>If <code>N &lt; 0</code>, return <code>0</code>. This handles <code>L = 0</code>, where the second prefix becomes <code>prefixXOR(-1)</code>.</p></li><li><p>Inside the helper, calculate <code>N % 4</code> and return the corresponding value from the four-case XOR pattern.</p></li><li><p>Calculate <code>prefixXOR(R)</code> to represent the XOR of all values from <code>0</code> to <code>R</code>.</p></li><li><p>XOR it with <code>prefixXOR(L - 1)</code>. The common prefix cancels, leaving exactly the XOR from <code>L</code> to <code>R</code>.</p></li></ul><h3 id="blog-toc-dry-run-2">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="XOR of Numbers in Range Optimal Appraoch Dry Run .png" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/c11df4c8f1f6af2e.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">XOR of Numbers in Range Optimal Appraoch Dry Run .png</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-7"><h3 id="blog-toc-solution-2">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+private:
+    long long prefixXOR(long long n) {
+        /*
+         * This represents an empty prefix and also allows
+         * the same range formula to work when L is 0.
+         */
+        if (n &lt; 0) {
+            return 0;
+        }
+
+        long long remainder = n % 4;
+
+        /*
+         * XOR from 0 through n follows a four-case pattern,
+         * so only n % 4 is needed to determine the result.
+         */
+        if (remainder == 0) {
+            return n;
+        }
+
+        if (remainder == 1) {
+            return 1;
+        }
+
+        if (remainder == 2) {
+            return n + 1;
+        }
+
+        return 0;
+    }
+
+public:
+    long long findRangeXOR(long long L, long long R) {
+        if (L &gt; R) {
+            return 0;
+        }
+
+        /*
+         * The prefix before L appears in both XOR groups
+         * and cancels, leaving only values from L through R.
+         */
+        return prefixXOR(R) ^ prefixXOR(L - 1);
+    }
+};
+
+int main() {
+    long long L = 3;
+    long long R = 6;
+
+    Solution solution;
+    cout &lt;&lt; solution.findRangeXOR(L, R) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+    def _prefix_xor(self, n: int) -&gt; int:
+        # Treat values below 0 as an empty prefix.
+        if n &lt; 0:
+            return 0
+
+        remainder = n % 4
+
+        # XOR from 0 through n repeats in a four-case pattern.
+        if remainder == 0:
+            return n
+
+        if remainder == 1:
+            return 1
+
+        if remainder == 2:
+            return n + 1
+
+        return 0
+
+    def find_range_xor(self, L: int, R: int) -&gt; int:
+        if L &gt; R:
+            return 0
+
+        # The prefix before L cancels from both XOR groups.
+        return self._prefix_xor(R) ^ self._prefix_xor(L - 1)
+
+
+if __name__ == "__main__":
+    L = 3
+    R = 6
+
+    solution = Solution()
+    print(solution.find_range_xor(L, R))</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">class Solution {
+    private long prefixXOR(long n) {
+        /*
+         * This represents an empty prefix and also allows
+         * the same range formula to work when L is 0.
+         */
+        if (n &lt; 0) {
+            return 0;
+        }
+
+        long remainder = n % 4;
+
+        /*
+         * XOR from 0 through n follows a four-case pattern,
+         * so only n % 4 is needed to determine the result.
+         */
+        if (remainder == 0) {
+            return n;
+        }
+
+        if (remainder == 1) {
+            return 1;
+        }
+
+        if (remainder == 2) {
+            return n + 1;
+        }
+
+        return 0;
+    }
+
+    public long findRangeXOR(long L, long R) {
+        if (L &gt; R) {
+            return 0;
+        }
+
+        /*
+         * The common prefix from 0 through L - 1
+         * cancels because XOR is its own inverse.
+         */
+        return prefixXOR(R) ^ prefixXOR(L - 1);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        long L = 3;
+        long R = 6;
+
+        Solution solution = new Solution();
+        System.out.println(solution.findRangeXOR(L, R));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    prefixXOR(n) {
+        /*
+         * Treat a negative boundary as an empty prefix,
+         * which keeps the formula valid when L is 0.
+         */
+        if (n &lt; 0n) {
+            return 0n;
+        }
+
+        const remainder = n % 4n;
+
+        /*
+         * XOR from 0 through n follows a four-case pattern,
+         * so the remainder determines the complete prefix XOR.
+         */
+        if (remainder === 0n) {
+            return n;
+        }
+
+        if (remainder === 1n) {
+            return 1n;
+        }
+
+        if (remainder === 2n) {
+            return n + 1n;
+        }
+
+        return 0n;
+    }
+
+    findRangeXOR(L, R) {
+        if (L &gt; R) {
+            return 0n;
+        }
+
+        /*
+         * The common prefix from 0 through L - 1
+         * cancels when the two prefix XORs are combined.
+         */
+        return this.prefixXOR(R) ^ this.prefixXOR(L - 1n);
+    }
+}
+
+const L = 3n;
+const R = 6n;
+
+const solution = new Solution();
+console.log(solution.findRangeXOR(L, R).toString());</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-8"><h3 id="blog-toc-complexity-analysis-2">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(1)</code>, because each prefix XOR is found using a fixed number of arithmetic and bitwise operations.</p><p><strong>Space Complexity:</strong> <code>O(1)</code>, because no additional data structure is required.</p><p></p><p></p></div><div><section aria-label="Interview follow-up Questions" class="BlogDetail-module__HEfJva__faqSection" id="blog-toc-faqs"><h2 class="BlogDetail-module__HEfJva__faqHeading">Interview follow-up Questions</h2><div class="flex w-full flex-col BlogDetail-module__HEfJva__faqList" data-orientation="vertical" data-slot="accordion"><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="open"><h3 class="flex" data-orientation="vertical" data-state="open"></h3><div aria-labelledby="radix-_R_1kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="open" id="radix-_R_9kcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"><div class="h-auto pt-0 pb-2.5 [&amp;_a]:underline [&amp;_a]:underline-offset-3 [&amp;_a]:hover:text-foreground [&amp;_p:not(:last-child)]:mb-4 BlogDetail-module__HEfJva__faqAnswer"><p>prefixXOR(R) contains every value from 0 to R, while prefixXOR(L - 1) contains the values before L. XORing them makes the common prefix appear twice, so those values cancel and only the range L to R remains.</p></div></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_2kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_akcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_3kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_bkcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_4kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_ckcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_5kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_dkcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_6kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_ekcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div></div></section></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div>
+</article>
+<script src="../article.js?v=1790281487"></script>
+</body></html>

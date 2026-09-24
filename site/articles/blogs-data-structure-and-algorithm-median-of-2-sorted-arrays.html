@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Median of 2 Sorted Arrays</title>
+<link rel="stylesheet" href="../style.css?v=1790281487">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Median of 2 Sorted Arrays</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/blogs/data-structure-and-algorithm/median-of-2-sorted-arrays</code></div>
+  <div class="ArticleParser-module__R__VNG__article" data-article-segment="html-0"><p>Given two sorted arrays nums1 and nums2 of size M and N respectively, return the median of the two sorted arrays. The final array is formed by merging both arrays and sorting them in non-decreasing order.</p><p>The median is defined as the middle value of a sorted list of numbers. In case the length of the list is even, the median is the average of the two middle elements.</p></div><div><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 1</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input</strong>: nums1 = [1, 3], nums2 = [2] </p><p><strong>Output</strong>: 2.00000 </p><p><strong>Explanation</strong>: The combined sorted array is [1, 2, 3]. The middle element is 2, so the median is 2.0.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 2</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input</strong>: nums1 = [1, 2], nums2 = [3, 4] </p><p><strong>Output</strong>: 2.50000 </p><p><strong>Explanation</strong>: The combined sorted array is [1, 2, 3, 4]. The middle elements are 2 and 3. The median is <span>(2 + 3) / 2 = 2.5</span>.</p></div></div></section></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-1"><h2 id="blog-toc-brute-force-approach">Brute Force Approach</h2><p>The simplest thought is to put all values from both arrays into one list. Once all values are together, sorting the list gives the exact order that the problem is talking about. Then finding the median becomes a normal middle-index task. The only downside is that it sorts again, even though both arrays were already sorted.</p><h3 id="blog-toc-algorithm">Algorithm</h3><ul><li><p>Create an empty list to store all values from both arrays. This is needed because the median belongs to the combined sorted order.</p></li><li><p>Add every element from the first array and every element from the second array into the list, so no value is missed.</p></li><li><p>Sort the combined list because the median is always found from the fully sorted order.</p></li><li><p>If the total number of elements is odd, return the middle element because there is one exact center.</p></li><li><p>If the total number of elements is even, return the average of the two middle elements because the center lies between them.</p></li></ul><h3 id="blog-toc-dry-run">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Median of 2 Sorted Arrays Brute Dry Run" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/41b5c8c567ac87d4.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Median of 2 Sorted Arrays Brute Dry Run</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-2"><h3 id="blog-toc-solution">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    /*
+    Finds the median after putting both arrays
+    into one combined sorted order.
+    */
+    double findMedianSortedArrays(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) {
+        // This stores all values from both arrays in one place.
+        vector&lt;int&gt; merged;
+
+        for (int value : nums1) {
+            merged.push_back(value);
+        }
+
+        for (int value : nums2) {
+            merged.push_back(value);
+        }
+
+        // Sorting creates the final order needed for median calculation.
+        sort(merged.begin(), merged.end());
+
+        // This is the total number of values after both arrays are combined.
+        int total = merged.size();
+
+        // If total is odd, there is one exact middle element.
+        if (total % 2 == 1) {
+            return merged[total / 2];
+        } else {
+            // If total is even, the median is the average
+            // of the two middle elements.
+            return ((double)merged[total / 2 - 1] + merged[total / 2]) / 2.0;
+        }
+    }
+};
+
+// Driver code starts
+int main() {
+    vector&lt;int&gt; nums1 = {1, 2};
+    vector&lt;int&gt; nums2 = {3, 4};
+
+    Solution obj;
+    cout &lt;&lt; obj.findMedianSortedArrays(nums1, nums2) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">from typing import List
+
+class Solution:
+    """
+    Finds the median after putting both arrays
+    into one combined sorted order.
+    """
+    def find_median_sorted_arrays(self, nums1: List[int], nums2: List[int]) -&gt; float:
+        # This stores all values from both arrays in one place.
+        merged: List[int] = []
+
+        for value in nums1:
+            merged.append(value)
+
+        for value in nums2:
+            merged.append(value)
+
+        # Sorting creates the final order needed for median calculation.
+        merged.sort()
+
+        # This is the total number of values after both arrays are combined.
+        total: int = len(merged)
+
+        # If total is odd, there is one exact middle element.
+        if total % 2 == 1:
+            return float(merged[total // 2])
+        else:
+            # If total is even, the median is the average
+            # of the two middle elements.
+            return (merged[total // 2 - 1] + merged[total // 2]) / 2.0
+
+
+# Driver code starts
+def main() -&gt; None:
+    nums1: List[int] = [1, 2]
+    nums2: List[int] = [3, 4]
+
+    obj = Solution()
+    print(obj.find_median_sorted_arrays(nums1, nums2))
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    /*
+    Finds the median after putting both arrays
+    into one combined sorted order.
+    */
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        // This stores all values from both arrays in one place.
+        ArrayList&lt;Integer&gt; merged = new ArrayList&lt;&gt;();
+
+        for (int value : nums1) {
+            merged.add(value);
+        }
+
+        for (int value : nums2) {
+            merged.add(value);
+        }
+
+        // Sorting creates the final order needed for median calculation.
+        Collections.sort(merged);
+
+        // This is the total number of values after both arrays are combined.
+        int total = merged.size();
+
+        // If total is odd, there is one exact middle element.
+        if (total % 2 == 1) {
+            return merged.get(total / 2);
+        } else {
+            // If total is even, the median is the average
+            // of the two middle elements.
+            return (
+                (double)merged.get(total / 2 - 1) +
+                merged.get(total / 2)
+            ) / 2.0;
+        }
+    }
+}
+
+public class Main {
+    // Driver code starts
+    public static void main(String[] args) {
+        int[] nums1 = {1, 2};
+        int[] nums2 = {3, 4};
+
+        Solution obj = new Solution();
+        System.out.println(obj.findMedianSortedArrays(nums1, nums2));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    /*
+    Finds the median after putting both arrays
+    into one combined sorted order.
+    */
+    findMedianSortedArrays(nums1, nums2) {
+        // This stores all values from both arrays in one place.
+        const merged = [];
+
+        for (const value of nums1) {
+            merged.push(value);
+        }
+
+        for (const value of nums2) {
+            merged.push(value);
+        }
+
+        // Sorting creates the final order needed for median calculation.
+        merged.sort((a, b) =&gt; a - b);
+
+        // This is the total number of values after both arrays are combined.
+        const total = merged.length;
+
+        // If total is odd, there is one exact middle element.
+        if (total % 2 === 1) {
+            return merged[Math.floor(total / 2)];
+        } else {
+            // If total is even, the median is the average
+            // of the two middle elements.
+            return (
+                merged[Math.floor(total / 2) - 1] +
+                merged[Math.floor(total / 2)]
+            ) / 2.0;
+        }
+    }
+}
+
+// Driver code starts
+function main() {
+    const nums1 = [1, 2];
+    const nums2 = [3, 4];
+
+    const obj = new Solution();
+    console.log(obj.findMedianSortedArrays(nums1, nums2));
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-3"><h3 id="blog-toc-complexity-analysis">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O((N + M) x log(N + M))</code>, because the final list containing all elements of size N+M is sorted.</p><p><strong>Space Complexity:</strong> <code>O(N + M)</code>, because a separate list is created to store all elements which contains N + M elements.</p><p></p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-4"><h2 id="blog-toc-better-approach">Better Approach</h2><p>Since both arrays are already sorted, sorting everything again is not needed. The merge step from merge sort already knows how to walk through two sorted arrays in increasing order by choosing the smaller element of the two unused elements from each array. For the median, the full merged array is also not needed. Only the middle element, or the two middle elements, matter.</p><p>So the idea is to simulate the merge process only until the middle position is reached. Keep track of the current picked value and the previous picked value. These two values are enough to handle both odd and even total sizes.</p><h3 id="blog-toc-algorithm-2">Algorithm</h3><ul><li><p>Keep two pointers, one for each array. These pointers show the next unused value in each array.</p></li><li><p>Run the merge process only until the middle position, by taking the smaller value of both unused value and moving the used value pointer to next. This is enough because elements after the middle cannot affect the median.</p></li><li><p>Before choosing the next value, store the current value as the previous value. This helps when the total length is even and two middle values are needed.</p></li><li><p>At each step, choose the smaller current value from the two arrays. If one array is finished, choose from the other array.</p></li><li><p>If the total length is odd, return the current middle value. If it is even, return the average of the previous and current values.</p></li></ul><h3 id="blog-toc-dry-run-2">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Better" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/4ea6d42b5d8e8c69.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Better</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-5"><h3 id="blog-toc-solution-2">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    /*
+    Finds the median by simulating the merge process
+    only until the middle position is reached.
+    */
+    double findMedianSortedArrays(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) {
+        int n = nums1.size();
+        int m = nums2.size();
+
+        // These pointers track the next unused value in each array.
+        int i = 0;
+        int j = 0;
+
+        // previous and current store the last two picked values.
+        int previous = 0;
+        int current = 0;
+
+        // Only positions up to the middle can affect the median.
+        int middle = (n + m) / 2;
+
+        for (int count = 0; count &lt;= middle; count++) {
+            previous = current;
+
+            // If both arrays still have values, choose the smaller one.
+            if (i &lt; n &amp;&amp; j &lt; m) {
+                // nums1 is chosen when it has the smaller current value.
+                if (nums1[i] &lt;= nums2[j]) {
+                    current = nums1[i];
+                    i++;
+                } else {
+                    // nums2 is chosen because its current value is smaller.
+                    current = nums2[j];
+                    j++;
+                }
+            } else if (i &lt; n) {
+                // nums2 is finished, so the next value must come from nums1.
+                current = nums1[i];
+                i++;
+            } else {
+                // nums1 is finished, so the next value must come from nums2.
+                current = nums2[j];
+                j++;
+            }
+        }
+
+        // If total is odd, current is the exact middle value.
+        if ((n + m) % 2 == 1) {
+            return current;
+        } else {
+            // If total is even, previous and current are the two middles.
+            return ((double)previous + current) / 2.0;
+        }
+    }
+};
+
+// Driver code starts
+int main() {
+    vector&lt;int&gt; nums1 = {1, 2};
+    vector&lt;int&gt; nums2 = {3, 4};
+
+    Solution obj;
+    cout &lt;&lt; obj.findMedianSortedArrays(nums1, nums2) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">from typing import List
+
+class Solution:
+    """
+    Finds the median by simulating the merge process
+    only until the middle position is reached.
+    """
+    def find_median_sorted_arrays(self, nums1: List[int], nums2: List[int]) -&gt; float:
+        n: int = len(nums1)
+        m: int = len(nums2)
+
+        # These pointers track the next unused value in each array.
+        i: int = 0
+        j: int = 0
+
+        # previous and current store the last two picked values.
+        previous: int = 0
+        current: int = 0
+
+        # Only positions up to the middle can affect the median.
+        middle: int = (n + m) // 2
+
+        for _ in range(middle + 1):
+            previous = current
+
+            # If both arrays still have values, choose the smaller one.
+            if i &lt; n and j &lt; m:
+                # nums1 is chosen when it has the smaller current value.
+                if nums1[i] &lt;= nums2[j]:
+                    current = nums1[i]
+                    i += 1
+                else:
+                    # nums2 is chosen because its current value is smaller.
+                    current = nums2[j]
+                    j += 1
+            elif i &lt; n:
+                # nums2 is finished, so the next value must come from nums1.
+                current = nums1[i]
+                i += 1
+            else:
+                # nums1 is finished, so the next value must come from nums2.
+                current = nums2[j]
+                j += 1
+
+        # If total is odd, current is the exact middle value.
+        if (n + m) % 2 == 1:
+            return float(current)
+        else:
+            # If total is even, previous and current are the two middles.
+            return (previous + current) / 2.0
+
+
+# Driver code starts
+def main() -&gt; None:
+    nums1: List[int] = [1, 2]
+    nums2: List[int] = [3, 4]
+
+    obj = Solution()
+    print(obj.find_median_sorted_arrays(nums1, nums2))
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    /*
+    Finds the median by simulating the merge process
+    only until the middle position is reached.
+    */
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int n = nums1.length;
+        int m = nums2.length;
+
+        // These pointers track the next unused value in each array.
+        int i = 0;
+        int j = 0;
+
+        // previous and current store the last two picked values.
+        int previous = 0;
+        int current = 0;
+
+        // Only positions up to the middle can affect the median.
+        int middle = (n + m) / 2;
+
+        for (int count = 0; count &lt;= middle; count++) {
+            previous = current;
+
+            // If both arrays still have values, choose the smaller one.
+            if (i &lt; n &amp;&amp; j &lt; m) {
+                // nums1 is chosen when it has the smaller current value.
+                if (nums1[i] &lt;= nums2[j]) {
+                    current = nums1[i];
+                    i++;
+                } else {
+                    // nums2 is chosen because its current value is smaller.
+                    current = nums2[j];
+                    j++;
+                }
+            } else if (i &lt; n) {
+                // nums2 is finished, so the next value must come from nums1.
+                current = nums1[i];
+                i++;
+            } else {
+                // nums1 is finished, so the next value must come from nums2.
+                current = nums2[j];
+                j++;
+            }
+        }
+
+        // If total is odd, current is the exact middle value.
+        if ((n + m) % 2 == 1) {
+            return current;
+        } else {
+            // If total is even, previous and current are the two middles.
+            return ((double)previous + current) / 2.0;
+        }
+    }
+}
+
+public class Main {
+    // Driver code starts
+    public static void main(String[] args) {
+        int[] nums1 = {1, 2};
+        int[] nums2 = {3, 4};
+
+        Solution obj = new Solution();
+        System.out.println(obj.findMedianSortedArrays(nums1, nums2));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    /*
+    Finds the median by simulating the merge process
+    only until the middle position is reached.
+    */
+    findMedianSortedArrays(nums1, nums2) {
+        const n = nums1.length;
+        const m = nums2.length;
+
+        // These pointers track the next unused value in each array.
+        let i = 0;
+        let j = 0;
+
+        // previous and current store the last two picked values.
+        let previous = 0;
+        let current = 0;
+
+        // Only positions up to the middle can affect the median.
+        const middle = Math.floor((n + m) / 2);
+
+        for (let count = 0; count &lt;= middle; count++) {
+            previous = current;
+
+            // If both arrays still have values, choose the smaller one.
+            if (i &lt; n &amp;&amp; j &lt; m) {
+                // nums1 is chosen when it has the smaller current value.
+                if (nums1[i] &lt;= nums2[j]) {
+                    current = nums1[i];
+                    i++;
+                } else {
+                    // nums2 is chosen because its current value is smaller.
+                    current = nums2[j];
+                    j++;
+                }
+            } else if (i &lt; n) {
+                // nums2 is finished, so the next value must come from nums1.
+                current = nums1[i];
+                i++;
+            } else {
+                // nums1 is finished, so the next value must come from nums2.
+                current = nums2[j];
+                j++;
+            }
+        }
+
+        // If total is odd, current is the exact middle value.
+        if ((n + m) % 2 === 1) {
+            return current;
+        } else {
+            // If total is even, previous and current are the two middles.
+            return (previous + current) / 2.0;
+        }
+    }
+}
+
+// Driver code starts
+function main() {
+    const nums1 = [1, 2];
+    const nums2 = [3, 4];
+
+    const obj = new Solution();
+    console.log(obj.findMedianSortedArrays(nums1, nums2));
+}
+
+main();</code></pre></div></div><div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-7"><h3 id="blog-toc-complexity-analysis-2">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O((N + M) / 2)</code>, because only elements up to the middle position are processed.</p><p><strong>Space Complexity:</strong> <code>O(1)</code>, because constant space is used.</p><p></p></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-8"><h2 id="blog-toc-optimal-approach">Optimal Approach</h2><p>The median divides a sorted list into two halves.</p><p>For example, in <code>[1, 2, 3, 4]</code>, the left half is <code>[1, 2]</code> and the right half is <code>[3, 4]</code>. The median comes from the border of these two halves.</p><p>Instead of merging both arrays, imagine cutting both arrays into a left part and a right part. The cut is correct when two things are true:</p><ul><li><p>The left side contains exactly half of the total elements, or one extra when the total length is odd.</p></li><li><p>Every value on the left side is less than or equal to every value on the right side.</p></li></ul><p>If those two things are true, the median is sitting right around the cut.</p><p>The trick is to binary search how many elements should be taken from the smaller array. Once that number is chosen, the number of elements needed from the other array is automatically fixed.</p><p>If too many large values are taken from the smaller array, move the cut left. If too few values are taken from it, move the cut right.</p><h3 id="blog-toc-algorithm-3">Algorithm</h3><ul><li><p>Always binary search on the smaller array. This keeps the search range small and avoids partition indexes going out of control.</p></li><li><p>Let <code>leftSize</code> be <code>(total + 1) / 2</code>. This is the number of elements that should stay on the left side, and the <code>+1</code> handles odd length neatly.</p></li><li><p>Pick a cut in the smaller array using binary search. The cut in the larger array is then <code>leftSize - cut1</code>, because the left side must contain exactly <code>leftSize</code> elements.</p></li><li><p><strong>Read the four border values:</strong></p><ul><li><p><code>left1</code> is the largest element on the left side of the cut in the first array.</p></li><li><p><code>right1</code> is the smallest element on the right side of the cut in the first array.</p></li><li><p><code>left2</code> is the largest element on the left side of the cut in the second array.</p></li><li><p><code>right2</code> is the smallest element on the right side of the cut in the second array.</p></li><li><p>If a cut touches the beginning of an array i.e. there is no element on its left side. Use <code>-INF</code> as the left boundary value.</p></li><li><p>If a cut touches the end of an array, there is no element on its right side. Use <code>+INF</code> as the right boundary value.</p></li></ul></li></ul><ul><li><p>If <code>left1 &lt;= right2</code> and <code>left2 &lt;= right1</code>, the partition is correct because every left-side value is less than or equal to every right-side value.</p></li><li><p>If <code>left1 &gt; right2</code>, move the cut left in the first array because too many large elements were taken from it.</p></li><li><p>Otherwise, move the cut right in the first array because more elements are needed from it to balance the partition correctly.</p></li></ul><h3 id="blog-toc-dry-run-3">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Median of 2 Sorted Arrays Optimal Dry Run" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/bb6c5c0a3c3fb631.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Median of 2 Sorted Arrays Optimal Dry Run</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-9"><h3 id="blog-toc-solution-3">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    /*
+    Finds the median by binary searching the partition
+    between the left half and the right half.
+    */
+    double findMedianSortedArrays(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) {
+        // Binary search should run on the smaller array.
+        if (nums1.size() &gt; nums2.size()) {
+            return findMedianSortedArrays(nums2, nums1);
+        }
+
+        int n = nums1.size();
+        int m = nums2.size();
+
+        // This is how many elements must stay in the left half.
+        int leftSize = (n + m + 1) / 2;
+
+        int low = 0;
+        int high = n;
+
+        while (low &lt;= high) {
+            // cut1 means how many elements are taken from nums1.
+            int cut1 = low + (high - low) / 2;
+
+            // cut2 fills the remaining left-half positions from nums2.
+            int cut2 = leftSize - cut1;
+
+            // If cut1 is at the start, nums1 has no left value.
+            int left1 = (cut1 == 0) ? INT_MIN : nums1[cut1 - 1];
+
+            // If cut1 is at the end, nums1 has no right value.
+            int right1 = (cut1 == n) ? INT_MAX : nums1[cut1];
+
+            // If cut2 is at the start, nums2 has no left value.
+            int left2 = (cut2 == 0) ? INT_MIN : nums2[cut2 - 1];
+
+            // If cut2 is at the end, nums2 has no right value.
+            int right2 = (cut2 == m) ? INT_MAX : nums2[cut2];
+
+            // This condition means all left values are small enough.
+            if (left1 &lt;= right2 &amp;&amp; left2 &lt;= right1) {
+                // If total length is odd, the median is the larger
+                // value from the left side.
+                if ((n + m) % 2 == 1) {
+                    return max(left1, left2);
+                } else {
+                    // If total length is even, average the two
+                    // values around the middle cut.
+                    return (
+                        (double)max(left1, left2) +
+                        min(right1, right2)
+                    ) / 2.0;
+                }
+            } else if (left1 &gt; right2) {
+                // Too many elements were taken from nums1,
+                // so move its cut toward the left.
+                high = cut1 - 1;
+            } else {
+                // Too few elements were taken from nums1,
+                // so move its cut toward the right.
+                low = cut1 + 1;
+            }
+        }
+
+        return 0.0;
+    }
+};
+
+// Driver code starts
+int main() {
+    vector&lt;int&gt; nums1 = {1, 2};
+    vector&lt;int&gt; nums2 = {3, 4};
+
+    Solution obj;
+    cout &lt;&lt; obj.findMedianSortedArrays(nums1, nums2) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">from typing import List
+
+class Solution:
+    """
+    Finds the median by binary searching the partition
+    between the left half and the right half.
+    """
+    def find_median_sorted_arrays(self, nums1: List[int], nums2: List[int]) -&gt; float:
+        # Binary search should run on the smaller array.
+        if len(nums1) &gt; len(nums2):
+            return self.find_median_sorted_arrays(nums2, nums1)
+
+        n: int = len(nums1)
+        m: int = len(nums2)
+
+        # This is how many elements must stay in the left half.
+        left_size: int = (n + m + 1) // 2
+
+        low: int = 0
+        high: int = n
+
+        while low &lt;= high:
+            # cut1 means how many elements are taken from nums1.
+            cut1: int = low + (high - low) // 2
+
+            # cut2 fills the remaining left-half positions from nums2.
+            cut2: int = left_size - cut1
+
+            # If cut1 is at the start, nums1 has no left value.
+            left1: float = float("-inf") if cut1 == 0 else nums1[cut1 - 1]
+
+            # If cut1 is at the end, nums1 has no right value.
+            right1: float = float("inf") if cut1 == n else nums1[cut1]
+
+            # If cut2 is at the start, nums2 has no left value.
+            left2: float = float("-inf") if cut2 == 0 else nums2[cut2 - 1]
+
+            # If cut2 is at the end, nums2 has no right value.
+            right2: float = float("inf") if cut2 == m else nums2[cut2]
+
+            # This condition means all left values are small enough.
+            if left1 &lt;= right2 and left2 &lt;= right1:
+                # If total length is odd, the median is the larger
+                # value from the left side.
+                if (n + m) % 2 == 1:
+                    return float(max(left1, left2))
+                else:
+                    # If total length is even, average the two
+                    # values around the middle cut.
+                    return (max(left1, left2) + min(right1, right2)) / 2.0
+            elif left1 &gt; right2:
+                # Too many elements were taken from nums1,
+                # so move its cut toward the left.
+                high = cut1 - 1
+            else:
+                # Too few elements were taken from nums1,
+                # so move its cut toward the right.
+                low = cut1 + 1
+
+        return 0.0
+
+
+# Driver code starts
+def main() -&gt; None:
+    nums1: List[int] = [1, 2]
+    nums2: List[int] = [3, 4]
+
+    obj = Solution()
+    print(obj.find_median_sorted_arrays(nums1, nums2))
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    /*
+    Finds the median by binary searching the partition
+    between the left half and the right half.
+    */
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        // Binary search should run on the smaller array.
+        if (nums1.length &gt; nums2.length) {
+            return findMedianSortedArrays(nums2, nums1);
+        }
+
+        int n = nums1.length;
+        int m = nums2.length;
+
+        // This is how many elements must stay in the left half.
+        int leftSize = (n + m + 1) / 2;
+
+        int low = 0;
+        int high = n;
+
+        while (low &lt;= high) {
+            // cut1 means how many elements are taken from nums1.
+            int cut1 = low + (high - low) / 2;
+
+            // cut2 fills the remaining left-half positions from nums2.
+            int cut2 = leftSize - cut1;
+
+            // If cut1 is at the start, nums1 has no left value.
+            int left1 = (cut1 == 0) ? Integer.MIN_VALUE : nums1[cut1 - 1];
+
+            // If cut1 is at the end, nums1 has no right value.
+            int right1 = (cut1 == n) ? Integer.MAX_VALUE : nums1[cut1];
+
+            // If cut2 is at the start, nums2 has no left value.
+            int left2 = (cut2 == 0) ? Integer.MIN_VALUE : nums2[cut2 - 1];
+
+            // If cut2 is at the end, nums2 has no right value.
+            int right2 = (cut2 == m) ? Integer.MAX_VALUE : nums2[cut2];
+
+            // This condition means all left values are small enough.
+            if (left1 &lt;= right2 &amp;&amp; left2 &lt;= right1) {
+                // If total length is odd, the median is the larger
+                // value from the left side.
+                if ((n + m) % 2 == 1) {
+                    return Math.max(left1, left2);
+                } else {
+                    // If total length is even, average the two
+                    // values around the middle cut.
+                    return (
+                        (double)Math.max(left1, left2) +
+                        Math.min(right1, right2)
+                    ) / 2.0;
+                }
+            } else if (left1 &gt; right2) {
+                // Too many elements were taken from nums1,
+                // so move its cut toward the left.
+                high = cut1 - 1;
+            } else {
+                // Too few elements were taken from nums1,
+                // so move its cut toward the right.
+                low = cut1 + 1;
+            }
+        }
+
+        return 0.0;
+    }
+}
+
+public class Main {
+    // Driver code starts
+    public static void main(String[] args) {
+        int[] nums1 = {1, 2};
+        int[] nums2 = {3, 4};
+
+        Solution obj = new Solution();
+        System.out.println(obj.findMedianSortedArrays(nums1, nums2));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    /*
+    Finds the median by binary searching the partition
+    between the left half and the right half.
+    */
+    findMedianSortedArrays(nums1, nums2) {
+        // Binary search should run on the smaller array.
+        if (nums1.length &gt; nums2.length) {
+            return this.findMedianSortedArrays(nums2, nums1);
+        }
+
+        const n = nums1.length;
+        const m = nums2.length;
+
+        // This is how many elements must stay in the left half.
+        const leftSize = Math.floor((n + m + 1) / 2);
+
+        let low = 0;
+        let high = n;
+
+        while (low &lt;= high) {
+            // cut1 means how many elements are taken from nums1.
+            const cut1 = Math.floor(low + (high - low) / 2);
+
+            // cut2 fills the remaining left-half positions from nums2.
+            const cut2 = leftSize - cut1;
+
+            // If cut1 is at the start, nums1 has no left value.
+            const left1 = cut1 === 0 ? Number.NEGATIVE_INFINITY : nums1[cut1 - 1];
+
+            // If cut1 is at the end, nums1 has no right value.
+            const right1 = cut1 === n ? Number.POSITIVE_INFINITY : nums1[cut1];
+
+            // If cut2 is at the start, nums2 has no left value.
+            const left2 = cut2 === 0 ? Number.NEGATIVE_INFINITY : nums2[cut2 - 1];
+
+            // If cut2 is at the end, nums2 has no right value.
+            const right2 = cut2 === m ? Number.POSITIVE_INFINITY : nums2[cut2];
+
+            // This condition means all left values are small enough.
+            if (left1 &lt;= right2 &amp;&amp; left2 &lt;= right1) {
+                // If total length is odd, the median is the larger
+                // value from the left side.
+                if ((n + m) % 2 === 1) {
+                    return Math.max(left1, left2);
+                } else {
+                    // If total length is even, average the two
+                    // values around the middle cut.
+                    return (
+                        Math.max(left1, left2) +
+                        Math.min(right1, right2)
+                    ) / 2.0;
+                }
+            } else if (left1 &gt; right2) {
+                // Too many elements were taken from nums1,
+                // so move its cut toward the left.
+                high = cut1 - 1;
+            } else {
+                // Too few elements were taken from nums1,
+                // so move its cut toward the right.
+                low = cut1 + 1;
+            }
+        }
+
+        return 0.0;
+    }
+}
+
+// Driver code starts
+function main() {
+    const nums1 = [1, 2];
+    const nums2 = [3, 4];
+
+    const obj = new Solution();
+    console.log(obj.findMedianSortedArrays(nums1, nums2));
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-10"><h3 id="blog-toc-complexity-analysis-3">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(log(min(N, M)))</code>, because binary search runs only on the smaller array.</p><p><strong>Space Complexity:</strong> <code>O(1)</code>, because constant space is used.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div><section aria-label="Interview follow-up Questions" class="BlogDetail-module__HEfJva__faqSection" id="blog-toc-faqs"><h2 class="BlogDetail-module__HEfJva__faqHeading">Interview follow-up Questions</h2><div class="flex w-full flex-col BlogDetail-module__HEfJva__faqList" data-orientation="vertical" data-slot="accordion"><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="open"><h3 class="flex" data-orientation="vertical" data-state="open"></h3><div aria-labelledby="radix-_R_1lcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="open" id="radix-_R_5lcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"><div class="h-auto pt-0 pb-2.5 [&amp;_a]:underline [&amp;_a]:underline-offset-3 [&amp;_a]:hover:text-foreground [&amp;_p:not(:last-child)]:mb-4 BlogDetail-module__HEfJva__faqAnswer"><p>Running Binary search on shorter array results in smaller number of operations as binary search has a complexity of log2N , doing binary search on smaller array results in better time complexity.</p></div></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_2lcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_6lcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_3lcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_7lcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div></div></section></div>
+</article>
+<script src="../article.js?v=1790281487"></script>
+</body></html>

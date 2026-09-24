@@ -1,0 +1,826 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Add One to a Number Represented by a Linked List</title>
+<link rel="stylesheet" href="../style.css?v=1790281487">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Add One to a Number Represented by a Linked List</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/blogs/data-structure-and-algorithm/add-one-to-number-linked-list</code></div>
+  <div class="ArticleParser-module__R__VNG__article" data-article-segment="html-0"><p>Given the head of a singly linked list representing a non-negative integer, add one to the number and return the updated linked list. The head node stores the most significant digit, and each node stores one digit.</p></div><div><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 1</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>head = [2, 3, 4]</code></p><p><strong>Output:</strong> <code>[2, 3, 5]</code></p><p><strong>Explanation:</strong> Only the last digit changes because no carry moves left.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 2</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>head = [9, 9, 9]</code></p><p><strong>Output:</strong> <code>[1, 0, 0, 0]</code></p><p><strong>Explanation:</strong> Carry passes across every digit, so one extra head node is created.</p></div></div></section></div><div><div class="BlogDetail-module__HEfJva__practiceCallout"><a class="BlogDetail-module__HEfJva__practiceLink" data-mobile-prefetch="normal" href="https://takeuforward.org/practice/dsa/add-one-to-a-number-represented-by-ll" rel="noopener" target="_blank"><span>Practice it by yourself before moving onto the solution</span><span class="BlogDetail-module__HEfJva__practiceAction">Try now</span></a></div></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-3"><h2 id="blog-toc-brute-force-approach">Brute Force Approach</h2><p>Forward-order storage makes the tail node the real starting point for addition, so recursion fits naturally. Recursive calls move to the end first, then the return path works like a backward traversal where carry travels from the last digit toward the head without reversing any pointers.</p><h3 id="blog-toc-algorithm">Algorithm</h3><ul><li><p>Use a recursive function to traverse the linked list until it reaches the end, as the digits are stored in forward order and the last digit needs to be processed first.</p></li><li><p>Return carry value <code>1</code> from the <code>null</code> base case, since the required operation is to add <code>1</code> and the carry needs to begin from the least significant digit.</p></li><li><p>During recursion unwind, add the received <code>carry</code> to the current node's value, as the return path moves from the last digit toward the head.</p></li><li><p>Store <code>sum % 10</code> in the current node, since it represents the updated digit at the current position.</p></li><li><p>Return <code>sum / 10</code> as the next carry, allowing any overflow to move toward the more significant digit.</p></li><li><p>After the top recursion call completes, create a new head node with value <code>1</code> if the final carry is <code>1</code>, since this represents an additional most significant digit.</p></li><li><p>Return the updated head after the entire linked list has been processed.</p></li></ul><h3 id="blog-toc-dry-run">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="add one by recursion" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/55325abff5975b35.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">add one by recursion</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-4"><h3 id="blog-toc-solution">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+
+    Node(int value) {
+        data = value;
+        next = nullptr;
+    }
+};
+
+class Solution {
+private:
+    // Propagate carry from tail to head through recursion.
+    int addCarry(Node* head) {
+        // Null node returns carry one for the initial plus-one operation.
+        if (head == nullptr) {
+            return 1;
+        }
+
+        // Recursively process the next node first.
+        int carry = addCarry(head-&gt;next);
+
+        // Add returned carry to the current digit.
+        int sum = head-&gt;data + carry;
+
+        // Store the updated digit.
+        head-&gt;data = sum % 10;
+
+        // Return carry for the previous node.
+        return sum / 10;
+    }
+
+public:
+    // Function to add one to linked list.
+    Node* addOne(Node* head) {
+        // Collect carry after recursive processing finishes.
+        int carry = addCarry(head);
+
+        // Create a new head when carry remains after the top call.
+        if (carry &gt; 0) {
+            Node* newHead = new Node(carry);
+            newHead-&gt;next = head;
+            return newHead;
+        }
+
+        // Return the original head when no extra node is required.
+        return head;
+    }
+};
+
+// Build a linked list from an array of digits.
+Node* buildList(const vector&lt;int&gt;&amp; values) {
+    Node* dummy = new Node(0);
+    Node* tail = dummy;
+
+    for (int value : values) {
+        tail-&gt;next = new Node(value);
+        tail = tail-&gt;next;
+    }
+
+    return dummy-&gt;next;
+}
+
+// Print the linked list in one line.
+void printList(Node* head) {
+    while (head != nullptr) {
+        cout &lt;&lt; head-&gt;data;
+
+        if (head-&gt;next != nullptr) {
+            cout &lt;&lt; " ";
+        }
+
+        head = head-&gt;next;
+    }
+
+    cout &lt;&lt; "\n";
+}
+
+// Run the recursive solution on a hard-coded sample.
+int main() {
+    vector&lt;int&gt; digits = {9, 9, 9};
+    Node* head = buildList(digits);
+
+    Solution solution;
+    Node* answer = solution.addOne(head);
+
+    printList(answer);
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">from __future__ import annotations
+from typing import List, Optional
+
+
+class Node:
+    def __init__(self, value: int, next_node: Optional['Node'] = None) -&gt; None:
+        self.data = value
+        self.next = next_node
+
+
+class Solution:
+    # Propagate carry from tail to head through recursion.
+    def addCarry(self, head: Optional[Node]) -&gt; int:
+        # Null node returns carry one for the initial plus-one operation.
+        if head is None:
+            return 1
+
+        # Recursively process the next node first.
+        carry = self.addCarry(head.next)
+
+        # Add returned carry to the current digit.
+        current_sum = head.data + carry
+
+        # Store the updated digit.
+        head.data = current_sum % 10
+
+        # Return carry for the previous node.
+        return current_sum // 10
+
+    # Function to add one to linked list.
+    def addOne(self, head: Optional[Node]) -&gt; Optional[Node]:
+        # Collect carry after recursive processing finishes.
+        carry = self.addCarry(head)
+
+        # Create a new head when carry remains after the top call.
+        if carry &gt; 0:
+            new_head = Node(carry)
+            new_head.next = head
+            return new_head
+
+        # Return the original head when no extra node is required.
+        return head
+
+
+# Build a linked list from an array of digits.
+def build_list(values: List[int]) -&gt; Optional[Node]:
+    dummy = Node(0)
+    tail = dummy
+
+    for value in values:
+        tail.next = Node(value)
+        tail = tail.next
+
+    return dummy.next
+
+
+# Print the linked list in one line.
+def print_list(head: Optional[Node]) -&gt; None:
+    result: List[str] = []
+
+    while head is not None:
+        result.append(str(head.data))
+        head = head.next
+
+    print(" ".join(result))
+
+
+# Run the recursive solution on a hard-coded sample.
+def main() -&gt; None:
+    digits = [9, 9, 9]
+    head = build_list(digits)
+
+    solution = Solution()
+    answer = solution.addOne(head)
+
+    print_list(answer)
+
+
+if __name__ == "__main__":
+    main()
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">class Node {
+    int data;
+    Node next;
+
+    Node(int value) {
+        data = value;
+        next = null;
+    }
+}
+
+class Solution {
+    // Propagate carry from tail to head through recursion.
+    private int addCarry(Node head) {
+        // Null node returns carry one for the initial plus-one operation.
+        if (head == null) {
+            return 1;
+        }
+
+        // Recursively process the next node first.
+        int carry = addCarry(head.next);
+
+        // Add returned carry to the current digit.
+        int sum = head.data + carry;
+
+        // Store the updated digit.
+        head.data = sum % 10;
+
+        // Return carry for the previous node.
+        return sum / 10;
+    }
+
+    // Function to add one to linked list.
+    public Node addOne(Node head) {
+        // Collect carry after recursive processing finishes.
+        int carry = addCarry(head);
+
+        // Create a new head when carry remains after the top call.
+        if (carry &gt; 0) {
+            Node newHead = new Node(carry);
+            newHead.next = head;
+            return newHead;
+        }
+
+        // Return the original head when no extra node is required.
+        return head;
+    }
+}
+
+class Main {
+    // Build a linked list from an array of digits.
+    static Node buildList(int[] values) {
+        Node dummy = new Node(0);
+        Node tail = dummy;
+
+        for (int value : values) {
+            tail.next = new Node(value);
+            tail = tail.next;
+        }
+
+        return dummy.next;
+    }
+
+    // Print the linked list in one line.
+    static void printList(Node head) {
+        while (head != null) {
+            System.out.print(head.data);
+
+            if (head.next != null) {
+                System.out.print(" ");
+            }
+
+            head = head.next;
+        }
+
+        System.out.println();
+    }
+
+    // Run the recursive solution on a hard-coded sample.
+    public static void main(String[] args) {
+        int[] digits = {9, 9, 9};
+        Node head = buildList(digits);
+
+        Solution solution = new Solution();
+        Node answer = solution.addOne(head);
+
+        printList(answer);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">function Node(value, nextNode = null) {
+    return { data: value, next: nextNode };
+}
+
+// Propagate carry from tail to head through recursion.
+function addCarry(head) {
+    // Null node returns carry one for the initial plus-one operation.
+    if (head === null) {
+        return 1;
+    }
+
+    // Recursively process the next node first.
+    const carry = addCarry(head.next);
+
+    // Add returned carry to the current digit.
+    const sum = head.data + carry;
+
+    // Store the updated digit.
+    head.data = sum % 10;
+
+    // Return carry for the previous node.
+    return Math.floor(sum / 10);
+}
+
+class Solution {
+    // Function to add one to linked list.
+    addOne(head) {
+        // Collect carry after recursive processing finishes.
+        const carry = addCarry(head);
+
+        // Create a new head when carry remains after the top call.
+        if (carry &gt; 0) {
+            const newHead = Node(carry);
+            newHead.next = head;
+            return newHead;
+        }
+
+        // Return the original head when no extra node is required.
+        return head;
+    }
+}
+
+// Build a linked list from an array of digits.
+function buildList(values) {
+    const dummy = Node(0);
+    let tail = dummy;
+
+    for (const value of values) {
+        tail.next = Node(value);
+        tail = tail.next;
+    }
+
+    return dummy.next;
+}
+
+// Print the linked list in one line.
+function printList(head) {
+    const result = [];
+
+    while (head !== null) {
+        result.push(String(head.data));
+        head = head.next;
+    }
+
+    console.log(result.join(" "));
+}
+
+// Run the recursive solution on a hard-coded sample.
+function main() {
+    const digits = [9, 9, 9];
+    const head = buildList(digits);
+
+    const solution = new Solution();
+    const answer = solution.addOne(head);
+
+    printList(answer);
+}
+
+main();
+</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-5"><h3 id="blog-toc-complexity-analysis">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(N)</code>, one recursive traversal reaches every node once.</p><p><strong>Space Complexity:</strong> <code>O(N)</code>, recursion stack stores one call per node.</p></div><div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-7"><h2 id="blog-toc-optimal-approach">Optimal Approach</h2><p>A very natural way to think about the number is from the last digit side because adding one always starts from the least significant digit. Since a singly linked list does not move backward, the list is first reversed, then one straight traversal handles carry from left to right in reversed order, and finally another reversal restores the original digit direction.</p><h3 id="blog-toc-algorithm-2">Algorithm</h3><ul><li><p>Reverse the linked list first, as adding <code>1</code> starts from the least significant digit and reversing makes that digit directly accessible from the head.</p></li><li><p>Initialize <code>carry</code> as <code>1</code>, since the required operation is to add one to the number.</p></li><li><p>Traverse the reversed list while a node exists and <code>carry</code> is non-zero, as processing can stop once there is no carry left to propagate.</p></li><li><p>Add <code>carry</code> to the current node's value, store <code>sum % 10</code> in the node, and update <code>carry</code> using <code>sum / 10</code>, since the remainder becomes the current digit while the quotient moves to the next position.</p></li><li><p>Create an extra node with value <code>1</code> at the tail if <code>carry</code> is still <code>1</code> after traversal, as this represents a new most significant digit, such as when the number consists entirely of <code>9</code>s.</p></li><li><p>Reverse the linked list again, since the first reversal changed the digit order and the final result needs to follow the original forward direction.</p></li><li><p>Return the new head, which now represents the number after adding <code>1</code>.</p></li></ul><h3 id="blog-toc-dry-run-2">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="add one by reverse" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/586794f5d9dc6bad.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">add one by reverse</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-8"><h3 id="blog-toc-solution-2">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+
+    Node(int value) {
+        data = value;
+        next = nullptr;
+    }
+};
+
+class Solution {
+private:
+    // Reverse a singly linked list and return the new head.
+    Node* reverseList(Node* head) {
+        // Previous pointer starts as null before reversal begins.
+        Node* prev = nullptr;
+
+        // Current pointer scans the original chain.
+        Node* current = head;
+
+        // Run one traversal and flip every next pointer.
+        while (current != nullptr) {
+            // Store the next node before pointer redirection.
+            Node* front = current-&gt;next;
+
+            // Reverse the current link.
+            current-&gt;next = prev;
+
+            // Shift both pointers forward.
+            prev = current;
+            current = front;
+        }
+
+        // Previous pointer becomes the new head.
+        return prev;
+    }
+public:
+    // Add one to the linked-list number by reversing twice.
+    Node* addOne(Node* head) {
+        // Reverse the list so addition starts from the 
+       // least significant digit.
+        head = reverseList(head);
+
+        // Carry starts as one because the task adds one.
+        int carry = 1;
+
+        // Current pointer walks through the reversed list.
+        Node* current = head;
+
+        // Previous pointer helps in tail extension after traversal end.
+        Node* prev = nullptr;
+
+        // Continue while nodes remain and carry still needs propagation.
+        while (current != nullptr &amp;&amp; carry &gt; 0) {
+            // Add carry to the current digit.
+            int sum = current-&gt;data + carry;
+
+            // Store the updated digit.
+            current-&gt;data = sum % 10;
+
+            // Move carry to the next position.
+            carry = sum / 10;
+
+            // Move traversal pointers forward.
+            prev = current;
+            current = current-&gt;next;
+        }
+
+        // Attach one extra node when carry remains after the last node.
+        if (carry &gt; 0) {
+            prev-&gt;next = new Node(carry);
+        }
+
+        // Reverse again to restore the original digit order.
+        head = reverseList(head);
+
+        // Return the updated head.
+        return head;
+    }
+};
+
+// Build a linked list from an array of digits.
+Node* buildList(const vector&lt;int&gt;&amp; values) {
+    Node* dummy = new Node(0);
+    Node* tail = dummy;
+
+    for (int value : values) {
+        tail-&gt;next = new Node(value);
+        tail = tail-&gt;next;
+    }
+
+    return dummy-&gt;next;
+}
+
+// Print the linked list in one line.
+void printList(Node* head) {
+    while (head != nullptr) {
+        cout &lt;&lt; head-&gt;data;
+
+        if (head-&gt;next != nullptr) {
+            cout &lt;&lt; " ";
+        }
+
+        head = head-&gt;next;
+    }
+
+    cout &lt;&lt; "\n";
+}
+
+// Run the reverse-based solution on a hard-coded sample.
+int main() {
+    vector&lt;int&gt; digits = {1, 5, 9};
+    Node* head = buildList(digits);
+
+    Solution solution;
+    Node* answer = solution.addOne(head);
+
+    printList(answer);
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">from __future__ import annotations
+from typing import List, Optional
+
+
+class Node:
+    def __init__(self, value: int, next_node: Optional['Node'] = None) -&gt; None:
+        self.data = value
+        self.next = next_node
+
+
+class Solution:
+    # Reverse a singly linked list and return the new head.
+    def reverseList(self, head: Optional[Node]) -&gt; Optional[Node]:
+        # Previous pointer starts as null before reversal begins.
+        prev: Optional[Node] = None
+
+        # Current pointer scans the original chain.
+        current = head
+
+        # Run one traversal and flip every next pointer.
+        while current is not None:
+            # Store the next node before pointer redirection.
+            front = current.next
+
+            # Reverse the current link.
+            current.next = prev
+
+            # Shift both pointers forward.
+            prev = current
+            current = front
+
+        # Previous pointer becomes the new head.
+        return prev
+
+    # Add one to the linked-list number by reversing twice.
+    def addOne(self, head: Optional[Node]) -&gt; Optional[Node]:
+        # Reverse the list so addition starts from the 
+        # least significant digit.
+        head = self.reverseList(head)
+
+        # Carry starts as one because the task adds one.
+        carry = 1
+
+        # Current pointer walks through the reversed list.
+        current = head
+
+        # Previous pointer helps in tail extension after traversal end.
+        prev: Optional[Node] = None
+
+        # Continue while nodes remain and carry still needs propagation.
+        while current is not None and carry &gt; 0:
+            # Add carry to the current digit.
+            current_sum = current.data + carry
+
+            # Store the updated digit.
+            current.data = current_sum % 10
+
+            # Move carry to the next position.
+            carry = current_sum // 10
+
+            # Move traversal pointers forward.
+            prev = current
+            current = current.next
+
+        # Attach one extra node when carry remains after the last node.
+        if carry &gt; 0:
+            prev.next = Node(carry)
+
+        # Reverse again to restore the original digit order.
+        head = self.reverseList(head)
+
+        # Return the updated head.
+        return head
+
+
+# Build a linked list from an array of digits.
+def build_list(values: List[int]) -&gt; Optional[Node]:
+    dummy = Node(0)
+    tail = dummy
+
+    for value in values:
+        tail.next = Node(value)
+        tail = tail.next
+
+    return dummy.next
+
+
+# Print the linked list in one line.
+def print_list(head: Optional[Node]) -&gt; None:
+    result: List[str] = []
+
+    while head is not None:
+        result.append(str(head.data))
+        head = head.next
+
+    print(" ".join(result))
+
+
+# Run the reverse-based solution on a hard-coded sample.
+def main() -&gt; None:
+    digits = [1, 5, 9]
+    head = build_list(digits)
+
+    solution = Solution()
+    answer = solution.addOne(head)
+
+    print_list(answer)
+
+
+if __name__ == "__main__":
+    main()
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">class Node {
+    int data;
+    Node next;
+
+    Node(int value) {
+        data = value;
+        next = null;
+    }
+}
+
+class Solution {
+    // Reverse a singly linked list and return the new head.
+    private Node reverseList(Node head) {
+        // Previous pointer starts as null before reversal begins.
+        Node prev = null;
+
+        // Current pointer scans the original chain.
+        Node current = head;
+
+        // Run one traversal and flip every next pointer.
+        while (current != null) {
+            // Store the next node before pointer redirection.
+            Node front = current.next;
+
+            // Reverse the current link.
+            current.next = prev;
+
+            // Shift both pointers forward.
+            prev = current;
+            current = front;
+        }
+
+        // Previous pointer becomes the new head.
+        return prev;
+    }
+
+    // Add one to the linked-list number by reversing twice.
+    public Node addOne(Node head) {
+        // Reverse the list so addition starts from the 
+        // least significant digit.
+        head = reverseList(head);
+
+        // Carry starts as one because the task adds one.
+        int carry = 1;
+
+        // Current pointer walks through the reversed list.
+        Node current = head;
+
+        // Previous pointer helps in tail extension after traversal end.
+        Node prev = null;
+
+        // Continue while nodes remain and carry still needs propagation.
+        while (current != null &amp;&amp; carry &gt; 0) {
+            // Add carry to the current digit.
+            int sum = current.data + carry;
+
+            // Store the updated digit.
+            current.data = sum % 10;
+
+            // Move carry to the next position.
+            carry = sum / 10;
+
+            // Move traversal pointers forward.
+            prev = current;
+            current = current.next;
+        }
+
+        // Attach one extra node when carry remains after the last node.
+        if (carry &gt; 0) {
+            prev.next = new Node(carry);
+        }
+
+        // Reverse again to restore the original digit order.
+        head = reverseList(head);
+
+        // Return the updated head.
+        return head;
+    }
+}
+
+class Main {
+    // Build a linked list from an array of digits.
+    static Node buildList(int[] values) {
+        Node dummy = new Node(0);
+        Node tail = dummy;
+
+        for (int value : values) {
+            tail.next = new Node(value);
+            tail = tail.next;
+        }
+
+        return dummy.next;
+    }
+
+    // Print the linked list in one line.
+    static void printList(Node head) {
+        while (head != null) {
+            System.out.print(head.data);
+
+            if (head.next != null) {
+                System.out.print(" ");
+            }
+
+            head = head.next;
+        }
+
+        System.out.println();
+    }
+
+    // Run the reverse-based solution on a hard-coded sample.
+    public static void main(String[] args) {
+        int[] digits = {1, 5, 9};
+        Node head = buildList(digits);
+
+        Solution solution = new Solution();
+        Node answer = solution.addOne(head);
+
+        printList(answer);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">function Node(value, nextNode = null) {
+    return { data: value, next: nextNode };
+}
+
+// Reverse a singly linked list and return the new head.
+function reverseList(head) {
+    // Previous pointer starts as null before reversal begins.
+    let prev = null;
+
+    // Current pointer scans the original chain.
+    let current = head;
+
+    // Run one traversal and flip every next pointer.
+    while (current !== null) {
+        // Store the next node before pointer redirection.
+        const front = current.next;
+
+        // Reverse the current link.
+        current.next = prev;
+
+        // Shift both pointers forward.
+        prev = current;
+        current = front;
+    }
+
+    // Previous pointer becomes the new head.
+    return prev;
+}
+
+class Solution {
+    // Add one to the linked-list number by reversing twice.
+    addOne(head) {
+        // Reverse the list so addition starts from the 
+        // least significant digit.
+        head = reverseList(head);
+
+        // Carry starts as one because the task adds one.
+        let carry = 1;
+
+        // Current pointer walks through the reversed list.
+        let current = head;
+
+        // Previous pointer helps in tail extension after traversal end.
+        let prev = null;
+
+        // Continue while nodes remain and carry still needs propagation.
+        while (current !== null &amp;&amp; carry &gt; 0) {
+            // Add carry to the current digit.
+            const sum = current.data + carry;
+
+            // Store the updated digit.
+            current.data = sum % 10;
+
+            // Move carry to the next position.
+            carry = Math.floor(sum / 10);
+
+            // Move traversal pointers forward.
+            prev = current;
+            current = current.next;
+        }
+
+        // Attach one extra node when carry remains after the last node.
+        if (carry &gt; 0) {
+            prev.next = Node(carry);
+        }
+
+        // Reverse again to restore the original digit order.
+        head = reverseList(head);
+
+        // Return the updated head.
+        return head;
+    }
+}
+
+// Build a linked list from an array of digits.
+function buildList(values) {
+    const dummy = Node(0);
+    let tail = dummy;
+
+    for (const value of values) {
+        tail.next = Node(value);
+        tail = tail.next;
+    }
+
+    return dummy.next;
+}
+
+// Print the linked list in one line.
+function printList(head) {
+    const result = [];
+
+    while (head !== null) {
+        result.push(String(head.data));
+        head = head.next;
+    }
+
+    console.log(result.join(" "));
+}
+
+// Run the reverse-based solution on a hard-coded sample.
+function main() {
+    const digits = [1, 5, 9];
+    const head = buildList(digits);
+
+    const solution = new Solution();
+    const answer = solution.addOne(head);
+
+    printList(answer);
+}
+
+main();
+</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-9"><h3 id="blog-toc-complexity-analysis-2">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(N)</code>, a constant number of full linked-list traversals are used.</p><p><strong>Space Complexity:</strong> <code>O(1)</code>, only pointer variables and one possible extra node are used.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div><section aria-label="Interview follow-up Questions" class="BlogDetail-module__HEfJva__faqSection" id="blog-toc-faqs"><h2 class="BlogDetail-module__HEfJva__faqHeading">Interview follow-up Questions</h2><div class="flex w-full flex-col BlogDetail-module__HEfJva__faqList" data-orientation="vertical" data-slot="accordion"><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="open"><h3 class="flex" data-orientation="vertical" data-state="open"></h3><div aria-labelledby="radix-_R_1kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="open" id="radix-_R_9kcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"><div class="h-auto pt-0 pb-2.5 [&amp;_a]:underline [&amp;_a]:underline-offset-3 [&amp;_a]:hover:text-foreground [&amp;_p:not(:last-child)]:mb-4 BlogDetail-module__HEfJva__faqAnswer"><p>Reversal places the least significant digit at the head side, which makes carry propagation follow normal forward traversal.</p></div></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_2kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_akcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_3kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_bkcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_4kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_ckcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div></div></section></div>
+</article>
+<script src="../article.js?v=1790281487"></script>
+</body></html>

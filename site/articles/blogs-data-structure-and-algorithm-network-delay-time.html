@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Network Delay Time Using Dijkstra&#x27;s Algorithm</title>
+<link rel="stylesheet" href="../style.css?v=1790281487">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Network Delay Time Using Dijkstra&#x27;s Algorithm</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/blogs/data-structure-and-algorithm/network-delay-time</code></div>
+  <div class="ArticleParser-module__R__VNG__article" data-article-segment="html-0"><p>A network contains <code>n</code> nodes labeled from <code>1</code> to <code>n</code>. Each directed edge <code>[u,v,w]</code> means a signal needs <code>w</code> time units to travel from node <code>u</code> to node <code>v</code>.</p><p>A signal starts from node <code>k</code>. Return the minimum time required for every node to receive the signal. Return <code>-1</code> if at least one node cannot receive the signal.</p></div><div><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 1</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>times = [[2,1,1],[2,3,1],[3,4,1]], n = 4, k = 2</code></p><p><strong>Output:</strong> <code>2</code></p><p><strong>Explanation:</strong> Nodes <code>1</code> and <code>3</code> receive the signal after <code>1</code> time unit. Node <code>4</code> receives the signal through node <code>3</code> after <code>2</code> time units.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 2</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>times = [[1,2,1]], n = 2, k = 2</code></p><p><strong>Output:</strong> <code>-1</code></p><p><strong>Explanation:</strong> No directed route reaches node <code>1</code> from source node <code>2</code>.</p></div></div></section></div><div><div class="BlogDetail-module__HEfJva__practiceCallout"><a class="BlogDetail-module__HEfJva__practiceLink" data-mobile-prefetch="normal" href="https://takeuforward.org/practice/dsa/network-delay-time?subject=graphs" rel="noopener" target="_blank"><span>Practice it by yourself before moving onto the solution</span><span class="BlogDetail-module__HEfJva__practiceAction">Try now</span></a></div></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-3"><h2 id="blog-toc-brute-force-approach">Brute Force Approach</h2><p>Signal arrival time at a node equals the shortest directed-path distance from source <code>k</code>. Bellman–Ford repeatedly scans every directed edge, allowing each relaxation round to extend known shortest paths by one additional edge.</p><p>A shortest simple path contains at most <code>N-1</code> edges, so <code>N-1</code> rounds are sufficient. The largest finite shortest distance represents the time required for the signal to reach the final node.</p><h3 id="blog-toc-algorithm">Algorithm</h3><ul><li><p>Initialize all distances as infinity and set <code>distance[k]</code> to <code>0</code>, establishing node <code>k</code> as the signal source.</p></li><li><p>Perform at most <code>N-1</code> relaxation rounds, since no shortest simple path can contain more than <code>N-1</code> edges.</p></li><li><p>At the beginning of every round, initialize an update flag as false to detect whether any shorter route is discovered.</p></li><li><p>Traverse every directed edge and skip relaxation when the starting node remains unreachable.</p></li><li><p>When <code>distance[source]+travelTime</code> is smaller, update the destination distance and set the update flag to true.</p></li><li><p>End the relaxation process when a complete round produces no update, as all shortest distances have stabilized.</p></li><li><p>Scan all nodes, return <code>-1</code> upon finding an infinite distance, and otherwise return the maximum distance as the network delay time.</p></li></ul><h3 id="blog-toc-dry-run">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="network-delay-time-brute-force-corrected" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/5361a90a82e78797.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">network-delay-time-brute-force-corrected</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-4"><h3 id="blog-toc-solution">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Return minimum time required for every node to receive the signal.
+    long long networkDelayTime(vector&lt;vector&lt;int&gt;&gt;&amp; times, int n, int k) {
+        // Use a wide sentinel outside valid accumulated times.
+        const long long INF = numeric_limits&lt;long long&gt;::max() / 4;
+
+        // Store shortest signal time using long long.
+        vector&lt;long long&gt; dist(n + 1, INF);
+
+        // Source receives the signal immediately.
+        dist[k] = 0;
+
+        // Propagate shortest distances through at most n - 1 edge rounds.
+        for (int pass = 1; pass &lt;= n - 1; pass++) {
+            bool changed = false;
+
+            // Relax every directed edge in input order.
+            for (const vector&lt;int&gt;&amp; edge : times) {
+                int from = edge[0];
+                int to = edge[1];
+                long long travelTime = edge[2];
+
+                // Ignore edges whose starting node remains unreachable.
+                if (dist[from] == INF) {
+                    continue;
+                }
+
+                // Record a faster signal arrival.
+                if (dist[from] + travelTime &lt; dist[to]) {
+                    dist[to] = dist[from] + travelTime;
+                    changed = true;
+                }
+            }
+
+            // Stop after a round without any improvement.
+            if (!changed) {
+                break;
+            }
+        }
+
+        long long answer = 0;
+
+        // Find the last signal arrival among all nodes.
+        for (int node = 1; node &lt;= n; node++) {
+            // If any node is unreachable, signal cannot reach all nodes.
+            if (dist[node] == INF) {
+                return -1;
+            }
+
+            // Track the maximum shortest distance.
+            answer = max(answer, dist[node]);
+
+            // Stop after processing the last valid node.
+            if (node == n) {
+                break;
+            }
+        }
+
+        // Return the time when the last node receives the signal.
+        return answer;
+    }
+};
+
+// Driver code.
+int main() {
+    vector&lt;vector&lt;int&gt;&gt; times = {
+        {2, 1, 1}, {2, 3, 1}, {3, 4, 1}
+    };
+
+    int n = 4;
+    int k = 2;
+
+    Solution sol;
+
+    cout &lt;&lt; sol.networkDelayTime(times, n, k);
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">from typing import List
+
+class Solution:
+    # Return minimum time required for every node to receive the signal.
+    def networkDelayTime(self, times: List[List[int]], n: int, k: int) -&gt; int:
+        # Infinity marks unreachable nodes.
+        INF = float("inf")
+
+        dist = [INF] * (n + 1)
+
+        # Source receives the signal immediately.
+        dist[k] = 0
+
+        # Propagate shortest distances through at most n - 1 rounds.
+        for _ in range(n - 1):
+            changed = False
+
+            # Relax every directed edge.
+            for fromNode, toNode, travelTime in times:
+                # Skip unreachable starting nodes.
+                if dist[fromNode] == INF:
+                    continue
+
+                # Record a faster signal arrival.
+                if dist[fromNode] + travelTime &lt; dist[toNode]:
+                    dist[toNode] = dist[fromNode] + travelTime
+                    changed = True
+
+            # Stop after no distance changes.
+            if not changed:
+                break
+
+        answer = 0
+
+        # Find the last signal arrival among all nodes.
+        for node in range(1, n + 1):
+            # If any node is unreachable, return -1.
+            if dist[node] == INF:
+                return -1
+
+            answer = max(answer, dist[node])
+
+            # Stop after processing the last node.
+            if node == n:
+                break
+
+        # Return the final network delay time.
+        return answer
+
+
+# Driver code.
+def main() -&gt; None:
+    times = [
+        [2, 1, 1], [2, 3, 1], [3, 4, 1]
+    ]
+
+    n = 4
+    k = 2
+
+    sol = Solution()
+
+    print(sol.networkDelayTime(times, n, k))
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Return minimum time required for every node to receive the signal.
+    public long networkDelayTime(int[][] times, int n, int k) {
+        // Use a wide sentinel outside valid accumulated times.
+        long INF = Long.MAX_VALUE / 4L;
+
+        long[] dist = new long[n + 1];
+
+        // Mark every node as unreachable.
+        Arrays.fill(dist, INF);
+
+        // Source receives the signal immediately.
+        dist[k] = 0L;
+
+        // Propagate shortest distances through at most n - 1 rounds.
+        for (int pass = 1; pass &lt;= n - 1; pass++) {
+            boolean changed = false;
+
+            // Relax every directed edge.
+            for (int[] edge : times) {
+                int from = edge[0];
+                int to = edge[1];
+                long travelTime = edge[2];
+
+                // Skip unreachable starting nodes.
+                if (dist[from] == INF) {
+                    continue;
+                }
+
+                // Record a faster signal arrival.
+                if (dist[from] + travelTime &lt; dist[to]) {
+                    dist[to] = dist[from] + travelTime;
+                    changed = true;
+                }
+            }
+
+            // Stop after no distance changes.
+            if (!changed) {
+                break;
+            }
+        }
+
+        long answer = 0L;
+
+        // Find the last signal arrival among all nodes.
+        for (int node = 1; node &lt;= n; node++) {
+            // If any node is unreachable, return -1.
+            if (dist[node] == INF) {
+                return -1L;
+            }
+
+            answer = Math.max(answer, dist[node]);
+
+            // Stop after processing the last node.
+            if (node == n) {
+                break;
+            }
+        }
+
+        // Return the final network delay time.
+        return answer;
+    }
+}
+
+class Main {
+    // Driver code.
+    public static void main(String[] args) {
+        int[][] times = {
+            {2, 1, 1}, {2, 3, 1}, {3, 4, 1}
+        };
+
+        int n = 4;
+        int k = 2;
+
+        Solution sol = new Solution();
+
+        System.out.println(sol.networkDelayTime(times, n, k));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Return minimum time required for every node to receive the signal.
+    networkDelayTime(times, n, k) {
+        // Infinity marks unreachable nodes.
+        const INF = Infinity;
+
+        const dist = new Array(n + 1).fill(INF);
+
+        // Source receives the signal immediately.
+        dist[k] = 0;
+
+        // Propagate shortest distances through at most n - 1 rounds.
+        for (let pass = 1; pass &lt;= n - 1; pass++) {
+            let changed = false;
+
+            // Relax every directed edge.
+            for (const edge of times) {
+                const from = edge[0];
+                const to = edge[1];
+                const travelTime = edge[2];
+
+                // Skip unreachable starting nodes.
+                if (dist[from] === INF) {
+                    continue;
+                }
+
+                const nextTime = dist[from] + travelTime;
+
+                // Keep accumulated times inside safe integer range.
+                if (nextTime &gt; Number.MAX_SAFE_INTEGER) {
+                    continue;
+                }
+
+                // Record a faster signal arrival.
+                if (nextTime &lt; dist[to]) {
+                    dist[to] = nextTime;
+                    changed = true;
+                }
+            }
+
+            // Stop after no distance changes.
+            if (!changed) {
+                break;
+            }
+        }
+
+        let answer = 0;
+
+        // Find the last signal arrival among all nodes.
+        for (let node = 1; node &lt;= n; node++) {
+            // If any node is unreachable, return -1.
+            if (dist[node] === INF) {
+                return -1;
+            }
+
+            answer = Math.max(answer, dist[node]);
+
+            // Stop after processing the last node.
+            if (node === n) {
+                break;
+            }
+        }
+
+        // Return the final network delay time.
+        return answer;
+    }
+}
+
+// Driver code.
+function main() {
+    const times = [
+        [2, 1, 1], [2, 3, 1], [3, 4, 1]
+    ];
+
+    const n = 4;
+    const k = 2;
+
+    const sol = new Solution();
+
+    console.log(sol.networkDelayTime(times, n, k));
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-5"><h3 id="blog-toc-complexity-analysis">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(N×M)</code>, where <code>N</code> is the number of nodes and <code>M</code> is the number of directed edges; up to <code>N-1</code> rounds scan all <code>M</code> edges.</p></div><div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-6"><p><strong>Space Complexity:</strong> <code>O(N)</code>, where the distance array stores one shortest signal-arrival time for each of the <code>N</code> nodes.</p></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-7"><h2 id="blog-toc-optimal-approach">Optimal Approach</h2><p>All travel times are non-negative, allowing Dijkstra’s Algorithm to finalize signal-arrival times in increasing order. A binary min-heap efficiently selects the node having the earliest known arrival time.</p><p>Every successful relaxation inserts a new arrival–node pair into the heap. Outdated pairs are skipped, while the largest final shortest distance represents the total network delay.</p><h3 id="blog-toc-algorithm-2">Algorithm</h3><ul><li><p>Build a directed weighted adjacency list from all signal times, storing each destination node with the corresponding travel time.</p></li><li><p>Initialize all distances as infinity, set <code>distance[k]</code> to <code>0</code>, and insert <code>{0, k}</code> into a min-heap.</p></li><li><p>Continue processing while the heap contains entries and remove the pair having the smallest arrival time.</p></li><li><p>Skip the removed pair when the heap time differs from the current stored distance, as the pair represents an outdated route.</p></li><li><p>Traverse every outgoing edge and calculate the candidate arrival time as <code>currentTime+edgeWeight</code>.</p></li><li><p>Upon finding a smaller arrival time, update the neighbor’s distance and insert the new arrival–neighbor pair into the heap.</p></li><li><p>Scan all nodes, return <code>-1</code> upon finding an infinite distance, and otherwise return the maximum shortest distance as the network delay time.</p></li></ul><h3 id="blog-toc-dry-run-2">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="network-delay-time-dijkstra-parsing-nodes-corrected" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/c85208a5a1acb93c.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">network-delay-time-dijkstra-parsing-nodes-corrected</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-8"><h3 id="blog-toc-solution-2">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Return minimum time required for every node to receive the signal.
+    long long networkDelayTime(vector&lt;vector&lt;int&gt;&gt;&amp; times, int n, int k) {
+        vector&lt;vector&lt;pair&lt;int, int&gt;&gt;&gt; adj(n + 1);
+
+        // Build a directed weighted adjacency list.
+        for (const vector&lt;int&gt;&amp; edge : times) {
+            int from = edge[0];
+            int to = edge[1];
+            int travelTime = edge[2];
+
+            adj[from].push_back({to, travelTime});
+        }
+
+        // Use a wide sentinel outside valid accumulated times.
+        const long long INF = numeric_limits&lt;long long&gt;::max() / 4;
+
+        vector&lt;long long&gt; dist(n + 1, INF);
+
+        priority_queue&lt;
+            pair&lt;long long, int&gt;,
+            vector&lt;pair&lt;long long, int&gt;&gt;,
+            greater&lt;pair&lt;long long, int&gt;&gt;
+        &gt; minHeap;
+
+        // Start Dijkstra traversal from source k.
+        dist[k] = 0;
+        minHeap.push({0, k});
+
+        // Process available nodes by earliest signal arrival.
+        while (!minHeap.empty()) {
+            auto [currentTime, node] = minHeap.top();
+            minHeap.pop();
+
+            // Skip an entry replaced by a faster route.
+            if (currentTime != dist[node]) {
+                continue;
+            }
+
+            // Relax every outgoing directed edge.
+            for (const auto&amp; [neighbor, travelTime] : adj[node]) {
+                long long candidate = currentTime + travelTime;
+
+                // Record a faster signal arrival.
+                if (candidate &lt; dist[neighbor]) {
+                    dist[neighbor] = candidate;
+                    minHeap.push({candidate, neighbor});
+                }
+            }
+        }
+
+        long long answer = 0;
+
+        // Find the last signal arrival among all nodes.
+        for (int node = 1; node &lt;= n; node++) {
+            // If any node is unreachable, return -1.
+            if (dist[node] == INF) {
+                return -1;
+            }
+
+            answer = max(answer, dist[node]);
+
+            // Stop after processing the last node.
+            if (node == n) {
+                break;
+            }
+        }
+
+        // Return the final network delay time.
+        return answer;
+    }
+};
+
+// Driver code.
+int main() {
+    vector&lt;vector&lt;int&gt;&gt; times = {
+        {2, 1, 1}, {2, 3, 1}, {3, 4, 1}
+    };
+
+    int n = 4;
+    int k = 2;
+
+    Solution sol;
+
+    cout &lt;&lt; sol.networkDelayTime(times, n, k);
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">from typing import List
+import heapq
+
+class Solution:
+    # Return minimum time required for every node to receive the signal.
+    def networkDelayTime(self, times: List[List[int]], n: int, k: int) -&gt; int:
+        adj = [[] for _ in range(n + 1)]
+
+        # Build a directed weighted adjacency list.
+        for edge in times:
+            fromNode = edge[0]
+            toNode = edge[1]
+            travelTime = edge[2]
+
+            adj[fromNode].append((toNode, travelTime))
+
+        # Infinity marks unreachable nodes.
+        INF = float("inf")
+
+        dist = [INF] * (n + 1)
+
+        minHeap = []
+
+        # Start Dijkstra traversal from source k.
+        dist[k] = 0
+        heapq.heappush(minHeap, (0, k))
+
+        # Process available nodes by earliest signal arrival.
+        while minHeap:
+            currentTime, node = heapq.heappop(minHeap)
+
+            # Skip an entry replaced by a faster route.
+            if currentTime != dist[node]:
+                continue
+
+            # Relax every outgoing directed edge.
+            for neighbor, travelTime in adj[node]:
+                candidate = currentTime + travelTime
+
+                # Record a faster signal arrival.
+                if candidate &lt; dist[neighbor]:
+                    dist[neighbor] = candidate
+                    heapq.heappush(minHeap, (candidate, neighbor))
+
+        answer = 0
+
+        # Find the last signal arrival among all nodes.
+        for node in range(1, n + 1):
+            # If any node is unreachable, return -1.
+            if dist[node] == INF:
+                return -1
+
+            answer = max(answer, dist[node])
+
+            # Stop after processing the last node.
+            if node == n:
+                break
+
+        # Return the final network delay time.
+        return answer
+
+
+# Driver code.
+def main() -&gt; None:
+    times = [
+        [2, 1, 1], [2, 3, 1], [3, 4, 1]
+    ]
+
+    n = 4
+    k = 2
+
+    sol = Solution()
+
+    print(sol.networkDelayTime(times, n, k))
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Return minimum time required for every node to receive the signal.
+    public long networkDelayTime(int[][] times, int n, int k) {
+        ArrayList&lt;ArrayList&lt;long[]&gt;&gt; adj = new ArrayList&lt;&gt;();
+
+        // Create adjacency list for every node.
+        for (int node = 0; node &lt;= n; node++) {
+            adj.add(new ArrayList&lt;&gt;());
+        }
+
+        // Build a directed weighted adjacency list.
+        for (int[] edge : times) {
+            int from = edge[0];
+            int to = edge[1];
+            long travelTime = edge[2];
+
+            adj.get(from).add(new long[]{to, travelTime});
+        }
+
+        // Use a wide sentinel outside valid accumulated times.
+        long INF = Long.MAX_VALUE / 4L;
+
+        long[] dist = new long[n + 1];
+
+        // Mark every node as unreachable.
+        Arrays.fill(dist, INF);
+
+        PriorityQueue&lt;long[]&gt; minHeap = new PriorityQueue&lt;&gt;(
+            (a, b) -&gt; Long.compare(a[0], b[0])
+        );
+
+        // Start Dijkstra traversal from source k.
+        dist[k] = 0L;
+        minHeap.offer(new long[]{0L, k});
+
+        // Process available nodes by earliest signal arrival.
+        while (!minHeap.isEmpty()) {
+            long[] state = minHeap.poll();
+
+            long currentTime = state[0];
+            int node = (int) state[1];
+
+            // Skip an entry replaced by a faster route.
+            if (currentTime != dist[node]) {
+                continue;
+            }
+
+            // Relax every outgoing directed edge.
+            for (long[] edge : adj.get(node)) {
+                int neighbor = (int) edge[0];
+                long travelTime = edge[1];
+                long candidate = currentTime + travelTime;
+
+                // Record a faster signal arrival.
+                if (candidate &lt; dist[neighbor]) {
+                    dist[neighbor] = candidate;
+                    minHeap.offer(new long[]{candidate, neighbor});
+                }
+            }
+        }
+
+        long answer = 0L;
+
+        // Find the last signal arrival among all nodes.
+        for (int node = 1; node &lt;= n; node++) {
+            // If any node is unreachable, return -1.
+            if (dist[node] == INF) {
+                return -1L;
+            }
+
+            answer = Math.max(answer, dist[node]);
+
+            // Stop after processing the last node.
+            if (node == n) {
+                break;
+            }
+        }
+
+        // Return the final network delay time.
+        return answer;
+    }
+}
+
+class Main {
+    // Driver code.
+    public static void main(String[] args) {
+        int[][] times = {
+            {2, 1, 1}, {2, 3, 1}, {3, 4, 1}
+        };
+
+        int n = 4;
+        int k = 2;
+
+        Solution sol = new Solution();
+
+        System.out.println(sol.networkDelayTime(times, n, k));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class MinHeap {
+    // Creates an empty min heap.
+    constructor() {
+        this.heap = [];
+    }
+
+    // Returns true when heap has no states.
+    isEmpty() {
+        return this.heap.length === 0;
+    }
+
+    // Adds a new state into the heap.
+    push(state) {
+        this.heap.push(state);
+        this.bubbleUp(this.heap.length - 1);
+    }
+
+    // Removes the state with minimum time.
+    pop() {
+        const top = this.heap[0];
+        const last = this.heap.pop();
+
+        if (this.heap.length &gt; 0) {
+            this.heap[0] = last;
+            this.bubbleDown(0);
+        }
+
+        return top;
+    }
+
+    // Moves a smaller state upward.
+    bubbleUp(index) {
+        while (index &gt; 0) {
+            const parent = Math.floor((index - 1) / 2);
+
+            if (this.heap[parent][0] &lt;= this.heap[index][0]) {
+                break;
+            }
+
+            [this.heap[parent], this.heap[index]] = [this.heap[index], this.heap[parent]];
+            index = parent;
+        }
+    }
+
+    // Moves a larger state downward.
+    bubbleDown(index) {
+        const length = this.heap.length;
+
+        while (true) {
+            let smallest = index;
+            const left = 2 * index + 1;
+            const right = 2 * index + 2;
+
+            if (left &lt; length &amp;&amp; this.heap[left][0] &lt; this.heap[smallest][0]) {
+                smallest = left;
+            }
+
+            if (right &lt; length &amp;&amp; this.heap[right][0] &lt; this.heap[smallest][0]) {
+                smallest = right;
+            }
+
+            if (smallest === index) {
+                break;
+            }
+
+            [this.heap[index], this.heap[smallest]] = [this.heap[smallest], this.heap[index]];
+            index = smallest;
+        }
+    }
+}
+
+class Solution {
+    // Return minimum time required for every node to receive the signal.
+    networkDelayTime(times, n, k) {
+        const adj = Array.from({ length: n + 1 }, () =&gt; []);
+
+        // Build a directed weighted adjacency list.
+        for (const edge of times) {
+            const from = edge[0];
+            const to = edge[1];
+            const travelTime = edge[2];
+
+            adj[from].push([to, travelTime]);
+        }
+
+        // Infinity marks unreachable nodes.
+        const INF = Infinity;
+
+        const dist = new Array(n + 1).fill(INF);
+        const minHeap = new MinHeap();
+
+        // Start Dijkstra traversal from source k.
+        dist[k] = 0;
+        minHeap.push([0, k]);
+
+        // Process available nodes by earliest signal arrival.
+        while (!minHeap.isEmpty()) {
+            const [currentTime, node] = minHeap.pop();
+
+            // Skip an entry replaced by a faster route.
+            if (currentTime !== dist[node]) {
+                continue;
+            }
+
+            // Relax every outgoing directed edge.
+            for (const [neighbor, travelTime] of adj[node]) {
+                const candidate = currentTime + travelTime;
+
+                // Keep accumulated times inside safe integer range.
+                if (candidate &gt; Number.MAX_SAFE_INTEGER) {
+                    continue;
+                }
+
+                // Record a faster signal arrival.
+                if (candidate &lt; dist[neighbor]) {
+                    dist[neighbor] = candidate;
+                    minHeap.push([candidate, neighbor]);
+                }
+            }
+        }
+
+        let answer = 0;
+
+        // Find the last signal arrival among all nodes.
+        for (let node = 1; node &lt;= n; node++) {
+            // If any node is unreachable, return -1.
+            if (dist[node] === INF) {
+                return -1;
+            }
+
+            answer = Math.max(answer, dist[node]);
+
+            // Stop after processing the last node.
+            if (node === n) {
+                break;
+            }
+        }
+
+        // Return the final network delay time.
+        return answer;
+    }
+}
+
+// Driver code.
+function main() {
+    const times = [
+        [2, 1, 1], [2, 3, 1], [3, 4, 1]
+    ];
+
+    const n = 4;
+    const k = 2;
+
+    const sol = new Solution();
+
+    console.log(sol.networkDelayTime(times, n, k));
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-9"><h3 id="blog-toc-complexity-analysis-2">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O((N+M)×log N)</code>, where <code>N</code> is the number of nodes and <code>M</code> is the number of directed edges; heap operations process extractions and successful relaxations.</p><p><strong>Space Complexity:</strong> <code>O(N+M)</code>, where the adjacency list stores <code>N</code> nodes and <code>M</code> edges, while the distance array and heap require up to <code>O(N+M)</code> space.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div><section aria-label="Interview follow-up Questions" class="BlogDetail-module__HEfJva__faqSection" id="blog-toc-faqs"><h2 class="BlogDetail-module__HEfJva__faqHeading">Interview follow-up Questions</h2><div class="flex w-full flex-col BlogDetail-module__HEfJva__faqList" data-orientation="vertical" data-slot="accordion"><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="open"><h3 class="flex" data-orientation="vertical" data-state="open"></h3><div aria-labelledby="radix-_R_1kkqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="open" id="radix-_R_9kkqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"><div class="h-auto pt-0 pb-2.5 [&amp;_a]:underline [&amp;_a]:underline-offset-3 [&amp;_a]:hover:text-foreground [&amp;_p:not(:last-child)]:mb-4 BlogDetail-module__HEfJva__faqAnswer"><p>Every node receives the signal at the corresponding shortest arrival time, and complete delivery finishes at the latest arrival.</p></div></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_2kkqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_akkqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_3kkqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_bkkqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_4kkqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_ckkqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div></div></section></div>
+</article>
+<script src="../article.js?v=1790281487"></script>
+</body></html>

@@ -1,0 +1,1582 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Minimum Time to Burn a Binary Tree from a Given Node</title>
+<link rel="stylesheet" href="../style.css?v=1790281487">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Minimum Time to Burn a Binary Tree from a Given Node</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/blogs/data-structure-and-algorithm/minimum-time-burn-binary-tree</code></div>
+  <div class="ArticleParser-module__R__VNG__article" data-article-segment="html-0"><p>Given the <code>root</code> of a binary tree and a <code>target</code> node present in the tree, determine the <strong>minimum time required to burn the entire tree</strong> if the fire starts from the target.</p><p>The fire spreads every second from a burning node to all directly connected nodes:</p><ul><li><p>its left child,</p></li><li><p>its right child,</p></li><li><p>its parent.</p></li></ul><p>A node burns only once, and all possible neighboring nodes catch fire simultaneously.</p></div><div><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 1</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong><br/><code>root = [1, 2, 3, 4, 5, null, 6], target = 2</code></p><p><strong>Output:</strong><br/><code>3</code></p><p><strong>Explanation:</strong><br/>At time <code>0</code>, node <code>2</code> starts burning. After <code>1</code> second, nodes <code>1</code>, <code>4</code>, and <code>5</code> burn. After <code>2</code> seconds, node <code>3</code> burns, and after <code>3</code> seconds, node <code>6</code> burns. Therefore, the entire tree burns in <code>3</code> seconds.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 2</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong><br/><code>root = [1], target = 1</code></p><p><strong>Output:</strong><br/><code>0</code></p><p><strong>Explanation:</strong><br/>The target is the only node in the tree, so the complete tree is already burning at time <code>0</code>.</p></div></div></section></div><div><div class="BlogDetail-module__HEfJva__practiceCallout"><a class="BlogDetail-module__HEfJva__practiceLink" data-mobile-prefetch="normal" href="https://takeuforward.org/practice/dsa/minimum-time-taken-to-burn-the-bt-from-a-given-node" rel="noopener" target="_blank"><span>Practice it by yourself before moving onto the solution</span><span class="BlogDetail-module__HEfJva__practiceAction">Try now</span></a></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-2"><h2 id="blog-toc-approach-1">Approach 1</h2><p>A binary tree normally provides links only from a parent to its children. Burning, however, must be allowed to spread in <strong>both directions</strong>.</p><p>Therefore, every parent-child connection is converted into an undirected edge. Once this conversion is performed, the tree behaves like an undirected graph in which the fire can move to every directly connected node.</p><p>A BFS is then started from the target.</p><p>A queue is used because nodes that burn at the same second must be processed together. The variable <code>levelSize</code> stores the number of nodes burning during the current second so that exactly one BFS level can be processed at a time.</p><p>A set named <code>burned</code> is maintained to represent nodes that have already caught fire. It prevents the same node from being reached repeatedly through the bidirectional graph.</p><p>A boolean variable <code>spread</code> is used to record whether at least one new node caught fire during the current BFS level. Time is increased only when <code>spread</code> becomes <code>true</code>, because a second should be counted only when the fire actually reaches another node.</p><h3 id="blog-toc-algorithm">Algorithm</h3><ul><li><p>An adjacency list is constructed by traversing the binary tree, and every parent-child connection is stored in both directions so that fire can spread both upward and downward.</p></li><li><p>A BFS queue is initialized with the <code>target</code>, and the target is inserted into the <code>burned</code> set because it is already burning at time <code>0</code>.</p></li><li><p>For each BFS iteration, the current queue size is stored in <code>levelSize</code> so that all nodes burning during the same second are processed together.</p></li><li><p>A boolean variable <code>spread</code> is initialized as <code>false</code> before the current level is processed so that it can record whether the fire reaches at least one new node.</p></li><li><p>For every node in the current level, all adjacent nodes that are not present in <code>burned</code> are marked as burned, inserted into the queue, and <code>spread</code> is set to <code>true</code>.</p></li><li><p>After the complete level has been processed, the burning time is increased by <code>1</code> only if <code>spread</code> is <code>true</code>, because at least one new node has caught fire.</p></li><li><p>The process is continued until the queue becomes empty, after which the recorded time is returned.</p></li></ul><h3 id="blog-toc-dry-run">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Burning Tree Approach 1 Dry Run .png" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/d9cedeac8ab74758.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Burning Tree Approach 1 Dry Run .png</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-3"><h3 id="blog-toc-solution">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+
+    TreeNode(int value) {
+        val = value;
+        left = nullptr;
+        right = nullptr;
+    }
+};
+
+class Solution {
+private:
+    // Builds an undirected graph so fire
+    // can move between parent and child.
+    void buildGraph(
+        TreeNode* node,
+        unordered_map&lt;TreeNode*, vector&lt;TreeNode*&gt;&gt;&amp; graph
+    ) {
+        if (node == nullptr) {
+            return;
+        }
+
+        // Both directions are stored because
+        // fire can spread upward and downward.
+        if (node-&gt;left != nullptr) {
+            graph[node].push_back(node-&gt;left);
+            graph[node-&gt;left].push_back(node);
+
+            buildGraph(node-&gt;left, graph);
+        }
+
+        if (node-&gt;right != nullptr) {
+            graph[node].push_back(node-&gt;right);
+            graph[node-&gt;right].push_back(node);
+
+            buildGraph(node-&gt;right, graph);
+        }
+    }
+
+public:
+    // Returns the minimum time required
+    // to burn the complete tree.
+    int minTime(
+        TreeNode* root,
+        TreeNode* target
+    ) {
+        if (root == nullptr) {
+            return 0;
+        }
+
+        unordered_map&lt;TreeNode*, vector&lt;TreeNode*&gt;&gt; graph;
+        buildGraph(root, graph);
+
+        queue&lt;TreeNode*&gt; nodesQueue;
+        unordered_set&lt;TreeNode*&gt; burned;
+
+        nodesQueue.push(target);
+
+        // The target starts burning at time 0,
+        // so it is marked before BFS begins.
+        burned.insert(target);
+
+        int time = 0;
+
+        while (!nodesQueue.empty()) {
+            int levelSize = nodesQueue.size();
+
+            // spread records whether at least one
+            // new node catches fire this second.
+            bool spread = false;
+
+            // levelSize keeps all nodes burning
+            // during the same second together.
+            for (int i = 0; i &lt; levelSize; i++) {
+                TreeNode* node = nodesQueue.front();
+                nodesQueue.pop();
+
+                for (TreeNode* neighbor : graph[node]) {
+                    if (burned.find(neighbor) == burned.end()) {
+                        burned.insert(neighbor);
+                        nodesQueue.push(neighbor);
+                        spread = true;
+                    }
+                }
+            }
+
+            // Time advances only when the fire
+            // actually spreads to another node.
+            if (spread) {
+                time++;
+            }
+        }
+
+        return time;
+    }
+};
+
+int main() {
+    TreeNode* root = new TreeNode(1);
+    root-&gt;left = new TreeNode(2);
+    root-&gt;right = new TreeNode(3);
+    root-&gt;left-&gt;left = new TreeNode(4);
+    root-&gt;left-&gt;right = new TreeNode(5);
+    root-&gt;right-&gt;right = new TreeNode(6);
+
+    TreeNode* target = root-&gt;left;
+
+    Solution solution;
+
+    cout &lt;&lt; solution.minTime(root, target) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">from collections import defaultdict, deque
+
+
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+
+class Solution:
+
+    # Builds an undirected graph so fire
+    # can move between parent and child.
+    def build_graph(self, node, graph):
+        if node is None:
+            return
+
+        # Both directions are stored because
+        # fire can spread upward and downward.
+        if node.left is not None:
+            graph[node].append(node.left)
+            graph[node.left].append(node)
+
+            self.build_graph(
+                node.left,
+                graph
+            )
+
+        if node.right is not None:
+            graph[node].append(node.right)
+            graph[node.right].append(node)
+
+            self.build_graph(
+                node.right,
+                graph
+            )
+
+    # Returns the minimum time required
+    # to burn the complete tree.
+    def min_time(self, root, target):
+        if root is None:
+            return 0
+
+        graph = defaultdict(list)
+
+        self.build_graph(
+            root,
+            graph
+        )
+
+        nodes_queue = deque([target])
+
+        # burned prevents a node from catching
+        # fire more than once.
+        burned = {target}
+
+        time = 0
+
+        while nodes_queue:
+            level_size = len(nodes_queue)
+
+            # spread records whether at least one
+            # new node catches fire this second.
+            spread = False
+
+            # One complete level represents
+            # all nodes burning at the same time.
+            for _ in range(level_size):
+                node = nodes_queue.popleft()
+
+                for neighbor in graph[node]:
+                    if neighbor not in burned:
+                        burned.add(neighbor)
+                        nodes_queue.append(neighbor)
+                        spread = True
+
+            # No second is counted when no
+            # new node catches fire.
+            if spread:
+                time += 1
+
+        return time
+
+
+if __name__ == "__main__":
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.right = TreeNode(3)
+    root.left.left = TreeNode(4)
+    root.left.right = TreeNode(5)
+    root.right.right = TreeNode(6)
+
+    target = root.left
+
+    solution = Solution()
+
+    print(
+        solution.min_time(
+            root,
+            target
+        )
+    )</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode(int value) {
+        val = value;
+    }
+}
+
+class Solution {
+
+    // Builds an undirected graph so fire
+    // can move between parent and child.
+    private void buildGraph(
+        TreeNode node,
+        Map&lt;TreeNode, List&lt;TreeNode&gt;&gt; graph
+    ) {
+        if (node == null) {
+            return;
+        }
+
+        // Both directions are stored because
+        // fire can spread upward and downward.
+        if (node.left != null) {
+            graph.computeIfAbsent(
+                node,
+                key -&gt; new ArrayList&lt;&gt;()
+            ).add(node.left);
+
+            graph.computeIfAbsent(
+                node.left,
+                key -&gt; new ArrayList&lt;&gt;()
+            ).add(node);
+
+            buildGraph(node.left, graph);
+        }
+
+        if (node.right != null) {
+            graph.computeIfAbsent(
+                node,
+                key -&gt; new ArrayList&lt;&gt;()
+            ).add(node.right);
+
+            graph.computeIfAbsent(
+                node.right,
+                key -&gt; new ArrayList&lt;&gt;()
+            ).add(node);
+
+            buildGraph(node.right, graph);
+        }
+    }
+
+    // Returns the minimum time required
+    // to burn the complete tree.
+    public int minTime(
+        TreeNode root,
+        TreeNode target
+    ) {
+        if (root == null) {
+            return 0;
+        }
+
+        Map&lt;TreeNode, List&lt;TreeNode&gt;&gt; graph =
+            new HashMap&lt;&gt;();
+
+        buildGraph(root, graph);
+
+        Queue&lt;TreeNode&gt; nodesQueue =
+            new LinkedList&lt;&gt;();
+
+        Set&lt;TreeNode&gt; burned =
+            new HashSet&lt;&gt;();
+
+        nodesQueue.offer(target);
+
+        // The target starts burning at time 0,
+        // so it is marked before BFS begins.
+        burned.add(target);
+
+        int time = 0;
+
+        while (!nodesQueue.isEmpty()) {
+            int levelSize = nodesQueue.size();
+
+            // spread records whether at least one
+            // new node catches fire this second.
+            boolean spread = false;
+
+            // levelSize keeps all nodes burning
+            // during the same second together.
+            for (int i = 0; i &lt; levelSize; i++) {
+                TreeNode node =
+                    nodesQueue.poll();
+
+                for (
+                    TreeNode neighbor :
+                    graph.getOrDefault(
+                        node,
+                        Collections.emptyList()
+                    )
+                ) {
+                    if (!burned.contains(neighbor)) {
+                        burned.add(neighbor);
+                        nodesQueue.offer(neighbor);
+                        spread = true;
+                    }
+                }
+            }
+
+            // Time advances only when the fire
+            // actually spreads to another node.
+            if (spread) {
+                time++;
+            }
+        }
+
+        return time;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        root.right.right = new TreeNode(6);
+
+        TreeNode target = root.left;
+
+        Solution solution = new Solution();
+
+        System.out.println(
+            solution.minTime(root, target)
+        );
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class TreeNode {
+    constructor(val) {
+        this.val = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class Solution {
+
+    // Builds an undirected graph so fire
+    // can move between parent and child.
+    buildGraph(node, graph) {
+        if (node === null) {
+            return;
+        }
+
+        if (!graph.has(node)) {
+            graph.set(node, []);
+        }
+
+        // Both directions are stored because
+        // fire can spread upward and downward.
+        if (node.left !== null) {
+            if (!graph.has(node.left)) {
+                graph.set(node.left, []);
+            }
+
+            graph.get(node).push(node.left);
+            graph.get(node.left).push(node);
+
+            this.buildGraph(
+                node.left,
+                graph
+            );
+        }
+
+        if (node.right !== null) {
+            if (!graph.has(node.right)) {
+                graph.set(node.right, []);
+            }
+
+            graph.get(node).push(node.right);
+            graph.get(node.right).push(node);
+
+            this.buildGraph(
+                node.right,
+                graph
+            );
+        }
+    }
+
+    // Returns the minimum time required
+    // to burn the complete tree.
+    minTime(root, target) {
+        if (root === null) {
+            return 0;
+        }
+
+        const graph = new Map();
+
+        this.buildGraph(
+            root,
+            graph
+        );
+
+        const nodesQueue = [target];
+        let front = 0;
+
+        // burned prevents a node from catching
+        // fire more than once.
+        const burned = new Set([target]);
+
+        let time = 0;
+
+        while (front &lt; nodesQueue.length) {
+            const levelSize =
+                nodesQueue.length - front;
+
+            // spread records whether at least one
+            // new node catches fire this second.
+            let spread = false;
+
+            // Exactly one burning level
+            // is processed at a time.
+            for (let i = 0; i &lt; levelSize; i++) {
+                const node =
+                    nodesQueue[front++];
+
+                const neighbors =
+                    graph.get(node) || [];
+
+                for (const neighbor of neighbors) {
+                    if (!burned.has(neighbor)) {
+                        burned.add(neighbor);
+                        nodesQueue.push(neighbor);
+                        spread = true;
+                    }
+                }
+            }
+
+            // Time advances only if the fire
+            // reaches at least one new node.
+            if (spread) {
+                time++;
+            }
+        }
+
+        return time;
+    }
+}
+
+const root = new TreeNode(1);
+root.left = new TreeNode(2);
+root.right = new TreeNode(3);
+root.left.left = new TreeNode(4);
+root.left.right = new TreeNode(5);
+root.right.right = new TreeNode(6);
+
+const target = root.left;
+
+const solution = new Solution();
+
+console.log(
+    solution.minTime(root, target)
+);</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-4"><h3 id="blog-toc-complexity-analysis">Complexity Analysis</h3><p>Let <code>N</code> be the number of nodes in the binary tree.</p><p><strong>Time Complexity:</strong> <code>O(N)</code>, where <code>N</code> is the number of nodes in the binary tree. Every tree edge is added to the adjacency structure a constant number of times, and every node is processed at most once during BFS.</p><p><strong>Space Complexity:</strong> <code>O(N)</code>. The adjacency list, <code>burned</code> set, and BFS queue can together store information for up to <code>N</code> nodes.</p><h2 id="blog-toc-approach-2">Approach 2</h2><p>Constructing a complete undirected graph is unnecessary because every node already provides references to its left and right children.</p><p>The only missing connection is:</p><p><code>child → parent</code></p><p>Therefore, a map named <code>parentTrack</code> can be maintained. The name indicates that it is used to <strong>track the parent of each node</strong>, allowing the fire to move upward during BFS.</p><p>After this preprocessing, every node effectively has at most three neighbors:</p><ul><li><p>left child,</p></li><li><p>right child,</p></li><li><p>parent.</p></li></ul><p>A queue is then used to simulate the burning process level by level.</p><p>The variable <code>levelSize</code> stores how many nodes are burning during the current second. A set named <code>burned</code> keeps track of nodes that have already caught fire so that the fire cannot move back and forth between a node and its parent.</p><p>A boolean variable <code>spread</code> records whether any new node catches fire during the current level. The elapsed time is increased only when this happens.</p><h3 id="blog-toc-algorithm-2">Algorithm</h3></div><div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-5"><ul><li><p>A queue-based traversal is performed from the root, and a map named <code>parentTrack</code> is constructed so that every non-root node is associated with its parent.</p></li><li><p>The root is stored with no parent, or is treated separately, because no node exists above it.</p></li><li><p>A BFS queue is initialized with the <code>target</code>, and the target is inserted into the <code>burned</code> set because it burns at time <code>0</code>.</p></li><li><p>At the beginning of each BFS level, the number of currently burning nodes is stored in <code>levelSize</code>, while <code>spread</code> is initialized as <code>false</code>.</p></li><li><p>For every node in that level, its left child, right child, and mapped parent are examined.</p></li><li><p>Whenever an existing neighbor has not already been burned, it is inserted into <code>burned</code> and the queue, while <code>spread</code> is set to <code>true</code>.</p></li><li><p>After all <code>levelSize</code> nodes have been processed, the elapsed time is increased only when <code>spread</code> is <code>true</code>, indicating that the fire has reached at least one new node.</p></li><li><p>Once the queue becomes empty, the recorded time is returned as the minimum time required to burn the entire tree.</p></li></ul><h3 id="blog-toc-dry-run-2">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Burning Tree Approach 2 Dry Run .png" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/6141fa658061c2d2.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Burning Tree Approach 2 Dry Run .png</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-6"><h3 id="blog-toc-solution-2">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+
+    TreeNode(int value) {
+        val = value;
+        left = nullptr;
+        right = nullptr;
+    }
+};
+
+class Solution {
+private:
+    // Builds child-to-parent links so fire
+    // can also spread upward.
+    void buildParentTrack(
+        TreeNode* root,
+        unordered_map&lt;TreeNode*, TreeNode*&gt;&amp; parentTrack
+    ) {
+        queue&lt;TreeNode*&gt; nodesQueue;
+        nodesQueue.push(root);
+
+        // The root has no parent, so nullptr
+        // marks the end of upward movement.
+        parentTrack[root] = nullptr;
+
+        while (!nodesQueue.empty()) {
+            TreeNode* node =
+                nodesQueue.front();
+
+            nodesQueue.pop();
+
+            if (node-&gt;left != nullptr) {
+                parentTrack[node-&gt;left] = node;
+                nodesQueue.push(node-&gt;left);
+            }
+
+            if (node-&gt;right != nullptr) {
+                parentTrack[node-&gt;right] = node;
+                nodesQueue.push(node-&gt;right);
+            }
+        }
+    }
+
+public:
+    // Simulates the fire using left,
+    // right, and parent connections.
+    int minTime(
+        TreeNode* root,
+        TreeNode* target
+    ) {
+        if (root == nullptr) {
+            return 0;
+        }
+
+        unordered_map&lt;TreeNode*, TreeNode*&gt; parentTrack;
+
+        buildParentTrack(
+            root,
+            parentTrack
+        );
+
+        queue&lt;TreeNode*&gt; nodesQueue;
+        unordered_set&lt;TreeNode*&gt; burned;
+
+        nodesQueue.push(target);
+        burned.insert(target);
+
+        int time = 0;
+
+        while (!nodesQueue.empty()) {
+            int levelSize =
+                nodesQueue.size();
+
+            // spread tells whether fire moved
+            // to at least one new node.
+            bool spread = false;
+
+            // levelSize represents all nodes
+            // burning during the current second.
+            for (int i = 0; i &lt; levelSize; i++) {
+                TreeNode* node =
+                    nodesQueue.front();
+
+                nodesQueue.pop();
+
+                if (
+                    node-&gt;left != nullptr &amp;&amp;
+                    burned.find(node-&gt;left) == burned.end()
+                ) {
+                    burned.insert(node-&gt;left);
+                    nodesQueue.push(node-&gt;left);
+                    spread = true;
+                }
+
+                if (
+                    node-&gt;right != nullptr &amp;&amp;
+                    burned.find(node-&gt;right) == burned.end()
+                ) {
+                    burned.insert(node-&gt;right);
+                    nodesQueue.push(node-&gt;right);
+                    spread = true;
+                }
+
+                TreeNode* parent =
+                    parentTrack[node];
+
+                // parentTrack supplies the upward
+                // connection missing from the tree.
+                if (
+                    parent != nullptr &amp;&amp;
+                    burned.find(parent) == burned.end()
+                ) {
+                    burned.insert(parent);
+                    nodesQueue.push(parent);
+                    spread = true;
+                }
+            }
+
+            // One second is counted only if
+            // at least one new node burns.
+            if (spread) {
+                time++;
+            }
+        }
+
+        return time;
+    }
+};
+
+int main() {
+    TreeNode* root = new TreeNode(1);
+    root-&gt;left = new TreeNode(2);
+    root-&gt;right = new TreeNode(3);
+    root-&gt;left-&gt;left = new TreeNode(4);
+    root-&gt;left-&gt;right = new TreeNode(5);
+    root-&gt;right-&gt;right = new TreeNode(6);
+
+    TreeNode* target = root-&gt;left;
+
+    Solution solution;
+
+    cout &lt;&lt; solution.minTime(root, target) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">from collections import deque
+
+
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+
+class Solution:
+
+    # Builds child-to-parent links so fire
+    # can also spread upward.
+    def build_parent_track(
+        self,
+        root,
+        parent_track
+    ):
+        nodes_queue = deque([root])
+
+        # The root has no parent, so None
+        # marks the end of upward movement.
+        parent_track[root] = None
+
+        while nodes_queue:
+            node = nodes_queue.popleft()
+
+            if node.left is not None:
+                parent_track[node.left] = node
+                nodes_queue.append(node.left)
+
+            if node.right is not None:
+                parent_track[node.right] = node
+                nodes_queue.append(node.right)
+
+    # Simulates fire using child
+    # and parent connections.
+    def min_time(self, root, target):
+        if root is None:
+            return 0
+
+        parent_track = {}
+
+        self.build_parent_track(
+            root,
+            parent_track
+        )
+
+        nodes_queue = deque([target])
+
+        # burned prevents already burned nodes
+        # from entering the queue again.
+        burned = {target}
+
+        time = 0
+
+        while nodes_queue:
+            level_size = len(nodes_queue)
+
+            # spread records whether at least
+            # one new node catches fire.
+            spread = False
+
+            # One complete queue level
+            # corresponds to one burning stage.
+            for _ in range(level_size):
+                node = nodes_queue.popleft()
+
+                if (
+                    node.left is not None
+                    and node.left not in burned
+                ):
+                    burned.add(node.left)
+                    nodes_queue.append(node.left)
+                    spread = True
+
+                if (
+                    node.right is not None
+                    and node.right not in burned
+                ):
+                    burned.add(node.right)
+                    nodes_queue.append(node.right)
+                    spread = True
+
+                parent = parent_track[node]
+
+                # parent_track provides the
+                # upward connection for the fire.
+                if (
+                    parent is not None
+                    and parent not in burned
+                ):
+                    burned.add(parent)
+                    nodes_queue.append(parent)
+                    spread = True
+
+            # Time advances only when the fire
+            # reaches a new node.
+            if spread:
+                time += 1
+
+        return time
+
+
+if __name__ == "__main__":
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.right = TreeNode(3)
+    root.left.left = TreeNode(4)
+    root.left.right = TreeNode(5)
+    root.right.right = TreeNode(6)
+
+    target = root.left
+
+    solution = Solution()
+
+    print(
+        solution.min_time(
+            root,
+            target
+        )
+    )</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode(int value) {
+        val = value;
+    }
+}
+
+class Solution {
+
+    // Builds child-to-parent links so fire
+    // can also spread upward.
+    private void buildParentTrack(
+        TreeNode root,
+        Map&lt;TreeNode, TreeNode&gt; parentTrack
+    ) {
+        Queue&lt;TreeNode&gt; nodesQueue =
+            new LinkedList&lt;&gt;();
+
+        nodesQueue.offer(root);
+
+        // The root has no parent, so null
+        // marks the end of upward movement.
+        parentTrack.put(root, null);
+
+        while (!nodesQueue.isEmpty()) {
+            TreeNode node =
+                nodesQueue.poll();
+
+            if (node.left != null) {
+                parentTrack.put(
+                    node.left,
+                    node
+                );
+
+                nodesQueue.offer(node.left);
+            }
+
+            if (node.right != null) {
+                parentTrack.put(
+                    node.right,
+                    node
+                );
+
+                nodesQueue.offer(node.right);
+            }
+        }
+    }
+
+    // Simulates fire using child
+    // and parent connections.
+    public int minTime(
+        TreeNode root,
+        TreeNode target
+    ) {
+        if (root == null) {
+            return 0;
+        }
+
+        Map&lt;TreeNode, TreeNode&gt; parentTrack =
+            new HashMap&lt;&gt;();
+
+        buildParentTrack(
+            root,
+            parentTrack
+        );
+
+        Queue&lt;TreeNode&gt; nodesQueue =
+            new LinkedList&lt;&gt;();
+
+        Set&lt;TreeNode&gt; burned =
+            new HashSet&lt;&gt;();
+
+        nodesQueue.offer(target);
+        burned.add(target);
+
+        int time = 0;
+
+        while (!nodesQueue.isEmpty()) {
+            int levelSize =
+                nodesQueue.size();
+
+            // spread records whether fire reaches
+            // any new node during this second.
+            boolean spread = false;
+
+            // All nodes in this level burn
+            // during the same second.
+            for (int i = 0; i &lt; levelSize; i++) {
+                TreeNode node =
+                    nodesQueue.poll();
+
+                if (
+                    node.left != null &amp;&amp;
+                    !burned.contains(node.left)
+                ) {
+                    burned.add(node.left);
+                    nodesQueue.offer(node.left);
+                    spread = true;
+                }
+
+                if (
+                    node.right != null &amp;&amp;
+                    !burned.contains(node.right)
+                ) {
+                    burned.add(node.right);
+                    nodesQueue.offer(node.right);
+                    spread = true;
+                }
+
+                TreeNode parent =
+                    parentTrack.get(node);
+
+                // The stored parent provides
+                // the upward spreading direction.
+                if (
+                    parent != null &amp;&amp;
+                    !burned.contains(parent)
+                ) {
+                    burned.add(parent);
+                    nodesQueue.offer(parent);
+                    spread = true;
+                }
+            }
+
+            // Time increases only when at least
+            // one additional node catches fire.
+            if (spread) {
+                time++;
+            }
+        }
+
+        return time;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        root.right.right = new TreeNode(6);
+
+        TreeNode target = root.left;
+
+        Solution solution = new Solution();
+
+        System.out.println(
+            solution.minTime(root, target)
+        );
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class TreeNode {
+    constructor(val) {
+        this.val = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class Solution {
+
+    // Builds child-to-parent links so fire
+    // can also spread upward.
+    buildParentTrack(root, parentTrack) {
+        const nodesQueue = [root];
+        let front = 0;
+
+        // The root has no parent, so null
+        // marks the end of upward movement.
+        parentTrack.set(root, null);
+
+        while (front &lt; nodesQueue.length) {
+            const node =
+                nodesQueue[front++];
+
+            if (node.left !== null) {
+                parentTrack.set(
+                    node.left,
+                    node
+                );
+
+                nodesQueue.push(node.left);
+            }
+
+            if (node.right !== null) {
+                parentTrack.set(
+                    node.right,
+                    node
+                );
+
+                nodesQueue.push(node.right);
+            }
+        }
+    }
+
+    // Simulates fire using child
+    // and parent connections.
+    minTime(root, target) {
+        if (root === null) {
+            return 0;
+        }
+
+        const parentTrack = new Map();
+
+        this.buildParentTrack(
+            root,
+            parentTrack
+        );
+
+        const nodesQueue = [target];
+        let front = 0;
+
+        // burned prevents already burned nodes
+        // from entering the queue again.
+        const burned = new Set([target]);
+
+        let time = 0;
+
+        while (front &lt; nodesQueue.length) {
+            const levelSize =
+                nodesQueue.length - front;
+
+            // spread records whether at least
+            // one new node catches fire.
+            let spread = false;
+
+            for (let i = 0; i &lt; levelSize; i++) {
+                const node =
+                    nodesQueue[front++];
+
+                if (
+                    node.left !== null &amp;&amp;
+                    !burned.has(node.left)
+                ) {
+                    burned.add(node.left);
+                    nodesQueue.push(node.left);
+                    spread = true;
+                }
+
+                if (
+                    node.right !== null &amp;&amp;
+                    !burned.has(node.right)
+                ) {
+                    burned.add(node.right);
+                    nodesQueue.push(node.right);
+                    spread = true;
+                }
+
+                const parent =
+                    parentTrack.get(node);
+
+                // parentTrack provides the
+                // upward spreading direction.
+                if (
+                    parent !== null &amp;&amp;
+                    !burned.has(parent)
+                ) {
+                    burned.add(parent);
+                    nodesQueue.push(parent);
+                    spread = true;
+                }
+            }
+
+            // A second is counted only when
+            // the fire reaches another node.
+            if (spread) {
+                time++;
+            }
+        }
+
+        return time;
+    }
+}
+
+const root = new TreeNode(1);
+root.left = new TreeNode(2);
+root.right = new TreeNode(3);
+root.left.left = new TreeNode(4);
+root.left.right = new TreeNode(5);
+root.right.right = new TreeNode(6);
+
+const target = root.left;
+
+const solution = new Solution();
+
+console.log(
+    solution.minTime(root, target)
+);</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-7"><h3 id="blog-toc-complexity-analysis-2">Complexity Analysis</h3><p>Let <code>N</code> be the number of nodes in the binary tree.</p><p><strong>Time Complexity:</strong> <code>O(N)</code>, where <code>N</code> is the number of nodes in the binary tree. Building <code>parentTrack</code> visits every node once, and the subsequent BFS processes every node at most once.</p><p><strong>Space Complexity:</strong> <code>O(N)</code>. The <code>parentTrack</code> map, <code>burned</code> set, and BFS queue can each contain information for up to <code>N</code> nodes in the worst case.</p><h2 id="blog-toc-approach-3">Approach 3</h2><p>The total burning time is equal to the <strong>maximum distance from the target to any node in the tree</strong>.</p><p>Instead of explicitly creating parent connections and simulating every second, this maximum distance can be determined using postorder DFS.</p><p>For every subtree, two pieces of information are useful:</p><ul><li><p><code>height</code> represents how far the deepest node lies below the current subtree.</p></li><li><p><code>distanceFromTarget</code> represents the distance from the current node to the target. A value of <code>-1</code> indicates that the target is absent from that subtree.</p></li></ul><p>Suppose the target is found in the left subtree. If <code>distanceFromTarget</code> represents the distance from the current node to the target, the fire can reach a node in the opposite right subtree by travelling:</p><p><code>target → current node → right subtree</code></p><p>If the opposite subtree has height <code>oppositeHeight</code>, the total distance to its deepest node becomes:</p><p><code>distanceFromTarget + 1 + oppositeHeight</code></p><p>The additional <code>1</code> represents the edge from the current node into the root of the opposite subtree.</p><p>The same reasoning is applied symmetrically when the target lies in the right subtree.</p><p>By evaluating this maximum distance at every ancestor, the farthest node from the target is found.</p><h3 id="blog-toc-algorithm-3">Algorithm</h3><ul><li><p>A postorder DFS is performed so that information from the left and right child subtrees is available before the current node is processed.</p></li><li><p>For every subtree, its <code>height</code> is calculated so that the maximum downward distance available through that subtree is known.</p></li><li><p>A value named <code>distanceFromTarget</code> is maintained to represent the number of edges between the current node and the target, while <code>-1</code> is used when the target is absent from that subtree.</p></li><li><p>When the target itself is reached, <code>distanceFromTarget</code> is set to <code>0</code>, and the subtree height is used to account for nodes lying below the target.</p></li><li><p>If the target is found in the left subtree, its returned distance is increased by <code>1</code> to obtain the current node's <code>distanceFromTarget</code>.</p></li><li><p>The farthest distance through the opposite right subtree is then calculated using <code>distanceFromTarget + 1 + rightHeight</code>, where the additional <code>1</code> represents the edge from the current node to the right child.</p></li><li><p>The same calculation is performed symmetrically when the target is found in the right subtree, using the height of the left subtree.</p></li><li><p>The maximum burning distance is updated whenever a larger candidate is obtained, and <code>distanceFromTarget</code> is propagated upward.</p></li><li><p>After the root has been completely processed, the maximum recorded distance is returned as the minimum burning time.</p></li></ul><h3 id="blog-toc-dry-run-3">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Burning Tree Approach 3 Dry Run .png" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/9f500e7f7ca1bd17.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Burning Tree Approach 3 Dry Run .png</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-8"><h3 id="blog-toc-solution-3">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+
+    TreeNode(int value) {
+        val = value;
+        left = nullptr;
+        right = nullptr;
+    }
+};
+
+class Solution {
+private:
+    struct Info {
+        int height;
+        int distanceFromTarget;
+    };
+
+    // Returns subtree height and the distance
+    // from the current node to the target.
+    Info dfs(
+        TreeNode* node,
+        TreeNode* target,
+        int&amp; maxTime
+    ) {
+        if (node == nullptr) {
+            return {-1, -1};
+        }
+
+        Info left =
+            dfs(node-&gt;left, target, maxTime);
+
+        Info right =
+            dfs(node-&gt;right, target, maxTime);
+
+        int height =
+            1 + max(left.height, right.height);
+
+        // When target is reached, its subtree
+        // height gives the farthest downward burn.
+        if (node == target) {
+            maxTime = max(
+                maxTime,
+                height
+            );
+
+            return {height, 0};
+        }
+
+        if (left.distanceFromTarget != -1) {
+            int distanceFromTarget =
+                left.distanceFromTarget + 1;
+
+            // The route moves from target to this
+            // ancestor, then one edge into the
+            // opposite subtree and to its deepest node.
+            maxTime = max(
+                maxTime,
+                distanceFromTarget
+                + 1
+                + right.height
+            );
+
+            return {
+                height,
+                distanceFromTarget
+            };
+        }
+
+        if (right.distanceFromTarget != -1) {
+            int distanceFromTarget =
+                right.distanceFromTarget + 1;
+
+            // The left subtree is the opposite
+            // branch when target lies on the right.
+            maxTime = max(
+                maxTime,
+                distanceFromTarget
+                + 1
+                + left.height
+            );
+
+            return {
+                height,
+                distanceFromTarget
+            };
+        }
+
+        return {height, -1};
+    }
+
+public:
+    // Finds the maximum distance from target
+    // without storing explicit parent links.
+    int minTime(
+        TreeNode* root,
+        TreeNode* target
+    ) {
+        if (root == nullptr) {
+            return 0;
+        }
+
+        int maxTime = 0;
+
+        dfs(
+            root,
+            target,
+            maxTime
+        );
+
+        return maxTime;
+    }
+};
+
+int main() {
+    TreeNode* root = new TreeNode(1);
+    root-&gt;left = new TreeNode(2);
+    root-&gt;right = new TreeNode(3);
+    root-&gt;left-&gt;left = new TreeNode(4);
+    root-&gt;left-&gt;right = new TreeNode(5);
+    root-&gt;right-&gt;right = new TreeNode(6);
+
+    TreeNode* target = root-&gt;left;
+
+    Solution solution;
+
+    cout &lt;&lt; solution.minTime(root, target) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+
+class Solution:
+
+    # Returns subtree height and the distance
+    # from the current node to the target.
+    def dfs(self, node, target):
+        if node is None:
+            return -1, -1
+
+        left_height, left_distance = (
+            self.dfs(node.left, target)
+        )
+
+        right_height, right_distance = (
+            self.dfs(node.right, target)
+        )
+
+        height = (
+            1
+            + max(
+                left_height,
+                right_height
+            )
+        )
+
+        # When target is reached, its subtree
+        # height gives the farthest downward burn.
+        if node is target:
+            self.max_time = max(
+                self.max_time,
+                height
+            )
+
+            return height, 0
+
+        if left_distance != -1:
+            distance_from_target = (
+                left_distance + 1
+            )
+
+            # The route moves from target to this
+            # ancestor, then into the opposite subtree.
+            self.max_time = max(
+                self.max_time,
+                distance_from_target
+                + 1
+                + right_height
+            )
+
+            return (
+                height,
+                distance_from_target
+            )
+
+        if right_distance != -1:
+            distance_from_target = (
+                right_distance + 1
+            )
+
+            # The left subtree becomes the opposite
+            # branch when target lies on the right.
+            self.max_time = max(
+                self.max_time,
+                distance_from_target
+                + 1
+                + left_height
+            )
+
+            return (
+                height,
+                distance_from_target
+            )
+
+        return height, -1
+
+    # Finds the maximum distance from target
+    # without storing explicit parent links.
+    def min_time(self, root, target):
+        if root is None:
+            return 0
+
+        self.max_time = 0
+
+        self.dfs(
+            root,
+            target
+        )
+
+        return self.max_time
+
+
+if __name__ == "__main__":
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.right = TreeNode(3)
+    root.left.left = TreeNode(4)
+    root.left.right = TreeNode(5)
+    root.right.right = TreeNode(6)
+
+    target = root.left
+
+    solution = Solution()
+
+    print(
+        solution.min_time(
+            root,
+            target
+        )
+    )</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode(int value) {
+        val = value;
+    }
+}
+
+class Solution {
+
+    static class Info {
+        int height;
+        int distanceFromTarget;
+
+        Info(
+            int height,
+            int distanceFromTarget
+        ) {
+            this.height = height;
+            this.distanceFromTarget =
+                distanceFromTarget;
+        }
+    }
+
+    private int maxTime;
+
+    // Returns subtree height and the distance
+    // from the current node to the target.
+    private Info dfs(
+        TreeNode node,
+        TreeNode target
+    ) {
+        if (node == null) {
+            return new Info(-1, -1);
+        }
+
+        Info left =
+            dfs(node.left, target);
+
+        Info right =
+            dfs(node.right, target);
+
+        int height =
+            1 + Math.max(
+                left.height,
+                right.height
+            );
+
+        // When target is reached, its subtree
+        // height gives the farthest downward burn.
+        if (node == target) {
+            maxTime = Math.max(
+                maxTime,
+                height
+            );
+
+            return new Info(
+                height,
+                0
+            );
+        }
+
+        if (left.distanceFromTarget != -1) {
+            int distanceFromTarget =
+                left.distanceFromTarget + 1;
+
+            // The route moves from target to this
+            // ancestor, then into the opposite subtree.
+            maxTime = Math.max(
+                maxTime,
+                distanceFromTarget
+                + 1
+                + right.height
+            );
+
+            return new Info(
+                height,
+                distanceFromTarget
+            );
+        }
+
+        if (right.distanceFromTarget != -1) {
+            int distanceFromTarget =
+                right.distanceFromTarget + 1;
+
+            // The left subtree becomes the opposite
+            // branch when target lies on the right.
+            maxTime = Math.max(
+                maxTime,
+                distanceFromTarget
+                + 1
+                + left.height
+            );
+
+            return new Info(
+                height,
+                distanceFromTarget
+            );
+        }
+
+        return new Info(
+            height,
+            -1
+        );
+    }
+
+    // Finds the maximum distance from target
+    // without storing explicit parent links.
+    public int minTime(
+        TreeNode root,
+        TreeNode target
+    ) {
+        if (root == null) {
+            return 0;
+        }
+
+        maxTime = 0;
+
+        dfs(
+            root,
+            target
+        );
+
+        return maxTime;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        root.right.right = new TreeNode(6);
+
+        TreeNode target = root.left;
+
+        Solution solution = new Solution();
+
+        System.out.println(
+            solution.minTime(root, target)
+        );
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class TreeNode {
+    constructor(val) {
+        this.val = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class Solution {
+
+    // Returns subtree height and the distance
+    // from the current node to the target.
+    dfs(node, target) {
+        if (node === null) {
+            return {
+                height: -1,
+                distanceFromTarget: -1
+            };
+        }
+
+        const left =
+            this.dfs(node.left, target);
+
+        const right =
+            this.dfs(node.right, target);
+
+        const height =
+            1 + Math.max(
+                left.height,
+                right.height
+            );
+
+        // When target is reached, its subtree
+        // height gives the farthest downward burn.
+        if (node === target) {
+            this.maxTime = Math.max(
+                this.maxTime,
+                height
+            );
+
+            return {
+                height,
+                distanceFromTarget: 0
+            };
+        }
+
+        if (left.distanceFromTarget !== -1) {
+            const distanceFromTarget =
+                left.distanceFromTarget + 1;
+
+            // The route moves from target to this
+            // ancestor, then into the opposite subtree.
+            this.maxTime = Math.max(
+                this.maxTime,
+                distanceFromTarget
+                + 1
+                + right.height
+            );
+
+            return {
+                height,
+                distanceFromTarget
+            };
+        }
+
+        if (right.distanceFromTarget !== -1) {
+            const distanceFromTarget =
+                right.distanceFromTarget + 1;
+
+            // The left subtree becomes the opposite
+            // branch when target lies on the right.
+            this.maxTime = Math.max(
+                this.maxTime,
+                distanceFromTarget
+                + 1
+                + left.height
+            );
+
+            return {
+                height,
+                distanceFromTarget
+            };
+        }
+
+        return {
+            height,
+            distanceFromTarget: -1
+        };
+    }
+
+    // Finds the maximum distance from target
+    // without storing explicit parent links.
+    minTime(root, target) {
+        if (root === null) {
+            return 0;
+        }
+
+        this.maxTime = 0;
+
+        this.dfs(
+            root,
+            target
+        );
+
+        return this.maxTime;
+    }
+}
+
+const root = new TreeNode(1);
+root.left = new TreeNode(2);
+root.right = new TreeNode(3);
+root.left.left = new TreeNode(4);
+root.left.right = new TreeNode(5);
+root.right.right = new TreeNode(6);
+
+const target = root.left;
+
+const solution = new Solution();
+
+console.log(
+    solution.minTime(root, target)
+);</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-9"><h3 id="blog-toc-complexity-analysis-3">Complexity Analysis</h3><p>Let <code>N</code> be the number of nodes in the binary tree and <code>H</code> be the height of the tree.</p><p><strong>Time Complexity:</strong> <code>O(N)</code>, where <code>N</code> is the number of nodes in the binary tree. Every node is processed once during the postorder traversal.</p><p><strong>Space Complexity:</strong> <code>O(H)</code>, where <code>H</code> is the height of the binary tree, due to the recursion stack. This becomes <code>O(N)</code> for a skewed tree and <code>O(log N)</code> for a balanced tree.</p></div><div><section aria-label="Interview follow-up Questions" class="BlogDetail-module__HEfJva__faqSection" id="blog-toc-faqs"><h2 class="BlogDetail-module__HEfJva__faqHeading">Interview follow-up Questions</h2><div class="flex w-full flex-col BlogDetail-module__HEfJva__faqList" data-orientation="vertical" data-slot="accordion"><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="open"><h3 class="flex" data-orientation="vertical" data-state="open"></h3><div aria-labelledby="radix-_R_1ksqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="open" id="radix-_R_9ksqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"><div class="h-auto pt-0 pb-2.5 [&amp;_a]:underline [&amp;_a]:underline-offset-3 [&amp;_a]:hover:text-foreground [&amp;_p:not(:last-child)]:mb-4 BlogDetail-module__HEfJva__faqAnswer"><p>Fire spreads through exactly one edge every second. BFS also explores nodes one edge farther from the starting node at each level, so one BFS level corresponds directly to one second.</p></div></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_2ksqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_aksqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_3ksqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_bksqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_4ksqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_cksqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_5ksqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_dksqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_6ksqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_eksqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div></div></section></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div>
+</article>
+<script src="../article.js?v=1790281487"></script>
+</body></html>

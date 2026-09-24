@@ -16,30 +16,33 @@ progress tracker that needs no login.
 
 ## What was recovered
 
-Content comes from two sources. takeuforward later restored much of the sheet at
-`/prep-hub/strivers-a2z-dsa-sheet`, so gaps the archive could not fill were topped
-up from the live site.
+Content comes from three sources, in descending order of quality:
+
+1. **Wayback Machine** — the original free tutorials, before takeuforward removed them.
+2. **`/blogs/data-structure-and-algorithm/...`** — the relaunched site's public
+   editorials, with working code in C++/Python/Java/JavaScript.
+3. **`/practice/dsa/...`** — statement, examples, constraints and hints, for
+   problems with no editorial anywhere.
 
 | | |
 |---|---|
 | Problems in the sheet | **451** (all of them) |
-| **Covered** | **429** |
-| — full articles, with solutions and code (Wayback) | **309** |
-| — problem statements only (live site) | **120** |
-| Still uncovered | **22** |
-| Article pages built | **407** |
-| Images stored locally | ~1,473 (~225 MB) |
+| **Covered** | **430** |
+| — with full solutions and code | **372** |
+| — statement only | **58** |
+| Still uncovered | **21** |
+| Article pages built | **467** |
+| Images stored locally | 1,709 (~239 MB) |
 | LeetCode / YouTube links | 262 / 378, pointing at the **live** sites |
 
-**The two kinds are labelled in the UI.** A solid **Article** pill is a full
-archived tutorial: problem statement, intuition, complexity analysis and code in
-C++/Java/Python/JavaScript. A dashed **Statement** pill is a page recovered from
-the relaunched site: statement, examples, constraints and hints, but **no
-solution** — the new site keeps its editorials behind a login, which this scraper
-does not attempt to bypass.
+Article files by source: {'rsc-ref': 288, 'blog': 60, 'live-ssr': 119}
 
-The remaining 22 have no article anywhere: some never had one, some were never
-captured by the Wayback Machine, and a few were dropped or renamed in the relaunch.
+**The two kinds are labelled in the UI.** A solid **Article** pill has the full
+write-up and code; a dashed **Statement** pill has the problem only. Editorials
+behind the site's login are never fetched.
+
+Three images 404 on takeuforward's own CDN (stale `/draft/` uploads) and are the
+only broken images in the archive.
 
 ## ⚠️ Keep this repository private
 
@@ -82,7 +85,9 @@ scrape/
   common.py         Wayback fetching, caching, throttling, RSC payload parsing
   fetch_index.py    the sheet -> data/sheet.json  (with an integrity check)
   fetch_articles.py articles   -> data/articles/*.json
-  fetch_restored.py gaps       -> data/articles/*.json  (from the relaunched live site)
+  fetch_restored.py gaps       -> data/articles/*.json  (statements, live site)
+  blogs.py          extractor for /blogs/ editorials (prose + code)
+  fetch_blogs.py    full editorials -> data/articles/*.json (live site)
   fetch_images.py   images     -> site/assets/img/, rewrites article HTML
   build_site.py     data/      -> site/
 data/               scraped JSON: this is the actual archive
@@ -109,7 +114,8 @@ already-scraped articles are skipped, so an interrupted run costs nothing.
 cd scrape
 python fetch_index.py      # fast
 python fetch_articles.py   # slow: hundreds of throttled requests
-python fetch_restored.py   # fills gaps from the live site; fast
+python fetch_blogs.py      # full editorials from /blogs/; indexes 442 posts
+python fetch_restored.py   # statement-only fallback for what is left
 python fetch_images.py     # moderate; pulls from the live CDN
 python build_site.py       # fast
 ```
@@ -128,6 +134,17 @@ Rebuilding the site only needs `build_site.py`.
   far more often than the rate limiter does.
 - **Some articles were never archived.** They are listed in `data/report.json`, and
   those problems render with the Article link disabled rather than broken.
+- **Blog editorials split prose from code.** The prose is server-rendered into
+  `article.editorialContent`, but the code only appears there as a Monaco preview
+  with line numbers welded into the text. The clean source is in the flight
+  payload under `code_editor`, sometimes inline and sometimes as an RSC reference
+  whose row header is *not* newline-anchored (unlike the article pages). Blocks
+  are matched to their DOM slot by content, since they are not in document order.
+- **Matching problems to blog posts is guarded twice**: a candidate needs both
+  string similarity and 55% token overlap, and after fetching, the page's own
+  title must still resemble the problem - otherwise the wrong editorial would be
+  filed under a problem. Loose matching produced real false positives
+  ("Functions (Pass by Reference and Value)" -> `z-function`).
 - `fetch_index.py` asserts the parsed totals against the counts shown on the
   archived page (451 / 132 / 183 / 136) and **fails loudly** on a mismatch — a
   silent shortfall would quietly corrupt the archive.

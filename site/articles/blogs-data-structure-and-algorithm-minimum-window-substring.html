@@ -1,0 +1,920 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Minimum Window Substring</title>
+<link rel="stylesheet" href="../style.css?v=1790281487">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Minimum Window Substring</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/blogs/data-structure-and-algorithm/minimum-window-substring</code></div>
+  <div class="ArticleParser-module__R__VNG__article" data-article-segment="html-0"><p>Given two strings s and t, return the minimum window substring of s such that every character in t is included in the window.</p><p>If there is no such substring, return an empty string.</p><p>The answer must include all characters of t with the same frequency.</p></div><div><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 1</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p>Input: s = "ADOBECODEBANC", t = "ABC"</p><p>Output: "BANC"</p><p>Explanation: The minimum window substring "BANC" contains all characters 'A', 'B', and 'C'.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 2</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p>Input: s = "a", t = "a"</p><p>Output: "a"</p><p>Explanation: The whole string contains all characters of t.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 3</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p>Input: s = "a", t = "aa"</p><p>Output: ""</p><p>Explanation: String s contains only one 'a', but t needs two 'a' characters.</p></div></div></section></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-1"><h2 id="blog-toc-brute-force-approach">Brute Force Approach</h2><p>In this approach, every possible substring of s is checked.</p><p>For each substring, we verify whether it contains all characters of t with the required frequency. This frequency part is important because t can contain duplicate characters.</p><p>For example, if t = "AABC", then a valid window must contain two 'A' characters, one 'B', and one 'C'. Having only one 'A' is not enough.</p><p>If a substring satisfies all required character frequencies, it is valid. Since the problem asks for the minimum window, we update the answer only when a smaller valid substring is found.</p><h3 id="blog-toc-algorithm">Algorithm</h3><ul><li><p>The sizes of s and t are stored in n and m. If s is empty, t is empty, or n is smaller than m, an empty string is returned because a valid window cannot exist.</p></li><li><p>A frequency array need is created for string t. This stores how many times each character is required in the window.</p></li><li><p>Two variables are initialized: minLength is set to a very large value to store the smallest valid window length, and answer is initialized as an empty string to store the best window found so far.</p></li><li><p>Two loops are used to generate every possible substring of s. The first loop chooses the starting index start, and the second loop chooses the ending index end.</p></li><li><p>Check whether every character required by <code>need</code> appears in <code>window</code> with at least the required frequency.</p></li><li><p>If the substring is valid, update <code>minLength</code> and <code>answer</code> when it is smaller than the current best, then <strong>break the current </strong><code>end</code><strong> traversal</strong> because extending the same <code>start</code> can only produce a longer valid window.</p></li></ul><h3 id="blog-toc-dry-run">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Minimum Window Substring Brute Approach Dry Run.png" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/c0585b7d966eebf5.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Minimum Window Substring Brute Approach Dry Run.png</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-2"><h3 id="blog-toc-solution">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+private:
+    // Checks whether the current window contains all required characters.
+    bool isValid(
+        const vector&lt;int&gt;&amp; need,
+        const vector&lt;int&gt;&amp; window
+    ) {
+        // Compare every ASCII character with its required frequency.
+        for (int i = 0; i &lt; 128; i++) {
+            // The window is invalid if any required count is missing.
+            if (window[i] &lt; need[i]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+public:
+    // Finds the minimum valid window by checking every substring.
+    string minWindow(string s, string t) {
+        int n = s.size();
+        int m = t.size();
+
+        // A valid window cannot exist in these cases.
+        if (n == 0 || m == 0 || n &lt; m) {
+            return "";
+        }
+
+        vector&lt;int&gt; need(128, 0);
+
+        // Store the required frequency of every character in t.
+        for (char ch : t) {
+            need[(unsigned char)ch]++;
+        }
+
+        int minLength = INT_MAX;
+        string answer = "";
+
+        // Choose every possible starting index.
+        for (int start = 0; start &lt; n; start++) {
+
+            // Choose every possible ending index for this start.
+            for (int end = start; end &lt; n; end++) {
+                vector&lt;int&gt; window(128, 0);
+
+                // Rebuild frequencies for the selected substring.
+                for (int i = start; i &lt;= end; i++) {
+                    window[(unsigned char)s[i]]++;
+                }
+
+                // The first valid window is shortest for this start.
+                if (isValid(need, window)) {
+                    int currentLength = end - start + 1;
+
+                    // Keep the smallest valid window found so far.
+                    if (currentLength &lt; minLength) {
+                        minLength = currentLength;
+                        answer = s.substr(start, currentLength);
+                    }
+
+                    break;
+                }
+            }
+        }
+
+        return answer;
+    }
+};
+
+int main() {
+    string s = "ADOBECODEBANC";
+    string t = "ABC";
+
+    Solution solution;
+
+    cout &lt;&lt; solution.minWindow(s, t) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+
+    # Checks whether the current window contains all required characters.
+    def is_valid(
+        self,
+        need: list[int],
+        window: list[int]
+    ) -&gt; bool:
+
+        # Compare every ASCII character with its required frequency.
+        for i in range(128):
+
+            # The window is invalid if any required count is missing.
+            if window[i] &lt; need[i]:
+                return False
+
+        return True
+
+    # Finds the minimum valid window by checking every substring.
+    def min_window(self, s: str, t: str) -&gt; str:
+        n = len(s)
+        m = len(t)
+
+        # A valid window cannot exist in these cases.
+        if n == 0 or m == 0 or n &lt; m:
+            return ""
+
+        need = [0] * 128
+
+        # Store the required frequency of every character in t.
+        for ch in t:
+            need[ord(ch)] += 1
+
+        min_length = float("inf")
+        answer = ""
+
+        # Choose every possible starting index.
+        for start in range(n):
+
+            # Choose every possible ending index for this start.
+            for end in range(start, n):
+                window = [0] * 128
+
+                # Rebuild frequencies for the selected substring.
+                for i in range(start, end + 1):
+                    window[ord(s[i])] += 1
+
+                # The first valid window is shortest for this start.
+                if self.is_valid(need, window):
+                    current_length = end - start + 1
+
+                    # Keep the smallest valid window found so far.
+                    if current_length &lt; min_length:
+                        min_length = current_length
+                        answer = s[start:end + 1]
+
+                    break
+
+        return answer
+
+
+if __name__ == "__main__":
+    s = "ADOBECODEBANC"
+    t = "ABC"
+
+    solution = Solution()
+
+    print(solution.min_window(s, t))</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">class Solution {
+
+    // Checks whether the current window contains all required characters.
+    private boolean isValid(int[] need, int[] window) {
+
+        // Compare every ASCII character with its required frequency.
+        for (int i = 0; i &lt; 128; i++) {
+
+            // The window is invalid if any required count is missing.
+            if (window[i] &lt; need[i]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    // Finds the minimum valid window by checking every substring.
+    public String minWindow(String s, String t) {
+        int n = s.length();
+        int m = t.length();
+
+        // A valid window cannot exist in these cases.
+        if (n == 0 || m == 0 || n &lt; m) {
+            return "";
+        }
+
+        int[] need = new int[128];
+
+        // Store the required frequency of every character in t.
+        for (int i = 0; i &lt; m; i++) {
+            need[t.charAt(i)]++;
+        }
+
+        int minLength = Integer.MAX_VALUE;
+        String answer = "";
+
+        // Choose every possible starting index.
+        for (int start = 0; start &lt; n; start++) {
+
+            // Choose every possible ending index for this start.
+            for (int end = start; end &lt; n; end++) {
+                int[] window = new int[128];
+
+                // Rebuild frequencies for the selected substring.
+                for (int i = start; i &lt;= end; i++) {
+                    window[s.charAt(i)]++;
+                }
+
+                // The first valid window is shortest for this start.
+                if (isValid(need, window)) {
+                    int currentLength = end - start + 1;
+
+                    // Keep the smallest valid window found so far.
+                    if (currentLength &lt; minLength) {
+                        minLength = currentLength;
+                        answer = s.substring(start, end + 1);
+                    }
+
+                    break;
+                }
+            }
+        }
+
+        return answer;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        String s = "ADOBECODEBANC";
+        String t = "ABC";
+
+        Solution solution = new Solution();
+
+        System.out.println(
+            solution.minWindow(s, t)
+        );
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+
+    // Checks whether the current window contains all required characters.
+    isValid(need, window) {
+
+        // Compare every ASCII character with its required frequency.
+        for (let i = 0; i &lt; 128; i++) {
+
+            // The window is invalid if any required count is missing.
+            if (window[i] &lt; need[i]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    // Finds the minimum valid window by checking every substring.
+    minWindow(s, t) {
+        const n = s.length;
+        const m = t.length;
+
+        // A valid window cannot exist in these cases.
+        if (n === 0 || m === 0 || n &lt; m) {
+            return "";
+        }
+
+        const need = new Array(128).fill(0);
+
+        // Store the required frequency of every character in t.
+        for (const ch of t) {
+            need[ch.charCodeAt(0)]++;
+        }
+
+        let minLength = Infinity;
+        let answer = "";
+
+        // Choose every possible starting index.
+        for (let start = 0; start &lt; n; start++) {
+
+            // Choose every possible ending index for this start.
+            for (let end = start; end &lt; n; end++) {
+                const window = new Array(128).fill(0);
+
+                // Rebuild frequencies for the selected substring.
+                for (let i = start; i &lt;= end; i++) {
+                    window[s.charCodeAt(i)]++;
+                }
+
+                // The first valid window is shortest for this start.
+                if (this.isValid(need, window)) {
+                    const currentLength =
+                        end - start + 1;
+
+                    // Keep the smallest valid window found so far.
+                    if (currentLength &lt; minLength) {
+                        minLength = currentLength;
+                        answer = s.slice(start, end + 1);
+                    }
+
+                    break;
+                }
+            }
+        }
+
+        return answer;
+    }
+}
+
+const s = "ADOBECODEBANC";
+const t = "ABC";
+
+const solution = new Solution();
+
+console.log(solution.minWindow(s, t));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-3"><h3 id="blog-toc-complexity-analysis">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(N³), where N is the length of s. There are O(N²) possible substrings, and checking each substring can take O(N) time.</p><p><strong>Space Complexity:</strong> O(1), because fixed-size frequency arrays are used for ASCII characters.</p><h2 id="blog-toc-better-approach">Better Approach</h2><p>Instead of checking every substring by counting its characters from scratch, we can build the window while moving forward from each starting index.</p><p>For every start index, we move end toward the right and keep updating the frequency of the current window.</p><p>A variable matched is used to count how many required characters from t have been satisfied in the current window. This count includes duplicate characters also.</p><p>For example, if t = "AA", then matched must become 2, not 1. That is why matched is compared with the length of t, not the number of distinct characters.</p><p>Once matched becomes equal to the length of t, the current window contains all required characters. For that fixed start index, this is the smallest valid window because end is moving from left to right. So, we update the answer and stop expanding for that start.</p><h3 id="blog-toc-algorithm-2">Algorithm</h3><ul><li><p>The sizes of s and t are stored in n and m. If s is empty, t is empty, or n is smaller than m, an empty string is returned.</p></li><li><p>A frequency array need is created to store the required frequency of every character in t. This helps us know how many copies of each character are needed.</p></li><li><p>Two variables are initialized: minLength is set to a very large value and answer is initialized as an empty string.</p></li><li><p>The string s is traversed using start as the starting index. For every start, a fresh window frequency array is created, and matched is initialized with 0.</p></li><li><p>The end pointer moves from start to the end of s. For every s[end], its frequency is increased in the window array. If this character is required and its window frequency is not more than the required frequency, matched is increased.</p></li><li><p>When matched becomes equal to m, the current window contains all characters of t with correct frequency. Its length is calculated, and answer is updated if this window is smaller. Then the loop stops for this start index because extending further will only increase the window length.</p></li></ul></div><div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-4"><h3 id="blog-toc-dry-run-2">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Minimum Window Substring Better Approach Dry Run.png" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/219a4b3f87e4600c.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Minimum Window Substring Better Approach Dry Run.png</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-5"><h3 id="blog-toc-solution-2">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Finds the minimum window by growing from every starting index.
+    string minWindow(string s, string t) {
+        int n = s.size();
+        int m = t.size();
+
+        // A valid window cannot exist in these cases.
+        if (n == 0 || m == 0 || n &lt; m) {
+            return "";
+        }
+
+        vector&lt;int&gt; need(128, 0);
+
+        // Store how many copies of each character are required.
+        for (char ch : t) {
+            need[(unsigned char)ch]++;
+        }
+
+        int minLength = INT_MAX;
+        string answer = "";
+
+        // Try every index as the beginning of a window.
+        for (int start = 0; start &lt; n; start++) {
+            vector&lt;int&gt; window(128, 0);
+            int matched = 0;
+
+            // Expand the window one character at a time.
+            for (int end = start; end &lt; n; end++) {
+                unsigned char current = s[end];
+                window[current]++;
+
+                // Count only copies that are still required by t.
+                if (
+                    need[current] &gt; 0 &amp;&amp;
+                    window[current] &lt;= need[current]
+                ) {
+                    matched++;
+                }
+
+                // All required copies are present in the current window.
+                if (matched == m) {
+                    int currentLength =
+                        end - start + 1;
+
+                    // Keep the smallest valid window found so far.
+                    if (currentLength &lt; minLength) {
+                        minLength = currentLength;
+                        answer = s.substr(
+                            start,
+                            currentLength
+                        );
+                    }
+
+                    break;
+                }
+            }
+        }
+
+        return answer;
+    }
+};
+
+int main() {
+    string s = "ADOBECODEBANC";
+    string t = "ABC";
+
+    Solution solution;
+
+    cout &lt;&lt; solution.minWindow(s, t) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+
+    # Finds the minimum window by growing from every starting index.
+    def min_window(self, s: str, t: str) -&gt; str:
+        n = len(s)
+        m = len(t)
+
+        # A valid window cannot exist in these cases.
+        if n == 0 or m == 0 or n &lt; m:
+            return ""
+
+        need = [0] * 128
+
+        # Store how many copies of each character are required.
+        for ch in t:
+            need[ord(ch)] += 1
+
+        min_length = float("inf")
+        answer = ""
+
+        # Try every index as the beginning of a window.
+        for start in range(n):
+            window = [0] * 128
+            matched = 0
+
+            # Expand the window one character at a time.
+            for end in range(start, n):
+                current = ord(s[end])
+                window[current] += 1
+
+                # Count only copies that are still required by t.
+                if (
+                    need[current] &gt; 0
+                    and window[current] &lt;= need[current]
+                ):
+                    matched += 1
+
+                # All required copies are present in the current window.
+                if matched == m:
+                    current_length = end - start + 1
+
+                    # Keep the smallest valid window found so far.
+                    if current_length &lt; min_length:
+                        min_length = current_length
+                        answer = s[start:end + 1]
+
+                    break
+
+        return answer
+
+
+if __name__ == "__main__":
+    s = "ADOBECODEBANC"
+    t = "ABC"
+
+    solution = Solution()
+
+    print(solution.min_window(s, t))</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">class Solution {
+
+    // Finds the minimum window by growing from every starting index.
+    public String minWindow(String s, String t) {
+        int n = s.length();
+        int m = t.length();
+
+        // A valid window cannot exist in these cases.
+        if (n == 0 || m == 0 || n &lt; m) {
+            return "";
+        }
+
+        int[] need = new int[128];
+
+        // Store how many copies of each character are required.
+        for (int i = 0; i &lt; m; i++) {
+            need[t.charAt(i)]++;
+        }
+
+        int minLength = Integer.MAX_VALUE;
+        String answer = "";
+
+        // Try every index as the beginning of a window.
+        for (int start = 0; start &lt; n; start++) {
+            int[] window = new int[128];
+            int matched = 0;
+
+            // Expand the window one character at a time.
+            for (int end = start; end &lt; n; end++) {
+                char current = s.charAt(end);
+                window[current]++;
+
+                // Count only copies that are still required by t.
+                if (
+                    need[current] &gt; 0 &amp;&amp;
+                    window[current] &lt;= need[current]
+                ) {
+                    matched++;
+                }
+
+                // All required copies are present in the current window.
+                if (matched == m) {
+                    int currentLength =
+                        end - start + 1;
+
+                    // Keep the smallest valid window found so far.
+                    if (currentLength &lt; minLength) {
+                        minLength = currentLength;
+                        answer = s.substring(
+                            start,
+                            end + 1
+                        );
+                    }
+
+                    break;
+                }
+            }
+        }
+
+        return answer;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        String s = "ADOBECODEBANC";
+        String t = "ABC";
+
+        Solution solution = new Solution();
+
+        System.out.println(
+            solution.minWindow(s, t)
+        );
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+
+    // Finds the minimum window by growing from every starting index.
+    minWindow(s, t) {
+        const n = s.length;
+        const m = t.length;
+
+        // A valid window cannot exist in these cases.
+        if (n === 0 || m === 0 || n &lt; m) {
+            return "";
+        }
+
+        const need = new Array(128).fill(0);
+
+        // Store how many copies of each character are required.
+        for (const ch of t) {
+            need[ch.charCodeAt(0)]++;
+        }
+
+        let minLength = Infinity;
+        let answer = "";
+
+        // Try every index as the beginning of a window.
+        for (let start = 0; start &lt; n; start++) {
+            const window = new Array(128).fill(0);
+            let matched = 0;
+
+            // Expand the window one character at a time.
+            for (let end = start; end &lt; n; end++) {
+                const current = s.charCodeAt(end);
+                window[current]++;
+
+                // Count only copies that are still required by t.
+                if (
+                    need[current] &gt; 0 &amp;&amp;
+                    window[current] &lt;= need[current]
+                ) {
+                    matched++;
+                }
+
+                // All required copies are present in the current window.
+                if (matched === m) {
+                    const currentLength =
+                        end - start + 1;
+
+                    // Keep the smallest valid window found so far.
+                    if (currentLength &lt; minLength) {
+                        minLength = currentLength;
+                        answer = s.slice(
+                            start,
+                            end + 1
+                        );
+                    }
+
+                    break;
+                }
+            }
+        }
+
+        return answer;
+    }
+}
+
+const s = "ADOBECODEBANC";
+const t = "ABC";
+
+const solution = new Solution();
+
+console.log(solution.minWindow(s, t));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-6"><h3 id="blog-toc-complexity-analysis-2">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(N²), where N is the length of s. For every starting index, the ending index may move toward the right until a valid window is found.</p><p><strong>Space Complexity:</strong> O(1), because fixed-size frequency arrays are used for ASCII characters.</p><h2 id="blog-toc-optimal-approach">Optimal Approach</h2><p>A sliding window expands from the right until it contains all characters of <code>t</code> with the required frequencies.</p><p>Once the window becomes valid, move <code>left</code> forward repeatedly while validity is preserved. Each valid shrink gives a smaller candidate, so the best answer is updated before removing the next left-side character.</p><p>Frequency arrays and <code>matched</code> allow validity to be checked in constant time without comparing all character counts after every movement.</p><h3 id="blog-toc-algorithm-3">Algorithm</h3><ul><li><p>Store the lengths of <code>s</code> and <code>t</code> in <code>n</code> and <code>m</code>. Return an empty string when either string is empty or <code>n &lt; m</code>.</p></li><li><p>Build <code>need</code> to store the required frequency of every character in <code>t</code>, and create <code>window</code> to track frequencies inside the current sliding window.</p></li><li><p>Initialize <code>left = 0</code>, <code>matched = 0</code>, <code>minLength</code> with a very large value, and <code>startIndex = -1</code>.</p></li><li><p>Move <code>right</code> from <code>0</code> to <code>n - 1</code> and add <code>s[right]</code> to <code>window</code>. If this character is required and its new frequency does not exceed its required frequency, increment <code>matched</code>.</p></li><li><p><strong>While </strong><code>matched == m</code><strong>, the current window contains every required character.</strong> Update <code>minLength</code> and <code>startIndex</code> if the current window is smaller than the best one found so far.</p></li><li><p>Remove <code>s[left]</code> while shrinking. If that character is required and its frequency becomes smaller than <code>need</code>, decrement <code>matched</code> because the window has just become invalid. Move <code>left</code> forward and continue shrinking while the window remains valid.</p></li><li><p>After <code>right</code> finishes, return an empty string if <code>startIndex == -1</code>; otherwise, return the substring beginning at <code>startIndex</code> with length <code>minLength</code>.</p></li></ul><h3 id="blog-toc-dry-run-3">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Minimum Window Substring Optimal Approach Dry Run.png" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/515fdf5f8a29ea11.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Minimum Window Substring Optimal Approach Dry Run.png</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-7"><h3 id="blog-toc-solution-3">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Finds the minimum valid substring using a sliding window.
+    string minWindow(string s, string t) {
+        int n = s.size();
+        int m = t.size();
+
+        // A valid window cannot exist in these cases.
+        if (n == 0 || m == 0 || n &lt; m) {
+            return "";
+        }
+
+        vector&lt;int&gt; need(128, 0);
+        vector&lt;int&gt; window(128, 0);
+
+        // Store how many copies of each character are required.
+        for (char ch : t) {
+            need[(unsigned char)ch]++;
+        }
+
+        int left = 0;
+        int matched = 0;
+        int minLength = INT_MAX;
+        int startIndex = -1;
+
+        // Expand the right boundary across the complete string.
+        for (int right = 0; right &lt; n; right++) {
+            unsigned char current = s[right];
+            window[current]++;
+
+            // Count the new character only if a required copy is satisfied.
+            if (
+                need[current] &gt; 0 &amp;&amp;
+                window[current] &lt;= need[current]
+            ) {
+                matched++;
+            }
+
+            // Shrink while every required character is still satisfied.
+            while (matched == m) {
+                int currentLength =
+                    right - left + 1;
+
+                // Keep the smallest valid window found so far.
+                if (currentLength &lt; minLength) {
+                    minLength = currentLength;
+                    startIndex = left;
+                }
+
+                unsigned char leftChar = s[left];
+                window[leftChar]--;
+
+                // Losing a required copy makes the window invalid.
+                if (
+                    need[leftChar] &gt; 0 &amp;&amp;
+                    window[leftChar] &lt; need[leftChar]
+                ) {
+                    matched--;
+                }
+
+                left++;
+            }
+        }
+
+        // No window contained every required character.
+        if (startIndex == -1) {
+            return "";
+        }
+
+        return s.substr(startIndex, minLength);
+    }
+};
+
+int main() {
+    string s = "ADOBECODEBANC";
+    string t = "ABC";
+
+    Solution solution;
+
+    cout &lt;&lt; solution.minWindow(s, t) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+
+    # Finds the minimum valid substring using a sliding window.
+    def min_window(self, s: str, t: str) -&gt; str:
+        n = len(s)
+        m = len(t)
+
+        # A valid window cannot exist in these cases.
+        if n == 0 or m == 0 or n &lt; m:
+            return ""
+
+        need = [0] * 128
+        window = [0] * 128
+
+        # Store how many copies of each character are required.
+        for ch in t:
+            need[ord(ch)] += 1
+
+        left = 0
+        matched = 0
+        min_length = float("inf")
+        start_index = -1
+
+        # Expand the right boundary across the complete string.
+        for right in range(n):
+            current = ord(s[right])
+            window[current] += 1
+
+            # Count the new character only if a required copy is satisfied.
+            if (
+                need[current] &gt; 0
+                and window[current] &lt;= need[current]
+            ):
+                matched += 1
+
+            # Shrink while every required character is still satisfied.
+            while matched == m:
+                current_length = right - left + 1
+
+                # Keep the smallest valid window found so far.
+                if current_length &lt; min_length:
+                    min_length = current_length
+                    start_index = left
+
+                left_char = ord(s[left])
+                window[left_char] -= 1
+
+                # Losing a required copy makes the window invalid.
+                if (
+                    need[left_char] &gt; 0
+                    and window[left_char] &lt; need[left_char]
+                ):
+                    matched -= 1
+
+                left += 1
+
+        # No window contained every required character.
+        if start_index == -1:
+            return ""
+
+        return s[
+            start_index:start_index + min_length
+        ]
+
+
+if __name__ == "__main__":
+    s = "ADOBECODEBANC"
+    t = "ABC"
+
+    solution = Solution()
+
+    print(solution.min_window(s, t))</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">class Solution {
+
+    // Finds the minimum valid substring using a sliding window.
+    public String minWindow(String s, String t) {
+        int n = s.length();
+        int m = t.length();
+
+        // A valid window cannot exist in these cases.
+        if (n == 0 || m == 0 || n &lt; m) {
+            return "";
+        }
+
+        int[] need = new int[128];
+        int[] window = new int[128];
+
+        // Store how many copies of each character are required.
+        for (int i = 0; i &lt; m; i++) {
+            need[t.charAt(i)]++;
+        }
+
+        int left = 0;
+        int matched = 0;
+        int minLength = Integer.MAX_VALUE;
+        int startIndex = -1;
+
+        // Expand the right boundary across the complete string.
+        for (int right = 0; right &lt; n; right++) {
+            char current = s.charAt(right);
+            window[current]++;
+
+            // Count the new character only if a required copy is satisfied.
+            if (
+                need[current] &gt; 0 &amp;&amp;
+                window[current] &lt;= need[current]
+            ) {
+                matched++;
+            }
+
+            // Shrink while every required character is still satisfied.
+            while (matched == m) {
+                int currentLength =
+                    right - left + 1;
+
+                // Keep the smallest valid window found so far.
+                if (currentLength &lt; minLength) {
+                    minLength = currentLength;
+                    startIndex = left;
+                }
+
+                char leftChar = s.charAt(left);
+                window[leftChar]--;
+
+                // Losing a required copy makes the window invalid.
+                if (
+                    need[leftChar] &gt; 0 &amp;&amp;
+                    window[leftChar] &lt; need[leftChar]
+                ) {
+                    matched--;
+                }
+
+                left++;
+            }
+        }
+
+        // No window contained every required character.
+        if (startIndex == -1) {
+            return "";
+        }
+
+        return s.substring(
+            startIndex,
+            startIndex + minLength
+        );
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        String s = "ADOBECODEBANC";
+        String t = "ABC";
+
+        Solution solution = new Solution();
+
+        System.out.println(
+            solution.minWindow(s, t)
+        );
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+
+    // Finds the minimum valid substring using a sliding window.
+    minWindow(s, t) {
+        const n = s.length;
+        const m = t.length;
+
+        // A valid window cannot exist in these cases.
+        if (n === 0 || m === 0 || n &lt; m) {
+            return "";
+        }
+
+        const need = new Array(128).fill(0);
+        const window = new Array(128).fill(0);
+
+        // Store how many copies of each character are required.
+        for (const ch of t) {
+            need[ch.charCodeAt(0)]++;
+        }
+
+        let left = 0;
+        let matched = 0;
+        let minLength = Infinity;
+        let startIndex = -1;
+
+        // Expand the right boundary across the complete string.
+        for (let right = 0; right &lt; n; right++) {
+            const current = s.charCodeAt(right);
+            window[current]++;
+
+            // Count the new character only if a required copy is satisfied.
+            if (
+                need[current] &gt; 0 &amp;&amp;
+                window[current] &lt;= need[current]
+            ) {
+                matched++;
+            }
+
+            // Shrink while every required character is still satisfied.
+            while (matched === m) {
+                const currentLength =
+                    right - left + 1;
+
+                // Keep the smallest valid window found so far.
+                if (currentLength &lt; minLength) {
+                    minLength = currentLength;
+                    startIndex = left;
+                }
+
+                const leftChar = s.charCodeAt(left);
+                window[leftChar]--;
+
+                // Losing a required copy makes the window invalid.
+                if (
+                    need[leftChar] &gt; 0 &amp;&amp;
+                    window[leftChar] &lt; need[leftChar]
+                ) {
+                    matched--;
+                }
+
+                left++;
+            }
+        }
+
+        // No window contained every required character.
+        if (startIndex === -1) {
+            return "";
+        }
+
+        return s.slice(
+            startIndex,
+            startIndex + minLength
+        );
+    }
+}
+
+const s = "ADOBECODEBANC";
+const t = "ABC";
+
+const solution = new Solution();
+
+console.log(solution.minWindow(s, t));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-8"><h3 id="blog-toc-complexity-analysis-3">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(N + M), where N is the length of s and M is the length of t. The string t is processed once, and every character of s enters and leaves the sliding window at most once.</p><p><strong>Space Complexity:</strong> O(1), because fixed-size frequency arrays are used for ASCII characters.</p><h3 id="blog-toc-faqs">FAQs</h3><p><strong>Q1. Why do we need frequency counts in this problem?</strong></p><p>Frequency counts are needed because t may contain duplicate characters. A window must contain every character of t with the same required frequency.</p><p><strong>Q2. Why is checking only character presence not enough?</strong></p><p>If t = "AABC", then a valid window must contain two A characters. A window with only one A is not valid, even if it contains B and C.</p><p><strong>Q3. Why do we increase matched only when window frequency is not greater than required frequency?</strong></p><p>Extra copies of a character do not help satisfy t further. For example, if only one A is required, the second extra A should not increase matched.</p><p><strong>Q4. Why does the Optimal Approach shrink the window while it remains valid?</strong></p><p>The first valid window for a right boundary may contain unnecessary characters on the left. Repeated shrinking removes them and finds the smallest valid window ending at that <code>right</code> position.</p><p><strong>Q5. Why is matched decreased only when a frequency falls below need?</strong></p><p>Removing an extra copy does not make the window invalid. <code>matched</code> should decrease only when one of the required copies is actually lost.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div>
+</article>
+<script src="../article.js?v=1790281487"></script>
+</body></html>
