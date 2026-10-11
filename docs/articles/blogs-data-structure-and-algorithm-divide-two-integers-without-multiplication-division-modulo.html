@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Divide Two Integers Without Multiplication, Division or Modulo</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Divide Two Integers Without Multiplication, Division or Modulo</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/blogs/data-structure-and-algorithm/divide-two-integers-without-multiplication-division-modulo</code></div>
+  <div class="ArticleParser-module__R__VNG__article" data-article-segment="html-0"><p>Given two integers <code>dividend</code> and <code>divisor</code>, return the integer quotient obtained by dividing <code>dividend</code> by <code>divisor</code> <strong>without using multiplication (</strong><code>*</code><strong>), division (</strong><code>/</code><strong>), or modulo (</strong><code>%</code><strong>) operators</strong>.</p><p>The fractional part of the result must be discarded, meaning the quotient is <strong>truncated toward zero</strong>.</p><p>Assume:</p><ul><li><p><code>divisor</code> is non-zero.</p></li><li><p>Both values are 32-bit signed integers.</p></li><li><p>If the quotient exceeds the maximum 32-bit signed integer value <code>2³¹ - 1</code>, return <code>2³¹ - 1</code>.</p></li></ul></div><div><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 1</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>dividend = 10</code>, <code>divisor = 3</code><br/><strong>Output:</strong> <code>3</code></p><p><strong>Explanation:</strong> <code>10 / 3</code> gives a quotient of <code>3</code> with a remainder. After truncating toward zero, the result is <code>3</code>.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 2</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>dividend = 7</code>, <code>divisor = -3</code><br/><strong>Output:</strong> <code>-2</code></p><p><strong>Explanation:</strong> The mathematical result lies between <code>-2</code> and <code>-3</code>. Truncating toward zero gives <code>-2</code>.</p></div></div></section></div><div><div class="BlogDetail-module__HEfJva__practiceCallout"><a class="BlogDetail-module__HEfJva__practiceLink" data-mobile-prefetch="normal" href="https://takeuforward.org/practice/dsa/divide-two-numbers-without-multiplication-and-division" rel="noopener" target="_blank"><span>Practice it by yourself before moving onto the solution</span><span class="BlogDetail-module__HEfJva__practiceAction">Try now</span></a></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-2"><p></p><h2 id="blog-toc-brute-force-approach">Brute Force Approach</h2><p>Division can be viewed as repeatedly removing the divisor from the dividend.</p><p>After converting both numbers to positive magnitudes, subtract the divisor while it still fits inside the remaining dividend. The number of successful subtractions becomes the magnitude of the quotient.</p><p>The sign can be handled separately, depending on whether the original inputs have the same or different signs.</p><h3 id="blog-toc-algorithm">Algorithm</h3><ul><li><p>Determine whether the final quotient should be negative. It is negative only when <code>dividend</code> and <code>divisor</code> have different signs.</p></li><li><p>Convert both values to positive magnitudes using a wider integer type, because the absolute value of <code>INT_MIN</code> cannot be represented by a 32-bit signed integer.</p></li><li><p>Initialize <code>quotient = 0</code> to count how many complete copies of the divisor fit inside the dividend.</p></li><li><p>While the remaining dividend is at least the divisor, subtract one divisor and increase <code>quotient</code>.</p></li><li><p>Apply the required sign to the quotient.</p></li><li><p>If the result exceeds the 32-bit signed range, clamp it to <code>INT_MAX</code>; otherwise return the signed quotient.</p></li></ul><h3 id="blog-toc-dry-run">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Divide Two Integers Brute Force Dry Run .png" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/0eb22c4413252d61.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Divide Two Integers Brute Force Dry Run .png</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-3"><h3 id="blog-toc-solution">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        bool negative = (dividend &lt; 0) ^ (divisor &lt; 0);
+
+        /*
+         * Convert to long long before taking absolute values
+         * so INT_MIN can be represented safely as positive.
+         */
+        long long dividendAbs = llabs((long long)dividend);
+        long long divisorAbs = llabs((long long)divisor);
+
+        long long quotient = 0;
+
+        /*
+         * Each subtraction represents one complete copy
+         * of the divisor fitting inside the dividend.
+         */
+        while (dividendAbs &gt;= divisorAbs) {
+            dividendAbs -= divisorAbs;
+            quotient++;
+        }
+
+        long long result = negative ? -quotient : quotient;
+
+        // Clamp results that cannot fit in a signed 32-bit integer.
+        if (result &gt; INT_MAX) {
+            return INT_MAX;
+        }
+
+        if (result &lt; INT_MIN) {
+            return INT_MIN;
+        }
+
+        return (int)result;
+    }
+};
+
+int main() {
+    int dividend = 10;
+    int divisor = 3;
+
+    Solution solution;
+    cout &lt;&lt; solution.divide(dividend, divisor) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+    def divide(self, dividend: int, divisor: int) -&gt; int:
+        negative = (dividend &lt; 0) != (divisor &lt; 0)
+
+        dividend_abs = abs(dividend)
+        divisor_abs = abs(divisor)
+
+        quotient = 0
+
+        # Each subtraction represents one full
+        # divisor contained in the dividend.
+        while dividend_abs &gt;= divisor_abs:
+            dividend_abs -= divisor_abs
+            quotient += 1
+
+        result = -quotient if negative else quotient
+
+        # Keep the result inside the signed 32-bit range.
+        if result &gt; 2**31 - 1:
+            return 2**31 - 1
+
+        if result &lt; -(2**31):
+            return -(2**31)
+
+        return result
+
+
+if __name__ == "__main__":
+    dividend = 10
+    divisor = 3
+
+    solution = Solution()
+    print(solution.divide(dividend, divisor))</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">class Solution {
+    public int divide(int dividend, int divisor) {
+        boolean negative = (dividend &lt; 0) ^ (divisor &lt; 0);
+
+        /*
+         * Convert to long before taking absolute values
+         * so Integer.MIN_VALUE can be handled safely.
+         */
+        long dividendAbs = Math.abs((long) dividend);
+        long divisorAbs = Math.abs((long) divisor);
+
+        long quotient = 0;
+
+        /*
+         * Each subtraction accounts for one complete
+         * divisor contained in the dividend.
+         */
+        while (dividendAbs &gt;= divisorAbs) {
+            dividendAbs -= divisorAbs;
+            quotient++;
+        }
+
+        long result = negative ? -quotient : quotient;
+
+        // Keep the answer inside the signed 32-bit range.
+        if (result &gt; Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
+        }
+
+        if (result &lt; Integer.MIN_VALUE) {
+            return Integer.MIN_VALUE;
+        }
+
+        return (int) result;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int dividend = 10;
+        int divisor = 3;
+
+        Solution solution = new Solution();
+        System.out.println(solution.divide(dividend, divisor));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    divide(dividend, divisor) {
+        const negative = (dividend &lt; 0) !== (divisor &lt; 0);
+
+        /*
+         * BigInt keeps the magnitude safe while handling
+         * the full signed 32-bit integer range.
+         */
+        let dividendAbs = BigInt(Math.abs(dividend));
+        const divisorAbs = BigInt(Math.abs(divisor));
+
+        let quotient = 0n;
+
+        /*
+         * Each subtraction represents one complete
+         * divisor contained in the dividend.
+         */
+        while (dividendAbs &gt;= divisorAbs) {
+            dividendAbs -= divisorAbs;
+            quotient++;
+        }
+
+        let result = negative ? -quotient : quotient;
+
+        const INT_MAX = 2147483647n;
+        const INT_MIN = -2147483648n;
+
+        // Keep the answer inside the signed 32-bit range.
+        if (result &gt; INT_MAX) {
+            result = INT_MAX;
+        }
+
+        if (result &lt; INT_MIN) {
+            result = INT_MIN;
+        }
+
+        return Number(result);
+    }
+}
+
+const dividend = 10;
+const divisor = 3;
+
+const solution = new Solution();
+console.log(solution.divide(dividend, divisor));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-4"><h3 id="blog-toc-complexity-analysis">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(|quotient|)</code>, because one copy of the divisor is removed in every iteration.</p></div><div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-5"><p><strong>Space Complexity:</strong> <code>O(1)</code>, because only a few variables are used.</p><p></p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-6"><h2 id="blog-toc-optimal-approach">Optimal Approach</h2><p>Repeated subtraction is slow because it removes only one divisor at a time.</p><p>Instead, use left shifts to consider larger multiples of the divisor:</p><p><code>divisor &lt;&lt; k</code></p><p>represents multiplying the divisor magnitude by <code>2^k</code>.</p><p>Starting from the largest useful bit position, check whether that shifted divisor still fits inside the remaining dividend. If it does, subtract the whole chunk at once and add <code>2^k</code> to the quotient.</p><p>By checking powers of two from large to small, the quotient is built directly in binary without performing multiplication or division.</p><h3 id="blog-toc-algorithm-2">Algorithm</h3><ul><li><p>Determine whether the quotient should be negative by checking whether the input signs differ.</p></li><li><p>Convert <code>dividend</code> and <code>divisor</code> to positive magnitudes using a wider integer type so <code>INT_MIN</code> can be handled safely.</p></li><li><p>Initialize <code>quotient = 0</code>.</p></li><li><p>Traverse bit positions from <code>31</code> down to <code>0</code>. For each <code>shift</code>, compute the chunk represented by <code>absDivisor &lt;&lt; shift</code>.</p></li><li><p>If that chunk does not exceed the remaining dividend, subtract it and add <code>1LL &lt;&lt; shift</code> to the quotient because that power of two belongs in the binary representation of the quotient.</p></li><li><p>Apply the original sign, clamp the only overflowing 32-bit result when necessary, and return the quotient.</p></li></ul><h3 id="blog-toc-dry-run-2">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Divide Two Integers Optimal Approach Dry Run .png" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/0d2f7c7a6ddd7537.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Divide Two Integers Optimal Approach Dry Run .png</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-7"><h3 id="blog-toc-solution-2">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        bool negative = (dividend &lt; 0) ^ (divisor &lt; 0);
+
+        /*
+         * Wider positive magnitudes allow shifts to be
+         * performed safely even when dividend is INT_MIN.
+         */
+        long long dividendAbs = llabs((long long)dividend);
+        long long divisorAbs = llabs((long long)divisor);
+
+        long long quotient = 0;
+
+        /*
+         * Check larger powers of two first so each accepted
+         * chunk determines one bit of the quotient.
+         */
+        for (int shift = 31; shift &gt;= 0; shift--) {
+            long long chunk = divisorAbs &lt;&lt; shift;
+
+            if (chunk &lt;= dividendAbs) {
+                dividendAbs -= chunk;
+
+                /*
+                 * This chunk represents divisor * 2^shift,
+                 * so the same power belongs in the quotient.
+                 */
+                quotient += (1LL &lt;&lt; shift);
+            }
+        }
+
+        long long result = negative ? -quotient : quotient;
+
+        // INT_MIN / -1 produces 2^31, which must be clamped.
+        if (result &gt; INT_MAX) {
+            return INT_MAX;
+        }
+
+        if (result &lt; INT_MIN) {
+            return INT_MIN;
+        }
+
+        return (int)result;
+    }
+};
+
+int main() {
+    int dividend = 10;
+    int divisor = 3;
+
+    Solution solution;
+    cout &lt;&lt; solution.divide(dividend, divisor) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+    def divide(self, dividend: int, divisor: int) -&gt; int:
+        negative = (dividend &lt; 0) != (divisor &lt; 0)
+
+        dividend_abs = abs(dividend)
+        divisor_abs = abs(divisor)
+
+        quotient = 0
+
+        # Larger shifts determine the higher
+        # bits of the quotient first.
+        for shift in range(31, -1, -1):
+            chunk = divisor_abs &lt;&lt; shift
+
+            if chunk &lt;= dividend_abs:
+                dividend_abs -= chunk
+
+                # This accepted chunk contributes 2^shift.
+                quotient += 1 &lt;&lt; shift
+
+        result = -quotient if negative else quotient
+
+        # Clamp values outside the signed 32-bit range.
+        if result &gt; 2**31 - 1:
+            return 2**31 - 1
+
+        if result &lt; -(2**31):
+            return -(2**31)
+
+        return result
+
+
+if __name__ == "__main__":
+    dividend = 10
+    divisor = 3
+
+    solution = Solution()
+    print(solution.divide(dividend, divisor))</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">class Solution {
+    public int divide(int dividend, int divisor) {
+        boolean negative = (dividend &lt; 0) ^ (divisor &lt; 0);
+
+        /*
+         * Wider positive magnitudes safely handle
+         * Integer.MIN_VALUE and the required shifts.
+         */
+        long dividendAbs = Math.abs((long) dividend);
+        long divisorAbs = Math.abs((long) divisor);
+
+        long quotient = 0;
+
+        /*
+         * Process larger powers of two first so the
+         * quotient is built from its most significant bits.
+         */
+        for (int shift = 31; shift &gt;= 0; shift--) {
+            long chunk = divisorAbs &lt;&lt; shift;
+
+            if (chunk &lt;= dividendAbs) {
+                dividendAbs -= chunk;
+
+                /*
+                 * The accepted chunk represents divisor * 2^shift,
+                 * so add that power of two to the quotient.
+                 */
+                quotient += 1L &lt;&lt; shift;
+            }
+        }
+
+        long result = negative ? -quotient : quotient;
+
+        // Integer.MIN_VALUE / -1 exceeds Integer.MAX_VALUE.
+        if (result &gt; Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
+        }
+
+        if (result &lt; Integer.MIN_VALUE) {
+            return Integer.MIN_VALUE;
+        }
+
+        return (int) result;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int dividend = 10;
+        int divisor = 3;
+
+        Solution solution = new Solution();
+        System.out.println(solution.divide(dividend, divisor));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    divide(dividend, divisor) {
+        const negative = (dividend &lt; 0) !== (divisor &lt; 0);
+
+        /*
+         * BigInt allows the full 32-bit magnitude and
+         * shifted values to be represented safely.
+         */
+        let dividendAbs = BigInt(Math.abs(dividend));
+        const divisorAbs = BigInt(Math.abs(divisor));
+
+        let quotient = 0n;
+
+        /*
+         * Examine powers of two from large to small
+         * to build the quotient one bit at a time.
+         */
+        for (let shift = 31; shift &gt;= 0; shift--) {
+            const bit = BigInt(shift);
+            const chunk = divisorAbs &lt;&lt; bit;
+
+            if (chunk &lt;= dividendAbs) {
+                dividendAbs -= chunk;
+
+                /*
+                 * This chunk represents divisor * 2^shift,
+                 * so include the same power in the quotient.
+                 */
+                quotient += 1n &lt;&lt; bit;
+            }
+        }
+
+        let result = negative ? -quotient : quotient;
+
+        const INT_MAX = 2147483647n;
+        const INT_MIN = -2147483648n;
+
+        // Clamp the only possible overflow beyond int32 limits.
+        if (result &gt; INT_MAX) {
+            result = INT_MAX;
+        }
+
+        if (result &lt; INT_MIN) {
+            result = INT_MIN;
+        }
+
+        return Number(result);
+    }
+}
+
+const dividend = 10;
+const divisor = 3;
+
+const solution = new Solution();
+console.log(solution.divide(dividend, divisor));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-8"><h3 id="blog-toc-complexity-analysis-2">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(log |dividend|)</code> in terms of the number of bits examined. For fixed 32-bit integers, at most 32 bit positions are checked, so the work is bounded by a constant.</p><p><strong>Space Complexity:</strong> <code>O(1)</code>, because only a constant number of variables are used</p><p></p></div><div><section aria-label="Interview follow-up Questions" class="BlogDetail-module__HEfJva__faqSection" id="blog-toc-faqs"><h2 class="BlogDetail-module__HEfJva__faqHeading">Interview follow-up Questions</h2><div class="flex w-full flex-col BlogDetail-module__HEfJva__faqList" data-orientation="vertical" data-slot="accordion"><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="open"><h3 class="flex" data-orientation="vertical" data-state="open"></h3><div aria-labelledby="radix-_R_1kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="open" id="radix-_R_9kcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"><div class="h-auto pt-0 pb-2.5 [&amp;_a]:underline [&amp;_a]:underline-offset-3 [&amp;_a]:hover:text-foreground [&amp;_p:not(:last-child)]:mb-4 BlogDetail-module__HEfJva__faqAnswer"><p>INT_MIN is -2³¹, while the largest positive 32-bit integer is only 2³¹ - 1. Therefore, abs(INT_MIN) cannot be stored safely in a signed 32-bit integer. Converting to a wider type first avoids this overflow.</p></div></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_2kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_akcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_3kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_bkcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_4kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_ckcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_5kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_dkcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_6kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_ekcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div></div></section></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div>
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

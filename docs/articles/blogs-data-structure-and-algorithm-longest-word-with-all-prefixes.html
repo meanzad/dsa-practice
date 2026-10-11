@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Longest Word with All Prefixes</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Longest Word with All Prefixes</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/blogs/data-structure-and-algorithm/longest-word-with-all-prefixes</code></div>
+  <div class="ArticleParser-module__R__VNG__article" data-article-segment="html-0"><p>Given an array of lowercase strings, find the longest string such that all of its prefixes are also present in the array as complete strings.</p><p>If more than one valid string has the same maximum length, return the lexicographically smallest one.</p><p>If no such string exists, return <code>None</code>.</p><p>A prefix means the starting part of a string. For example, the prefixes of <code>ninja</code> are <code>n</code>, <code>ni</code>, <code>nin</code>, <code>ninj</code>, and <code>ninja</code>.</p></div><div><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 1</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> words = ["n", "ni", "nin", "ninj", "ninja", "ninga"]</p><p><strong>Output:</strong> ninja</p><p><strong>Explanation:</strong> <code>ninja</code> is valid because <code>n</code>, <code>ni</code>, <code>nin</code>, and <code>ninj</code> are all present. <code>ninga</code> is not valid because <code>ning</code> is missing.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 2</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> words = ["a", "ap", "app", "appl", "apple", "apply"]</p><p><strong>Output:</strong> apple</p><p><strong>Explanation:</strong> Both <code>apple</code> and <code>apply</code> have all prefixes present, but <code>apple</code> is lexicographically smaller.</p></div></div></section></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-1"><h2 id="blog-toc-approach">Approach</h2><p>The small observation is this: a word is valid only if every step while walking through its characters lands on a node that already marks the end of a word. That means a trie can do two useful jobs at once. First, it stores all words in shared prefix form. Second, while checking a word, it can confirm whether each prefix on that path is already a complete word. So instead of building prefixes again and again as separate strings, the trie lets the check happen directly on the character path.</p><h3 id="blog-toc-algorithm">Algorithm</h3><ul><li><p>First, insert all words into a trie. This is done so every word and every shared prefix can be checked by simply moving along trie nodes instead of building new prefix strings again and again.</p></li><li><p>While inserting a word, mark only its last node as <code>end of word</code>. This is important because the problem does not ask whether a prefix path exists. It asks whether that prefix is itself a complete word in the array.</p></li><li><p>After building the trie, pick one word at a time and walk through it character by character. This direct walk helps check all prefixes of that word in one pass.</p></li><li><p>At each character, move to the matching child node. If that child does not exist, the current prefix is missing, so this word must be rejected immediately.</p></li><li><p>Even if the child node exists, check whether that node is marked as <code>end of word</code>. This step matters because a prefix may exist as part of some longer word, but it still does not count unless that prefix was inserted as a full word.</p></li><li><p>If the full word passes every prefix check, compare it with the current best answer. This comparison is needed because more than one valid word can exist.</p></li><li><p>Replace the current answer when the new word is longer, because the problem asks for the longest valid word.</p></li><li><p>If both valid words have the same length, keep the lexicographically smaller one, because that is the required tie-break rule.</p></li><li><p>After all words are checked, return the stored answer. If no valid word was ever accepted, return <code>None</code>.</p></li></ul></div><div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-2"><h3 id="blog-toc-key-points">Key Points</h3><ul><li><p>The word itself must also be present in the array, because the final trie node must be marked as a complete word too.</p></li><li><p>If no single-letter word exists, many larger words will fail immediately because their first prefix is missing.</p></li><li><p>The lexicographical tie-break matters only when two valid words have the same length.</p></li></ul><h3 id="blog-toc-dry-run">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Longest Word with All Prefixes Dry Run" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/4ab9d57964d355e8.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Longest Word with All Prefixes Dry Run</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-3"><h3 id="blog-toc-solution">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class TrieNode {
+public:
+    vector&lt;TrieNode*&gt; children;
+    bool isEndOfWord;
+
+    TrieNode() {
+        children.assign(26, nullptr);
+        isEndOfWord = false;
+    }
+};
+
+class Solution {
+private:
+    void insertWord(TrieNode* root, const string&amp; word) {
+        TrieNode* node = root;
+
+        for (char ch : word) {
+            // Convert the current character into a trie index from 0 to 25.
+            int index = ch - 'a';
+
+            // Create the next node only when this character path is new.
+            if (node-&gt;children[index] == nullptr) {
+                node-&gt;children[index] = new TrieNode();
+            }
+
+            // Move forward so the next character is attached after this one.
+            node = node-&gt;children[index];
+        }
+
+        // Mark the full word so this path counts as a valid complete prefix later.
+        node-&gt;isEndOfWord = true;
+    }
+
+    bool hasAllPrefixes(TrieNode* root, const string&amp; word) {
+        TrieNode* node = root;
+
+        for (char ch : word) {
+            int index = ch - 'a';
+
+            // If the path breaks, this prefix does not exist.
+            if (node-&gt;children[index] == nullptr) {
+                return false;
+            }
+
+            node = node-&gt;children[index];
+
+            // Every step must end at a complete word, not just a path.
+            if (!node-&gt;isEndOfWord) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+public:
+    /*
+    Returns the longest word whose every prefix
+    is also present in the given list of words.
+    */
+    string longestWordWithAllPrefixes(vector&lt;string&gt;&amp; words) {
+        TrieNode* root = new TrieNode();
+
+        // Store every word first so prefix checks can be done by walking the trie.
+        for (const string&amp; word : words) {
+            insertWord(root, word);
+        }
+
+        // Keep the best valid answer found so far.
+        string answer = "";
+
+        for (const string&amp; word : words) {
+            // Only words whose every prefix is complete can compete for the answer.
+            if (hasAllPrefixes(root, word)) {
+                // Prefer longer words, and for equal length prefer smaller dictionary order.
+                if (word.length() &gt; answer.length() ||
+                    (word.length() == answer.length() &amp;&amp; word &lt; answer)) {
+                    answer = word;
+                }
+            }
+        }
+
+        // If no valid word exists, return None.
+        return answer.empty() ? "None" : answer;
+    }
+};
+
+// Driver code starts
+int main() {
+    vector&lt;string&gt; words = {"a", "ap", "app", "appl", "apple", "apply"};
+
+    Solution obj;
+    cout &lt;&lt; obj.longestWordWithAllPrefixes(words) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">from typing import List, Optional
+
+class TrieNode:
+    def __init__(self) -&gt; None:
+        self.children: List[Optional["TrieNode"]] = [None] * 26
+        self.is_end_of_word: bool = False
+
+
+class Solution:
+    def insert_word(self, root: TrieNode, word: str) -&gt; None:
+        node: TrieNode = root
+
+        for ch in word:
+            # Convert the current character into a trie index from 0 to 25.
+            index: int = ord(ch) - ord('a')
+
+            # Create the next node only when this character path is new.
+            if node.children[index] is None:
+                node.children[index] = TrieNode()
+
+            # Move forward so the next character is attached after this one.
+            node = node.children[index]
+
+        # Mark the full word so this path counts as a valid complete prefix later.
+        node.is_end_of_word = True
+
+    def has_all_prefixes(self, root: TrieNode, word: str) -&gt; bool:
+        node: TrieNode = root
+
+        for ch in word:
+            index: int = ord(ch) - ord('a')
+
+            # If the path breaks, this prefix does not exist.
+            if node.children[index] is None:
+                return False
+
+            node = node.children[index]
+
+            # Every step must end at a complete word, not just a path.
+            if not node.is_end_of_word:
+                return False
+
+        return True
+
+    """
+    Returns the longest word whose every prefix
+    is also present in the given list of words.
+    """
+    def longest_word_with_all_prefixes(self, words: List[str]) -&gt; str:
+        root: TrieNode = TrieNode()
+
+        # Store every word first so prefix checks can be done by walking the trie.
+        for word in words:
+            self.insert_word(root, word)
+
+        # Keep the best valid answer found so far.
+        answer: str = ""
+
+        for word in words:
+            # Only words whose every prefix is complete can compete for the answer.
+            if self.has_all_prefixes(root, word):
+                # Prefer longer words, and for equal length prefer smaller dictionary order.
+                if len(word) &gt; len(answer) or (len(word) == len(answer) and word &lt; answer):
+                    answer = word
+
+        # If no valid word exists, return None.
+        return "None" if answer == "" else answer
+
+
+# Driver code starts
+def main() -&gt; None:
+    words: List[str] = ["a", "ap", "app", "appl", "apple", "apply"]
+
+    obj = Solution()
+    print(obj.longest_word_with_all_prefixes(words))
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class TrieNode {
+    TrieNode[] children;
+    boolean isEndOfWord;
+
+    TrieNode() {
+        children = new TrieNode[26];
+        isEndOfWord = false;
+    }
+}
+
+class Solution {
+    private void insertWord(TrieNode root, String word) {
+        TrieNode node = root;
+
+        for (char ch : word.toCharArray()) {
+            // Convert the current character into a trie index from 0 to 25.
+            int index = ch - 'a';
+
+            // Create the next node only when this character path is new.
+            if (node.children[index] == null) {
+                node.children[index] = new TrieNode();
+            }
+
+            // Move forward so the next character is attached after this one.
+            node = node.children[index];
+        }
+
+        // Mark the full word so this path counts as a valid complete prefix later.
+        node.isEndOfWord = true;
+    }
+
+    private boolean hasAllPrefixes(TrieNode root, String word) {
+        TrieNode node = root;
+
+        for (char ch : word.toCharArray()) {
+            int index = ch - 'a';
+
+            // If the path breaks, this prefix does not exist.
+            if (node.children[index] == null) {
+                return false;
+            }
+
+            node = node.children[index];
+
+            // Every step must end at a complete word, not just a path.
+            if (!node.isEndOfWord) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /*
+    Returns the longest word whose every prefix
+    is also present in the given list of words.
+    */
+    public String longestWordWithAllPrefixes(String[] words) {
+        TrieNode root = new TrieNode();
+
+        // Store every word first so prefix checks can be done by walking the trie.
+        for (String word : words) {
+            insertWord(root, word);
+        }
+
+        // Keep the best valid answer found so far.
+        String answer = "";
+
+        for (String word : words) {
+            // Only words whose every prefix is complete can compete for the answer.
+            if (hasAllPrefixes(root, word)) {
+                // Prefer longer words, and for equal length prefer smaller dictionary order.
+                if (word.length() &gt; answer.length() ||
+                    (word.length() == answer.length() &amp;&amp; word.compareTo(answer) &lt; 0)) {
+                    answer = word;
+                }
+            }
+        }
+
+        // If no valid word exists, return None.
+        return answer.isEmpty() ? "None" : answer;
+    }
+}
+
+public class Main {
+    // Driver code starts
+    public static void main(String[] args) {
+        String[] words = {"a", "ap", "app", "appl", "apple", "apply"};
+
+        Solution obj = new Solution();
+        System.out.println(obj.longestWordWithAllPrefixes(words));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class TrieNode {
+    constructor() {
+        this.children = new Array(26).fill(null);
+        this.isEndOfWord = false;
+    }
+}
+
+class Solution {
+    insertWord(root, word) {
+        let node = root;
+
+        for (const ch of word) {
+            // Convert the current character into a trie index from 0 to 25.
+            const index = ch.charCodeAt(0) - 'a'.charCodeAt(0);
+
+            // Create the next node only when this character path is new.
+            if (node.children[index] === null) {
+                node.children[index] = new TrieNode();
+            }
+
+            // Move forward so the next character is attached after this one.
+            node = node.children[index];
+        }
+
+        // Mark the full word so this path counts as a valid complete prefix later.
+        node.isEndOfWord = true;
+    }
+
+    hasAllPrefixes(root, word) {
+        let node = root;
+
+        for (const ch of word) {
+            const index = ch.charCodeAt(0) - 'a'.charCodeAt(0);
+
+            // If the path breaks, this prefix does not exist.
+            if (node.children[index] === null) {
+                return false;
+            }
+
+            node = node.children[index];
+
+            // Every step must end at a complete word, not just a path.
+            if (!node.isEndOfWord) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /*
+    Returns the longest word whose every prefix
+    is also present in the given list of words.
+    */
+    longestWordWithAllPrefixes(words) {
+        const root = new TrieNode();
+
+        // Store every word first so prefix checks can be done by walking the trie.
+        for (const word of words) {
+            this.insertWord(root, word);
+        }
+
+        // Keep the best valid answer found so far.
+        let answer = "";
+
+        for (const word of words) {
+            // Only words whose every prefix is complete can compete for the answer.
+            if (this.hasAllPrefixes(root, word)) {
+                // Prefer longer words, and for equal length prefer smaller dictionary order.
+                if (word.length &gt; answer.length ||
+                    (word.length === answer.length &amp;&amp; word &lt; answer)) {
+                    answer = word;
+                }
+            }
+        }
+
+        // If no valid word exists, return None.
+        return answer === "" ? "None" : answer;
+    }
+}
+
+// Driver code starts
+function main() {
+    const words = ["a", "ap", "app", "appl", "apple", "apply"];
+
+    const obj = new Solution();
+    console.log(obj.longestWordWithAllPrefixes(words));
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-4"><h3 id="blog-toc-complexity-analysis">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(N x L), where <code>N</code> is the number of words and <code>L</code> is the average length of a word. Insertion processes each character once, and validation also processes each character once.</p><p><strong>Space Complexity:</strong> <span>O(N x L x 26)</span> Where <span>N x L</span> represents the maximum possible number of nodes created across all words in the worst case (when no words share prefixes), <span>26</span> for lowercase English letters. Every Trie node statically allocates an array of 26 child pointers (or references) regardless of how many actual children are active, contributing a constant multiplier of <span>26</span> to the memory footprint.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div><section aria-label="Interview follow-up Questions" class="BlogDetail-module__HEfJva__faqSection" id="blog-toc-faqs"><h2 class="BlogDetail-module__HEfJva__faqHeading">Interview follow-up Questions</h2><div class="flex w-full flex-col BlogDetail-module__HEfJva__faqList" data-orientation="vertical" data-slot="accordion"><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="open"><h3 class="flex" data-orientation="vertical" data-state="open"></h3><div aria-labelledby="radix-_R_qsqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="open" id="radix-_R_2qsqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"><div class="h-auto pt-0 pb-2.5 [&amp;_a]:underline [&amp;_a]:underline-offset-3 [&amp;_a]:hover:text-foreground [&amp;_p:not(:last-child)]:mb-4 BlogDetail-module__HEfJva__faqAnswer"><p>A trie stores words by shared prefixes. That makes it very easy to walk through a word and verify that every prefix is present as a complete word.</p></div></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_1asqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_3asqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_1qsqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_3qsqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div></div></section></div>
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

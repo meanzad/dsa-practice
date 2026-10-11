@@ -1,0 +1,931 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Minimum Path Sum In a Grid (DP 10)</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Minimum Path Sum In a Grid (DP 10)</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/minimum-path-sum-in-a-grid-dp-10/</code></div>
+  <p><strong>Problem Statement: </strong> Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right, which minimizes the sum of all numbers along its path.
+<br/>
+Note: You can only move either down or right at any point in time.<br/>
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: grid = [[5,9,6],[11,5,2]]</span>
+<span>Output: 21</span>
+<span>Explanation: Minimum sum is achieved via path 5-&gt;9-&gt;5-&gt;2 i.e. 21.</span>
+<img height="320" loading="lazy" src="../assets/img/8b928fa37392e120.png" width="624"/>
+<span>Input : grid = [[1,2,3],[4,5,6]]</span>
+<span>Output: 12</span>
+<span>Explanation : Minimum sum is achieved via path 1-&gt;2-&gt;3-&gt;6 i.e. 12.</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+
+
+            It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Memoization Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+  This question is a slight modification of the question discussed in  <a href="https://takeuforward.org/data-structure/grid-unique-paths-2-dp-9/" rel="noopener" target="_blank" title="Grid Unique Path 2">Grid Unique Path 2</a> . In the previous problem, there were obstacles whereas this problem has cost associated with a cell and we need to return the minimum cost path.<br/><br/>
+<strong>Why a Greedy Solution doesn’t work?</strong><br/><br/>
+As we have to return the minimum path sum, the first approach that comes to our mind is to take a greedy approach and always form a path by locally choosing the cheaper option. This approach will not give us the correct answer. Let us look at this example to understand:
+<p><img height="336" loading="lazy" src="../assets/img/4547991991cd8a24.png" width="287"/></p><br/>
+At every cell, we have two choices: to move right and move down. Our ultimate aim is to provide a path that provides us the least path sum. Therefore at every cell, we will make the choice to move which costs are less.<br/>
+<img height="363" loading="lazy" src="../assets/img/5e9f6101ba1dab95.png" width="624"/>
+<ul><li>Figure on the left gives us a greedy solution, where we move by taking the local best choice.</li><li>Figure on the right gives us a non-greedy solution.</li></ul>
+We can clearly see the problem with the greedy solution. Whenever we are making a local choice, we may tend to choose a path that may cost us way more later.<br/><br/>
+Therefore, the other alternative left to us is to generate all the possible paths and see which is the path with the minimum path sum. To generate all paths we will use recursion.
+<ul>
+<li>Start from the bottom-right cell (destination) and move toward the top-left (starting point) recursively.</li>
+<li>For each cell, explore the minimum path sum by going either up or left (since we are moving backward in recursion).</li>
+<li>Use a 2D memoization table to store results of subproblems to avoid recalculating them.</li>
+<li>The base case is the top-left cell where the path sum is simply the grid value at that position. If we go out of bounds (negative index), we return a large number to avoid considering invalid paths.</li>
+<li>At each step, take the grid value at the current cell and add it to the minimum of the path sums from the top and left cells, then memoize and return.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Class containing the solution logic
+class Solution {
+public:
+    // Function to calculate minimum path sum with memoization
+    int minPath(int i, int j,
+                vector&lt;vector&lt;int&gt;&gt; &amp;grid,
+                vector&lt;vector&lt;int&gt;&gt; &amp;dp) {
+        // If we are at (0,0), return that cell's value
+        if (i == 0 &amp;&amp; j == 0)
+            return grid[0][0];
+
+        // If out of bounds, return large number
+        if (i &lt; 0 || j &lt; 0)
+            return 1e9;
+
+        // If already computed, return from dp
+        if (dp[i][j] != -1)
+            return dp[i][j];
+
+        // Compute path by going up
+        int up = grid[i][j] +
+                 minPath(i - 1, j, grid, dp);
+
+        // Compute path by going left
+        int left = grid[i][j] +
+                   minPath(i, j - 1, grid, dp);
+
+        // Store the minimum in dp and return
+        return dp[i][j] = min(up, left);
+    }
+
+    // Main function that initializes dp and calls helper
+    int minPathSum(vector&lt;vector&lt;int&gt;&gt; &amp;grid) {
+        int n = grid.size();
+        int m = grid[0].size();
+
+        // Create dp table initialized with -1
+        vector&lt;vector&lt;int&gt;&gt; dp(n,
+                vector&lt;int&gt;(m, -1));
+
+        // Start from bottom-right corner
+        return minPath(n - 1, m - 1, grid, dp);
+    }
+};
+
+// Driver function
+int main() {
+    vector&lt;vector&lt;int&gt;&gt; grid = {
+        {5, 9, 6},
+        {11, 5, 2}
+    };
+
+    Solution obj;
+    cout &lt;&lt; "Minimum sum path: "
+         &lt;&lt; obj.minPathSum(grid) &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Class containing the solution logic
+class Solution {
+    // Function to calculate minimum path sum with memoization
+    public int minPath(int i, int j,
+            int[][] grid, int[][] dp) {
+
+        // If we are at (0,0), return that cell's value
+        if (i == 0 &amp;&amp; j == 0)
+            return grid[0][0];
+
+        // If out of bounds, return large number
+        if (i &lt; 0 || j &lt; 0)
+            return (int) 1e9;
+
+        // If already computed, return from dp
+        if (dp[i][j] != -1)
+            return dp[i][j];
+
+        // Compute path by going up
+        int up = grid[i][j] +
+                 minPath(i - 1, j, grid, dp);
+
+        // Compute path by going left
+        int left = grid[i][j] +
+                   minPath(i, j - 1, grid, dp);
+
+        // Store the minimum in dp and return
+        return dp[i][j] = Math.min(up, left);
+    }
+
+    // Main function that initializes dp and calls helper
+    public int minPathSum(int[][] grid) {
+        int n = grid.length;
+        int m = grid[0].length;
+
+        // Create dp table initialized with -1
+        int[][] dp = new int[n][m];
+        for (int[] row : dp)
+            Arrays.fill(row, -1);
+
+        // Start from bottom-right corner
+        return minPath(n - 1, m - 1, grid, dp);
+    }
+}
+
+// Driver class
+public class Main {
+    public static void main(String[] args) {
+        int[][] grid = {
+            {5, 9, 6},
+            {11, 5, 2}
+        };
+
+        Solution obj = new Solution();
+        System.out.println("Minimum sum path: "
+            + obj.minPathSum(grid));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Class containing the solution logic
+class Solution:
+    # Function to calculate minimum path sum with memoization
+    def minPath(self, i, j, grid, dp):
+        # If we are at (0,0), return that cell's value
+        if i == 0 and j == 0:
+            return grid[0][0]
+
+        # If out of bounds, return large number
+        if i &lt; 0 or j &lt; 0:
+            return int(1e9)
+
+        # If already computed, return from dp
+        if dp[i][j] != -1:
+            return dp[i][j]
+
+        # Compute path by going up
+        up = grid[i][j] + self.minPath(i - 1, j, grid, dp)
+
+        # Compute path by going left
+        left = grid[i][j] + self.minPath(i, j - 1, grid, dp)
+
+        # Store the minimum in dp and return
+        dp[i][j] = min(up, left)
+        return dp[i][j]
+
+    # Main function that initializes dp and calls helper
+    def minPathSum(self, grid):
+        n = len(grid)
+        m = len(grid[0])
+
+        # Create dp table initialized with -1
+        dp = [[-1 for _ in range(m)] for _ in range(n)]
+
+        # Start from bottom-right corner
+        return self.minPath(n - 1, m - 1, grid, dp)
+
+# Driver function
+if __name__ == "__main__":
+    grid = [
+        [5, 9, 6],
+        [11, 5, 2]
+    ]
+
+    obj = Solution()
+    print("Minimum sum path:", obj.minPathSum(grid))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Class containing the solution logic
+class Solution {
+    // Function to calculate minimum path sum with memoization
+    minPath(i, j, grid, dp) {
+        // If we are at (0,0), return that cell's value
+        if (i === 0 &amp;&amp; j === 0)
+            return grid[0][0];
+
+        // If out of bounds, return large number
+        if (i &lt; 0 || j &lt; 0)
+            return 1e9;
+
+        // If already computed, return from dp
+        if (dp[i][j] !== -1)
+            return dp[i][j];
+
+        // Compute path by going up
+        let up = grid[i][j] +
+                 this.minPath(i - 1, j, grid, dp);
+
+        // Compute path by going left
+        let left = grid[i][j] +
+                   this.minPath(i, j - 1, grid, dp);
+
+        // Store the minimum in dp and return
+        return dp[i][j] = Math.min(up, left);
+    }
+
+    // Main function that initializes dp and calls helper
+    minPathSum(grid) {
+        let n = grid.length;
+        let m = grid[0].length;
+
+        // Create dp table initialized with -1
+        let dp = Array.from({ length: n },
+            () =&gt; Array(m).fill(-1));
+
+        // Start from bottom-right corner
+        return this.minPath(n - 1, m - 1, grid, dp);
+    }
+}
+
+// Driver code
+const grid = [
+    [5, 9, 6],
+    [11, 5, 2]
+];
+
+const obj = new Solution();
+console.log("Minimum sum path:",
+    obj.minPathSum(grid));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N*M)</strong>, at max, there will be N*M calls of recursion..<br/>
+<strong>Space Complexity: O(M+N) + O(N*M)</strong>, additional space for recursion stack and memo table.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Tabulation Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+                       Tabulation is the bottom-up approach, which means we will go from the base case to the main problem. The steps to convert to the tabular solution are given below:
+<ul><li>Declare a dp[] array of size [n][m].</li><li>First initialize the base condition values, i.e dp[0][0] = matrix[0][0]</li><li>Our answer should get stored in dp[n-1][m-1]. We want to move from (0,0) to (n-1,m-1). But we can’t move arbitrarily, we should move such that at a particular i and j, we have all the values required to compute dp[i][j].</li><li>If we see the memoized code, values required for dp[i][j] are: dp[i-1][j] and dp[i][j-1]. So we only use the previous row and column value.</li><li>We have already filled the top-left corner (i=0 and j=0), if we move in any of the two following ways(given below), at every cell we do have all the previous values required to compute its value.</li></ul>
+<img height="351" loading="lazy" src="../assets/img/646ef5228f4d67f9.png" width="624"/>
+<ul><li>We can use two nested loops to have this traversal</li><li>Whenever i&gt;0 , j&gt;0, we will simply mark dp[i][j] = matric[i][j] + min(dp[i-1][j],dp[i][j-1]), according to our recursive relation.</li><li>When i=0 or j=0, we add to up( or left) 1e9, so that this path can be rejected.</li></ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Class to solve the problem
+class Solution {
+public:
+    // Function to calculate minimum path sum
+    int minPathSum(vector&lt;vector&lt;int&gt;&gt; &amp;matrix) {
+        int n = matrix.size();
+        int m = matrix[0].size();
+
+        // Create DP table
+        vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(m, 0));
+
+        // Fill the table
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = 0; j &lt; m; j++) {
+
+                // First cell initialization
+                if (i == 0 &amp;&amp; j == 0)
+                    dp[i][j] = matrix[i][j];
+                else {
+                    // Calculate from top
+                    int up = matrix[i][j];
+                    if (i &gt; 0) up += dp[i - 1][j];
+                    else up += 1e9;
+
+                    // Calculate from left
+                    int left = matrix[i][j];
+                    if (j &gt; 0) left += dp[i][j - 1];
+                    else left += 1e9;
+
+                    // Take minimum
+                    dp[i][j] = min(up, left);
+                }
+            }
+        }
+
+        // Return result
+        return dp[n - 1][m - 1];
+    }
+};
+
+// Driver function
+int main() {
+    vector&lt;vector&lt;int&gt;&gt; matrix{
+        {5, 9, 6},
+        {11, 5, 2}
+    };
+
+    Solution obj;
+    cout &lt;&lt; "Minimum sum path: " &lt;&lt; obj.minPathSum(matrix) &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to calculate minimum path sum
+    public int minPathSum(int[][] matrix) {
+        int n = matrix.length;
+        int m = matrix[0].length;
+
+        // Create DP table
+        int[][] dp = new int[n][m];
+
+        // Fill the table
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = 0; j &lt; m; j++) {
+
+                // First cell initialization
+                if (i == 0 &amp;&amp; j == 0)
+                    dp[i][j] = matrix[i][j];
+                else {
+                    // Calculate from top
+                    int up = matrix[i][j];
+                    if (i &gt; 0) up += dp[i - 1][j];
+                    else up += (int)1e9;
+
+                    // Calculate from left
+                    int left = matrix[i][j];
+                    if (j &gt; 0) left += dp[i][j - 1];
+                    else left += (int)1e9;
+
+                    // Take minimum
+                    dp[i][j] = Math.min(up, left);
+                }
+            }
+        }
+
+        // Return result
+        return dp[n - 1][m - 1];
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[][] matrix = {
+            {5, 9, 6},
+            {11, 5, 2}
+        };
+
+        Solution obj = new Solution();
+        System.out.println("Minimum sum path: " + obj.minPathSum(matrix));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to calculate minimum path sum
+    def minPathSum(self, matrix):
+        n = len(matrix)
+        m = len(matrix[0])
+
+        # Create DP table
+        dp = [[0 for _ in range(m)] for _ in range(n)]
+
+        # Fill the table
+        for i in range(n):
+            for j in range(m):
+
+                # First cell initialization
+                if i == 0 and j == 0:
+                    dp[i][j] = matrix[i][j]
+                else:
+                    # Calculate from top
+                    up = matrix[i][j]
+                    if i &gt; 0:
+                        up += dp[i-1][j]
+                    else:
+                        up += int(1e9)
+
+                    # Calculate from left
+                    left = matrix[i][j]
+                    if j &gt; 0:
+                        left += dp[i][j-1]
+                    else:
+                        left += int(1e9)
+
+                    # Take minimum
+                    dp[i][j] = min(up, left)
+
+        # Return result
+        return dp[n-1][m-1]
+
+# Driver code
+matrix = [
+    [5, 9, 6],
+    [11, 5, 2]
+]
+
+obj = Solution()
+print("Minimum sum path:", obj.minPathSum(matrix))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to calculate minimum path sum
+    minPathSum(matrix) {
+        const n = matrix.length;
+        const m = matrix[0].length;
+
+        // Create DP table
+        const dp = Array.from({ length: n }, () =&gt; Array(m).fill(0));
+
+        // Fill the table
+        for (let i = 0; i &lt; n; i++) {
+            for (let j = 0; j &lt; m; j++) {
+
+                // First cell initialization
+                if (i === 0 &amp;&amp; j === 0)
+                    dp[i][j] = matrix[i][j];
+                else {
+                    // Calculate from top
+                    let up = matrix[i][j];
+                    if (i &gt; 0) up += dp[i - 1][j];
+                    else up += 1e9;
+
+                    // Calculate from left
+                    let left = matrix[i][j];
+                    if (j &gt; 0) left += dp[i][j - 1];
+                    else left += 1e9;
+
+                    // Take minimum
+                    dp[i][j] = Math.min(up, left);
+                }
+            }
+        }
+
+        // Return result
+        return dp[n - 1][m - 1];
+    }
+}
+
+// Driver code
+const matrix = [
+    [5, 9, 6],
+    [11, 5, 2]
+];
+
+const obj = new Solution();
+console.log("Minimum sum path:", obj.minPathSum(matrix));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N*M)</strong>, entire grid is visited atleast once.<br/>
+<strong>Space Complexity: O(N*M)</strong>, space used for DP array.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Space Optimization Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+                    If we closely look at the relation,<br/><br/>dp[i][j] = matrix[i][j] + min(dp[i-1][j] + dp[i][j-1]))<br/><br/>
+We see that we only need the previous row and column, in order to calculate dp[i][j]. Therefore we can space optimize it.<br/><br/>
+Initially, we can take a dummy row (say prev) and initialize it as 0.
+Now the current row (say temp) only needs the previous row value and the current row’s value in order to calculate dp[i][j].
+<img height="351" loading="lazy" src="../assets/img/bd32935505fa1546.png" width="624"/><br/>
+At the next step, the temp array becomes the prev of the next step and using its values we can still calculate the next row’s values.
+<img height="351" loading="lazy" src="../assets/img/e85fb067c1d6b425.png" width="624"/><br/>
+At last prev[n-1] will give us the required answer.
+                    </div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class solution{
+public:
+
+    // Function to find the minimum sum path in grid
+    int minSumPath(int n, int m, vector&lt;vector&lt;int&gt;&gt; &amp;matrix) {
+    
+        // Create 1D vector for previous row
+        vector&lt;int&gt; prev(m, 0);
+    
+        // Loop through each row
+        for (int i = 0; i &lt; n; i++) {
+        
+            // Create temp vector for current row
+            vector&lt;int&gt; temp(m, 0);
+        
+            // Loop through each column
+            for (int j = 0; j &lt; m; j++) {
+            
+                // If at the start cell
+                if (i == 0 &amp;&amp; j == 0)
+                    temp[j] = matrix[i][j];
+                else {
+                    
+                    // Take up direction if valid
+                    int up = matrix[i][j];
+                    if (i &gt; 0)
+                        up += prev[j];
+                    else
+                        up += 1e9;
+                    
+                    // Take left direction if valid
+                    int left = matrix[i][j];
+                    if (j &gt; 0)
+                        left += temp[j - 1];
+                    else
+                        left += 1e9;
+                    
+                    // Take minimum of both directions
+                    temp[j] = min(up, left);
+                }
+            }
+    
+            // Move current row to previous
+            prev = temp;
+        }
+    
+        // Return result at destination
+        return prev[m - 1];
+    }
+};
+
+int main() {
+    vector&lt;vector&lt;int&gt;&gt; matrix{
+        {5, 9, 6},
+        {11, 5, 2}
+    };
+
+    int n = matrix.size();
+    int m = matrix[0].size();
+    
+    Solution obj;
+    
+    cout &lt;&lt; "Minimum sum path: " &lt;&lt; obj.minSumPath(n, m, matrix) &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    
+    // Function to find the minimum sum path in grid
+    public static int minSumPath(int n, int m, int[][] matrix) {
+        
+        // Create 1D array for previous row
+        int[] prev = new int[m];
+        
+        // Loop through each row
+        for (int i = 0; i &lt; n; i++) {
+            
+            // Create temp array for current row
+            int[] temp = new int[m];
+            
+            // Loop through each column
+            for (int j = 0; j &lt; m; j++) {
+                
+                // If at the start cell
+                if (i == 0 &amp;&amp; j == 0) {
+                    temp[j] = matrix[i][j];
+                } else {
+                    
+                    // Take up direction if valid
+                    int up = matrix[i][j];
+                    if (i &gt; 0)
+                        up += prev[j];
+                    else
+                        up += (int)1e9;
+                    
+                    // Take left direction if valid
+                    int left = matrix[i][j];
+                    if (j &gt; 0)
+                        left += temp[j - 1];
+                    else
+                        left += (int)1e9;
+                    
+                    // Take minimum of both directions
+                    temp[j] = Math.min(up, left);
+                }
+            }
+
+            // Move current row to previous
+            prev = temp;
+        }
+
+        // Return result at destination
+        return prev[m - 1];
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        
+        int[][] matrix = {
+            {5, 9, 6},
+            {11, 5, 2}
+        };
+
+        int n = matrix.length;
+        int m = matrix[0].length;
+
+        System.out.println("Minimum sum path: " + Solution.minSumPath(n, m, matrix));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    
+    # Function to find the minimum sum path in grid
+    def minSumPath(self, n, m, matrix):
+        
+        # Create 1D list for previous row
+        prev = [0] * m
+        
+        # Loop through each row
+        for i in range(n):
+            
+            # Create temp list for current row
+            temp = [0] * m
+            
+            # Loop through each column
+            for j in range(m):
+                
+                # If at the start cell
+                if i == 0 and j == 0:
+                    temp[j] = matrix[i][j]
+                else:
+                    
+                    # Take up direction if valid
+                    up = matrix[i][j]
+                    if i &gt; 0:
+                        up += prev[j]
+                    else:
+                        up += int(1e9)
+                    
+                    # Take left direction if valid
+                    left = matrix[i][j]
+                    if j &gt; 0:
+                        left += temp[j - 1]
+                    else:
+                        left += int(1e9)
+                    
+                    # Take minimum of both directions
+                    temp[j] = min(up, left)
+            
+            # Move current row to previous
+            prev = temp
+        
+        # Return result at destination
+        return prev[m - 1]
+
+# Main function
+if __name__ == "__main__":
+    matrix = [
+        [5, 9, 6],
+        [11, 5, 2]
+    ]
+    n = len(matrix)
+    m = len(matrix[0])
+    sol = Solution()
+    print("Minimum sum path:", sol.minSumPath(n, m, matrix))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    
+    // Function to find the minimum sum path in grid
+    minSumPath(n, m, matrix) {
+        
+        // Create array for previous row
+        let prev = new Array(m).fill(0);
+        
+        // Loop through each row
+        for (let i = 0; i &lt; n; i++) {
+            
+            // Create temp array for current row
+            let temp = new Array(m).fill(0);
+            
+            // Loop through each column
+            for (let j = 0; j &lt; m; j++) {
+                
+                // If at the start cell
+                if (i === 0 &amp;&amp; j === 0) {
+                    temp[j] = matrix[i][j];
+                } else {
+                    
+                    // Take up direction if valid
+                    let up = matrix[i][j];
+                    if (i &gt; 0)
+                        up += prev[j];
+                    else
+                        up += 1e9;
+                    
+                    // Take left direction if valid
+                    let left = matrix[i][j];
+                    if (j &gt; 0)
+                        left += temp[j - 1];
+                    else
+                        left += 1e9;
+                    
+                    // Take minimum of both directions
+                    temp[j] = Math.min(up, left);
+                }
+            }
+
+            // Move current row to previous
+            prev = temp;
+        }
+
+        // Return result at destination
+        return prev[m - 1];
+    }
+}
+
+// Main driver
+const matrix = [
+    [5, 9, 6],
+    [11, 5, 2]
+];
+const n = matrix.length;
+const m = matrix[0].length;
+const sol = new Solution();
+console.log("Minimum sum path:", sol.minSumPath(n, m, matrix));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N*M)</strong>, every element of grid is visited atleast once.<br/>
+<strong>Space Complexity: O(N)</strong>, we only use one array for storing rows.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

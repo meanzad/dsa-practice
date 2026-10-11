@@ -1,0 +1,968 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Grid Unique Paths 2 (DP 9)</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Grid Unique Paths 2 (DP 9)</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/grid-unique-paths-2-dp-9/</code></div>
+  <p><strong>Problem Statement: </strong>
+Given an m x n 2d array named matrix, where each cell is either 0 or 1. Return the number of unique ways to go from the top-left cell (matrix[0][0]) to the bottom-right cell (matrix[m-1][n-1]). A cell is blocked if its value is 1, and no path is possible through that cell.
+<br/><br/>
+Movement is allowed in only two directions from a cell - right and bottom.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>  
+<strong>Input:</strong> matrix = [[0, 0, 0], [0, 1, 0], [0, 0, 0]]  
+<strong>Output:</strong> 2  
+<strong>Explanation:</strong>  
+The two possible paths to reach the bottom-right cell are:  
+1) down → down → right → right  
+2) right → right → down → down  
+Thus, the number of paths is 2.
+
+<strong>Example 2:</strong>  
+<strong>Input:</strong> matrix = [[0, 0, 0], [0, 0, 1], [0, 1, 0]]  
+<strong>Output:</strong> 0  
+<strong>Explanation:</strong> There is no valid path to reach the bottom-right cell due to blocked cells (represented by 1).</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/unique-paths-ii" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Memoization Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Declare a <code>dp[]</code> array of size <code>[m][n]</code>, where <code>m</code> and <code>n</code> are the maximum values that the parameters <code>i</code> and <code>j</code> can attain in the recursive solution. The array will store the results of the subproblems. Initially, fill the array with <code>-1</code> to indicate that no subproblem has been solved yet.</li>
+<li>The <code>dp[i][j]</code> represents the total ways to reach from <code>(0,0)</code> to <code>(i,j)</code>. We will use this array to store intermediate results of subproblems to avoid redundant calculations.</li>
+<li>When encountering an overlapping subproblem, i.e., a subproblem where the value in the <code>dp</code> array is not <code>-1</code>, it means the subproblem has been solved previously. In this case, simply return the value from the <code>dp</code> array instead of recalculating it.</li>
+<li>If the subproblem has not been solved yet (i.e., <code>dp[i][j] == -1</code>), calculate the result for this subproblem and store it in the <code>dp</code> array to ensure that future requests for the same subproblem can directly retrieve the result.</li>
+</ul>
+<p><img height="457" loading="lazy" src="../assets/img/5979cd4797f0ac71.png" width="481"/></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+private:
+
+    //Function to solve the problem using memoization
+    int func(int i, int j, vector&lt;vector&lt;int&gt;&gt;&amp; matrix, vector&lt;vector&lt;int&gt;&gt; &amp;dp){
+        // Base cases
+        if (i &lt; 0 || j &lt; 0 || matrix[i][j] == 1) return 0;
+        else if(i == 0 &amp;&amp; j == 0) return 1;
+        
+        // If the result is already computed, return it
+        if(dp[i][j] != -1) return dp[i][j];
+
+        /* Calculate the number of ways by
+        moving up and left recursively.*/
+        int up = func(i - 1, j, matrix, dp);
+        int left = func(i, j - 1, matrix, dp);
+
+        // Return the total ways
+        return dp[i][j] = up + left;
+    }
+    
+public:
+
+    /*Function to find all unique paths to reach
+    matrix[m-1][n-1] form matrix[0][0] with obstacles*/
+    int uniquePathsWithObstacles(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) {
+        int m = matrix.size();
+        int n = matrix[0].size();
+        
+        // Initialize DP table to memoize results
+        vector&lt;vector&lt;int&gt;&gt; dp(m, vector&lt;int&gt;(n, -1)); 
+        
+        //Return the total number of paths
+        return func(m-1, n-1, matrix, dp);
+    }
+};
+
+int main() {
+    vector&lt;vector&lt;int&gt;&gt; maze{
+        {0, 0, 0},
+        {0, 1, 0},
+        {0, 0, 0}
+    };
+    
+    //Create an instance of Solution class
+    Solution sol;
+
+    cout &lt;&lt; "Number of paths with obstacles: " &lt;&lt; sol.uniquePathsWithObstacles(maze) &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    private int func(int i, int j, int[][] matrix, int[][] dp) {
+        // Base cases
+        if (i &lt; 0 || j &lt; 0 || matrix[i][j] == 1) return 0;
+        else if (i == 0 &amp;&amp; j == 0) return 1;
+
+        // If the result is already computed, return it
+        if (dp[i][j] != -1) return dp[i][j];
+
+        /* Calculate the number of ways by
+        moving up and left recursively. */
+        int up = func(i - 1, j, matrix, dp);
+        int left = func(i, j - 1, matrix, dp);
+
+        // Return the total ways
+        return dp[i][j] = up + left;
+    }
+
+    /* Function to find all unique paths to reach
+    matrix[m-1][n-1] from matrix[0][0] with obstacles */
+    public int uniquePathsWithObstacles(int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+
+        // Initialize DP table to memoize results
+        int[][] dp = new int[m][n];
+        for (int[] row : dp) Arrays.fill(row, -1);
+
+        // Return the total number of paths
+        return func(m - 1, n - 1, matrix, dp);
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        int[][] maze = {
+            {0, 0, 0},
+            {0, 1, 0},
+            {0, 0, 0}
+        };
+
+        // Create an instance of Solution class
+        Solution sol = new Solution();
+
+        System.out.println("Number of paths with obstacles: " + sol.uniquePathsWithObstacles(maze));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    def func(self, i, j, matrix, dp):
+        # Base cases
+        if i &lt; 0 or j &lt; 0 or matrix[i][j] == 1:
+            return 0
+        elif i == 0 and j == 0:
+            return 1
+
+        # If the result is already computed, return it
+        if dp[i][j] != -1:
+            return dp[i][j]
+
+        """ Calculate the number of ways by
+        moving up and left recursively. """
+        up = self.func(i - 1, j, matrix, dp)
+        left = self.func(i, j - 1, matrix, dp)
+
+        # Return the total ways
+        dp[i][j] = up + left
+        return dp[i][j]
+
+    """ Function to find all unique paths to reach
+    matrix[m-1][n-1] from matrix[0][0] with obstacles """
+    def uniquePathsWithObstacles(self, matrix):
+        m, n = len(matrix), len(matrix[0])
+
+        # Initialize DP table to memoize results
+        dp = [[-1] * n for _ in range(m)]
+
+        # Return the total number of paths
+        return self.func(m - 1, n - 1, matrix, dp)
+
+if __name__ == "__main__":
+    maze = [
+        [0, 0, 0],
+        [0, 1, 0],
+        [0, 0, 0]
+    ]
+
+    # Create an instance of Solution class
+    sol = Solution()
+
+    print("Number of paths with obstacles:", sol.uniquePathsWithObstacles(maze))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    func(i, j, matrix, dp) {
+        // Base cases
+        if (i &lt; 0 || j &lt; 0 || matrix[i][j] === 1) return 0;
+        else if (i === 0 &amp;&amp; j === 0) return 1;
+
+        // If the result is already computed, return it
+        if (dp[i][j] !== -1) return dp[i][j];
+
+        /* Calculate the number of ways by
+        moving up and left recursively. */
+        let up = this.func(i - 1, j, matrix, dp);
+        let left = this.func(i, j - 1, matrix, dp);
+
+        // Return the total ways
+        return (dp[i][j] = up + left);
+    }
+
+    /* Function to find all unique paths to reach
+    matrix[m-1][n-1] from matrix[0][0] with obstacles */
+    uniquePathsWithObstacles(matrix) {
+        let m = matrix.length;
+        let n = matrix[0].length;
+
+        // Initialize DP table to memoize results
+        let dp = Array.from({ length: m }, () =&gt; Array(n).fill(-1));
+
+        // Return the total number of paths
+        return this.func(m - 1, n - 1, matrix, dp);
+    }
+}
+
+// Main execution
+const maze = [
+    [0, 0, 0],
+    [0, 1, 0],
+    [0, 0, 0]
+];
+
+// Create an instance of Solution class
+const sol = new Solution();
+
+console.log("Number of paths with obstacles:", sol.uniquePathsWithObstacles(maze));</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(m * n)</strong>, where m is the number of rows and n is the number of columns in the matrix. This is because we are filling up a 2D DP array of size m x n, and each cell takes constant time to compute.
+                        <br/><br/>
+<strong>Space Complexity: O((N-1)+(M-1)) + O(M*N)</strong> We are using a recursion stack space: O((N-1)+(M-1)), here (N-1)+(M-1) is the path length and an external DP Array of size ‘M*N’.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="better-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Tabulation Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Declare a <code>dp[]</code> array of size <code>[m][n]</code> where <code>m</code> and <code>n</code> are the dimensions of the matrix. The <code>dp</code> array stores the results of subproblems. Specifically, <code>dp[i][j]</code> represents the total number of ways to reach the destination <code>(0,0)</code> from the cell <code>(i,j)</code>.</li>
+<li>Set the base case for the array: In the recursive solution, when <code>i = 0</code> and <code>j = 0</code>, we have one way to reach there. Therefore, set <code>dp[0][0] = 1</code>, indicating that we have reached the destination.</li>
+<li>Use two nested loops to iterate through the <code>dp</code> array. For each cell, calculate the number of ways to reach it from the top (up) and from the left (left), as we did in the recursive approach. If <code>mat[i][j]</code> is a blocked cell (i.e., the value is 1), set <code>dp[i][j] = 0</code> to indicate that no path exists through that cell.</li>
+<li>At each cell, if <code>i &gt; 0</code> and <code>j &gt; 0</code>, compute <code>dp[i][j] = dp[i-1][j] + dp[i][j-1]</code> to account for the number of ways to reach <code>(i,j)</code> from the previous row and column. If the cell is blocked, we ensure that <code>dp[i][j]</code> remains 0.</li>
+<li>After filling in the entire <code>dp</code> array, return <code>dp[m-1][n-1]</code> because it will contain the total number of ways to reach the bottom-right corner of the grid, which is the final solution to the problem.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+private:
+    // Function to solve the problem using tabulation
+    int func(int m, int n, vector&lt;vector&lt;int&gt;&gt;&amp; matrix, vector&lt;vector&lt;int&gt;&gt;&amp; dp) {
+        for (int i = 0; i &lt; m; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                
+                // Base conditions
+                if (matrix[i][j] == 1) {
+                    /* If there's an obstacle at the 
+                    cell, no paths can pass through it*/
+                    dp[i][j] = 0;
+                    continue;
+                }
+                if (i == 0 &amp;&amp; j == 0) {
+                    /* If we are at the starting 
+                    point, there is one path to it*/
+                    dp[i][j] = 1;
+                    continue;
+                }
+
+                int up = 0;
+                int left = 0;
+
+                /* Check if we can move up and left 
+                (if not at the edge of the maze)*/
+                if (i &gt; 0)
+                    up = dp[i - 1][j];
+                if (j &gt; 0)
+                    left = dp[i][j - 1];
+
+                /* Total number of paths to reach (i, j)
+                is the sum of paths from above and left*/
+                dp[i][j] = up + left;
+            }
+        }
+
+        /* The final result is stored in dp[m-1][n-1],
+        which represents the destination*/
+        return dp[m - 1][n - 1];
+    }
+
+public:
+    /* Function to find all unique paths to reach 
+    matrix[m-1][n-1] from matrix[0][0] with obstacles*/
+    int uniquePathsWithObstacles(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) {
+        int m = matrix.size();   
+        int n = matrix[0].size(); 
+
+        // Initialize DP table to memoize results
+        vector&lt;vector&lt;int&gt;&gt; dp(m, vector&lt;int&gt;(n, 0));
+
+        // Return the total number of paths
+        return func(m, n, matrix, dp);
+    }
+};
+
+int main() {
+    vector&lt;vector&lt;int&gt;&gt; maze{
+        {0, 0, 0},
+        {0, 1, 0},
+        {0, 0, 0}
+    };
+
+    // Create an instance of Solution class
+    Solution sol;
+
+    cout &lt;&lt; "Number of paths with obstacles: " &lt;&lt; sol.uniquePathsWithObstacles(maze) &lt;&lt; endl;
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // Function to solve the problem using tabulation
+    private int func(int m, int n, int[][] matrix, int[][] dp) {
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = 0; j &lt; m; j++) {
+                
+                // Base conditions
+                if (matrix[i][j] == 1) {
+                    // If there's an obstacle, no paths can pass through it
+                    dp[i][j] = 0;
+                    continue;
+                }
+                if (i == 0 &amp;&amp; j == 0) {
+                    // Starting point has exactly one path
+                    dp[i][j] = 1;
+                    continue;
+                }
+
+                int up = 0;
+                int left = 0;
+
+                // Check if we can move up and left
+                if (i &gt; 0)
+                    up = dp[i - 1][j];
+                if (j &gt; 0)
+                    left = dp[i][j - 1];
+
+                // Sum of paths from above and left
+                dp[i][j] = up + left;
+            }
+        }
+
+        // The answer is at the bottom-right cell
+        return dp[n - 1][m - 1];
+    }
+
+    // Public method to find unique paths
+    public int uniquePathsWithObstacles(int[][] matrix) {
+        int m = matrix[0].length;    
+        int n = matrix.length;       
+
+        // DP table to store results
+        int[][] dp = new int[n][m];
+
+        return func(m, n, matrix, dp);
+    }
+}
+
+// Separate main class
+public class Main {
+    public static void main(String[] args) {
+        int[][] maze = {
+            {0, 0, 0},
+            {0, 1, 0},
+            {0, 0, 0}
+        };
+
+        // Create Solution object
+        Solution sol = new Solution();
+
+        // Output result
+        System.out.println("Number of paths with obstacles: " + sol.uniquePathsWithObstacles(maze));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to solve the problem using tabulation
+    def func(self, m, n, matrix, dp):
+        for i in range(n):
+            for j in range(m):
+                
+                # Base conditions
+                if matrix[i][j] == 1:
+                    """ If there's an obstacle at the 
+                    cell, no paths can pass through it"""
+                    dp[i][j] = 0
+                    continue
+                if i == 0 and j == 0:
+                    """ If we are at the starting 
+                    point, there is one path to it"""
+                    dp[i][j] = 1
+                    continue
+
+                up = 0
+                left = 0
+
+                """ Check if we can move up and left 
+                (if not at the edge of the maze)"""
+                if i &gt; 0:
+                    up = dp[i - 1][j]
+                if j &gt; 0:
+                    left = dp[i][j - 1]
+
+                """ Total number of paths to reach (i, j)
+                is the sum of paths from above and left"""
+                dp[i][j] = up + left
+
+        """ The final result is stored in dp[n-1][m-1],
+        which represents the destination"""
+        return dp[n - 1][m - 1]
+
+    """ Function to find all unique paths to reach
+    matrix[m-1][n-1] from matrix[0][0] with obstacles"""
+    def uniquePathsWithObstacles(self, matrix):
+        m = len(matrix[0])  
+        n = len(matrix)     
+
+        # Initialize DP table to memoize results
+        dp = [[0] * m for _ in range(n)]
+
+        # Return the total number of paths
+        return self.func(m, n, matrix, dp)
+
+if __name__ == "__main__":
+    maze = [
+        [0, 0, 0],
+        [0, 1, 0],
+        [0, 0, 0]
+    ]
+
+    # Create an instance of Solution class
+    sol = Solution()
+
+    print("Number of paths with obstacles:", sol.uniquePathsWithObstacles(maze))</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to solve the problem using tabulation
+    func(m, n, matrix, dp) {
+        for (let i = 0; i &lt; n; i++) {
+            for (let j = 0; j &lt; m; j++) {
+                
+                // Base conditions
+                if (matrix[i][j] === 1) {
+                    /* If there's an obstacle at the 
+                    cell, no paths can pass through it*/
+                    dp[i][j] = 0;
+                    continue;
+                }
+                if (i === 0 &amp;&amp; j === 0) {
+                    /* If we are at the starting 
+                    point, there is one path to it*/
+                    dp[i][j] = 1;
+                    continue;
+                }
+
+                let up = 0;
+                let left = 0;
+
+                /* Check if we can move up and left 
+                (if not at the edge of the maze)*/
+                if (i &gt; 0)
+                    up = dp[i - 1][j];
+                if (j &gt; 0)
+                    left = dp[i][j - 1];
+
+                /* Total number of paths to reach (i, j)
+                is the sum of paths from above and left*/
+                dp[i][j] = up + left;
+            }
+        }
+
+        /* The final result is stored in dp[n-1][m-1],
+        which represents the destination*/
+        return dp[n - 1][m - 1];
+    }
+
+    /* Function to find all unique paths to reach 
+    matrix[m-1][n-1] from matrix[0][0] with obstacles*/
+    uniquePathsWithObstacles(matrix) {
+        const m = matrix[0].length; 
+        const n = matrix.length;    
+
+        // Initialize DP table to memoize results
+        const dp = new Array(n).fill(0).map(() =&gt; new Array(m).fill(0));
+
+        // Return the total number of paths
+        return this.func(m, n, matrix, dp);
+    }
+}
+
+const maze = [
+    [0, 0, 0],
+    [0, 1, 0],
+    [0, 0, 0]
+];
+
+// Create an instance of Solution class
+const sol = new Solution();
+
+console.log("Number of paths with obstacles:", sol.uniquePathsWithObstacles(maze));</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(m * n)</strong>, where m is the number of rows and n is the number of columns in the matrix. This is because we are filling up a 2D DP array of size m x n, and each cell takes constant time to compute.
+                        <br/><br/>
+<strong>Space Complexity: O(m * n)</strong>, where m is the number of rows and n is the number of columns in the matrix. This is due to the use of a 2D DP array to store intermediate results.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Space Optimized Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>In the tabulation approach, we observe that the value of <code>dp[i][j]</code> only depends on the previous row (<code>dp[i-1][j]</code>) and the current row (<code>dp[i][j-1]</code>). Hence, we can optimize the space complexity by using only two rows instead of maintaining the entire <code>dp</code> array.</li>
+<li>Initially, create a dummy array <code>prev</code> and initialize it with 0. This array will represent the previous row of <code>dp</code>.</li>
+<li>For each row, we only need the values of the previous row and the current row, which will be stored in the <code>temp</code> array. Calculate <code>dp[i][j]</code> using <code>prev</code> (the previous row) and <code>temp</code> (the current row).</li>
+<li>After completing each iteration of the row, update <code>prev</code> to hold the values of <code>temp</code>, making it the previous row for the next step.</li>
+<li>By the end of the process, <code>prev[n-1]</code> will contain the final result, which represents the total number of ways to reach the bottom-right corner of the grid in the top-down approach.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/385efac5eae0933f.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/70d30315182c7744.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/385efac5eae0933f.png"/><img alt="Image 2" loading="lazy" src="../assets/img/70d30315182c7744.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+private:
+    // Function to solve the problem using tabulation
+    int func(int m, int n, vector&lt;vector&lt;int&gt;&gt;&amp; matrix) {
+        
+        vector&lt;int&gt; prev(n, 0), curr(n, 0);
+        
+        for (int i = 0; i &lt; m; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                
+                // Base conditions
+                if (matrix[i][j] == 1) {
+                    /* If there's an obstacle at the 
+                    cell, no paths can pass through it*/
+                    curr[j] = 0;
+                    continue;
+                }
+                if (i == 0 &amp;&amp; j == 0) {
+                    /* If we are at the starting 
+                    point, there is one path to it*/
+                    curr[j] = 1;
+                    continue;
+                }
+
+                int up = 0;
+                int left = 0;
+
+                /* Check if we can move up and left 
+                (if not at the edge of the maze)*/
+                if (i &gt; 0)
+                    up = prev[j];
+                if (j &gt; 0)
+                    left = curr[j - 1];
+
+                /* Total number of paths to reach (i, j)
+                is the sum of paths from above and left*/
+                curr[j] = up + left;
+            }
+            
+            prev = curr;
+        }
+
+        /* The final result is stored in dp[m-1][n-1],
+        which represents the destination*/
+        return prev[n-1];
+    }
+
+public:
+    /* Function to find all unique paths to reach 
+    matrix[m-1][n-1] from matrix[0][0] with obstacles*/
+    int uniquePathsWithObstacles(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) {
+        int m = matrix.size();   
+        int n = matrix[0].size(); 
+
+        // Return the total number of paths
+        return func(m, n, matrix);
+    }
+};
+
+int main() {
+    vector&lt;vector&lt;int&gt;&gt; maze{
+        {0, 0, 0},
+        {0, 1, 0},
+        {0, 0, 0}
+    };
+
+    // Create an instance of Solution class
+    Solution sol;
+
+    cout &lt;&lt; "Number of paths with obstacles: " &lt;&lt; sol.uniquePathsWithObstacles(maze) &lt;&lt; endl;
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to solve the problem using tabulation
+    private int func(int m, int n, int[][] matrix) {
+        
+        int[] prev = new int[n];
+        int[] curr = new int[n];
+        
+        for (int i = 0; i &lt; m; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                
+                // Base conditions
+                if (matrix[i][j] == 1) {
+                    /* If there's an obstacle at the 
+                    cell, no paths can pass through it*/
+                    curr[j] = 0;
+                    continue;
+                }
+                if (i == 0 &amp;&amp; j == 0) {
+                    /* If we are at the starting 
+                    point, there is one path to it*/
+                    curr[j] = 1;
+                    continue;
+                }
+
+                int up = 0;
+                int left = 0;
+
+                /* Check if we can move up and left 
+                (if not at the edge of the maze)*/
+                if (i &gt; 0)
+                    up = prev[j];
+                if (j &gt; 0)
+                    left = curr[j - 1];
+
+                /* Total number of paths to reach (i, j)
+                is the sum of paths from above and left*/
+                curr[j] = up + left;
+            }
+            
+            prev = curr.clone();
+        }
+
+        /* The final result is stored in dp[m-1][n-1],
+        which represents the destination*/
+        return prev[n - 1];
+    }
+
+    /* Function to find all unique paths to reach 
+    matrix[m-1][n-1] from matrix[0][0] with obstacles*/
+    public int uniquePathsWithObstacles(int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+
+        // Return the total number of paths
+        return func(m, n, matrix);
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        int[][] maze = {
+            {0, 0, 0},
+            {0, 1, 0},
+            {0, 0, 0}
+        };
+
+        Solution sol = new Solution();
+        System.out.println("Number of paths with obstacles: " + sol.uniquePathsWithObstacles(maze));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to solve the problem using tabulation
+    def func(self, m, n, matrix):
+        
+        prev = [0] * n
+        curr = [0] * n
+        
+        for i in range(m):
+            for j in range(n):
+                
+                # Base conditions
+                if matrix[i][j] == 1:
+                    """If there's an obstacle at the 
+                    cell, no paths can pass through it"""
+                    curr[j] = 0
+                    continue
+                if i == 0 and j == 0:
+                    """If we are at the starting 
+                    point, there is one path to it"""
+                    curr[j] = 1
+                    continue
+
+                up = 0
+                left = 0
+
+                """Check if we can move up and left 
+                (if not at the edge of the maze)"""
+                if i &gt; 0:
+                    up = prev[j]
+                if j &gt; 0:
+                    left = curr[j - 1]
+
+                """Total number of paths to reach (i, j)
+                is the sum of paths from above and left"""
+                curr[j] = up + left
+            
+            prev = curr[:]
+
+        """The final result is stored in dp[m-1][n-1],
+        which represents the destination"""
+        return prev[n - 1]
+
+    """Function to find all unique paths to reach 
+    matrix[m-1][n-1] from matrix[0][0] with obstacles"""
+    def uniquePathsWithObstacles(self, matrix):
+        m = len(matrix)
+        n = len(matrix[0])
+
+        # Return the total number of paths
+        return self.func(m, n, matrix)
+
+
+if __name__ == "__main__":
+    maze = [
+        [0, 0, 0],
+        [0, 1, 0],
+        [0, 0, 0]
+    ]
+
+    sol = Solution()
+    print("Number of paths with obstacles:", sol.uniquePathsWithObstacles(maze))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to solve the problem using tabulation
+    func(m, n, matrix) {
+        
+        let prev = new Array(n).fill(0);
+        let curr = new Array(n).fill(0);
+        
+        for (let i = 0; i &lt; m; i++) {
+            for (let j = 0; j &lt; n; j++) {
+                
+                // Base conditions
+                if (matrix[i][j] === 1) {
+                    /* If there's an obstacle at the 
+                    cell, no paths can pass through it*/
+                    curr[j] = 0;
+                    continue;
+                }
+                if (i === 0 &amp;&amp; j === 0) {
+                    /* If we are at the starting 
+                    point, there is one path to it*/
+                    curr[j] = 1;
+                    continue;
+                }
+
+                let up = 0;
+                let left = 0;
+
+                /* Check if we can move up and left 
+                (if not at the edge of the maze)*/
+                if (i &gt; 0)
+                    up = prev[j];
+                if (j &gt; 0)
+                    left = curr[j - 1];
+
+                /* Total number of paths to reach (i, j)
+                is the sum of paths from above and left*/
+                curr[j] = up + left;
+            }
+            
+            prev = [...curr];
+        }
+
+        /* The final result is stored in dp[m-1][n-1],
+        which represents the destination*/
+        return prev[n - 1];
+    }
+
+    /* Function to find all unique paths to reach 
+    matrix[m-1][n-1] from matrix[0][0] with obstacles*/
+    uniquePathsWithObstacles(matrix) {
+        let m = matrix.length;
+        let n = matrix[0].length;
+
+        // Return the total number of paths
+        return this.func(m, n, matrix);
+    }
+}
+
+// Driver code
+const maze = [
+    [0, 0, 0],
+    [0, 1, 0],
+    [0, 0, 0]
+];
+
+const sol = new Solution();
+console.log("Number of paths with obstacles:", sol.uniquePathsWithObstacles(maze));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(m * n)</strong>, where m is the number of rows and n is the number of columns in the matrix. This is because we are filling up a 2D DP array of size m x n, and each cell takes constant time to compute.
+                        <br/><br/>
+<strong>Space Complexity: O(n)</strong>, where n is the number of columns in the matrix. This is due to the use of two 1D arrays to store intermediate results, instead of a full 2D DP array.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

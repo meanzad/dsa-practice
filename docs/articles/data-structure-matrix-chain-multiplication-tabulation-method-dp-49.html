@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Matrix Chain Multiplication | Tabulation Method | (DP-49)</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Matrix Chain Multiplication | Tabulation Method | (DP-49)</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/matrix-chain-multiplication-tabulation-method-dp-49/</code></div>
+  <p><strong>Problem Statement: </strong>
+Given a chain of matrices A1, A2, A3,.....An, you have to figure out the most efficient way to multiply these matrices. In other words, determine where to place parentheses to minimize the number of multiplications.
+<br/><br/>
+Given an array nums of size n. Dimension of matrix Ai ( 0 &lt; i &lt; n ) is nums[i - 1] x nums[i].Find a minimum number of multiplications needed to multiply the chain.
+<br/><br/>
+<strong>Note: </strong>Solve using tabulation.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>  
+<strong>Input:</strong> nums = [10, 15, 20, 25]  
+<strong>Output:</strong> 8000  
+<strong>Explanation:</strong> There are two ways to multiply the chain:
+- A1 * (A2 * A3) → requires 11250 multiplications.
+- (A1 * A2) * A3 → requires 8000 multiplications.
+Thus, the minimum number of multiplications required is 8000.
+
+<strong>Example 2:</strong>  
+<strong>Input:</strong> nums = [4, 2, 3]  
+<strong>Output:</strong> 24  
+<strong>Explanation:</strong> There is only one way to multiply the chain: A1 * A2, which requires 24 multiplications.</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/matrix-chain-multiplication" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Define a 2D array dp where dp[i][j] represents the minimum cost of multiplying the chain of matrices from index i to index j.</li>
+<li>Initialize the diagonal elements of the dp array to 0, as a single matrix requires no multiplication.</li>
+<li>Iterate over the length of the chain, starting from 2 up to the length of the matrix array.</li>
+<li>For each length, iterate over the possible starting indices of the chain.</li>
+<li>For each starting index, calculate the ending index based on the current chain length.</li>
+<li>For each pair of starting and ending indices, iterate over all possible split points.</li>
+<li>Calculate the cost of multiplying the matrices at the current split point, which includes the cost of multiplying the left sub-chain, the right sub-chain, and the cost of multiplying the resulting two matrices.</li>
+<li>Update the dp array with the minimum cost found for each pair of starting and ending indices.</li>
+<li>The result is stored in dp[1][n-1], representing the minimum cost of multiplying the entire chain of matrices.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    int matrixMultiplication(vector&lt;int&gt;&amp; nums) {
+        int n = nums.size();
+        vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(n, INT_MAX));
+
+        // A single matrix needs no multiplication cost
+        for (int i = 1; i &lt; n; ++i) {
+            dp[i][i] = 0;
+        }
+
+        // Filling the dp array
+        for (int length = 2; length &lt; n; ++length) { // length of the chain
+            for (int i = 1; i &lt;= n - length; ++i) {
+                int j = i + length - 1;
+                for (int k = i; k &lt; j; ++k) {
+                    int cost = dp[i][k] + dp[k + 1][j] + nums[i - 1] * nums[k] * nums[j];
+                    if (cost &lt; dp[i][j]) {
+                        dp[i][j] = cost;
+                    }
+                }
+            }
+        }
+
+        // The result is in dp[1][n-1]
+        return dp[1][n - 1];
+    }
+};
+
+int main() {
+    Solution sol;
+    vector&lt;int&gt; nums = {10, 15, 20, 25};
+    // Output should be 8000
+    cout &lt;&lt; sol.matrixMultiplication(nums) &lt;&lt; endl; 
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">public class Solution {
+    public int matrixMultiplication(int[] nums) {
+        int n = nums.length;
+        int[][] dp = new int[n][n];
+
+        // Initialize the dp array with large values
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                dp[i][j] = Integer.MAX_VALUE;
+            }
+        }
+
+        // A single matrix doesn't require any multiplication
+        for (int i = 1; i &lt; n; i++) {
+            dp[i][i] = 0;
+        }
+
+        // Filling the dp array in a bottom-up manner
+        for (int length = 2; length &lt; n; length++) {
+            for (int i = 1; i &lt;= n - length; i++) {
+                int j = i + length - 1;
+                for (int k = i; k &lt; j; k++) {
+                    // Calculate cost
+                    int cost = dp[i][k] + dp[k + 1][j] + nums[i - 1] * nums[k] * nums[j];
+                    // Take the minimum cost
+                    if (cost &lt; dp[i][j]) {
+                        dp[i][j] = cost;
+                    }
+                }
+            }
+        }
+
+        // The result is in dp[1][n-1] (multiplying from matrix 1 to n-1)
+        return dp[1][n - 1];
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        int[] nums = {10, 15, 20, 25};
+
+        // Output should be 8000
+        System.out.println("Minimum number of multiplications: " + sol.matrixMultiplication(nums));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    def matrixMultiplication(self, nums):
+        n = len(nums)
+        dp = [[float('inf')] * n for _ in range(n)]
+
+        # A single matrix needs no multiplication cost
+        for i in range(1, n):
+            dp[i][i] = 0
+
+        # Filling the dp array
+        for length in range(2, n):  # length of the chain
+            for i in range(1, n - length + 1):
+                j = i + length - 1
+                for k in range(i, j):
+                    cost = dp[i][k] + dp[k + 1][j] + nums[i - 1] * nums[k] * nums[j]
+                    if cost &lt; dp[i][j]:
+                        dp[i][j] = cost
+
+        # The result is in dp[1][n-1]
+        return dp[1][n - 1]
+
+# Main method to test the solution
+if __name__ == "__main__":
+    sol = Solution()
+    nums = [10, 15, 20, 25]
+    print(sol.matrixMultiplication(nums))  # Output should be 8000</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    matrixMultiplication(nums) {
+        const n = nums.length;
+        const dp = Array.from({ length: n }, () =&gt; Array(n).fill(Infinity));
+
+        // A single matrix needs no multiplication cost
+        for (let i = 1; i &lt; n; i++) {
+            dp[i][i] = 0;
+        }
+
+        // Filling the dp array
+        for (let length = 2; length &lt; n; length++) { // length of the chain
+            for (let i = 1; i &lt;= n - length; i++) {
+                let j = i + length - 1;
+                for (let k = i; k &lt; j; k++) {
+                    let cost = dp[i][k] + dp[k + 1][j] + nums[i - 1] * nums[k] * nums[j];
+                    if (cost &lt; dp[i][j]) {
+                        dp[i][j] = cost;
+                    }
+                }
+            }
+        }
+
+        // The result is in dp[1][n-1]
+        return dp[1][n - 1];
+    }
+}
+
+// Main method to test the solution
+const sol = new Solution();
+const nums = [10, 15, 20, 25];
+console.log(sol.matrixMultiplication(nums)); // Output should be 8000
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(N^3)</strong>, where N is the number of matrices. We have three nested loops: one for the length of the chain, one for the starting index, and one for the split point.
+                        <br/><br/>
+<strong>Space Complexity: O(N^2)</strong>, for the dp array used to store the minimum multiplication costs.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

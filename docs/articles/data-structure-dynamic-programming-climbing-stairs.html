@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Dynamic Programming : Climbing Stairs</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Dynamic Programming : Climbing Stairs</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/dynamic-programming-climbing-stairs/</code></div>
+  <p><strong>Problem Statement: </strong> Given a number of stairs. Starting from the 0th stair we need to climb to the
+    “Nth” stair. At a time we can climb either one or two steps. We need to return the total number of distinct ways to
+    reach from 0th to Nth stair.</p>
+<figure class="wp-block-image"><img alt="" loading="lazy" src="../assets/img/62eb3d449475fd21.png"/></figure>
+<p><strong>Pre-req: Recursion, </strong><a href="https://takeuforward.org/data-structure/dynamic-programming-introduction/" rel="noopener" target="_blank"><strong>Dynamic Programming
+            Introduction</strong></a></p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Input: n = 2
+Output: 2
+Explanation: There are 2 unique ways to climb to the 2nd step:
+1. 1 step + 1 step
+2. 2 steps
+
+Input: n = 3
+Output: 3
+Explanation: There are 3 unique ways to climb to the 3rd step:
+1. 1 step + 1 step + 1 step
+2. 2 steps + 1 step
+3. 1 step + 2 steps
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/climbing-stairs" rel="noopener" target="_blank">practice link</a> to help
+        you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+<p>The Fibonacci sequence is defined as F(n) = F(n-1) + F(n-2) with base cases F(0)=1 and
+                            F(1)=1. A naive recursive solution recalculates many subproblems, leading to exponential
+                            time. By storing results in a DP array, we avoid recomputation and compute the result
+                            efficiently.</p>
+<p><strong>Approach:</strong></p>
+<ol>
+<li>Initialize a DP array <code>dp</code> of size <code>n+1</code> with -1 to store results.
+                            </li>
+<li>Set the base cases: <code>dp[0] = 1</code>, <code>dp[1] = 1</code>.</li>
+<li>Iterate from <code>i = 2</code> to <code>n</code> and compute
+                                <code>dp[i] = dp[i-1] + dp[i-2]</code>.
+                            </li>
+<li>Return <code>dp[n]</code> as the answer.</li>
+</ol>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div>
+<div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int main() {
+    // Number for which Fibonacci is to be calculated
+    int n = 3;
+
+    // Create a dp array initialized with -1
+    vector&lt;int&gt; dp(n + 1, -1);
+
+    // Base cases
+    dp[0] = 1;
+    dp[1] = 1;
+
+    // Fill dp array using bottom-up dynamic programming
+    for (int i = 2; i &lt;= n; i++) {
+        dp[i] = dp[i - 1] + dp[i - 2];
+    }
+
+    // Print the nth Fibonacci number
+    cout &lt;&lt; dp[n];
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Main {
+    public static void main(String[] args) {
+        // Number for which Fibonacci is to be calculated
+        int n = 3;
+
+        // Create a dp array initialized with -1
+        int[] dp = new int[n + 1];
+        Arrays.fill(dp, -1);
+
+        // Base cases
+        dp[0] = 1;
+        dp[1] = 1;
+
+        // Fill dp array using bottom-up dynamic programming
+        for (int i = 2; i &lt;= n; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+
+        // Print the nth Fibonacci number
+        System.out.println(dp[n]);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">def main():
+    # Number for which Fibonacci is to be calculated
+    n = 3
+
+    # Create a dp array initialized with -1
+    dp = [-1] * (n + 1)
+
+    # Base cases
+    dp[0] = 1
+    dp[1] = 1
+
+    # Fill dp array using bottom-up dynamic programming
+    for i in range(2, n + 1):
+        dp[i] = dp[i - 1] + dp[i - 2]
+
+    # Print the nth Fibonacci number
+    print(dp[n])
+
+
+if __name__ == "__main__":
+    main()
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">function main() {
+    // Number for which Fibonacci is to be calculated
+    let n = 3;
+
+    // Create a dp array initialized with -1
+    let dp = new Array(n + 1).fill(-1);
+
+    // Base cases
+    dp[0] = 1;
+    dp[1] = 1;
+
+    // Fill dp array using bottom-up dynamic programming
+    for (let i = 2; i &lt;= n; i++) {
+        dp[i] = dp[i - 1] + dp[i - 2];
+    }
+
+    // Print the nth Fibonacci number
+    console.log(dp[n]);
+}
+
+// Driver code
+main();
+</code></pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+</summary>
+<p>
+</p><p><strong>Time Complexity:</strong> O(n), since we compute each Fibonacci number from 2 to n
+                        exactly once.</p>
+<p><strong>Space Complexity:</strong> O(n), for storing the DP array of size n+1.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

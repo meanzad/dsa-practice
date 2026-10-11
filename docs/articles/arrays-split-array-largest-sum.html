@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Split Array - Largest Sum</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Split Array - Largest Sum</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/arrays/split-array-largest-sum/</code></div>
+  <p><strong>Problem Statement: </strong> Given an integer array ‘A’ of size ‘N’ and an integer ‘K'. Split the array ‘A’ into ‘K’ non-empty subarrays such that the largest sum of any subarray is minimized. Your task is to return the minimized largest sum of the split.
+A subarray is a contiguous part of the array. </p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input Format: N = 5, a[] = {1,2,3,4,5}, k = 3
+Result: 6
+Explanation: There are many ways to split the array a[] into k consecutive subarrays. The best way to do this is to split the array a[] into [1, 2, 3], [4], and [5], where the largest sum among the three subarrays is only 6.
+
+Example 2:
+Input Format: N = 3, a[] = {3,5,1}, k = 3
+Result: 5
+Explanation: There is only one way to split the array a[] into 3 subarrays, i.e., [3], [5], and [1]. The largest sum among these subarrays is 5.
+
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/split-array---largest-sum" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Brute Force
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<ul>
+<li>First, we will find the maximum element and the summation of the given array.</li>
+<li>We will use a loop to check all possible answers from max(arr[]) to sum(arr[]).</li>
+<li>Next, inside the loop, we will send ‘maxSum’, to the function countPartitions() function to get the number of partitions.</li>
+<li>The first value of ‘maxSum’, for which the number of partitions will be equal to ‘k’, will be our answer. So, we will return that particular value of ‘maxSum’.</li>
+<li>Finally, if we are out of the loop, we will return max(arr[]) as there cannot exist any answer smaller than that.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class SubarrayPartitioner {
+public:
+    // Function to count how many partitions are needed
+    // if each subarray sum is restricted to at most maxSum
+    int countPartitions(vector&lt;int&gt; &amp;a, int maxSum) {
+        int n = a.size(); // size of the array
+        int partitions = 1; // always have at least 1 partition
+        long long subarraySum = 0; // sum of the current subarray
+
+        for (int i = 0; i &lt; n; i++) {
+            // If adding this element doesn't exceed maxSum, keep adding to current subarray
+            if (subarraySum + a[i] &lt;= maxSum) {
+                subarraySum += a[i];
+            }
+            else {
+                // Otherwise, start a new subarray
+                partitions++;
+                subarraySum = a[i];
+            }
+        }
+        return partitions;
+    }
+
+    // Function to find the smallest maximum subarray sum possible
+    // such that the array is split into exactly k subarrays
+    int largestSubarraySumMinimized(vector&lt;int&gt; &amp;a, int k) {
+        // Lower bound: max element in array (can't be smaller than that)
+        int low = *max_element(a.begin(), a.end());
+        // Upper bound: sum of entire array (only one subarray)
+        int high = accumulate(a.begin(), a.end(), 0);
+
+        // Brute-force: test each possible maxSum from low to high
+        for (int maxSum = low; maxSum &lt;= high; maxSum++) {
+            // If we can form exactly k partitions with this maxSum, return it
+            if (countPartitions(a, maxSum) == k)
+                return maxSum;
+        }
+        return low; // fallback
+    }
+};
+
+int main() {
+    vector&lt;int&gt; a = {10, 20, 30, 40};
+    int k = 2;
+    SubarrayPartitioner sp; // Create object
+    int ans = sp.largestSubarraySumMinimized(a, k);
+    cout &lt;&lt; "The answer is: " &lt;&lt; ans &lt;&lt; "\n";
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class SubarrayPartitioner {
+    // Counts how many partitions are needed for a given maxSum limit
+    public int countPartitions(int[] a, int maxSum) {
+        int n = a.length; // size of array
+        int partitions = 1; // at least one partition
+        long subarraySum = 0; // sum of current subarray
+
+        for (int i = 0; i &lt; n; i++) {
+            // Add to current subarray if possible
+            if (subarraySum + a[i] &lt;= maxSum) {
+                subarraySum += a[i];
+            } else {
+                // Start new subarray
+                partitions++;
+                subarraySum = a[i];
+            }
+        }
+        return partitions;
+    }
+
+    // Finds the smallest possible largest subarray sum to get exactly k partitions
+    public int largestSubarraySumMinimized(int[] a, int k) {
+        int low = Arrays.stream(a).max().getAsInt(); // max element
+        int high = Arrays.stream(a).sum(); // sum of all elements
+
+        // Brute-force from low to high
+        for (int maxSum = low; maxSum &lt;= high; maxSum++) {
+            if (countPartitions(a, maxSum) == k) {
+                return maxSum;
+            }
+        }
+        return low; // fallback
+    }
+
+    public static void main(String[] args) {
+        int[] a = {10, 20, 30, 40};
+        int k = 2;
+        SubarrayPartitioner sp = new SubarrayPartitioner();
+        int ans = sp.largestSubarraySumMinimized(a, k);
+        System.out.println("The answer is: " + ans);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class SubarrayPartitioner:
+    # Counts how many partitions are needed given maxSum
+    def count_partitions(self, a, max_sum):
+        partitions = 1  # at least one partition
+        subarray_sum = 0  # current subarray sum
+
+        for num in a:
+            # Add to current subarray if it doesn't exceed max_sum
+            if subarray_sum + num &lt;= max_sum:
+                subarray_sum += num
+            else:
+                # Start a new subarray
+                partitions += 1
+                subarray_sum = num
+        return partitions
+
+    # Finds the smallest possible largest subarray sum for exactly k partitions
+    def largest_subarray_sum_minimized(self, a, k):
+        low = max(a)  # minimum possible max sum
+        high = sum(a)  # maximum possible max sum
+
+        # Brute-force check
+        for max_sum in range(low, high + 1):
+            if self.count_partitions(a, max_sum) == k:
+                return max_sum
+        return low  # fallback
+
+
+if __name__ == "__main__":
+    a = [10, 20, 30, 40]
+    k = 2
+    sp = SubarrayPartitioner()
+    ans = sp.largest_subarray_sum_minimized(a, k)
+    print("The answer is:", ans)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class SubarrayPartitioner {
+    // Counts how many partitions are needed given maxSum
+    countPartitions(a, maxSum) {
+        let partitions = 1; // at least one partition
+        let subarraySum = 0; // current subarray sum
+
+        for (let num of a) {
+            // Add to current subarray if it doesn't exceed maxSum
+            if (subarraySum + num &lt;= maxSum) {
+                subarraySum += num;
+            } else {
+                // Start a new subarray
+                partitions++;
+                subarraySum = num;
+            }
+        }
+        return partitions;
+    }
+
+    // Finds smallest possible largest subarray sum for exactly k partitions
+    largestSubarraySumMinimized(a, k) {
+        let low = Math.max(...a); // max element
+        let high = a.reduce((acc, val) =&gt; acc + val, 0); // sum of array
+
+        // Brute-force from low to high
+        for (let maxSum = low; maxSum &lt;= high; maxSum++) {
+            if (this.countPartitions(a, maxSum) === k) {
+                return maxSum;
+            }
+        }
+        return low; // fallback
+    }
+}
+
+// Example usage
+let a = [10, 20, 30, 40];
+let k = 2;
+let sp = new SubarrayPartitioner();
+let ans = sp.largestSubarraySumMinimized(a, k);
+console.log("The answer is:", ans);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+</p><p>Time Complexity:  O(N * (sum(arr[])-max(arr[])+1)), where N = size of the array, sum(arr[]) = sum of all array elements, max(arr[]) = maximum of all array elements.</p>
+<p>Space Complexity: O(1), no extra space used.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimised Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<h2>Intuition</h2>
+<p>We are going to use the Binary Search algorithm to optimize the approach.</p>
+<p>The primary objective of the Binary Search algorithm is to efficiently determine the appropriate half to eliminate, thereby reducing the search space by half. It does this by determining a specific condition that ensures that the target is not present in that half.</p>
+<h2>Algorithm</h2>
+<ul>
+<li>Place the 2 pointers i.e. low and high: Initially, we will place the pointers. The pointer low will point to max(arr[]) and the high will point to sum(arr[]).</li>
+<li>Calculate the ‘mid’: Now, inside the loop, we will calculate the value of ‘mid’ using the following formula: mid = (low+high) // 2 ( ‘//’ refers to integer division.</li>
+<li>Eliminate the halves based on the number of subarrays returned by countPartitions(): We will pass the potential value of ‘maxSum’, represented by the variable 'mid', to the ‘countPartitions()' function. This function will return the number of partitions we can make.</li>
+<ul>
+<li>If partitions &gt; k: On satisfying this condition, we can conclude that the number ‘mid’ is smaller than our answer. So, we will eliminate the left half and consider the right half(i.e. low = mid+1).</li>
+<li>Otherwise, the value mid is one of the possible answers. But we want the minimum value. So, we will eliminate the right half and consider the left half(i.e. high = mid-1).</li>
+</ul>
+<li>Finally, outside the loop, we will return the value of low as the pointer will be pointing to the answer.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/820c65a0578d5f95.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/94d0b35fc3a9316c.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/f6a490d2bdfddac9.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/820c65a0578d5f95.png"/><img alt="Image 2" loading="lazy" src="../assets/img/94d0b35fc3a9316c.png"/><img alt="Image 3" loading="lazy" src="../assets/img/f6a490d2bdfddac9.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">import java.util.*;
+
+class SubarrayPartitioner {
+    // Counts how many partitions are needed for a given maxSum
+    public int countPartitions(int[] a, int maxSum) {
+        int partitions = 1; // at least one partition
+        long subarraySum = 0; // sum of current subarray
+
+        for (int num : a) {
+            if (subarraySum + num &lt;= maxSum) {
+                subarraySum += num;
+            } else {
+                partitions++;
+                subarraySum = num;
+            }
+        }
+        return partitions;
+    }
+
+    // Finds the minimum largest subarray sum possible for at most k partitions
+    public int largestSubarraySumMinimized(int[] a, int k) {
+        int low = Arrays.stream(a).max().getAsInt(); // largest element
+        int high = Arrays.stream(a).sum(); // sum of all elements
+
+        // Binary search for the smallest maxSum
+        while (low &lt;= high) {
+            int mid = (low + high) / 2;
+            int partitions = countPartitions(a, mid);
+
+            if (partitions &gt; k) {
+                low = mid + 1; // too many partitions → increase maxSum
+            } else {
+                high = mid - 1; // valid but try smaller maxSum
+            }
+        }
+        return low;
+    }
+
+    public static void main(String[] args) {
+        int[] a = {10, 20, 30, 40};
+        int k = 2;
+        SubarrayPartitioner sp = new SubarrayPartitioner();
+        int ans = sp.largestSubarraySumMinimized(a, k);
+        System.out.println("The answer is: " + ans);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class SubarrayPartitioner {
+    // Counts how many partitions are needed for a given maxSum
+    public int countPartitions(int[] a, int maxSum) {
+        int partitions = 1; // at least one partition
+        long subarraySum = 0; // sum of current subarray
+
+        for (int num : a) {
+            if (subarraySum + num &lt;= maxSum) {
+                subarraySum += num;
+            } else {
+                partitions++;
+                subarraySum = num;
+            }
+        }
+        return partitions;
+    }
+
+    // Finds the minimum largest subarray sum possible for at most k partitions
+    public int largestSubarraySumMinimized(int[] a, int k) {
+        int low = Arrays.stream(a).max().getAsInt(); // largest element
+        int high = Arrays.stream(a).sum(); // sum of all elements
+
+        // Binary search for the smallest maxSum
+        while (low &lt;= high) {
+            int mid = (low + high) / 2;
+            int partitions = countPartitions(a, mid);
+
+            if (partitions &gt; k) {
+                low = mid + 1; // too many partitions → increase maxSum
+            } else {
+                high = mid - 1; // valid but try smaller maxSum
+            }
+        }
+        return low;
+    }
+
+    public static void main(String[] args) {
+        int[] a = {10, 20, 30, 40};
+        int k = 2;
+        SubarrayPartitioner sp = new SubarrayPartitioner();
+        int ans = sp.largestSubarraySumMinimized(a, k);
+        System.out.println("The answer is: " + ans);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class SubarrayPartitioner:
+    # Counts how many partitions are needed for a given max_sum
+    def count_partitions(self, a, max_sum):
+        partitions = 1  # at least one partition
+        subarray_sum = 0  # current subarray sum
+
+        for num in a:
+            if subarray_sum + num &lt;= max_sum:
+                subarray_sum += num
+            else:
+                partitions += 1
+                subarray_sum = num
+        return partitions
+
+    # Finds the minimum largest subarray sum possible for at most k partitions
+    def largest_subarray_sum_minimized(self, a, k):
+        low = max(a)  # largest element
+        high = sum(a)  # sum of all elements
+
+        # Binary search
+        while low &lt;= high:
+            mid = (low + high) // 2
+            partitions = self.count_partitions(a, mid)
+
+            if partitions &gt; k:
+                low = mid + 1  # too many partitions
+            else:
+                high = mid - 1  # try smaller max_sum
+        return low
+
+
+if __name__ == "__main__":
+    a = [10, 20, 30, 40]
+    k = 2
+    sp = SubarrayPartitioner()
+    ans = sp.largest_subarray_sum_minimized(a, k)
+    print("The answer is:", ans)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class SubarrayPartitioner {
+    // Counts how many partitions are needed for a given maxSum
+    countPartitions(a, maxSum) {
+        let partitions = 1; // at least one partition
+        let subarraySum = 0; // sum of current subarray
+
+        for (let num of a) {
+            if (subarraySum + num &lt;= maxSum) {
+                subarraySum += num;
+            } else {
+                partitions++;
+                subarraySum = num;
+            }
+        }
+        return partitions;
+    }
+
+    // Finds the minimum largest subarray sum possible for at most k partitions
+    largestSubarraySumMinimized(a, k) {
+        let low = Math.max(...a); // largest element
+        let high = a.reduce((acc, val) =&gt; acc + val, 0); // sum of array
+
+        // Binary search
+        while (low &lt;= high) {
+            let mid = Math.floor((low + high) / 2);
+            let partitions = this.countPartitions(a, mid);
+
+            if (partitions &gt; k) {
+                low = mid + 1; // too many partitions
+            } else {
+                high = mid - 1; // try smaller maxSum
+            }
+        }
+        return low;
+    }
+}
+
+// Example usage
+let a = [10, 20, 30, 40];
+let k = 2;
+let sp = new SubarrayPartitioner();
+let ans = sp.largestSubarraySumMinimized(a, k);
+console.log("The answer is:", ans);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+</p><p>Time Complexity: O(N * log(sum(arr[])-max(arr[])+1)), where N = size of the array, sum(arr[]) = sum of all array elements, max(arr[]) = maximum of all array elements.</p>
+<p>Space Complexity: O(1), no extra space used</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

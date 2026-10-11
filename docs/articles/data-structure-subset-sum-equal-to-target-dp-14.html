@@ -1,0 +1,842 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Subset sum equal to target (DP- 14)</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Subset sum equal to target (DP- 14)</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/subset-sum-equal-to-target-dp-14/</code></div>
+  <p><strong>Problem Statement: </strong> We are given an array ‘ARR’ with N positive integers. We need to find if there is a subset in “ARR” with a sum equal to K. If there is, return true else return false.</p>
+<p>A subset/subsequence is a contiguous or non-contiguous part of an array, where elements appear in the same order as the original array.<br/>For example, for the array: [2,3,1] , the subsequences will be [{2},{3},{1},{2,3},{2,1},{3,1},{2,3,1}} but {3,2} is <strong>not</strong> a subsequence because its elements are not in the same order as the original array.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p>
+<strong>Input : </strong> N = 4, ARR = [4, 3, 5, 2], K = 6 
+<strong>Output : </strong>true
+<strong>Explanation : </strong>One possible subset with sum = 6 is [4, 2]. There’s also [3, 3] but that doesn’t exist in the array. As soon as we find one subset whose sum is equal to K, the answer is true.<br/>
+<strong>Input : </strong>N = 3, ARR = [1, 2, 5], K = 4 
+<strong>Output : </strong>false
+<strong>Explanation : </strong>Possible subsets and their sums: [1] → 1, [2] → 2, [5] → 5, [1,2] → 3, [1,5] → 6, [2,5] → 7, [1,2,5] → 8. None of them equal 4, so the answer is false.</p></pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Don’t jump directly to the solution, try it out yourself first. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                  Memorization Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<h3><strong>Why a Greedy Solution doesn’t work?</strong></h3>
+A Greedy Solution doesn’t make sense because we are not looking to optimize anything. We can rather try to generate all subsequences using recursion and whenever we get a single subsequence whose sum is equal to the given target, we can return true.<br/><br/>
+<strong>Note: </strong>Readers are highly advised to watch this video “<a href="https://www.youtube.com/watch?v=AxNNVECce8c" rel="noopener" target="_blank">Recursion on Subsequences</a>” to understand how we generate subsequences using recursion.<br/>
+<h3><strong>Steps to form the recursive solution: </strong></h3>
+We will first form the recursive solution by the three points mentioned in the <a href="https://takeuforward.org/data-structure/dynamic-programming-introduction/" rel="noopener" target="_blank">Dynamic Programming Introduction</a>. 
+<br/><br/>
+<strong>Express the problem in terms of indexes.</strong><br/>
+The array will have an index but there is one more parameter “target”. We are given the initial problem to find whether there exists in the whole array a subsequence whose sum is equal to the target.
+So, we can say that initially, we need to find(n-1, target) which means that we need to find whether there exists a subsequence in the array from index 0 to n-1, whose sum is equal to the target. Similarly, we can generalize it for an index.<br/><br/>
+<strong>Base Cases:</strong>
+<ul><li>If target == 0, it means that we have already found the subsequence from the previous steps, so we can return true.</li><li>If ind==0, it means we are at the first element, so we need to return arr[ind]==target. If the element is equal to the target we return true else false.</li></ul><br/>
+<strong>Try out all possible choices at a given index.</strong><br/>
+We need to generate all the subsequences. We will use the pick/non-pick technique as discussed in this video “<a href="https://www.youtube.com/watch?v=AxNNVECce8c" rel="noopener" target="_blank">Recursion on Subsequences</a>”.<br/><br/>
+<strong>We have two choices:</strong><br/>
+<ul><li><strong>Exclude the current element in the subsequence: </strong>We first try to find a subsequence without considering the current index element. For this, we will make a recursive call to f(ind-1,target).</li><li><strong>Include the current element in the subsequence:</strong> We will try to find a subsequence by considering the current index as element as part of subsequence. As we have included arr[ind], the updated target which we need to find in the rest if the array will be target - arr[ind]. Therefore, we will call f(ind-1,target-arr[ind]).</li></ul>
+<p><strong>Note: </strong>We will consider the current element in the subsequence only when the current element is less or equal to the target.</p>
+<strong>Return (taken || notTaken)</strong><br/>
+As we are looking for only one subset, if any of the one among taken or not taken returns true, we can return true from our function. Therefore, we return ‘or(||)’ of both of them.<br/>
+<p><strong>Steps to memoize a recursive solution:</strong></p>
+If we draw the recursion tree, we will see that there are overlapping subproblems. In order to convert a recursive solution the following steps will be taken:<br/>
+<ol><li>Create a dp array of size [n][k+1]. The size of the input array is ‘n’, so the index will always lie between ‘0’ and ‘n-1’. The target can take any value between ‘0’ and ‘k’. Therefore we take the dp array as dp[n][k+1]</li><li>We initialize the dp array to -1.</li><li>Whenever we want to find the answer of particular parameters (say f(ind,target)), we first check whether the answer is already calculated using the dp array(i.e dp[ind][target]!= -1 ). If yes, simply return the value from the dp array.</li><li>If not, then we are finding the answer for the given value for the first time, we will use the recursive relation as usual but before returning from the function, we will set dp[ind][target] to the solution we get.</li></ol>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Recursive helper function to check if a subset sum equals target
+    bool subsetSumUtil(int ind, int target, vector&lt;int&gt;&amp; arr, vector&lt;vector&lt;int&gt;&gt;&amp; dp) {
+        // Base case: target achieved
+        if (target == 0) return true;
+
+        // Base case: at the first index, check if it equals the target
+        if (ind == 0) return arr[0] == target;
+
+        // Check memoization table
+        if (dp[ind][target] != -1) return dp[ind][target];
+
+        // Choice 1: do not take the current element
+        bool notTaken = subsetSumUtil(ind - 1, target, arr, dp);
+
+        // Choice 2: take the current element if possible
+        bool taken = false;
+        if (arr[ind] &lt;= target) {
+            taken = subsetSumUtil(ind - 1, target - arr[ind], arr, dp);
+        }
+
+        // Store result in DP table
+        return dp[ind][target] = notTaken || taken;
+    }
+
+    // Main function to check if subset with sum = k exists
+    bool subsetSumToK(int n, int k, vector&lt;int&gt;&amp; arr) {
+        vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(k + 1, -1));
+        return subsetSumUtil(n - 1, k, arr, dp);
+    }
+};
+
+// Driver code
+int main() {
+    vector&lt;int&gt; arr = {1, 2, 3, 4};
+    int k = 4;
+    int n = arr.size();
+
+    Solution sol;
+    if (sol.subsetSumToK(n, k, arr))
+        cout &lt;&lt; "Subset with the given target found";
+    else
+        cout &lt;&lt; "Subset with the given target not found";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import.java.util.*;
+// Class containing the subset sum logic
+class Solution {
+    // Recursive helper with memoization
+    public boolean subsetSumUtil(int ind, int target, int[] arr, int[][] dp) {
+        // If target is achieved
+        if (target == 0) return true;
+
+        // Base case: at first index
+        if (ind == 0) return arr[0] == target;
+
+        // If already computed
+        if (dp[ind][target] != -1) return dp[ind][target] == 1;
+
+        // Choice 1: not take the element
+        boolean notTaken = subsetSumUtil(ind - 1, target, arr, dp);
+
+        // Choice 2: take the element if possible
+        boolean taken = false;
+        if (arr[ind] &lt;= target) {
+            taken = subsetSumUtil(ind - 1, target - arr[ind], arr, dp);
+        }
+
+        // Store in DP table (1 for true, 0 for false)
+        dp[ind][target] = (notTaken || taken) ? 1 : 0;
+        return notTaken || taken;
+    }
+
+    // Main function to call the helper
+    public boolean subsetSumToK(int n, int k, int[] arr) {
+        int[][] dp = new int[n][k + 1];
+        for (int[] row : dp) {
+            java.util.Arrays.fill(row, -1);
+        }
+        return subsetSumUtil(n - 1, k, arr, dp);
+    }
+}
+
+// Driver code
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 4};
+        int k = 4;
+        Solution sol = new Solution();
+
+        if (sol.subsetSumToK(arr.length, k, arr))
+            System.out.println("Subset with the given target found");
+        else
+            System.out.println("Subset with the given target not found");
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Recursive helper function with memoization
+    def subsetSumUtil(self, ind, target, arr, dp):
+        # Base case: target achieved
+        if target == 0:
+            return True
+
+        # Base case: first index check
+        if ind == 0:
+            return arr[0] == target
+
+        # If already computed
+        if dp[ind][target] != -1:
+            return dp[ind][target] == 1
+
+        # Choice 1: not take the element
+        notTaken = self.subsetSumUtil(ind - 1, target, arr, dp)
+
+        # Choice 2: take the element if possible
+        taken = False
+        if arr[ind] &lt;= target:
+            taken = self.subsetSumUtil(ind - 1, target - arr[ind], arr, dp)
+
+        # Store result
+        dp[ind][target] = 1 if (notTaken or taken) else 0
+        return notTaken or taken
+
+    # Main function to call the helper
+    def subsetSumToK(self, n, k, arr):
+        dp = [[-1] * (k + 1) for _ in range(n)]
+        return self.subsetSumUtil(n - 1, k, arr, dp)
+
+
+# Driver code
+if __name__ == "__main__":
+    arr = [1, 2, 3, 4]
+    k = 4
+    sol = Solution()
+
+    if sol.subsetSumToK(len(arr), k, arr):
+        print("Subset with the given target found")
+    else:
+        print("Subset with the given target not found")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Recursive helper with memoization
+    subsetSumUtil(ind, target, arr, dp) {
+        // Base case: target achieved
+        if (target === 0) return true;
+
+        // Base case: first index
+        if (ind === 0) return arr[0] === target;
+
+        // If already computed
+        if (dp[ind][target] !== -1) return dp[ind][target] === 1;
+
+        // Choice 1: not take the element
+        let notTaken = this.subsetSumUtil(ind - 1, target, arr, dp);
+
+        // Choice 2: take the element if possible
+        let taken = false;
+        if (arr[ind] &lt;= target) {
+            taken = this.subsetSumUtil(ind - 1, target - arr[ind], arr, dp);
+        }
+
+        // Store in DP
+        dp[ind][target] = (notTaken || taken) ? 1 : 0;
+        return notTaken || taken;
+    }
+
+    // Main function
+    subsetSumToK(n, k, arr) {
+        let dp = Array.from({ length: n }, () =&gt; Array(k + 1).fill(-1));
+        return this.subsetSumUtil(n - 1, k, arr, dp);
+    }
+}
+
+// Driver code
+const arr = [1, 2, 3, 4];
+const k = 4;
+const sol = new Solution();
+
+if (sol.subsetSumToK(arr.length, k, arr))
+    console.log("Subset with the given target found");
+else
+    console.log("Subset with the given target not found");
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity: O(N*K)</strong>,There are N*K states therefore at max ‘N*K’ new problems will be solved.</p>
+<p><strong>Space Complexity: O(N*K) + O(N)</strong>,We are using a recursion stack space(O(N)) and a 2D array ( O(N*K)).</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="better-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+          Tabulation Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<p><strong>Steps to convert Recursive Solution to Tabulation one.</strong></p>
+To convert the memoization approach to a tabulation one, create a dp array with the same size as done in memoization. We can set its type as bool and initialize it as false.
+
+
+First, we need to initialize the base conditions of the recursive solution.
+<ul><li>If target == 0, ind can take any value from 0 to n-1, therefore we need to set the value of the first column as true.</li></ul>
+
+
+<ul><li>The first row dp[0][] indicates that only the first element of the array is considered, therefore for the target value equal to arr[0], only cell with that target will be true, so explicitly set dp[0][arr[0]] =true, (dp[0][arr[0]] means that we are considering the first element of the array with the target equal to the first element itself). Please note that it can happen that arr[0]&gt;target, so we first check it: if(arr[0]&lt;=target) then set dp[0][arr[0]] = true. </li></ul>
+
+
+<ul><li>After that , we will set our nested for loops to traverse the dp array and following the logic discussed in the recursive approach, we will set the value of each cell. Instead of recursive calls, we will use the dp array itself.</li><li>At last we will return dp[n-1][k] as our answer.</li></ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/46494f441b023ebf.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/2362d70cb2b4012e.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/ce48f0ca84a2f2a6.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/46494f441b023ebf.png"/><img alt="Image 2" loading="lazy" src="../assets/img/2362d70cb2b4012e.png"/><img alt="Image 3" loading="lazy" src="../assets/img/ce48f0ca84a2f2a6.png"/></div></div>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to check if there is a subset of 'arr' with a sum equal to 'k'
+    bool subsetSumToK(int n, int k, vector&lt;int&gt; &amp;arr) {
+        // Initialize a 2D DP array with dimensions (n x k+1) to store subproblem results
+        vector&lt;vector&lt;bool&gt;&gt; dp(n, vector&lt;bool&gt;(k + 1, false));
+
+        // Base case: If the target sum is 0, we can always achieve it by taking no elements
+        for (int i = 0; i &lt; n; i++) {
+            dp[i][0] = true;
+        }
+
+        // Base case: If the first element of 'arr' is less than or equal to 'k', set dp[0][arr[0]] to true
+        if (arr[0] &lt;= k) {
+            dp[0][arr[0]] = true;
+        }
+
+        // Fill the DP array iteratively
+        for (int ind = 1; ind &lt; n; ind++) {
+            for (int target = 1; target &lt;= k; target++) {
+                // If we don't take the current element, the result is the same as the previous row
+                bool notTaken = dp[ind - 1][target];
+
+                // If we take the current element, subtract its value from the target and check the previous row
+                bool taken = false;
+                if (arr[ind] &lt;= target) {
+                    taken = dp[ind - 1][target - arr[ind]];
+                }
+
+                // Store the result in the DP array for the current subproblem
+                dp[ind][target] = notTaken || taken;
+            }
+        }
+
+        // The final result is stored in dp[n-1][k]
+        return dp[n - 1][k];
+    }
+};
+
+// Driver code
+int main() {
+    vector&lt;int&gt; arr = {1, 2, 3, 4};
+    int k = 4;
+    int n = arr.size();
+
+    Solution sol;
+    if (sol.subsetSumToK(n, k, arr))
+        cout &lt;&lt; "Subset with the given target found";
+    else
+        cout &lt;&lt; "Subset with the given target not found";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.Arrays;
+
+class Solution {
+    // Function to check if subset with sum k exists in arr
+    public boolean subsetSumToK(int n, int k, int[] arr) {
+        // Create DP table with n rows and k+1 columns, default false
+        boolean[][] dp = new boolean[n][k + 1];
+
+        // Base case: sum=0 can always be formed by empty subset
+        for (int i = 0; i &lt; n; i++) {
+            dp[i][0] = true;
+        }
+
+        // Base case: If first element &lt;= k, mark dp[0][arr[0]] true
+        if (arr[0] &lt;= k) {
+            dp[0][arr[0]] = true;
+        }
+
+        // Fill the DP table iteratively
+        for (int ind = 1; ind &lt; n; ind++) {
+            for (int target = 1; target &lt;= k; target++) {
+                // Option 1: Do not take the current element
+                boolean notTaken = dp[ind - 1][target];
+
+                // Option 2: Take current element if it does not exceed target
+                boolean taken = false;
+                if (arr[ind] &lt;= target) {
+                    taken = dp[ind - 1][target - arr[ind]];
+                }
+
+                // Mark current cell as true if either option is true
+                dp[ind][target] = notTaken || taken;
+            }
+        }
+
+        // Return whether sum k can be formed using all elements
+        return dp[n - 1][k];
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 4};
+        int k = 4;
+        Solution sol = new Solution();
+
+        if (sol.subsetSumToK(arr.length, k, arr)) {
+            System.out.println("Subset with the given target found");
+        } else {
+            System.out.println("Subset with the given target not found");
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    def subsetSumToK(self, n, k, arr):
+        # Initialize DP table with False values
+        dp = [[False] * (k + 1) for _ in range(n)]
+
+        # Base case: sum 0 can always be formed with empty subset
+        for i in range(n):
+            dp[i][0] = True
+
+        # Base case: if first element &lt;= k, set that position True
+        if arr[0] &lt;= k:
+            dp[0][arr[0]] = True
+
+        # Fill the DP table iteratively
+        for ind in range(1, n):
+            for target in range(1, k + 1):
+                # Option 1: not take current element
+                not_taken = dp[ind - 1][target]
+
+                # Option 2: take current element if possible
+                taken = False
+                if arr[ind] &lt;= target:
+                    taken = dp[ind - 1][target - arr[ind]]
+
+                # Current cell is True if either option is True
+                dp[ind][target] = not_taken or taken
+
+        # Final answer: can sum k be formed using all elements?
+        return dp[n - 1][k]
+
+
+# Driver code
+if __name__ == "__main__":
+    arr = [1, 2, 3, 4]
+    k = 4
+    n = len(arr)
+    sol = Solution()
+
+    if sol.subsetSumToK(n, k, ar
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to check if subset sum k exists in arr
+    subsetSumToK(n, k, arr) {
+        // Initialize 2D dp array with false
+        let dp = Array.from({ length: n }, () =&gt; Array(k + 1).fill(false));
+
+        // Base case: sum=0 is always possible (empty subset)
+        for (let i = 0; i &lt; n; i++) {
+            dp[i][0] = true;
+        }
+
+        // Base case: If first element &lt;= k, mark dp[0][arr[0]] true
+        if (arr[0] &lt;= k) {
+            dp[0][arr[0]] = true;
+        }
+
+        // Fill the DP table iteratively
+        for (let ind = 1; ind &lt; n; ind++) {
+            for (let target = 1; target &lt;= k; target++) {
+                // Option 1: not take current element
+                let notTaken = dp[ind - 1][target];
+
+                // Option 2: take current element if possible
+                let taken = false;
+                if (arr[ind] &lt;= target) {
+                    taken = dp[ind - 1][target - arr[ind]];
+                }
+
+                // Mark dp[ind][target] true if either is true
+                dp[ind][target] = notTaken || taken;
+            }
+        }
+
+        // Return whether sum k can be formed using all elements
+        return dp[n - 1][k];
+    }
+}
+
+// Driver code
+const arr = [1, 2, 3, 4];
+const k = 4;
+const sol = new Solution();
+
+if (sol.subsetSumToK(arr.length, k, arr)) {
+    console.log("Subset with the given target found");
+} else {
+    console.log("Subset with the given target not found");
+}
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity: O(N*K)</strong>,There are two nested loops</p>
+<p><strong>Space Complexity: O(N*K)</strong>, We are using an external array of size ‘N*K’. Stack Space is eliminated.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                 Space Optimization Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+If we closely look the relation,
+<p><strong>dp[ind][target] =  dp[ind-1][target] || dp[ind-1][target-arr[ind]]</strong></p>
+We see that to calculate a value of a cell of the dp array, we need only the previous row values (say prev). So, we don’t need to store an entire array. Hence we can space optimize it.
+<p><strong>Note: </strong>Whenever we create a new row ( say cur), we need to explicitly set its first element is true according to our base condition.</p>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to check if there is a subset of 'arr' with sum equal to 'k' using space optimization
+    bool subsetSumToK(int n, int k, vector&lt;int&gt; &amp;arr) {
+        // Initialize a vector 'prev' to represent the previous row of the DP table
+        vector&lt;bool&gt; prev(k + 1, false);
+
+        // Base case: sum 0 can always be formed by empty subset
+        prev[0] = true;
+
+        // Base case: if first element &lt;= k, mark true
+        if (arr[0] &lt;= k) {
+            prev[arr[0]] = true;
+        }
+
+        // Iterate over all elements from second to last
+        for (int ind = 1; ind &lt; n; ind++) {
+            vector&lt;bool&gt; cur(k + 1, false);
+            cur[0] = true; // sum 0 is always possible
+
+            for (int target = 1; target &lt;= k; target++) {
+                bool notTaken = prev[target]; // skip current element
+                bool taken = false;
+
+                if (arr[ind] &lt;= target) {
+                    taken = prev[target - arr[ind]]; // take current element
+                }
+
+                cur[target] = notTaken || taken; // store result for current target
+            }
+
+            prev = cur; // move to next iteration
+        }
+
+        // Final answer: can we form sum k using all elements?
+        return prev[k];
+    }
+};
+
+// Driver code
+int main() {
+    vector&lt;int&gt; arr = {1, 2, 3, 4};
+    int k = 4;
+    int n = arr.size();
+
+    Solution sol;
+    if (sol.subsetSumToK(n, k, arr))
+        cout &lt;&lt; "Subset with the given target found";
+    else
+        cout &lt;&lt; "Subset with the given target not found";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.Arrays;
+
+class Solution {
+    // Function to check if subset with sum k exists using space optimized DP
+    public boolean subsetSumToK(int n, int k, int[] arr) {
+        // Initialize previous row of DP table with false
+        boolean[] prev = new boolean[k + 1];
+
+        // Base case: sum 0 can always be formed with empty subset
+        prev[0] = true;
+
+        // Base case: if first element &lt;= k, mark true
+        if (arr[0] &lt;= k) {
+            prev[arr[0]] = true;
+        }
+
+        // Iterate over elements starting from second
+        for (int ind = 1; ind &lt; n; ind++) {
+            // Current row of DP table
+            boolean[] cur = new boolean[k + 1];
+            cur[0] = true; // sum 0 always possible
+
+            for (int target = 1; target &lt;= k; target++) {
+                // Option 1: not take current element
+                boolean notTaken = prev[target];
+
+                // Option 2: take current element if possible
+                boolean taken = false;
+                if (arr[ind] &lt;= target) {
+                    taken = prev[target - arr[ind]];
+                }
+
+                // Store true if either option is true
+                cur[target] = notTaken || taken;
+            }
+            // Move current row to previous for next iteration
+            prev = cur;
+        }
+
+        // Return if sum k is possible using all elements
+        return prev[k];
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 4};
+        int k = 4;
+        Solution sol = new Solution();
+
+        if (sol.subsetSumToK(arr.length, k, arr)) {
+            System.out.println("Subset with the given target found");
+        } else {
+            System.out.println("Subset with the given target not found");
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    def subsetSumToK(self, n, k, arr):
+        # Initialize previous DP row with False
+        prev = [False] * (k + 1)
+
+        # Base case: sum 0 can always be formed by empty subset
+        prev[0] = True
+
+        # Base case: if first element &lt;= k, mark True
+        if arr[0] &lt;= k:
+            prev[arr[0]] = True
+
+        # Iterate through elements starting from second
+        for ind in range(1, n):
+            cur = [False] * (k + 1)
+            cur[0] = True  # sum 0 is always possible
+
+            for target in range(1, k + 1):
+                not_taken = prev[target]  # without current element
+                taken = False
+
+                if arr[ind] &lt;= target:
+                    taken = prev[target - arr[ind]]  # with current element
+
+                # Mark True if any option is True
+                cur[target] = not_taken or taken
+
+            prev = cur  # move current row to prev for next iteration
+
+        # Final answer: can sum k be formed using all elements?
+        return prev[k]
+
+
+# Driver code
+if __name__ == "__main__":
+    arr = [1, 2, 3, 4]
+    k = 4
+    n = len(arr)
+    sol = Solution()
+
+    if sol.subsetSumToK(n, k, arr):
+        print("Subset with the given target found")
+    else:
+        print("Subset with the given target not found")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    subsetSumToK(n, k, arr) {
+        // Initialize previous DP row with false
+        let prev = Array(k + 1).fill(false);
+
+        // Base case: sum 0 is always possible (empty subset)
+        prev[0] = true;
+
+        // Base case: if first element &lt;= k, mark true
+        if (arr[0] &lt;= k) {
+            prev[arr[0]] = true;
+        }
+
+        // Iterate through elements starting from second
+        for (let ind = 1; ind &lt; n; ind++) {
+            let cur = Array(k + 1).fill(false);
+            cur[0] = true; // sum 0 is always possible
+
+            for (let target = 1; target &lt;= k; target++) {
+                let notTaken = prev[target]; // without current element
+                let taken = false;
+
+                if (arr[ind] &lt;= target) {
+                    taken = prev[target - arr[ind]]; // with current element
+                }
+
+                // Mark true if either option is true
+                cur[target] = notTaken || taken;
+            }
+
+            prev = cur; // move current to prev for next iteration
+        }
+
+        // Return if sum k is possible using all elements
+        return prev[k];
+    }
+}
+
+// Driver code
+const arr = [1, 2, 3, 4];
+const k = 4;
+const sol = new Solution();
+
+if (sol.subsetSumToK(arr.length, k, arr)) {
+    console.log("Subset with the given target found");
+} else {
+    console.log("Subset with the given target not found");
+}
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity: O(N*K)</strong>,There are three nested loops</p>
+<p><strong>Space Complexity: O(K)</strong>,We are using an external array of size ‘K+1’ to store only one row.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

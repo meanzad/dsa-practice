@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Minimum Insertions/Deletions to Convert String | (DP- 30)</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Minimum Insertions/Deletions to Convert String | (DP- 30)</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/minimum-insertions-deletions-to-convert-string-dp-30/</code></div>
+  <p><strong>Problem Statement: </strong> We are given two strings, str1 and str2. We are allowed the following operations:<br/>
+1. Delete any number of characters from string str1.<br/>2. Insert any number of characters in string str1.<br/>
+Return the minimum number of operations required to convert str1 to str2.
+</p>
+<p><strong>Pre-requisite: </strong><a href="https://takeuforward.org/data-structure/longest-common-subsequence-dp-25/" rel="noopener" target="_blank">Longest Common Subsequence</a></p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input:  str1 = "kitten", str2 = "sitting"</span>
+<span>Output: 5</span>
+<span>Explanation: To transform "kitten" to "sitting", delete "k" and insert "s" to get "sitten", then delete 'e' and insert "i" to get "sittin", and insert "g" at the end to get "sitting".</span>
+<p></p>
+<span>Input : str1 = "flaw", str2 = "lawn"</span>
+<span>Output: 2</span>
+<span>Explanation : To transform "flaw" to "lawn", delete "f" and insert "n" at the end. Hence minimum number of operations required is 2".</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/minimum-insertions-or-deletions-to-convert-string-a-to-b" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better.
+            It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Tabulation Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+  We need to find the minimum operations required to convert string str1 to str2. Let us keep the 'minimum' criteria aside and think, what maximum operations will be required for this conversion?<br/><br/>
+
+The easiest way is to remove all the characters of str1 and then insert all the characters of str2. In this way, we will convert str1 to str2 with total of ‘n+m’ operations (where n and m are the length of strings str1 and str2 respectively). 
+
+<p><img height="267" loading="lazy" src="../assets/img/9a80c998911eb543.png" width="494"/></p>
+To minimize the operations, we will first try to refrain from deleting those characters which are already present in str2. More extensively, we refrain from deleting those characters which are common and come in the same order. To minimize the operations, we would like to keep the maximum common characters coming in the same order intact. These maximum characters are the characters of the <strong>longest common subsequence</strong>. 
+<ul>
+<li>Keep all the characters of longest common subsequence in str1 and delete all the other characters.</li>
+<p><img height="225" loading="lazy" src="../assets/img/fb9e62a5429173ae.png" width="574"/></p>
+<li>Next, we will insert all the remaining characters of str2 to str1. </li>
+<p><img height="289" loading="lazy" src="../assets/img/480d5967f96680ff.png" width="542"/></p>
+</ul>
+In order to minimize the operations, we need to find the length of the longest common subsequence. <br/>Minimum Operations required = (n - k) + (m - k)<br/>
+Here n and m are the length of str1 and str2 respectively and k is the length of the longest common subsequence of str1 and str2.<p></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find minimum insertions/deletions
+    int minOperations(string s1, string s2) {
+        // Get lengths of both strings
+        int n = s1.length();
+        int m = s2.length();
+
+        // Create DP table of size (n+1) x (m+1)
+        vector&lt;vector&lt;int&gt;&gt; dp(n + 1, vector&lt;int&gt;(m + 1, 0));
+
+        // Fill the table using bottom-up approach
+        for (int i = 1; i &lt;= n; i++) {
+            for (int j = 1; j &lt;= m; j++) {
+                // If characters match, extend LCS
+                if (s1[i - 1] == s2[j - 1])
+                    dp[i][j] = 1 + dp[i - 1][j - 1];
+                else
+                    dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+            }
+        }
+
+        // Get LCS length
+        int lcs = dp[n][m];
+
+        // Return total operations = deletions + insertions
+        return (n - lcs) + (m - lcs);
+    }
+};
+
+int main() {
+    Solution sol;
+    string s1 = "heap", s2 = "pea";
+
+    // Call function and print result
+    cout &lt;&lt; "Minimum operations: " &lt;&lt; sol.minOperations(s1, s2) &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">public class Solution {
+    // Function to find minimum insertions/deletions
+    public int minOperations(String s1, String s2) {
+        // Get lengths of both strings
+        int n = s1.length();
+        int m = s2.length();
+
+        // Create DP table of size (n+1) x (m+1)
+        int[][] dp = new int[n + 1][m + 1];
+
+        // Fill the table using bottom-up approach
+        for (int i = 1; i &lt;= n; i++) {
+            for (int j = 1; j &lt;= m; j++) {
+                // If characters match, extend LCS
+                if (s1.charAt(i - 1) == s2.charAt(j - 1))
+                    dp[i][j] = 1 + dp[i - 1][j - 1];
+                else
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+            }
+        }
+
+        // Get LCS length
+        int lcs = dp[n][m];
+
+        // Return total operations = deletions + insertions
+        return (n - lcs) + (m - lcs);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        String s1 = "heap", s2 = "pea";
+
+        // Call function and print result
+        System.out.println("Minimum operations: " + sol.minOperations(s1, s2));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to find minimum insertions/deletions
+    def minOperations(self, s1, s2):
+        # Get lengths of both strings
+        n = len(s1)
+        m = len(s2)
+
+        # Create DP table of size (n+1) x (m+1)
+        dp = [[0] * (m + 1) for _ in range(n + 1)]
+
+        # Fill the table using bottom-up approach
+        for i in range(1, n + 1):
+            for j in range(1, m + 1):
+                # If characters match, extend LCS
+                if s1[i - 1] == s2[j - 1]:
+                    dp[i][j] = 1 + dp[i - 1][j - 1]
+                else:
+                    dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+
+        # Get LCS length
+        lcs = dp[n][m]
+
+        # Return total operations = deletions + insertions
+        return (n - lcs) + (m - lcs)
+
+# Driver code
+sol = Solution()
+s1 = "heap"
+s2 = "pea"
+
+# Call function and print result
+print("Minimum operations:", sol.minOperations(s1, s2))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find minimum insertions/deletions
+    minOperations(s1, s2) {
+        // Get lengths of both strings
+        const n = s1.length;
+        const m = s2.length;
+
+        // Create DP table of size (n+1) x (m+1)
+        const dp = Array.from({ length: n + 1 }, () =&gt; Array(m + 1).fill(0));
+
+        // Fill the table using bottom-up approach
+        for (let i = 1; i &lt;= n; i++) {
+            for (let j = 1; j &lt;= m; j++) {
+                // If characters match, extend LCS
+                if (s1[i - 1] === s2[j - 1]) {
+                    dp[i][j] = 1 + dp[i - 1][j - 1];
+                } else {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+
+        // Get LCS length
+        const lcs = dp[n][m];
+
+        // Return total operations = deletions + insertions
+        return (n - lcs) + (m - lcs);
+    }
+}
+
+// Driver code
+const sol = new Solution();
+const s1 = "heap";
+const s2 = "pea";
+
+// Call function and print result
+console.log("Minimum operations:", sol.minOperations(s1, s2));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N*M)</strong>, we fill the entire DP array of size N*M one by one.<br/>
+<strong>Space Complexity: O(N*M)</strong>, additional space used to store DP array.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Space Optimized Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+                        If we look closely, we are essentially using only two rows in our DP table: dp[ind-1][ ] and dp[ind][ ]. <br/>This means we don’t need to maintain the entire 2D array. Instead, we can optimize space by using two 1D arrays — prev and cur, where prev represents dp[ind-1] and cur represents dp[ind].<br/><br/>
+
+We can simply replace all instances of dp[ind-1] with prev, and dp[ind] with cur. After completing each inner iteration, we can update prev = cur so that the current row becomes the previous row for the next step.<p></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Class containing the solution
+class Solution {
+public:
+    // Function to calculate minimum operations
+    int minOperations(string s1, string s2) {
+        // Get the lengths of both strings
+        int n = s1.size(), m = s2.size();
+
+        // Create two 1D DP arrays
+        vector&lt;int&gt; prev(m + 1, 0), cur(m + 1, 0);
+
+        // Iterate through each character of s1
+        for (int i = 1; i &lt;= n; i++) {
+
+            // Iterate through each character of s2
+            for (int j = 1; j &lt;= m; j++) {
+
+                // If characters match, increment LCS length
+                if (s1[i - 1] == s2[j - 1])
+                    cur[j] = 1 + prev[j - 1];
+
+                // Else, take max from left or top
+                else
+                    cur[j] = max(prev[j], cur[j - 1]);
+            }
+
+            // Update prev row to current
+            prev = cur;
+        }
+
+        // Calculate total operations
+        int lcs = prev[m];
+        return (n - lcs) + (m - lcs);
+    }
+};
+
+// Main function
+int main() {
+    // Input strings
+    string s1 = "heap", s2 = "pea";
+
+    // Create object of Solution
+    Solution obj;
+
+    // Call function and print result
+    cout &lt;&lt; obj.minOperations(s1, s2) &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">// Class containing the solution
+class Solution {
+    // Function to calculate minimum operations
+    public int minOperations(String s1, String s2) {
+        // Get lengths of both strings
+        int n = s1.length(), m = s2.length();
+
+        // Create two DP arrays
+        int[] prev = new int[m + 1];
+        int[] cur = new int[m + 1];
+
+        // Loop through characters of s1
+        for (int i = 1; i &lt;= n; i++) {
+
+            // Loop through characters of s2
+            for (int j = 1; j &lt;= m; j++) {
+
+                // If characters match, increment LCS
+                if (s1.charAt(i - 1) == s2.charAt(j - 1))
+                    cur[j] = 1 + prev[j - 1];
+
+                // Else, take max from left or top
+                else
+                    cur[j] = Math.max(prev[j], cur[j - 1]);
+            }
+
+            // Update prev with cur
+            prev = cur.clone();
+        }
+
+        // Calculate total operations
+        int lcs = prev[m];
+        return (n - lcs) + (m - lcs);
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+        // Input strings
+        String s1 = "heap", s2 = "pea";
+
+        // Create object of Solution
+        Solution obj = new Solution();
+
+        // Call function and print result
+        System.out.println(obj.minOperations(s1, s2));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Class containing the solution
+class Solution:
+    # Function to calculate minimum operations
+    def minOperations(self, s1: str, s2: str) -&gt; int:
+        # Get lengths of strings
+        n, m = len(s1), len(s2)
+
+        # Initialize DP rows
+        prev = [0] * (m + 1)
+        cur = [0] * (m + 1)
+
+        # Loop through characters of s1
+        for i in range(1, n + 1):
+
+            # Loop through characters of s2
+            for j in range(1, m + 1):
+
+                # If characters match
+                if s1[i - 1] == s2[j - 1]:
+                    cur[j] = 1 + prev[j - 1]
+
+                # Else take max
+                else:
+                    cur[j] = max(prev[j], cur[j - 1])
+
+            # Update prev to cur
+            prev = cur[:]
+
+        # Calculate result
+        lcs = prev[m]
+        return (n - lcs) + (m - lcs)
+
+# Driver code
+s1 = "heap"
+s2 = "pea"
+obj = Solution()
+print(obj.minOperations(s1, s2))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Class containing the solution
+class Solution {
+    // Function to calculate minimum operations
+    minOperations(s1, s2) {
+        // Get lengths of strings
+        const n = s1.length, m = s2.length;
+
+        // Initialize DP rows
+        let prev = new Array(m + 1).fill(0);
+        let cur = new Array(m + 1).fill(0);
+
+        // Loop through characters of s1
+        for (let i = 1; i &lt;= n; i++) {
+
+            // Loop through characters of s2
+            for (let j = 1; j &lt;= m; j++) {
+
+                // If characters match
+                if (s1[i - 1] === s2[j - 1])
+                    cur[j] = 1 + prev[j - 1];
+
+                // Else take max
+                else
+                    cur[j] = Math.max(prev[j], cur[j - 1]);
+            }
+
+            // Update prev to cur
+            prev = [...cur];
+        }
+
+        // Calculate result
+        const lcs = prev[m];
+        return (n - lcs) + (m - lcs);
+    }
+}
+
+// Driver code
+const s1 = "heap";
+const s2 = "pea";
+const obj = new Solution();
+console.log(obj.minOperations(s1, s2));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N*M)</strong>, we fill the entire DP array of size N*M one by one.<br/>
+<strong>Space Complexity: O(M)</strong>, we are using an external array of size ‘M+1’ to store only two rows.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

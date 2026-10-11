@@ -1,0 +1,823 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Buy and Sell Stocks With Cooldown | (DP - 39)</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Buy and Sell Stocks With Cooldown | (DP - 39)</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/buy-and-sell-stocks-with-cooldown-dp-39/</code></div>
+  <p>We are given an array Arr[] of length n. It represents the price of a stock on ‘n’ days. The following guidelines need to be followed:</p>
+
+<ol><li>We can <a href="https://takeuforward.org/data-structure/stock-buy-and-sell/" rel="noopener" target="_blank" title="buy and sell the stock">buy and sell the stock</a> any number of times.</li><li>In order to sell the stock, we need to first buy it on the same or any previous day.</li><li>We can’t buy a stock again after buying it once. In other words, we first buy a stock and then sell it. After selling we can buy and sell again. But we can’t sell before buying and can’t buy before selling any previously bought stock.</li><li>We can’t buy a stock on the very next day of selling it. This is the <strong>cooldown</strong> clause.</li></ol>
+
+
+<p><img height="457" loading="lazy" src="../assets/img/54837627c37652d2.png" width="481"/></p>
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+Examples
+</strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Arr=[4,9, 0, 4, 10]
+N=5
+Max Profit=11 ((9-4)+(10-4))
+Explanation: Buy the stock on 0th day at a price of 4 and sell on the 1st day with a price of 9, then again buy stock at 3rd day at a price of 4 and sell the stock at 4th day at the price of 10
+
+<p><img height="457" loading="lazy" src="../assets/img/cdd2ea005234db19.png" width="481"/></p>
+</pre>
+</div>
+</details>
+</div>
+
+
+
+<div class="practice">
+<span><strong>Practice: </strong></span>
+<div class="problem-buttons">
+
+<span>Solve Problem</span>
+<img alt="code-studio" loading="lazy" src="../assets/img/66297b3c5a7813f2.png"/>
+</div>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/best-time-to-buy-and-sell-stock-with-cooldown" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+
+<div class="horizontal_navbar_dsa_article">
+<div class="grid_container_three">
+<a class="three-boxes box-a" href="#brute-force-approach">
+Memoization approach
+</a>
+<a class="three-boxes box-b" href="#better-approach">
+Tabulation approach
+</a>
+<a class="three-boxes box-c" href="#optimal-approach">
+Space Optimization
+</a>
+<a class="three-boxes box-d" href="#dsa_article_video_explanation">
+<svg fill="none" height="26" viewbox="0 0 20 14" width="26" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 10L13.19 7L8 4V10ZM19.56 2.17C19.69 2.64 19.78 3.27 19.84 4.07C19.91 4.87 19.94 5.56 19.94 6.16L20 7C20 9.19 19.84 10.8 19.56 11.83C19.31 12.73 18.73 13.31 17.83 13.56C17.36 13.69 16.5 13.78 15.18 13.84C13.88 13.91 12.69 13.94 11.59 13.94L10 14C5.81 14 3.2 13.84 2.17 13.56C1.27 13.31 0.69 12.73 0.44 11.83C0.31 11.36 0.22 10.73 0.16 9.93C0.0900001 9.13 0.0599999 8.44 0.0599999 7.84L0 7C0 4.81 0.16 3.2 0.44 2.17C0.69 1.27 1.27 0.69 2.17 0.44C2.64 0.31 3.5 0.22 4.82 0.16C6.12 0.0899998 7.31 0.0599999 8.41 0.0599999L10 0C14.19 0 16.8 0.16 17.83 0.44C18.73 0.69 19.31 1.27 19.56 2.17Z" fill="red"></path>
+</svg>
+</a>
+<div class="box-e tooltip">
+<svg fill="none" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.842 9.25L11.9577 10.17C11.2502 10.89 10.8081 11.5 10.8081 13H8.84297V12.5C8.84297 11.39 9.28511 10.39 9.99255 9.67L11.2109 8.41C11.5745 8.05 11.7906 7.55 11.7906 7C11.7906 6.46957 11.5836 5.96086 11.2151 5.58579C10.8465 5.21071 10.3467 5 9.82552 5C9.30434 5 8.80451 5.21071 8.43598 5.58579C8.06745 5.96086 7.86041 6.46957 7.86041 7H5.89531C5.89531 5.93913 6.30938 4.92172 7.04644 4.17157C7.7835 3.42143 8.78316 3 9.82552 3C10.8679 3 11.8675 3.42143 12.6046 4.17157C13.3417 4.92172 13.7557 5.93913 13.7557 7C13.7543 7.84324 13.4259 8.65183 12.842 9.25ZM10.8081 17H8.84297V15H10.8081M9.82552 0C8.53521 0 7.25754 0.258658 6.06545 0.761205C4.87337 1.26375 3.79021 2.00035 2.87783 2.92893C1.03519 4.8043 0 7.34784 0 10C0 12.6522 1.03519 15.1957 2.87783 17.0711C3.79021 17.9997 4.87337 18.7362 6.06545 19.2388C7.25754 19.7413 8.53521 20 9.82552 20C12.4314 20 14.9306 18.9464 16.7732 17.0711C18.6158 15.1957 19.651 12.6522 19.651 10C19.651 4.47 15.2296 0 9.82552 0Z" fill="black"></path>
+</svg>
+<div class="bottom">
+<p>Expand any one approach by clicking the given options in the bar. Clicking one approach on bar,
+closes all other expands. You can manually expand more than one approach at a time</p>
+<i></i>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+Memoization Approach
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+Algorithm / Intuition
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<p>Each day, we can either do nothing or make a buy/sell decision based on previous actions. Since future profits depend on today’s choice, we explore all possibilities using recursion.</p>
+<h3><strong>Approach:</strong></h3>
+<ul>
+<li>We look at one day at a time.</li>
+<li>We track whether we’re allowed to buy or sell that day.</li>
+</ul>
+<h4><strong>When buying is allowed:</strong></h4>
+<ul>
+<li>Option 1: Skip the day and decide again tomorrow.</li>
+<li>Option 2: Buy today, spend money, and move forward with a plan to sell later.</li>
+</ul>
+<h4><strong>When selling is allowed:</strong></h4>
+<ul>
+<li>Option 1: Skip the day and keep holding the stock.</li>
+<li>Option 2: Sell today, earn money, and skip the next day due to cooldown before buying again.</li>
+</ul>
+<h3><strong>Memoization:</strong></h3>
+<ul>
+<li>Store results to avoid recalculating the same case.</li>
+<li>Before calculating for a specific day and action, check if the answer is already saved.</li>
+<li>If saved, reuse it. If not, compute and store it for future use.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+class Solution{
+int getAns(vector&lt;int&gt; Arr, int ind, int buy, int n, vector&lt;vector&lt;int&gt;&gt; &amp;dp) {
+    // Base case: If we've reached the end of the array, return 0 profit.
+    if (ind &gt;= n) return 0;
+    
+    // Check if the result is already computed
+    if (dp[ind][buy] != -1)
+        return dp[ind][buy];
+        
+    int profit;
+    
+    if (buy == 0) { // We can buy the stock
+        profit = max(0 + getAns(Arr, ind + 1, 0, n, dp), -Arr[ind] + getAns(Arr, ind + 1, 1, n, dp));
+    }
+    
+    if (buy == 1) { // We can sell the stock
+        profit = max(0 + getAns(Arr, ind + 1, 1, n, dp), Arr[ind] + getAns(Arr, ind + 2, 0, n, dp));
+    }
+    
+    // Store the result in the DP array and return
+    return dp[ind][buy] = profit;
+}
+
+int stockProfit(vector&lt;int&gt; &amp;Arr) {
+    int n = Arr.size();
+    vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(2, -1));
+    
+    int ans = getAns(Arr, 0, 0, n, dp);
+    return ans;
+}
+
+int main() {
+    vector&lt;int&gt; prices {4, 9, 0, 4, 10};
+                                 
+    cout &lt;&lt; "The maximum profit that can be generated is " &lt;&lt; stockProfit(prices) &lt;&lt; endl;
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Recursive function to calculate the maximum profit
+    static int getAns(int[] Arr, int ind, int buy, int n, int[][] dp) {
+        // Base case
+        if (ind &gt;= n) {
+            return 0;
+        }
+
+        // If the result is already calculated, return it
+        if (dp[ind][buy] != -1) {
+            return dp[ind][buy];
+        }
+
+        int profit = 0;
+
+        if (buy == 0) { // We can buy the stock
+            profit = Math.max(0 + getAns(Arr, ind + 1, 0, n, dp),
+                    -Arr[ind] + getAns(Arr, ind + 1, 1, n, dp));
+        }
+
+        if (buy == 1) { // We can sell the stock
+            profit = Math.max(0 + getAns(Arr, ind + 1, 1, n, dp),
+                    Arr[ind] + getAns(Arr, ind + 2, 0, n, dp));
+        }
+
+        // Store the result in dp and return it
+        dp[ind][buy] = profit;
+        return profit;
+    }
+
+    static int stockProfit(int[] Arr) {
+        int n = Arr.length;
+        int[][] dp = new int[n][2];
+        
+        // Initialize dp array with -1 to mark states as not calculated yet
+        for (int[] row : dp) {
+            Arrays.fill(row, -1);
+        }
+
+        int ans = getAns(Arr, 0, 0, n, dp);
+        return ans;
+    }
+
+    public static void main(String args[]) {
+        int prices[] = {4, 9, 0, 4, 10};
+
+        System.out.println("The maximum profit that can be generated is " + stockProfit(prices));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">
+class Solution:
+def get_max_profit(prices, ind, buy, n, dp):
+    # Base case: if we reach the end of the array
+    if ind &gt;= n:
+        return 0
+
+    # Check if the result is already calculated
+    if dp[ind][buy] != -1:
+        return dp[ind][buy]
+
+    # Initialize profit
+    profit = 0
+
+    if buy == 0:  # We can buy the stock
+        profit = max(
+            0 + get_max_profit(prices, ind + 1, 0, n, dp),
+            -prices[ind] + get_max_profit(prices, ind + 1, 1, n, dp)
+        )
+
+    if buy == 1:  # We can sell the stock
+        profit = max(
+            0 + get_max_profit(prices, ind + 1, 1, n, dp),
+            prices[ind] + get_max_profit(prices, ind + 2, 0, n, dp)
+        )
+
+    # Memoize the result and return
+    dp[ind][buy] = profit
+    return profit
+
+
+def stock_profit(prices):
+    n = len(prices)
+    dp = [[-1 for _ in range(2)] for _ in range(n)]
+
+    ans = get_max_profit(prices, 0, 0, n, dp)
+    return ans
+
+
+if __name__ == "__main__":
+    prices = [4, 9, 0, 4, 10]
+
+    result = stock_profit(prices)
+    print(f"The maximum profit that can be generated is {result}")</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">
+class Solution{
+function getAns(Arr, ind, buy, n, dp) {
+    // Base case: if the index is greater than or equal to n, return 0
+    if (ind &gt;= n) return 0;
+
+    // Check if the result is already computed and stored in dp
+    if (dp[ind][buy] !== -1) return dp[ind][buy];
+
+    let profit;
+
+    if (buy === 0) { // We can buy the stock
+        profit = Math.max(
+            0 + getAns(Arr, ind + 1, 0, n, dp),
+            -Arr[ind] + getAns(Arr, ind + 1, 1, n, dp)
+        );
+    }
+
+    if (buy === 1) { // We can sell the stock
+        profit = Math.max(
+            0 + getAns(Arr, ind + 1, 1, n, dp),
+            Arr[ind] + getAns(Arr, ind + 2, 0, n, dp)
+        );
+    }
+
+    // Store the result in dp and return it
+    dp[ind][buy] = profit;
+    return profit;
+}
+
+function stockProfit(Arr) {
+    const n = Arr.length;
+    // Create a 2D dp array filled with -1 to store computed results
+    const dp = new Array(n).fill().map(() =&gt; new Array(2).fill(-1));
+
+    // Call the recursive function to compute the maximum profit
+    const ans = getAns(Arr, 0, 0, n, dp);
+    return ans;
+}
+
+// Main function
+function main() {
+    const prices = [4, 9, 0, 4, 10];
+
+    const result = stockProfit(prices);
+    console.log("The maximum profit that can be generated is", result);
+}
+
+// Call the main function
+main();</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+Complexity Analysis
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p>Time Complexity: O(N*2). There are N*2 states therefore at max ‘N*2’ new problems will be solved and we are running a for loop for ‘N’ times to calculate the total sum. </p>
+<p>Space Complexity: O(N*2) + O(N). We are using a recursion stack space(O(N)) and a 2D array O(N*2).</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="better-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+Tabulation Approach
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+Algorithm
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<p>To convert the memoization approach into tabulation, we create a 2D array just like before. This time, instead of recursion, we fill the array from the end toward the start.</p>
+<ul>
+<li>Create a 2D array with rows equal to the number of days + 1, and two columns for the buy/sell state.</li>
+<li>Initialize the last row with 0s since there’s no profit after all days are done.</li>
+</ul>
+
+
+
+<p><img height="457" loading="lazy" src="../assets/img/c78c9a2b1c0db3f5.png" width="481"/></p>
+<ul>
+<li>Use two nested loops:
+    <ul>
+<li>The outer loop goes backward from the last day to the first.</li>
+<li>The inner loop switches between the buy and sell states.</li>
+</ul>
+</li>
+</ul>
+
+
+
+<p><img height="457" loading="lazy" src="../assets/img/8d83aaf814155f00.png" width="481"/></p>
+<ul>
+<li>In each loop step, calculate values using the same logic from memoization.</li>
+<li>Final answer is stored at the start of the array, representing the first day with the right to buy.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+class Solution{
+int stockProfit(vector&lt;int&gt; &amp;Arr) {
+    int n = Arr.size();
+    // Create a 2D DP array with dimensions (n+2) x 2, initialized to 0
+    vector&lt;vector&lt;int&gt;&gt; dp(n + 2, vector&lt;int&gt;(2, 0));
+    
+    // Loop through the stock prices from the end to the beginning
+    for (int ind = n - 1; ind &gt;= 0; ind--) {
+        for (int buy = 0; buy &lt;= 1; buy++) {
+            int profit;
+
+            if (buy == 0) { // We can buy the stock
+                profit = max(0 + dp[ind + 1][0], -Arr[ind] + dp[ind + 1][1]);
+            }
+
+            if (buy == 1) { // We can sell the stock
+                profit = max(0 + dp[ind + 1][1], Arr[ind] + dp[ind + 2][0]);
+            }
+
+            // Store the computed profit in the DP array
+            dp[ind][buy] = profit;
+        }
+    }
+
+    return dp[0][0];
+}
+
+int main() {
+    vector&lt;int&gt; prices {4, 9, 0, 4, 10};
+                                 
+    cout &lt;&lt; "The maximum profit that can be generated is " &lt;&lt; stockProfit(prices) &lt;&lt; endl;
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to calculate the maximum profit from stock trading
+    static int stockProfit(int[] Arr) {
+        int n = Arr.length;
+        int dp[][] = new int[n + 2][2];
+        
+        // Iterate through the array backwards
+        for (int ind = n - 1; ind &gt;= 0; ind--) {
+            for (int buy = 0; buy &lt;= 1; buy++) {
+                int profit = 0;
+
+                if (buy == 0) { // We can buy the stock
+                    profit = Math.max(0 + dp[ind + 1][0], -Arr[ind] + dp[ind + 1][1]);
+                }
+
+                if (buy == 1) { // We can sell the stock
+                    profit = Math.max(0 + dp[ind + 1][1], Arr[ind] + dp[ind + 2][0]);
+                }
+
+                dp[ind][buy] = profit;
+            }
+        }
+
+        // The maximum profit is stored in dp[0][0]
+        return dp[0][0];
+    }
+
+    public static void main(String args[]) {
+        int prices[] = {4, 9, 0, 4, 10};
+
+        System.out.println("The maximum profit that can be generated is " + stockProfit(prices));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">
+class Solution:
+def stock_profit(prices):
+    n = len(prices)
+    
+    # Create a 2D dp array of size [n+2][2] initialized to 0
+    dp = [[0 for _ in range(2)] for _ in range(n + 2)]
+
+    for ind in range(n - 1, -1, -1):
+        for buy in range(2):
+            profit = 0
+
+            if buy == 0:  # We can buy the stock
+                profit = max(
+                    0 + dp[ind + 1][0],
+                    -prices[ind] + dp[ind + 1][1]
+                )
+
+            if buy == 1:  # We can sell the stock
+                profit = max(
+                    0 + dp[ind + 1][1],
+                    prices[ind] + dp[ind + 2][0]
+                )
+
+            dp[ind][buy] = profit
+
+    return dp[0][0]
+
+
+if __name__ == "__main__":
+    prices = [4, 9, 0, 4, 10]
+
+    result = stock_profit(prices)
+    print(f"The maximum profit that can be generated is {result}")</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">
+class Solution{
+function stockProfit(Arr) {
+    const n = Arr.length;
+    // Create a 2D dp array of size (n+2) x 2 filled with 0s
+    const dp = new Array(n + 2).fill().map(() =&gt; new Array(2).fill(0));
+
+    // Loop through the prices in reverse order
+    for (let ind = n - 1; ind &gt;= 0; ind--) {
+        for (let buy = 0; buy &lt;= 1; buy++) {
+            let profit;
+
+            if (buy === 0) { // We can buy the stock
+                profit = Math.max(
+                    0 + dp[ind + 1][0],
+                    -Arr[ind] + dp[ind + 1][1]
+                );
+            }
+
+            if (buy === 1) { // We can sell the stock
+                profit = Math.max(
+                    0 + dp[ind + 1][1],
+                    Arr[ind] + dp[ind + 2][0]
+                );
+            }
+
+            dp[ind][buy] = profit;
+        }
+    }
+
+    // Return the maximum profit that can be generated
+    return dp[0][0];
+}
+
+// Main function
+function main() {
+    const prices = [4, 9, 0, 4, 10];
+
+    const result = stockProfit(prices);
+    console.log("The maximum profit that can be generated is", result);
+}
+
+// Call the main function
+main();</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+Complexity Analysis
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p>Time Complexity: O(N*2). There are two nested loops that account for O(N*2) complexity.</p>
+<p>Space Complexity: O(N*2). We are using an external array of size ‘N*2’. Stack Space is eliminated.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+Space Optimization Approach
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+Algorithm
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<p>When we look carefully at the pattern, we find that to make a decision for today, we only need the results of the next one or two days.</p>
+<p>This means we don’t need to remember all the past results  just the most recent two outcomes. So, instead of keeping a big table, we can reduce it to only a few values.</p>
+
+
+
+<p><img height="457" loading="lazy" src="../assets/img/7d3ea120a24e6b5a.png" width="481"/></p>
+<ul>
+<li>We start by assuming that after the final day, no more profit can be made.</li>
+<li>Then we go backward, one day at a time, deciding what action would give the best result based on the next few days.</li>
+<li>For each step, we only keep the results from the two upcoming days and use them to calculate the best choice for today.</li>
+<li>Once today’s decision is done, we shift the stored values to prepare for the next step.</li>
+<li>At the end, the answer lies in the final calculated value.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+class Solution{
+int stockProfit(vector&lt;int&gt; &amp;Arr) {
+    int n = Arr.size();
+    
+    // Initialize three arrays to track the maximum profit for buying and selling
+    vector&lt;int&gt; cur(2, 0);       // Current maximum profit
+    vector&lt;int&gt; front1(2, 0);    // Maximum profit one step ahead
+    vector&lt;int&gt; front2(2, 0);    // Maximum profit two steps ahead
+    
+    for (int ind = n - 1; ind &gt;= 0; ind--) {
+        for (int buy = 0; buy &lt;= 1; buy++) {
+            int profit;
+
+            if (buy == 0) { // We can buy the stock
+                profit = max(0 + front1[0], -Arr[ind] + front1[1]);
+            }
+
+            if (buy == 1) { // We can sell the stock
+                profit = max(0 + front1[1], Arr[ind] + front2[0]);
+            }
+            
+            cur[buy] = profit;
+        }
+        
+        // Update the 'front1' and 'front2' arrays with current values
+        front2 = front1;
+        front1 = cur;
+    }
+    
+    return cur[0]; // Return the maximum profit for buying.
+}
+
+int main() {
+    vector&lt;int&gt; prices {4, 9, 0, 4, 10};
+                                 
+    cout &lt;&lt; "The maximum profit that can be generated is " &lt;&lt; stockProfit(prices) &lt;&lt; endl;
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution{
+    // Function to calculate the maximum profit from stock trading
+    static int stockProfit(int[] Arr) {
+        int n = Arr.length;
+        int[] cur = new int[2];
+        int[] front1 = new int[2];
+        int[] front2 = new int[2];
+        
+        // Iterate through the array backwards
+        for (int ind = n - 1; ind &gt;= 0; ind--) {
+            for (int buy = 0; buy &lt;= 1; buy++) {
+                int profit = 0;
+
+                if (buy == 0) { // We can buy the stock
+                    profit = Math.max(0 + front1[0], -Arr[ind] + front1[1]);
+                }
+
+                if (buy == 1) { // We can sell the stock
+                    profit = Math.max(0 + front1[1], Arr[ind] + front2[0]);
+                }
+
+                cur[buy] = profit;
+            }
+
+            // Update front1 and front2 arrays
+            System.arraycopy(front1, 0, front2, 0, 2);
+            System.arraycopy(cur, 0, front1, 0, 2);
+        }
+
+        // The maximum profit is stored in cur[0]
+        return cur[0];
+    }
+
+    public static void main(String args[]) {
+        int prices[] = {4, 9, 0, 4, 10};
+
+        System.out.println("The maximum profit that can be generated is " + stockProfit(prices));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">
+class Solution:
+def stock_profit(prices):
+    n = len(prices)
+    
+    # Initialize three lists to track the profit states
+    cur = [0, 0]
+    front1 = [0, 0]
+    front2 = [0, 0]
+
+    for ind in range(n - 1, -1, -1):
+        for buy in range(2):
+            profit = 0
+
+            if buy == 0:  # We can buy the stock
+                profit = max(
+                    0 + front1[0],
+                    -prices[ind] + front1[1]
+                )
+
+            if buy == 1:  # We can sell the stock
+                profit = max(
+                    0 + front1[1],
+                    prices[ind] + front2[0]
+                )
+
+            cur[buy] = profit
+
+        # Update the 'front' lists for the next iteration
+        front2 = front1.copy()
+        front1 = cur.copy()
+
+    return cur[0]
+
+
+if __name__ == "__main__":
+    prices = [4, 9, 0, 4, 10]
+
+    result = stock_profit(prices)
+    print(f"The maximum profit that can be generated is {result}")</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">
+class Solution{
+function stockProfit(Arr) {
+    const n = Arr.length;
+    // Create arrays to represent the current and two front state arrays, each initialized to [0, 0]
+    let cur = [0, 0];
+    let front1 = [0, 0];
+    let front2 = [0, 0];
+
+    // Loop through the prices in reverse order
+    for (let ind = n - 1; ind &gt;= 0; ind--) {
+        for (let buy = 0; buy &lt;= 1; buy++) {
+            let profit;
+
+            if (buy === 0) { // We can buy the stock
+                profit = Math.max(
+                    0 + front1[0],
+                    -Arr[ind] + front1[1]
+                );
+            }
+
+            if (buy === 1) { // We can sell the stock
+                profit = Math.max(
+                    0 + front1[1],
+                    Arr[ind] + front2[0]
+                );
+            }
+
+            cur[buy] = profit;
+        }
+
+        // Update front2 and front1 arrays for the next iteration
+        front2 = [...front1];
+        front1 = [...cur];
+    }
+
+    // Return the maximum profit that can be generated
+    return cur[0];
+}
+
+// Main function
+function main() {
+    const prices = [4, 9, 0, 4, 10];
+
+    const result = stockProfit(prices);
+    console.log("The maximum profit that can be generated is", result);
+}
+
+// Call the main function
+main();</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+Complexity Analysis
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p>Time Complexity: O(N*2). There are two nested loops that account for O(N*2) complexity</p>
+<p>Space Complexity: O(1). We are using three external arrays of size ‘2’. </p>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

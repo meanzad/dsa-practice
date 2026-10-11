@@ -1,0 +1,972 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Construct a BST from Preorder Traversal</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Construct a BST from Preorder Traversal</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/blogs/data-structure-and-algorithm/construct-a-bst-from-preorder-traversal</code></div>
+  <div class="ArticleParser-module__R__VNG__article" data-article-segment="html-0"><p>Given an array <code>preorder</code> that represents the preorder traversal of a Binary Search Tree, construct the BST and return its root. In preorder traversal, nodes are visited in this order:</p><ul><li><p>Root</p></li><li><p>Left subtree</p></li><li><p>Right subtree</p></li></ul><p>In a BST, every value in the left subtree is smaller than the root, and every value in the right subtree is greater than the root.</p></div><div><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 1</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input: </strong>array = [8, 5, 1, 7, 10, 12]</p><p><strong>Output: </strong>tree generated</p><img alt="Example 1" loading="lazy" src="../assets/img/fd8974029dba1da6.webp" title="Example 1"/><p><strong>Explanation: </strong>In preorder (Root -&gt;Left -&gt;Right), the first value <strong>8</strong> is the tree root.</p><ul><li><p>BST rules state all smaller values go left and all larger values go right, splitting the rest into left subtree <strong>[5, 1, 7]</strong> and right subtree <strong>[10, 12]</strong>.</p></li><li><p>Applying the same logic recursively:</p><ul><li><p>For <strong>[5, 1, 7]</strong>: <strong>5</strong> is the root, <strong>1</strong> is smaller (left child), and <strong>7</strong> is larger (right child).</p></li><li><p>For <strong>[10, 12]</strong>: <strong>10</strong> is the root, there are no smaller values (no left child), and <strong>12</strong> is larger (right child).</p></li></ul></li></ul></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 2</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> array = [10, 4, 1, 6, 15, 20]</p><p><strong>Output:</strong> tree generated</p><img alt="Example 2" loading="lazy" src="../assets/img/6e7f0f877f9fe3f5.webp" title="Example 2"/><p><strong>Explanation:</strong> In preorder (Root -&gt; Left -&gt; Right), the first value 10 is the tree root.</p><p>BST rules state all smaller values go left and all larger values go right, splitting the rest into left subtree [4, 1, 6] and right subtree [15, 20]. Applying the same logic recursively: For [4, 1, 6]: 4 is the root, 1 is smaller (left child), and 6 is larger (right child). For [15, 20]: 15 is the root, there are no smaller values (no left child), and 20 is larger (right child).</p></div></div></section></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-2"><h2 id="blog-toc-brute-force-approach">Brute Force Approach</h2><p>The most direct idea is to rebuild the BST in the same order in which preorder gives the values.</p><p>Preorder visits a node before its children, so the first value is the root. After that, every next value can simply be inserted into the BST using the normal BST insertion rule.</p><p>If the value is smaller than the current node, move left. If it is greater, move right. Eventually an empty position is found, and the value is placed there.</p><p>This works because inserting values one by one into an empty BST using the given preorder order creates the same BST. The only drawback is that the tree can become skewed, and insertion may take linear time for many nodes.</p><h3 id="blog-toc-algorithm">Algorithm</h3><ul><li><p>Start with an empty root because no node has been created yet.</p></li><li><p>Traverse every value in <code>preorder</code> from left to right. This is done because preorder already gives the root before its subtree nodes.</p></li><li><p>Insert each value into the BST using the normal BST rule. If the value is smaller, it must go somewhere in the left subtree; if it is greater, it must go somewhere in the right subtree.</p></li><li><p>When an empty position is reached, create a new node there because that is the correct place for the current value.</p></li><li><p>After all values are inserted, return the root of the constructed BST.</p></li></ul><h3 id="blog-toc-dry-run">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Construct BST from Preorder Traversal Brute Dry Run" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/36062b332431e0cc.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Construct BST from Preorder Traversal Brute Dry Run</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-3"><h3 id="blog-toc-solution">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+
+    TreeNode(int value) {
+        val = value;
+        left = nullptr;
+        right = nullptr;
+    }
+};
+
+class Solution {
+private:
+    // Inserts one value into the BST and returns the subtree root.
+    TreeNode* insertNode(TreeNode* root, int value) {
+        // An empty position is the correct place for the new value.
+        if (root == nullptr) {
+            return new TreeNode(value);
+        }
+
+        // Smaller values must be placed somewhere in the left subtree.
+        if (value &lt; root-&gt;val) {
+            root-&gt;left = insertNode(root-&gt;left, value);
+        }
+        // Greater values must be placed somewhere in the right subtree.
+        else if (value &gt; root-&gt;val) {
+            root-&gt;right = insertNode(root-&gt;right, value);
+        }
+
+        return root;
+    }
+
+    // Prints inorder traversal of the constructed BST.
+    void printInorder(TreeNode* root) {
+        // Empty subtree has nothing to print.
+        if (root == nullptr) {
+            return;
+        }
+
+        printInorder(root-&gt;left);
+        cout &lt;&lt; root-&gt;val &lt;&lt; " ";
+        printInorder(root-&gt;right);
+    }
+
+public:
+    /*
+    Builds a BST by inserting preorder values
+    one by one using the normal BST rule.
+    */
+    TreeNode* bstFromPreorder(vector&lt;int&gt;&amp; preorder) {
+        // Stores the root of the BST built so far.
+        TreeNode* root = nullptr;
+
+        for (int value : preorder) {
+            root = insertNode(root, value);
+        }
+
+        return root;
+    }
+
+    // Prints inorder traversal of the constructed BST.
+    void printTree(TreeNode* root) {
+        printInorder(root);
+    }
+};
+
+// Driver code starts
+int main() {
+    vector&lt;int&gt; preorder = {8, 5, 1, 7, 10, 12};
+
+    Solution obj;
+    TreeNode* root = obj.bstFromPreorder(preorder);
+
+    obj.printTree(root);
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">from typing import List, Optional
+
+
+class TreeNode:
+    # Creates a tree node with left and right child links.
+    def __init__(self, val: int) -&gt; None:
+        self.val: int = val
+        self.left: Optional["TreeNode"] = None
+        self.right: Optional["TreeNode"] = None
+
+
+class Solution:
+    # Inserts one value into the BST and returns the subtree root.
+    def insert_node(
+        self,
+        root: Optional[TreeNode],
+        value: int
+    ) -&gt; TreeNode:
+        # An empty position is the correct place for the new value.
+        if root is None:
+            return TreeNode(value)
+
+        # Smaller values must be placed somewhere in the left subtree.
+        if value &lt; root.val:
+            root.left = self.insert_node(root.left, value)
+        # Greater values must be placed somewhere in the right subtree.
+        elif value &gt; root.val:
+            root.right = self.insert_node(root.right, value)
+
+        return root
+
+    """
+    Builds a BST by inserting preorder values
+    one by one using the normal BST rule.
+    """
+    def bst_from_preorder(self, preorder: List[int]) -&gt; Optional[TreeNode]:
+        # Stores the root of the BST built so far.
+        root: Optional[TreeNode] = None
+
+        for value in preorder:
+            root = self.insert_node(root, value)
+
+        return root
+
+    # Prints inorder traversal of the constructed BST.
+    def print_inorder(self, root: Optional[TreeNode]) -&gt; None:
+        # Empty subtree has nothing to print.
+        if root is None:
+            return
+
+        self.print_inorder(root.left)
+        print(root.val, end=" ")
+        self.print_inorder(root.right)
+
+
+# Driver code starts
+def main() -&gt; None:
+    preorder: List[int] = [8, 5, 1, 7, 10, 12]
+
+    obj = Solution()
+    root = obj.bst_from_preorder(preorder)
+
+    obj.print_inorder(root)
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode(int value) {
+        val = value;
+        left = null;
+        right = null;
+    }
+}
+
+class Solution {
+    // Inserts one value into the BST and returns the subtree root.
+    private TreeNode insertNode(TreeNode root, int value) {
+        // An empty position is the correct place for the new value.
+        if (root == null) {
+            return new TreeNode(value);
+        }
+
+        // Smaller values must be placed somewhere in the left subtree.
+        if (value &lt; root.val) {
+            root.left = insertNode(root.left, value);
+        }
+        // Greater values must be placed somewhere in the right subtree.
+        else if (value &gt; root.val) {
+            root.right = insertNode(root.right, value);
+        }
+
+        return root;
+    }
+
+    // Prints inorder traversal of the constructed BST.
+    private void printInorder(TreeNode root) {
+        // Empty subtree has nothing to print.
+        if (root == null) {
+            return;
+        }
+
+        printInorder(root.left);
+        System.out.print(root.val + " ");
+        printInorder(root.right);
+    }
+
+    /*
+    Builds a BST by inserting preorder values
+    one by one using the normal BST rule.
+    */
+    public TreeNode bstFromPreorder(int[] preorder) {
+        // Stores the root of the BST built so far.
+        TreeNode root = null;
+
+        for (int value : preorder) {
+            root = insertNode(root, value);
+        }
+
+        return root;
+    }
+
+    // Prints inorder traversal of the constructed BST.
+    public void printTree(TreeNode root) {
+        printInorder(root);
+    }
+}
+
+public class Main {
+    // Driver code starts
+    public static void main(String[] args) {
+        int[] preorder = {8, 5, 1, 7, 10, 12};
+
+        Solution obj = new Solution();
+        TreeNode root = obj.bstFromPreorder(preorder);
+
+        obj.printTree(root);
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class TreeNode {
+    constructor(value) {
+        this.val = value;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class Solution {
+    // Inserts one value into the BST and returns the subtree root.
+    insertNode(root, value) {
+        // An empty position is the correct place for the new value.
+        if (root === null) {
+            return new TreeNode(value);
+        }
+
+        // Smaller values must be placed somewhere in the left subtree.
+        if (value &lt; root.val) {
+            root.left = this.insertNode(root.left, value);
+        }
+        // Greater values must be placed somewhere in the right subtree.
+        else if (value &gt; root.val) {
+            root.right = this.insertNode(root.right, value);
+        }
+
+        return root;
+    }
+
+    /*
+    Builds a BST by inserting preorder values
+    one by one using the normal BST rule.
+    */
+    bstFromPreorder(preorder) {
+        // Stores the root of the BST built so far.
+        let root = null;
+
+        for (const value of preorder) {
+            root = this.insertNode(root, value);
+        }
+
+        return root;
+    }
+
+    // Prints inorder traversal of the constructed BST.
+    printInorder(root) {
+        // Empty subtree has nothing to print.
+        if (root === null) {
+            return;
+        }
+
+        this.printInorder(root.left);
+        process.stdout.write(root.val + " ");
+        this.printInorder(root.right);
+    }
+
+    // Prints inorder traversal of the constructed BST.
+    printTree(root) {
+        this.printInorder(root);
+    }
+}
+
+// Driver code starts
+function main() {
+    const preorder = [8, 5, 1, 7, 10, 12];
+
+    const obj = new Solution();
+    const root = obj.bstFromPreorder(preorder);
+
+    obj.printTree(root);
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-4"><h3 id="blog-toc-complexity-analysis">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(N<sup>2</sup>), N is the number of nodes in tree, in the worst case because the BST can become skewed, and each insertion may take <code>O(N)</code> time.</p><p><strong>Space Complexity:</strong> <code>O(H)</code>, where <code>H</code> is the height of the BST due to recursive insertion calls. In the worst case, it can be <code>O(N)</code>.</p></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-5"><h2 id="blog-toc-better-approach">Better Approach</h2><p>In preorder traversal, the first value of any subtree is its root.</p><p>Now apply the BST property. In the preorder segment for a subtree, all values smaller than the root belong to the left subtree. Once a value greater than the root appears, the right subtree starts.</p><p>For example, in <code>[8, 5, 1, 7, 10, 12]</code>, root is <code>8</code>. Values <code>5, 1, 7</code> are smaller than <code>8</code>, so they belong to the left subtree. The first greater value is <code>10</code>, so the right subtree starts there.</p><p>This gives a clean recursive split.</p><p>The small improvement is to find this split point using binary search. The whole segment is not sorted, but the condition <code>value &gt; root</code> changes only once: first all left-subtree values are smaller than root, then all right-subtree values are greater than root.</p><p>So binary search can find the first value greater than the root.</p><h3 id="blog-toc-algorithm-2">Algorithm</h3></div><div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-6"><ul><li><p>Treat the current preorder range as one subtree. This is useful because preorder keeps each subtree's nodes together.</p></li><li><p>The first value of the range becomes the root because preorder always visits root first.</p></li><li><p>Use binary search to find the first value greater than the root. This split point is needed because smaller values form the left subtree and greater values form the right subtree.</p></li><li><p>Recursively build the left subtree from the values before the split point.</p></li><li><p>Recursively build the right subtree from the values from the split point onward.</p></li><li><p>Return the root after connecting both subtrees.</p></li></ul><h3 id="blog-toc-dry-run-2">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Construct BST from Preorder Traversal Better Dry Run" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/1f58f4ee6b7ecc80.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Construct BST from Preorder Traversal Better Dry Run</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-7"><h3 id="blog-toc-solution-2">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+
+    TreeNode(int value) {
+        val = value;
+        left = nullptr;
+        right = nullptr;
+    }
+};
+
+class Solution {
+private:
+    // Builds the BST from preorder values inside one range.
+    TreeNode* build(vector&lt;int&gt;&amp; preorder, int start, int end) {
+        // No values are left in this range, so no subtree exists.
+        if (start &gt; end) {
+            return nullptr;
+        }
+
+        // The first value of this range is the subtree root.
+        TreeNode* root = new TreeNode(preorder[start]);
+
+        // Defines the search space for the first greater value.
+        int left = start + 1;
+        int right = end + 1;
+
+        while (left &lt; right) {
+            int mid = left + (right - left) / 2;
+
+            // A greater middle value may be the first right-subtree value.
+            if (preorder[mid] &gt; root-&gt;val) {
+                right = mid;
+            }
+            // A smaller middle value still belongs to the left subtree.
+            else {
+                left = mid + 1;
+            }
+        }
+
+        // Marks where the right subtree begins.
+        int splitIndex = left;
+
+        root-&gt;left = build(preorder, start + 1, splitIndex - 1);
+        root-&gt;right = build(preorder, splitIndex, end);
+
+        return root;
+    }
+
+    // Prints inorder traversal of the constructed BST.
+    void printInorder(TreeNode* root) {
+        // Empty subtree has nothing to print.
+        if (root == nullptr) {
+            return;
+        }
+
+        printInorder(root-&gt;left);
+        cout &lt;&lt; root-&gt;val &lt;&lt; " ";
+        printInorder(root-&gt;right);
+    }
+
+public:
+    /*
+    Builds a BST by using binary search
+    to split each preorder range.
+    */
+    TreeNode* bstFromPreorder(vector&lt;int&gt;&amp; preorder) {
+        return build(preorder, 0, (int)preorder.size() - 1);
+    }
+
+    // Prints inorder traversal of the constructed BST.
+    void printTree(TreeNode* root) {
+        printInorder(root);
+    }
+};
+
+// Driver code starts
+int main() {
+    vector&lt;int&gt; preorder = {8, 5, 1, 7, 10, 12};
+
+    Solution obj;
+    TreeNode* root = obj.bstFromPreorder(preorder);
+
+    obj.printTree(root);
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">from typing import List, Optional
+
+class TreeNode:
+    # Creates a tree node with left and right child links.
+    def __init__(self, val: int) -&gt; None:
+        self.val: int = val
+        self.left: Optional["TreeNode"] = None
+        self.right: Optional["TreeNode"] = None
+
+
+class Solution:
+    # Builds the BST from preorder values inside one range.
+    def build(
+        self,
+        preorder: List[int],
+        start: int,
+        end: int
+    ) -&gt; Optional[TreeNode]:
+        # No values are left in this range, so no subtree exists.
+        if start &gt; end:
+            return None
+
+        # The first value of this range is the subtree root.
+        root = TreeNode(preorder[start])
+
+        # Defines the search space for the first greater value.
+        left: int = start + 1
+        right: int = end + 1
+
+        while left &lt; right:
+            mid: int = left + (right - left) // 2
+
+            # A greater middle value may be the first right-subtree value.
+            if preorder[mid] &gt; root.val:
+                right = mid
+            # A smaller middle value still belongs to the left subtree.
+            else:
+                left = mid + 1
+
+        # Marks where the right subtree begins.
+        split_index: int = left
+
+        root.left = self.build(preorder, start + 1, split_index - 1)
+        root.right = self.build(preorder, split_index, end)
+
+        return root
+
+    """
+    Builds a BST by using binary search
+    to split each preorder range.
+    """
+    def bst_from_preorder(self, preorder: List[int]) -&gt; Optional[TreeNode]:
+        return self.build(preorder, 0, len(preorder) - 1)
+
+    # Prints inorder traversal of the constructed BST.
+    def print_inorder(self, root: Optional[TreeNode]) -&gt; None:
+        # Empty subtree has nothing to print.
+        if root is None:
+            return
+
+        self.print_inorder(root.left)
+        print(root.val, end=" ")
+        self.print_inorder(root.right)
+
+    # Prints inorder traversal of the constructed BST.
+    def print_tree(self, root: Optional[TreeNode]) -&gt; None:
+        self.print_inorder(root)
+
+
+# Driver code starts
+def main() -&gt; None:
+    preorder: List[int] = [8, 5, 1, 7, 10, 12]
+
+    obj = Solution()
+    root = obj.bst_from_preorder(preorder)
+
+    obj.print_tree(root)
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode(int value) {
+        val = value;
+        left = null;
+        right = null;
+    }
+}
+
+class Solution {
+    // Builds the BST from preorder values inside one range.
+    private TreeNode build(int[] preorder, int start, int end) {
+        // No values are left in this range, so no subtree exists.
+        if (start &gt; end) {
+            return null;
+        }
+
+        // The first value of this range is the subtree root.
+        TreeNode root = new TreeNode(preorder[start]);
+
+        // Defines the search space for the first greater value.
+        int left = start + 1;
+        int right = end + 1;
+
+        while (left &lt; right) {
+            int mid = left + (right - left) / 2;
+
+            // A greater middle value may be the first right-subtree value.
+            if (preorder[mid] &gt; root.val) {
+                right = mid;
+            }
+            // A smaller middle value still belongs to the left subtree.
+            else {
+                left = mid + 1;
+            }
+        }
+
+        // Marks where the right subtree begins.
+        int splitIndex = left;
+
+        root.left = build(preorder, start + 1, splitIndex - 1);
+        root.right = build(preorder, splitIndex, end);
+
+        return root;
+    }
+
+    // Prints inorder traversal of the constructed BST.
+    private void printInorder(TreeNode root) {
+        // Empty subtree has nothing to print.
+        if (root == null) {
+            return;
+        }
+
+        printInorder(root.left);
+        System.out.print(root.val + " ");
+        printInorder(root.right);
+    }
+
+    /*
+    Builds a BST by using binary search
+    to split each preorder range.
+    */
+    public TreeNode bstFromPreorder(int[] preorder) {
+        return build(preorder, 0, preorder.length - 1);
+    }
+
+    // Prints inorder traversal of the constructed BST.
+    public void printTree(TreeNode root) {
+        printInorder(root);
+    }
+}
+
+public class Main {
+    // Driver code starts
+    public static void main(String[] args) {
+        int[] preorder = {8, 5, 1, 7, 10, 12};
+
+        Solution obj = new Solution();
+        TreeNode root = obj.bstFromPreorder(preorder);
+
+        obj.printTree(root);
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class TreeNode {
+    constructor(value) {
+        this.val = value;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class Solution {
+    // Builds the BST from preorder values inside one range.
+    build(preorder, start, end) {
+        // No values are left in this range, so no subtree exists.
+        if (start &gt; end) {
+            return null;
+        }
+
+        // The first value of this range is the subtree root.
+        const root = new TreeNode(preorder[start]);
+
+        // Defines the search space for the first greater value.
+        let left = start + 1;
+        let right = end + 1;
+
+        while (left &lt; right) {
+            const mid = left + Math.floor((right - left) / 2);
+
+            // A greater middle value may be the first right-subtree value.
+            if (preorder[mid] &gt; root.val) {
+                right = mid;
+            }
+            // A smaller middle value still belongs to the left subtree.
+            else {
+                left = mid + 1;
+            }
+        }
+
+        // Marks where the right subtree begins.
+        const splitIndex = left;
+
+        root.left = this.build(preorder, start + 1, splitIndex - 1);
+        root.right = this.build(preorder, splitIndex, end);
+
+        return root;
+    }
+
+    /*
+    Builds a BST by using binary search
+    to split each preorder range.
+    */
+    bstFromPreorder(preorder) {
+        return this.build(preorder, 0, preorder.length - 1);
+    }
+
+    // Prints inorder traversal of the constructed BST.
+    printInorder(root) {
+        // Empty subtree has nothing to print.
+        if (root === null) {
+            return;
+        }
+
+        this.printInorder(root.left);
+        process.stdout.write(root.val + " ");
+        this.printInorder(root.right);
+    }
+
+    // Prints inorder traversal of the constructed BST.
+    printTree(root) {
+        this.printInorder(root);
+    }
+}
+
+// Driver code starts
+function main() {
+    const preorder = [8, 5, 1, 7, 10, 12];
+
+    const obj = new Solution();
+    const root = obj.bstFromPreorder(preorder);
+
+    obj.printTree(root);
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-8"><h3 id="blog-toc-complexity-analysis-2">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(N log N)</code>, N is the number of nodes in tree, in the worst case because each node is created once, and each recursive call uses binary search to find the split point.</p><p><strong>Space Complexity:</strong> <code>O(H)</code>, where <code>H</code> is the height of the constructed BST. In the worst case, it can be <code>O(N)</code>.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-9"><h2 id="blog-toc-optimal-approach">Optimal Approach</h2><p>The previous approach keeps scanning to find where the left subtree ends. A better thought is: why search for the split again and again when the valid range of each subtree already tells the story?</p><p>For any node in a BST:</p><ul><li><p>Its left subtree can only contain values smaller than that node.</p></li><li><p>Its right subtree can only contain values greater than that node.</p></li></ul><p>So while reading preorder from left to right, keep a valid range for the current subtree. If the next value fits in that range, it belongs here. If it does not fit, that subtree is finished, and the value should be used by some ancestor's right subtree.</p><p>The index moves forward only when a node is actually created. That is the key reason this approach becomes linear.</p><h3 id="blog-toc-algorithm-3">Algorithm</h3><ul><li><p>Keep one index that points to the next unused value in <code>preorder</code>. This avoids slicing arrays or rechecking old values.</p></li><li><p>Start with the widest possible range, because the root can be any valid value.</p></li><li><p>For each recursive call, check whether the next preorder value fits inside the allowed range. This check is needed because each subtree can only accept values allowed by its ancestors.</p></li><li><p>If the value does not fit, return <code>null</code> without moving the index. This is important because the value may belong to another subtree that will be built later.</p></li><li><p>If the value fits, create a node and move the index forward because this value has now been consumed.</p></li><li><p>Build the left subtree with an upper bound equal to the current node's value, then build the right subtree with a lower bound equal to the current node's value.</p></li><li><p>Return the node after both subtrees are connected.</p></li></ul><h3 id="blog-toc-dry-run-3">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Construct BST from Preorder Traversal Optimal Dry Run" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/583bedb829db5cf6.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Construct BST from Preorder Traversal Optimal Dry Run</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-10"><h3 id="blog-toc-solution-3">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+
+    TreeNode(int value) {
+        val = value;
+        left = nullptr;
+        right = nullptr;
+    }
+};
+
+class Solution {
+private:
+    // Builds the subtree whose values must stay inside the given bounds.
+    TreeNode* build(vector&lt;int&gt;&amp; preorder, int&amp; index, long long lower, long long upper) {
+        // All preorder values are already used, so there is no subtree left.
+        if (index &gt;= (int)preorder.size()) {
+            return nullptr;
+        }
+
+        // Stores the next value that has not been used yet.
+        int value = preorder[index];
+
+        // A value outside the range belongs to another subtree.
+        if (value &lt;= lower || value &gt;= upper) {
+            return nullptr;
+        }
+
+        // The value fits this range, so it becomes the current root.
+        TreeNode* root = new TreeNode(value);
+
+        // Move forward because this value is now used.
+        index++;
+
+        root-&gt;left = build(preorder, index, lower, value);
+        root-&gt;right = build(preorder, index, value, upper);
+
+        return root;
+    }
+
+    // Prints inorder traversal of the constructed BST.
+    void printInorder(TreeNode* root) {
+        // Empty subtree has nothing to print.
+        if (root == nullptr) {
+            return;
+        }
+
+        printInorder(root-&gt;left);
+        cout &lt;&lt; root-&gt;val &lt;&lt; " ";
+        printInorder(root-&gt;right);
+    }
+
+public:
+    /*
+    Builds a BST by consuming preorder values
+    only when they fit the current valid range.
+    */
+    TreeNode* bstFromPreorder(vector&lt;int&gt;&amp; preorder) {
+        // Points to the next preorder value that still needs placement.
+        int index = 0;
+
+        return build(preorder, index, LLONG_MIN, LLONG_MAX);
+    }
+
+    // Prints inorder traversal of the constructed BST.
+    void printTree(TreeNode* root) {
+        printInorder(root);
+    }
+};
+
+// Driver code starts
+int main() {
+    vector&lt;int&gt; preorder = {8, 5, 1, 7, 10, 12};
+
+    Solution obj;
+    TreeNode* root = obj.bstFromPreorder(preorder);
+
+    obj.printTree(root);
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">from typing import List, Optional
+
+
+class TreeNode:
+    # Creates a tree node with left and right child links.
+    def __init__(self, val: int) -&gt; None:
+        self.val: int = val
+        self.left: Optional["TreeNode"] = None
+        self.right: Optional["TreeNode"] = None
+
+
+class Solution:
+    # Builds the subtree whose values must stay inside the given bounds.
+    def build(
+        self,
+        preorder: List[int],
+        lower: float,
+        upper: float
+    ) -&gt; Optional[TreeNode]:
+        # All preorder values are already used, so there is no subtree left.
+        if self.index &gt;= len(preorder):
+            return None
+
+        # Stores the next value that has not been used yet.
+        value: int = preorder[self.index]
+
+        # A value outside the range belongs to another subtree.
+        if value &lt;= lower or value &gt;= upper:
+            return None
+
+        # The value fits this range, so it becomes the current root.
+        root = TreeNode(value)
+
+        # Move forward because this value is now used.
+        self.index += 1
+
+        root.left = self.build(preorder, lower, value)
+        root.right = self.build(preorder, value, upper)
+
+        return root
+
+    """
+    Builds a BST by consuming preorder values
+    only when they fit the current valid range.
+    """
+    def bst_from_preorder(self, preorder: List[int]) -&gt; Optional[TreeNode]:
+        # Points to the next preorder value that still needs placement.
+        self.index: int = 0
+
+        return self.build(preorder, float("-inf"), float("inf"))
+
+    # Prints inorder traversal of the constructed BST.
+    def print_inorder(self, root: Optional[TreeNode]) -&gt; None:
+        # Empty subtree has nothing to print.
+        if root is None:
+            return
+
+        self.print_inorder(root.left)
+        print(root.val, end=" ")
+        self.print_inorder(root.right)
+
+    # Prints inorder traversal of the constructed BST.
+    def print_tree(self, root: Optional[TreeNode]) -&gt; None:
+        self.print_inorder(root)
+
+
+# Driver code starts
+def main() -&gt; None:
+    preorder: List[int] = [8, 5, 1, 7, 10, 12]
+
+    obj = Solution()
+    root = obj.bst_from_preorder(preorder)
+
+    obj.print_tree(root)
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode(int value) {
+        val = value;
+        left = null;
+        right = null;
+    }
+}
+
+class Solution {
+    private int index;
+
+    // Builds the subtree whose values must stay inside the given bounds.
+    private TreeNode build(int[] preorder, long lower, long upper) {
+        // All preorder values are already used, so there is no subtree left.
+        if (index &gt;= preorder.length) {
+            return null;
+        }
+
+        // Stores the next value that has not been used yet.
+        int value = preorder[index];
+
+        // A value outside the range belongs to another subtree.
+        if (value &lt;= lower || value &gt;= upper) {
+            return null;
+        }
+
+        // The value fits this range, so it becomes the current root.
+        TreeNode root = new TreeNode(value);
+
+        // Move forward because this value is now used.
+        index++;
+
+        root.left = build(preorder, lower, value);
+        root.right = build(preorder, value, upper);
+
+        return root;
+    }
+
+    // Prints inorder traversal of the constructed BST.
+    private void printInorder(TreeNode root) {
+        // Empty subtree has nothing to print.
+        if (root == null) {
+            return;
+        }
+
+        printInorder(root.left);
+        System.out.print(root.val + " ");
+        printInorder(root.right);
+    }
+
+    /*
+    Builds a BST by consuming preorder values
+    only when they fit the current valid range.
+    */
+    public TreeNode bstFromPreorder(int[] preorder) {
+        // Points to the next preorder value that still needs placement.
+        index = 0;
+
+        return build(preorder, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+    // Prints inorder traversal of the constructed BST.
+    public void printTree(TreeNode root) {
+        printInorder(root);
+    }
+}
+
+public class Main {
+    // Driver code starts
+    public static void main(String[] args) {
+        int[] preorder = {8, 5, 1, 7, 10, 12};
+
+        Solution obj = new Solution();
+        TreeNode root = obj.bstFromPreorder(preorder);
+
+        obj.printTree(root);
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class TreeNode {
+    constructor(value) {
+        this.val = value;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class Solution {
+    // Builds the subtree whose values must stay inside the given bounds.
+    build(preorder, lower, upper) {
+        // All preorder values are already used, so there is no subtree left.
+        if (this.index &gt;= preorder.length) {
+            return null;
+        }
+
+        // Stores the next value that has not been used yet.
+        const value = preorder[this.index];
+
+        // A value outside the range belongs to another subtree.
+        if (value &lt;= lower || value &gt;= upper) {
+            return null;
+        }
+
+        // The value fits this range, so it becomes the current root.
+        const root = new TreeNode(value);
+
+        // Move forward because this value is now used.
+        this.index++;
+
+        root.left = this.build(preorder, lower, value);
+        root.right = this.build(preorder, value, upper);
+
+        return root;
+    }
+
+    /*
+    Builds a BST by consuming preorder values
+    only when they fit the current valid range.
+    */
+    bstFromPreorder(preorder) {
+        // Points to the next preorder value that still needs placement.
+        this.index = 0;
+
+        return this.build(
+            preorder,
+            Number.NEGATIVE_INFINITY,
+            Number.POSITIVE_INFINITY
+        );
+    }
+
+    // Prints inorder traversal of the constructed BST.
+    printInorder(root) {
+        // Empty subtree has nothing to print.
+        if (root === null) {
+            return;
+        }
+
+        this.printInorder(root.left);
+        process.stdout.write(root.val + " ");
+        this.printInorder(root.right);
+    }
+
+    // Prints inorder traversal of the constructed BST.
+    printTree(root) {
+        this.printInorder(root);
+    }
+}
+
+// Driver code starts
+function main() {
+    const preorder = [8, 5, 1, 7, 10, 12];
+
+    const obj = new Solution();
+    const root = obj.bstFromPreorder(preorder);
+
+    obj.printTree(root);
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-11"><h3 id="blog-toc-complexity-analysis-3">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(N)</code> because each value is consumed exactly once.</p><p><strong>Space Complexity:</strong> <code>O(H)</code>, where <code>H</code> is the height of the BST due to recursion. In the worst case, it can be <code>O(N)</code>.</p></div><div><section aria-label="Interview follow-up Questions" class="BlogDetail-module__HEfJva__faqSection" id="blog-toc-faqs"><h2 class="BlogDetail-module__HEfJva__faqHeading">Interview follow-up Questions</h2><div class="flex w-full flex-col BlogDetail-module__HEfJva__faqList" data-orientation="vertical" data-slot="accordion"><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="open"><h3 class="flex" data-orientation="vertical" data-state="open"></h3><div aria-labelledby="radix-_R_1lkqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="open" id="radix-_R_9lkqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"><div class="h-auto pt-0 pb-2.5 [&amp;_a]:underline [&amp;_a]:underline-offset-3 [&amp;_a]:hover:text-foreground [&amp;_p:not(:last-child)]:mb-4 BlogDetail-module__HEfJva__faqAnswer"><p>Preorder traversal visits the root first, then the left subtree, then the right subtree. So in any subtree's preorder segment, the first value is always that subtree's root.</p></div></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_2lkqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_alkqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_3lkqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_blkqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_4lkqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_clkqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div></div></section></div>
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

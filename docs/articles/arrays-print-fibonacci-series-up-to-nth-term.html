@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Print Fibonacci Series up to Nth term</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Print Fibonacci Series up to Nth term</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/arrays/print-fibonacci-series-up-to-nth-term/</code></div>
+  <p><strong>Problem Statement: </strong>Given an integer N. Print the Fibonacci series up to the Nth term.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input: N = 5
+Output: 0 1 1 2 3 5
+Explanation: 0 1 1 2 3 5 is the fibonacci series up to 5th term.(0 based indexing)
+
+Example 2:
+Input: 6
+Output: 0 1 1 2 3 5 8
+Explanation: 0 1 1 2 3 5 8 is the fibonacci series upto 6th term.(o based indexing)
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Brute Force
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<h2>Intuition</h2>
+<p>As we know fib(i) = fib(i-1) + fib(i-2).Simply iterate and go on calculating the ith term in the series.</p>
+<h2>Approach</h2>
+<ul>
+<li>Take an array say fib of size n+1.The 0th term and 1st term are 0 and 1 respectively.So fib(0)=0 and fib(1)=1.</li>
+<li>Now iterate from 2 to n and calculate fib(n).fib(n)=fib(n-1) + fib(n-2).</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+int main() {
+    int n = 5;
+
+    // Edge case: if n is 0, print only 0
+    if (n == 0) {
+        cout &lt;&lt; 0;
+    }
+    // Special case: if n is 1, print first two Fibonacci numbers
+    else if (n == 1) {
+        cout &lt;&lt; 0 &lt;&lt; " " &lt;&lt; 1 &lt;&lt; "\n";
+    }
+    // General case: generate and print Fibonacci series up to nth term
+    else {
+        int fib[n + 1];    // Array to store Fibonacci numbers up to index n
+        fib[0] = 0;
+        fib[1] = 1;
+
+        // Fill the Fibonacci series using bottom-up dynamic programming
+        for (int i = 2; i &lt;= n; i++) {
+            fib[i] = fib[i - 1] + fib[i - 2];
+        }
+
+        cout &lt;&lt; "The Fibonacci Series up to " &lt;&lt; n &lt;&lt; "th term:" &lt;&lt; endl;
+        for (int i = 0; i &lt;= n; i++) {
+            cout &lt;&lt; fib[i] &lt;&lt; " ";
+        }
+    }
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">public class Fibonacci {
+
+    public static void main(String[] args) {
+        int n = 5;
+
+        // Edge case: if n is 0, print only 0
+        if (n == 0) {
+            System.out.println(0);
+        }
+        // Special case: if n is 1, print first two Fibonacci numbers
+        else if (n == 1) {
+            System.out.println("0 1");
+        }
+        // General case: compute and print Fibonacci series
+        else {
+            int[] fib = new int[n + 1];  // Array to hold Fibonacci numbers
+            fib[0] = 0;
+            fib[1] = 1;
+
+            // Compute Fibonacci numbers from index 2 to n
+            for (int i = 2; i &lt;= n; i++) {
+                fib[i] = fib[i - 1] + fib[i - 2];
+            }
+
+            System.out.println("The Fibonacci Series up to " + n + "th term:");
+            for (int i = 0; i &lt;= n; i++) {
+                System.out.print(fib[i] + " ");
+            }
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">def main():
+    n = 5
+
+    # Edge case: if n is 0, print only 0
+    if n == 0:
+        print(0)
+    # Special case: if n is 1, print first two Fibonacci numbers
+    elif n == 1:
+        print("0 1")
+    # General case: compute and print Fibonacci series
+    else:
+        fib = [0] * (n + 1)  # List to store Fibonacci numbers
+        fib[0] = 0
+        fib[1] = 1
+
+        # Fill the list using bottom-up dynamic programming
+        for i in range(2, n + 1):
+            fib[i] = fib[i - 1] + fib[i - 2]
+
+        print(f"The Fibonacci Series up to {n}th term:")
+        print(" ".join(str(num) for num in fib))
+
+if __name__ == "__main__":
+    main()
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">function generateFibonacci(n) {
+    // Edge case: if n is 0, print only 0
+    if (n === 0) {
+        console.log(0);
+    }
+    // Special case: if n is 1, print first two Fibonacci numbers
+    else if (n === 1) {
+        console.log("0 1");
+    }
+    // General case: compute and print Fibonacci series
+    else {
+        let fib = new Array(n + 1).fill(0);
+        fib[0] = 0;
+        fib[1] = 1;
+
+        // Fill the array with Fibonacci values
+        for (let i = 2; i &lt;= n; i++) {
+            fib[i] = fib[i - 1] + fib[i - 2];
+        }
+
+        console.log(`The Fibonacci Series up to ${n}th term:`);
+        console.log(fib.join(" "));
+    }
+}
+
+// Call the function
+generateFibonacci(5);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+</p><p>Time Complexity: O(n)+O(n), for calculating and printing the Fibonacci series.</p>
+<p>Space Complexity: O(n) for storing the fibonacci series.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="better-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Better Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<h2>Intuition</h2>
+<p>For calculating the ith term we only need the last and second last term i.e (i-1)th and (i-2)th term, so we don't need to maintain the whole array</p>
+<h2>Approach</h2>
+<ul>
+<li>Take two variables last and secondLast for storing (i-1)th and (i-2)th term.</li>
+<li>Now iterate from 2 to n and calculate the ith term. ith term is last + secondLast term.</li>
+<li>Then update secondLast term to the last term and the last term to ith term as we iterate.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int main() {
+    int n = 5;
+
+    // If n is 0, only the first Fibonacci number is printed
+    if (n == 0) {
+        cout &lt;&lt; "The Fibonacci Series up to " &lt;&lt; n &lt;&lt; "th term:" &lt;&lt; endl;
+        cout &lt;&lt; 0;
+    }
+    else {
+        int secondLast = 0; // (i-2)th term
+        int last = 1;       // (i-1)th term
+
+        cout &lt;&lt; "The Fibonacci Series up to " &lt;&lt; n &lt;&lt; "th term:" &lt;&lt; endl;
+        cout &lt;&lt; secondLast &lt;&lt; " " &lt;&lt; last &lt;&lt; " ";
+
+        int cur; // ith term
+        for (int i = 2; i &lt;= n; i++) {
+            cur = last + secondLast;   // ith Fibonacci number
+            secondLast = last;         // move window forward
+            last = cur;
+            cout &lt;&lt; cur &lt;&lt; " ";
+        }
+    }
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">public class FibonacciEfficient {
+    public static void main(String[] args) {
+        int n = 5;
+
+        // If n is 0, print only the first term
+        if (n == 0) {
+            System.out.println("The Fibonacci Series up to " + n + "th term:");
+            System.out.println(0);
+        } else {
+            int secondLast = 0; // (i-2)th term
+            int last = 1;       // (i-1)th term
+
+            System.out.println("The Fibonacci Series up to " + n + "th term:");
+            System.out.print(secondLast + " " + last + " ");
+
+            int cur;
+            for (int i = 2; i &lt;= n; i++) {
+                cur = last + secondLast;  // Calculate current term
+                secondLast = last;        // Slide the window
+                last = cur;
+                System.out.print(cur + " ");
+            }
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">def main():
+    n = 5
+
+    # If n is 0, only the first term is printed
+    if n == 0:
+        print(f"The Fibonacci Series up to {n}th term:")
+        print(0)
+    else:
+        second_last = 0  # (i-2)th term
+        last = 1         # (i-1)th term
+
+        print(f"The Fibonacci Series up to {n}th term:")
+        print(f"{second_last} {last}", end=" ")
+
+        for i in range(2, n + 1):
+            cur = last + second_last  # Current ith Fibonacci number
+            second_last = last        # Move window
+            last = cur
+            print(cur, end=" ")
+
+if __name__ == "__main__":
+    main()
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">function generateFibonacci(n) {
+    // If n is 0, only the first number is printed
+    if (n === 0) {
+        console.log(`The Fibonacci Series up to ${n}th term:`);
+        console.log(0);
+    } else {
+        let secondLast = 0; // (i-2)th term
+        let last = 1;       // (i-1)th term
+
+        console.log(`The Fibonacci Series up to ${n}th term:`);
+        let output = `${secondLast} ${last}`;
+
+        for (let i = 2; i &lt;= n; i++) {
+            let cur = last + secondLast; // Calculate ith term
+            secondLast = last;           // Update for next iteration
+            last = cur;
+            output += ` ${cur}`;
+        }
+
+        console.log(output);
+    }
+}
+
+// Run the function
+generateFibonacci(5);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+</p><p>Time Complexity:  O(N).As we are iterating over just one for a loop.</p>
+<p>Space Complexity: O(1), no extra space used.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<h2>Intuition</h2>
+<p>In this approach, instead of printing the Fibonacci series till N, we’re going to print the Nth Fibonacci number using functional recursion with multiple function calls.</p>
+<ul>
+<li>Similar to all the recursion problems we’ve seen before, we need a base case in this problem too in order for recursion to not go infinitely. Here, we notice that the Fibonacci series start from N = 1, where we initialize its value as 1. </li>
+<li>Assume Fibonacci(0) = 0. So, Fibonacci(2) = 1+0 = 1 as the Nth Fibonacci number is the sum of the previous two Fibonacci numbers.</li>
+<li>Similarly, we call Fibonacci(N-1) and Fibonacci(N-2) and return their sum. Both the function calls Fibonacci(N-1) and Fibonacci(N-2) would be computed individually one by one until the base condition is reached for both and then they return back to the main function.</li>
+<ul>
+<p>Let us see the recursion tree for the following problem to get an even better understanding:</p>
+<p><img height="457" loading="lazy" src="../assets/img/c269e3d03815664e.png" width="481"/></p>
+</ul></ul></div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Recursive function to compute the Nth Fibonacci number
+int fibonacci(int N) {
+    // Base case: if N is 0 or 1, return N itself
+    if (N &lt;= 1) {
+        return N;
+    }
+
+    // Recursive case: sum of (N-1)th and (N-2)th Fibonacci numbers
+    int last = fibonacci(N - 1);   // (N-1)th Fibonacci
+    int slast = fibonacci(N - 2);  // (N-2)th Fibonacci
+
+    return last + slast;
+}
+
+int main() {
+    int N = 4;
+    cout &lt;&lt; fibonacci(N) &lt;&lt; endl; // Output: 3 (0 1 1 2 3)
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">public class RecursiveFibonacci {
+
+    // Recursive function to compute Nth Fibonacci number
+    public static int fibonacci(int N) {
+        // Base case: return N if it's 0 or 1
+        if (N &lt;= 1) {
+            return N;
+        }
+
+        // Recursive case: calculate previous two terms
+        int last = fibonacci(N - 1);    // (N-1)th term
+        int slast = fibonacci(N - 2);   // (N-2)th term
+
+        return last + slast;
+    }
+
+    public static void main(String[] args) {
+        int N = 4;
+        System.out.println(fibonacci(N));  // Output: 3
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">def fibonacci(N):
+    # Base case: if N is 0 or 1, return N
+    if N &lt;= 1:
+        return N
+
+    # Recursive calls: calculate previous two terms
+    last = fibonacci(N - 1)   # (N-1)th term
+    slast = fibonacci(N - 2)  # (N-2)th term
+
+    return last + slast
+
+# Driver code
+N = 4
+print(fibonacci(N))  # Output: 3
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Recursive function to compute the Nth Fibonacci number
+function fibonacci(N) {
+    // Base case: if N is 0 or 1, return N
+    if (N &lt;= 1) {
+        return N;
+    }
+
+    // Recursive case: sum of (N-1)th and (N-2)th terms
+    const last = fibonacci(N - 1);   // (N-1)th Fibonacci
+    const slast = fibonacci(N - 2);  // (N-2)th Fibonacci
+
+    return last + slast;
+}
+
+// Example usage
+const N = 4;
+console.log(fibonacci(N));  // Output: 3
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+</p><p>Time Complexity: O(2^N) { This problem involves two function calls for each iteration which further expands to 4 function calls and so on which makes worst-case time complexity to be exponential in nature }.</p>
+<p>Space Complexity: O(N) { At maximum there could be N function calls waiting in the recursion stack since we need to calculate the Nth Fibonacci number for which we also need to calculate (N-1) Fibonacci numbers before it }.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Shortest Common Supersequence | (DP - 31)</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Shortest Common Supersequence | (DP - 31)</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/shortest-common-supersequence-dp-31/</code></div>
+  <p><strong>Problem Statement: </strong>We are given two strings ‘S1’ and ‘S2’. We need to return their shortest common supersequence. A supersequence is defined as the string which contains both the strings S1 and S2 as subsequences.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p><strong>Input :</strong> str1 = "mno", str2 = "nop"
+<strong>Output :</strong>"mnop"
+<strong>Explanation :</strong> The shortest common supersequence is "mnop". It contains "mno" as the first three characters and "nop" as the last three characters, thus including both strings as subsequences.<br/>
+<strong>Input :</strong>str1 = "dynamic", str2 = "program"
+<strong>Output :</strong> "dynprogramic"
+<strong>Explanation :</strong>The shortest common supersequence is "dynprogramic". It includes all characters from both "dynamic" and "program", with minimal overlap. For example, "dynamic" appears as "dyn...amic" and "program" appears as "...program..." within "dynprogramic".</p></pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/shortest-common-supersequence" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+
+<p><strong>Pre-req: </strong><a href="https://takeuforward.org/data-structure/longest-common-subsequence-dp-25/" rel="noopener" target="_blank">Longest Common Subsequence</a>, <a href="https://takeuforward.org/data-structure/print-longest-common-subsequence-dp-26/" rel="noopener" target="_blank">Print Longest Common Subsequence</a></p>
+If we keep the “shortest” criteria aside, what can be a way to generate a supersequence given two strings. One easy way is to concat the given strings (write one after the other), this will always give us a supersequence for any pair of given strings.<br/><br/>
+This can be said as the worst case with time complexity of O(n+m), where n and are the lengths of strings S1 and S2 respectively.
+
+<strong>How can we improve from this naive approach?</strong><br/>
+If we think a little, there are some common characters that we can avoid writing for both the strings separately. These common characters can’t be all the common characters. They are the characters that <strong>are common and come in the same order</strong>. In other words, they are the characters of the <strong>longest common subsequence</strong>. <br/><br/>
+In an optimum solution, the characters of the longest common subsequence are written only once and other characters are placed around them. For every character that belongs to the longest common subsequence, the non-lcs characters coming before them in the strings S1 and S2 are placed before the lcs-character in the answer string.<br/><br/>
+
+<strong>Length of Shortest Common Supersequence?</strong><br/>
+From the explanation above, we can see that characters of lcs need to be covered only once. Therefore, the length of the shortest Common supersequence =<strong> n + m -k</strong>, where (n and m are lengths of S1 and S2, and k is the length of the lcs string).<br/><br/>
+<strong>Finding the supersequence string</strong><br/>
+Now, instead of the length, we are interested in finding the shortest supersequence string itself. Readers are highly advised to read the article <a href="https://takeuforward.org/data-structure/print-longest-common-subsequence-dp-26/" rel="noopener" target="_blank">Print Longest Common Subsequence</a>.<br/>
+
+When we form the DP table to calculate the longest common subsequence (as done in <a href="https://takeuforward.org/data-structure/print-longest-common-subsequence-dp-26/" rel="noopener" target="_blank">Print Longest Common Subsequence</a>) we have all the information of characters that are coming in the lcs string and characters that don’t. We use this same DP table to form the shortest common supersequence.
+
+To frame the string, we need to understand how the dp table was formed and work in the reverse process.Now, let us see what were the conditions that we used while forming the dp array:<br/>
+<ul><li><strong>if(S1[i-1] == S2[j-1])</strong>, then return 1 + dp[i-1][j-1]</li><li><strong>if(S1[i-1] != S2[j-1]) ,</strong> then return 0 + max(dp[i-1][j],dp[i][j-1])</li></ul><br/>
+We will start from the right-most cell of the dp array, initially i=n and j=m.
+To form the string, we will work in a reverse manner.<br/>
+<ul><li><strong>if(S1[i-1] == S2[j-1]), </strong>this means the character is an lcs character and needs to be included only once from both the strings, so we add it to the ans string and reduce both i and j by 1. We reduce them simultaneously to make sure the character is counted only once.</li><li>if(S1[i-1] != S2[j-1]), this means that the character is a non-lcs character and then we move the pointer to the top cell or left cell depending on which is greater. This way non-lcs characters will be included separately in the right order.</li></ul>
+<ul><li>We start from cell dp[n][m]. Initially i=n and j=m.</li><li>At every cell, we will check if S1[i-1] == S2[j-1], if it is then it means this character is a part of the longest common subsequence. So we will push it to the ans string str. Then we will move to the diagonally top-left   cell by assigning i to i-1 and j to j-1.</li><li>Else, this character is not a part of the longest common subsequence so we include it in ans string. Originally this cell got its value from its left cell (←) or from its top cell (↑). Whichever cell’s value will be more of the two, we will move to that cell.</li><li>We will continue till i&gt;0 and j&gt;0, failing it we will break from the loop.</li><li>After breaking, either i&gt;0 or j&gt;0 (only one condition will fail to break from the while loop), if(i&gt;0) we push all the characters from S1 to ans string, else if(j&gt;0), we push all the remaining characters from S2.</li><li>At last, we reverse the ‘ans’ string and we get our answer.</li></ul>
+
+
+
+
+</div>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/58da2c4b927f3ebe.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/3e0c9852457432b1.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/68eee4197c487369.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/c2e2cc5be5691994.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/936438258b854ee7.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/23287871f218640a.png"/></div><div class="carousel-image"><img alt="Image 7" loading="lazy" src="../assets/img/553a6dc1a2c1c978.png"/></div><div class="carousel-image"><img alt="Image 8" loading="lazy" src="../assets/img/22c1acfb33c10092.png"/></div><div class="carousel-image"><img alt="Image 9" loading="lazy" src="../assets/img/f682385cc21b8ff0.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/58da2c4b927f3ebe.png"/><img alt="Image 2" loading="lazy" src="../assets/img/3e0c9852457432b1.png"/><img alt="Image 3" loading="lazy" src="../assets/img/68eee4197c487369.png"/><img alt="Image 4" loading="lazy" src="../assets/img/c2e2cc5be5691994.png"/><img alt="Image 5" loading="lazy" src="../assets/img/936438258b854ee7.png"/><img alt="Image 6" loading="lazy" src="../assets/img/23287871f218640a.png"/><img alt="Image 7" loading="lazy" src="../assets/img/553a6dc1a2c1c978.png"/><img alt="Image 8" loading="lazy" src="../assets/img/22c1acfb33c10092.png"/><img alt="Image 9" loading="lazy" src="../assets/img/f682385cc21b8ff0.png"/></div></div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to return the shortest common supersequence of two strings
+    string shortestSupersequence(string s1, string s2) {
+
+        // Get the lengths of the two strings
+        int n = s1.size();
+        int m = s2.size();
+
+        // Create a 2D DP table to store lengths of LCS
+        vector&lt;vector&lt;int&gt;&gt; dp(n + 1, vector&lt;int&gt;(m + 1, 0));
+
+        // Initialize base cases: when either string is empty
+        for (int i = 0; i &lt;= n; i++) {
+            dp[i][0] = 0;
+        }
+        for (int i = 0; i &lt;= m; i++) {
+            dp[0][i] = 0;
+        }
+
+        // Fill the DP table using bottom-up approach
+        for (int ind1 = 1; ind1 &lt;= n; ind1++) {
+            for (int ind2 = 1; ind2 &lt;= m; ind2++) {
+
+                // If characters match, take diagonal + 1
+                if (s1[ind1 - 1] == s2[ind2 - 1])
+                    dp[ind1][ind2] = 1 + dp[ind1 - 1][ind2 - 1];
+
+                // Otherwise, take max from left or top
+                else
+                    dp[ind1][ind2] = max(dp[ind1 - 1][ind2], dp[ind1][ind2 - 1]);
+            }
+        }
+
+        // Start from bottom-right of the DP table to build the supersequence
+        int i = n;
+        int j = m;
+        string ans = "";
+
+        // Traverse the table in reverse to find the supersequence
+        while (i &gt; 0 &amp;&amp; j &gt; 0) {
+
+            // If characters are equal, include it once
+            if (s1[i - 1] == s2[j - 1]) {
+                ans += s1[i - 1];
+                i--;
+                j--;
+            }
+
+            // Move in the direction of greater value
+            else if (dp[i - 1][j] &gt; dp[i][j - 1]) {
+                ans += s1[i - 1];
+                i--;
+            } else {
+                ans += s2[j - 1];
+                j--;
+            }
+        }
+
+        // If any characters are left in s1, add them
+        while (i &gt; 0) {
+            ans += s1[i - 1];
+            i--;
+        }
+
+        // If any characters are left in s2, add them
+        while (j &gt; 0) {
+            ans += s2[j - 1];
+            j--;
+        }
+
+        // Since we added characters in reverse order, reverse the result
+        reverse(ans.begin(), ans.end());
+
+        // Return the final shortest supersequence
+        return ans;
+    }
+};
+
+// Driver code
+int main() {
+
+    // Define input strings
+    string s1 = "brute";
+    string s2 = "groot";
+
+    // Create object of Solution class
+    Solution obj;
+
+    // Call the function and print result
+    cout &lt;&lt; "The Shortest Common Supersequence is " &lt;&lt; obj.shortestSupersequence(s1, s2);
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+
+    // Function to return the shortest common supersequence of two strings
+    public String shortestSupersequence(String s1, String s2) {
+
+        // Get the lengths of both strings
+        int n = s1.length();
+        int m = s2.length();
+
+        // Create a 2D DP array to store lengths of LCS
+        int[][] dp = new int[n + 1][m + 1];
+
+        // Fill the DP array using bottom-up tabulation
+        for (int i = 1; i &lt;= n; i++) {
+            for (int j = 1; j &lt;= m; j++) {
+
+                // If characters match, add 1 to diagonal value
+                if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
+                    dp[i][j] = 1 + dp[i - 1][j - 1];
+                } 
+                
+                // Otherwise, take the max from left or top cell
+                else {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+
+        // Initialize StringBuilder to build the result
+        StringBuilder ans = new StringBuilder();
+
+        // Start from bottom-right corner of the table
+        int i = n, j = m;
+
+        // Traverse the table in reverse to build supersequence
+        while (i &gt; 0 &amp;&amp; j &gt; 0) {
+
+            // If characters match, add to answer and move diagonally
+            if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
+                ans.append(s1.charAt(i - 1));
+                i--;
+                j--;
+            }
+
+            // Move in the direction of larger value
+            else if (dp[i - 1][j] &gt; dp[i][j - 1]) {
+                ans.append(s1.charAt(i - 1));
+                i--;
+            } else {
+                ans.append(s2.charAt(j - 1));
+                j--;
+            }
+        }
+
+        // Append remaining characters from s1
+        while (i &gt; 0) {
+            ans.append(s1.charAt(i - 1));
+            i--;
+        }
+
+        // Append remaining characters from s2
+        while (j &gt; 0) {
+            ans.append(s2.charAt(j - 1));
+            j--;
+        }
+
+        // Reverse the result since it was built backwards
+        return ans.reverse().toString();
+    }
+}
+
+// Driver class
+class Main {
+    public static void main(String[] args) {
+
+        // Define input strings
+        String s1 = "brute";
+        String s2 = "groot";
+
+        // Create object of Solution class
+        Solution sol = new Solution();
+
+        // Call the function and print the result
+        System.out.println("The Shortest Common Supersequence is " + sol.shortestSupersequence(s1, s2));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Class to compute shortest common supersequence
+class Solution:
+
+    # Function to return shortest common supersequence of two strings
+    def shortestSupersequence(self, s1: str, s2: str) -&gt; str:
+
+        # Get the lengths of the strings
+        n = len(s1)
+        m = len(s2)
+
+        # Create a 2D DP table to store LCS lengths
+        dp = [[0] * (m + 1) for _ in range(n + 1)]
+
+        # Fill the DP table using bottom-up approach
+        for i in range(1, n + 1):
+            for j in range(1, m + 1):
+
+                # If characters match, take diagonal + 1
+                if s1[i - 1] == s2[j - 1]:
+                    dp[i][j] = 1 + dp[i - 1][j - 1]
+
+                # Otherwise, take max from top or left
+                else:
+                    dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+
+        # Start from bottom-right and build the supersequence
+        i, j = n, m
+        result = []
+
+        # Traverse in reverse to collect characters
+        while i &gt; 0 and j &gt; 0:
+
+            # If characters are equal, include once and move diagonally
+            if s1[i - 1] == s2[j - 1]:
+                result.append(s1[i - 1])
+                i -= 1
+                j -= 1
+
+            # Move in direction of greater value
+            elif dp[i - 1][j] &gt; dp[i][j - 1]:
+                result.append(s1[i - 1])
+                i -= 1
+            else:
+                result.append(s2[j - 1])
+                j -= 1
+
+        # Add remaining characters from s1
+        while i &gt; 0:
+            result.append(s1[i - 1])
+            i -= 1
+
+        # Add remaining characters from s2
+        while j &gt; 0:
+            result.append(s2[j - 1])
+            j -= 1
+
+        # Reverse the result as it was built in reverse
+        result.reverse()
+
+        # Join the list to form final string
+        return ''.join(result)
+
+# Driver code
+if __name__ == "__main__":
+
+    # Define input strings
+    s1 = "brute"
+    s2 = "groot"
+
+    # Create object of Solution class
+    obj = Solution()
+
+    # Call the function and print the result
+    print("The Shortest Common Supersequence is", obj.shortestSupersequence(s1, s2))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+
+    // Function to return shortest common supersequence of two strings
+    shortestSupersequence(s1, s2) {
+
+        // Get lengths of both strings
+        const n = s1.length;
+        const m = s2.length;
+
+        // Create a 2D DP array filled with 0s
+        const dp = Array.from({ length: n + 1 }, () =&gt; Array(m + 1).fill(0));
+
+        // Fill the DP table using bottom-up approach
+        for (let i = 1; i &lt;= n; i++) {
+            for (let j = 1; j &lt;= m; j++) {
+
+                // If characters match, take diagonal + 1
+                if (s1[i - 1] === s2[j - 1]) {
+                    dp[i][j] = 1 + dp[i - 1][j - 1];
+                }
+
+                // Otherwise, take max from top or left
+                else {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+
+        // Initialize result string builder
+        let result = [];
+
+        // Start from bottom-right of DP table
+        let i = n, j = m;
+
+        // Traverse in reverse to build supersequence
+        while (i &gt; 0 &amp;&amp; j &gt; 0) {
+
+            // If characters match, add to result
+            if (s1[i - 1] === s2[j - 1]) {
+                result.push(s1[i - 1]);
+                i--;
+                j--;
+            }
+
+            // Move in direction of larger value
+            else if (dp[i - 1][j] &gt; dp[i][j - 1]) {
+                result.push(s1[i - 1]);
+                i--;
+            } else {
+                result.push(s2[j - 1]);
+                j--;
+            }
+        }
+
+        // Add remaining characters from s1
+        while (i &gt; 0) {
+            result.push(s1[i - 1]);
+            i--;
+        }
+
+        // Add remaining characters from s2
+        while (j &gt; 0) {
+            result.push(s2[j - 1]);
+            j--;
+        }
+
+        // Reverse the result to correct order
+        result.reverse();
+
+        // Return final string
+        return result.join('');
+    }
+}
+
+// Driver code
+const s1 = "brute";
+const s2 = "groot";
+
+// Create object of Solution class
+const obj = new Solution();
+
+// Call the function and print the result
+console.log("The Shortest Common Supersequence is", obj.shortestSupersequence(s1, s2));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+</summary>
+<p>
+</p><p><strong>Time Complexity:</strong>
+O(n * m), Filling the DP table takes O(n * m), and backtracking adds O(n + m), which is negligible compared to the main DP.</p>
+<p><strong>Space Complexity:</strong>
+
+O(n * m),A 2D DP array of size (n+1) × (m+1) is used.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

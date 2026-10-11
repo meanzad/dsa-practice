@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Rotate a Linked List</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Rotate a Linked List</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/rotate-a-linked-list/</code></div>
+  <p><strong>Problem Statement: </strong>Given the head of a singly linked list containing integers, shift the elements of the linked list to the right by k places and return the head of the modified list. Do not change the values of the nodes, only change the links between nodes.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p><strong>Input :</strong> head -&gt; 1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5, k = 2
+<strong>Output :</strong> head -&gt; 4 -&gt; 5 -&gt; 1 -&gt; 2 -&gt; 3
+<strong>Explanation :</strong>List after 1 shift to right: head -&gt; 5 -&gt; 1 -&gt; 2 -&gt; 3 -&gt; 4.
+List after 2 shift to right: head -&gt; 4 -&gt; 5 -&gt; 1 -&gt; 2 -&gt; 3.<br/>
+<strong>Input :</strong> head -&gt; 1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5, k = 4
+<strong>Output :</strong>head -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5 -&gt; 1
+<strong>Explanation :</strong>List after 1 shift to right: head -&gt; 5 -&gt; 1 -&gt; 2 -&gt; 3 -&gt; 4.
+List after 2 shift to right: head -&gt; 4 -&gt; 5 -&gt; 1 -&gt; 2 -&gt; 3.
+List after 3 shift to right: head -&gt; 3 -&gt; 4 -&gt; 5 -&gt; 1 -&gt; 2.
+List after 4 shift to right: head -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5 -&gt; 1. </p></pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/rotate-a-ll" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Brute Force Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+When asked to rotate a linked list to the right k times, we are essentially moving the last node to the front of the list, k times.
+
+Each rotation means:
+
+take the last node,
+
+disconnect it from the list,
+
+insert it at the front (head) of the list.
+
+We repeat this process k times.
+This approach is straightforward but not efficient because each rotation requires a traversal to the second-last node, which takes linear time.
+
+So in total, if we rotate k times and for each rotation we traverse the list (of n nodes), hence this approach is inefficient for large inputs.
+
+
+<ul> <li>If the linked list is empty or has only one node, or k is 0, return the head as-is.</li> <li>Repeat the following steps k times: <ul> <li>Initialize a pointer to traverse the list from head.</li> <li>Traverse to the second-last node of the list.</li> <li>Store the last node separately.</li> <li>Make the second-last node point to null (removing the last node).</li> <li>Insert the stored last node at the beginning by: <ul> <li>Pointing its next to the current head.</li> <li>Updating the head to this node.</li> </ul> </li> </ul> </li> <li>Return the new head of the list.</li> </ul>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Definition for singly-linked list node
+struct ListNode {
+    int val;
+    ListNode* next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
+
+class Solution {
+public:
+    // Function to rotate the list to the right by k positions
+    ListNode* rotateRight(ListNode* head, int k) {
+        // If list is empty or has only one node or no rotation needed
+        if (!head || !head-&gt;next || k == 0) return head;
+
+        // Repeat the rotation process k times
+        for (int i = 0; i &lt; k; i++) {
+            // Initialize two pointers to traverse the list
+            ListNode* curr = head;
+            ListNode* prev = NULL;
+
+            // Traverse to the last node
+            while (curr-&gt;next) {
+                prev = curr;
+                curr = curr-&gt;next;
+            }
+
+            // Detach the last node and place it at the beginning
+            prev-&gt;next = NULL;
+            curr-&gt;next = head;
+            head = curr;
+        }
+
+        // Return the rotated head
+        return head;
+    }
+};
+
+// Driver code
+int main() {
+    // Creating the linked list 1-&gt;2-&gt;3-&gt;4-&gt;5
+    ListNode* head = new ListNode(1);
+    head-&gt;next = new ListNode(2);
+    head-&gt;next-&gt;next = new ListNode(3);
+    head-&gt;next-&gt;next-&gt;next = new ListNode(4);
+    head-&gt;next-&gt;next-&gt;next-&gt;next = new ListNode(5);
+
+    Solution obj;
+    int k = 2;
+    ListNode* result = obj.rotateRight(head, k);
+
+    // Printing the rotated list
+    while (result) {
+        cout &lt;&lt; result-&gt;val &lt;&lt; " ";
+        result = result-&gt;next;
+    }
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">// Definition for singly-linked list node
+class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode(int x) {
+        val = x;
+        next = null;
+    }
+}
+
+class Solution {
+    // Function to rotate the list to the right by k positions
+    public ListNode rotateRight(ListNode head, int k) {
+        // If list is empty or has one node or no rotation needed
+        if (head == null || head.next == null || k == 0) return head;
+
+        // Repeat rotation k times
+        for (int i = 0; i &lt; k; i++) {
+            // Initialize pointers for traversal
+            ListNode curr = head;
+            ListNode prev = null;
+
+            // Traverse to the last node
+            while (curr.next != null) {
+                prev = curr;
+                curr = curr.next;
+            }
+
+            // Cut the last node
+            prev.next = null;
+
+            // Move it to the front
+            curr.next = head;
+            head = curr;
+        }
+
+        // Return rotated list
+        return head;
+    }
+}
+
+// Driver class
+public class Main {
+    public static void main(String[] args) {
+        // Create linked list: 1-&gt;2-&gt;3-&gt;4-&gt;5
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(3);
+        head.next.next.next = new ListNode(4);
+        head.next.next.next.next = new ListNode(5);
+
+        Solution sol = new Solution();
+        int k = 2;
+        ListNode result = sol.rotateRight(head, k);
+
+        // Print result
+        while (result != null) {
+            System.out.print(result.val + " ");
+            result = result.next;
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Definition for singly-linked list node
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+class Solution:
+    # Function to rotate the list to the right by k positions
+    def rotateRight(self, head: ListNode, k: int) -&gt; ListNode:
+        # If list is empty or has one node or no rotation needed
+        if not head or not head.next or k == 0:
+            return head
+
+        # Repeat the rotation k times
+        for _ in range(k):
+            # Initialize two pointers
+            curr = head
+            prev = None
+
+            # Traverse to the last node
+            while curr.next:
+                prev = curr
+                curr = curr.next
+
+            # Remove last node and move it to front
+            prev.next = None
+            curr.next = head
+            head = curr
+
+        # Return the rotated list
+        return head
+
+# Driver code
+def printList(head):
+    while head:
+        print(head.val, end=" ")
+        head = head.next
+
+# Create linked list: 1-&gt;2-&gt;3-&gt;4-&gt;5
+head = ListNode(1)
+head.next = ListNode(2)
+head.next.next = ListNode(3)
+head.next.next.next = ListNode(4)
+head.next.next.next.next = ListNode(5)
+
+sol = Solution()
+k = 2
+newHead = sol.rotateRight(head, k)
+printList(newHead)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Definition for singly-linked list node
+class ListNode {
+    constructor(val) {
+        this.val = val;
+        this.next = null;
+    }
+}
+
+class Solution {
+    // Function to rotate the list to the right by k positions
+    rotateRight(head, k) {
+        // If list is empty or has one node or no rotation needed
+        if (!head || !head.next || k === 0) return head;
+
+        // Repeat rotation k times
+        for (let i = 0; i &lt; k; i++) {
+            let curr = head;
+            let prev = null;
+
+            // Traverse to the last node
+            while (curr.next) {
+                prev = curr;
+                curr = curr.next;
+            }
+
+            // Detach the last node
+            prev.next = null;
+
+            // Move last node to front
+            curr.next = head;
+            head = curr;
+        }
+
+        // Return the rotated list
+        return head;
+    }
+}
+
+// Driver code
+function printList(head) {
+    let curr = head;
+    let result = [];
+    while (curr) {
+        result.push(curr.val);
+        curr = curr.next;
+    }
+    console.log(result.join(" "));
+}
+
+// Create linked list: 1-&gt;2-&gt;3-&gt;4-&gt;5
+let head = new ListNode(1);
+head.next = new ListNode(2);
+head.next.next = new ListNode(3);
+head.next.next.next = new ListNode(4);
+head.next.next.next.next = new ListNode(5);
+
+let sol = new Solution();
+let k = 2;
+let newHead = sol.rotateRight(head, k);
+printList(newHead);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity: O(k * n)</strong>,We are performing `k` rotations. In each rotation. We traverse the list to reach the second-last node (this takes O(n) time), then we adjust a few pointers (which is O(1)).
+So the overall time complexity is O(k * n).
+
+This approach becomes inefficient if k is large, especially with long lists, because each rotation traverses the full list.</p>
+<p><strong>Space Complexity: O(1)</strong>, We do not use any additional data structures.</p>
+</details>
+</div>
+</details>
+
+</div>
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+When we rotate a linked list to the right by <strong>k</strong> positions, each node is effectively shifted forward <strong>k</strong> steps. Instead of performing <strong>k</strong> individual rotations, we observe that rotating a list by its own <strong>length</strong> results in the same list. So, we only need to rotate by <strong>k % length</strong>.
+
+We first compute the <strong>length</strong> of the list and connect the last node to the head, forming a <strong>circular linked list</strong>. Then we locate the new tail, which is at <strong>length - (k % length)</strong> steps from the start. The node next to this becomes the new head, and we break the circular link there. This transforms the list in a single traversal, making the process efficient.
+
+<ul> <li>Handle edge cases where the list is empty, has one node, or k is 0 — in these cases, return head as-is.</li> <li>Traverse the list to calculate its total length.</li> <li>Connect the last node to the first node, converting the list into a <a href="https://takeuforward.org/data-structure/circular-linked-list-in-c/" rel="noopener" target="_blank"><strong>circular linked list</strong></a>.</li> <li>Calculate effective rotations as <strong>k % length</strong> to avoid unnecessary full rotations.</li> <li>Find the new tail node, which is located at the <strong>(length - k % length - 1)</strong>th position from the start.</li> <li>Set the new head to the node just after the new tail.</li> <li>Break the circular link by setting <strong>newTail.next = null</strong>.</li> <li>Return the new head of the rotated list.</li> </ul>
+
+
+
+
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/56c94180fe00d2da.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/ed5bf97a6e9f1c04.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/53a6894793e41b65.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/6e716a658da737ac.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/56c94180fe00d2da.png"/><img alt="Image 2" loading="lazy" src="../assets/img/ed5bf97a6e9f1c04.png"/><img alt="Image 3" loading="lazy" src="../assets/img/53a6894793e41b65.png"/><img alt="Image 4" loading="lazy" src="../assets/img/6e716a658da737ac.png"/></div></div>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Definition of a singly linked list node
+struct ListNode {
+    int val;
+    ListNode* next;
+
+    ListNode(int x) {
+        val = x;
+        next = NULL;
+    }
+};
+
+class Solution {
+public:
+    // Function to rotate the linked list to the right by k places
+    ListNode* rotateRight(ListNode* head, int k) {
+        // If list is empty or has only one node, or no rotation is needed
+        if (!head || !head-&gt;next || k == 0)
+            return head;
+
+        // Initialize length and tail pointer
+        int length = 1;
+        ListNode* tail = head;
+
+        // Traverse to find the tail and length
+        while (tail-&gt;next) {
+            tail = tail-&gt;next;
+            length++;
+        }
+
+        // Make it a circular linked list
+        tail-&gt;next = head;
+
+        // Effective rotations needed
+        k = k % length;
+
+        // Traverse to the new tail (length - k - 1 steps from head)
+        int stepsToNewTail = length - k;
+        ListNode* newTail = head;
+        for (int i = 1; i &lt; stepsToNewTail; i++) {
+            newTail = newTail-&gt;next;
+        }
+
+        // Set the new head
+        ListNode* newHead = newTail-&gt;next;
+
+        // Break the circle
+        newTail-&gt;next = NULL;
+
+        return newHead;
+    }
+};
+
+// Driver code
+int main() {
+    // Create linked list: 1-&gt;2-&gt;3-&gt;4-&gt;5
+    ListNode* head = new ListNode(1);
+    head-&gt;next = new ListNode(2);
+    head-&gt;next-&gt;next = new ListNode(3);
+    head-&gt;next-&gt;next-&gt;next = new ListNode(4);
+    head-&gt;next-&gt;next-&gt;next-&gt;next = new ListNode(5);
+
+    int k = 2;
+
+    Solution obj;
+    ListNode* newHead = obj.rotateRight(head, k);
+
+    // Print the rotated list
+    while (newHead) {
+        cout &lt;&lt; newHead-&gt;val &lt;&lt; " ";
+        newHead = newHead-&gt;next;
+    }
+    cout &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">// Definition for singly-linked list node
+class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode(int x) {
+        val = x;
+        next = null;
+    }
+}
+
+class Solution {
+    // Function to rotate the linked list to the right by k places
+    public ListNode rotateRight(ListNode head, int k) {
+        // If list is empty or only one node or k = 0, return head
+        if (head == null || head.next == null || k == 0)
+            return head;
+
+        // Initialize length and tail
+        int length = 1;
+        ListNode tail = head;
+
+        // Traverse to find tail and calculate length
+        while (tail.next != null) {
+            tail = tail.next;
+            length++;
+        }
+
+        // Make the list circular
+        tail.next = head;
+
+        // Calculate effective rotation
+        k = k % length;
+
+        // Traverse to new tail position
+        int stepsToNewTail = length - k;
+        ListNode newTail = head;
+        for (int i = 1; i &lt; stepsToNewTail; i++) {
+            newTail = newTail.next;
+        }
+
+        // New head is next of newTail
+        ListNode newHead = newTail.next;
+
+        // Break the circle
+        newTail.next = null;
+
+        return newHead;
+    }
+}
+
+// Driver code
+public class Main {
+    public static void main(String[] args) {
+        // Creating linked list: 1-&gt;2-&gt;3-&gt;4-&gt;5
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(3);
+        head.next.next.next = new ListNode(4);
+        head.next.next.next.next = new ListNode(5);
+
+        int k = 2;
+
+        Solution obj = new Solution();
+        ListNode newHead = obj.rotateRight(head, k);
+
+        // Print rotated list
+        while (newHead != null) {
+            System.out.print(newHead.val + " ");
+            newHead = newHead.next;
+        }
+        System.out.println();
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Definition for singly-linked list node
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+class Solution:
+    # Function to rotate the linked list to the right by k places
+    def rotateRight(self, head: ListNode, k: int) -&gt; ListNode:
+        # If list is empty or has only one node or no rotation
+        if not head or not head.next or k == 0:
+            return head
+
+        # Calculate the length and find the tail
+        length = 1
+        tail = head
+        while tail.next:
+            tail = tail.next
+            length += 1
+
+        # Make it a circular linked list
+        tail.next = head
+
+        # Calculate effective rotations
+        k = k % length
+
+        # Find the new tail (length - k steps)
+        stepsToNewTail = length - k
+        newTail = head
+        for _ in range(stepsToNewTail - 1):
+            newTail = newTail.next
+
+        # Set new head
+        newHead = newTail.next
+
+        # Break the circle
+        newTail.next = None
+
+        return newHead
+
+# Driver code
+def printList(head):
+    while head:
+        print(head.val, end=" ")
+        head = head.next
+    print()
+
+# Create linked list: 1-&gt;2-&gt;3-&gt;4-&gt;5
+head = ListNode(1)
+head.next = ListNode(2)
+head.next.next = ListNode(3)
+head.next.next.next = ListNode(4)
+head.next.next.next.next = ListNode(5)
+
+k = 2
+obj = Solution()
+newHead = obj.rotateRight(head, k)
+printList(newHead)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Definition for singly-linked list node
+class ListNode {
+    constructor(val, next = null) {
+        this.val = val;
+        this.next = next;
+    }
+}
+
+class Solution {
+    // Function to rotate the linked list to the right by k places
+    rotateRight(head, k) {
+        // If list is empty or only one node or k is 0
+        if (!head || !head.next || k === 0) return head;
+
+        // Calculate length and find tail
+        let length = 1;
+        let tail = head;
+        while (tail.next) {
+            tail = tail.next;
+            length++;
+        }
+
+        // Make it a circular list
+        tail.next = head;
+
+        // Find effective rotations
+        k = k % length;
+
+        // Traverse to the new tail
+        let stepsToNewTail = length - k;
+        let newTail = head;
+        for (let i = 1; i &lt; stepsToNewTail; i++) {
+            newTail = newTail.next;
+        }
+
+        // Set new head
+        let newHead = newTail.next;
+
+        // Break the loop
+        newTail.next = null;
+
+        return newHead;
+    }
+}
+
+// Driver code
+function printList(head) {
+    while (head) {
+        process.stdout.write(head.val + " ");
+        head = head.next;
+    }
+    console.log();
+}
+
+// Create linked list: 1-&gt;2-&gt;3-&gt;4-&gt;5
+let head = new ListNode(1);
+head.next = new ListNode(2);
+head.next.next = new ListNode(3);
+head.next.next.next = new ListNode(4);
+head.next.next.next.next = new ListNode(5);
+
+let k = 2;
+let obj = new Solution();
+let newHead = obj.rotateRight(head, k);
+printList(newHead);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O(N), We perform a single traversal to calculate the length, another to find the new tail, and one for final breaking all linear operations.</p> <p><strong>Space Complexity:</strong> O(1),No extra space is used; we just adjust pointers in place.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

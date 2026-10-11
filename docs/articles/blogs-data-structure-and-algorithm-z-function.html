@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Z Function</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Z Function</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/blogs/data-structure-and-algorithm/z-function</code></div>
+  <div class="ArticleParser-module__R__VNG__article" data-article-segment="html-0"><p>Given a string <code>s</code> of length <code>n</code>, build an array <code>z</code> of length <code>n</code>.For every index <code>i</code>, <code>z[i]</code> stores the length of the longest substring starting at index <code>i</code> that matches the prefix of <code>s</code>.</p><p>By common convention, <code>z[0] = 0</code> because the whole string obviously matches itself, and that value is usually not useful for the algorithm.</p></div><div><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 1</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> s = "aabxaab"</p><p><strong>Output:</strong> [0, 1, 0, 0, 3, 1, 0]</p><p><strong>Explanation:</strong> At index <code>4</code>, the substring starts as <code>"aab"</code>, which matches the prefix <code>"aab"</code>, so <code>z[4] = 3</code>.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 2</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> s = "aaaaa"</p><p><strong>Output:</strong> [0, 4, 3, 2, 1]</p><p><strong>Explanation:</strong> Every suffix is made of only <code>'a'</code>, so each position matches a smaller prefix of the string.</p></div></div></section></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-2"><h2 id="blog-toc-brute-force-approach">Brute Force Approach</h2><p>The most direct way to understand the Z Function is to stand at every index and compare the string from there with the prefix.</p><p>For example, at index <code>i</code>, compare <code>s[i]</code> with <code>s[0]</code>, then <code>s[i + 1]</code> with <code>s[1]</code>, and keep going while the characters match. The number of successful comparisons becomes <code>z[i]</code>.</p><p>This is easy to picture and useful for learning the meaning of the Z-array. The downside is that the same characters may be compared again and again from different positions, which makes it slow for long strings like <code>"aaaaaa..."</code>.</p><h3 id="blog-toc-algorithm">Algorithm</h3><ul><li><p>Create an array <code>z</code> of size <code>n</code> and fill it with <code>0</code>. This is needed because every index starts with no confirmed prefix match.</p></li><li><p>Start checking from index <code>1</code> because <code>z[0]</code> is kept as <code>0</code> by convention.</p></li><li><p>For each index, compare the prefix of the string with the substring starting at that index. This tells exactly how many characters match from that position.</p></li><li><p>Increase <code>z[i]</code> while the characters are equal and the comparison stays inside the string. This count becomes the answer for that index.</p></li><li><p>Return the completed <code>z</code> array after every index has been processed.</p></li></ul><h3 id="blog-toc-dry-run">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Z Function Brute Dry Run" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/8ba5235cff1295a2.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Z Function Brute Dry Run</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-3"><h3 id="blog-toc-solution">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    /*
+    Builds the Z-array by comparing every suffix
+    directly with the prefix of the string.
+    */
+    vector&lt;int&gt; zFunction(string s) {
+        // Store the length of the input string.
+        int n = s.size();
+
+        // Store the Z-value for every index.
+        vector&lt;int&gt; z(n, 0);
+
+        for (int i = 1; i &lt; n; i++) {
+            // Keep matching while both characters are equal
+            // and the comparison stays inside the string.
+            while (i + z[i] &lt; n &amp;&amp; s[z[i]] == s[i + z[i]]) {
+                z[i]++;
+            }
+        }
+
+        return z;
+    }
+};
+
+// Driver code starts
+int main() {
+    string s = "aabxaab";
+
+    Solution obj;
+    vector&lt;int&gt; answer = obj.zFunction(s);
+
+    for (int value : answer) {
+        cout &lt;&lt; value &lt;&lt; " ";
+    }
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">from typing import List
+
+class Solution:
+    """
+    Builds the Z-array by comparing every suffix
+    directly with the prefix of the string.
+    """
+    def z_function(self, s: str) -&gt; List[int]:
+        # Store the length of the input string.
+        n: int = len(s)
+
+        # Store the Z-value for every index.
+        z: List[int] = [0] * n
+
+        for i in range(1, n):
+            # Keep matching while both characters are equal
+            # and the comparison stays inside the string.
+            while i + z[i] &lt; n and s[z[i]] == s[i + z[i]]:
+                z[i] += 1
+
+        return z
+
+
+# Driver code starts
+def main() -&gt; None:
+    s: str = "aabxaab"
+
+    obj = Solution()
+    print(obj.z_function(s))
+
+
+# Run the driver only when this file is executed directly.
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.Arrays;
+
+class Solution {
+    /*
+    Builds the Z-array by comparing every suffix
+    directly with the prefix of the string.
+    */
+    public int[] zFunction(String s) {
+        // Store the length of the input string.
+        int n = s.length();
+
+        // Store the Z-value for every index.
+        int[] z = new int[n];
+
+        for (int i = 1; i &lt; n; i++) {
+            // Keep matching while both characters are equal
+            // and the comparison stays inside the string.
+            while (i + z[i] &lt; n &amp;&amp; s.charAt(z[i]) == s.charAt(i + z[i])) {
+                z[i]++;
+            }
+        }
+
+        return z;
+    }
+}
+
+public class Main {
+    // Driver code starts
+    public static void main(String[] args) {
+        String s = "aabxaab";
+
+        Solution obj = new Solution();
+        int[] answer = obj.zFunction(s);
+
+        System.out.println(Arrays.toString(answer));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    /*
+    Builds the Z-array by comparing every suffix
+    directly with the prefix of the string.
+    */
+    zFunction(s) {
+        // Store the length of the input string.
+        const n = s.length;
+
+        // Store the Z-value for every index.
+        const z = new Array(n).fill(0);
+
+        for (let i = 1; i &lt; n; i++) {
+            // Keep matching while both characters are equal
+            // and the comparison stays inside the string.
+            while (i + z[i] &lt; n &amp;&amp; s[z[i]] === s[i + z[i]]) {
+                z[i]++;
+            }
+        }
+
+        return z;
+    }
+}
+
+// Driver code
+function main() {
+    const s = "aabxaab";
+
+    const obj = new Solution();
+    const result = obj.zFunction(s);
+
+    // Prints as a clean, single-line space-separated string: 0 1 0 0 3 1 0
+    console.log(result.join(" "));
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-4"><h3 id="blog-toc-complexity-analysis">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(N<sup>2</sup>), because for every index, the comparison can scan many characters in the worst case.</p><p><strong>Space Complexity:</strong> <code>O(N)</code>, because the Z-array stores one value for every index.</p></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-5"><h2 id="blog-toc-optimal-approach">Optimal Approach</h2><p>The brute force method works, but it suffers from amnesia—it recalculates matches it has already seen. The optimal Z-algorithm fixes this by remembering our most successful recent match.</p><p>Think of this remembered match as a <strong>"Z-box"</strong>. It is defined by two pointers, <code>left</code> and <code>right</code>.</p><ul><li><p><strong>The Z-Box (</strong><code>[left, right]</code><strong>):</strong> This is a window representing the rightmost segment of the string that perfectly matches the prefix of the string.</p></li><li><p><strong>The "Twin" Concept:</strong> Because everything inside this box is an exact copy of the string's prefix, any character inside the box has an exact "twin" near the beginning of the string. The twin for index <code>i</code> is located at index <code>i - left</code>.</p></li></ul><p>Instead of starting from zero at every index <code>i</code>, we check if <code>i</code> is safely inside our Z-box. If it is, we just look at its twin. Whatever the twin scored (its Z-value), index <code>i</code> will likely score the exact same, saving us from doing the work twice.</p></div><div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-6"><h4>The Three Scenarios</h4><p>When evaluating a new index <code>i</code>, only three things can happen:</p><ol><li><p><strong>Outside the Box (</strong><code>i &gt; right</code><strong>):</strong> We are in unknown territory. We have no memory to rely on, so we must compare characters one by one starting from the prefix (just like the brute force method).</p></li><li><p><strong>Inside the Box, fully contained:</strong> We look at our twin (<code>i - left</code>). The twin's previously calculated Z-value fits entirely within our current Z-box. We simply copy the twin's Z-value for <code>i</code>. No new comparisons are needed!</p></li><li><p><strong>Inside the Box, touching the edge:</strong> We look at our twin, but its Z-value is so large that it extends <em>past</em> the right edge of our Z-box. Because we only know what's inside the box, we can copy the twin's value <strong>up to the edge</strong> of the box (<code>right - i + 1</code>). From that edge onward, we must manually compare characters to see how far the match actually goes.</p></li></ol><h3 id="blog-toc-algorithm-2">Algorithm</h3><ul><li><p><strong>Initialize variables (</strong><code>z</code><strong> array, </strong><code>left</code><strong>, </strong><code>right</code><strong>):</strong> Set up the <code>z</code> array to store answers, using <code>left</code> and <code>right</code> starting at 0 to track the boundaries of your verified memory box.</p></li><li><p><strong>Start the loop (</strong><code>i = 1</code><strong> to </strong><code>n - 1</code><strong>):</strong> Iterate through the string to evaluate every possible starting position, skipping index 0 since the full string trivially matches itself.</p></li><li><p><strong>Find the twin (</strong><code>i &lt;= right</code><strong>):</strong> If the current index is inside the known memory box, calculate <code>i - left</code> to locate its identical twin near the beginning of the string to reference its previously calculated score.</p></li><li><p><strong>Copy safe values (</strong><code>min(z[k], right - i + 1)</code><strong>):</strong> Restrict the copied twin's value to the remaining distance of the box's right edge, ensuring you only reuse matches that fit strictly within verified territory.</p></li><li><p><strong>Extend manually:</strong> Use a <code>while</code> loop to step into unverified territory, comparing characters one by one to see how far the actual match continues beyond your current memory.</p></li><li><p><strong>Update boundaries (</strong><code>if i + z[i] - 1 &gt; right</code><strong>):</strong> If the manual comparisons stretch further right than the old box, update <code>left</code> and <code>right</code> to cover this newly discovered territory, maximizing the chance of skipping work in future iterations.</p></li><li><p><strong>Return the result:</strong> The array is now fully populated with the longest prefix matches for every position, achieved without redundant character comparisons.</p></li></ul><h3 id="blog-toc-dry-run-2">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Z Function Optimal Dry Run" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/df1f8712130e9f09.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Z Function Optimal Dry Run</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-7"><h3 id="blog-toc-solution-2">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    /*
+    Builds the Z-array in linear time by reusing
+    matches from the current rightmost Z-box.
+    */
+    vector&lt;int&gt; zFunction(string s) {
+        // Store the length of the input string.
+        int n = s.size();
+
+        // Store the Z-value for every index.
+        vector&lt;int&gt; z(n, 0);
+
+        // Mark the current rightmost segment that matches the prefix.
+        int left = 0;
+        int right = 0;
+
+        for (int i = 1; i &lt; n; i++) {
+            // If the index is inside the current Z-box,
+            // reuse only the part that is guaranteed to match.
+            if (i &lt;= right) {
+                // Find the matching position inside the prefix.
+                int mirrorIndex = i - left;
+
+                // Count how much of the current Z-box is still available.
+                int remainingBoxLength = right - i + 1;
+
+                // Reuse the safe part of the previously computed answer.
+                z[i] = min(remainingBoxLength, z[mirrorIndex]);
+            }
+
+            // Compare only the unknown part beyond the reused match.
+            while (i + z[i] &lt; n &amp;&amp; s[z[i]] == s[i + z[i]]) {
+                z[i]++;
+            }
+
+            // If this match reaches farther, it becomes the new Z-box.
+            if (i + z[i] - 1 &gt; right) {
+                // Save the start of the new rightmost matching segment.
+                left = i;
+
+                // Save the last matched index of the new segment.
+                right = i + z[i] - 1;
+            }
+        }
+
+        return z;
+    }
+};
+
+// Driver code starts
+int main() {
+    string s = "aabxaab";
+
+    Solution obj;
+    vector&lt;int&gt; answer = obj.zFunction(s);
+
+    for (int value : answer) {
+        cout &lt;&lt; value &lt;&lt; " ";
+    }
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">from typing import List
+
+class Solution:
+    """
+    Builds the Z-array in linear time by reusing
+    matches from the current rightmost Z-box.
+    """
+    def z_function(self, s: str) -&gt; List[int]:
+        # Store the length of the input string.
+        n: int = len(s)
+
+        # Store the Z-value for every index.
+        z: List[int] = [0] * n
+
+        # Mark the current rightmost segment that matches the prefix.
+        left: int = 0
+        right: int = 0
+
+        for i in range(1, n):
+            # If the index is inside the current Z-box,
+            # reuse only the part that is guaranteed to match.
+            if i &lt;= right:
+                # Find the matching position inside the prefix.
+                mirror_index: int = i - left
+
+                # Count how much of the current Z-box is still available.
+                remaining_box_length: int = right - i + 1
+
+                # Reuse the safe part of the previously computed answer.
+                z[i] = min(remaining_box_length, z[mirror_index])
+
+            # Compare only the unknown part beyond the reused match.
+            while i + z[i] &lt; n and s[z[i]] == s[i + z[i]]:
+                z[i] += 1
+
+            # If this match reaches farther, it becomes the new Z-box.
+            if i + z[i] - 1 &gt; right:
+                # Save the start of the new rightmost matching segment.
+                left = i
+
+                # Save the last matched index of the new segment.
+                right = i + z[i] - 1
+
+        return z
+
+
+# Driver code starts
+def main() -&gt; None:
+    s: str = "aabxaab"
+
+    obj = Solution()
+    print(obj.z_function(s))
+
+
+# Run the driver only when this file is executed directly.
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.Arrays;
+
+class Solution {
+    /*
+    Builds the Z-array in linear time by reusing
+    matches from the current rightmost Z-box.
+    */
+    public int[] zFunction(String s) {
+        // Store the length of the input string.
+        int n = s.length();
+
+        // Store the Z-value for every index.
+        int[] z = new int[n];
+
+        // Mark the current rightmost segment that matches the prefix.
+        int left = 0;
+        int right = 0;
+
+        for (int i = 1; i &lt; n; i++) {
+            // If the index is inside the current Z-box,
+            // reuse only the part that is guaranteed to match.
+            if (i &lt;= right) {
+                // Find the matching position inside the prefix.
+                int mirrorIndex = i - left;
+
+                // Count how much of the current Z-box is still available.
+                int remainingBoxLength = right - i + 1;
+
+                // Reuse the safe part of the previously computed answer.
+                z[i] = Math.min(remainingBoxLength, z[mirrorIndex]);
+            }
+
+            // Compare only the unknown part beyond the reused match.
+            while (i + z[i] &lt; n &amp;&amp; s.charAt(z[i]) == s.charAt(i + z[i])) {
+                z[i]++;
+            }
+
+            // If this match reaches farther, it becomes the new Z-box.
+            if (i + z[i] - 1 &gt; right) {
+                // Save the start of the new rightmost matching segment.
+                left = i;
+
+                // Save the last matched index of the new segment.
+                right = i + z[i] - 1;
+            }
+        }
+
+        return z;
+    }
+}
+
+public class Main {
+    // Driver code starts
+    public static void main(String[] args) {
+        String s = "aabxaab";
+
+        Solution obj = new Solution();
+        int[] answer = obj.zFunction(s);
+
+        System.out.println(Arrays.toString(answer));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    /*
+    Builds the Z-array in linear time by reusing
+    matches from the current rightmost Z-box.
+    */
+    zFunction(s) {
+        // Store the length of the input string.
+        const n = s.length;
+
+        // Store the Z-value for every index.
+        const z = new Array(n).fill(0);
+
+        // Mark the current rightmost segment that matches the prefix.
+        let left = 0;
+        let right = 0;
+
+        for (let i = 1; i &lt; n; i++) {
+            // If the index is inside the current Z-box,
+            // reuse only the part that is guaranteed to match.
+            if (i &lt;= right) {
+                // Find the matching position inside the prefix.
+                const mirrorIndex = i - left;
+
+                // Count how much of the current Z-box is still available.
+                const remainingBoxLength = right - i + 1;
+
+                // Reuse the safe part of the previously computed answer.
+                z[i] = Math.min(remainingBoxLength, z[mirrorIndex]);
+            }
+
+            // Compare only the unknown part beyond the reused match.
+            while (i + z[i] &lt; n &amp;&amp; s[z[i]] === s[i + z[i]]) {
+                z[i]++;
+            }
+
+            // If this match reaches farther, it becomes the new Z-box.
+            if (i + z[i] - 1 &gt; right) {
+                // Save the start of the new rightmost matching segment.
+                left = i;
+
+                // Save the last matched index of the new segment.
+                right = i + z[i] - 1;
+            }
+        }
+
+        return z;
+    }
+}
+
+// Driver code starts
+function main() {
+    const s = "aabxaab";
+
+    const obj = new Solution();
+    console.log(obj.zFunction(s));
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-8"><h3 id="blog-toc-complexity-analysis-2">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(N)</code>, because each extra character comparison extends the right boundary, and that boundary can move only up to the end of the string.</p><p><strong>Space Complexity:</strong> <code>O(N)</code>, because the Z-array stores one value for every index.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div><section aria-label="Interview follow-up Questions" class="BlogDetail-module__HEfJva__faqSection" id="blog-toc-faqs"><h2 class="BlogDetail-module__HEfJva__faqHeading">Interview follow-up Questions</h2><div class="flex w-full flex-col BlogDetail-module__HEfJva__faqList" data-orientation="vertical" data-slot="accordion"><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="open"><h3 class="flex" data-orientation="vertical" data-state="open"></h3><div aria-labelledby="radix-_R_1kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="open" id="radix-_R_9kcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"><div class="h-auto pt-0 pb-2.5 [&amp;_a]:underline [&amp;_a]:underline-offset-3 [&amp;_a]:hover:text-foreground [&amp;_p:not(:last-child)]:mb-4 BlogDetail-module__HEfJva__faqAnswer"><p>The whole string matches itself at index 0, so its value could be considered n. But in most Z Function implementations, z[0] is kept as 0 because it is not needed for computing the remaining values.</p></div></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_2kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_akcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_3kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_bkcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_4kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_ckcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div></div></section></div>
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

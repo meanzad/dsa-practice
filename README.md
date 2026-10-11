@@ -53,16 +53,28 @@ carry `noindex,nofollow`, but that is not a substitute for keeping the repo priv
 
 ## Using the site
 
-Everything under `site/` is plain HTML/CSS/JS with no build step.
+Everything under `docs/` is plain HTML/CSS/JS with no build step.
 
 ```bash
-cd site && python -m http.server 8000
+cd docs && python -m http.server 8000
 ```
 
 Then open <http://localhost:8000>. (Open `index.html` via `file://` and the browser
 will block the `fetch` of `sheet.json` — serve it over HTTP.)
 
-For GitHub Pages on a **private** repo, point Pages at the `site/` folder.
+### Syncing progress between machines
+
+Progress and notes live in `localStorage`, which never leaves the browser. To use
+the sheet on more than one computer, click **Sync** and paste a GitHub
+*fine-grained* token with **Gist** access (read and write) and no other permission.
+
+The token is stored only in that browser and is sent only to `api.github.com`.
+**Never commit it.** The first connect creates a private gist; every machine after
+that finds the same gist and merges into it.
+
+Merging is per problem, last write wins: two machines editing different problems
+both keep their work, and the same problem resolves to the newer edit. The sheet
+syncs on load, when you return to the tab, and a moment after each change.
 
 **Features**
 - All 451 problems, grouped by category and subcategory, with solved counts per section
@@ -88,10 +100,10 @@ scrape/
   fetch_restored.py gaps       -> data/articles/*.json  (statements, live site)
   blogs.py          extractor for /blogs/ editorials (prose + code)
   fetch_blogs.py    full editorials -> data/articles/*.json (live site)
-  fetch_images.py   images     -> site/assets/img/, rewrites article HTML
-  build_site.py     data/      -> site/
+  fetch_images.py   images     -> docs/assets/img/, rewrites article HTML
+  build_site.py     data/      -> docs/
 data/               scraped JSON: this is the actual archive
-site/               the generated static site
+docs/               the generated static site (GitHub Pages serves this folder)
 .cache/             raw HTTP responses (gitignored); makes re-runs free
 ```
 

@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Maximum Width of a Binary Tree</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Maximum Width of a Binary Tree</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/maximum-width-of-a-binary-tree/</code></div>
+  <p><strong>Problem Statement: </strong> <br/>Given a Binary Tree, return its maximum width.
+The maximum width of a Binary Tree is the maximum diameter among all its levels. The width or diameter of a level is the number of nodes between the leftmost and rightmost nodes.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: Binary Tree: 1 2 3 5 6 -1 9</span>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/e7d6233aff521639.png" width="439"/></figure>
+<span>Output: Maximum Width: 4</span>
+<span>Explanation: 
+Level 3 is the widest level of the Binary Tree and whose end-to-end width is 4 comprising of nodes: {5, 6, null, 9}.</span>
+				<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/4c9525e0505abe65.png" width="439"/></figure>
+<p></p>
+<span>Input: Binary Tree: 1 2 3 5</span>
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/2293e575faf53674.png" width="439"/></figure>
+<span>Output: Maximum Width: 2</span>
+<span>Explanation: 
+Level 2 is the widest level of the Binary Tree and whose end-to-end width is comprised of nodes: {2, 3}.</span>
+				<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/3019fd93636ace17.png" width="439"/></figure>
+            </pre>
+</div>
+</details>
+</div><strong><em>Disclaimer</em></strong>: <em>
+     Here is the <a href="https://takeuforward.org/plus/dsa/problems/maximum-width-of-bt" rel="noopener" target="_blank">practice link </a> to help you assess your knowledge better.
+           It's highly recommend trying to
+        solve it before looking at the solution. </em>
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+To determine the maximum width of a tree, an effective strategy would be to assign and identify indexes for the leftmost and rightmost nodes at each level. Using these indexes, we can calculate the width for each level by subtracting the index of the leftmost node from that of the rightmost node.
+<br/>
+Start by assigning an index to the root node as 0. For each level, the left child gets an index equal to 2 * parent index, and the right child gets an index equal to 2 * parent index + 1. Using a level order traversal, we use the leftmost and rightmost nodes at each level to get the width at that level. Keep track of the maximum width encountered during the traversal. Whenever a wider level is found, update the maximum width.
+
+<ul>
+<li>Use level-order traversal (BFS) and track each node’s position as if the tree were a complete binary tree.</li>
+<li>For each level in the tree, note the position of the first and last node and compute the width as the difference between these two positions.</li>
+<li>For the next level, assign positions to children. After processing all levels, return the maximum width recorded.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/e6946a99e1d3419f.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/a31016e32472b23f.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/3dfaec3f1de039f7.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/44371d4e063f99d1.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/4613b4e8137f57dc.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/e6946a99e1d3419f.png"/><img alt="Image 2" loading="lazy" src="../assets/img/a31016e32472b23f.png"/><img alt="Image 3" loading="lazy" src="../assets/img/3dfaec3f1de039f7.png"/><img alt="Image 4" loading="lazy" src="../assets/img/44371d4e063f99d1.png"/><img alt="Image 5" loading="lazy" src="../assets/img/4613b4e8137f57dc.png"/></div></div><p></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Class definition for a binary tree node
+class TreeNode {
+public:
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+
+    // Constructor to initialize the node value
+    TreeNode(int x) {
+        val = x;
+        left = nullptr;
+        right = nullptr;
+    }
+};
+
+// Class containing the method to find maximum width
+class Solution {
+public:
+    // Function to compute the maximum width of binary tree
+    int widthOfBinaryTree(TreeNode* root) {
+
+        // If the tree is empty, return 0
+        if (!root)
+            return 0;
+
+        // Initialize maximum width as 0
+        int maxWidth = 0;
+
+        // Queue to perform level-order traversal
+        // Each element is a pair of node and its index
+        queue&lt;pair&lt;TreeNode*, int&gt;&gt; q;
+
+        // Push root node with index 0
+        q.push({root, 0});
+
+        // Continue BFS until queue becomes empty
+        while (!q.empty()) {
+
+            // Get the number of nodes at current level
+            int size = q.size();
+
+            // Store the index of the first node at this level
+            int minIndex = q.front().second;
+
+            // Initialize variables to track first and last index
+            int first = 0;
+            int last = 0;
+
+            // Traverse all nodes at the current level
+            for (int i = 0; i &lt; size; i++) {
+
+                // Get the current node and its relative index
+                int currIndex = q.front().second - minIndex;
+                TreeNode* node = q.front().first;
+
+                // Pop the current node from the queue
+                q.pop();
+
+                // Update the first index if it's the first node
+                if (i == 0)
+                    first = currIndex;
+
+                // Update the last index if it's the last node
+                if (i == size - 1)
+                    last = currIndex;
+
+                // If left child exists, push it with calculated index
+                if (node-&gt;left)
+                    q.push({node-&gt;left, 2 * currIndex + 1});
+
+                // If right child exists, push it with calculated index
+                if (node-&gt;right)
+                    q.push({node-&gt;right, 2 * currIndex + 2});
+            }
+
+            // Update the maximum width if needed
+            maxWidth = max(maxWidth, last - first + 1);
+        }
+
+        // Return the result
+        return maxWidth;
+    }
+};
+
+// Main driver function
+int main() {
+
+    // Create a sample tree
+    TreeNode* root = new TreeNode(1);
+    root-&gt;left = new TreeNode(3);
+    root-&gt;right = new TreeNode(2);
+    root-&gt;left-&gt;left = new TreeNode(5);
+    root-&gt;left-&gt;right = new TreeNode(3);
+    root-&gt;right-&gt;right = new TreeNode(9);
+
+    // Create solution object
+    Solution sol;
+
+    // Call the function and print the result
+    cout &lt;&lt; "Maximum width: " &lt;&lt; sol.widthOfBinaryTree(root) &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Class definition for binary tree node
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    // Constructor
+    TreeNode(int val) {
+        this.val = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+// Class containing the method
+class Solution {
+    // Function to find the maximum width of binary tree
+    public int widthOfBinaryTree(TreeNode root) {
+
+        // If the root is null, return 0
+        if (root == null)
+            return 0;
+
+        // Initialize max width
+        int maxWidth = 0;
+
+        // Queue to store node and its index
+        Queue&lt;Pair&lt;TreeNode, Integer&gt;&gt; q = new LinkedList&lt;&gt;();
+
+        // Push root with index 0
+        q.offer(new Pair&lt;&gt;(root, 0));
+
+        // BFS traversal
+        while (!q.isEmpty()) {
+
+            // Get size of current level
+            int size = q.size();
+
+            // Get the minimum index at this level
+            int minIndex = q.peek().getValue();
+
+            // Variables to store first and last index
+            int first = 0, last = 0;
+
+            // Traverse all nodes in this level
+            for (int i = 0; i &lt; size; i++) {
+
+                // Get current node and index
+                Pair&lt;TreeNode, Integer&gt; p = q.poll();
+                TreeNode node = p.getKey();
+                int currIndex = p.getValue() - minIndex;
+
+                // Update first index
+                if (i == 0)
+                    first = currIndex;
+
+                // Update last index
+                if (i == size - 1)
+                    last = currIndex;
+
+                // Push left child if exists
+                if (node.left != null)
+                    q.offer(new Pair&lt;&gt;(node.left, 
+                        2 * currIndex + 1));
+
+                // Push right child if exists
+                if (node.right != null)
+                    q.offer(new Pair&lt;&gt;(node.right, 
+                        2 * currIndex + 2));
+            }
+
+            // Update maximum width
+            maxWidth = Math.max(maxWidth, last - first + 1);
+        }
+
+        // Return the final result
+        return maxWidth;
+    }
+}
+
+// Driver class
+public class Main {
+    public static void main(String[] args) {
+
+        // Create the tree
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(3);
+        root.right = new TreeNode(2);
+        root.left.left = new TreeNode(5);
+        root.left.right = new TreeNode(3);
+        root.right.right = new TreeNode(9);
+
+        // Create solution object
+        Solution sol = new Solution();
+
+        // Call the function and print result
+        System.out.println("Maximum width: " + 
+            sol.widthOfBinaryTree(root));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">from collections import deque
+
+# Class definition for binary tree node
+class TreeNode:
+    # Constructor to initialize node
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+# Class containing the function
+class Solution:
+    # Function to calculate maximum width
+    def widthOfBinaryTree(self, root):
+
+        # If root is None, return 0
+        if not root:
+            return 0
+
+        # Initialize max width
+        max_width = 0
+
+        # Queue for BFS traversal
+        # Stores node and its index
+        q = deque()
+        q.append((root, 0))
+
+        # Continue BFS
+        while q:
+
+            # Size of current level
+            size = len(q)
+
+            # Minimum index at this level
+            min_index = q[0][1]
+
+            # Initialize first and last
+            first = 0
+            last = 0
+
+            # Process all nodes at this level
+            for i in range(size):
+
+                # Get node and relative index
+                node, idx = q.popleft()
+                curr_index = idx - min_index
+
+                # Set first index
+                if i == 0:
+                    first = curr_index
+
+                # Set last index
+                if i == size - 1:
+                    last = curr_index
+
+                # Append left child if exists
+                if node.left:
+                    q.append((node.left, 
+                              2 * curr_index + 1))
+
+                # Append right child if exists
+                if node.right:
+                    q.append((node.right, 
+                              2 * curr_index + 2))
+
+            # Update max width
+            max_width = max(max_width, 
+                            last - first + 1)
+
+        # Return the answer
+        return max_width
+
+# Driver code
+if __name__ == "__main__":
+
+    # Build the tree
+    root = TreeNode(1)
+    root.left = TreeNode(3)
+    root.right = TreeNode(2)
+    root.left.left = TreeNode(5)
+    root.left.right = TreeNode(3)
+    root.right.right = TreeNode(9)
+
+    # Create object
+    sol = Solution()
+
+    # Print the result
+    print("Maximum width:", sol.widthOfBinaryTree(root))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Class definition for binary tree node
+class TreeNode {
+    // Constructor
+    constructor(val) {
+        this.val = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+// Function to calculate maximum width
+function widthOfBinaryTree(root) {
+
+    // If tree is empty, return 0
+    if (!root) return 0;
+
+    // Initialize maximum width
+    let maxWidth = 0;
+
+    // Queue for BFS: stores [node, index]
+    let queue = [[root, 0]];
+
+    // BFS loop
+    while (queue.length &gt; 0) {
+
+        // Number of nodes in current level
+        let size = queue.length;
+
+        // Minimum index in level
+        let minIndex = queue[0][1];
+
+        // Initialize first and last
+        let first = 0, last = 0;
+
+        // Traverse current level
+        for (let i = 0; i &lt; size; i++) {
+
+            // Dequeue node and its index
+            let [node, index] = queue.shift();
+
+            // Normalize index
+            let currIndex = index - minIndex;
+
+            // Set first index
+            if (i === 0) first = currIndex;
+
+            // Set last index
+            if (i === size - 1) last = currIndex;
+
+            // Enqueue left child if exists
+            if (node.left)
+                queue.push([node.left, 
+                            2 * currIndex + 1]);
+
+            // Enqueue right child if exists
+            if (node.right)
+                queue.push([node.right, 
+                            2 * currIndex + 2]);
+        }
+
+        // Update maximum width
+        maxWidth = Math.max(maxWidth, last - first + 1);
+    }
+
+    // Return the result
+    return maxWidth;
+}
+
+// Driver code
+
+// Build the binary tree
+let root = new TreeNode(1);
+root.left = new TreeNode(3);
+root.right = new TreeNode(2);
+root.left.left = new TreeNode(5);
+root.left.right = new TreeNode(3);
+root.right.right = new TreeNode(9);
+
+// Call the function and print
+console.log("Maximum width:", widthOfBinaryTree(root));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+<strong>Time Complexity: O(N)</strong>, each node is processed once in level order traversal.<br/>
+<strong>Space Complexity: O(N)</strong>, in worst case, the queue holds all the nodes of the last level i.e. N/2 nodes.<br/>
+<p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

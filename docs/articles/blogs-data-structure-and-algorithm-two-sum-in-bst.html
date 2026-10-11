@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Two Sum in a BST: Find a Pair with a Given Sum</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Two Sum in a BST: Find a Pair with a Given Sum</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/blogs/data-structure-and-algorithm/two-sum-in-bst</code></div>
+  <div class="ArticleParser-module__R__VNG__article" data-article-segment="html-0"><p>In the Two Sum IV - Input is a BST problem, you are given the root node of a binary search tree and an integer target <code>k</code>. Your task is to determine if there are any two distinct nodes within the tree whose values add up exactly to the target <code>k</code>. Return true if such a pair exists, and false if no such pair can be found anywhere in the tree.</p></div><div><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 1</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> root = [5, 3, 6, 2, 4, null, 7], k = 9</p><p><strong>Output: </strong>true</p><p><strong>Explanation:</strong> The tree contains the values 5, 3, 6, 2, 4, and 7. If we take the node with value 3 and the node with value 6, their sum is exactly 9. Because a valid pair exists, the result is true.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 2</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input: </strong>root = [5, 3, 6, 2, 4, null, 7], k = 28</p><p><strong>Output:</strong> false</p><p><strong>Explanation: </strong>The tree contains the same values. However, even if we add the two absolute largest numbers in the tree together (6 + 7), the maximum possible sum is 13. It is physically impossible to reach the target of 28, so the result is false.</p></div></div></section></div><div><div class="BlogDetail-module__HEfJva__practiceCallout"><a class="BlogDetail-module__HEfJva__practiceLink" data-mobile-prefetch="normal" href="https://takeuforward.org/practice/dsa/two-sum-in-bst-check-if-there-exists-a-pair-with-sum-k?subject=strivers-79-sheet" rel="noopener" target="_blank"><span>Practice it by yourself before moving onto the solution</span><span class="BlogDetail-module__HEfJva__practiceAction">Try now</span></a></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-2"><h2 id="blog-toc-brute-force-approach">Brute Force Approach</h2><p>Finding two matching numbers is much easier when all the numbers are lined up in order from smallest to largest. A binary search tree is naturally sorted, but the numbers are spread out across hierarchical branches. By performing a standard inorder traversal, we can extract every single number and place it into a flat, perfectly sorted list. Once we have this sorted list, we can place one pointer at the smallest number and another pointer at the largest number. If their sum is too big, we move the larger pointer down. If their sum is too small, we move the smaller pointer up. If you want to understand this in detail, check our guide on the Two Pointer Technique.</p><h3 id="blog-toc-algorithm"><strong>Algorithm</strong></h3><ul><li><p>Create an empty dynamic array to hold our extracted numbers.</p></li><li><p>Write a recursive helper function to perform an inorder traversal (visit left child, visit root, visit right child) and push each value into the array.</p></li><li><p>Call the helper function on the root of the tree.</p></li><li><p>Set a <code>left</code> pointer to the first index of the array (0) and a <code>right</code> pointer to the last index of the array.</p></li><li><p>Start a loop that continues as long as <code>left</code> is strictly less than <code>right</code>.</p></li><li><p>Calculate the sum of the numbers at the <code>left</code> and <code>right</code> pointers.</p></li><li><p>If the sum exactly matches the target <code>k</code>, return true immediately.</p></li><li><p>If the sum is strictly less than the target, increment the <code>left</code> pointer to increase the total sum.</p></li><li><p>If the sum is strictly greater than the target, decrement the <code>right</code> pointer to decrease the total sum.</p></li><li><p>If the loop breaks without finding a match, return false.</p></li></ul><h3 id="blog-toc-dry-run">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Two Sum 4 Brute Dry Run" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/aea78700a9deda55.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Two Sum 4 Brute Dry Run</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-3"><h3 id="blog-toc-solution">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Definition for a binary tree node
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+class Solution {
+private:
+    // Helper function to extract tree values in strictly increasing order
+    void inorder(TreeNode* root, vector&lt;int&gt;&amp; nums) {
+        // Base case: stop if the node is empty
+        if (root == nullptr) {
+            return;
+        }
+        
+        // Traverse the left side completely
+        inorder(root-&gt;left, nums);
+        // Store the current node's value
+        nums.push_back(root-&gt;val);
+        // Traverse the right side completely
+        inorder(root-&gt;right, nums);
+    }
+
+public:
+    /*
+       Main function to find the target sum using an array and two pointers
+    */
+    bool findTarget(TreeNode* root, int k) {
+        vector&lt;int&gt; nums;
+        // Flatten the BST into a sorted array
+        inorder(root, nums);
+        
+        // Initialize pointers at the extreme ends of the array
+        int left = 0;
+        int right = nums.size() - 1;
+        
+        // Loop to check pairs until the pointers cross
+        while (left &lt; right) {
+            int currentSum = nums[left] + nums[right];
+            
+            // If the exact target is found, return true
+            if (currentSum == k) {
+                return true;
+            }
+            
+            // If the sum is too small, move to a larger number on the left
+            if (currentSum &lt; k) {
+                left++;
+            } 
+            // If the sum is too large, move to a smaller number on the right
+            else {
+                right--;
+            }
+        }
+        
+        // No valid pairs exist
+        return false;
+    }
+};
+
+// Driver code starts here
+int main() {
+    // Construct the sample tree: [5, 3, 6, 2, 4, null, 7]
+    TreeNode* root = new TreeNode(5);
+    root-&gt;left = new TreeNode(3);
+    root-&gt;right = new TreeNode(6);
+    root-&gt;left-&gt;left = new TreeNode(2);
+    root-&gt;left-&gt;right = new TreeNode(4);
+    root-&gt;right-&gt;right = new TreeNode(7);
+    
+    Solution obj;
+    int k = 9;
+    
+    // Check if the target exists
+    bool result = obj.findTarget(root, k);
+    cout &lt;&lt; (result ? "true" : "false") &lt;&lt; endl;
+    
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python"># Definition for a binary tree node
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    # Helper function to extract tree values in strictly increasing order
+    def inorder(self, root, nums):
+        # Base case: stop if the node is empty
+        if root is None:
+            return
+            
+        # Traverse the left side completely
+        self.inorder(root.left, nums)
+        # Store the current node's value
+        nums.append(root.val)
+        # Traverse the right side completely
+        self.inorder(root.right, nums)
+
+    # Main function to find the target sum using a list and two pointers
+    def findTarget(self, root, k):
+        nums = []
+        # Flatten the BST into a sorted list
+        self.inorder(root, nums)
+        
+        # Initialize pointers at the extreme ends of the list
+        left = 0
+        right = len(nums) - 1
+        
+        # Loop to check pairs until the pointers cross
+        while left &lt; right:
+            currentSum = nums[left] + nums[right]
+            
+            # If the exact target is found, return true
+            if currentSum == k:
+                return True
+                
+            # If the sum is too small, move to a larger number on the left
+            if currentSum &lt; k:
+                left += 1
+            # If the sum is too large, move to a smaller number on the right
+            else:
+                right -= 1
+                
+        # No valid pairs exist
+        return False
+
+# Driver code starts here
+if __name__ == "__main__":
+    # Construct the sample tree: [5, 3, 6, 2, 4, None, 7]
+    root = TreeNode(5)
+    root.left = TreeNode(3)
+    root.right = TreeNode(6)
+    root.left.left = TreeNode(2)
+    root.left.right = TreeNode(4)
+    root.right.right = TreeNode(7)
+    
+    obj = Solution()
+    k = 9
+    
+    # Check if the target exists
+    result = obj.findTarget(root, k)
+    print("true" if result else "false")</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+/*
+   Definition for a binary tree node
+*/
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+    TreeNode(int x) { val = x; }
+}
+
+class Solution {
+    /*
+       Helper function to extract tree values in strictly increasing order
+    */
+    private void inorder(TreeNode root, List&lt;Integer&gt; nums) {
+        // Base case: stop if the node is empty
+        if (root == null) {
+            return;
+        }
+        
+        // Traverse the left side completely
+        inorder(root.left, nums);
+        // Store the current node's value
+        nums.add(root.val);
+        // Traverse the right side completely
+        inorder(root.right, nums);
+    }
+
+    /*
+       Main function to find the target sum using a list and two pointers
+    */
+    public boolean findTarget(TreeNode root, int k) {
+        List&lt;Integer&gt; nums = new ArrayList&lt;&gt;();
+        // Flatten the BST into a sorted list
+        inorder(root, nums);
+        
+        // Initialize pointers at the extreme ends of the list
+        int left = 0;
+        int right = nums.size() - 1;
+        
+        // Loop to check pairs until the pointers cross
+        while (left &lt; right) {
+            int currentSum = nums.get(left) + nums.get(right);
+            
+            // If the exact target is found, return true
+            if (currentSum == k) {
+                return true;
+            }
+            
+            // If the sum is too small, move to a larger number on the left
+            if (currentSum &lt; k) {
+                left++;
+            } 
+            // If the sum is too large, move to a smaller number on the right
+            else {
+                right--;
+            }
+        }
+        
+        // No valid pairs exist
+        return false;
+    }
+}
+
+// Driver code starts here
+class Main {
+    public static void main(String[] args) {
+        // Construct the sample tree: [5, 3, 6, 2, 4, null, 7]
+        TreeNode root = new TreeNode(5);
+        root.left = new TreeNode(3);
+        root.right = new TreeNode(6);
+        root.left.left = new TreeNode(2);
+        root.left.right = new TreeNode(4);
+        root.right.right = new TreeNode(7);
+        
+        Solution obj = new Solution();
+        int k = 9;
+        
+        // Check if the target exists
+        boolean result = obj.findTarget(root, k);
+        System.out.println(result ? "true" : "false");
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">/*
+   Definition for a binary tree node
+*/
+class TreeNode {
+    constructor(val = 0, left = null, right = null) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+class Solution {
+    /*
+       Helper function to extract tree values in strictly increasing order
+    */
+    inorder(root, nums) {
+        // Base case: stop if the node is empty
+        if (root === null) {
+            return;
+        }
+        
+        // Traverse the left side completely
+        this.inorder(root.left, nums);
+        // Store the current node's value
+        nums.push(root.val);
+        // Traverse the right side completely
+        this.inorder(root.right, nums);
+    }
+
+    /*
+       Main function to find the target sum using an array and two pointers
+    */
+    findTarget(root, k) {
+        let nums = [];
+        // Flatten the BST into a sorted array
+        this.inorder(root, nums);
+        
+        // Initialize pointers at the extreme ends of the array
+        let left = 0;
+        let right = nums.length - 1;
+        
+        // Loop to check pairs until the pointers cross
+        while (left &lt; right) {
+            let currentSum = nums[left] + nums[right];
+            
+            // If the exact target is found, return true
+            if (currentSum === k) {
+                return true;
+            }
+            
+            // If the sum is too small, move to a larger number on the left
+            if (currentSum &lt; k) {
+                left++;
+            } 
+            // If the sum is too large, move to a smaller number on the right
+            else {
+                right--;
+            }
+        }
+        
+        // No valid pairs exist
+        return false;
+    }
+}
+
+// Driver code starts here
+// Construct the sample tree: [5, 3, 6, 2, 4, null, 7]
+const root = new TreeNode(5);
+root.left = new TreeNode(3);
+root.right = new TreeNode(6);
+root.left.left = new TreeNode(2);
+root.left.right = new TreeNode(4);
+root.right.right = new TreeNode(7);
+
+const obj = new Solution();
+const k = 9;
+
+// Check if the target exists
+const result = obj.findTarget(root, k);
+console.log(result ? "true" : "false");</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-4"><h3 id="blog-toc-complexity-analysis">Complexity Analysis</h3><p><strong>Time Complexity: </strong>O(N), where N is the total number of nodes. We visit every node once during the inorder traversal, and the two-pointer loop takes at most N steps.</p><p><strong>Space Complexity: </strong>O(N), because we store all the node values in an entirely separate array structure, consuming memory proportional to the size of the tree.</p><p></p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-5"><h2 id="blog-toc-optimal-approach">Optimal Approach</h2></div><div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-6"><p>Extracting everything into an array takes unnecessary RAM. If the tree contains millions of elements, we create an array of millions of elements, even if the target numbers are the very first two numbers we check. We can drastically improve our memory usage by using customized iterators that walk through the tree one step at a time, calculating the sums on the fly. If you want to understand this in detail, check our guide on the Binary Search Tree Iterator.</p><p>Consider two explorers navigating a mountain range. One explorer starts at the absolute lowest valley and only walks upward. The second explorer starts at the highest peak and only walks downward. They pause at every checkpoint and communicate their combined altitude via radio. If the total altitude is too low, the bottom explorer climbs one checkpoint higher. If the total is too high, the top explorer climbs one checkpoint lower. They use a breadcrumb trail (a stack) to remember their paths without mapping the entire mountain range at once.</p><h3 id="blog-toc-algorithm-2"><strong>Algorithm</strong></h3><ul><li><p>Create a custom <code>BSTIterator</code> class. It should accept a boolean flag <code>reverse</code>. If <code>reverse</code> is false, it behaves like a normal in-order iterator (yielding smallest to largest). If <code>reverse</code> is true, it behaves as a reverse in-order iterator (yielding largest to smallest).</p></li><li><p>Inside the main solution, instantiate two iterators: <code>leftIter</code> (normal) and <code>rightIter</code> (reverse).</p></li><li><p>Retrieve the first elements from both iterators: <code>i</code> from <code>leftIter</code> and <code>j</code> from <code>rightIter</code>.</p></li><li><p>Loop while <code>i</code> is strictly less than <code>j</code>.</p></li><li><p>Check the sum of <code>i</code> and <code>j</code>. If it matches <code>k</code>, return true.</p></li><li><p>If the sum is strictly less than <code>k</code>, move the left explorer forward by calling <code>next()</code> on <code>leftIter</code> and updating <code>i</code>.</p></li><li><p>If the sum is strictly greater than <code>k</code>, move the right explorer backward by calling <code>next()</code> on <code>rightIter</code> and updating <code>j</code>.</p></li><li><p>Return false if the iterators cross paths without finding a match.</p></li></ul><h3 id="blog-toc-dry-run-2">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Two Sum 4 Optimal Dry Run" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/233bc5711f6774d5.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Two Sum 4 Optimal Dry Run</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-7"><h3 id="blog-toc-solution-2">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Definition for a binary tree node
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+/*
+   Custom iterator class that can traverse the tree from smallest to largest
+   or from largest to smallest, depending on the initialization flag
+*/
+class BSTIterator {
+private:
+    stack&lt;TreeNode*&gt; st;
+    // true = descending, false = ascending
+    bool reverse; 
+    
+    // Helper function to push all boundary nodes onto the stack
+    void pushAll(TreeNode* node) {
+        while (node != nullptr) {
+            st.push(node);
+            // If traversing backwards, load right children. Otherwise, load left children.
+            if (reverse == true) {
+                node = node-&gt;right;
+            } else {
+                node = node-&gt;left;
+            }
+        }
+    }
+
+public:
+    // Constructor initializes the appropriate path
+    BSTIterator(TreeNode* root, bool isReverse) {
+        reverse = isReverse;
+        pushAll(root);
+    }
+    
+    // Retrieves the next target element in the sequence
+    int next() {
+        TreeNode* topNode = st.top();
+        st.pop();
+        
+        // If traversing backwards, look left for the next smaller element
+        if (reverse == true) {
+            pushAll(topNode-&gt;left);
+        } 
+        // If traversing forwards, look right for the next larger element
+        else {
+            pushAll(topNode-&gt;right);
+        }
+        
+        return topNode-&gt;val;
+    }
+};
+
+class Solution {
+public:
+    /*
+       Main function linking the forward and reverse iterators
+       to simulate the optimal two-pointer array technique
+    */
+    bool findTarget(TreeNode* root, int k) {
+        // Guard clause for empty trees
+        if (root == nullptr) return false;
+        
+        // Initialize one iterator at the minimum and one at the maximum
+        BSTIterator leftIter(root, false);
+        BSTIterator rightIter(root, true);
+        
+        int i = leftIter.next();
+        int j = rightIter.next();
+        
+        // Loop until the iterators cross each other
+        while (i &lt; j) {
+            int currentSum = i + j;
+            
+            // The exact sum is found
+            if (currentSum == k) {
+                return true;
+            }
+            
+            // Sum is too small, advance the left iterator
+            if (currentSum &lt; k) {
+                i = leftIter.next();
+            } 
+            // Sum is too large, advance the right iterator
+            else {
+                j = rightIter.next();
+            }
+        }
+        
+        return false;
+    }
+};
+
+// Driver code starts here
+int main() {
+    // Construct the sample tree: [5, 3, 6, 2, 4, null, 7]
+    TreeNode* root = new TreeNode(5);
+    root-&gt;left = new TreeNode(3);
+    root-&gt;right = new TreeNode(6);
+    root-&gt;left-&gt;left = new TreeNode(2);
+    root-&gt;left-&gt;right = new TreeNode(4);
+    root-&gt;right-&gt;right = new TreeNode(7);
+    
+    Solution obj;
+    int k = 9;
+    
+    // Check if the target exists
+    bool result = obj.findTarget(root, k);
+    cout &lt;&lt; (result ? "true" : "false") &lt;&lt; endl;
+    
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python"># Definition for a binary tree node
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+# Custom iterator class that can traverse the tree from smallest to largest
+# or from largest to smallest, depending on the initialization flag
+class BSTIterator:
+    # Constructor initializes the appropriate path
+    def __init__(self, root, isReverse):
+        self.st = []
+        self.reverse = isReverse
+        self._pushAll(root)
+        
+    # Helper function to push all boundary nodes onto the stack
+    def _pushAll(self, node):
+        while node is not None:
+            self.st.append(node)
+            # If traversing backwards, load right children. Otherwise, load left children.
+            if self.reverse:
+                node = node.right
+            else:
+                node = node.left
+
+    # Retrieves the next target element in the sequence
+    def next(self):
+        topNode = self.st.pop()
+        
+        # If traversing backwards, look left for the next smaller element
+        if self.reverse:
+            self._pushAll(topNode.left)
+        # If traversing forwards, look right for the next larger element
+        else:
+            self._pushAll(topNode.right)
+            
+        return topNode.val
+
+class Solution:
+    # Main function linking the forward and reverse iterators
+    # to simulate the optimal two-pointer array technique
+    def findTarget(self, root, k):
+        # Guard clause for empty trees
+        if root is None:
+            return False
+            
+        # Initialize one iterator at the minimum and one at the maximum
+        leftIter = BSTIterator(root, False)
+        rightIter = BSTIterator(root, True)
+        
+        i = leftIter.next()
+        j = rightIter.next()
+        
+        # Loop until the iterators cross each other
+        while i &lt; j:
+            currentSum = i + j
+            
+            # The exact sum is found
+            if currentSum == k:
+                return True
+                
+            # Sum is too small, advance the left iterator
+            if currentSum &lt; k:
+                i = leftIter.next()
+            # Sum is too large, advance the right iterator
+            else:
+                j = rightIter.next()
+                
+        return False
+
+# Driver code starts here
+if __name__ == "__main__":
+    # Construct the sample tree: [5, 3, 6, 2, 4, None, 7]
+    root = TreeNode(5)
+    root.left = TreeNode(3)
+    root.right = TreeNode(6)
+    root.left.left = TreeNode(2)
+    root.left.right = TreeNode(4)
+    root.right.right = TreeNode(7)
+    
+    obj = Solution()
+    k = 9
+    
+    # Check if the target exists
+    result = obj.findTarget(root, k)
+    print("true" if result else "false")</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+/*
+   Definition for a binary tree node
+*/
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+    TreeNode(int x) { val = x; }
+}
+
+/*
+   Custom iterator class that can traverse the tree from smallest to largest
+   or from largest to smallest, depending on the initialization flag
+*/
+class BSTIterator {
+    private Stack&lt;TreeNode&gt; st;
+    private boolean reverse; // true = descending, false = ascending
+    
+    // Helper function to push all boundary nodes onto the stack
+    private void pushAll(TreeNode node) {
+        while (node != null) {
+            st.push(node);
+            // If traversing backwards, load right children. Otherwise, load left children.
+            if (reverse == true) {
+                node = node.right;
+            } else {
+                node = node.left;
+            }
+        }
+    }
+
+    // Constructor initializes the appropriate path
+    public BSTIterator(TreeNode root, boolean isReverse) {
+        st = new Stack&lt;&gt;();
+        reverse = isReverse;
+        pushAll(root);
+    }
+    
+    // Retrieves the next target element in the sequence
+    public int next() {
+        TreeNode topNode = st.pop();
+        
+        // If traversing backwards, look left for the next smaller element
+        if (reverse == true) {
+            pushAll(topNode.left);
+        } 
+        // If traversing forwards, look right for the next larger element
+        else {
+            pushAll(topNode.right);
+        }
+        
+        return topNode.val;
+    }
+}
+
+class Solution {
+    /*
+       Main function linking the forward and reverse iterators
+       to simulate the optimal two-pointer array technique
+    */
+    public boolean findTarget(TreeNode root, int k) {
+        // Guard clause for empty trees
+        if (root == null) return false;
+        
+        // Initialize one iterator at the minimum and one at the maximum
+        BSTIterator leftIter = new BSTIterator(root, false);
+        BSTIterator rightIter = new BSTIterator(root, true);
+        
+        int i = leftIter.next();
+        int j = rightIter.next();
+        
+        // Loop until the iterators cross each other
+        while (i &lt; j) {
+            int currentSum = i + j;
+            
+            // The exact sum is found
+            if (currentSum == k) {
+                return true;
+            }
+            
+            // Sum is too small, advance the left iterator
+            if (currentSum &lt; k) {
+                i = leftIter.next();
+            } 
+            // Sum is too large, advance the right iterator
+            else {
+                j = rightIter.next();
+            }
+        }
+        
+        return false;
+    }
+}
+
+// Driver code starts here
+class Main {
+    public static void main(String[] args) {
+        // Construct the sample tree: [5, 3, 6, 2, 4, null, 7]
+        TreeNode root = new TreeNode(5);
+        root.left = new TreeNode(3);
+        root.right = new TreeNode(6);
+        root.left.left = new TreeNode(2);
+        root.left.right = new TreeNode(4);
+        root.right.right = new TreeNode(7);
+        
+        Solution obj = new Solution();
+        int k = 9;
+        
+        // Check if the target exists
+        boolean result = obj.findTarget(root, k);
+        System.out.println(result ? "true" : "false");
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Definition for a binary tree node
+class TreeNode {
+    constructor(val = 0, left = null, right = null) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+/*
+   Custom iterator class that can traverse the tree from smallest to largest
+   or from largest to smallest, depending on the initialization flag
+*/
+class BSTIterator {
+    // Constructor initializes the appropriate path
+    constructor(root, isReverse) {
+        this.st = [];
+        this.reverse = isReverse;
+        this.pushAll(root);
+    }
+    
+    // Helper function to push all boundary nodes onto the stack
+    pushAll(node) {
+        while (node !== null) {
+            this.st.push(node);
+            // If traversing backwards, load right children. Otherwise, load left children.
+            if (this.reverse === true) {
+                node = node.right;
+            } else {
+                node = node.left;
+            }
+        }
+    }
+    
+    // Retrieves the next target element in the sequence
+    next() {
+        let topNode = this.st.pop();
+        
+        // If traversing backwards, look left for the next smaller element
+        if (this.reverse === true) {
+            this.pushAll(topNode.left);
+        } 
+        // If traversing forwards, look right for the next larger element
+        else {
+            this.pushAll(topNode.right);
+        }
+        
+        return topNode.val;
+    }
+}
+
+class Solution {
+    /*
+       Main function linking the forward and reverse iterators
+       to simulate the optimal two-pointer array technique
+    */
+    findTarget(root, k) {
+        // Guard clause for empty trees
+        if (root === null) return false;
+        
+        // Initialize one iterator at the minimum and one at the maximum
+        let leftIter = new BSTIterator(root, false);
+        let rightIter = new BSTIterator(root, true);
+        
+        let i = leftIter.next();
+        let j = rightIter.next();
+        
+        // Loop until the iterators cross each other
+        while (i &lt; j) {
+            let currentSum = i + j;
+            
+            // The exact sum is found
+            if (currentSum === k) {
+                return true;
+            }
+            
+            // Sum is too small, advance the left iterator
+            if (currentSum &lt; k) {
+                i = leftIter.next();
+            } 
+            // Sum is too large, advance the right iterator
+            else {
+                j = rightIter.next();
+            }
+        }
+        
+        return false;
+    }
+}
+
+// Driver code starts here
+// Construct the sample tree: [5, 3, 6, 2, 4, null, 7]
+const root = new TreeNode(5);
+root.left = new TreeNode(3);
+root.right = new TreeNode(6);
+root.left.left = new TreeNode(2);
+root.left.right = new TreeNode(4);
+root.right.right = new TreeNode(7);
+
+const obj = new Solution();
+const k = 9;
+
+// Check if the target exists
+const result = obj.findTarget(root, k);
+console.log(result ? "true" : "false");</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-8"><h3 id="blog-toc-complexity-analysis-2">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(N), where N is the total number of nodes in the tree. Although we jump around the tree dynamically, every node is pushed and popped from our stacks at most once. The amortized cost remains completely linear.</p><p><strong>Space Complexity: </strong>O(H) * 2, where H is the height of the tree. The two custom stacks only hold nodes mapping a single vertical path at any given time. For perfectly balanced trees, this is highly efficient memory usage.</p></div><div><section aria-label="Interview follow-up Questions" class="BlogDetail-module__HEfJva__faqSection" id="blog-toc-faqs"><h2 class="BlogDetail-module__HEfJva__faqHeading">Interview follow-up Questions</h2><div class="flex w-full flex-col BlogDetail-module__HEfJva__faqList" data-orientation="vertical" data-slot="accordion"><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="open"><h3 class="flex" data-orientation="vertical" data-state="open"></h3><div aria-labelledby="radix-_R_1kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="open" id="radix-_R_9kcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"><div class="h-auto pt-0 pb-2.5 [&amp;_a]:underline [&amp;_a]:underline-offset-3 [&amp;_a]:hover:text-foreground [&amp;_p:not(:last-child)]:mb-4 BlogDetail-module__HEfJva__faqAnswer"><p>You absolutely can! Another valid approach is traversing the tree and using a HashSet to store visited numbers, checking if (k - root.val) exists in the set. However, the Two Pointer / BST Iterator approach demonstrates mastery over the specific sorted structure of a Binary Search Tree, whereas a HashSet approach is generic and treats the tree just like a normal unsorted array.</p></div></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_2kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_akcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_3kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_bkcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_4kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_ckcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div></div></section></div>
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Task Scheduler: Minimum Intervals with Cooldown</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Task Scheduler: Minimum Intervals with Cooldown</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/blogs/data-structure-and-algorithm/task-scheduler</code></div>
+  <div class="ArticleParser-module__R__VNG__article" data-article-segment="html-0"><p>Given an array <code>tasks</code> containing uppercase English letters and a non-negative integer <code>n</code>, schedule every task in any order. Each CPU interval can execute one task or remain idle. Two executions with the same label must have at least <code>n</code> intervals between both executions.</p><p>Return the minimum number of CPU intervals needed to finish every task, including any required idle intervals.</p></div><div><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 1</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>tasks = ["A", "A", "A", "B", "B", "B"]</code>, <code>n = 2</code><br/><strong>Output:</strong> <code>8</code><br/><strong>Explanation:</strong> One shortest schedule is <code>A, B, idle, A, B, idle, A, B</code>. Every pair of equal tasks has two intervening intervals.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 2</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>tasks = ["A", "A", "B"]</code>, <code>n = 0</code><br/><strong>Output:</strong> <code>3</code><br/><strong>Explanation:</strong> A zero cooldown permits consecutive equal tasks, so <code>A, A, B</code> finishes without idle time.</p></div></div></section></div><div><div class="BlogDetail-module__HEfJva__practiceCallout"><a class="BlogDetail-module__HEfJva__practiceLink" data-mobile-prefetch="normal" href="https://takeuforward.org/practice/dsa/task-scheduler?subject=strivers-79-sheet" rel="noopener" target="_blank"><span>Practice it by yourself before moving onto the solution</span><span class="BlogDetail-module__HEfJva__practiceAction">Try now</span></a></div></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-3"><h2 id="blog-toc-brute-force-approach">Brute Force Approach</h2><p>A direct simulation can build the schedule one interval at a time. A frequency array records unfinished copies, while an availability array records the earliest legal interval for every task label.</p><p>Every interval scans all 26 labels and selects the ready label with the largest remaining frequency. Giving early positions to frequent labels spreads repeated copies across the schedule and avoids unnecessary idle time.</p><h3 id="blog-toc-algorithm">Algorithm</h3><ul><li><p>Begin with a frequency array of size 26 so every unfinished task copy remains visible during the simulation.</p></li><li><p>Keep an <code>availableAt</code> array initialized to interval <code>1</code>, allowing every present label to run at the first simulated interval.</p></li><li><p>Scan all task labels at every interval so only unfinished and legally available work can compete for the next position.</p></li><li><p>Select the ready label with the largest remaining frequency because frequent labels need the most future cooldown gaps.</p></li><li><p>Execute the selected label and move the next legal time forward by <code>n + 1</code>, so the required cooldown remains protected.</p></li><li><p>Advance one interval without executing a task if no label is ready, because the cooldown restriction forces an idle position.</p></li><li><p>Keep the elapsed interval count as the answer because every task and forced idle position contributes one interval.</p></li></ul><h3 id="blog-toc-dry-run">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Task Scheduler - Brute Force Approach" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/142e3b613d22d921.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Task Scheduler - Brute Force Approach</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-4"><h3 id="blog-toc-solution">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Finds the minimum schedule length
+    int leastInterval(vector&lt;char&gt;&amp; tasks, int n) {
+        // Store unfinished copies for every task label
+        vector&lt;int&gt; frequency(26, 0);
+
+        // Count each task before schedule simulation
+        for (char task : tasks) {
+            frequency[task - 'A']++;
+        }
+
+        // Store the next legal interval for each label
+        vector&lt;int&gt; availableAt(26, 0);
+        int time = 0;
+        int remaining = tasks.size();
+
+        // Continue until every task copy is scheduled
+        while (remaining &gt; 0) {
+            int chosen = -1;
+
+            // Inspect every label for a ready frequent task
+            for (int index = 0; index &lt; 26; index++) {
+                // A ready label can enter the current interval
+                if (frequency[index] &gt; 0 &amp;&amp;
+                    availableAt[index] &lt;= time) {
+                    // Larger remaining work receives priority
+                    if (chosen == -1 ||
+                        frequency[index] &gt; frequency[chosen]) {
+                        chosen = index;
+                    }
+                }
+            }
+
+            // No ready label forces one idle interval
+            if (chosen == -1) {
+                time++;
+                continue;
+            }
+
+            // Execute one copy during the current interval
+            frequency[chosen]--;
+            remaining--;
+
+            // Reuse becomes legal after n full intervals
+            availableAt[chosen] = time + n + 1;
+            time++;
+        }
+
+        // Elapsed intervals include every forced idle slot
+        return time;
+    }
+};
+
+// Driver code
+int main() {
+    vector&lt;char&gt; tasks = {'A', 'A', 'A', 'B', 'B', 'B'};
+    int n = 2;
+    Solution obj;
+    cout &lt;&lt; obj.leastInterval(tasks, n) &lt;&lt; endl;
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">from typing import List
+
+
+class Solution:
+    # Finds the minimum schedule length
+    def leastInterval(self, tasks: List[str], n: int) -&gt; int:
+        # Store unfinished copies for every task label
+        frequency = [0] * 26
+
+        # Count each task before schedule simulation
+        for task in tasks:
+            frequency[ord(task) - ord("A")] += 1
+
+        # Store the next legal interval for each label
+        available_at = [0] * 26
+        time = 0
+        remaining = len(tasks)
+
+        # Continue until every task copy is scheduled
+        while remaining &gt; 0:
+            chosen = -1
+
+            # Inspect every label for a ready frequent task
+            for index in range(26):
+                # A ready label can enter the current interval
+                if (frequency[index] &gt; 0 and
+                        available_at[index] &lt;= time):
+                    # Larger remaining work receives priority
+                    if (chosen == -1 or
+                            frequency[index] &gt; frequency[chosen]):
+                        chosen = index
+
+            # No ready label forces one idle interval
+            if chosen == -1:
+                time += 1
+                continue
+
+            # Execute one copy during the current interval
+            frequency[chosen] -= 1
+            remaining -= 1
+
+            # Reuse becomes legal after n full intervals
+            available_at[chosen] = time + n + 1
+            time += 1
+
+        # Elapsed intervals include every forced idle slot
+        return time
+
+
+# Driver code
+def main() -&gt; None:
+    tasks = ["A", "A", "A", "B", "B", "B"]
+    n = 2
+    obj = Solution()
+    print(obj.leastInterval(tasks, n))
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Finds the minimum schedule length
+    public int leastInterval(char[] tasks, int n) {
+        // Store unfinished copies for every task label
+        int[] frequency = new int[26];
+
+        // Count each task before schedule simulation
+        for (char task : tasks) {
+            frequency[task - 'A']++;
+        }
+
+        // Store the next legal interval for each label
+        int[] availableAt = new int[26];
+        int time = 0;
+        int remaining = tasks.length;
+
+        // Continue until every task copy is scheduled
+        while (remaining &gt; 0) {
+            int chosen = -1;
+
+            // Inspect every label for a ready frequent task
+            for (int index = 0; index &lt; 26; index++) {
+                // A ready label can enter the current interval
+                if (frequency[index] &gt; 0 &amp;&amp;
+                    availableAt[index] &lt;= time) {
+                    // Larger remaining work receives priority
+                    if (chosen == -1 ||
+                        frequency[index] &gt; frequency[chosen]) {
+                        chosen = index;
+                    }
+                }
+            }
+
+            // No ready label forces one idle interval
+            if (chosen == -1) {
+                time++;
+                continue;
+            }
+
+            // Execute one copy during the current interval
+            frequency[chosen]--;
+            remaining--;
+
+            // Reuse becomes legal after n full intervals
+            availableAt[chosen] = time + n + 1;
+            time++;
+        }
+
+        // Elapsed intervals include every forced idle slot
+        return time;
+    }
+}
+
+// Driver code
+public class Main {
+    public static void main(String[] args) {
+        char[] tasks = {'A', 'A', 'A', 'B', 'B', 'B'};
+        int n = 2;
+        Solution obj = new Solution();
+        System.out.println(obj.leastInterval(tasks, n));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Finds the minimum schedule length
+    leastInterval(tasks, n) {
+        // Store unfinished copies for every task label
+        const frequency = new Array(26).fill(0);
+
+        // Count each task before schedule simulation
+        for (const task of tasks) {
+            const index = task.charCodeAt(0) -
+                "A".charCodeAt(0);
+            frequency[index]++;
+        }
+
+        // Store the next legal interval for each label
+        const availableAt = new Array(26).fill(0);
+        let time = 0;
+        let remaining = tasks.length;
+
+        // Continue until every task copy is scheduled
+        while (remaining &gt; 0) {
+            let chosen = -1;
+
+            // Inspect every label for a ready frequent task
+            for (let index = 0; index &lt; 26; index++) {
+                // A ready label can enter the current interval
+                if (frequency[index] &gt; 0 &amp;&amp;
+                    availableAt[index] &lt;= time) {
+                    // Larger remaining work receives priority
+                    if (chosen === -1 ||
+                        frequency[index] &gt; frequency[chosen]) {
+                        chosen = index;
+                    }
+                }
+            }
+
+            // No ready label forces one idle interval
+            if (chosen === -1) {
+                time++;
+                continue;
+            }
+
+            // Execute one copy during the current interval
+            frequency[chosen]--;
+            remaining--;
+
+            // Reuse becomes legal after n full intervals
+            availableAt[chosen] = time + n + 1;
+            time++;
+        }
+
+        // Elapsed intervals include every forced idle slot
+        return time;
+    }
+}
+
+// Driver code
+function main() {
+    const tasks = ["A", "A", "A", "B", "B", "B"];
+    const n = 2;
+    const obj = new Solution();
+    console.log(obj.leastInterval(tasks, n));
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-5"><h3 id="blog-toc-complexity-analysis">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(A × k)</code>, where <code>A</code> is the total number of intervals in the final schedule and <code>k</code> is the number of distinct task labels, because every simulated interval scans all <code>k</code> labels. In the worst case, <code>A</code> can grow to <code>O(M × (n + 1))</code>, where <code>M</code> is the total number of tasks and <code>n</code> is the cooldown period.</p><p><strong>Space Complexity:</strong> <code>O(k)</code>, because the frequency and availability arrays store one entry for each distinct task label.</p></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-6"><h2 id="blog-toc-better-approach">Better Approach</h2><p>The repeated 26-label scan can be replaced by a max heap. The largest remaining frequency stays at the top, so the next useful task becomes available without a full search.</p><p>A group of <code>n + 1</code> intervals forms one safe cycle because any label can appear at most once inside the group. Unfinished frequencies return to the heap only after the cycle ends, preventing an early repeat.</p><h3 id="blog-toc-algorithm-2">Algorithm</h3></div><div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-7"><ul><li><p>Begin with a frequency array and place every positive count in a max heap so the largest remaining workload stays immediately accessible.</p></li><li><p>Start a cycle with <code>n + 1</code> available slots because equal labels placed in consecutive cycles receive the required separation.</p></li><li><p>Remove up to <code>n + 1</code> heap entries and save unfinished counts outside the heap so one label cannot run twice inside the same cycle.</p></li><li><p>Keep removed counts away from the heap until the current cycle ends, preventing the same label from entering one cycle twice.</p></li><li><p>Restore every unfinished count after the cycle so the next cycle again starts with the largest remaining workload.</p></li><li><p>Add only the used slot count for the final cycle because no idle suffix is needed after all tasks finish.</p></li><li><p>Add the full <code>n + 1</code> cycle length while more work remains because unused positions inside an unfinished schedule are forced idle intervals.</p></li><li><p>Keep the accumulated interval count as the answer because every completed cycle contributes task slots and forced idle slots.</p></li></ul><h3 id="blog-toc-dry-run-2">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Diagram 1" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/4a20a11957a7e367.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland"><span class="ImageSlider-module__5oY_MW__pagination">1 / 2</span></div><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Diagram 1</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"><div class="flex h-3 shrink-0 items-center"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto mx-1 self-stretch" role="separator" style="width:1px;height:100%"></div></div><div class="flex h-3 shrink-0 items-center"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto mx-1 self-stretch" role="separator" style="width:1px;height:100%"></div></div></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-8"><p></p><h3 id="blog-toc-solution-2">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Finds the minimum schedule length
+    int leastInterval(vector&lt;char&gt;&amp; tasks, int n) {
+        // Count every task label before heap creation
+        vector&lt;int&gt; frequency(26, 0);
+        for (char task : tasks) {
+            frequency[task - 'A']++;
+        }
+
+        // Keep the largest unfinished count on top
+        priority_queue&lt;int&gt; maxHeap;
+        for (int count : frequency) {
+            // Only present task labels belong in the heap
+            if (count &gt; 0) {
+                maxHeap.push(count);
+            }
+        }
+
+        int time = 0;
+
+        // Process one safe cooldown cycle at a time
+        while (!maxHeap.empty()) {
+            vector&lt;int&gt; pending;
+            int slots = n + 1;
+            int used = 0;
+
+            // Execute distinct labels inside the cycle
+            while (slots &gt; 0 &amp;&amp; !maxHeap.empty()) {
+                int count = maxHeap.top();
+                maxHeap.pop();
+
+                // One execution removes one unfinished copy
+                count--;
+                used++;
+                slots--;
+
+                // Positive counts need a later cycle
+                if (count &gt; 0) {
+                    pending.push_back(count);
+                }
+            }
+
+            // Restore labels only after the cycle closes
+            for (int count : pending) {
+                maxHeap.push(count);
+            }
+
+            // A final cycle needs no idle suffix
+            if (maxHeap.empty()) {
+                time += used;
+            } else {
+                time += n + 1;
+            }
+        }
+
+        // Accumulated cycles contain tasks and forced idles
+        return time;
+    }
+};
+
+// Driver code
+int main() {
+    vector&lt;char&gt; tasks = {'A', 'A', 'A', 'B', 'B', 'B'};
+    int n = 2;
+    Solution obj;
+    cout &lt;&lt; obj.leastInterval(tasks, n) &lt;&lt; endl;
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">import heapq
+from typing import List
+
+
+class Solution:
+    # Finds the minimum schedule length
+    def leastInterval(self, tasks: List[str], n: int) -&gt; int:
+        # Count every task label before heap creation
+        frequency = [0] * 26
+        for task in tasks:
+            frequency[ord(task) - ord("A")] += 1
+
+        # Negative counts create max-heap behavior
+        max_heap = []
+        for count in frequency:
+            # Only present task labels belong in the heap
+            if count &gt; 0:
+                heapq.heappush(max_heap, -count)
+
+        time = 0
+
+        # Process one safe cooldown cycle at a time
+        while max_heap:
+            pending = []
+            slots = n + 1
+            used = 0
+
+            # Execute distinct labels inside the cycle
+            while slots &gt; 0 and max_heap:
+                count = -heapq.heappop(max_heap)
+
+                # One execution removes one unfinished copy
+                count -= 1
+                used += 1
+                slots -= 1
+
+                # Positive counts need a later cycle
+                if count &gt; 0:
+                    pending.append(count)
+
+            # Restore labels only after the cycle closes
+            for count in pending:
+                heapq.heappush(max_heap, -count)
+
+            # A final cycle needs no idle suffix
+            if not max_heap:
+                time += used
+            else:
+                time += n + 1
+
+        # Accumulated cycles contain tasks and forced idles
+        return time
+
+
+# Driver code
+def main() -&gt; None:
+    tasks = ["A", "A", "A", "B", "B", "B"]
+    n = 2
+    obj = Solution()
+    print(obj.leastInterval(tasks, n))
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Finds the minimum schedule length
+    public int leastInterval(char[] tasks, int n) {
+        // Count every task label before heap creation
+        int[] frequency = new int[26];
+        for (char task : tasks) {
+            frequency[task - 'A']++;
+        }
+
+        // Keep the largest unfinished count on top
+        PriorityQueue&lt;Integer&gt; maxHeap =
+            new PriorityQueue&lt;&gt;(Collections.reverseOrder());
+        for (int count : frequency) {
+            // Only present task labels belong in the heap
+            if (count &gt; 0) {
+                maxHeap.offer(count);
+            }
+        }
+
+        int time = 0;
+
+        // Process one safe cooldown cycle at a time
+        while (!maxHeap.isEmpty()) {
+            List&lt;Integer&gt; pending = new ArrayList&lt;&gt;();
+            int slots = n + 1;
+            int used = 0;
+
+            // Execute distinct labels inside the cycle
+            while (slots &gt; 0 &amp;&amp; !maxHeap.isEmpty()) {
+                int count = maxHeap.poll();
+
+                // One execution removes one unfinished copy
+                count--;
+                used++;
+                slots--;
+
+                // Positive counts need a later cycle
+                if (count &gt; 0) {
+                    pending.add(count);
+                }
+            }
+
+            // Restore labels only after the cycle closes
+            for (int count : pending) {
+                maxHeap.offer(count);
+            }
+
+            // A final cycle needs no idle suffix
+            if (maxHeap.isEmpty()) {
+                time += used;
+            } else {
+                time += n + 1;
+            }
+        }
+
+        // Accumulated cycles contain tasks and forced idles
+        return time;
+    }
+}
+
+// Driver code
+public class Main {
+    public static void main(String[] args) {
+        char[] tasks = {'A', 'A', 'A', 'B', 'B', 'B'};
+        int n = 2;
+        Solution obj = new Solution();
+        System.out.println(obj.leastInterval(tasks, n));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class MaxHeap {
+    constructor() {
+        // Store heap values in level order
+        this.values = [];
+    }
+
+    // Reports empty heap state
+    isEmpty() {
+        return this.values.length === 0;
+    }
+
+    // Adds one count while preserving heap order
+    push(value) {
+        this.values.push(value);
+        this.#moveUp(this.values.length - 1);
+    }
+
+    // Removes the largest stored count
+    pop() {
+        const top = this.values[0];
+        const last = this.values.pop();
+
+        // A remaining root needs downward repair
+        if (this.values.length &gt; 0) {
+            this.values[0] = last;
+            this.#moveDown(0);
+        }
+
+        return top;
+    }
+
+    // Moves a new value toward the correct parent
+    #moveUp(index) {
+        // Parent swaps stop after heap order returns
+        while (index &gt; 0) {
+            const parent = Math.floor((index - 1) / 2);
+
+            // A larger parent already satisfies max order
+            if (this.values[parent] &gt;= this.values[index]) {
+                break;
+            }
+
+            const saved = this.values[parent];
+            this.values[parent] = this.values[index];
+            this.values[index] = saved;
+            index = parent;
+        }
+    }
+
+    // Moves a root value toward the correct child
+    #moveDown(index) {
+        const size = this.values.length;
+
+        // Child comparisons stop at a leaf
+        while (true) {
+            const left = index * 2 + 1;
+            const right = left + 1;
+            let largest = index;
+
+            // A larger left child becomes the swap target
+            if (left &lt; size &amp;&amp;
+                this.values[left] &gt; this.values[largest]) {
+                largest = left;
+            }
+
+            // A larger right child becomes the swap target
+            if (right &lt; size &amp;&amp;
+                this.values[right] &gt; this.values[largest]) {
+                largest = right;
+            }
+
+            // Equal target and index confirm valid heap order
+            if (largest === index) {
+                break;
+            }
+
+            const saved = this.values[index];
+            this.values[index] = this.values[largest];
+            this.values[largest] = saved;
+            index = largest;
+        }
+    }
+}
+
+class Solution {
+    // Finds the minimum schedule length
+    leastInterval(tasks, n) {
+        // Count every task label before heap creation
+        const frequency = new Array(26).fill(0);
+        for (const task of tasks) {
+            const index = task.charCodeAt(0) -
+                "A".charCodeAt(0);
+            frequency[index]++;
+        }
+
+        // Keep the largest unfinished count on top
+        const maxHeap = new MaxHeap();
+        for (const count of frequency) {
+            // Only present task labels belong in the heap
+            if (count &gt; 0) {
+                maxHeap.push(count);
+            }
+        }
+
+        let time = 0;
+
+        // Process one safe cooldown cycle at a time
+        while (!maxHeap.isEmpty()) {
+            const pending = [];
+            let slots = n + 1;
+            let used = 0;
+
+            // Execute distinct labels inside the cycle
+            while (slots &gt; 0 &amp;&amp; !maxHeap.isEmpty()) {
+                let count = maxHeap.pop();
+
+                // One execution removes one unfinished copy
+                count--;
+                used++;
+                slots--;
+
+                // Positive counts need a later cycle
+                if (count &gt; 0) {
+                    pending.push(count);
+                }
+            }
+
+            // Restore labels only after the cycle closes
+            for (const count of pending) {
+                maxHeap.push(count);
+            }
+
+            // A final cycle needs no idle suffix
+            if (maxHeap.isEmpty()) {
+                time += used;
+            } else {
+                time += n + 1;
+            }
+        }
+
+        // Accumulated cycles contain tasks and forced idles
+        return time;
+    }
+}
+
+// Driver code
+function main() {
+    const tasks = ["A", "A", "A", "B", "B", "B"];
+    const n = 2;
+    const obj = new Solution();
+    console.log(obj.leastInterval(tasks, n));
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-9"><h3 id="blog-toc-complexity-analysis-2">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(M log k)</code>, where <code>M</code> is the total number of tasks and <code>k</code> is the number of distinct task labels, because each task may enter and leave a heap containing at most <code>k</code> labels.</p><p><strong>Space Complexity:</strong> <code>O(k)</code>, because the frequency array, heap, and pending list store at most one entry for each distinct task label.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-10"><h2 id="blog-toc-optimal-approach">Optimal Approach</h2><p>Heap simulation can be skipped after identifying the labels responsible for forced gaps. A label with maximum frequency <code>maxFrequency</code> creates <code>maxFrequency - 1</code> complete blocks, and every complete block needs <code>n + 1</code> positions.</p><p>Several labels can share the maximum frequency. Every such label contributes one position after the complete blocks. A schedule with enough different tasks needs no idle time, so the larger value between the block length and the task count gives the answer.</p><h3 id="blog-toc-algorithm-3">Algorithm</h3><ul><li><p>Begin with a frequency array of size 26 so the workload of every task label can be counted in one pass.</p></li><li><p>Find <code>maxFrequency</code> among all counts because the most repeated labels create the strongest cooldown restriction.</p></li><li><p>Count <code>maxFrequencyTasks</code>, the number of labels reaching <code>maxFrequency</code>, because every tied label occupies the final block.</p></li><li><p>Form <code>maxFrequency - 1</code> complete blocks because the last occurrence of each most frequent label needs no following cooldown.</p></li><li><p>Give every complete block <code>n + 1</code> positions so consecutive copies of a most frequent label receive <code>n</code> intervening intervals.</p></li><li><p>Add <code>maxFrequencyTasks</code> for the tied final occurrences so every busiest label receives a valid ending position.</p></li><li><p>Compare the block-driven length with the total task count so plentiful distinct tasks can replace all potential idle positions.</p></li></ul><h3 id="blog-toc-dry-run-3">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="task-scheduler-optimal-edge-case" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/c8937e79f21487b5.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">task-scheduler-optimal-edge-case</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-11"><p></p><h3 id="blog-toc-solution-3">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Finds the minimum schedule length
+    int leastInterval(vector&lt;char&gt;&amp; tasks, int n) {
+        // Count every task label
+        vector&lt;int&gt; frequency(26, 0);
+        for (char task : tasks) {
+            frequency[task - 'A']++;
+        }
+
+        // Find the strongest cooldown bottleneck
+        int maxFrequency = 0;
+        for (int count : frequency) {
+            maxFrequency = max(maxFrequency, count);
+        }
+
+        // Count labels sharing the strongest bottleneck
+        int maxFrequencyTasks = 0;
+        for (int count : frequency) {
+            // Every tied label needs a final position
+            if (count == maxFrequency) {
+                maxFrequencyTasks++;
+            }
+        }
+
+        // Complete blocks preserve all cooldown gaps
+        int blockLength =
+            (maxFrequency - 1) * (n + 1) +
+            maxFrequencyTasks;
+
+        // Total tasks dominate after all idle gaps fill
+        return max((int) tasks.size(), blockLength);
+    }
+};
+
+// Driver code
+int main() {
+    vector&lt;char&gt; tasks = {'A', 'A', 'A', 'B', 'B', 'B'};
+    int n = 2;
+    Solution obj;
+    cout &lt;&lt; obj.leastInterval(tasks, n) &lt;&lt; endl;
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">from typing import List
+
+
+class Solution:
+    # Finds the minimum schedule length
+    def leastInterval(self, tasks: List[str], n: int) -&gt; int:
+        # Count every task label
+        frequency = [0] * 26
+        for task in tasks:
+            frequency[ord(task) - ord("A")] += 1
+
+        # Find the strongest cooldown bottleneck
+        max_frequency = max(frequency)
+
+        # Count labels sharing the strongest bottleneck
+        max_frequency_tasks = 0
+        for count in frequency:
+            # Every tied label needs a final position
+            if count == max_frequency:
+                max_frequency_tasks += 1
+
+        # Complete blocks preserve all cooldown gaps
+        block_length = (
+            (max_frequency - 1) * (n + 1) +
+            max_frequency_tasks
+        )
+
+        # Total tasks dominate after all idle gaps fill
+        return max(len(tasks), block_length)
+
+
+# Driver code
+def main() -&gt; None:
+    tasks = ["A", "A", "A", "B", "B", "B"]
+    n = 2
+    obj = Solution()
+    print(obj.leastInterval(tasks, n))
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Finds the minimum schedule length
+    public int leastInterval(char[] tasks, int n) {
+        // Count every task label
+        int[] frequency = new int[26];
+        for (char task : tasks) {
+            frequency[task - 'A']++;
+        }
+
+        // Find the strongest cooldown bottleneck
+        int maxFrequency = 0;
+        for (int count : frequency) {
+            maxFrequency = Math.max(maxFrequency, count);
+        }
+
+        // Count labels sharing the strongest bottleneck
+        int maxFrequencyTasks = 0;
+        for (int count : frequency) {
+            // Every tied label needs a final position
+            if (count == maxFrequency) {
+                maxFrequencyTasks++;
+            }
+        }
+
+        // Complete blocks preserve all cooldown gaps
+        int blockLength =
+            (maxFrequency - 1) * (n + 1) +
+            maxFrequencyTasks;
+
+        // Total tasks dominate after all idle gaps fill
+        return Math.max(tasks.length, blockLength);
+    }
+}
+
+// Driver code
+public class Main {
+    public static void main(String[] args) {
+        char[] tasks = {'A', 'A', 'A', 'B', 'B', 'B'};
+        int n = 2;
+        Solution obj = new Solution();
+        System.out.println(obj.leastInterval(tasks, n));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Finds the minimum schedule length
+    leastInterval(tasks, n) {
+        // Count every task label
+        const frequency = new Array(26).fill(0);
+        for (const task of tasks) {
+            const index = task.charCodeAt(0) -
+                "A".charCodeAt(0);
+            frequency[index]++;
+        }
+
+        // Find the strongest cooldown bottleneck
+        let maxFrequency = 0;
+        for (const count of frequency) {
+            maxFrequency = Math.max(maxFrequency, count);
+        }
+
+        // Count labels sharing the strongest bottleneck
+        let maxFrequencyTasks = 0;
+        for (const count of frequency) {
+            // Every tied label needs a final position
+            if (count === maxFrequency) {
+                maxFrequencyTasks++;
+            }
+        }
+
+        // Complete blocks preserve all cooldown gaps
+        const blockLength =
+            (maxFrequency - 1) * (n + 1) +
+            maxFrequencyTasks;
+
+        // Total tasks dominate after all idle gaps fill
+        return Math.max(tasks.length, blockLength);
+    }
+}
+
+// Driver code
+function main() {
+    const tasks = ["A", "A", "A", "B", "B", "B"];
+    const n = 2;
+    const obj = new Solution();
+    console.log(obj.leastInterval(tasks, n));
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-12"><h3 id="blog-toc-complexity-analysis-3">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(M + k)</code>, where <code>M</code> is the total number of tasks and <code>k</code> is the number of possible task labels. One pass counts all <code>M</code> tasks, and two short scans inspect the <code>k</code> labels.</p><p><strong>Space Complexity:</strong> <code>O(k)</code>, because the frequency array stores one count for each task label. Since uppercase English letters limit <code>k</code> to <code>26</code>, the auxiliary space is effectively <code>O(1)</code>.</p></div><div><section aria-label="Interview follow-up Questions" class="BlogDetail-module__HEfJva__faqSection" id="blog-toc-faqs"><h2 class="BlogDetail-module__HEfJva__faqHeading">Interview follow-up Questions</h2><div class="flex w-full flex-col BlogDetail-module__HEfJva__faqList" data-orientation="vertical" data-slot="accordion"><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="open"><h3 class="flex" data-orientation="vertical" data-state="open"></h3><div aria-labelledby="radix-_R_1lsqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="open" id="radix-_R_9lsqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"><div class="h-auto pt-0 pb-2.5 [&amp;_a]:underline [&amp;_a]:underline-offset-3 [&amp;_a]:hover:text-foreground [&amp;_p:not(:last-child)]:mb-4 BlogDetail-module__HEfJva__faqAnswer"><p>No. The canonical Task Scheduler variant permits any execution order, so frequency-based rearrangement is valid.</p></div></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_2lsqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_alsqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_3lsqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_blsqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_4lsqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_clsqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_5lsqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_dlsqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div></div></section></div>
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

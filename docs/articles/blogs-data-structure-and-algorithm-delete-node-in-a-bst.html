@@ -1,0 +1,847 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Delete Node in a BST</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Delete Node in a BST</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/blogs/data-structure-and-algorithm/delete-node-in-a-bst</code></div>
+  <div class="ArticleParser-module__R__VNG__article" data-article-segment="html-0"><p>In the Delete Node in a BST problem, you are given the root node of a binary search tree and an integer key. Your task is to find the node that contains this exact key and remove it from the tree. After removing the node, you must ensure that the remaining nodes are reconnected in a way that perfectly maintains the binary search tree rules. Finally, return the root of the updated tree.</p></div><div><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 1</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> root = [5, 3, 6, 2, 4, null, 7], key = 3</p><p><strong>Output: </strong>[5, 4, 6, 2, null, null, 7]</p><p><strong>Explanation:</strong> We need to delete the node containing 3. Node 3 has two children: 2 and 4. We can remove 3 and replace its position with its right child (4). We then attach its left child (2) to the appropriate empty spot to maintain the sorted order.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 2</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input: </strong>root = [5, 3, 6, 2, 4, null, 7], key = 0</p><p><strong>Output:</strong> [5, 3, 6, 2, 4, null, 7]</p><p><strong>Explanation:</strong> We search the entire tree for the key 0. Since 0 does not exist anywhere in the tree, we do not make any changes and return the original tree exactly as it is.</p></div></div></section></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-1"><h2 id="blog-toc-brute-force-approach">Brute Force Approach</h2><p>Think of a corporate organization chart where a manager is leaving the company. If the manager has no team, they simply leave. If they manage only one team, that entire team directly reports to the manager's boss. But if the departing manager has two distinct teams, it gets complicated. The simplest solution is to promote one team to take the manager's place, and then assign the other team to report to the most junior person of the promoted team.</p><p>In our tree, if the node to be deleted has two children, we will promote its right child to take its place. Then, we find the smallest value in that right child's branch (the leftmost spot) and attach the entire left child branch there. We can use recursion to travel down the tree to find the node, and a helper function to rewire the teams when we find it.</p><h3 id="blog-toc-algorithm"><strong>Algorithm</strong></h3><ul><li><p>Check the base case: if the current node is empty, return empty.</p></li><li><p>If the current node value matches the key, pass this node to a helper function to perform the deletion and return the reconnected branches.</p></li><li><p>If the key is smaller than the current node value, make a recursive call to the left child and update the left pointer with the result to check for even smaller value.</p></li><li><p>If the key is larger than the current node value, make a recursive call to the right child and update the right pointer with the result.</p></li><li><p>In the helper function: handle the cases where the node has zero or one child by returning the non-empty child.</p></li><li><p>If the node has two children: find the leftmost node of the right child. Attach the left child to this leftmost node. Return the right child as the new replacement.</p></li></ul><h3 id="blog-toc-dry-run">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Delete a Node in BST Brute Dry Run" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/663ab98e15b4eb30.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Delete a Node in BST Brute Dry Run</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-2"><h3 id="blog-toc-solution">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Definition for a binary tree node
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+class Solution {
+private:
+    // Helper function to rewire the tree when the target node is found
+    TreeNode* helper(TreeNode* root) {
+        // If there is no left child, simply return the right child
+        if (root-&gt;left == nullptr) {
+            return root-&gt;right;
+        }
+        // If there is no right child, simply return the left child
+        if (root-&gt;right == nullptr) {
+            return root-&gt;left;
+        }
+        
+        // Both children exist, so we promote the right child
+        TreeNode* rightChild = root-&gt;right;
+        // We also need to save the left child to reattach it later
+        TreeNode* leftChild = root-&gt;left;
+        
+        // Find the absolute leftmost node in the promoted right branch
+        TreeNode* leftmostOfRight = rightChild;
+        while (leftmostOfRight-&gt;left != nullptr) {
+            leftmostOfRight = leftmostOfRight-&gt;left;
+        }
+        
+        // Attach the saved left child to this empty leftmost spot
+        leftmostOfRight-&gt;left = leftChild;
+        
+        // Return the newly promoted right child
+        return rightChild;
+    }
+
+public:
+    // Main recursive function to locate the node before deleting
+    TreeNode* deleteNode(TreeNode* root, int key) {
+        // Base case: if we hit a dead end, the key is not in the tree
+        if (root == nullptr) {
+            return nullptr;
+        }
+        
+        // If we found the exact node, rewire it using the helper
+        if (root-&gt;val == key) {
+            return helper(root);
+        }
+        
+        // If the key is smaller, continue searching down the left path
+        if (root-&gt;val &gt; key) {
+            root-&gt;left = deleteNode(root-&gt;left, key);
+        }
+        // If the key is larger, continue searching down the right path
+        else {
+            root-&gt;right = deleteNode(root-&gt;right, key);
+        }
+        
+        // Return the current node to keep the rest of the tree intact
+        return root;
+    }
+};
+
+// Helper function to print in-order traversal of the tree
+void printInOrder(TreeNode* node) {
+    if (node == nullptr) return;
+    printInOrder(node-&gt;left);
+    cout &lt;&lt; node-&gt;val &lt;&lt; " ";
+    printInOrder(node-&gt;right);
+}
+
+// Driver code starts here
+int main() {
+    // Construct the sample tree
+    TreeNode* root = new TreeNode(5);
+    root-&gt;left = new TreeNode(3);
+    root-&gt;right = new TreeNode(6);
+    root-&gt;left-&gt;left = new TreeNode(2);
+    root-&gt;left-&gt;right = new TreeNode(4);
+    root-&gt;right-&gt;right = new TreeNode(7);
+    
+    // Instantiate the solution object
+    Solution obj;
+    int key = 3;
+    
+    // Perform the recursive deletion
+    TreeNode* result = obj.deleteNode(root, key);
+    
+    // Output the entire tree via in-order traversal
+    cout &lt;&lt; "In-order traversal: ";
+    printInOrder(result);
+    cout &lt;&lt; endl;
+    
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python"># Definition for a binary tree node
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    # Helper function to rewire the tree when the target node is found
+    def helper(self, root):
+        # If there is no left child, simply return the right child
+        if root.left is None:
+            return root.right
+            
+        # If there is no right child, simply return the left child
+        if root.right is None:
+            return root.left
+            
+        # Both children exist, so we promote the right child
+        rightChild = root.right
+        # We also need to save the left child to reattach it later
+        leftChild = root.left
+        
+        # Find the absolute leftmost node in the promoted right branch
+        leftmostOfRight = rightChild
+        while leftmostOfRight.left is not None:
+            leftmostOfRight = leftmostOfRight.left
+            
+        # Attach the saved left child to this empty leftmost spot
+        leftmostOfRight.left = leftChild
+        
+        # Return the newly promoted right child
+        return rightChild
+
+    # Main recursive function to locate the node before deleting
+    def deleteNode(self, root, key):
+        # Base case: if we hit a dead end, the key is not in the tree
+        if root is None:
+            return None
+            
+        # If we found the exact node, rewire it using the helper
+        if root.val == key:
+            return self.helper(root)
+            
+        # If the key is smaller, continue searching down the left path
+        if root.val &gt; key:
+            root.left = self.deleteNode(root.left, key)
+        # If the key is larger, continue searching down the right path
+        else:
+            root.right = self.deleteNode(root.right, key)
+            
+        # Return the current node to keep the rest of the tree intact
+        return root
+
+# Helper function to print in-order traversal of the tree
+def print_in_order(node):
+    if node is None:
+        return
+    print_in_order(node.left)
+    print(node.val, end=" ")
+    print_in_order(node.right)
+
+# Driver code starts here
+if __name__ == "__main__":
+    # Construct the sample tree
+    root = TreeNode(5)
+    root.left = TreeNode(3)
+    root.right = TreeNode(6)
+    root.left.left = TreeNode(2)
+    root.left.right = TreeNode(4)
+    root.right.right = TreeNode(7)
+    
+    # Instantiate the solution object
+    obj = Solution()
+    key = 3
+    
+    # Perform the recursive deletion
+    result = obj.deleteNode(root, key)
+    
+    # Output the entire tree via in-order traversal
+    print("In-order traversal:", end=" ")
+    print_in_order(result)
+    print()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+// Definition for a binary tree node
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode(int x) {
+        val = x;
+    }
+}
+
+class Solution {
+
+    // Helper function to delete the target node
+    private TreeNode helper(TreeNode root) {
+
+        // Case 1: No left child
+        if (root.left == null) {
+            return root.right;
+        }
+
+        // Case 2: No right child
+        if (root.right == null) {
+            return root.left;
+        }
+
+        // Case 3: Both children exist
+        TreeNode rightChild = root.right;
+        TreeNode leftChild = root.left;
+
+        // Find the leftmost node in the right subtree
+        TreeNode leftmostOfRight = rightChild;
+
+        while (leftmostOfRight.left != null) {
+            leftmostOfRight = leftmostOfRight.left;
+        }
+
+        // Attach the left subtree
+        leftmostOfRight.left = leftChild;
+
+        // Promote the right subtree
+        return rightChild;
+    }
+
+    // Delete a node from BST
+    public TreeNode deleteNode(TreeNode root, int key) {
+
+        if (root == null) {
+            return null;
+        }
+
+        // Target node found
+        if (root.val == key) {
+            return helper(root);
+        }
+
+        // Search in left subtree
+        if (key &lt; root.val) {
+            root.left = deleteNode(root.left, key);
+        }
+
+        // Search in right subtree
+        else {
+            root.right = deleteNode(root.right, key);
+        }
+
+        return root;
+    }
+}
+
+// Driver code
+class Main {
+
+    static void printInOrder(TreeNode node) {
+        if (node == null) return;
+
+        printInOrder(node.left);
+        System.out.print(node.val + " ");
+        printInOrder(node.right);
+    }
+
+    public static void main(String[] args) {
+
+        // Construct BST
+        TreeNode root = new TreeNode(5);
+
+        root.left = new TreeNode(3);
+        root.right = new TreeNode(6);
+
+        root.left.left = new TreeNode(2);
+        root.left.right = new TreeNode(4);
+
+        root.right.right = new TreeNode(7);
+
+        Solution obj = new Solution();
+
+        int key = 3;
+
+        // Delete node
+        TreeNode result = obj.deleteNode(root, key);
+
+        System.out.print("In-order traversal: ");
+        printInOrder(result);
+        System.out.println();
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Definition for a binary tree node
+class TreeNode {
+    constructor(val = 0, left = null, right = null) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+class Solution {
+    // Helper function to rewire the tree when the target node is found
+    helper(root) {
+        // If there is no left child, simply return the right child
+        if (root.left === null) {
+            return root.right;
+        }
+        // If there is no right child, simply return the left child
+        if (root.right === null) {
+            return root.left;
+        }
+        
+        // Both children exist, so we promote the right child
+        let rightChild = root.right;
+        // We also need to save the left child to reattach it later
+        let leftChild = root.left;
+        
+        // Find the absolute leftmost node in the promoted right branch
+        let leftmostOfRight = rightChild;
+        while (leftmostOfRight.left !== null) {
+            leftmostOfRight = leftmostOfRight.left;
+        }
+        
+        // Attach the saved left child to this empty leftmost spot
+        leftmostOfRight.left = leftChild;
+        
+        // Return the newly promoted right child
+        return rightChild;
+    }
+
+    // Main recursive function to locate the node before deleting
+    deleteNode(root, key) {
+        // Base case: if we hit a dead end, the key is not in the tree
+        if (root === null) {
+            return null;
+        }
+        
+        // If we found the exact node, rewire it using the helper
+        if (root.val === key) {
+            return this.helper(root);
+        }
+        
+        // If the key is smaller, continue searching down the left path
+        if (root.val &gt; key) {
+            root.left = this.deleteNode(root.left, key);
+        }
+        // If the key is larger, continue searching down the right path
+        else {
+            root.right = this.deleteNode(root.right, key);
+        }
+        
+        // Return the current node to keep the rest of the tree intact
+        return root;
+    }
+}
+
+// Helper function to collect in-order traversal of the tree
+function getInOrder(node, output = []) {
+    if (node === null) return output;
+    getInOrder(node.left, output);
+    output.push(node.val);
+    getInOrder(node.right, output);
+    return output;
+}
+
+// Driver code starts here
+// Construct the sample tree
+const root = new TreeNode(5);
+root.left = new TreeNode(3);
+root.right = new TreeNode(6);
+root.left.left = new TreeNode(2);
+root.left.right = new TreeNode(4);
+root.right.right = new TreeNode(7);
+
+// Instantiate the solution object
+const obj = new Solution();
+const key = 3;
+
+// Perform the recursive deletion
+const result = obj.deleteNode(root, key);
+
+// Output the entire tree via in-order traversal
+console.log("In-order traversal:", getInOrder(result).join(" "));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-3"><h3 id="blog-toc-complexity-analysis">Complexity Analysis</h3><p><strong>Time Complexity: </strong>O(H), where H is the height of the tree. In the worst case, we travel from the root down to the deepest leaf to find the node, and then travel down again to find the leftmost child in the helper function.</p></div><div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-4"><p><strong>Space Complexity:</strong> O(H), because the recursive function calls stack up in the system memory. In a deeply unbalanced tree, this matches the height of the tree.</p><p></p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-5"><h2 id="blog-toc-optimal-approach">Optimal Approach</h2><p>The recursive method works perfectly but comes with hidden memory costs due to the call stack. If the tree is extremely deep and looks like a straight line, recursion might trigger a memory crash. We can easily optimize this by replacing the recursion with a single pointer that physically travels down the tree. If you want to understand this in detail, check our guide on Binary Search Trees.</p><p>Instead of sending a chain of messengers down the corporate ladder to fire someone, you personally walk down the hallway. At each intersection, you read the door numbers to find the exact person. Once you find them, you manually unplug their phone line and plug it into their successor's office before walking away. You do not leave any extra memory trails behind.</p><h3 id="blog-toc-algorithm-2"><strong>Algorithm</strong></h3><ul><li><p>Check the base case: if the tree is empty, return empty nothing to check.</p></li><li><p>If the very first root node is the key, use the helper function to rewire it and instantly return the new root.</p></li><li><p>Set a pointer to track your current location starting at the root.</p></li><li><p>Start a loop that runs while the current node is not empty.</p></li><li><p>Check if the target key is located in the left child. If yes, apply the helper function to the left child, update the left pointer, and break the loop. If not, step down into the left child.</p></li><li><p>Alternatively, check if the target key is located in the right child. If yes, apply the helper function to the right child, update the right pointer, and break the loop. If not, step down into the right child.</p></li><li><p>Return the original root node.</p></li></ul><h3 id="blog-toc-dry-run-2">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Delete a Node in BST Optimal Dry Run" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/436c0a7570046b19.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Delete a Node in BST Optimal Dry Run</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-6"><h3 id="blog-toc-solution-2">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Definition for a binary tree node
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+class Solution {
+private:
+    // Helper function to rewire the tree when the target node is found
+    TreeNode* helper(TreeNode* root) {
+        // If there is no left child, simply return the right child
+        if (root-&gt;left == nullptr) {
+            return root-&gt;right;
+        }
+        // If there is no right child, simply return the left child
+        if (root-&gt;right == nullptr) {
+            return root-&gt;left;
+        }
+        
+        // Both children exist, so we promote the right child
+        TreeNode* rightChild = root-&gt;right;
+        // We also need to save the left child to reattach it later
+        TreeNode* leftChild = root-&gt;left;
+        
+        // Find the absolute leftmost node in the promoted right branch
+        TreeNode* leftmostOfRight = rightChild;
+        while (leftmostOfRight-&gt;left != nullptr) {
+            leftmostOfRight = leftmostOfRight-&gt;left;
+        }
+        
+        // Attach the saved left child to this empty leftmost spot
+        leftmostOfRight-&gt;left = leftChild;
+        
+        // Return the newly promoted right child
+        return rightChild;
+    }
+
+public:
+    // Iterative function to travel down the tree using constant memory
+    TreeNode* deleteNode(TreeNode* root, int key) {
+        // Immediately return if the tree is completely empty
+        if (root == nullptr) {
+            return nullptr;
+        }
+        
+        // If the root itself is the target, replace the entire tree
+        if (root-&gt;val == key) {
+            return helper(root);
+        }
+        
+        // Pointer to keep track of our current walking position
+        TreeNode* current = root;
+        
+        // Keep walking down the tree until we hit a dead end
+        while (current != nullptr) {
+            // Target is smaller, so it must be on the left side
+            if (current-&gt;val &gt; key) {
+                // If the immediate left child is the target, replace it
+                if (current-&gt;left != nullptr &amp;&amp; current-&gt;left-&gt;val == key) {
+                    current-&gt;left = helper(current-&gt;left);
+                    break;
+                } else {
+                    // Otherwise, take a step down to the left
+                    current = current-&gt;left;
+                }
+            } 
+            // Target is larger, so it must be on the right side
+            else {
+                // If the immediate right child is the target, replace it
+                if (current-&gt;right != nullptr &amp;&amp; current-&gt;right-&gt;val == key) {
+                    current-&gt;right = helper(current-&gt;right);
+                    break;
+                } else {
+                    // Otherwise, take a step down to the right
+                    current = current-&gt;right;
+                }
+            }
+        }
+        
+        // Return the root of the modified tree
+        return root;
+    }
+};
+
+// Helper function to print in-order traversal of the tree
+void printInOrder(TreeNode* node) {
+    if (node == nullptr) return;
+    printInOrder(node-&gt;left);
+    cout &lt;&lt; node-&gt;val &lt;&lt; " ";
+    printInOrder(node-&gt;right);
+}
+
+// Driver code starts here
+int main() {
+    // Construct the sample tree
+    TreeNode* root = new TreeNode(5);
+    root-&gt;left = new TreeNode(3);
+    root-&gt;right = new TreeNode(6);
+    root-&gt;left-&gt;left = new TreeNode(2);
+    root-&gt;left-&gt;right = new TreeNode(4);
+    root-&gt;right-&gt;right = new TreeNode(7);
+    
+    // Instantiate the solution object
+    Solution obj;
+    int key = 3;
+    
+    // Perform the optimized iterative deletion
+    TreeNode* result = obj.deleteNode(root, key);
+    
+    // Output the entire tree via in-order traversal
+    cout &lt;&lt; "In-order traversal: ";
+    printInOrder(result);
+    cout &lt;&lt; endl;
+    
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python"># Definition for a binary tree node
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    # Helper function to rewire the tree when the target node is found
+    def helper(self, root):
+        # If there is no left child, simply return the right child
+        if root.left is None:
+            return root.right
+            
+        # If there is no right child, simply return the left child
+        if root.right is None:
+            return root.left
+            
+        # Both children exist, so we promote the right child
+        rightChild = root.right
+        # We also need to save the left child to reattach it later
+        leftChild = root.left
+        
+        # Find the absolute leftmost node in the promoted right branch
+        leftmostOfRight = rightChild
+        while leftmostOfRight.left is not None:
+            leftmostOfRight = leftmostOfRight.left
+            
+        # Attach the saved left child to this empty leftmost spot
+        leftmostOfRight.left = leftChild
+        
+        # Return the newly promoted right child
+        return rightChild
+
+    # Iterative function to travel down the tree using constant memory
+    def deleteNode(self, root, key):
+        # Immediately return if the tree is completely empty
+        if root is None:
+            return None
+            
+        # If the root itself is the target, replace the entire tree
+        if root.val == key:
+            return self.helper(root)
+            
+        # Pointer to keep track of our current walking position
+        current = root
+        
+        # Keep walking down the tree until we hit a dead end
+        while current is not None:
+            # Target is smaller, so it must be on the left side
+            if current.val &gt; key:
+                # If the immediate left child is the target, replace it
+                if current.left is not None and current.left.val == key:
+                    current.left = self.helper(current.left)
+                    break
+                else:
+                    # Otherwise, take a step down to the left
+                    current = current.left
+            # Target is larger, so it must be on the right side
+            else:
+                # If the immediate right child is the target, replace it
+                if current.right is not None and current.right.val == key:
+                    current.right = self.helper(current.right)
+                    break
+                else:
+                    # Otherwise, take a step down to the right
+                    current = current.right
+                    
+        # Return the root of the modified tree
+        return root
+
+# Helper function to print in-order traversal of the tree
+def print_in_order(node):
+    if node is None:
+        return
+    print_in_order(node.left)
+    print(node.val, end=" ")
+    print_in_order(node.right)
+
+# Driver code starts here
+if __name__ == "__main__":
+    # Construct the sample tree
+    root = TreeNode(5)
+    root.left = TreeNode(3)
+    root.right = TreeNode(6)
+    root.left.left = TreeNode(2)
+    root.left.right = TreeNode(4)
+    root.right.right = TreeNode(7)
+    
+    # Instantiate the solution object
+    obj = Solution()
+    key = 3
+    
+    # Perform the optimized iterative deletion
+    result = obj.deleteNode(root, key)
+    
+    # Output the entire tree via in-order traversal
+    print("In-order traversal:", end=" ")
+    print_in_order(result)
+    print()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+// Definition for a binary tree node
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+    TreeNode(int x) { val = x; }
+}
+
+class Solution {
+    // Helper function to rewire the tree when the target node is found
+    private TreeNode helper(TreeNode root) {
+        // If there is no left child, simply return the right child
+        if (root.left == null) {
+            return root.right;
+        }
+        // If there is no right child, simply return the left child
+        if (root.right == null) {
+            return root.left;
+        }
+        
+        // Both children exist, so we promote the right child
+        TreeNode rightChild = root.right;
+        // We also need to save the left child to reattach it later
+        TreeNode leftChild = root.left;
+        
+        // Find the absolute leftmost node in the promoted right branch
+        TreeNode leftmostOfRight = rightChild;
+        while (leftmostOfRight.left != null) {
+            leftmostOfRight = leftmostOfRight.left;
+        }
+        
+        // Attach the saved left child to this empty leftmost spot
+        leftmostOfRight.left = leftChild;
+        
+        // Return the newly promoted right child
+        return rightChild;
+    }
+
+    // Iterative function to travel down the tree using constant memory
+    public TreeNode deleteNode(TreeNode root, int key) {
+        // Immediately return if the tree is completely empty
+        if (root == null) {
+            return null;
+        }
+        
+        // If the root itself is the target, replace the entire tree
+        if (root.val == key) {
+            return helper(root);
+        }
+        
+        // Pointer to keep track of our current walking position
+        TreeNode current = root;
+        
+        // Keep walking down the tree until we hit a dead end
+        while (current != null) {
+            // Target is smaller, so it must be on the left side
+            if (current.val &gt; key) {
+                // If the immediate left child is the target, replace it
+                if (current.left != null &amp;&amp; current.left.val == key) {
+                    current.left = helper(current.left);
+                    break;
+                } else {
+                    // Otherwise, take a step down to the left
+                    current = current.left;
+                }
+            } 
+            // Target is larger, so it must be on the right side
+            else {
+                // If the immediate right child is the target, replace it
+                if (current.right != null &amp;&amp; current.right.val == key) {
+                    current.right = helper(current.right);
+                    break;
+                } else {
+                    // Otherwise, take a step down to the right
+                    current = current.right;
+                }
+            }
+        }
+        
+        // Return the root of the modified tree
+        return root;
+    }
+}
+
+// Driver code starts here
+class Main {
+    // Helper method to print in-order traversal of the tree
+    static void printInOrder(TreeNode node) {
+        if (node == null) return;
+        printInOrder(node.left);
+        System.out.print(node.val + " ");
+        printInOrder(node.right);
+    }
+
+    public static void main(String[] args) {
+        // Construct the sample tree
+        TreeNode root = new TreeNode(5);
+        root.left = new TreeNode(3);
+        root.right = new TreeNode(6);
+        root.left.left = new TreeNode(2);
+        root.left.right = new TreeNode(4);
+        root.right.right = new TreeNode(7);
+        
+        // Instantiate the solution object
+        Solution obj = new Solution();
+        int key = 3;
+        
+        // Perform the optimized iterative deletion
+        TreeNode result = obj.deleteNode(root, key);
+        
+        // Output the entire tree via in-order traversal
+        System.out.print("In-order traversal: ");
+        printInOrder(result);
+        System.out.println();
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Definition for a binary tree node
+class TreeNode {
+    constructor(val = 0, left = null, right = null) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+class Solution {
+    // Helper function to rewire the tree when the target node is found
+    helper(root) {
+        // If there is no left child, simply return the right child
+        if (root.left === null) {
+            return root.right;
+        }
+        // If there is no right child, simply return the left child
+        if (root.right === null) {
+            return root.left;
+        }
+        
+        // Both children exist, so we promote the right child
+        let rightChild = root.right;
+        // We also need to save the left child to reattach it later
+        let leftChild = root.left;
+        
+        // Find the absolute leftmost node in the promoted right branch
+        let leftmostOfRight = rightChild;
+        while (leftmostOfRight.left !== null) {
+            leftmostOfRight = leftmostOfRight.left;
+        }
+        
+        // Attach the saved left child to this empty leftmost spot
+        leftmostOfRight.left = leftChild;
+        
+        // Return the newly promoted right child
+        return rightChild;
+    }
+
+    // Iterative function to travel down the tree using constant memory
+    deleteNode(root, key) {
+        // Immediately return if the tree is completely empty
+        if (root === null) {
+            return null;
+        }
+        
+        // If the root itself is the target, replace the entire tree
+        if (root.val === key) {
+            return this.helper(root);
+        }
+        
+        // Pointer to keep track of our current walking position
+        let current = root;
+        
+        // Keep walking down the tree until we hit a dead end
+        while (current !== null) {
+            // Target is smaller, so it must be on the left side
+            if (current.val &gt; key) {
+                // If the immediate left child is the target, replace it
+                if (current.left !== null &amp;&amp; current.left.val == key) {
+                    current.left = this.helper(current.left);
+                    break;
+                } else {
+                    // Otherwise, take a step down to the left
+                    current = current.left;
+                }
+            } 
+            // Target is larger, so it must be on the right side
+            else {
+                // If the immediate right child is the target, replace it
+                if (current.right !== null &amp;&amp; current.right.val == key) {
+                    current.right = this.helper(current.right);
+                    break;
+                } else {
+                    // Otherwise, take a step down to the right
+                    current = current.right;
+                }
+            }
+        }
+        
+        // Return the root of the modified tree
+        return root;
+    }
+}
+
+// Helper function to collect in-order traversal of the tree
+function getInOrder(node, output = []) {
+    if (node === null) return output;
+    getInOrder(node.left, output);
+    output.push(node.val);
+    getInOrder(node.right, output);
+    return output;
+}
+
+// Driver code starts here
+// Construct the sample tree
+const root = new TreeNode(5);
+root.left = new TreeNode(3);
+root.right = new TreeNode(6);
+root.left.left = new TreeNode(2);
+root.left.right = new TreeNode(4);
+root.right.right = new TreeNode(7);
+
+// Instantiate the solution object
+const obj = new Solution();
+const key = 3;
+
+// Perform the optimized iterative deletion
+const result = obj.deleteNode(root, key);
+
+// Output the entire tree via in-order traversal
+console.log("In-order traversal:", getInOrder(result).join(" "));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-7"><h3 id="blog-toc-complexity-analysis-2">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(H), where H is the height of the tree. The single pointer moves strictly downwards without duplicating any steps.</p><p><strong>Space Complexity: </strong>O(1), because we use primitive pointer variables instead of the system call stack, keeping memory usage strictly minimal.</p></div><div><section aria-label="Interview follow-up Questions" class="BlogDetail-module__HEfJva__faqSection" id="blog-toc-faqs"><h2 class="BlogDetail-module__HEfJva__faqHeading">Interview follow-up Questions</h2><div class="flex w-full flex-col BlogDetail-module__HEfJva__faqList" data-orientation="vertical" data-slot="accordion"><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="open"><h3 class="flex" data-orientation="vertical" data-state="open"></h3><div aria-labelledby="radix-_R_1k4qnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="open" id="radix-_R_9k4qnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"><div class="h-auto pt-0 pb-2.5 [&amp;_a]:underline [&amp;_a]:underline-offset-3 [&amp;_a]:hover:text-foreground [&amp;_p:not(:last-child)]:mb-4 BlogDetail-module__HEfJva__faqAnswer"><p>If the very first node is the target, we simply pass it to our helper function. The helper function performs the branch promotions as usual, and returns the newly appointed top node. We then return this new node, which officially becomes the new root of the tree.</p></div></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_2k4qnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_ak4qnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_3k4qnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_bk4qnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_4k4qnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_ck4qnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div></div></section></div>
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

@@ -1,0 +1,811 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Find the Majority Element that occurs more than N/2 times</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Find the Majority Element that occurs more than N/2 times</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/find-the-majority-element-that-occurs-more-than-n-2-times/</code></div>
+  <p><strong>Problem Statement: </strong>
+Given an integer array nums of size n, return the majority element of the array.
+<br/><br/>
+The majority element of an array is an element that appears more than n/2 times in the array. The array is guaranteed to have a majority element.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>  
+<strong>Input:</strong> nums = [7, 0, 0, 1, 7, 7, 2, 7, 7]  
+<strong>Output:</strong> 7  
+<strong>Explanation:</strong> The number 7 appears 5 times in the 9-sized array, making it the most frequent element.
+
+<strong>Example 2:</strong>  
+<strong>Input:</strong> nums = [1, 1, 1, 2, 1, 2]  
+<strong>Output:</strong> 1  
+<strong>Explanation:</strong> The number 1 appears 4 times in the 6-sized array, making it the most frequent element.</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/majority-element-i" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Brute Force 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Iterate through the array to select each element one by one.</li>
+<li>For each selected element, run another loop to count its occurrences in the given array.</li>
+<li>If the occurrence of any element is greater than the floor of <code>(N/2)</code>, return that element immediately as the majority element.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find the majority element in an array
+    int majorityElement(vector&lt;int&gt;&amp; nums) {
+        
+        // Size of the given array
+        int n = nums.size();
+        
+        // Iterate through each element of the array
+        for (int i = 0; i &lt; n; i++) {
+            
+            // Counter to count occurrences of nums[i]
+            int cnt = 0; 
+            
+            // Count the frequency of nums[i] in the array
+            for (int j = 0; j &lt; n; j++) {
+                if (nums[j] == nums[i]) {
+                    cnt++;
+                }
+            }
+            
+            // Check if frequency of nums[i] is greater than n/2
+            if (cnt &gt; (n / 2)) {
+                // Return the majority element
+                return nums[i]; 
+            }
+        }
+        
+        // Return -1 if no majority element is found
+        return -1; 
+    }
+};
+
+int main() {
+    vector&lt;int&gt; arr = {2, 2, 1, 1, 1, 2, 2};
+    
+    // Create an instance of Solution class
+    Solution sol;
+ 
+    int ans = sol.majorityElement(arr);
+    
+    // Print the majority element found
+    cout &lt;&lt; "The majority element is: " &lt;&lt; ans &lt;&lt; endl;
+    
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Class containing the majority element logic
+class Solution {
+    // Function to find the majority element in an array
+    public int majorityElement(int[] nums) {
+        
+        // Size of the given array
+        int n = nums.length;
+        
+        // Iterate through each element of the array
+        for (int i = 0; i &lt; n; i++) {
+            
+            // Counter to count occurrences of nums[i]
+            int cnt = 0; 
+            
+            // Count the frequency of nums[i] in the array
+            for (int j = 0; j &lt; n; j++) {
+                if (nums[j] == nums[i]) {
+                    cnt++;
+                }
+            }
+            
+            // Check if frequency of nums[i] is greater than n/2
+            if (cnt &gt; (n / 2)) {
+                // Return the majority element
+                return nums[i]; 
+            }
+        }
+        
+        // Return -1 if no majority element is found
+        return -1; 
+    }
+}
+
+// Separate class containing only the main method
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {2, 2, 1, 1, 1, 2, 2};
+        
+        // Create an instance of Solution class
+        Solution sol = new Solution();
+ 
+        int ans = sol.majorityElement(arr);
+        
+        // Print the majority element found
+        System.out.println("The majority element is: " + ans);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">from typing import List
+
+class Solution:
+    # Function to find the majority element in an array
+    def majorityElement(self, nums: List[int]) -&gt; int:
+        
+        # Size of the given array
+        n = len(nums)
+        
+        # Iterate through each element of the array
+        for i in range(n):
+            
+            # Counter to count occurrences of nums[i]
+            cnt = 0 
+            
+            # Count the frequency of nums[i] in the array
+            for j in range(n):
+                if nums[j] == nums[i]:
+                    cnt += 1
+            
+            # Check if frequency of nums[i] is greater than n/2
+            if cnt &gt; (n // 2):
+                # Return the majority element
+                return nums[i]
+        
+        # Return -1 if no majority element is found
+        return -1
+
+if __name__ == "__main__":
+    arr = [2, 2, 1, 1, 1, 2, 2]
+    
+    # Create an instance of Solution class
+    sol = Solution()
+ 
+    ans = sol.majorityElement(arr)
+    
+    # Print the majority element found
+    print("The majority element is:", ans)</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find the majority element in an array
+    majorityElement(nums) {
+        
+        // Size of the given array
+        let n = nums.length;
+        
+        // Iterate through each element of the array
+        for (let i = 0; i &lt; n; i++) {
+            
+            // Counter to count occurrences of nums[i]
+            let cnt = 0; 
+            
+            // Count the frequency of nums[i] in the array
+            for (let j = 0; j &lt; n; j++) {
+                if (nums[j] === nums[i]) {
+                    cnt++;
+                }
+            }
+            
+            // Check if frequency of nums[i] is greater than n/2
+            if (cnt &gt; Math.floor(n / 2)) {
+                // Return the majority element
+                return nums[i]; 
+            }
+        }
+        
+        // Return -1 if no majority element is found
+        return -1; 
+    }
+}
+
+function main() {
+    let arr = [2, 2, 1, 1, 1, 2, 2];
+    
+    // Create an instance of Solution class
+    let sol = new Solution();
+ 
+    let ans = sol.majorityElement(arr);
+    
+    // Print the majority element found
+    console.log("The majority element is:", ans);
+}
+
+// Execute the main function
+main();
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(N^2)</strong>, where N is the size of the input array. This is because we are using a nested loop to count the occurrences of each element.
+                        <br/><br/>
+<strong>Space Complexity: O(1)</strong>, as we are using a constant amount of space for the counters and indices.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="better-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Better Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Use a hashmap to store elements as <code>(key, value)</code> pairs, where the key is the element of the array and the value is the number of times it occurs.</li>
+<li>Traverse the array and update the value of the corresponding key in the hashmap.</li>
+<li>Simultaneously check if the value (the count) of any key is greater than the floor of <code>(N/2)</code>.</li>
+<li>If the value is greater than the floor of <code>(N/2)</code>, return the key immediately as the majority element.</li>
+<li>If no majority element is found, continue iterating through the array.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find the majority element in an array
+    int majorityElement(vector&lt;int&gt;&amp; nums) {
+        
+        // Size of the given array
+        int n = nums.size();
+        
+        // Hash map to store element counts
+        unordered_map&lt;int, int&gt; mp;
+        
+        // Count occurrences of each element
+        for (int num : nums) {
+            mp[num]++;
+        }
+        
+        /* Iterate through the map to
+        find the majority element*/
+        for (auto&amp; pair : mp) {
+            if (pair.second &gt; n / 2) {
+                return pair.first;
+            }
+        }
+        
+        // Return -1 if no majority element is found
+        return -1;
+    }
+};
+
+int main() {
+    vector&lt;int&gt; arr = {2, 2, 1, 1, 1, 2, 2};
+    
+    // Create an instance of Solution class
+    Solution sol;
+
+    int ans = sol.majorityElement(arr);
+    
+    // Print the majority element found
+    cout &lt;&lt; "The majority element is: " &lt;&lt; ans &lt;&lt; endl;
+    
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Class containing the majority element logic
+class Solution {
+    // Function to find the majority element in an array
+    public int majorityElement(int[] nums) {
+        
+        // Size of the given array
+        int n = nums.length;
+        
+        // Hash map to store element counts
+        HashMap&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();
+        
+        // Count occurrences of each element
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+        
+        /* Iterate through the map to
+           find the majority element */
+        for (Map.Entry&lt;Integer, Integer&gt; entry : map.entrySet()) {
+            if (entry.getValue() &gt; n / 2) {
+                return entry.getKey();
+            }
+        }
+        
+        // Return -1 if no majority element is found
+        return -1;
+    }
+}
+
+// Separate class containing only the main method
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {2, 2, 1, 1, 1, 2, 2};
+        
+        // Create an instance of Solution class
+        Solution sol = new Solution();
+ 
+        int ans = sol.majorityElement(arr);
+        
+        // Print the majority element found
+        System.out.println("The majority element is: " + ans);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">from typing import List
+
+class Solution:
+    # Function to find the majority element in an array
+    def majorityElement(self, nums: List[int]) -&gt; int:
+        
+        # Size of the given array
+        n = len(nums)
+        
+        # Hash map to store element counts
+        mp = {}
+        
+        # Count occurrences of each element
+        for num in nums:
+            if num in mp:
+                mp[num] += 1
+            else:
+                mp[num] = 1
+        
+        """ Iterate through the map to
+        find the majority element"""
+        for num, count in mp.items():
+            if count &gt; n // 2:
+                return num
+        
+        # Return -1 if no majority element is found
+        return -1
+
+# Main function to test the Solution class
+if __name__ == "__main__":
+    arr = [2, 2, 1, 1, 1, 2, 2]
+    
+    # Create an instance of Solution class
+    sol = Solution()
+ 
+    ans = sol.majorityElement(arr)
+    
+    # Print the majority element found
+    print("The majority element is:", ans)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find the majority element in an array
+    majorityElement(nums) {
+        
+        // Size of the given array
+        let n = nums.length;
+        
+        // Hash map to store element counts
+        let map = new Map();
+        
+        // Count occurrences of each element
+        for (let num of nums) {
+            map.set(num, (map.get(num) || 0) + 1);
+        }
+        
+        /* Iterate through the map to
+        find the majority element */
+        for (let [key, value] of map.entries()) {
+            if (value &gt; n / 2) {
+                return key;
+            }
+        }
+        
+        // Return -1 if no majority element is found
+        return -1;
+    }
+}
+
+// Main function to test the Solution class
+function main() {
+    let arr = [2, 2, 1, 1, 1, 2, 2];
+    
+    // Create an instance of Solution class
+    let sol = new Solution();
+ 
+    let ans = sol.majorityElement(arr);
+    
+    // Print the majority element found
+    console.log("The majority element is:", ans);
+}
+
+// Execute the main function
+main();
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(N)</strong>, where N is the size of the input array. This is because we are iterating through the array once to count occurrences and then iterating through the hashmap to find the majority element.
+                        <br/><br/>
+<strong>Space Complexity: O(N)</strong>, as we are using a hashmap to store the counts of each element, which can take up to N space in the worst case.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Initialize two variables: <code>count</code> to track the count of elements, and <code>element</code> to keep track of the element being counted.</li>
+<li>Traverse through the given array. If <code>count</code> is 0, store the current value of the array as <code>element</code>.</li>
+<li>If the current element in the array is the same as <code>element</code>, increment the <code>count</code> by 1.</li>
+<li>If the current element is different from <code>element</code>, decrement the <code>count</code> by 1.</li>
+<li>At the end of the traversal, the integer stored in <code>element</code> will be the expected result (the majority element).</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/595cb4e886bfea90.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/bf750e3e67f3a7e1.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/f24a8bc82a229e7f.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/581cab982db0bbd1.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/098bf217eb78b038.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/595cb4e886bfea90.png"/><img alt="Image 2" loading="lazy" src="../assets/img/bf750e3e67f3a7e1.png"/><img alt="Image 3" loading="lazy" src="../assets/img/f24a8bc82a229e7f.png"/><img alt="Image 4" loading="lazy" src="../assets/img/581cab982db0bbd1.png"/><img alt="Image 5" loading="lazy" src="../assets/img/098bf217eb78b038.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find the majority element in an array
+    int majorityElement(vector&lt;int&gt;&amp; nums) {
+        
+        // Size of the given array
+        int n = nums.size();
+        
+        // Count
+        int cnt = 0;
+        
+        // Element
+        int el; 
+        
+        // Applying the algorithm
+        for (int i = 0; i &lt; n; i++) {
+            if (cnt == 0) {
+                cnt = 1;
+                el = nums[i];
+            } else if (el == nums[i]) {
+                cnt++;
+            } else {
+                cnt--;
+            }
+        }
+        
+        /* Checking if the stored element
+         is the majority element*/
+        int cnt1 = 0;
+        for (int i = 0; i &lt; n; i++) {
+            if (nums[i] == el) {
+                cnt1++;
+            }
+        }
+        
+        //return element if it is a majority element
+        if (cnt1 &gt; (n / 2)) {
+            return el;
+        }
+        
+        //return -1 if no such element found
+        return -1;
+    }
+};
+
+int main() {
+    vector&lt;int&gt; arr = {2, 2, 1, 1, 1, 2, 2};
+    
+    // Create an instance of Solution class
+    Solution sol;
+
+    int ans = sol.majorityElement(arr);
+    
+    // Print the majority element found
+    cout &lt;&lt; "The majority element is: " &lt;&lt; ans &lt;&lt; endl;
+    
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Class containing the majority element logic
+class Solution {
+    // Function to find the majority element in an array
+    public int majorityElement(int[] nums) {
+        // Size of the given array
+        int n = nums.length;
+        
+        // Count variable
+        int cnt = 0;
+        
+        // Candidate element
+        int el = 0;
+        
+        // Step 1: Find the potential majority element
+        for (int i = 0; i &lt; n; i++) {
+            if (cnt == 0) {
+                cnt = 1;
+                el = nums[i];
+            } else if (el == nums[i]) {
+                cnt++;
+            } else {
+                cnt--;
+            }
+        }
+        
+        // Step 2: Verify the candidate
+        int cnt1 = 0;
+        for (int i = 0; i &lt; n; i++) {
+            if (nums[i] == el) {
+                cnt1++;
+            }
+        }
+        
+        // Return the element if it's a majority
+        if (cnt1 &gt; (n / 2)) {
+            return el;
+        }
+        
+        // No majority found
+        return -1;
+    }
+}
+
+// Separate Main class for execution
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {2, 2, 1, 1, 1, 2, 2};
+        
+        // Create an instance of Solution class
+        Solution sol = new Solution();
+
+        // Call the majorityElement function
+        int ans = sol.majorityElement(arr);
+        
+        // Print the majority element
+        System.out.println("The majority element is: " + ans);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">from typing import List
+
+class Solution:
+    # Function to find the majority element in an array
+    def majorityElement(self, nums: List[int]) -&gt; int:
+        
+        # Size of the given array
+        n = len(nums)
+        
+        # Count
+        cnt = 0
+        
+        # Element
+        el = 0
+        
+        # Applying the algorithm
+        for num in nums:
+            if cnt == 0:
+                cnt = 1
+                el = num
+            elif el == num:
+                cnt += 1
+            else:
+                cnt -= 1
+        
+        """ Checking if the stored element
+        is the majority element"""
+        cnt1 = nums.count(el)
+        
+        # Return element if it is a majority element
+        if cnt1 &gt; (n // 2):
+            return el
+        
+        # Return -1 if no such element found
+        return -1
+
+# Test the solution with the given example
+arr = [2, 2, 1, 1, 1, 2, 2]
+
+# Create an instance of Solution class
+sol = Solution()
+
+ans = sol.majorityElement(arr)
+
+# Print the majority element found
+print(f"The majority element is: {ans}")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find the majority element in an array
+    majorityElement(nums) {
+        // Size of the given array
+        let n = nums.length;
+        
+        // Count
+        let cnt = 0;
+        
+        // Element
+        let el = 0;
+        
+        // Applying the algorithm
+        for (let num of nums) {
+            if (cnt === 0) {
+                cnt = 1;
+                el = num;
+            } else if (el === num) {
+                cnt++;
+            } else {
+                cnt--;
+            }
+        }
+        
+        /* Checking if the stored element
+         is the majority element*/
+        let cnt1 = nums.filter(num =&gt; num === el).length;
+        
+        // Return element if it is a majority element
+        if (cnt1 &gt; Math.floor(n / 2)) {
+            return el;
+        }
+        
+        // Return -1 if no such element found
+        return -1;
+    }
+}
+
+let arr = [2, 2, 1, 1, 1, 2, 2];
+
+// Create an instance of Solution class
+let sol = new Solution();
+
+let ans = sol.majorityElement(arr);
+
+// Print the majority element found
+console.log(`The majority element is: ${ans}`);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(N)</strong>, where N is the size of the input array. This is because we are iterating through the array once to find the potential majority element and then again to verify it.
+                        <br/><br/>
+<strong>Space Complexity: O(1)</strong>, as we are using only a constant amount of extra space.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

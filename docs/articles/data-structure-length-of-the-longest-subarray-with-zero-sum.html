@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Length of the longest subarray with zero Sum</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Length of the longest subarray with zero Sum</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/length-of-the-longest-subarray-with-zero-sum/</code></div>
+  <p><strong>Problem Statement: </strong>
+Given an array containing both positive and negative integers, we have to find the length of the longest subarray with the sum of all elements equal to zero.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>  
+<strong>Input:</strong> N = 6, array[] = {9, -3, 3, -1, 6, -5}  
+<strong>Result:</strong> 5  
+<strong>Explanation:</strong> The following subarrays sum to zero:
+- {-3, 3}
+- {-1, 6, -5}
+- {-3, 3, -1, 6, -5}
+The length of the longest subarray with sum zero is 5.
+
+<strong>Example 2:</strong>  
+<strong>Input:</strong> N = 8, array[] = {6, -2, 2, -8, 1, 7, 4, -10}  
+<strong>Result:</strong> 8  
+<strong>Explanation:</strong> Subarrays with sum zero:
+- {-2, 2}
+- {-8, 1, 7}
+- {-2, 2, -8, 1, 7}
+- {6, -2, 2, -8, 1, 7, 4, -10}
+The length of the longest subarray with sum zero is 8.</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>It's highly recommend trying to solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Brute Force 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Initialize a variable <code>max = 0</code>, which stores the length of the longest subarray with a sum of 0.</li>
+<li>Traverse the array from the start and initialize a variable <code>sum = 0</code>, which stores the sum of the subarray starting with the current index.</li>
+<li>Traverse from the next element of the current index up to the end of the array. Each time, add the element to the sum and check if it is equal to 0.</li>
+<li>If <code>sum = 0</code>, check if the length of the subarray so far is greater than <code>max</code>, and if yes, update <code>max</code>.</li>
+<li>Continue adding elements and repeat the above step until the outer loop completes traversing all elements.</li>
+<li>Finally, return the <code>max</code> which holds the length of the longest subarray with a sum of 0.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// compute length of the longest subarray with sum 0
+int solve(vector&lt;int&gt;&amp; a) {
+    // store best length found so far
+    int maxLen = 0;
+    // map prefix sum -&gt; first index seen
+    unordered_map&lt;int, int&gt; sumIndexMap;
+    // running prefix sum
+    int sum = 0;
+
+    // iterate through the array
+    for (int i = 0; i &lt; (int)a.size(); i++) {
+        // update running sum
+        sum += a[i];
+
+        // if sum is zero, subarray [0..i] has zero sum
+        if (sum == 0) {
+            // update best length
+            maxLen = i + 1;
+        }
+        // if this sum seen before, subarray (prevIndex..i] has zero sum
+        else if (sumIndexMap.find(sum) != sumIndexMap.end()) {
+            // maximize length using previous index
+            maxLen = max(maxLen, i - sumIndexMap[sum]);
+        }
+        // first time seeing this sum, store its index
+        else {
+            sumIndexMap[sum] = i;
+        }
+    }
+
+    // return best length
+    return maxLen;
+}
+
+// program entry
+int main() {
+    // sample input
+    vector&lt;int&gt; a = {9, -3, 3, -1, 6, -5};
+    // print result
+    cout &lt;&lt; solve(a) &lt;&lt; endl;
+    // exit
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// core logic holder
+class Solution {
+    // compute length of the longest subarray with sum 0
+    public int solve(int[] a) {
+        // store best length found so far
+        int maxLen = 0;
+        // map prefix sum -&gt; first index seen
+        Map&lt;Integer, Integer&gt; sumIndexMap = new HashMap&lt;&gt;();
+        // running prefix sum
+        int sum = 0;
+
+        // iterate through the array
+        for (int i = 0; i &lt; a.length; i++) {
+            // update running sum
+            sum += a[i];
+
+            // if sum is zero, subarray [0..i] has zero sum
+            if (sum == 0) {
+                // update best length
+                maxLen = i + 1;
+            }
+            // if this sum seen before, subarray (prevIndex..i] has zero sum
+            else if (sumIndexMap.containsKey(sum)) {
+                // maximize length using previous index
+                maxLen = Math.max(maxLen, i - sumIndexMap.get(sum));
+            }
+            // first time seeing this sum, store its index
+            else {
+                sumIndexMap.put(sum, i);
+            }
+        }
+
+        // return best length
+        return maxLen;
+    }
+}
+
+// separate main class
+public class Main {
+    // program entry
+    public static void main(String[] args) {
+        // sample input
+        int[] a = new int[] {9, -3, 3, -1, 6, -5};
+        // compute result
+        int ans = new Solution().solve(a);
+        // print result
+        System.out.println(ans);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># compute length of the longest subarray with sum 0
+def solve(a: list[int]) -&gt; int:
+    # store best length found so far
+    max_len = 0
+    # map prefix sum -&gt; first index seen
+    sum_index = {}
+    # running prefix sum
+    s = 0
+
+    # iterate through the array
+    for i, val in enumerate(a):
+        # update running sum
+        s += val
+
+        # if sum is zero, subarray [0..i] has zero sum
+        if s == 0:
+            # update best length
+            max_len = i + 1
+        # if this sum seen before, subarray (prevIndex..i] has zero sum
+        elif s in sum_index:
+            # maximize length using previous index
+            max_len = max(max_len, i - sum_index[s])
+        # first time seeing this sum, store its index
+        else:
+            sum_index[s] = i
+
+    # return best length
+    return max_len
+
+# program entry
+def main():
+    # sample input
+    a = [9, -3, 3, -1, 6, -5]
+    # print result
+    print(solve(a))
+
+# run main
+if __name__ == "__main__":
+    main()
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// compute length of the longest subarray with sum 0
+function solve(a) {
+  // store best length found so far
+  let maxLen = 0;
+  // map prefix sum -&gt; first index seen
+  const sumIndexMap = new Map();
+  // running prefix sum
+  let sum = 0;
+
+  // iterate through the array
+  for (let i = 0; i &lt; a.length; i++) {
+    // update running sum
+    sum += a[i];
+
+    // if sum is zero, subarray [0..i] has zero sum
+    if (sum === 0) {
+      // update best length
+      maxLen = i + 1;
+    }
+    // if this sum seen before, subarray (prevIndex..i] has zero sum
+    else if (sumIndexMap.has(sum)) {
+      // maximize length using previous index
+      maxLen = Math.max(maxLen, i - sumIndexMap.get(sum));
+    }
+    // first time seeing this sum, store its index
+    else {
+      sumIndexMap.set(sum, i);
+    }
+  }
+
+  // return best length
+  return maxLen;
+}
+
+// program entry
+function main() {
+  // sample input
+  const a = [9, -3, 3, -1, 6, -5];
+  // print result
+  console.log(solve(a));
+}
+
+// run main
+main();
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(N^2)</strong>, where N is the size of the array. This is because we are using two nested loops to check all possible subarrays.<br/><br/>
+<strong>Space Complexity: O(1)</strong>, as we are not using any additional data structures that grow with input size. We are only using a few variables to store the maximum length and the current sum.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Optimal Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Initialize a variable <code>sum = 0</code>, which stores the sum of elements traversed so far, and another variable <code>max = 0</code>, which stores the length of the longest subarray with sum zero.</li>
+<li>Declare a <code>HashMap&lt;Integer, Integer&gt;</code> to store the prefix sum of every element as a key and its index as a value.</li>
+<li>Traverse the array and add the array element to the <code>sum</code>.</li>
+<li>If <code>sum = 0</code>, update <code>max</code> with the maximum value between <code>max</code> and <code>current_index + 1</code>, as the subarray from the start to the current index has a sum of 0.</li>
+<li>If <code>sum</code> is not equal to zero, check the <code>HashMap</code> to see if we've encountered this sum before.</li>
+<li>If the <code>HashMap</code> contains the sum, this indicates that a subarray with the same sum exists, so update <code>max</code> accordingly.</li>
+<li>If the sum is not found in the <code>HashMap</code>, insert <code>(sum, current_index)</code> into the <code>HashMap</code> to store the prefix sum until the current index.</li>
+<li>After traversing the entire array, the <code>max</code> variable will hold the length of the longest subarray with a sum equal to zero. Return <code>max</code>.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// compute length of the longest subarray with sum 0
+int maxLen(int A[], int n) {
+  // map prefix sum -&gt; first index seen
+  unordered_map&lt;int, int&gt; mpp;
+  // best length so far
+  int maxi = 0;
+  // running prefix sum
+  int sum = 0;
+
+  // iterate over the array
+  for (int i = 0; i &lt; n; i++) {
+    // update running sum
+    sum += A[i];
+
+    // if sum is zero, subarray [0..i] has zero sum
+    if (sum == 0) {
+      // update best length
+      maxi = i + 1;
+    }
+    // otherwise check if this sum was seen before
+    else {
+      // when seen, zero-sum segment between previous index + 1 and i
+      if (mpp.find(sum) != mpp.end()) {
+        // maximize length
+        maxi = max(maxi, i - mpp[sum]);
+      }
+      // first time seeing this sum
+      else {
+        // record index
+        mpp[sum] = i;
+      }
+    }
+  }
+
+  // return best length
+  return maxi;
+}
+
+// program entry
+int main() {
+  // sample input
+  int A[] = {9, -3, 3, -1, 6, -5};
+  // compute size
+  int n = sizeof(A) / sizeof(A[0]);
+  // print result
+  cout &lt;&lt; maxLen(A, n) &lt;&lt; endl;
+  // exit
+  return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// core logic holder
+class Solution {
+    // compute length of the longest subarray with sum 0
+    public int maxLen(int[] A, int n) {
+        // map prefix sum -&gt; first index seen
+        Map&lt;Integer, Integer&gt; mpp = new HashMap&lt;&gt;();
+        // best length so far
+        int maxi = 0;
+        // running prefix sum
+        int sum = 0;
+
+        // iterate over the array
+        for (int i = 0; i &lt; n; i++) {
+            // update running sum
+            sum += A[i];
+
+            // if sum is zero, subarray [0..i] has zero sum
+            if (sum == 0) {
+                // update best length
+                maxi = i + 1;
+            }
+            // otherwise check if this sum was seen before
+            else {
+                // when seen, zero-sum segment between previous index + 1 and i
+                if (mpp.containsKey(sum)) {
+                    // maximize length
+                    maxi = Math.max(maxi, i - mpp.get(sum));
+                }
+                // first time seeing this sum
+                else {
+                    // record index
+                    mpp.put(sum, i);
+                }
+            }
+        }
+
+        // return best length
+        return maxi;
+    }
+}
+
+// separate main class
+public class Main {
+    // program entry
+    public static void main(String[] args) {
+        // sample input
+        int[] A = new int[]{9, -3, 3, -1, 6, -5};
+        // compute size
+        int n = A.length;
+        // compute result
+        int ans = new Solution().maxLen(A, n);
+        // print result
+        System.out.println(ans);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># compute length of the longest subarray with sum 0
+def maxLen(A: list[int], n: int) -&gt; int:
+    # map prefix sum -&gt; first index seen
+    mpp: dict[int, int] = {}
+    # best length so far
+    maxi = 0
+    # running prefix sum
+    s = 0
+
+    # iterate over the array
+    for i in range(n):
+        # update running sum
+        s += A[i]
+
+        # if sum is zero, subarray [0..i] has zero sum
+        if s == 0:
+            # update best length
+            maxi = i + 1
+        # otherwise check if this sum was seen before
+        else:
+            # when seen, zero-sum segment between previous index + 1 and i
+            if s in mpp:
+                # maximize length
+                maxi = max(maxi, i - mpp[s])
+            # first time seeing this sum
+            else:
+                # record index
+                mpp[s] = i
+
+    # return best length
+    return maxi
+
+# program entry
+def main():
+    # sample input
+    A = [9, -3, 3, -1, 6, -5]
+    # compute size
+    n = len(A)
+    # print result
+    print(maxLen(A, n))
+
+# run main
+if __name__ == "__main__":
+    main()
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// compute length of the longest subarray with sum 0
+function maxLen(A, n) {
+  // map prefix sum -&gt; first index seen
+  const mpp = new Map();
+  // best length so far
+  let maxi = 0;
+  // running prefix sum
+  let sum = 0;
+
+  // iterate over the array
+  for (let i = 0; i &lt; n; i++) {
+    // update running sum
+    sum += A[i];
+
+    // if sum is zero, subarray [0..i] has zero sum
+    if (sum === 0) {
+      // update best length
+      maxi = i + 1;
+    }
+    // otherwise check if this sum was seen before
+    else {
+      // when seen, zero-sum segment between previous index + 1 and i
+      if (mpp.has(sum)) {
+        // maximize length
+        maxi = Math.max(maxi, i - mpp.get(sum));
+      }
+      // first time seeing this sum
+      else {
+        // record index
+        mpp.set(sum, i);
+      }
+    }
+  }
+
+  // return best length
+  return maxi;
+}
+
+// program entry
+function main() {
+  // sample input
+  const A = [9, -3, 3, -1, 6, -5];
+  // compute size
+  const n = A.length;
+  // print result
+  console.log(maxLen(A, n));
+}
+
+// run main
+main();
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(n)</strong>, where n is the length of the string. This is because we are using a single pass through the string with two pointers, leading to linear time complexity.<br/><br/>
+<strong>Space Complexity: O(1)</strong>, as we are using a fixed-size hash array of size 256 (for ASCII characters) and not using any additional data structures that grow with input size.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

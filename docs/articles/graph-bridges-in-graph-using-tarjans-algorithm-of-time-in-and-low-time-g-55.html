@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Bridges in Graph - Using Tarjan&#x27;s Algorithm of time in and low time: G-55</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Bridges in Graph - Using Tarjan&#x27;s Algorithm of time in and low time: G-55</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/graph/bridges-in-graph-using-tarjans-algorithm-of-time-in-and-low-time-g-55/</code></div>
+  <p><strong>Problem Statement: </strong>There are n servers numbered from 0 to n - 1 connected by undirected server-to-server connections forming a network where connections[i] = [ai, bi] represents a connection between servers ai and bi. Any server can reach other servers directly or indirectly through the network.A critical connection is a connection that, if removed, will make some servers unable to reach some other servers. Return all critical connections in the network in any order.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input Format: N = 4, connections = [[0,1],[1,2],[2,0],[1,3]]
+Result: [[1, 3]]
+Explanation: The edge [1, 3] is the critical edge because if we remove the edge the graph will be divided into 2 components.
+<p><img height="457" loading="lazy" src="../assets/img/7faacac89d73ecaa.png" width="481"/></p>
+
+Example 2:
+Input Format N = 12, connection=[[1,2], [1,4], [2,3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [6, 9], [8, 9], [8, 10], [10, 11], [10, 12]]
+Result: [[4, 5], [5, 6], [8, 10]]
+Explanation: If we remove any of the three edges, the graph will be divided into 2 or more components.
+<p><img height="457" loading="lazy" src="../assets/img/9a50ba1c0a4499bd.png" width="481"/></p>
+</pre></div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/bridges-in-graph" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+<ul>
+<li>First, we need to create the adjacency list for the given graph from the edge information(If not already given). And we will declare a variable timer(either globally or we can carry it while calling DFS), that will keep track of the time of insertion for each node.</li>
+<li>Then we will start DFS from node 0(assuming the graph contains a single component otherwise, we will call DFS for every component) with parent -1.</li>
+<li>Inside DFS, we will first mark the node visited and then store the time of insertion and the lowest time of insertion properly. The timer may be initialized to 0 or 1.</li>
+<li>Now, it’s time to visit the adjacent nodes. </li>
+<ul>
+<li>If the adjacent node is the parent itself, we will just continue to the next node.</li>
+<li>If the adjacent node is not visited, we will call DFS for the adjacent node with the current node as the parent. After the DFS gets completed, we will compare the lowest time of insertion of the current node and the adjacent node and take the minimum one. Now, we will check if the lowest time of insertion of the adjacent node is greater than the time of insertion of the current node. If it is, then we will store the adjacent node and the current node in our answer array as they are representing the bridge.</li>
+<li>If the adjacent node is already visited, we will just compare the lowest time of insertion of the current node and the adjacent node and take the minimum one.</li>
+</ul>
+<li>Finally, our answer array will store all the bridges.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+private:
+    int timer = 1; // Global timer to assign discovery times
+
+    // Depth-First Search (DFS) to find bridges
+    void dfs(int node, int parent, vector&lt;int&gt; &amp;vis,
+             vector&lt;int&gt; adj[], int tin[], int low[],
+             vector&lt;vector&lt;int&gt;&gt; &amp;bridges) {
+        vis[node] = 1;                 // Mark current node as visited
+        tin[node] = low[node] = timer; // Set discovery time and low-link value
+        timer++;
+
+        for (auto it : adj[node]) {    // Explore all adjacent nodes
+            if (it == parent) continue; // Skip the edge to parent
+
+            if (vis[it] == 0) {
+                // If neighbor is unvisited, recurse
+                dfs(it, node, vis, adj, tin, low, bridges);
+
+                // Update low-link value of current node
+                low[node] = min(low[node], low[it]);
+
+                // Check if the edge is a bridge
+                if (low[it] &gt; tin[node]) {
+                    bridges.push_back({it, node});
+                }
+            } else {
+                // Back edge: update low-link value
+                low[node] = min(low[node], low[it]);
+            }
+        }
+    }
+
+public:
+    vector&lt;vector&lt;int&gt;&gt; criticalConnections(int n,
+        vector&lt;vector&lt;int&gt;&gt;&amp; connections) {
+
+        // Step 1: Build adjacency list
+        vector&lt;int&gt; adj[n];
+        for (auto it : connections) {
+            int u = it[0], v = it[1];
+            adj[u].push_back(v);
+            adj[v].push_back(u);
+        }
+
+        // Step 2: Initialize helper arrays
+        vector&lt;int&gt; vis(n, 0);
+        int tin[n]; // Discovery time
+        int low[n]; // Lowest reachable time
+        vector&lt;vector&lt;int&gt;&gt; bridges;
+
+        // Step 3: Run DFS (assuming graph is connected)
+        dfs(0, -1, vis, adj, tin, low, bridges);
+
+        return bridges;
+    }
+};
+
+int main() {
+    int n = 4;
+    vector&lt;vector&lt;int&gt;&gt; connections = {
+        {0, 1}, {1, 2}, {2, 0}, {1, 3}
+    };
+
+    Solution obj;
+    vector&lt;vector&lt;int&gt;&gt; bridges = obj.criticalConnections(n, connections);
+
+    cout &lt;&lt; "Critical Connections (Bridges): ";
+    for (auto it : bridges) {
+        cout &lt;&lt; "[" &lt;&lt; it[0] &lt;&lt; ", " &lt;&lt; it[1] &lt;&lt; "] ";
+    }
+    cout &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    private int timer = 1; // Global timer for discovery times
+
+    // Depth-First Search to find bridges
+    private void dfs(int node, int parent, boolean[] vis,
+                     List&lt;List&lt;Integer&gt;&gt; adj, int[] tin, int[] low,
+                     List&lt;List&lt;Integer&gt;&gt; bridges) {
+        vis[node] = true;            // Mark as visited
+        tin[node] = low[node] = timer++; // Set discovery and low-link time
+
+        for (int neighbor : adj.get(node)) { // Explore neighbors
+            if (neighbor == parent) continue; // Skip parent
+
+            if (!vis[neighbor]) {
+                // Recurse on unvisited neighbor
+                dfs(neighbor, node, vis, adj, tin, low, bridges);
+
+                // Update low-link value
+                low[node] = Math.min(low[node], low[neighbor]);
+
+                // Check if it's a bridge
+                if (low[neighbor] &gt; tin[node]) {
+                    bridges.add(Arrays.asList(neighbor, node));
+                }
+            } else {
+                // Back edge: update low-link
+                low[node] = Math.min(low[node], low[neighbor]);
+            }
+        }
+    }
+
+    public List&lt;List&lt;Integer&gt;&gt; criticalConnections(int n, int[][] connections) {
+        // Step 1: Build adjacency list
+        List&lt;List&lt;Integer&gt;&gt; adj = new ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; n; i++) adj.add(new ArrayList&lt;&gt;());
+
+        for (int[] conn : connections) {
+            int u = conn[0], v = conn[1];
+            adj.get(u).add(v);
+            adj.get(v).add(u);
+        }
+
+        // Step 2: Initialize helper arrays
+        boolean[] vis = new boolean[n];
+        int[] tin = new int[n];
+        int[] low = new int[n];
+        List&lt;List&lt;Integer&gt;&gt; bridges = new ArrayList&lt;&gt;();
+
+        // Step 3: Run DFS
+        dfs(0, -1, vis, adj, tin, low, bridges);
+
+        return bridges;
+    }
+
+    public static void main(String[] args) {
+        int n = 4;
+        int[][] connections = {{0,1},{1,2},{2,0},{1,3}};
+
+        Solution obj = new Solution();
+        List&lt;List&lt;Integer&gt;&gt; bridges = obj.criticalConnections(n, connections);
+
+        System.out.println("Critical Connections (Bridges): " + bridges);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">from typing import List
+
+class Solution:
+    def __init__(self):
+        self.timer = 1  # Global timer for discovery times
+
+    def dfs(self, node: int, parent: int, vis: List[int],
+            adj: List[List[int]], tin: List[int], low: List[int],
+            bridges: List[List[int]]) -&gt; None:
+        vis[node] = 1                     # Mark as visited
+        tin[node] = low[node] = self.timer  # Set discovery &amp; low-link value
+        self.timer += 1
+
+        for neighbor in adj[node]:        # Explore neighbors
+            if neighbor == parent:
+                continue
+
+            if vis[neighbor] == 0:
+                # Recursive DFS call
+                self.dfs(neighbor, node, vis, adj, tin, low, bridges)
+
+                # Update low-link value
+                low[node] = min(low[node], low[neighbor])
+
+                # If the lowest reachable node from neighbor is higher than discovery time of node
+                if low[neighbor] &gt; tin[node]:
+                    bridges.append([neighbor, node])
+            else:
+                # Back edge
+                low[node] = min(low[node], low[neighbor])
+
+    def criticalConnections(self, n: int, connections: List[List[int]]) -&gt; List[List[int]]:
+        # Step 1: Build adjacency list
+        adj = [[] for _ in range(n)]
+        for u, v in connections:
+            adj[u].append(v)
+            adj[v].append(u)
+
+        # Step 2: Initialize helper arrays
+        vis = [0] * n
+        tin = [0] * n
+        low = [0] * n
+        bridges = []
+
+        # Step 3: Run DFS
+        self.dfs(0, -1, vis, adj, tin, low, bridges)
+        return bridges
+
+# Driver Code
+if __name__ == "__main__":
+    n = 4
+    connections = [[0,1],[1,2],[2,0],[1,3]]
+    obj = Solution()
+    print("Critical Connections (Bridges):", obj.criticalConnections(n, connections))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    constructor() {
+        this.timer = 1; // Global timer for discovery times
+    }
+
+    // DFS to find bridges
+    dfs(node, parent, vis, adj, tin, low, bridges) {
+        vis[node] = 1;                  // Mark visited
+        tin[node] = low[node] = this.timer++; // Set discovery &amp; low-link
+
+        for (let neighbor of adj[node]) {
+            if (neighbor === parent) continue; // Skip parent edge
+
+            if (vis[neighbor] === 0) {
+                // Recursive DFS call
+                this.dfs(neighbor, node, vis, adj, tin, low, bridges);
+
+                // Update low-link value
+                low[node] = Math.min(low[node], low[neighbor]);
+
+                // Check if it's a bridge
+                if (low[neighbor] &gt; tin[node]) {
+                    bridges.push([neighbor, node]);
+                }
+            } else {
+                // Back edge
+                low[node] = Math.min(low[node], low[neighbor]);
+            }
+        }
+    }
+
+    criticalConnections(n, connections) {
+        // Step 1: Build adjacency list
+        const adj = Array.from({ length: n }, () =&gt; []);
+        for (let [u, v] of connections) {
+            adj[u].push(v);
+            adj[v].push(u);
+        }
+
+        // Step 2: Initialize helper arrays
+        const vis = new Array(n).fill(0);
+        const tin = new Array(n).fill(0);
+        const low = new Array(n).fill(0);
+        const bridges = [];
+
+        // Step 3: Run DFS
+        this.dfs(0, -1, vis, adj, tin, low, bridges);
+        return bridges;
+    }
+}
+
+// Driver Code
+const n = 4;
+const connections = [[0,1],[1,2],[2,0],[1,3]];
+const obj = new Solution();
+console.log("Critical Connections (Bridges):", obj.criticalConnections(n, connections));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Complexity Analysis
+                    </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p>Time Complexity: O(V+2E), where V = no. of vertices, E = no. of edges. It is because the algorithm is just a simple DFS traversal.</p>
+<p>Space Complexity: O(V+2E) + O(3V), where V = no. of vertices, E = no. of edges. O(V+2E) to store the graph in an adjacency list and O(3V) for the three arrays i.e. tin, low, and vis, each of size V.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

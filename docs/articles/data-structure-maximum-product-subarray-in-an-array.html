@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Maximum Product Subarray in an Array</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Maximum Product Subarray in an Array</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/maximum-product-subarray-in-an-array/</code></div>
+  <p><strong>Problem Statement: </strong> Given an array that contains both negative and positive integers, find the maximum product subarray. 
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: Nums = [1,2,3,4,5,0]</span>
+<span>Output: 120</span>
+<span>Explanation: 
+In the given array, 1×2×3×4×5 gives maximum product value.</span>
+<p></p>
+<span>Input: Nums = [1,2,-3,0,-4,-5]</span>
+<span>Output: 20</span>
+<span>Explanation: 
+In the given array, (-4)×(-5) gives maximum product value.</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+     Here is the <a href="https://takeuforward.org/plus/dsa/problems/maximum-product-subarray-in-an-array" rel="noopener" target="_blank">practice link </a> to help you assess your knowledge better.
+           It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Brute-Force Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">In the brute force method, we generate all possible subarrays and calculate the product of each subarray. We track the maximum product found among all. Use two nested loops, the outer loop picks the starting index of the subarray and the inner loop picks the ending index. For every subarray defined by start and end, calculate the product and update the maximum product if the current subarray's product is larger.
+
+<p></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // This function finds the maximum product
+    // of any contiguous subarray using brute force
+    int maxProduct(vector&lt;int&gt;&amp; nums) {
+        // Initialize the answer with the first element
+        int maxProd = nums[0];
+
+        // Outer loop picks the starting index
+        for (int i = 0; i &lt; nums.size(); i++) {
+            // Initialize current product to 1
+            int prod = 1;
+
+            // Inner loop picks the ending index
+            for (int j = i; j &lt; nums.size(); j++) {
+                // Multiply current number to product
+                prod *= nums[j];
+
+                // Update maximum product if needed
+                maxProd = max(maxProd, prod);
+            }
+        }
+
+        // Return the result
+        return maxProd;
+    }
+};
+
+int main() {
+    // Sample input
+    vector&lt;int&gt; nums = {2, 3, -2, 4};
+
+    // Create Solution object
+    Solution sol;
+
+    // Print the result
+    cout &lt;&lt; sol.maxProduct(nums);
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // This function finds the maximum product
+    // of any contiguous subarray using brute force
+    public int maxProduct(int[] nums) {
+        // Initialize the answer with the first element
+        int maxProd = nums[0];
+
+        // Outer loop picks the starting index
+        for (int i = 0; i &lt; nums.length; i++) {
+            // Initialize current product to 1
+            int prod = 1;
+
+            // Inner loop picks the ending index
+            for (int j = i; j &lt; nums.length; j++) {
+                // Multiply current number to product
+                prod *= nums[j];
+
+                // Update maximum product if needed
+                maxProd = Math.max(maxProd, prod);
+            }
+        }
+
+        // Return the result
+        return maxProd;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Sample input
+        int[] nums = {2, 3, -2, 4};
+
+        // Create Solution object
+        Solution sol = new Solution();
+
+        // Print the result
+        System.out.println(sol.maxProduct(nums));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # This function finds the maximum product
+    # of any contiguous subarray using brute force
+    def maxProduct(self, nums):
+        # Initialize the answer with the first element
+        maxProd = nums[0]
+
+        # Outer loop picks the starting index
+        for i in range(len(nums)):
+            # Initialize current product to 1
+            prod = 1
+
+            # Inner loop picks the ending index
+            for j in range(i, len(nums)):
+                # Multiply current number to product
+                prod *= nums[j]
+
+                # Update maximum product if needed
+                maxProd = max(maxProd, prod)
+
+        # Return the result
+        return maxProd
+
+# Sample input
+nums = [2, 3, -2, 4]
+
+# Create Solution object
+sol = Solution()
+
+# Print the result
+print(sol.maxProduct(nums))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // This function finds the maximum product
+    // of any contiguous subarray using brute force
+    maxProduct(nums) {
+        // Initialize the answer with the first element
+        let maxProd = nums[0];
+
+        // Outer loop picks the starting index
+        for (let i = 0; i &lt; nums.length; i++) {
+            // Initialize current product to 1
+            let prod = 1;
+
+            // Inner loop picks the ending index
+            for (let j = i; j &lt; nums.length; j++) {
+                // Multiply current number to product
+                prod *= nums[j];
+
+                // Update maximum product if needed
+                maxProd = Math.max(maxProd, prod);
+            }
+        }
+
+        // Return the result
+        return maxProd;
+    }
+}
+
+// Sample input
+const nums = [2, 3, -2, 4];
+
+// Create Solution object
+const sol = new Solution();
+
+// Print the result
+console.log(sol.maxProduct(nums));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+<strong>Time Complexity: O(N^2)</strong>, we check the product of all possible subarrays using two nested loops.<br/>
+<strong>Space Complexity: O(1)</strong>, No extra space is used.<br/>
+<p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach - 1
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+    The product of elements in a subarray can become large when there are positive numbers, but negative numbers and zeros make it tricky. A negative number can flip a large product into a negative one, but if we meet another negative later, the sign flips back to positive. Therefore, to capture all possible max products, we do two things:
+<ul>
+<li>Traverse the array from left to right (prefix) to build cumulative product.</li>
+<li>Traverse the array from right to left (suffix) to catch subarrays ending at the back (helpful when max product is at the end or due to even negatives).</li>
+<li>Reset the product to 1 whenever a zero is found, as it breaks the subarray continuity.</li>
+<li>By comparing products in both directions at each step, we ensure we don’t miss any possible maximum.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/091bb2e4032e8318.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/d61fed7b6d261d1c.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/091bb2e4032e8318.png"/><img alt="Image 2" loading="lazy" src="../assets/img/d61fed7b6d261d1c.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// This function returns the maximum product subarray
+// using prefix and suffix traversal
+class Solution {
+public:
+    int maxProductSubArray(vector&lt;int&gt;&amp; arr) {
+        // Store size of array
+        int n = arr.size();
+
+        // Initialize prefix and suffix product
+        int pre = 1, suff = 1;
+
+        // Initialize answer to negative infinity
+        int ans = INT_MIN;
+
+        // Traverse from both left and right
+        for (int i = 0; i &lt; n; i++) {
+            // Reset prefix if zero
+            if (pre == 0) pre = 1;
+
+            // Reset suffix if zero
+            if (suff == 0) suff = 1;
+
+            // Multiply prefix with current element from front
+            pre *= arr[i];
+
+            // Multiply suffix with current element from back
+            suff *= arr[n - i - 1];
+
+            // Update the maximum of all products seen so far
+            ans = max(ans, max(pre, suff));
+        }
+
+        // Return the final answer
+        return ans;
+    }
+};
+
+int main() {
+    // Sample input
+    vector&lt;int&gt; arr = {2, 3, -2, 4};
+
+    // Create object of solution
+    Solution obj;
+
+    // Call the function and print the result
+    cout &lt;&lt; obj.maxProductSubArray(arr) &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">// This class contains the function to find maximum product subarray
+// using prefix and suffix traversal
+class Solution {
+    public int maxProductSubArray(int[] arr) {
+        // Get the length of the array
+        int n = arr.length;
+
+        // Initialize prefix and suffix product
+        int pre = 1, suff = 1;
+
+        // Initialize answer with smallest integer
+        int ans = Integer.MIN_VALUE;
+
+        // Traverse from both left and right
+        for (int i = 0; i &lt; n; i++) {
+            // Reset prefix if zero
+            if (pre == 0) pre = 1;
+
+            // Reset suffix if zero
+            if (suff == 0) suff = 1;
+
+            // Multiply prefix with current element from front
+            pre *= arr[i];
+
+            // Multiply suffix with current element from back
+            suff *= arr[n - i - 1];
+
+            // Update maximum value so far
+            ans = Math.max(ans, Math.max(pre, suff));
+        }
+
+        // Return the final result
+        return ans;
+    }
+}
+
+// Separate Main class for testing
+class Main {
+    public static void main(String[] args) {
+        // Sample input
+        int[] arr = {2, 3, -2, 4};
+
+        // Create object of Solution
+        Solution sol = new Solution();
+
+        // Call the method and print the result
+        System.out.println(sol.maxProductSubArray(arr));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># This function returns the maximum product subarray
+# using prefix and suffix traversal
+class Solution:
+    def maxProductSubArray(self, arr):
+        # Store length of array
+        n = len(arr)
+
+        # Initialize prefix and suffix products
+        pre, suff = 1, 1
+
+        # Initialize answer as negative infinity
+        ans = float('-inf')
+
+        # Traverse from both front and back
+        for i in range(n):
+            # Reset prefix if zero
+            if pre == 0:
+                pre = 1
+
+            # Reset suffix if zero
+            if suff == 0:
+                suff = 1
+
+            # Multiply prefix with front element
+            pre *= arr[i]
+
+            # Multiply suffix with back element
+            suff *= arr[n - i - 1]
+
+            # Update maximum product so far
+            ans = max(ans, pre, suff)
+
+        # Return the result
+        return ans
+
+# Sample usage
+arr = [2, 3, -2, 4]
+sol = Solution()
+print(sol.maxProductSubArray(arr))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// This function returns the maximum product subarray
+// using prefix and suffix traversal
+class Solution {
+    maxProductSubArray(arr) {
+        // Get the length of array
+        const n = arr.length;
+
+        // Initialize prefix and suffix products
+        let pre = 1, suff = 1;
+
+        // Initialize answer as negative infinity
+        let ans = -Infinity;
+
+        // Traverse from both directions
+        for (let i = 0; i &lt; n; i++) {
+            // Reset prefix if zero
+            if (pre === 0) pre = 1;
+
+            // Reset suffix if zero
+            if (suff === 0) suff = 1;
+
+            // Multiply prefix with front element
+            pre *= arr[i];
+
+            // Multiply suffix with back element
+            suff *= arr[n - i - 1];
+
+            // Update the maximum product so far
+            ans = Math.max(ans, pre, suff);
+        }
+
+        // Return final result
+        return ans;
+    }
+}
+
+// Sample usage
+const arr = [2, 3, -2, 4];
+const sol = new Solution();
+console.log(sol.maxProductSubArray(arr));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+<strong>Time Complexity: O(N)</strong>, every element of array is visited once.<br/>
+<strong>Space Complexity: O(1)</strong>, constant number of variables are used.<br/>
+<p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach - 2
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+    In a product-based subarray problem, a negative number can flip the sign, turning a big minimum into a potential maximum. So, we track both the maximum and minimum products at each step. This helps handle negative numbers effectively.
+    <ul>
+<li>Start by setting the answer, current max product, and current min product to the first number.</li>
+<li>For each number in the array starting from the second:</li>
+<ul>
+<li>If the number is negative, swap current max and min.</li>
+<li>If the product of the current number and previous max is larger than the number itself, update current max to that product; otherwise, set it to the number.</li>
+<li>Similarly, if the product of the current number and previous min is smaller, update current min; otherwise, set it to the number.</li>
+<li>If the current max is greater than the answer so far, update the answer.</li>
+</ul>
+<li>Return the answer at the end.</li>
+</ul>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-7260" loading="lazy" src="../assets/img/6b7357f88377fc42.png"/></figure><p></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // This function returns the maximum product
+    // of any contiguous subarray using optimized approach
+    int maxProduct(vector&lt;int&gt;&amp; nums) {
+        // Initialize answer, max and min product as first element
+        int res = nums[0];
+        int maxProd = nums[0];
+        int minProd = nums[0];
+
+        // Traverse from second element
+        for (int i = 1; i &lt; nums.size(); i++) {
+            // Store current number
+            int curr = nums[i];
+
+            // If current number is negative, swap max and min
+            if (curr &lt; 0) swap(maxProd, minProd);
+
+            // Update max and min product ending at current index
+            maxProd = max(curr, maxProd * curr);
+            minProd = min(curr, minProd * curr);
+
+            // Update global result
+            res = max(res, maxProd);
+        }
+
+        // Return the result
+        return res;
+    }
+};
+
+int main() {
+    vector&lt;int&gt; nums = {2, 3, -2, 4};
+    Solution sol;
+    cout &lt;&lt; sol.maxProduct(nums);
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // This function returns the maximum product
+    // of any contiguous subarray using optimized approach
+    public int maxProduct(int[] nums) {
+        int res = nums[0];
+        int maxProd = nums[0];
+        int minProd = nums[0];
+
+        // Traverse from second element
+        for (int i = 1; i &lt; nums.length; i++) {
+            int curr = nums[i];
+
+            // Swap if current is negative
+            if (curr &lt; 0) {
+                int temp = maxProd;
+                maxProd = minProd;
+                minProd = temp;
+            }
+
+            // Update max and min product
+            maxProd = Math.max(curr, maxProd * curr);
+            minProd = Math.min(curr, minProd * curr);
+
+            // Update result
+            res = Math.max(res, maxProd);
+        }
+
+        return res;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[] nums = {2, 3, -2, 4};
+        Solution sol = new Solution();
+        System.out.println(sol.maxProduct(nums));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # This function returns the maximum product
+    # of any contiguous subarray using optimized approach
+    def maxProduct(self, nums):
+        res = nums[0]
+        maxProd = nums[0]
+        minProd = nums[0]
+
+        # Traverse from second element
+        for i in range(1, len(nums)):
+            curr = nums[i]
+
+            # Swap max and min if current is negative
+            if curr &lt; 0:
+                maxProd, minProd = minProd, maxProd
+
+            # Update max and min product
+            maxProd = max(curr, maxProd * curr)
+            minProd = min(curr, minProd * curr)
+
+            # Update result
+            res = max(res, maxProd)
+
+        return res
+
+nums = [2, 3, -2, 4]
+sol = Solution()
+print(sol.maxProduct(nums))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // This function returns the maximum product
+    // of any contiguous subarray using optimized approach
+    maxProduct(nums) {
+        let res = nums[0];
+        let maxProd = nums[0];
+        let minProd = nums[0];
+
+        // Traverse from second element
+        for (let i = 1; i &lt; nums.length; i++) {
+            let curr = nums[i];
+
+            // Swap max and min if current is negative
+            if (curr &lt; 0) {
+                [maxProd, minProd] = [minProd, maxProd];
+            }
+
+            // Update max and min product
+            maxProd = Math.max(curr, maxProd * curr);
+            minProd = Math.min(curr, minProd * curr);
+
+            // Update result
+            res = Math.max(res, maxProd);
+        }
+
+        return res;
+    }
+}
+
+const nums = [2, 3, -2, 4];
+const sol = new Solution();
+console.log(sol.maxProduct(nums));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+<strong>Time Complexity: O(N)</strong>, every element of array is visited once.<br/>
+<strong>Space Complexity: O(1) </strong>, only constant variables are used.<br/>
+<p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

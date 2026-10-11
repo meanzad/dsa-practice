@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>G-39: Minimum Multiplications to Reach End</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>G-39: Minimum Multiplications to Reach End</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/graph/g-39-minimum-multiplications-to-reach-end/</code></div>
+  <p><strong>Problem Statement: </strong>Given start, end, and an array arr of n numbers. At each step, the start is multiplied by any number in the array and then a mod operation with 100000 is done to get the new start.
+Your task is to find the minimum steps in which the end can be achieved starting from the start. If it is not possible to reach the end, then return -1.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input:
+arr[] = {2, 5, 7}
+start = 3
+end = 30
+Output:
+2
+Explanation: 
+Step 1: 3*2 = 6 % 100000 = 6 
+Step 2: 6*5 = 30 % 100000 = 30
+Therefore, in minimum 2 multiplications we reach the end number which is treated as a destination node of a graph here.
+
+Example 2:
+Input:
+arr[] = {3, 4, 65}
+start = 7
+end = 66175
+Output:
+4
+Explanation: 
+Step 1: 7*3 = 21 % 100000 = 21 
+Step 2: 21*3 = 6 % 100000 = 63 
+Step 3: 63*65 = 4095 % 100000 = 4095 
+Step 4: 4095*65 = 266175 % 100000 = 66175
+Therefore, in minimum 4 multiplications we reach the end number which is treated as a destination node of a graph here.
+        </pre></div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/minimum-multiplications-to-reach-end" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+<h2>Intuition</h2>
+<p>Since we need to find the minimum number of multiplications in order to attain the end number from the start number, the one standard algorithm that we can think of for finding the shortest/minimum paths is of course Dijkstra’s Algorithm. But a question may arise in our minds: how can we depict this problem in the form of a graph? So let us understand this through an illustration :</p>
+<p><img height="457" loading="lazy" src="../assets/img/35a723b448636f06.png" width="481"/></p>
+<p><strong>Initial configuration:</strong></p>
+<ul><li><strong>Queue: </strong>Define a Queue which would contain pairs of the type {steps, num }, where ‘steps’ indicates the currently updated value of no. of steps taken to reach from source to the current ‘num’.</li><li><strong>Distance Array: </strong>Define a distance array that would contain the minimum no. of multiplications/distance from the start number to the current number. If a cell is marked as ‘infinity’ then it is treated as unreachable/unattained.</li><li><strong>Start and End: </strong>Define the start and the end value which we have to reach through a series of multiplications.</li></ul>
+<h2>Algorithm</h2>
+<ul><li>Start by creating a queue that stores the step-num pairs in the form {steps, num} and a dist array with each node initialized with a very large number ( to indicate that they’ve not been attained initially). The size of the ‘dist’ array is set to 100000 because it is the maximum number of distinct numbers that can be generated.</li><li>We push the start number to the queue along with its steps marked as ‘0’ initially because we’ve just started the algorithm.</li><li>Pop the element from the front of the queue and look out for its adjacent nodes (here, adjacent nodes can be regarded as the numbers which we get when we multiply the start number by each element from the arr).</li><li>If the current dist value for a number is better than the previous distance indicated by the distance array, we update the distance/steps in the array and push it to the queue.</li><li>We repeat the above three steps until the queue becomes empty or we reach the end number.</li><li>Return the calculated number of steps after we reach the end number. If the queue becomes empty and we don’t encounter the required number, return ‘-1’ indicating that the following number is unattainable by multiplying the start number any number of times.</li></ul>
+<p>Here’s a quick demonstration of the Algorithm’s 1st iteration for <strong>example 1</strong> stated above ( all the further iterations would be done in a similar way ) :</p>
+<p><img height="457" loading="lazy" src="../assets/img/95546d065af119a1.png" width="481"/></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution
+{
+public:
+    int minimumMultiplications(vector&lt;int&gt; &amp;arr,
+                               int start, int end)
+    {
+        // Create a queue for storing the numbers as a result of multiplication
+        // of the numbers in the array and the start number.
+        queue&lt;pair&lt;int, int&gt;&gt; q;
+        q.push({start, 0});
+
+        // Create a dist array to store the no. of multiplications to reach
+        // a particular number from the start number.
+        vector&lt;int&gt; dist(100000, 1e9);
+        dist[start] = 0;
+        int mod = 100000;
+
+        // Multiply the start no. with each of numbers in the arr
+        // until we get the end no.
+        while (!q.empty())
+        {
+            int node = q.front().first;
+            int steps = q.front().second;
+            q.pop();
+
+            for (auto it : arr)
+            {
+                int num = (it * node) % mod;
+
+                // If the no. of multiplications are less than before
+                // in order to reach a number, we update the dist array.
+                if (steps + 1 &lt; dist[num])
+                {
+                    dist[num] = steps + 1;
+
+                    // Whenever we reach the end number
+                    // return the calculated steps
+                    if (num == end)
+                        return steps + 1;
+                    q.push({num, steps + 1});
+                }
+            }
+        }
+        // If the end no. is unattainable.
+        return -1;
+    }
+};
+
+int main()
+{
+    // Driver Code.
+    int start = 3, end = 30;
+
+    vector&lt;int&gt; arr = {2, 5, 7};
+
+    Solution obj;
+
+    int ans = obj.minimumMultiplications(arr, start, end);
+
+    cout &lt;&lt; ans;
+    cout &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*; 
+
+class Solution {
+    public int minimumMultiplications(int[] arr, int start, int end) {
+        // Queue to store pairs of (number, steps)
+        Queue&lt;int[]&gt; q = new LinkedList&lt;&gt;();
+        q.offer(new int[]{start, 0});
+
+        // Distance array to store minimum multiplications needed to reach a number
+        int[] dist = new int[100000];
+        Arrays.fill(dist, (int)1e9);
+        dist[start] = 0;
+        int mod = 100000;
+
+        // BFS traversal
+        while (!q.isEmpty()) {
+            int[] current = q.poll();
+            int node = current[0];
+            int steps = current[1];
+
+            // Try multiplying node with each element in arr
+            for (int factor : arr) {
+                int num = (factor * node) % mod;
+
+                // If this path gives a lesser number of multiplications, update and enqueue
+                if (steps + 1 &lt; dist[num]) {
+                    dist[num] = steps + 1;
+
+                    // If we reached the target, return the steps
+                    if (num == end) return steps + 1;
+
+                    q.offer(new int[]{num, steps + 1});
+                }
+            }
+        }
+        // Return -1 if the end number is unreachable
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        int start = 3, end = 30;
+        int[] arr = {2, 5, 7};
+
+        Solution obj = new Solution();
+        int ans = obj.minimumMultiplications(arr, start, end);
+
+        System.out.println(ans);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">from collections import deque
+
+class Solution:
+    def minimumMultiplications(self, arr, start, end):
+        """
+        Finds the minimum number of multiplications to transform start into end
+        using elements from arr under modulo 100000.
+        """
+        # Queue to store (number, steps) pairs for BFS
+        q = deque()
+        q.append((start, 0))
+
+        # Distance list initialized with infinity-like value
+        dist = [int(1e9)] * 100000
+        dist[start] = 0
+        mod = 100000
+
+        while q:
+            node, steps = q.popleft()
+
+            # Try multiplying node with each element in arr
+            for factor in arr:
+                num = (factor * node) % mod
+
+                # If this path is better (fewer steps), update and enqueue
+                if steps + 1 &lt; dist[num]:
+                    dist[num] = steps + 1
+
+                    # If we reached the target, return the number of steps
+                    if num == end:
+                        return steps + 1
+                    
+                    q.append((num, steps + 1))
+
+        # Return -1 if unreachable
+        return -1
+
+
+# Driver code
+if __name__ == "__main__":
+    start, end = 3, 30
+    arr = [2, 5, 7]
+    obj = Solution()
+    ans = obj.minimumMultiplications(arr, start, end)
+    print(ans)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    minimumMultiplications(arr, start, end) {
+        /**
+         * Finds the minimum number of multiplications to transform start into end
+         * using elements from arr under modulo 100000.
+         */
+        const mod = 100000;
+
+        // Distance array to track minimum steps for each number
+        const dist = new Array(mod).fill(1e9);
+        dist[start] = 0;
+
+        // Queue for BFS: each element is [number, steps]
+        const queue = [[start, 0]];
+
+        while (queue.length &gt; 0) {
+            const [node, steps] = queue.shift();
+
+            // Multiply node with each element in arr
+            for (let factor of arr) {
+                const num = (factor * node) % mod;
+
+                // If this path is better (fewer steps), update and enqueue
+                if (steps + 1 &lt; dist[num]) {
+                    dist[num] = steps + 1;
+
+                    // If we reached the target, return steps
+                    if (num === end) return steps + 1;
+
+                    queue.push([num, steps + 1]);
+                }
+            }
+        }
+        // If unreachable, return -1
+        return -1;
+    }
+}
+
+// Driver code
+const start = 3, end = 30;
+const arr = [2, 5, 7];
+const obj = new Solution();
+const ans = obj.minimumMultiplications(arr, start, end);
+console.log(ans);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Complexity Analysis
+                    </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p>Time Complexity : O(100000 * N), Where ‘100000’ are the total possible numbers generated by multiplication (hypothetical) and N = size of the array with numbers of which each node could be multiplied.</p>
+<p>Space Complexity :  O(100000 * N), Where ‘100000’ are the total possible numbers generated by multiplication (hypothetical) and N = size of the array with numbers of which each node could be multiplied. 100000 * N is the max possible queue size. The space complexity of the dist array is constant.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

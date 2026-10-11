@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Count digits in a number</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Count digits in a number</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/count-digits-in-a-number/</code></div>
+  <p><strong>Problem Statement: </strong>Given an integer N, return the number of digits in N.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input:N = 12345
+Output:5
+Explanation:  The number 12345 has 5 digits.
+                        
+Example 2:
+Input:N = 7789              
+Output: 4
+Explanation: The number 7789 has 4 digits.  
+</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em> It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                   Brute Force Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<p>To count the number of digits in a number, we can use the algorithm created in<a href="https://takeuforward.org/maths/extract-digits-from-a-given-number" rel="noopener" target="_blank"> Extract Digits</a> as now instead of extracting digits we are simply creating a counter to count the number of digits in the number..</p>
+<p><strong>Algorithm:</strong></p>
+<ul>
+<li>Initialise a counter to store the number of digits.</li>
+<li>While N is greater than 0, execute the following:
+                        <ol><li>Increment the counter by 1</li><li>Update N by removing its last digit by performing a modulo 10 (%10) operation on it.</li></ol></li>
+<li>After exiting the while loop, we return the counter as the number of digits.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Code
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<button class="code-tab dsa_article_code_active" data-lang="cpp">C++</button>
+<button class="code-tab" data-lang="java">Java</button>
+<button class="code-tab" data-lang="python">Python</button>
+<button class="code-tab" data-lang="javascript">JavaScript</button>
+<svg class="copy-btn" fill="none" height="20" viewbox="0 0 17 20" width="17" xmlns="http://www.w3.org/2000/svg">
+<path d="M2 20C1.45 20 0.979002 19.804 0.587002 19.412C0.195002 19.02 -0.000664969 18.5493 1.69779e-06 18V4H2V18H13V20H2ZM6 16C5.45 16 4.979 15.804 4.587 15.412C4.195 15.02 3.99934 14.5493 4 14V2C4 1.45 4.196 0.979002 4.588 0.587002C4.98 0.195002 5.45067 -0.000664969 6 1.69779e-06H15C15.55 1.69779e-06 16.021 0.196002 16.413 0.588002C16.805 0.980002 17.0007 1.45067 17 2V14C17 14.55 16.804 15.021 16.412 15.413C16.02 15.805 15.5493 16.0007 15 16H6ZM6 14H15V2H6V14Z">
+</path>
+</svg>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0">
+                                <code class="language-cpp" lang="cpp">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+
+// Function to count the number
+// of digits in an integer 'n'.
+int countDigits(int n){
+    // Initialize a counter variable
+    // 'cnt' to store the count of digits.
+    int cnt = 0;
+    // While loop iterates until 'n'
+    // becomes 0 (no more digits left).
+    while(n &gt; 0){
+        // Increment the counter
+        // for each digit encountered.
+        cnt = cnt + 1;
+        // Divide 'n' by 10 to
+        // remove the last digit.
+        n = n / 10;
+    }
+    // Return the
+    // count of digits.
+    return cnt;
+}
+
+
+
+int main() {
+    int N = 329823;
+    cout &lt;&lt; "N: "&lt;&lt; N &lt;&lt; endl;
+    int digits = countDigits(N);
+    cout &lt;&lt; "Number of Digits in N: "&lt;&lt; digits &lt;&lt; endl;
+    return 0;
+}
+
+                                </code>
+                            </pre><pre class="wp-block-code hidden" data-i="1">
+                                <code class="language-java" lang="java">
+import java.util.Scanner;
+
+public class Main {
+    // Function to count the number
+    // of digits in an integer 'n'.
+    public static int countDigits(int n) {
+        // Initialize a counter variable
+        // 'cnt' to store the count of digits.
+        int cnt = 0;
+        // While loop iterates until 'n'
+        // becomes 0 (no more digits left).
+        while (n &gt; 0) {
+            // Increment the counter
+            // for each digit encountered.
+            cnt = cnt + 1;
+            // Divide 'n' by 10 to
+            // remove the last digit.
+            n = n / 10;
+        }
+        // Return the
+        // count of digits.
+        return cnt;
+    }
+
+    public static void main(String[] args) {
+        int N = 329823;
+        System.out.println("N: " + N);
+        int digits = countDigits(N);
+        System.out.println("Number of Digits in N: " + digits);
+    }
+}
+
+                                </code>
+                            </pre><pre class="wp-block-code hidden" data-i="2">
+                                <code class="language-python" lang="python">
+# Function to count the number
+# of digits in an integer 'n'.
+def countDigits(n):
+    # Initialize a counter variable
+    # 'cnt' to store the count of digits.
+    cnt = 0
+    # While loop iterates until 'n'
+    # becomes 0 (no more digits left).
+    while n &gt; 0:
+        # Increment the counter
+        # for each digit encountered.
+        cnt = cnt + 1
+        # Divide 'n' by 10 to
+        # remove the last digit.
+        n = n // 10
+    # Return the
+    # count of digits.
+    return cnt
+
+
+if __name__ == "__main__":
+    N = 329823
+    print("N:", N)
+    digits = countDigits(N)
+    print("Number of Digits in N:", digits)
+                                </code>
+                            </pre><pre class="wp-block-code hidden" data-i="3">
+                            <code class="language-javascript" lang="javascript">
+// Function to count the number
+// of digits in an integer 'n'.
+function countDigits(n) {
+    // Initialize a counter variable
+    // 'cnt' to store the count of digits.
+    let cnt = 0;
+    // While loop iterates until 'n'
+    // becomes 0 (no more digits left).
+    while (n &gt; 0) {
+        // Increment the counter
+        // for each digit encountered.
+        cnt = cnt + 1;
+        // Divide 'n' by 10 to
+        // remove the last digit.
+        n = Math.floor(n / 10);
+    }
+    // Return the
+    // count of digits.
+    return cnt;
+}
+
+// Main function
+function main() {
+    let N = 329823;
+    console.log("N: " + N);
+    let digits = countDigits(N);
+    console.log("Number of Digits in N: " + digits);
+}
+
+// Execute the main function
+main();
+
+                            </code>
+                        </pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+</p><p><strong>Time Complexity: O(log<sub>10</sub>N + 1)</strong>, where N is the input number. The time complexity is determined by the number of digits in the input integer N. In the worst case when N is a multiple of 10 the number of digits in N is log<sub>10</sub>N + 1. 
+                        </p><ol><li>In the while loop we divide N by 10 until it becomes 0 which takes log<sub>10</sub>N iterations.</li><li>In each iteration of the while loop we perform constant time operations like division and increment the counter.</li></ol>
+<p><strong>Space Complexity : O(1)</strong>, as only a constant amount of additional memory for the counter regardless of size of the input number.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<p>The logarithmic base 10 of a positive integers gives the number of digits in n. We add 1 to the result to ensure that the count is correct even for numbers that are powers of 10.</p>
+<p>We cast the result to an integer to ensure that any fractional part is discarded giving the exact count of digits.</p>
+<p><strong>Algorithm</strong></p>
+<ul>
+<li>Initialise a variable to store the count of digits of the number.</li>
+<li>The count of digits can be calculated using log<sub>10</sub> N + 1.
+                        <ol><li>log<sub>10</sub> N operation gives the logarithmic base 10 of  which returns the power to which 10 must be raised to, to be equal to N.</li><li>We add  1 to the result which accounts for the possibility that N itself is a power of 10.</li><li>Financially cast the result to an integer to ensure that it is rounded down to the nearest whole number.</li></ol></li>
+<li>Return the value of count which represents the count of digits in the input integer N</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Code
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<button class="code-tab dsa_article_code_active" data-lang="cpp">C++</button>
+<button class="code-tab" data-lang="java">Java</button>
+<button class="code-tab" data-lang="python">Python</button>
+<button class="code-tab" data-lang="javascript">JavaScript</button>
+<svg class="copy-btn" fill="none" height="20" viewbox="0 0 17 20" width="17" xmlns="http://www.w3.org/2000/svg">
+<path d="M2 20C1.45 20 0.979002 19.804 0.587002 19.412C0.195002 19.02 -0.000664969 18.5493 1.69779e-06 18V4H2V18H13V20H2ZM6 16C5.45 16 4.979 15.804 4.587 15.412C4.195 15.02 3.99934 14.5493 4 14V2C4 1.45 4.196 0.979002 4.588 0.587002C4.98 0.195002 5.45067 -0.000664969 6 1.69779e-06H15C15.55 1.69779e-06 16.021 0.196002 16.413 0.588002C16.805 0.980002 17.0007 1.45067 17 2V14C17 14.55 16.804 15.021 16.412 15.413C16.02 15.805 15.5493 16.0007 15 16H6ZM6 14H15V2H6V14Z">
+</path>
+</svg>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0">
+                                <code class="language-cpp" lang="cpp">
+#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+
+
+// Calculate the count of digits in 'n'
+// using logarithmic operation log10(n) + 1.
+int countDigits(int n){
+    // Initialize a variable 'cnt' to
+    // store the count of digits.
+    int cnt = (int)(log10(n)+1);
+
+    // The expression (int)(log10(n)+1)
+    // calculates the number of digits in 'n'
+    // and casts it to an integer.
+    
+    // Adding 1 to the result accounts
+    // for the case when 'n' is a power of 10,
+    // ensuring that the count is correct.
+   
+    // Finally, the result is cast
+    // to an integer to ensure it is rounded
+    // down to the nearest whole number.
+    
+    // Return the count of digits in 'n'.
+    return cnt;
+}
+
+
+
+
+int main() {
+    int N = 329823;
+    cout &lt;&lt; "N: "&lt;&lt; N &lt;&lt; endl;
+    int digits = countDigits(N);
+    cout &lt;&lt; "Number of Digits in N: "&lt;&lt; digits &lt;&lt; endl;
+    return 0;
+}
+                                </code>
+                            </pre><pre class="wp-block-code hidden" data-i="1">
+                                <code class="language-java" lang="java">
+import java.util.*;
+
+public class Main {
+    // Calculate the count of digits in 'n'
+    // using logarithmic operation log10(n) + 1.
+    static int countDigits(int n) {
+        // Initialize a variable 'cnt' to
+        // store the count of digits.
+        int cnt = (int) (Math.log10(n) + 1);
+
+        // The expression (int)(Math.log10(n) + 1)
+        // calculates the number of digits in 'n'
+        // and casts it to an integer.
+
+        // Adding 1 to the result accounts
+        // for the case when 'n' is a power of 10,
+        // ensuring that the count is correct.
+
+        // Finally, the result is cast
+        // to an integer to ensure it is rounded
+        // down to the nearest whole number.
+
+        // Return the count of digits in 'n'.
+        return cnt;
+    }
+
+    public static void main(String[] args) {
+        int N = 329823;
+        System.out.println("N: " + N);
+        int digits = countDigits(N);
+        System.out.println("Number of Digits in N: " + digits);
+    }
+}
+                                </code>
+                            </pre><pre class="wp-block-code hidden" data-i="2">
+                                <code class="language-python" lang="python">
+                     
+import math
+
+# Calculate the count of digits in 'n'
+# using logarithmic operation log10(n) + 1.
+def countDigits(n):
+    # Initialize a variable 'cnt' to
+    # store the count of digits.
+    cnt = int(math.log10(n) + 1)
+
+    # The expression int(math.log10(n) + 1)
+    # calculates the number of digits in 'n'
+    # and casts it to an integer.
+    
+    # Adding 1 to the result accounts
+    # for the case when 'n' is a power of 10,
+    # ensuring that the count is correct.
+   
+    # Finally, the result is cast
+    # to an integer to ensure it is rounded
+    # down to the nearest whole number.
+    
+    # Return the count of digits in 'n'.
+    return cnt
+
+# Main function
+if __name__ == "__main__":
+    N = 329823
+    print("N:", N)
+    digits = countDigits(N)
+    print("Number of Digits in N:", digits)
+
+                                </code>
+                            </pre><pre class="wp-block-code hidden" data-i="3">
+                            <code class="language-javascript" lang="javascript">
+// Calculate the count of digits in 'n'
+// using logarithmic operation log10(n) + 1.
+function countDigits(n) {
+    // Initialize a variable 'cnt' to
+    // store the count of digits.
+    let cnt = Math.floor(Math.log10(n) + 1);
+
+    // The expression Math.floor(Math.log10(n) + 1)
+    // calculates the number of digits in 'n'
+    // and rounds it down to the nearest whole number.
+
+    // Adding 1 to the result accounts
+    // for the case when 'n' is a power of 10,
+    // ensuring that the count is correct.
+
+    // Return the count of digits in 'n'.
+    return cnt;
+}
+
+let N = 329823;
+console.log("N: " + N);
+let digits = countDigits(N);
+console.log("Number of Digits in N: " + digits);
+                            </code>
+                        </pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+</p><p><strong>Time Complexity: O(1)</strong>, as simple arithmetic operations in constant time are computed on integers.</p>
+<p><strong>Space Complexity : O(1)</strong>, as only a constant amount of additional memory for the count variable regardless of size of the input number.
+</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Selection Sort Algorithm</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Selection Sort Algorithm</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/sorting/selection-sort-algorithm/</code></div>
+  <p><strong>Problem Statement: </strong> Given an array of N integers, write a program to implement the Selection sorting algorithm.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input: N = 6, array[] = {13,46,24,52,20,9}
+Output: 9,13,20,24,46,52
+Explanation: After sorting the array is: 9, 13, 20, 24, 46, 52
+
+Example 2:
+Input: N=5, array[] = {5,4,3,2,1}
+Output: 1,2,3,4,5
+Explanation: After sorting the array is: 1, 2, 3, 4, 5
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/selection-sort" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                Approach
+            </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Algorithm
+                    </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<ul>
+<li>First, we will select the range of the unsorted array using a loop (say i) that indicates the starting index of the range. The loop will run forward from 0 to n-1. The value i = 0 means the range is from 0 to n-1, and similarly, i = 1 means the range is from 1 to n-1, and so on. (Initially, the range will be the whole array starting from the first index.)</li>
+<li>Now, in each iteration, we will select the minimum element from the range of the unsorted array using an inner loop.</li>
+<li>After that, we will swap the minimum element with the first element of the selected range(in step 1). </li>
+<li>Finally, after each iteration, we will find that the array is sorted up to the first index of the range. </li>
+</ul>
+<h3>Dry Run</h3>
+Iteration 1:
+<p><img height="457" loading="lazy" src="../assets/img/b143d9e0b6561bc5.png" width="481"/></p>
+Iteration 2:
+<p><img height="457" loading="lazy" src="../assets/img/59b8026e0e28d374.png" width="481"/></p>
+Iteration 3:
+<p><img height="457" loading="lazy" src="../assets/img/f8497e8dc7447f5a.png" width="481"/></p>
+Iteration 4:
+<p><img height="457" loading="lazy" src="../assets/img/26596bcb641d7933.png" width="481"/></p>
+<p>So, after 4 iterations(i.e. n-1 iterations where n = size of the array), the given array is sorted.</p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Function to perform selection sort
+void selection_sort(int arr[], int n) {
+    // Traverse the array
+    for (int i = 0; i &lt; n - 1; i++) {
+        int mini = i; // Assume current index holds the minimum value
+
+        // Find the index of the smallest element in the remaining array
+        for (int j = i + 1; j &lt; n; j++) {
+            if (arr[j] &lt; arr[mini]) {
+                mini = j; // Update mini if smaller element is found
+            }
+        }
+
+        // Swap the found minimum element with the first element of unsorted part
+        int temp = arr[mini];
+        arr[mini] = arr[i];
+        arr[i] = temp;
+    }
+
+    // Print the sorted array
+    cout &lt;&lt; "After selection sort: " &lt;&lt; "\n";
+    for (int i = 0; i &lt; n; i++) {
+        cout &lt;&lt; arr[i] &lt;&lt; " ";
+    }
+    cout &lt;&lt; "\n";
+}
+
+int main() {
+    // Initialize array
+    int arr[] = {13, 46, 24, 52, 20, 9};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    // Print array before sorting
+    cout &lt;&lt; "Before selection sort: " &lt;&lt; "\n";
+    for (int i = 0; i &lt; n; i++) {
+        cout &lt;&lt; arr[i] &lt;&lt; " ";
+    }
+    cout &lt;&lt; "\n";
+
+    // Call selection sort
+    selection_sort(arr, n);
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">public class SelectionSort {
+    // Function to perform selection sort
+    public static void selectionSort(int[] arr) {
+        int n = arr.length;
+
+        // Traverse through all array elements
+        for (int i = 0; i &lt; n - 1; i++) {
+            int minIndex = i; // Assume current index holds the minimum
+
+            // Find the minimum element in the remaining array
+            for (int j = i + 1; j &lt; n; j++) {
+                if (arr[j] &lt; arr[minIndex]) {
+                    minIndex = j; // Update minIndex if smaller is found
+                }
+            }
+
+            // Swap the found minimum element with the first element of unsorted part
+            int temp = arr[minIndex];
+            arr[minIndex] = arr[i];
+            arr[i] = temp;
+        }
+
+        // Print the sorted array
+        System.out.println("After selection sort:");
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {13, 46, 24, 52, 20, 9};
+
+        // Print array before sorting
+        System.out.println("Before selection sort:");
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+
+        // Call selection sort
+        selectionSort(arr);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">def selection_sort(arr):
+    n = len(arr)
+
+    # Traverse through all array elements
+    for i in range(n - 1):
+        min_index = i  # Assume current index is the minimum
+
+        # Find the minimum element in the remaining array
+        for j in range(i + 1, n):
+            if arr[j] &lt; arr[min_index]:
+                min_index = j  # Update min_index if smaller is found
+
+        # Swap the found minimum with the first element of unsorted part
+        arr[i], arr[min_index] = arr[min_index], arr[i]
+
+    # Print the sorted array
+    print("After selection sort:")
+    print(*arr)
+
+
+# Driver code
+arr = [13, 46, 24, 52, 20, 9]
+
+# Print array before sorting
+print("Before selection sort:")
+print(*arr)
+
+# Call selection sort
+selection_sort(arr)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">function selectionSort(arr) {
+    let n = arr.length;
+
+    // Traverse the array
+    for (let i = 0; i &lt; n - 1; i++) {
+        let minIndex = i; // Assume current index is the minimum
+
+        // Find the minimum element in the remaining unsorted array
+        for (let j = i + 1; j &lt; n; j++) {
+            if (arr[j] &lt; arr[minIndex]) {
+                minIndex = j; // Update minIndex if smaller element is found
+            }
+        }
+
+        // Swap the found minimum with the first element of unsorted part
+        let temp = arr[minIndex];
+        arr[minIndex] = arr[i];
+        arr[i] = temp;
+    }
+
+    // Print the sorted array
+    console.log("After selection sort:");
+    console.log(arr.join(" "));
+}
+
+// Driver code
+let arr = [13, 46, 24, 52, 20, 9];
+
+// Print array before sorting
+console.log("Before selection sort:");
+console.log(arr.join(" "));
+
+// Call selection sort
+selectionSort(arr);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Complexity Analysis
+                    </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>Time Complexity:O(N^2),Selection sort runs in O(N²) time in the best, average, and worst cases due to its nested loop structure. It makes approximately N(N-1)/2 comparisons, regardless of the array's initial state. Even if no swaps are needed (best case), the number of comparisons remains the same./p&gt;
+</p><p>Space Complexity: O(1). No extra space used</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

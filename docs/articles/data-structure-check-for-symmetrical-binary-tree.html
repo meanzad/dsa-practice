@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Check for Symmetrical Binary Tree</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Check for Symmetrical Binary Tree</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/check-for-symmetrical-binary-tree/</code></div>
+  <p><strong>Problem Statement: </strong>Given a Binary Tree, determine whether the given tree is symmetric or not. A Binary Tree would be Symmetric, when its mirror image is exactly the same as the original tree. If we were to draw a vertical line through the centre of the tree, the nodes on the left and right side would be mirror images of each other.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input: Binary Tree: 1 2 2 3 4 4 3
+
+<p><img height="457" loading="lazy" src="../assets/img/dafbe7f9f48a704f.png" width="481"/></p>
+Output:True
+Explanation: If we were to draw a vertical line through the centre of the tree, dividing it into left and right parts, we observe that the nodes on the left and right sides are mirror images of each other.
+
+<p><img height="457" loading="lazy" src="../assets/img/60a434143a398eb7.png" width="481"/></p>
+
+Example 2:
+Input:Binary Tree: 1 2 2 -1 3 -1 3
+
+<p><img height="457" loading="lazy" src="../assets/img/df8c2036493375af.png" width="481"/></p>
+Output : False
+Explanation: While the tree has a symmetric structure at the first level with nodes 2 and 2, the subtrees under nodes 2 and 2 are not symmetric. If we were to draw a vertical line through the centre of the tree, dividing it into left and right parts, we observe that the nodes on the left and right sides are not mirror images of each other.
+
+<p><img height="457" loading="lazy" src="../assets/img/df51189cdcde49a2.png" width="481"/></p>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/check-for-symmetrical-bts" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+<p>A binary tree is symmetric if its left and right sides are mirror images of each other. If a vertical line is drawn through the center, both sides should align perfectly.</p>
+
+
+
+
+
+<p><strong>Symmetry conditions:</strong></p>
+<ol>
+<li>The tree must visually mirror itself from left to right.</li>
+<li>This mirror pattern must be consistent at every level of the tree.</li>
+</ol>
+<p>We compare left and right parts in a mirrored way - left child of the left side is compared with the right child of the right side, and vice versa.</p>
+
+
+
+
+
+<p><strong>Base check:</strong> If both parts are empty, it is symmetric. If only one is empty, it's not.</p>
+
+
+
+
+
+<p><strong>Mirror checks:</strong></p>
+<ol>
+<li>Both nodes should have the same value.</li>
+<li>Left of left side matches right of right side.</li>
+<li>Right of left side matches left of right side.</li>
+</ol>
+
+
+
+
+
+<p><strong>Final result:</strong> The tree is symmetric if all mirrored comparisons pass successfully from top to bottom.</p>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/9c5abfb641a5026d.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/5fee569ccecc3a9d.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/9e86b704a9a48887.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/0d8053898f578b3f.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/86f958ca6b181f94.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/19f262f147a087f5.png"/></div><div class="carousel-image"><img alt="Image 7" loading="lazy" src="../assets/img/52d66fc80bb2bb23.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/9c5abfb641a5026d.png"/><img alt="Image 2" loading="lazy" src="../assets/img/5fee569ccecc3a9d.png"/><img alt="Image 3" loading="lazy" src="../assets/img/9e86b704a9a48887.png"/><img alt="Image 4" loading="lazy" src="../assets/img/0d8053898f578b3f.png"/><img alt="Image 5" loading="lazy" src="../assets/img/86f958ca6b181f94.png"/><img alt="Image 6" loading="lazy" src="../assets/img/19f262f147a087f5.png"/><img alt="Image 7" loading="lazy" src="../assets/img/52d66fc80bb2bb23.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;iostream&gt;
+using namespace std;
+
+// Node structure for the binary tree
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+    // Constructor to initialize
+    // the node with a value
+    Node(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+
+class Solution {
+private:
+    // Function to check if
+    // two subtrees are symmetric
+    bool isSymmetricUtil(Node* root1, Node* root2) {
+        // Check if either subtree is NULL
+        if (root1 == NULL || root2 == NULL) {
+            // If one subtree is NULL, the other
+            // must also be NULL for symmetry
+            return root1 == root2;
+        }
+        // Check if the data in the current nodes is equal
+        // and recursively check for symmetry in subtrees
+        return (root1-&gt;data == root2-&gt;data)
+            &amp;&amp; isSymmetricUtil(root1-&gt;left, root2-&gt;right)
+            &amp;&amp; isSymmetricUtil(root1-&gt;right, root2-&gt;left);
+    }
+
+public:
+    // Public function to check if the
+    // entire binary tree is symmetric
+    bool isSymmetric(Node* root) {
+        // Check if the tree is empty
+        if (!root) {
+            // An empty tree is
+            // considered symmetric
+            return true;
+        }
+        // Call the utility function
+        // to check symmetry of subtrees
+        return isSymmetricUtil(root-&gt;left, root-&gt;right);
+    }
+};
+
+
+// Function to print the Inorder
+// Traversal of the Binary Tree
+void printInorder(Node* root){
+    if(!root){
+        return;
+    }
+    printInorder(root-&gt;left);
+    cout &lt;&lt; root-&gt;data &lt;&lt; " ";
+    printInorder(root-&gt;right);
+}
+
+
+int main() {
+    // Creating a sample binary tree
+    Node* root = new Node(1);
+    root-&gt;left = new Node(2);
+    root-&gt;right = new Node(2);
+    root-&gt;left-&gt;left = new Node(3);
+    root-&gt;right-&gt;right = new Node(3);
+    root-&gt;left-&gt;right = new Node(4);
+    root-&gt;right-&gt;left = new Node(4);
+
+    Solution solution;
+    
+    cout &lt;&lt; "Binary Tree (Inorder): ";
+    printInorder(root);
+    cout &lt;&lt; endl;
+
+    bool res;
+    res = solution.isSymmetric(root);
+    
+    if(res){
+        cout &lt;&lt; "This Tree is Symmetrical" &lt;&lt; endl;
+    }
+    else{
+        cout &lt;&lt; "This Tree is NOT Symmetrical" &lt;&lt; endl;
+    }
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">// Node structure for the binary tree
+class Node {
+    int data;
+    Node left;
+    Node right;
+
+    // Constructor to initialize
+    // the node with a value
+    public Node(int val) {
+        data = val;
+        left = null;
+        right = null;
+    }
+}
+
+class Solution {
+    // Function to check if
+    // two subtrees are symmetric
+    private boolean isSymmetricUtil(Node root1, Node root2) {
+        // Check if either subtree is null
+        if (root1 == null || root2 == null) {
+            // If one subtree is null, the other
+            // must also be null for symmetry
+            return root1 == root2;
+        }
+        // Check if the data in the current nodes is equal
+        // and recursively check for symmetry in subtrees
+        return (root1.data == root2.data)
+                &amp;&amp; isSymmetricUtil(root1.left, root2.right)
+                &amp;&amp; isSymmetricUtil(root1.right, root2.left);
+    }
+
+    // Public function to check if the
+    // entire binary tree is symmetric
+    public boolean isSymmetric(Node root) {
+        // Check if the tree is empty
+        if (root == null) {
+            // An empty tree is
+            // considered symmetric
+            return true;
+        }
+        // Call the utility function
+        // to check symmetry of subtrees
+        return isSymmetricUtil(root.left, root.right);
+    }
+}
+
+public class Main {
+    // Function to print the Inorder
+    // Traversal of the Binary Tree
+    private static void printInorder(Node root) {
+        if (root == null) {
+            return;
+        }
+        printInorder(root.left);
+        System.out.print(root.data + " ");
+        printInorder(root.right);
+    }
+
+    public static void main(String[] args) {
+        // Creating a sample binary tree
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(2);
+        root.left.left = new Node(3);
+        root.right.right = new Node(3);
+        root.left.right = new Node(4);
+        root.right.left = new Node(4);
+
+        Solution solution = new Solution();
+
+        System.out.print("Binary Tree (Inorder): ");
+        printInorder(root);
+        System.out.println();
+
+        boolean res = solution.isSymmetric(root);
+
+        if (res) {
+            System.out.println("This Tree is Symmetrical");
+        } else {
+            System.out.println("This Tree is NOT Symmetrical");
+        }
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Node class for the binary tree
+class Node:
+    def __init__(self, val):
+        self.data = val
+        self.left = None
+        self.right = None
+
+# Solution class to find the
+# maximum depth of a binary tree
+class Solution:
+    # Function to find the
+    # maximum depth of a binary tree
+    def maxDepth(self, root):
+        # If the root is None
+        # (empty tree), depth is 0
+        if root is None:
+            return 0
+        
+        # Recursive call to find the
+        # maximum depth of the left subtree
+        lh = self.maxDepth(root.left)
+        
+        # Recursive call to find the
+        # maximum depth of the right subtree
+        rh = self.maxDepth(root.right)
+        
+        # Return the maximum depth of the
+        # tree, adding 1 for the current node
+        return 1 + max(lh, rh)
+
+# Main function
+if __name__ == "__main__":
+    # Creating a sample binary tree
+    root = Node(1)
+    root.left = Node(2)
+    root.right = Node(3)
+    root.left.left = Node(4)
+    root.left.right = Node(5)
+    root.left.right.right = Node(6)
+    root.left.right.right.right = Node(7)
+    
+    solution = Solution()
+    depth = solution.maxDepth(root)
+    
+    print("Maximum depth of the binary tree:", depth)</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Node structure for the binary tree
+class Node {
+    constructor(val) {
+        this.data = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class Solution {
+    // Function to check if
+    // two subtrees are symmetric
+    isSymmetricUtil(root1, root2) {
+        // Check if either subtree is NULL
+        if (root1 === null || root2 === null) {
+            // If one subtree is NULL, the other
+            // must also be NULL for symmetry
+            return root1 === root2;
+        }
+        // Check if the data in the current nodes is equal
+        // and recursively check for symmetry in subtrees
+        return (
+            root1.data === root2.data &amp;&amp;
+            this.isSymmetricUtil(root1.left, root2.right) &amp;&amp;
+            this.isSymmetricUtil(root1.right, root2.left)
+        );
+    }
+
+    // Public function to check if the
+    // entire binary tree is symmetric
+    isSymmetric(root) {
+        // Check if the tree is empty
+        if (!root) {
+            // An empty tree is
+            // considered symmetric
+            return true;
+        }
+        // Call the utility function
+        // to check symmetry of subtrees
+        return this.isSymmetricUtil(root.left, root.right);
+    }
+}
+
+// Function to print the Inorder
+// Traversal of the Binary Tree
+function printInorder(root) {
+    if (!root) {
+        return;
+    }
+    printInorder(root.left);
+    console.log(root.data + ' ');
+    printInorder(root.right);
+}
+
+// Creating a sample binary tree
+const root = new Node(1);
+root.left = new Node(2);
+root.right = new Node(2);
+root.left.left = new Node(3);
+root.right.right = new Node(3);
+root.left.right = new Node(4);
+root.right.left = new Node(4);
+
+const solution = new Solution();
+
+console.log('Binary Tree (Inorder): ');
+printInorder(root);
+console.log('');
+
+const res = solution.isSymmetric(root);
+
+if (res) {
+    console.log('This Tree is Symmetrical');
+} else {
+    console.log('This Tree is NOT Symmetrical');
+}</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Complexity Analysis
+                    </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p>Time Complexity: O(N) where N is the number of nodes in the Binary Tree. This complexity arises from visiting each node exactly once during the traversal and the function compares the nodes in a symmetric manner.</p>
+<p>Space Complexity: O(1) as no additional data structures or memory is allocated.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

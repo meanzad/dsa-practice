@@ -1,0 +1,1168 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Palindrome Partitioning II: Minimum Cuts</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Palindrome Partitioning II: Minimum Cuts</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/blogs/data-structure-and-algorithm/palindrome-partitioning-ii-minimum-cuts</code></div>
+  <div class="ArticleParser-module__R__VNG__article" data-article-segment="html-0"><p>Given a string <code>s</code>, place cuts between adjacent characters so every resulting substring is a palindrome. Return the smallest possible number of cuts.</p><p>A palindrome reads identically from left to right and from right to left. Every part must be a non-empty contiguous substring, and the parts must cover the complete string in the original order.</p></div><div><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 1</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>s = "aab"</code><br/><strong>Output:</strong> <code>1</code><br/><strong>Explanation:</strong> The partition <code>"aa" | "b"</code> contains only palindromes and needs one cut.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 2</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>s = "a"</code><br/><strong>Output:</strong> <code>0</code><br/><strong>Explanation:</strong> A single character is already a palindrome, so no cut is needed.</p></div></div></section></div><div><div class="BlogDetail-module__HEfJva__practiceCallout"><a class="BlogDetail-module__HEfJva__practiceLink" data-mobile-prefetch="normal" href="https://takeuforward.org/practice/dsa/palindrome-partitioning-ii-" rel="noopener" target="_blank"><span>Practice it by yourself before moving onto the solution</span><span class="BlogDetail-module__HEfJva__practiceAction">Try now</span></a></div></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-3"><h2 id="blog-toc-recursion">Recursion</h2><p>A cut is made only between two neighboring characters. Instead of directly minimizing cuts, we first minimize the number of palindromic pieces, because a partition with <code>p</code> pieces always needs exactly <code>p - 1</code> cuts.</p><p>The state <code>solve(end)</code> represents the minimum number of palindromic pieces needed to form the prefix <code>s[0...end-1]</code>. For each state, we try every possible starting position of the last piece. If <code>s[start...end-1]</code> is a palindrome, it becomes one valid piece, and we recursively solve the remaining prefix ending at <code>start</code>. The public method starts with <code>solve(n)</code> because the complete string contains all <code>n</code> characters.</p><h3 id="blog-toc-algorithm">Algorithm</h3><ul><li><p>Handle an empty string before recursion because it needs <code>0</code> cuts.</p></li><li><p>Begin with <code>solve(n)</code> because the initial state represents the complete string.</p></li><li><p>Return <code>0</code> from <code>solve(0)</code> because an empty prefix requires no palindromic pieces.</p></li><li><p>Initialize the best piece count to a value greater than <code>n</code> so any valid partition can improve it.</p></li><li><p>Move <code>start</code> from <code>end - 1</code> down to <code>0</code> to consider every possible final substring.</p></li><li><p>Check whether <code>s[start...end-1]</code> is a palindrome because only palindromic substrings can form valid pieces.</p></li><li><p>For every palindromic substring, add <code>1</code> for that piece to the minimum pieces needed for the remaining prefix <code>s[0...start-1]</code>.</p></li><li><p>Return the smallest piece count found and subtract <code>1</code> in the public method because <code>p</code> pieces require exactly <code>p - 1</code> cuts.</p></li></ul><h3 id="blog-toc-dry-run">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Diagram 1" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/d3ad69ea5f5396bf.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland"><span class="ImageSlider-module__5oY_MW__pagination">1 / 2</span></div><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Diagram 1</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"><div class="flex h-3 shrink-0 items-center"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto mx-1 self-stretch" role="separator" style="width:1px;height:100%"></div></div><div class="flex h-3 shrink-0 items-center"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto mx-1 self-stretch" role="separator" style="width:1px;height:100%"></div></div></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-4"><p></p><h3 id="blog-toc-solution">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+private:
+    // Checks whether one range is palindromic.
+    bool isPalindrome(string&amp; s, int left, int right) {
+        // Compares matching positions from both ends.
+        while (left &lt; right) {
+            // A mismatch makes the range invalid.
+            if (s[left] != s[right]) {
+                return false;
+            }
+
+            // Moves both pointers toward the center.
+            left++;
+            right--;
+        }
+
+        return true;
+    }
+
+    // Finds minimum pieces for one prefix.
+    int solve(string&amp; s, int end) {
+        // An empty prefix needs no piece.
+        if (end == 0) {
+            return 0;
+        }
+
+        // The sentinel exceeds every possible piece count.
+        int best = s.size() + 1;
+
+        // Tries every possible final piece.
+        for (int start = end - 1; start &gt;= 0; start--) {
+            // Only a palindrome can form a valid piece.
+            if (isPalindrome(s, start, end - 1)) {
+                // The final palindrome adds one piece.
+                int current = 1 + solve(s, start);
+
+                // The smallest valid partition is retained.
+                best = min(best, current);
+            }
+        }
+
+        return best;
+    }
+
+public:
+    // Returns minimum cuts for the full string.
+    int minCut(string s) {
+        // Empty input needs no cut.
+        if (s.size() == 0) {
+            return 0;
+        }
+
+        // The full prefix contains every character.
+        int pieces = solve(s, s.size());
+
+        // One fewer cut than pieces joins the partition.
+        return pieces - 1;
+    }
+};
+
+// Driver code
+int main() {
+    string s = "aab";
+    Solution obj;
+    cout &lt;&lt; obj.minCut(s) &lt;&lt; endl;
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">from typing import List
+
+
+class Solution:
+    # Checks whether one range is palindromic.
+    def _is_palindrome(
+        self, s: str, left: int, right: int
+    ) -&gt; bool:
+        # Compares matching positions from both ends.
+        while left &lt; right:
+            # A mismatch makes the range invalid.
+            if s[left] != s[right]:
+                return False
+
+            # Moves both pointers toward the center.
+            left += 1
+            right -= 1
+
+        return True
+
+    # Finds minimum pieces for one prefix.
+    def _solve(self, s: str, end: int) -&gt; int:
+        # An empty prefix needs no piece.
+        if end == 0:
+            return 0
+
+        # The sentinel exceeds every possible piece count.
+        best = len(s) + 1
+
+        # Tries every possible final piece.
+        for start in range(end - 1, -1, -1):
+            # Only a palindrome can form a valid piece.
+            if self._is_palindrome(s, start, end - 1):
+                # The final palindrome adds one piece.
+                current = 1 + self._solve(s, start)
+
+                # The smallest valid partition is retained.
+                best = min(best, current)
+
+        return best
+
+    # Returns minimum cuts for the full string.
+    def min_cut(self, s: str) -&gt; int:
+        # Empty input needs no cut.
+        if len(s) == 0:
+            return 0
+
+        # The full prefix contains every character.
+        pieces = self._solve(s, len(s))
+
+        # One fewer cut than pieces joins the partition.
+        return pieces - 1
+
+
+# Driver code
+def main() -&gt; None:
+    s = "aab"
+    obj = Solution()
+    print(obj.min_cut(s))
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Checks whether one range is palindromic.
+    private boolean isPalindrome(
+        String s, int left, int right
+    ) {
+        // Compares matching positions from both ends.
+        while (left &lt; right) {
+            // A mismatch makes the range invalid.
+            if (s.charAt(left) != s.charAt(right)) {
+                return false;
+            }
+
+            // Moves both pointers toward the center.
+            left++;
+            right--;
+        }
+
+        return true;
+    }
+
+    // Finds minimum pieces for one prefix.
+    private int solve(String s, int end) {
+        // An empty prefix needs no piece.
+        if (end == 0) {
+            return 0;
+        }
+
+        // The sentinel exceeds every possible piece count.
+        int best = s.length() + 1;
+
+        // Tries every possible final piece.
+        for (int start = end - 1; start &gt;= 0; start--) {
+            // Only a palindrome can form a valid piece.
+            if (isPalindrome(s, start, end - 1)) {
+                // The final palindrome adds one piece.
+                int current = 1 + solve(s, start);
+
+                // The smallest valid partition is retained.
+                best = Math.min(best, current);
+            }
+        }
+
+        return best;
+    }
+
+    // Returns minimum cuts for the full string.
+    public int minCut(String s) {
+        // Empty input needs no cut.
+        if (s.length() == 0) {
+            return 0;
+        }
+
+        // The full prefix contains every character.
+        int pieces = solve(s, s.length());
+
+        // One fewer cut than pieces joins the partition.
+        return pieces - 1;
+    }
+}
+
+// Driver code
+public class Main {
+    public static void main(String[] args) {
+        String s = "aab";
+        Solution obj = new Solution();
+        System.out.println(obj.minCut(s));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">"use strict";
+
+class Solution {
+    // Checks whether one range is palindromic.
+    #isPalindrome(s, left, right) {
+        // Compares matching positions from both ends.
+        while (left &lt; right) {
+            // A mismatch makes the range invalid.
+            if (s[left] !== s[right]) {
+                return false;
+            }
+
+            // Moves both pointers toward the center.
+            left++;
+            right--;
+        }
+
+        return true;
+    }
+
+    // Finds minimum pieces for one prefix.
+    #solve(s, end) {
+        // An empty prefix needs no piece.
+        if (end === 0) {
+            return 0;
+        }
+
+        // The sentinel exceeds every possible piece count.
+        let best = s.length + 1;
+
+        // Tries every possible final piece.
+        for (let start = end - 1; start &gt;= 0; start--) {
+            // Only a palindrome can form a valid piece.
+            if (this.#isPalindrome(s, start, end - 1)) {
+                // The final palindrome adds one piece.
+                const current = 1 + this.#solve(s, start);
+
+                // The smallest valid partition is retained.
+                best = Math.min(best, current);
+            }
+        }
+
+        return best;
+    }
+
+    // Returns minimum cuts for the full string.
+    minCut(s) {
+        // Empty input needs no cut.
+        if (s.length === 0) {
+            return 0;
+        }
+
+        // The full prefix contains every character.
+        const pieces = this.#solve(s, s.length);
+
+        // One fewer cut than pieces joins the partition.
+        return pieces - 1;
+    }
+}
+
+// Driver code
+function main() {
+    const s = "aab";
+    const obj = new Solution();
+    console.log(obj.minCut(s));
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-5"><p>Note: Direct recursion may fail for large input values. Repeated subproblems create exponential work, so an online judge may report Time Limit Exceeded.</p><h3 id="blog-toc-complexity-analysis">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(2</code><sup>N</sup><code>)</code>, where <code>N</code> is the length of the string, because the recursion explores exponentially many possible cut patterns in the worst case, with palindrome checks adding work within those recursive calls.</p><p><strong>Space Complexity:</strong> <code>O(N)</code>, because the deepest recursive path can contain up to <code>N</code> active calls, while palindrome checking uses only constant extra space.</p></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-6"><h2 id="blog-toc-memoization">Memoization</h2><p>Recursion can reach the same prefix through different choices of the final palindromic piece. Without memoization, the entire search for an already solved prefix is repeated. Storing the answer for each prefix avoids this repeated work.</p><p>A one-dimensional <code>dp</code> array is used, where <code>dp[end]</code> stores the minimum number of palindromic pieces needed for <code>s[0...end-1]</code>. The recursive choices remain the same; the only difference is that a previously solved state is returned immediately instead of exploring its subtree again.</p><h3 id="blog-toc-algorithm-2">Algorithm</h3><ul><li><p>Handle an empty string before allocation because it needs no prefix states or cuts.</p></li><li><p>Fill the <code>dp</code> array with <code>-1</code> so every unsolved prefix can be distinguished from a valid piece count.</p></li><li><p>Start with <code>solve(n)</code> because the state at <code>n</code> represents the complete string.</p></li><li><p>Return <code>0</code> when <code>end = 0</code> because an empty prefix requires no palindromic pieces.</p></li><li><p>Return <code>dp[end]</code> immediately when it is already calculated because the same prefix does not need to be solved again.</p></li><li><p>Try every possible <code>start</code> for the final substring because an optimal partition may end with any palindromic suffix.</p></li><li><p>For each palindromic final substring, calculate <code>solve(start) + 1</code> because the chosen substring forms one additional piece.</p></li><li><p>Keep the minimum candidate for <code>dp[end]</code> because we want the fewest palindromic pieces.</p></li><li><p>Store the result in <code>dp[end]</code> so future calls can reuse it.</p></li><li><p>Return <code>solve(n) - 1</code> because a partition with <code>p</code> pieces requires exactly <code>p - 1</code> cuts.</p></li></ul><h3 id="blog-toc-dry-run-2">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Diagram 1" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/b532fdb05c6996a8.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland"><span class="ImageSlider-module__5oY_MW__pagination">1 / 2</span></div><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Diagram 1</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"><div class="flex h-3 shrink-0 items-center"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto mx-1 self-stretch" role="separator" style="width:1px;height:100%"></div></div><div class="flex h-3 shrink-0 items-center"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto mx-1 self-stretch" role="separator" style="width:1px;height:100%"></div></div></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-7"><p></p><h3 id="blog-toc-solution-2">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+private:
+    // Checks whether one range is palindromic.
+    bool isPalindrome(string&amp; s, int left, int right) {
+        // Compares matching positions from both ends.
+        while (left &lt; right) {
+            // A mismatch makes the range invalid.
+            if (s[left] != s[right]) {
+                return false;
+            }
+
+            // Moves both pointers toward the center.
+            left++;
+            right--;
+        }
+
+        return true;
+    }
+
+    // Finds and stores minimum prefix pieces.
+    int solve(string&amp; s, int end, vector&lt;int&gt;&amp; dp) {
+        // An empty prefix needs no piece.
+        if (end == 0) {
+            return 0;
+        }
+
+        // A stored answer avoids repeated recursion.
+        if (dp[end] != -1) {
+            return dp[end];
+        }
+
+        // The sentinel exceeds every possible piece count.
+        int best = s.size() + 1;
+
+        // Tries every possible final piece.
+        for (int start = end - 1; start &gt;= 0; start--) {
+            // Only a palindrome can form a valid piece.
+            if (isPalindrome(s, start, end - 1)) {
+                // The final palindrome adds one piece.
+                int current = 1 + solve(s, start, dp);
+
+                // The smallest valid partition is retained.
+                best = min(best, current);
+            }
+        }
+
+        // The prefix answer is cached for later calls.
+        dp[end] = best;
+        return dp[end];
+    }
+
+public:
+    // Returns minimum cuts for the full string.
+    int minCut(string s) {
+        // Empty input needs no cut.
+        if (s.size() == 0) {
+            return 0;
+        }
+
+        // Negative values mark uncalculated prefixes.
+        vector&lt;int&gt; dp(s.size() + 1, -1);
+
+        // The full prefix contains every character.
+        int pieces = solve(s, s.size(), dp);
+
+        // One fewer cut than pieces joins the partition.
+        return pieces - 1;
+    }
+};
+
+// Driver code
+int main() {
+    string s = "abab";
+    Solution obj;
+    cout &lt;&lt; obj.minCut(s) &lt;&lt; endl;
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">from typing import List
+
+
+class Solution:
+    # Checks whether one range is palindromic.
+    def _is_palindrome(
+        self, s: str, left: int, right: int
+    ) -&gt; bool:
+        # Compares matching positions from both ends.
+        while left &lt; right:
+            # A mismatch makes the range invalid.
+            if s[left] != s[right]:
+                return False
+
+            # Moves both pointers toward the center.
+            left += 1
+            right -= 1
+
+        return True
+
+    # Finds and stores minimum prefix pieces.
+    def _solve(
+        self, s: str, end: int, dp: List[int]
+    ) -&gt; int:
+        # An empty prefix needs no piece.
+        if end == 0:
+            return 0
+
+        # A stored answer avoids repeated recursion.
+        if dp[end] != -1:
+            return dp[end]
+
+        # The sentinel exceeds every possible piece count.
+        best = len(s) + 1
+
+        # Tries every possible final piece.
+        for start in range(end - 1, -1, -1):
+            # Only a palindrome can form a valid piece.
+            if self._is_palindrome(s, start, end - 1):
+                # The final palindrome adds one piece.
+                current = 1 + self._solve(s, start, dp)
+
+                # The smallest valid partition is retained.
+                best = min(best, current)
+
+        # The prefix answer is cached for later calls.
+        dp[end] = best
+        return dp[end]
+
+    # Returns minimum cuts for the full string.
+    def min_cut(self, s: str) -&gt; int:
+        # Empty input needs no cut.
+        if len(s) == 0:
+            return 0
+
+        # Negative values mark uncalculated prefixes.
+        dp = [-1] * (len(s) + 1)
+
+        # The full prefix contains every character.
+        pieces = self._solve(s, len(s), dp)
+
+        # One fewer cut than pieces joins the partition.
+        return pieces - 1
+
+
+# Driver code
+def main() -&gt; None:
+    s = "abab"
+    obj = Solution()
+    print(obj.min_cut(s))
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Checks whether one range is palindromic.
+    private boolean isPalindrome(
+        String s, int left, int right
+    ) {
+        // Compares matching positions from both ends.
+        while (left &lt; right) {
+            // A mismatch makes the range invalid.
+            if (s.charAt(left) != s.charAt(right)) {
+                return false;
+            }
+
+            // Moves both pointers toward the center.
+            left++;
+            right--;
+        }
+
+        return true;
+    }
+
+    // Finds and stores minimum prefix pieces.
+    private int solve(String s, int end, int[] dp) {
+        // An empty prefix needs no piece.
+        if (end == 0) {
+            return 0;
+        }
+
+        // A stored answer avoids repeated recursion.
+        if (dp[end] != -1) {
+            return dp[end];
+        }
+
+        // The sentinel exceeds every possible piece count.
+        int best = s.length() + 1;
+
+        // Tries every possible final piece.
+        for (int start = end - 1; start &gt;= 0; start--) {
+            // Only a palindrome can form a valid piece.
+            if (isPalindrome(s, start, end - 1)) {
+                // The final palindrome adds one piece.
+                int current = 1 + solve(s, start, dp);
+
+                // The smallest valid partition is retained.
+                best = Math.min(best, current);
+            }
+        }
+
+        // The prefix answer is cached for later calls.
+        dp[end] = best;
+        return dp[end];
+    }
+
+    // Returns minimum cuts for the full string.
+    public int minCut(String s) {
+        // Empty input needs no cut.
+        if (s.length() == 0) {
+            return 0;
+        }
+
+        // Negative values mark uncalculated prefixes.
+        int[] dp = new int[s.length() + 1];
+        Arrays.fill(dp, -1);
+
+        // The full prefix contains every character.
+        int pieces = solve(s, s.length(), dp);
+
+        // One fewer cut than pieces joins the partition.
+        return pieces - 1;
+    }
+}
+
+// Driver code
+public class Main {
+    public static void main(String[] args) {
+        String s = "abab";
+        Solution obj = new Solution();
+        System.out.println(obj.minCut(s));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">"use strict";
+
+class Solution {
+    // Checks whether one range is palindromic.
+    #isPalindrome(s, left, right) {
+        // Compares matching positions from both ends.
+        while (left &lt; right) {
+            // A mismatch makes the range invalid.
+            if (s[left] !== s[right]) {
+                return false;
+            }
+
+            // Moves both pointers toward the center.
+            left++;
+            right--;
+        }
+
+        return true;
+    }
+
+    // Finds and stores minimum prefix pieces.
+    #solve(s, end, dp) {
+        // An empty prefix needs no piece.
+        if (end === 0) {
+            return 0;
+        }
+
+        // A stored answer avoids repeated recursion.
+        if (dp[end] !== -1) {
+            return dp[end];
+        }
+
+        // The sentinel exceeds every possible piece count.
+        let best = s.length + 1;
+
+        // Tries every possible final piece.
+        for (let start = end - 1; start &gt;= 0; start--) {
+            // Only a palindrome can form a valid piece.
+            if (this.#isPalindrome(s, start, end - 1)) {
+                // The final palindrome adds one piece.
+                const current = 1 + this.#solve(s, start, dp);
+
+                // The smallest valid partition is retained.
+                best = Math.min(best, current);
+            }
+        }
+
+        // The prefix answer is cached for later calls.
+        dp[end] = best;
+        return dp[end];
+    }
+
+    // Returns minimum cuts for the full string.
+    minCut(s) {
+        // Empty input needs no cut.
+        if (s.length === 0) {
+            return 0;
+        }
+
+        // Negative values mark uncalculated prefixes.
+        const dp = Array(s.length + 1).fill(-1);
+
+        // The full prefix contains every character.
+        const pieces = this.#solve(s, s.length, dp);
+
+        // One fewer cut than pieces joins the partition.
+        return pieces - 1;
+    }
+}
+
+// Driver code
+function main() {
+    const s = "abab";
+    const obj = new Solution();
+    console.log(obj.minCut(s));
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-8"><h3 id="blog-toc-complexity-analysis-2">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(N</code><sup>3</sup><code>)</code>, where <code>N</code> is the length of the string, because the <code>N</code> prefix states can each try up to <code>N</code> possible final-piece starts, and each on-demand palindrome check can take up to <code>O(N)</code> time.</p></div><div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-9"><p><strong>Space Complexity:</strong> <code>O(N)</code>, because the <code>dp</code> array stores <code>N + 1</code> prefix answers, and the recursion stack can contain up to <code>N</code> active calls.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-10"><h2 id="blog-toc-tabulation">Tabulation</h2><p>Memoization removes repeated prefix searches, but repeated palindrome scans still cost extra time. A boolean table can record every palindromic range once.</p><p>Build palindrome information from shorter inner ranges before longer outer ranges. Then fill <code>dp[end]</code> from left to right. The meaning of <code>dp[end]</code> remains the minimum palindromic pieces for <code>s[0...end-1]</code>. Every valid last range contributes <code>dp[start] + 1</code>, exactly matching the earlier recursive transition.</p><h3 id="blog-toc-algorithm-3">Algorithm</h3><ul><li><p>Return <code>0</code> for an empty string because no table entry or cut is needed.</p></li><li><p>Create a square boolean table named <code>palindrome</code> so every substring test can become a constant-time lookup.</p></li><li><p>Fill <code>start</code> from right to left and <code>end</code> from <code>start</code> to the final index because the inner range must be ready before an outer range.</p></li><li><p>Mark a range palindromic when both end characters match because matching ends can surround only an empty, single-character, or already palindromic middle.</p></li><li><p>Fill an array named <code>dp</code> with a value above <code>n</code>, then set <code>dp[0] = 0</code> because an empty prefix needs no piece.</p></li><li><p>Process prefix ends from <code>1</code> through <code>n</code> because every required <code>dp[start]</code> value is ready, then minimize <code>dp[end]</code> with each palindromic final range.</p></li><li><p>Return <code>dp[n] - 1</code> because a partition with <code>dp[n]</code> pieces contains one fewer cut.</p></li></ul><h3 id="blog-toc-dry-run-3">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Palindrome Partitioning II Tabulation" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/ef0c2cc66637982b.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Palindrome Partitioning II Tabulation</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-11"><h3 id="blog-toc-solution-3">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Returns minimum cuts with bottom-up tables.
+    int minCut(string s) {
+        int n = s.size();
+
+        // Empty input needs no cut.
+        if (n == 0) {
+            return 0;
+        }
+
+        // The table records every palindromic range.
+        vector&lt;vector&lt;bool&gt;&gt; palindrome(
+            n, vector&lt;bool&gt;(n, false)
+        );
+
+        // Right-to-left order prepares inner ranges.
+        for (int start = n - 1; start &gt;= 0; start--) {
+            // Every range beginning at start is checked.
+            for (int end = start; end &lt; n; end++) {
+                // Matching ends are required.
+                bool sameEnds = s[start] == s[end];
+
+                // Short ranges have no unresolved middle.
+                bool shortRange = end - start &lt;= 1;
+
+                // A valid middle completes the palindrome.
+                if (
+                    sameEnds &amp;&amp;
+                    (
+                        shortRange ||
+                        palindrome[start + 1][end - 1]
+                    )
+                ) {
+                    palindrome[start][end] = true;
+                }
+            }
+        }
+
+        // Large values mark unfinished prefix states.
+        vector&lt;int&gt; dp(n + 1, n + 1);
+
+        // An empty prefix needs no piece.
+        dp[0] = 0;
+
+        // Prefixes are completed from short to long.
+        for (int end = 1; end &lt;= n; end++) {
+            // Every possible final piece is considered.
+            for (int start = 0; start &lt; end; start++) {
+                // Only a palindrome can close the prefix.
+                if (palindrome[start][end - 1]) {
+                    // The final palindrome adds one piece.
+                    int current = dp[start] + 1;
+
+                    // The smallest valid partition is retained.
+                    dp[end] = min(dp[end], current);
+                }
+            }
+        }
+
+        // One fewer cut than pieces joins the partition.
+        return dp[n] - 1;
+    }
+};
+
+// Driver code
+int main() {
+    string s = "aab";
+    Solution obj;
+    cout &lt;&lt; obj.minCut(s) &lt;&lt; endl;
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">from typing import List
+
+
+class Solution:
+    # Returns minimum cuts with bottom-up tables.
+    def min_cut(self, s: str) -&gt; int:
+        n = len(s)
+
+        # Empty input needs no cut.
+        if n == 0:
+            return 0
+
+        # The table records every palindromic range.
+        palindrome = [
+            [False] * n for _ in range(n)
+        ]
+
+        # Right-to-left order prepares inner ranges.
+        for start in range(n - 1, -1, -1):
+            # Every range beginning at start is checked.
+            for end in range(start, n):
+                # Matching ends are required.
+                same_ends = s[start] == s[end]
+
+                # Short ranges have no unresolved middle.
+                short_range = end - start &lt;= 1
+
+                # A valid middle completes the palindrome.
+                if (
+                    same_ends
+                    and (
+                        short_range
+                        or palindrome[start + 1][end - 1]
+                    )
+                ):
+                    palindrome[start][end] = True
+
+        # Large values mark unfinished prefix states.
+        dp = [n + 1] * (n + 1)
+
+        # An empty prefix needs no piece.
+        dp[0] = 0
+
+        # Prefixes are completed from short to long.
+        for end in range(1, n + 1):
+            # Every possible final piece is considered.
+            for start in range(end):
+                # Only a palindrome can close the prefix.
+                if palindrome[start][end - 1]:
+                    # The final palindrome adds one piece.
+                    current = dp[start] + 1
+
+                    # The smallest partition is retained.
+                    dp[end] = min(dp[end], current)
+
+        # One fewer cut than pieces joins the partition.
+        return dp[n] - 1
+
+
+# Driver code
+def main() -&gt; None:
+    s = "aab"
+    obj = Solution()
+    print(obj.min_cut(s))
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Returns minimum cuts with bottom-up tables.
+    public int minCut(String s) {
+        int n = s.length();
+
+        // Empty input needs no cut.
+        if (n == 0) {
+            return 0;
+        }
+
+        // The table records every palindromic range.
+        boolean[][] palindrome = new boolean[n][n];
+
+        // Right-to-left order prepares inner ranges.
+        for (int start = n - 1; start &gt;= 0; start--) {
+            // Every range beginning at start is checked.
+            for (int end = start; end &lt; n; end++) {
+                // Matching ends are required.
+                boolean sameEnds =
+                    s.charAt(start) == s.charAt(end);
+
+                // Short ranges have no unresolved middle.
+                boolean shortRange = end - start &lt;= 1;
+
+                // A valid middle completes the palindrome.
+                if (
+                    sameEnds &amp;&amp;
+                    (
+                        shortRange ||
+                        palindrome[start + 1][end - 1]
+                    )
+                ) {
+                    palindrome[start][end] = true;
+                }
+            }
+        }
+
+        // Large values mark unfinished prefix states.
+        int[] dp = new int[n + 1];
+        Arrays.fill(dp, n + 1);
+
+        // An empty prefix needs no piece.
+        dp[0] = 0;
+
+        // Prefixes are completed from short to long.
+        for (int end = 1; end &lt;= n; end++) {
+            // Every possible final piece is considered.
+            for (int start = 0; start &lt; end; start++) {
+                // Only a palindrome can close the prefix.
+                if (palindrome[start][end - 1]) {
+                    // The final palindrome adds one piece.
+                    int current = dp[start] + 1;
+
+                    // The smallest partition is retained.
+                    dp[end] = Math.min(dp[end], current);
+                }
+            }
+        }
+
+        // One fewer cut than pieces joins the partition.
+        return dp[n] - 1;
+    }
+}
+
+// Driver code
+public class Main {
+    public static void main(String[] args) {
+        String s = "aab";
+        Solution obj = new Solution();
+        System.out.println(obj.minCut(s));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">"use strict";
+
+class Solution {
+    // Returns minimum cuts with bottom-up tables.
+    minCut(s) {
+        const n = s.length;
+
+        // Empty input needs no cut.
+        if (n === 0) {
+            return 0;
+        }
+
+        // The table records every palindromic range.
+        const palindrome = Array.from(
+            { length: n },
+            () =&gt; Array(n).fill(false)
+        );
+
+        // Right-to-left order prepares inner ranges.
+        for (let start = n - 1; start &gt;= 0; start--) {
+            // Every range beginning at start is checked.
+            for (let end = start; end &lt; n; end++) {
+                // Matching ends are required.
+                const sameEnds = s[start] === s[end];
+
+                // Short ranges have no unresolved middle.
+                const shortRange = end - start &lt;= 1;
+
+                // A valid middle completes the palindrome.
+                if (
+                    sameEnds &amp;&amp;
+                    (
+                        shortRange ||
+                        palindrome[start + 1][end - 1]
+                    )
+                ) {
+                    palindrome[start][end] = true;
+                }
+            }
+        }
+
+        // Large values mark unfinished prefix states.
+        const dp = Array(n + 1).fill(n + 1);
+
+        // An empty prefix needs no piece.
+        dp[0] = 0;
+
+        // Prefixes are completed from short to long.
+        for (let end = 1; end &lt;= n; end++) {
+            // Every possible final piece is considered.
+            for (let start = 0; start &lt; end; start++) {
+                // Only a palindrome can close the prefix.
+                if (palindrome[start][end - 1]) {
+                    // The final palindrome adds one piece.
+                    const current = dp[start] + 1;
+
+                    // The smallest partition is retained.
+                    dp[end] = Math.min(dp[end], current);
+                }
+            }
+        }
+
+        // One fewer cut than pieces joins the partition.
+        return dp[n] - 1;
+    }
+}
+
+// Driver code
+function main() {
+    const s = "aab";
+    const obj = new Solution();
+    console.log(obj.minCut(s));
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-12"><h3 id="blog-toc-complexity-analysis-3">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(N</code><sup>2</sup><code>)</code>, where <code>N</code> is the length of the string, because palindrome preprocessing checks <code>O(N</code><sup>2</sup><code>)</code> substring ranges, and prefix tabulation checks up to <code>O(N</code><sup>2</sup><code>)</code> possible final pieces.</p><p><strong>Space Complexity:</strong> <code>O(N</code><sup>2</sup><code>)</code>, because the palindrome table stores one value for each substring range, while the one-dimensional <code>dp</code> array adds only <code>O(N)</code> storage.</p></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-13"><h2 id="blog-toc-space-optimization">Space Optimization</h2><p>The tabulation table stores every palindromic range, although each range is needed only once to relax a prefix answer. Expanding around centers can discover the same odd-length and even-length palindromes without retaining the square table.</p><p>Keep the one-dimensional prefix array <code>dp</code>. Process centers from left to right, and update <code>dp[right + 1]</code> from <code>dp[left] + 1</code> whenever <code>s[left...right]</code> is palindromic. Every value at <code>dp[left]</code> is already final before a later center uses the value, because any palindrome ending before <code>left</code> has an earlier center.</p><h3 id="blog-toc-algorithm-4">Algorithm</h3><ul><li><p>Return <code>0</code> for an empty string because no center or prefix state exists.</p></li><li><p>Initialize <code>dp[end] = end</code> so every prefix begins with the valid worst case of one piece per character.</p></li><li><p>Process centers from left to right because every completed earlier prefix must be final before a later palindrome uses the prefix.</p></li><li><p>Expand once from <code>(center, center)</code> so every odd-length palindrome receives consideration.</p></li><li><p>Expand again from <code>(center - 1, center)</code> so every even-length palindrome receives consideration.</p></li><li><p>For every matching range, calculate <code>current = dp[left] + 1</code> so the palindrome becomes one final piece, then minimize <code>dp[right + 1]</code> before shifting both bounds outward.</p></li><li><p>Return <code>dp[n] - 1</code> because the optimized array still stores piece counts rather than cut counts.</p></li></ul><h3 id="blog-toc-dry-run-4">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Palindrome Partitioning II Space Optimization" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/1c149dba9b7f1be0.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Palindrome Partitioning II Space Optimization</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-14"><h3 id="blog-toc-solution-4">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+private:
+    // Expands one center and updates prefix pieces.
+    void expandAndUpdate(
+        string&amp; s,
+        int left,
+        int right,
+        vector&lt;int&gt;&amp; dp
+    ) {
+        int n = s.size();
+
+        // Matching bounds describe one palindrome.
+        while (
+            left &gt;= 0 &amp;&amp;
+            right &lt; n &amp;&amp;
+            s[left] == s[right]
+        ) {
+            // The current value adds the final palindrome.
+            int current = dp[left] + 1;
+
+            // The smallest prefix partition is retained.
+            dp[right + 1] = min(dp[right + 1], current);
+
+            // Both bounds shift to the next larger range.
+            left--;
+            right++;
+        }
+    }
+
+public:
+    // Returns minimum cuts with center expansion.
+    int minCut(string s) {
+        int n = s.size();
+
+        // Empty input needs no cut.
+        if (n == 0) {
+            return 0;
+        }
+
+        // Every prefix starts with one piece per character.
+        vector&lt;int&gt; dp(n + 1);
+
+        // The index equals the worst-case piece count.
+        for (int end = 0; end &lt;= n; end++) {
+            dp[end] = end;
+        }
+
+        // Left-to-right centers preserve prefix readiness.
+        for (int center = 0; center &lt; n; center++) {
+            // A single center finds odd palindromes.
+            expandAndUpdate(
+                s, center, center, dp
+            );
+
+            // A center gap finds even palindromes.
+            expandAndUpdate(
+                s, center - 1, center, dp
+            );
+        }
+
+        // One fewer cut than pieces joins the partition.
+        return dp[n] - 1;
+    }
+};
+
+// Driver code
+int main() {
+    string s = "aab";
+    Solution obj;
+    cout &lt;&lt; obj.minCut(s) &lt;&lt; endl;
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">from typing import List
+
+
+class Solution:
+    # Expands one center and updates prefix pieces.
+    def _expand_and_update(
+        self,
+        s: str,
+        left: int,
+        right: int,
+        dp: List[int],
+    ) -&gt; None:
+        n = len(s)
+
+        # Matching bounds describe one palindrome.
+        while (
+            left &gt;= 0
+            and right &lt; n
+            and s[left] == s[right]
+        ):
+            # The current value adds the final palindrome.
+            current = dp[left] + 1
+
+            # The smallest prefix partition is retained.
+            dp[right + 1] = min(
+                dp[right + 1], current
+            )
+
+            # Both bounds shift to the next larger range.
+            left -= 1
+            right += 1
+
+    # Returns minimum cuts with center expansion.
+    def min_cut(self, s: str) -&gt; int:
+        n = len(s)
+
+        # Empty input needs no cut.
+        if n == 0:
+            return 0
+
+        # Every prefix starts with one piece per character.
+        dp = list(range(n + 1))
+
+        # Left-to-right centers preserve prefix readiness.
+        for center in range(n):
+            # A single center finds odd palindromes.
+            self._expand_and_update(
+                s, center, center, dp
+            )
+
+            # A center gap finds even palindromes.
+            self._expand_and_update(
+                s, center - 1, center, dp
+            )
+
+        # One fewer cut than pieces joins the partition.
+        return dp[n] - 1
+
+
+# Driver code
+def main() -&gt; None:
+    s = "aab"
+    obj = Solution()
+    print(obj.min_cut(s))
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Expands one center and updates prefix pieces.
+    private void expandAndUpdate(
+        String s,
+        int left,
+        int right,
+        int[] dp
+    ) {
+        int n = s.length();
+
+        // Matching bounds describe one palindrome.
+        while (
+            left &gt;= 0 &amp;&amp;
+            right &lt; n &amp;&amp;
+            s.charAt(left) == s.charAt(right)
+        ) {
+            // The current value adds the final palindrome.
+            int current = dp[left] + 1;
+
+            // The smallest prefix partition is retained.
+            dp[right + 1] = Math.min(
+                dp[right + 1], current
+            );
+
+            // Both bounds shift to the next larger range.
+            left--;
+            right++;
+        }
+    }
+
+    // Returns minimum cuts with center expansion.
+    public int minCut(String s) {
+        int n = s.length();
+
+        // Empty input needs no cut.
+        if (n == 0) {
+            return 0;
+        }
+
+        // Every prefix starts with one piece per character.
+        int[] dp = new int[n + 1];
+
+        // The index equals the worst-case piece count.
+        for (int end = 0; end &lt;= n; end++) {
+            dp[end] = end;
+        }
+
+        // Left-to-right centers preserve prefix readiness.
+        for (int center = 0; center &lt; n; center++) {
+            // A single center finds odd palindromes.
+            expandAndUpdate(
+                s, center, center, dp
+            );
+
+            // A center gap finds even palindromes.
+            expandAndUpdate(
+                s, center - 1, center, dp
+            );
+        }
+
+        // One fewer cut than pieces joins the partition.
+        return dp[n] - 1;
+    }
+}
+
+// Driver code
+public class Main {
+    public static void main(String[] args) {
+        String s = "aab";
+        Solution obj = new Solution();
+        System.out.println(obj.minCut(s));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">"use strict";
+
+class Solution {
+    // Expands one center and updates prefix pieces.
+    #expandAndUpdate(s, left, right, dp) {
+        const n = s.length;
+
+        // Matching bounds describe one palindrome.
+        while (
+            left &gt;= 0 &amp;&amp;
+            right &lt; n &amp;&amp;
+            s[left] === s[right]
+        ) {
+            // The current value adds the final palindrome.
+            const current = dp[left] + 1;
+
+            // The smallest prefix partition is retained.
+            dp[right + 1] = Math.min(
+                dp[right + 1], current
+            );
+
+            // Both bounds shift to the next larger range.
+            left--;
+            right++;
+        }
+    }
+
+    // Returns minimum cuts with center expansion.
+    minCut(s) {
+        const n = s.length;
+
+        // Empty input needs no cut.
+        if (n === 0) {
+            return 0;
+        }
+
+        // Every prefix starts with one piece per character.
+        const dp = Array(n + 1).fill(0);
+
+        // The index equals the worst-case piece count.
+        for (let end = 0; end &lt;= n; end++) {
+            dp[end] = end;
+        }
+
+        // Left-to-right centers preserve prefix readiness.
+        for (let center = 0; center &lt; n; center++) {
+            // A single center finds odd palindromes.
+            this.#expandAndUpdate(
+                s, center, center, dp
+            );
+
+            // A center gap finds even palindromes.
+            this.#expandAndUpdate(
+                s, center - 1, center, dp
+            );
+        }
+
+        // One fewer cut than pieces joins the partition.
+        return dp[n] - 1;
+    }
+}
+
+// Driver code
+function main() {
+    const s = "aab";
+    const obj = new Solution();
+    console.log(obj.minCut(s));
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-15"><h3 id="blog-toc-complexity-analysis-4">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(N</code><sup>2</sup><code>)</code>, where <code>N</code> is the length of the string, because every odd and even center can expand across at most <code>N</code> characters, and each discovered palindrome performs a constant-time prefix update.</p><p><strong>Space Complexity:</strong> <code>O(N)</code>, because the one-dimensional <code>dp</code> array stores prefix piece counts, while center expansion uses only scalar bounds.</p></div><div><section aria-label="Interview follow-up Questions" class="BlogDetail-module__HEfJva__faqSection" id="blog-toc-faqs"><h2 class="BlogDetail-module__HEfJva__faqHeading">Interview follow-up Questions</h2><div class="flex w-full flex-col BlogDetail-module__HEfJva__faqList" data-orientation="vertical" data-slot="accordion"><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="open"><h3 class="flex" data-orientation="vertical" data-state="open"></h3><div aria-labelledby="radix-_R_1n4qnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="open" id="radix-_R_9n4qnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"><div class="h-auto pt-0 pb-2.5 [&amp;_a]:underline [&amp;_a]:underline-offset-3 [&amp;_a]:hover:text-foreground [&amp;_p:not(:last-child)]:mb-4 BlogDetail-module__HEfJva__faqAnswer"><p>No. The complete string forms one palindromic piece, so the minimum cut count is 0.</p></div></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_2n4qnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_an4qnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_3n4qnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_bn4qnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_4n4qnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_cn4qnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_5n4qnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_dn4qnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div></div></section></div>
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

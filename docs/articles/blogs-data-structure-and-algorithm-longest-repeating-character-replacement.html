@@ -1,0 +1,859 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Longest Repeating Character Replacement</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Longest Repeating Character Replacement</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/blogs/data-structure-and-algorithm/longest-repeating-character-replacement</code></div>
+  <div class="ArticleParser-module__R__VNG__article" data-article-segment="html-0"><p>Given a string s and an integer k, return the length of the longest substring that can be changed into a substring containing the same character after replacing at most k characters.</p><p>You can replace any character in the substring with any other uppercase English character.</p></div><div><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 1</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p>Input: s = "ABAB", k = 2</p><p>Output: 4</p><p>Explanation: We can replace both 'A' characters with 'B', or both 'B' characters with 'A'. So the whole string can become one repeating character.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 2</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p>Input: s = "AABABBA", k = 1</p><p>Output: 4</p><p>Explanation: The substring "AABA" can be changed to "AAAA" by replacing one 'B' with 'A'. So the answer is 4.</p></div></div></section></div><div><div class="BlogDetail-module__HEfJva__practiceCallout"><a class="BlogDetail-module__HEfJva__practiceLink" data-mobile-prefetch="normal" href="https://takeuforward.org/practice/dsa/longest-repeating-character-replacement?subject=blind-75" rel="noopener" target="_blank"><span>Practice it by yourself before moving onto the solution</span><span class="BlogDetail-module__HEfJva__practiceAction">Try now</span></a></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-2"><h2 id="blog-toc-brute-force-approach">Brute Force Approach</h2><p>In this approach, every possible substring is checked.</p><p>For any substring, we need to decide whether it can be converted into a string having only one repeating character using at most k replacements.</p><p>The best character to keep unchanged is always the character that appears the most in that substring. All other characters need to be replaced.</p><p>So, for a substring:</p><p>replacementsNeeded = length of substring - maximum frequency of any character in that substring</p><p>If replacementsNeeded is less than or equal to k, the substring is valid.</p><h3 id="blog-toc-algorithm">Algorithm</h3><ul><li><p>Store the string length in <code>n</code> and return <code>0</code> when <code>n == 0</code> or <code>k &lt; 0</code>, because no valid result can be formed in these cases.</p></li><li><p>Initialize <code>maxLength = 0</code> to store the longest valid substring found so far.</p></li><li><p>Select every <code>start</code> index and move <code>end</code> from <code>start</code> toward <code>n - 1</code> so every possible substring can be considered.</p></li><li><p>For each range <code>s[start...end]</code>, build a frequency array of size <code>26</code> and find the highest character frequency in that substring.</p></li><li><p>Calculate <code>replacementsNeeded = (end - start + 1) - maxFrequency</code>. If this value exceeds <code>k</code>, <strong>break the current </strong><code>end</code><strong> traversal</strong>, because extending the same starting position cannot decrease the required number of replacements.</p></li><li><p>Otherwise, update <code>maxLength</code> with <code>end - start + 1</code> and return it after all starting positions are processed.</p></li></ul><h3 id="blog-toc-dry-run">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Longest Repeating Character Replacement Brute Force Dry Run.png" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/d17443528da62140.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Longest Repeating Character Replacement Brute Force Dry Run.png</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-3"><h3 id="blog-toc-solution">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+private:
+    // Returns replacements needed
+    // for the selected substring.
+    int replacementsNeeded(
+        const string&amp; s,
+        int start,
+        int end
+    ) {
+        vector&lt;int&gt; frequency(26, 0);
+        int maxFrequency = 0;
+
+        // Count characters in the
+        // selected substring.
+        for (int i = start; i &lt;= end; i++) {
+            int index = s[i] - 'A';
+            frequency[index]++;
+
+            maxFrequency = max(
+                maxFrequency,
+                frequency[index]
+            );
+        }
+
+        int length = end - start + 1;
+
+        return length - maxFrequency;
+    }
+
+public:
+    // Finds the longest substring
+    // valid within k replacements.
+    int characterReplacement(string s, int k) {
+        int n = s.size();
+
+        // No valid substring can exist
+        // for these input conditions.
+        if (n == 0 || k &lt; 0) {
+            return 0;
+        }
+
+        int maxLength = 0;
+
+        // Try every possible start.
+        for (int start = 0; start &lt; n; start++) {
+
+            // Try every possible end
+            // for the current start.
+            for (int end = start; end &lt; n; end++) {
+                int needed = replacementsNeeded(
+                    s,
+                    start,
+                    end
+                );
+
+                // Further expansion cannot
+                // reduce replacements needed.
+                if (needed &gt; k) {
+                    break;
+                }
+
+                maxLength = max(
+                    maxLength,
+                    end - start + 1
+                );
+            }
+        }
+
+        return maxLength;
+    }
+};
+
+int main() {
+    string s = "AABABBA";
+    int k = 1;
+
+    Solution solution;
+
+    cout &lt;&lt; solution.characterReplacement(s, k)
+         &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+
+    # Returns replacements needed
+    # for the selected substring.
+    def replacements_needed(
+        self,
+        s: str,
+        start: int,
+        end: int
+    ) -&gt; int:
+        frequency = [0] * 26
+        max_frequency = 0
+
+        # Count characters in the
+        # selected substring.
+        for i in range(start, end + 1):
+            index = ord(s[i]) - ord("A")
+            frequency[index] += 1
+
+            max_frequency = max(
+                max_frequency,
+                frequency[index]
+            )
+
+        length = end - start + 1
+
+        return length - max_frequency
+
+    # Finds the longest substring
+    # valid within k replacements.
+    def character_replacement(
+        self,
+        s: str,
+        k: int
+    ) -&gt; int:
+        n = len(s)
+
+        # No valid substring can exist
+        # for these input conditions.
+        if n == 0 or k &lt; 0:
+            return 0
+
+        max_length = 0
+
+        # Try every possible start.
+        for start in range(n):
+
+            # Try every possible end
+            # for the current start.
+            for end in range(start, n):
+                needed = self.replacements_needed(
+                    s,
+                    start,
+                    end
+                )
+
+                # Further expansion cannot
+                # reduce replacements needed.
+                if needed &gt; k:
+                    break
+
+                max_length = max(
+                    max_length,
+                    end - start + 1
+                )
+
+        return max_length
+
+
+if __name__ == "__main__":
+    s = "AABABBA"
+    k = 1
+
+    solution = Solution()
+
+    print(solution.character_replacement(s, k))</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">class Solution {
+
+    // Returns replacements needed
+    // for the selected substring.
+    private int replacementsNeeded(
+        String s,
+        int start,
+        int end
+    ) {
+        int[] frequency = new int[26];
+        int maxFrequency = 0;
+
+        // Count characters in the
+        // selected substring.
+        for (int i = start; i &lt;= end; i++) {
+            int index = s.charAt(i) - 'A';
+            frequency[index]++;
+
+            maxFrequency = Math.max(
+                maxFrequency,
+                frequency[index]
+            );
+        }
+
+        int length = end - start + 1;
+
+        return length - maxFrequency;
+    }
+
+    // Finds the longest substring
+    // valid within k replacements.
+    public int characterReplacement(String s, int k) {
+        int n = s.length();
+
+        // No valid substring can exist
+        // for these input conditions.
+        if (n == 0 || k &lt; 0) {
+            return 0;
+        }
+
+        int maxLength = 0;
+
+        // Try every possible start.
+        for (int start = 0; start &lt; n; start++) {
+
+            // Try every possible end
+            // for the current start.
+            for (int end = start; end &lt; n; end++) {
+                int needed = replacementsNeeded(
+                    s,
+                    start,
+                    end
+                );
+
+                // Further expansion cannot
+                // reduce replacements needed.
+                if (needed &gt; k) {
+                    break;
+                }
+
+                maxLength = Math.max(
+                    maxLength,
+                    end - start + 1
+                );
+            }
+        }
+
+        return maxLength;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        String s = "AABABBA";
+        int k = 1;
+
+        Solution solution = new Solution();
+
+        System.out.println(
+            solution.characterReplacement(s, k)
+        );
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+
+    // Returns replacements needed
+    // for the selected substring.
+    replacementsNeeded(s, start, end) {
+        const frequency = new Array(26).fill(0);
+        let maxFrequency = 0;
+
+        // Count characters in the
+        // selected substring.
+        for (let i = start; i &lt;= end; i++) {
+            const index =
+                s.charCodeAt(i) - 65;
+
+            frequency[index]++;
+
+            maxFrequency = Math.max(
+                maxFrequency,
+                frequency[index]
+            );
+        }
+
+        const length = end - start + 1;
+
+        return length - maxFrequency;
+    }
+
+    // Finds the longest substring
+    // valid within k replacements.
+    characterReplacement(s, k) {
+        const n = s.length;
+
+        // No valid substring can exist
+        // for these input conditions.
+        if (n === 0 || k &lt; 0) {
+            return 0;
+        }
+
+        let maxLength = 0;
+
+        // Try every possible start.
+        for (let start = 0; start &lt; n; start++) {
+
+            // Try every possible end
+            // for the current start.
+            for (let end = start; end &lt; n; end++) {
+                const needed =
+                    this.replacementsNeeded(
+                        s,
+                        start,
+                        end
+                    );
+
+                // Further expansion cannot
+                // reduce replacements needed.
+                if (needed &gt; k) {
+                    break;
+                }
+
+                maxLength = Math.max(
+                    maxLength,
+                    end - start + 1
+                );
+            }
+        }
+
+        return maxLength;
+    }
+}
+
+const s = "AABABBA";
+const k = 1;
+
+const solution = new Solution();
+
+console.log(solution.characterReplacement(s, k));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-4"><h3 id="blog-toc-complexity-analysis">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(N³), where N is the length of the string. There are O(N²) possible substrings, and for every substring, counting character frequencies can take O(N) time.</p><p><strong>Space Complexity:</strong> O(1), because the frequency array stores counts for only 26 uppercase English letters.</p><h3></h3><h2 id="blog-toc-better-approach">Better Approach</h2><p>Instead of counting frequencies again for every substring, we can build the substring while moving toward the right.</p><p>For every starting index, the ending index is expanded one character at a time. While expanding, the frequency array is updated immediately.</p><p>At every step, we also maintain the maximum frequency in the current substring. This helps us quickly calculate how many characters need to be replaced.</p><p>If currentLength - maxFrequency is less than or equal to k, the substring is valid. If it becomes greater than k, we stop expanding for that starting index.</p><p>For the same starting index, adding more characters cannot reduce the number of replacements needed. It can either stay the same or increase. So, once the substring becomes invalid, there is no benefit in expanding it further.</p><h3 id="blog-toc-algorithm-2">Algorithm</h3><ul><li><p>The size of the string is stored in n. If n is 0, 0 is returned because an empty string has no substring. If k is negative, 0 is returned because negative replacements are not possible.</p></li><li><p>A variable maxLength is initialized with 0 to store the best valid substring length found so far.</p></li><li><p>The string is traversed using start as the starting index. For every start, a frequency array of size 26 is created to track character counts in the current substring.</p></li><li><p>The end pointer moves from start to the end of the string. For every s[end], its frequency is increased because this character is now included in the current substring.</p></li><li><p>The maxFrequency value is updated using the frequency of s[end]. This value tells us the count of the character that appears most often in the current substring.</p></li><li><p>The current length is calculated as end - start + 1, and replacementsNeeded is calculated as currentLength - maxFrequency. If replacementsNeeded is greater than k, the loop is stopped for this start. Otherwise, maxLength is updated. After all starting positions are checked, maxLength is returned.</p></li></ul><h3 id="blog-toc-dry-run-2">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Longest Repeating Character Replacement Bettter Appraoch Dry Run.png" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/ee5dd47c17cb76b2.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Longest Repeating Character Replacement Bettter Appraoch Dry Run.png</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-5"><h3 id="blog-toc-solution-2">Solution</h3></div><div></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Expands from every start
+    // while maintaining frequencies.
+    int characterReplacement(string s, int k) {
+        int n = s.size();
+
+        // No valid substring can exist
+        // for these input conditions.
+        if (n == 0 || k &lt; 0) {
+            return 0;
+        }
+
+        int maxLength = 0;
+
+        // Try every possible start.
+        for (int start = 0; start &lt; n; start++) {
+            vector&lt;int&gt; frequency(26, 0);
+            int maxFrequency = 0;
+
+            // Expand the substring
+            // one character at a time.
+            for (int end = start; end &lt; n; end++) {
+                int index = s[end] - 'A';
+                frequency[index]++;
+
+                maxFrequency = max(
+                    maxFrequency,
+                    frequency[index]
+                );
+
+                int currentLength =
+                    end - start + 1;
+
+                int replacementsNeeded =
+                    currentLength - maxFrequency;
+
+                // Further expansion cannot
+                // reduce replacements needed.
+                if (replacementsNeeded &gt; k) {
+                    break;
+                }
+
+                maxLength = max(
+                    maxLength,
+                    currentLength
+                );
+            }
+        }
+
+        return maxLength;
+    }
+};
+
+int main() {
+    string s = "AABABBA";
+    int k = 1;
+
+    Solution solution;
+
+    cout &lt;&lt; solution.characterReplacement(s, k)
+         &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+
+    # Expands from every start
+    # while maintaining frequencies.
+    def character_replacement(
+        self,
+        s: str,
+        k: int
+    ) -&gt; int:
+        n = len(s)
+
+        # No valid substring can exist
+        # for these input conditions.
+        if n == 0 or k &lt; 0:
+            return 0
+
+        max_length = 0
+
+        # Try every possible start.
+        for start in range(n):
+            frequency = [0] * 26
+            max_frequency = 0
+
+            # Expand the substring
+            # one character at a time.
+            for end in range(start, n):
+                index = ord(s[end]) - ord("A")
+                frequency[index] += 1
+
+                max_frequency = max(
+                    max_frequency,
+                    frequency[index]
+                )
+
+                current_length = (
+                    end - start + 1
+                )
+
+                replacements_needed = (
+                    current_length - max_frequency
+                )
+
+                # Further expansion cannot
+                # reduce replacements needed.
+                if replacements_needed &gt; k:
+                    break
+
+                max_length = max(
+                    max_length,
+                    current_length
+                )
+
+        return max_length
+
+
+if __name__ == "__main__":
+    s = "AABABBA"
+    k = 1
+
+    solution = Solution()
+
+    print(solution.character_replacement(s, k))</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">class Solution {
+
+    // Expands from every start
+    // while maintaining frequencies.
+    public int characterReplacement(String s, int k) {
+        int n = s.length();
+
+        // No valid substring can exist
+        // for these input conditions.
+        if (n == 0 || k &lt; 0) {
+            return 0;
+        }
+
+        int maxLength = 0;
+
+        // Try every possible start.
+        for (int start = 0; start &lt; n; start++) {
+            int[] frequency = new int[26];
+            int maxFrequency = 0;
+
+            // Expand the substring
+            // one character at a time.
+            for (int end = start; end &lt; n; end++) {
+                int index = s.charAt(end) - 'A';
+                frequency[index]++;
+
+                maxFrequency = Math.max(
+                    maxFrequency,
+                    frequency[index]
+                );
+
+                int currentLength =
+                    end - start + 1;
+
+                int replacementsNeeded =
+                    currentLength - maxFrequency;
+
+                // Further expansion cannot
+                // reduce replacements needed.
+                if (replacementsNeeded &gt; k) {
+                    break;
+                }
+
+                maxLength = Math.max(
+                    maxLength,
+                    currentLength
+                );
+            }
+        }
+
+        return maxLength;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        String s = "AABABBA";
+        int k = 1;
+
+        Solution solution = new Solution();
+
+        System.out.println(
+            solution.characterReplacement(s, k)
+        );
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+
+    // Expands from every start
+    // while maintaining frequencies.
+    characterReplacement(s, k) {
+        const n = s.length;
+
+        // No valid substring can exist
+        // for these input conditions.
+        if (n === 0 || k &lt; 0) {
+            return 0;
+        }
+
+        let maxLength = 0;
+
+        // Try every possible start.
+        for (let start = 0; start &lt; n; start++) {
+            const frequency =
+                new Array(26).fill(0);
+
+            let maxFrequency = 0;
+
+            // Expand the substring
+            // one character at a time.
+            for (let end = start; end &lt; n; end++) {
+                const index =
+                    s.charCodeAt(end) - 65;
+
+                frequency[index]++;
+
+                maxFrequency = Math.max(
+                    maxFrequency,
+                    frequency[index]
+                );
+
+                const currentLength =
+                    end - start + 1;
+
+                const replacementsNeeded =
+                    currentLength - maxFrequency;
+
+                // Further expansion cannot
+                // reduce replacements needed.
+                if (replacementsNeeded &gt; k) {
+                    break;
+                }
+
+                maxLength = Math.max(
+                    maxLength,
+                    currentLength
+                );
+            }
+        }
+
+        return maxLength;
+    }
+}
+
+const s = "AABABBA";
+const k = 1;
+
+const solution = new Solution();
+
+console.log(solution.characterReplacement(s, k));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-7"><h3 id="blog-toc-complexity-analysis-2">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(N²), where N is the length of the string. For every starting index, the ending index can move toward the right until the substring becomes invalid.</p><p><strong>Space Complexity:</strong> O(1), because the frequency array stores counts for only 26 uppercase English letters.</p><h2 id="blog-toc-optimal-approach">Optimal Approach</h2><p>The optimal approach uses sliding window.</p><p>The window represents the current substring that we are trying to convert into one repeating character.</p><p>For a window to be valid, the number of characters that need replacement must be at most k.</p><p>The best character to keep unchanged is the one with the maximum frequency inside the window. So:</p><p>replacementsNeeded = window length - maxFrequency</p><p>If replacementsNeeded becomes greater than k, the window is too large and must be adjusted from the left.</p><p>A small optimization is used here: instead of shrinking the window repeatedly using a while loop, we shrink it by one position using an if condition. This works because the goal is to maintain the largest possible window size. When the window becomes invalid, adding one character from the right and removing one character from the left prevents the window from growing incorrectly.</p><p>The maxFrequency value is not recomputed while shrinking. It may sometimes represent an older maximum frequency, but that is fine because it never causes us to miss the best answer. It helps maintain the maximum possible window length efficiently.</p><h3 id="blog-toc-algorithm-3">Algorithm</h3><ul><li><p>The size of the string is stored in n. If n is 0, 0 is returned because there is no substring. If k is negative, 0 is returned because negative replacements are not valid.</p></li><li><p>A frequency array of size 26 is created to count characters inside the current window. Since the string contains uppercase English letters, a fixed-size array is enough.</p></li><li><p>Three variables are initialized: left is set to 0 to mark the left boundary of the window, maxFrequency is set to 0 to store the highest character frequency seen while expanding, and maxLength is set to 0 to store the best answer.</p></li><li><p>The right pointer moves from 0 to n - 1. For every s[right], its frequency is increased because this character is now included in the window.</p></li><li><p>The maxFrequency value is updated using the frequency of s[right]. This represents the count of the most frequent character seen in the current expanding process.</p></li><li><p>The current window length is calculated as right - left + 1. If currentLength - maxFrequency becomes greater than k, the window needs more replacements than allowed. So, the frequency of s[left] is decreased and left is moved one step forward.</p></li><li><p>After the window is adjusted, the current window length is calculated again and maxLength is updated if this length is greater. After the traversal ends, maxLength is returned.</p></li></ul><h3 id="blog-toc-dry-run-3">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Longest Repeating Character Replacement Optimal Appraoch Dry Run.png" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/d9414418482b305b.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Longest Repeating Character Replacement Optimal Appraoch Dry Run.png</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-8"><h3 id="blog-toc-solution-3">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Uses a sliding window
+    // with character frequencies.
+    int characterReplacement(string s, int k) {
+        int n = s.size();
+
+        // No valid substring can exist
+        // for these input conditions.
+        if (n == 0 || k &lt; 0) {
+            return 0;
+        }
+
+        vector&lt;int&gt; frequency(26, 0);
+
+        int left = 0;
+        int maxFrequency = 0;
+        int maxLength = 0;
+
+        // Expand the window with right.
+        for (int right = 0; right &lt; n; right++) {
+            int index = s[right] - 'A';
+            frequency[index]++;
+
+            maxFrequency = max(
+                maxFrequency,
+                frequency[index]
+            );
+
+            int currentLength =
+                right - left + 1;
+
+            // Shrink once when the window
+            // needs too many replacements.
+            if (currentLength - maxFrequency &gt; k) {
+                frequency[s[left] - 'A']--;
+                left++;
+            }
+
+            // Measure the adjusted
+            // window after possible shrinking.
+            currentLength =
+                right - left + 1;
+
+            maxLength = max(
+                maxLength,
+                currentLength
+            );
+        }
+
+        return maxLength;
+    }
+};
+
+int main() {
+    string s = "AABABBA";
+    int k = 1;
+
+    Solution solution;
+
+    cout &lt;&lt; solution.characterReplacement(s, k)
+         &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+
+    # Uses a sliding window
+    # with character frequencies.
+    def character_replacement(
+        self,
+        s: str,
+        k: int
+    ) -&gt; int:
+        n = len(s)
+
+        # No valid substring can exist
+        # for these input conditions.
+        if n == 0 or k &lt; 0:
+            return 0
+
+        frequency = [0] * 26
+
+        left = 0
+        max_frequency = 0
+        max_length = 0
+
+        # Expand the window with right.
+        for right in range(n):
+            index = ord(s[right]) - ord("A")
+            frequency[index] += 1
+
+            max_frequency = max(
+                max_frequency,
+                frequency[index]
+            )
+
+            current_length = (
+                right - left + 1
+            )
+
+            # Shrink once when the window
+            # needs too many replacements.
+            if current_length - max_frequency &gt; k:
+                left_index = (
+                    ord(s[left]) - ord("A")
+                )
+
+                frequency[left_index] -= 1
+                left += 1
+
+            # Measure the adjusted
+            # window after possible shrinking.
+            current_length = (
+                right - left + 1
+            )
+
+            max_length = max(
+                max_length,
+                current_length
+            )
+
+        return max_length
+
+
+if __name__ == "__main__":
+    s = "AABABBA"
+    k = 1
+
+    solution = Solution()
+
+    print(solution.character_replacement(s, k))</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">class Solution {
+
+    // Uses a sliding window
+    // with character frequencies.
+    public int characterReplacement(String s, int k) {
+        int n = s.length();
+
+        // No valid substring can exist
+        // for these input conditions.
+        if (n == 0 || k &lt; 0) {
+            return 0;
+        }
+
+        int[] frequency = new int[26];
+
+        int left = 0;
+        int maxFrequency = 0;
+        int maxLength = 0;
+
+        // Expand the window with right.
+        for (int right = 0; right &lt; n; right++) {
+            int index = s.charAt(right) - 'A';
+            frequency[index]++;
+
+            maxFrequency = Math.max(
+                maxFrequency,
+                frequency[index]
+            );
+
+            int currentLength =
+                right - left + 1;
+
+            // Shrink once when the window
+            // needs too many replacements.
+            if (currentLength - maxFrequency &gt; k) {
+                frequency[
+                    s.charAt(left) - 'A'
+                ]--;
+
+                left++;
+            }
+
+            // Measure the adjusted
+            // window after possible shrinking.
+            currentLength =
+                right - left + 1;
+
+            maxLength = Math.max(
+                maxLength,
+                currentLength
+            );
+        }
+
+        return maxLength;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        String s = "AABABBA";
+        int k = 1;
+
+        Solution solution = new Solution();
+
+        System.out.println(
+            solution.characterReplacement(s, k)
+        );
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+
+    // Uses a sliding window
+    // with character frequencies.
+    characterReplacement(s, k) {
+        const n = s.length;
+
+        // No valid substring can exist
+        // for these input conditions.
+        if (n === 0 || k &lt; 0) {
+            return 0;
+        }
+
+        const frequency =
+            new Array(26).fill(0);
+
+        let left = 0;
+        let maxFrequency = 0;
+        let maxLength = 0;
+
+        // Expand the window with right.
+        for (let right = 0; right &lt; n; right++) {
+            const index =
+                s.charCodeAt(right) - 65;
+
+            frequency[index]++;
+
+            maxFrequency = Math.max(
+                maxFrequency,
+                frequency[index]
+            );
+
+            let currentLength =
+                right - left + 1;
+
+            // Shrink once when the window
+            // needs too many replacements.
+            if (currentLength - maxFrequency &gt; k) {
+                const leftIndex =
+                    s.charCodeAt(left) - 65;
+
+                frequency[leftIndex]--;
+                left++;
+            }
+
+            // Measure the adjusted
+            // window after possible shrinking.
+            currentLength =
+                right - left + 1;
+
+            maxLength = Math.max(
+                maxLength,
+                currentLength
+            );
+        }
+
+        return maxLength;
+    }
+}
+
+const s = "AABABBA";
+const k = 1;
+
+const solution = new Solution();
+
+console.log(solution.characterReplacement(s, k));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-9"><h3 id="blog-toc-complexity-analysis-3">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(N), where N is the length of the string. Each character is processed once by the right pointer, and the left pointer only moves forward.</p><p><strong>Space Complexity:</strong> O(1), because the frequency array stores counts for only 26 uppercase English letters.</p><h3 id="blog-toc-faqs">FAQs</h3><p><strong>Q1. Why do we use maximum frequency in this problem?</strong></p><p>The character with the maximum frequency is the best character to keep unchanged. To make the whole substring contain one repeating character, all other characters need to be replaced.</p><p><strong>Q2. Why is replacementsNeeded equal to window length - maximum frequency?</strong></p><p>The most frequent character is kept as it is. Every other character in the window must be changed to that character. So, the number of replacements needed is total characters minus the count of the most frequent character.</p><p><strong>Q3. Why can we stop expanding in the better approach when replacementsNeeded becomes greater than k?</strong></p><p>For the same starting index, adding more characters cannot reduce replacementsNeeded. It can either stay the same or increase. So, once the substring becomes invalid, further expansion is not useful.</p><p><strong>Q4. Why do we not recompute maxFrequency while shrinking?</strong></p><p>Recomputing maxFrequency after every shrink is unnecessary. Even if maxFrequency is slightly old, it does not make us miss the best answer. It helps us maintain the largest possible window size in O(N) time.</p><p><strong>Q5. What happens if k is 0?</strong></p><p>No replacement is allowed. So, the answer becomes the length of the longest substring that already contains the same repeating character.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div>
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

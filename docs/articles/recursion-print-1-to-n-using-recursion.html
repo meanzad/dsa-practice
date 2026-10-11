@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Print 1 to N using Recursion</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Print 1 to N using Recursion</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/recursion/print-1-to-n-using-recursion/</code></div>
+  <p><strong>Problem Description: </strong>Given an integer N, write a program to print numbers from 1 to N.
+</p>
+
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: N = 4</span>
+<span>Output: 1, 2, 3, 4</span>
+<span>Explanation: All the numbers from 1 to 4 are printed.</span>
+<p></p>
+<span>Input: N = 1</span>
+<span>Output: 1 </span>
+<span>Explanation: This is the base case.</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+
+
+            It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                   Forward Recursion
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+To print numbers from 1 to n using forward recursion, the approach involves defining a recursive function that takes the current number as a parameter. The function first checks if the current number exceeds n; if it does, the recursion terminates. Otherwise, it prints the current number and then recursively calls itself with the next number incremented by one. This way, the numbers are printed in ascending order as the recursion unfolds forward from the base case to the maximum number. The key is to make the print statement before the recursive call, ensuring the numbers appear from 1 up to n in order.
+
+
+<p><img height="457" loading="lazy" src="../assets/img/e802950a34e65ae9.png" width="481"/></p>
+<p></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Recursive function to print numbers from current to n
+    void printNumbers(int current, int n) {
+        // Base case: if current exceeds n, stop recursion
+        if (current &gt; n)
+            return;
+
+        // Print current number
+        cout &lt;&lt; current &lt;&lt; " ";
+
+        // Recursive call with next number
+        printNumbers(current + 1, n);
+    }
+};
+
+int main() {
+    Solution sol;
+    int n = 10;
+
+    sol.printNumbers(1, n);
+    cout &lt;&lt; "\n";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // Recursive function to print numbers from current to n
+    public void printNumbers(int current, int n) {
+        // Base case: if current exceeds n, stop recursion
+        if (current &gt; n)
+            return;
+
+        // Print current number
+        System.out.print(current + " ");
+
+        // Recursive call with next number
+        printNumbers(current + 1, n);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        int n = 10;
+
+        sol.printNumbers(1, n);
+        System.out.println();
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Recursive function to print numbers from current to n
+    def printNumbers(self, current, n):
+        # Base case: if current exceeds n, stop recursion
+        if current &gt; n:
+            return
+
+        # Print current number
+        print(current, end=' ')
+
+        # Recursive call with next number
+        self.printNumbers(current + 1, n)
+
+
+if __name__ == "__main__":
+    sol = Solution()
+    n = 10
+
+    sol.printNumbers(1, n)
+    print()
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Recursive function to print numbers from current to n
+    printNumbers(current, n) {
+        // Base case: if current exceeds n, stop recursion
+        if (current &gt; n) return;
+
+        // Print current number
+        process.stdout.write(current + " ");
+
+        // Recursive call with next number
+        this.printNumbers(current + 1, n);
+    }
+}
+
+// Driver code
+const sol = new Solution();
+const n = 10;
+
+sol.printNumbers(1, n);
+console.log();
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N)</strong>, we print every number from 1 to N using recursion<br/>
+<strong>Space Complexity: O(N)</strong>, stack space used for recursive calls.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                   Backtracking
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+Backtracking builds solutions by exploring all options and undoing choices when needed. To print numbers from 1 to n using backtracking, the function recursively calls itself with the next number until it passes n. After reaching the base case, it prints the numbers while returning from the recursion. This way, numbers are printed in reverse order because the print happens after the recursive call during backtracking. The main difference from forward recursion is that printing occurs on the way back, not before the recursive call.
+
+
+<p><img height="457" loading="lazy" src="../assets/img/78c3a9a87e280f3b.png" width="481"/></p>
+<p></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Recursive function to print numbers from current to n using backtracking
+    void printNumbers(int current, int n) {
+        // Base case: if current exceeds n, stop recursion
+        if (current &gt; n)
+            return;
+
+        // Recursive call with next number
+        printNumbers(current + 1, n);
+
+        // Print current number during backtracking
+        cout &lt;&lt; current &lt;&lt; " ";
+    }
+};
+
+int main() {
+    Solution sol;
+    int n = 10;
+
+    sol.printNumbers(1, n);
+    cout &lt;&lt; "\n";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // Recursive function to print numbers from current to n using backtracking
+    public void printNumbers(int current, int n) {
+        // Base case: if current exceeds n, stop recursion
+        if (current &gt; n)
+            return;
+
+        // Recursive call with next number
+        printNumbers(current + 1, n);
+
+        // Print current number during backtracking
+        System.out.print(current + " ");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        int n = 10;
+
+        sol.printNumbers(1, n);
+        System.out.println();
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Recursive function to print numbers from current to n using backtracking
+    def printNumbers(self, current, n):
+        # Base case: if current exceeds n, stop recursion
+        if current &gt; n:
+            return
+
+        # Recursive call with next number
+        self.printNumbers(current + 1, n)
+
+        # Print current number during backtracking
+        print(current, end=' ')
+
+
+if __name__ == "__main__":
+    sol = Solution()
+    n = 10
+
+    sol.printNumbers(1, n)
+    print()
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Recursive function to print numbers from current to n using backtracking
+    printNumbers(current, n) {
+        // Base case: if current exceeds n, stop recursion
+        if (current &gt; n) return;
+
+        // Recursive call with next number
+        this.printNumbers(current + 1, n);
+
+        // Print current number during backtracking
+        process.stdout.write(current + " ");
+    }
+}
+
+// Driver code
+const sol = new Solution();
+const n = 10;
+
+sol.printNumbers(1, n);
+console.log();
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N)</strong>, we print every number from 1 to N using recursion<br/>
+<strong>Space Complexity: O(N)</strong>, stack space used for recursive calls.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

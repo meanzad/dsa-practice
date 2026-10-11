@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Job Sequencing Problem</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Job Sequencing Problem</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/job-sequencing-problem/</code></div>
+  <p><strong>Problem Statement: </strong>
+You are given a set of N jobs where each job comes with a deadline and profit. The profit can only be earned upon completing the job within its deadline. Find the number of jobs done and the maximum profit that can be obtained. Each job takes a single unit of time and only one job can be performed at a time.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>  
+<strong>Input:</strong>  
+N = 4, Jobs = {(1, 4, 20), (2, 1, 10), (3, 1, 40), (4, 1, 30)}  
+<strong>Output:</strong> 2 60  
+<strong>Explanation:</strong>  
+- The 3rd job with a deadline of 1 is performed during the first unit of time.  
+- The 1st job is performed during the second unit of time as its deadline is 4.  
+Profit = 40 + 20 = 60.  
+So, the result is 2 jobs with a total profit of 60.
+
+<strong>Example 2:</strong>  
+<strong>Input:</strong>  
+N = 5, Jobs = {(1, 2, 100), (2, 1, 19), (3, 2, 27), (4, 1, 25), (5, 1, 15)}  
+<strong>Output:</strong> 2 127  
+<strong>Explanation:</strong>  
+The first and third jobs, both having a deadline of 2, give the highest profit.  
+Profit = 100 + 27 = 127.  
+So, the result is 2 jobs with a total profit of 127.</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/job-sequencing-problem" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Sort the jobs in descending order of profit.</li>
+<li>If the maximum deadline is x, create an array of size x. Initialize each array index to -1 to represent that no jobs have been performed yet.</li>
+<li>For each job, check if it can be performed on its last day (i.e., check if the index corresponding to its deadline is available).</li>
+<li>If the job can be performed on its last day, mark that index with the job ID and add the profit to the total.</li>
+<li>If the job cannot be performed on its last day, loop through the previous indexes to find an empty slot and schedule the job there.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/f859fa9bdf3eaf31.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/fc442e8d0e0d7015.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/484fd92864f74b27.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/275ef64ed76cea50.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/70204d7df408bcfe.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/f859fa9bdf3eaf31.png"/><img alt="Image 2" loading="lazy" src="../assets/img/fc442e8d0e0d7015.png"/><img alt="Image 3" loading="lazy" src="../assets/img/484fd92864f74b27.png"/><img alt="Image 4" loading="lazy" src="../assets/img/275ef64ed76cea50.png"/><img alt="Image 5" loading="lazy" src="../assets/img/70204d7df408bcfe.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include&lt;bits/stdc++.h&gt;
+
+using namespace std;
+
+// A structure to represent a job 
+struct Job {
+   // Job Id
+   int id; 
+   // Deadline of job
+   int dead;
+   // Profit if job is completed before or on the deadline 
+   int profit; 
+};
+
+class Solution {
+   public:
+      // Comparator function to sort jobs in decreasing order of profit
+      bool static comparison(Job a, Job b) {
+          // Sort by profit in descending order
+         return (a.profit &gt; b.profit); 
+      }
+
+   // Function to find the maximum profit and the number of jobs done
+   pair &lt; int, int &gt; JobScheduling(Job arr[], int n) {
+
+      // Sort the jobs based on decreasing profit
+      sort(arr, arr + n, comparison);
+
+      // Find the maximum deadline among all jobs
+      int maxi = arr[0].dead;
+      for (int i = 1; i &lt; n; i++) {
+        // Get the latest deadline
+        maxi = max(maxi, arr[i].dead);  
+      }
+
+      // Initialize the slot array to track which time slots are taken
+      int slot[maxi + 1];
+      for (int i = 0; i &lt;= maxi; i++)
+        // Mark all slots as unoccupied initially
+        slot[i] = -1;  
+
+      int countJobs = 0, jobProfit = 0;
+
+      // Iterate through all jobs to find the best possible schedule
+      for (int i = 0; i &lt; n; i++) {
+         // Find a slot for the current job (starting from its deadline)
+         for (int j = arr[i].dead; j &gt; 0; j--) {
+            // If the slot is available
+            if (slot[j] == -1) {  
+                // Assign the job to the slot
+                slot[j] = i;  
+                // Increment the number of jobs done
+                countJobs++;  
+                // Add the profit of the job
+                jobProfit += arr[i].profit;  
+               break;
+            }
+         }
+      }
+
+      // Return the number of jobs done and the total profit
+      return make_pair(countJobs, jobProfit);
+   }
+};
+
+int main() {
+   // Driver code
+   int n = 4;
+   // Define jobs with id, deadline, and profit
+   Job arr[n] = {{1,4,20},{2,1,10},{3,2,40},{4,2,30}};
+
+   Solution ob;
+   // Function call to find the number of jobs done and total profit
+   pair &lt; int, int &gt; ans = ob.JobScheduling(arr, n);
+
+   // Output the number of jobs and the total profit
+   cout &lt;&lt; ans.first &lt;&lt; " " &lt;&lt; ans.second &lt;&lt; endl;
+
+   return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// A class representing a Job with id, deadline, and profit
+class Job {
+    // Job Id
+    int id;    
+    // Deadline of job
+    int dead;  
+    // Profit if job is completed before or on deadline
+    int profit; 
+}
+
+class Solution {
+
+    // Comparator function to sort jobs by profit in decreasing order
+    public static boolean comparison(Job a, Job b) {
+        // Return true if a's profit is greater than b's
+        return a.profit &gt; b.profit; 
+    }
+
+    // Function to find the maximum profit and the number of jobs done
+    public static Pair&lt;Integer, Integer&gt; JobScheduling(Job[] arr, int n) {
+
+        // Sort the jobs by profit in descending order
+        Arrays.sort(arr, (a, b) -&gt; b.profit - a.profit);
+
+        // Find the maximum deadline among all jobs
+        int maxi = arr[0].dead;
+        for (int i = 1; i &lt; n; i++) {
+            // Find the latest deadline
+            maxi = Math.max(maxi, arr[i].dead); 
+        }
+
+        // Create an array to store the slots for the jobs
+        int[] slot = new int[maxi + 1];
+        // Initialize all slots as unoccupied
+        Arrays.fill(slot, -1);  
+
+        int countJobs = 0, jobProfit = 0;
+
+        // Try to assign jobs to the slots
+        for (int i = 0; i &lt; n; i++) {
+
+            // Find a slot for the current job, starting from the job's deadline
+            for (int j = arr[i].dead; j &gt; 0; j--) {
+                // If the slot is available
+                if (slot[j] == -1) {  
+                // Assign the job to the slot
+                    slot[j] = i;  
+                    // Increment the job count
+                    countJobs++;   
+                    // Add the profit of the job
+                    jobProfit += arr[i].profit;  
+                    break;
+                }
+            }
+        }
+
+        // Return the number of jobs done and total profit
+        return new Pair&lt;&gt;(countJobs, jobProfit);
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        // Driver Code
+        int n = 4;
+
+        // Define the edges (source, destination, weight)
+        Job[] arr = new Job[] {
+            new Job() {{id = 1; dead = 4; profit = 20;}},
+            new Job() {{id = 2; dead = 1; profit = 10;}},
+            new Job() {{id = 3; dead = 2; profit = 40;}},
+            new Job() {{id = 4; dead = 2; profit = 30;}}
+        };
+
+        // Call the JobScheduling function
+        Pair&lt;Integer, Integer&gt; ans = Solution.JobScheduling(arr, n);
+
+        // Output the result
+        System.out.println(ans.getKey() + " " + ans.getValue());
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># A class representing a Job with id, deadline, and profit
+class Job:
+    def __init__(self, id, dead, profit):
+        # Job Id
+        self.id = id      
+        # Deadline of job
+        self.dead = dead  
+        # Profit if job is completed before or on deadline
+        self.profit = profit  
+
+
+def JobScheduling(arr, n):
+    # Sort the jobs by profit in descending order
+    arr.sort(key=lambda x: x.profit, reverse=True)
+
+    # Find the maximum deadline among all jobs
+    maxi = arr[0].dead
+    for i in range(1, n):
+        # Find the latest deadline
+        maxi = max(maxi, arr[i].dead)  
+
+    # Create an array to store the slots for the jobs
+    slot = [-1] * (maxi + 1)
+
+    countJobs = 0
+    jobProfit = 0
+
+    # Try to assign jobs to the slots
+    for i in range(n):
+        # Find a slot for the current job, starting from the job's deadline
+        for j in range(arr[i].dead, 0, -1):
+            # If the slot is available
+            if slot[j] == -1:  
+                # Assign the job to the slot
+                slot[j] = i  
+                # Increment the job count
+                countJobs += 1  
+                # Add the profit of the job
+                jobProfit += arr[i].profit  
+                break 
+
+    # Return the number of jobs done and total profit
+    return countJobs, jobProfit
+
+
+# Driver code
+if __name__ == "__main__":
+    n = 4
+    # Define the jobs with id, deadline, and profit
+    arr = [Job(1, 4, 20), Job(2, 1, 10), Job(3, 2, 40), Job(4, 2, 30)]
+
+    # Call the JobScheduling function
+    ans = JobScheduling(arr, n)
+
+    # Output the result
+    print(ans[0], ans[1])</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// A class representing a Job with id, deadline, and profit
+class Job {
+    constructor(id, dead, profit) {
+        // Job Id
+        this.id = id;      
+        // Deadline of job
+        this.dead = dead;  
+        // Profit if job is completed before or on deadline
+        this.profit = profit;  
+    }
+}
+
+function JobScheduling(arr, n) {
+    // Sort the jobs by profit in descending order
+    arr.sort((a, b) =&gt; b.profit - a.profit);
+
+    // Find the maximum deadline among all jobs
+    let maxi = arr[0].dead;
+    for (let i = 1; i &lt; n; i++) {
+        // Find the latest deadline
+        maxi = Math.max(maxi, arr[i].dead); 
+    }
+
+    // Create an array to store the slots for the jobs
+    let slot = new Array(maxi + 1).fill(-1);
+
+    let countJobs = 0;
+    let jobProfit = 0;
+
+    // Try to assign jobs to the slots
+    for (let i = 0; i &lt; n; i++) {
+        // Find a slot for the current job, starting from the job's deadline
+        for (let j = arr[i].dead; j &gt; 0; j--) {
+            if (slot[j] === -1) { 
+                slot[j] = i;  
+                countJobs++;   
+                // Add the profit of the job
+                jobProfit += arr[i].profit;  
+                break; 
+            }
+        }
+    }
+
+    // Return the number of jobs done and total profit
+    return [countJobs, jobProfit];
+}
+
+// Driver code
+const n = 4;
+const arr = [
+    new Job(1, 4, 20),
+    new Job(2, 1, 10),
+    new Job(3, 2, 40),
+    new Job(4, 2, 30)
+];
+
+// Call the JobScheduling function
+const ans = JobScheduling(arr, n);
+
+// Output the result
+console.log(ans[0], ans[1]);</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(N log N) + O(N * M)</strong>, O(N log N) for sorting the jobs in decreasing order of profit. O(N * M) since we are iterating through all N jobs and for every job, we are checking from the last deadline, say M deadlines in the worst case.<br/><br/>
+<strong>Space Complexity: O(M)</strong>, for an array that keeps track of which day each job is performed if M is the maximum deadline available.
+
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

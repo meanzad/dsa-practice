@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Minimize Maximum Distance Between Gas Stations</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Minimize Maximum Distance Between Gas Stations</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/blogs/data-structure-and-algorithm/minimize-maximum-distance-between-gas-stations</code></div>
+  <div class="ArticleParser-module__R__VNG__article" data-article-segment="html-0"><p>You are given a sorted array representing the exact integer positions of several gas stations on a highway. You are also given an integer k, which represents the number of brand new gas stations you are allowed to build. You can place these new gas stations anywhere on the highway, including at non-integer decimal positions. Your objective is to place these k new stations in a way that minimizes the maximum distance between any two adjacent gas stations. You must return this optimized maximum distance, accurate to 1e<sup>-6</sup>.</p></div><div><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 1</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> arr = [1, 2, 3, 4, 5], k = 4</p><p><strong>Output: </strong>0.500000</p><p><strong>Explanation:</strong> The original distance between every adjacent station is 1. We have 4 new stations to build. By placing exactly one new station perfectly halfway between every existing pair (at 1.5, 2.5, 3.5, and 4.5), the new maximum distance between any two stations becomes exactly 0.5.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 2</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> arr = [2, 12], k = 4</p><p><strong>Output: </strong>2.000000</p><p><strong>Explanation: </strong>We only have two stations with a massive gap of 10 between them. We must place all 4 new stations into this single gap. This divides the gap into 5 equal sections. Dividing 10 by 5 gives a distance of 2.0.</p></div></div></section></div><div><div class="BlogDetail-module__HEfJva__practiceCallout"><a class="BlogDetail-module__HEfJva__practiceLink" data-mobile-prefetch="normal" href="https://takeuforward.org/practice/dsa/minimise-max-distance-to-gas-stations?subject=binary-search" rel="noopener" target="_blank"><span>Practice it by yourself before moving onto the solution</span><span class="BlogDetail-module__HEfJva__practiceAction">Try now</span></a></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-2"><h2 id="blog-toc-brute-force-approach">Brute Force Approach</h2><p>We want to shrink the largest gaps between stations. To do this, you need to place <code>k</code> extra stations within the longest empty stretches. The most straightforward way is to scan the distances between all current stations, find the single largest gap, and place one new station there. Then, you scan the distances all over again to find the new largest gap, and place your next station. You repeat this full scanning process <code>k</code> times until all <code>k</code> additional stations are placed.</p><h3 id="blog-toc-algorithm"><strong>Algorithm</strong></h3><ul><li><p>Create an array called howMany of size n-1 to keep track of the number of placed gas stations in each original gap. Initially, all values are zero.</p></li><li><p>Run an outer loop exactly k times to place one gas station at a time.</p></li><li><p>Inside this loop, run an inner loop through all the original gaps to find the one with the current maximum distance. The distance for any gap is calculated by dividing its initial length by the number of stations placed in it plus one.</p></li><li><p>Once the largest gap is found, increment its count in the howMany array.</p></li><li><p>After all k stations are placed, run one final loop to find the maximum distance among all the gaps using the same division formula.</p></li><li><p>Return this maximum distance as the answer.</p></li></ul><h3 id="blog-toc-dry-run">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Minimize Maximum Distance to Gas Station Brute Dry Run" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/9ba9df6fd9d55c63.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Minimize Maximum Distance to Gas Station Brute Dry Run</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-3"><h3 id="blog-toc-solution">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Manually scans the array k times to find and divide the largest current gap
+    long double minimiseMaxDistance(vector&lt;int&gt; &amp;arr, int k) {
+        int n = arr.size();
+        // Array to track how many new stations are added in each original gap
+        vector&lt;int&gt; howMany(n - 1, 0);
+        
+        // Place k stations one by one in the largest available gaps
+        for (int stations = 1; stations &lt;= k; stations++) {
+            long double maxSection = -1.0;
+            int maxIndex = -1;
+            
+            // Scan all gaps to find the current maximum section length
+            for (int i = 0; i &lt; n - 1; i++) {
+                long double diff = arr[i + 1] - arr[i];
+                long double sectionLength = diff / (long double)(howMany[i] + 1);
+                
+                // Keep track of the largest gap found
+                if (sectionLength &gt; maxSection) {
+                    maxSection = sectionLength;
+                    maxIndex = i;
+                }
+            }
+            
+            // Add one station to the largest found gap
+            howMany[maxIndex]++;
+        }
+        
+        long double maxAns = -1.0;
+        
+        // Calculate the final maximum distance across all sections
+        for (int i = 0; i &lt; n - 1; i++) {
+            long double diff = arr[i + 1] - arr[i];
+            long double sectionLength = diff / (long double)(howMany[i] + 1);
+            maxAns = max(maxAns, sectionLength);
+        }
+        
+        return maxAns;
+    }
+};
+
+// Driver code starts here
+int main() {
+    Solution obj;
+    vector&lt;int&gt; arr = {1, 2, 3, 4, 5};
+    int k = 4;
+    long double ans = obj.minimiseMaxDistance(arr, k);
+    cout &lt;&lt; fixed &lt;&lt; setprecision(6) &lt;&lt; ans &lt;&lt; endl;
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+    # Manually scans the array k times to find and divide the largest current gap
+    def minimiseMaxDistance(self, arr, k):
+        n = len(arr)
+        # Array to track how many new stations are added in each original gap
+        howMany = [0] * (n - 1)
+        
+        # Place k stations one by one in the largest available gaps
+        for stations in range(k):
+            maxSection = -1.0
+            maxIndex = -1
+            
+            # Scan all gaps to find the current maximum section length
+            for i in range(n - 1):
+                diff = arr[i + 1] - arr[i]
+                sectionLength = diff / (howMany[i] + 1)
+                
+                # Keep track of the largest gap found
+                if sectionLength &gt; maxSection:
+                    maxSection = sectionLength
+                    maxIndex = i
+                    
+            # Add one station to the largest found gap
+            howMany[maxIndex] += 1
+            
+        maxAns = -1.0
+        
+        # Calculate the final maximum distance across all sections
+        for i in range(n - 1):
+            diff = arr[i + 1] - arr[i]
+            sectionLength = diff / (howMany[i] + 1)
+            maxAns = max(maxAns, sectionLength)
+            
+        return maxAns
+
+# Driver code starts here
+if __name__ == "__main__":
+    obj = Solution()
+    arr = [1, 2, 3, 4, 5]
+    k = 4
+    ans = obj.minimiseMaxDistance(arr, k)
+    print(f"{ans:.6f}")</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Manually scans the array k times to find and divide the largest current gap
+    public double minimiseMaxDistance(int[] arr, int k) {
+        int n = arr.length;
+        // Array to track how many new stations are added in each original gap
+        int[] howMany = new int[n - 1];
+        
+        // Place k stations one by one in the largest available gaps
+        for (int stations = 1; stations &lt;= k; stations++) {
+            double maxSection = -1.0;
+            int maxIndex = -1;
+            
+            // Scan all gaps to find the current maximum section length
+            for (int i = 0; i &lt; n - 1; i++) {
+                double diff = arr[i + 1] - arr[i];
+                double sectionLength = diff / (double)(howMany[i] + 1);
+                
+                // Keep track of the largest gap found
+                if (sectionLength &gt; maxSection) {
+                    maxSection = sectionLength;
+                    maxIndex = i;
+                }
+            }
+            
+            // Add one station to the largest found gap
+            howMany[maxIndex]++;
+        }
+        
+        double maxAns = -1.0;
+        
+        // Calculate the final maximum distance across all sections
+        for (int i = 0; i &lt; n - 1; i++) {
+            double diff = arr[i + 1] - arr[i];
+            double sectionLength = diff / (double)(howMany[i] + 1);
+            maxAns = Math.max(maxAns, sectionLength);
+        }
+        
+        return maxAns;
+    }
+}
+
+// Driver code starts here
+class Main {
+    public static void main(String[] args) {
+        Solution obj = new Solution();
+        int[] arr = {1, 2, 3, 4, 5};
+        int k = 4;
+        double ans = obj.minimiseMaxDistance(arr, k);
+        System.out.printf("%.6f\n", ans);
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Manually scans the array k times to find and divide the largest current gap
+    minimiseMaxDistance(arr, k) {
+        let n = arr.length;
+        // Array to track how many new stations are added in each original gap
+        let howMany = new Array(n - 1).fill(0);
+        
+        // Place k stations one by one in the largest available gaps
+        for (let stations = 1; stations &lt;= k; stations++) {
+            let maxSection = -1.0;
+            let maxIndex = -1;
+            
+            // Scan all gaps to find the current maximum section length
+            for (let i = 0; i &lt; n - 1; i++) {
+                let diff = arr[i + 1] - arr[i];
+                let sectionLength = diff / (howMany[i] + 1);
+                
+                // Keep track of the largest gap found
+                if (sectionLength &gt; maxSection) {
+                    maxSection = sectionLength;
+                    maxIndex = i;
+                }
+            }
+            
+            // Add one station to the largest found gap
+            howMany[maxIndex]++;
+        }
+        
+        let maxAns = -1.0;
+        
+        // Calculate the final maximum distance across all sections
+        for (let i = 0; i &lt; n - 1; i++) {
+            let diff = arr[i + 1] - arr[i];
+            let sectionLength = diff / (howMany[i] + 1);
+            maxAns = Math.max(maxAns, sectionLength);
+        }
+        
+        return maxAns;
+    }
+}
+
+// Driver code starts here
+const obj = new Solution();
+const arr = [1, 2, 3, 4, 5];
+const k = 4;
+const ans = obj.minimiseMaxDistance(arr, k);
+console.log(ans.toFixed(6));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-4"><h3 id="blog-toc-complexity-analysis">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(k <span style="color:rgb(250, 250, 250)">×</span> N), where N is the number of given gas stations. We loop through all N-1 gaps exactly k times, which makes the approach very slow for large inputs.</p><p><strong>Space Complexity: </strong>O(N), as we allocate an additional array of size N-1 to track the stations placed in each gap.</p><p></p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-5"><h2 id="blog-toc-better-approach">Better Approach</h2><p>The brute force approach is highly inefficient because we manually scan the entire array every single time we want to find the largest gap. We can vastly improve this by using a max heap (priority queue), which automatically organizes data to keep the largest gap right at the top. This completely eliminates the need for repetitive scanning. By maintaining our distances in a priority queue, we can instantly retrieve the largest gap whenever we need to place a new station.</p><h3 id="blog-toc-algorithm-2"><strong>Algorithm</strong></h3><ul><li><p>Declare an array howMany to keep track of the placed gas stations in each original gap, and initialize a priority queue that acts as a max heap.</p></li><li><p>Loop through the original array and insert all the initial distances, along with their respective index, into the max heap.</p></li><li><p>Run a loop exactly k times picking one gas station at a time.</p></li><li><p>Pick the first element of the priority queue, which guarantees the maximum current distance. Note its original index.</p></li><li><p>Place the current gas station in this gap by incrementing its count in the howMany array.</p></li><li><p>Calculate the new divided section length for this gap and insert it back into the priority queue.</p></li><li><p>After processing all k stations, the distance remaining at the very top of the priority queue will be our final answer.</p></li></ul><h3 id="blog-toc-dry-run-2">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Maximize Distance to Gas Station Better Dry Run" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/d3465feaea0433f8.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Maximize Distance to Gas Station Better Dry Run</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-6"><h3 id="blog-toc-solution-2">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    /*
+       Utilizes a max heap to continuously retrieve and divide
+       the largest available distance segment efficiently
+    */
+    long double minimiseMaxDistance(vector&lt;int&gt; &amp;arr, int k) {
+        int n = arr.size();
+        // Array to track how many new stations are added in each original gap
+        vector&lt;int&gt; howMany(n - 1, 0);
+        
+        // Max heap to store pairs of current gap distance and its original index
+        priority_queue&lt;pair&lt;long double, int&gt;&gt; pq;
+        
+        // Populate the heap with the initial gaps between stations
+        for (int i = 0; i &lt; n - 1; i++) {
+            pq.push({arr[i + 1] - arr[i], i});
+        }
+        
+        // Place k stations one by one by always splitting the largest gap
+        for (int stations = 1; stations &lt;= k; stations++) {
+            // Retrieve the maximum gap from the top of the heap
+            auto top = pq.top();
+            pq.pop();
+            int secIndex = top.second;
+            
+            // Add a station to this specific gap segment
+            howMany[secIndex]++;
+            
+            // Calculate the newly divided segment length
+            long double originalDiff = arr[secIndex + 1] - arr[secIndex];
+            long double newSectionLen = originalDiff / (long double)(howMany[secIndex] + 1);
+            
+            // Reinsert the reduced gap back into the heap for future operations
+            pq.push({newSectionLen, secIndex});
+        }
+        
+        // The maximum distance is guaranteed to be at the top of the heap
+        return pq.top().first;
+    }
+};
+
+// Driver code starts here
+int main() {
+    Solution obj;
+    vector&lt;int&gt; arr = {1, 2, 3, 4, 5};
+    int k = 4;
+    long double ans = obj.minimiseMaxDistance(arr, k);
+    cout &lt;&lt; fixed &lt;&lt; setprecision(6) &lt;&lt; ans &lt;&lt; endl;
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">import heapq
+
+class Solution:
+    # Utilizes a max heap to continuously retrieve and divide
+    # the largest available distance segment efficiently
+    def minimiseMaxDistance(self, arr, k):
+        n = len(arr)
+        # Array to track how many new stations are added in each original gap
+        howMany = [0] * (n - 1)
+        
+        # Python provides min-heap by default, so we insert negative distances
+        pq = []
+        for i in range(n - 1):
+            heapq.heappush(pq, (-(arr[i + 1] - arr[i]), i))
+            
+        # Place k stations one by one by always splitting the largest gap
+        for stations in range(k):
+            # Retrieve the maximum gap from the top of the heap
+            distance, secIndex = heapq.heappop(pq)
+            
+            # Add a station to this specific gap segment
+            howMany[secIndex] += 1
+            
+            # Calculate the newly divided segment length
+            originalDiff = arr[secIndex + 1] - arr[secIndex]
+            newSectionLen = originalDiff / (howMany[secIndex] + 1)
+            
+            # Reinsert the reduced gap back into the heap for future operations
+            heapq.heappush(pq, (-newSectionLen, secIndex))
+            
+        # Retrieve the final maximum distance
+        return -pq[0][0]
+
+# Driver code starts here
+if __name__ == "__main__":
+    obj = Solution()
+    arr = [1, 2, 3, 4, 5]
+    k = 4
+    ans = obj.minimiseMaxDistance(arr, k)
+    print(f"{ans:.6f}")</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Helper class to bundle distance and index data for the priority queue
+    class Pair {
+        double distance;
+        int index;
+        Pair(double distance, int index) {
+            this.distance = distance;
+            this.index = index;
+        }
+    }
+
+    /*
+       Utilizes a max heap to continuously retrieve and divide
+       the largest available distance segment efficiently
+    */
+    public double minimiseMaxDistance(int[] arr, int k) {
+        int n = arr.length;
+        // Array to track how many new stations are added in each original gap
+        int[] howMany = new int[n - 1];
+        
+        // Max heap configured to organize pairs by distance descending
+        PriorityQueue&lt;Pair&gt; pq = new PriorityQueue&lt;&gt;((a, b) -&gt; Double.compare(b.distance, a.distance));
+        
+        // Populate the heap with the initial gaps between stations
+        for (int i = 0; i &lt; n - 1; i++) {
+            pq.add(new Pair(arr[i + 1] - arr[i], i));
+        }
+        
+        // Place k stations one by one by always splitting the largest gap
+        for (int stations = 1; stations &lt;= k; stations++) {
+            // Retrieve the maximum gap from the top of the heap
+            Pair top = pq.poll();
+            int secIndex = top.index;
+            
+            // Add a station to this specific gap segment
+            howMany[secIndex]++;
+            
+            // Calculate the newly divided segment length
+            double originalDiff = arr[secIndex + 1] - arr[secIndex];
+            double newSectionLen = originalDiff / (double)(howMany[secIndex] + 1);
+            
+            // Reinsert the reduced gap back into the heap for future operations
+            pq.add(new Pair(newSectionLen, secIndex));
+        }
+        
+        // The maximum distance is guaranteed to be at the top of the heap
+        return pq.peek().distance;
+    }
+}
+
+// Driver code starts here
+class Main {
+    public static void main(String[] args) {
+        Solution obj = new Solution();
+        int[] arr = {1, 2, 3, 4, 5};
+        int k = 4;
+        double ans = obj.minimiseMaxDistance(arr, k);
+        System.out.printf("%.6f\n", ans);
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    /*
+       Since Javascript lacks a native heap, we simulate priority insertion.
+       This prevents doing a full loop scan, though a real heap is faster.
+    */
+    minimiseMaxDistance(arr, k) {
+        let n = arr.length;
+        let howMany = new Array(n - 1).fill(0);
+        let gaps = [];
+        
+        // Store initial gaps and sort them descending
+        for (let i = 0; i &lt; n - 1; i++) {
+            gaps.push({ dist: arr[i + 1] - arr[i], index: i });
+        }
+        gaps.sort((a, b) =&gt; b.dist - a.dist);
+        
+        for (let stations = 1; stations &lt;= k; stations++) {
+            // Take the largest gap from the front
+            let top = gaps.shift();
+            let secIndex = top.index;
+            
+            // Add station
+            howMany[secIndex]++;
+            
+            // Calculate new gap distance
+            let originalDiff = arr[secIndex + 1] - arr[secIndex];
+            let newSectionLen = originalDiff / (howMany[secIndex] + 1);
+            
+            // Insert back into sorted array efficiently
+            let inserted = false;
+            for (let i = 0; i &lt; gaps.length; i++) {
+                if (gaps[i].dist &lt; newSectionLen) {
+                    gaps.splice(i, 0, { dist: newSectionLen, index: secIndex });
+                    inserted = true;
+                    break;
+                }
+            }
+            if (!inserted) {
+                gaps.push({ dist: newSectionLen, index: secIndex });
+            }
+        }
+        
+        return gaps[0].dist;
+    }
+}
+
+// Driver code starts here
+const obj = new Solution();
+const arr = [1, 2, 3, 4, 5];
+const k = 4;
+const ans = obj.minimiseMaxDistance(arr, k);
+console.log(ans.toFixed(6));</code></pre></div></div><div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-8"><h3 id="blog-toc-complexity-analysis-2">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O((N + K) x log<sub>2</sub> N). We take N x log N time to build the initial heap of gaps. Then, extracting and inserting back into the heap takes log<sub>2</sub> N time, and we do this exactly k times.</p><p><strong>Space Complexity:</strong> O(N), to maintain the howMany array and the priority queue which stores all the segment distances.</p><p></p><p></p></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-9"><h2 id="blog-toc-optimal-approach">Optimal Approach</h2><p>The priority queue method is highly inefficient for extremely large values of k. Simulating the placements step-by-step by popping and pushing to a heap repeatedly will result in a Time Limit Exceeded error. We can optimize this by bypassing the step-by-step simulation entirely and using Binary Search on Answers to directly find the final maximum distance.</p><p>Instead of placing stations one by one, we guess a maximum distance and check if it is achievable using at most k extra stations. For any guessed maximum distance <code>mid</code>, we can calculate the exact number of stations required to ensure no gap exceeds <code>mid</code>.</p><ul><li><p>If the required number of stations is strictly greater than k, this guessed distance is too small and is <strong>not possible</strong>. We must increase our guessed distance.</p></li><li><p>If the required number of stations is less than or equal to k, the distance is <strong>possible</strong>. Since our goal is to minimize the maximum distance, we will record this answer and try to find an even smaller distance by reducing our guess.</p></li></ul><p>This property creates a monotonic search space of the format: <code>[not possible, not possible, ..., possible, possible]</code>. By repeatedly halving the search space using binary search, we can efficiently pinpoint the exact minimum possible maximum distance without simulating any individual placements.</p><h3 id="blog-toc-algorithm-3"><strong>Algorithm</strong></h3><ul><li><p>First, find the maximum initial distance between two consecutive gas stations.</p></li><li><p>Initialize two pointers for our search range. The low pointer will start at 0, and the high pointer will start at the maximum initial distance we just found.</p></li><li><p>Start a binary search loop that continues as long as the difference between high and low is greater than 1e-6. This ensures high decimal precision.</p></li><li><p>Calculate the mid value.</p></li><li><p>Pass this mid distance to a helper function. This function loops through all original gaps and divides them by the mid value to calculate how many total new stations are required to ensure no gap is larger than mid.</p></li><li><p>If the required number of stations is greater than k, our mid distance is too small and strict. Eliminate the left half by setting low equal to mid.</p></li><li><p>If the required stations are less than or equal to k, this distance works. We eliminate the right half to find an even smaller minimum by setting high equal to mid.</p></li><li><p>Return the high pointer as our finalized optimal answer.</p></li></ul><h3 id="blog-toc-key-points">Key Points</h3><ul><li><p><strong>Floating-point division for </strong><code>mid</code><strong>:</strong> Unlike standard binary search which uses integer division to find array indices or discrete values, <code>mid</code> in this approach is calculated using normal floating-point division (e.g., <code>(low + high) / 2.0</code>). This is because the distance between stations can be a decimal or fractional value. Since our search space is continuous rather than discrete, we must use floating-point numbers to accurately calculate and pinpoint the exact minimized gap with high precision.</p></li></ul><h3 id="blog-toc-dry-run-3">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Maximize Distance to Gas Station Optimal Dry Run" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/197e26d2b1d91573.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Maximize Distance to Gas Station Optimal Dry Run</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-10"><h3 id="blog-toc-solution-3">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    /*
+       Helper function to verify how many gas stations are required
+       to enforce a specific maximum distance rule across all gaps
+    */
+    int numberOfGasStationsRequired(vector&lt;int&gt;&amp; arr, long double dist) {
+        int required = 0;
+        
+        // Check every existing gap between stations
+        for (int i = 0; i &lt; arr.size() - 1; i++) {
+            // Count how many sections of 'dist' length fit inside the gap
+            required += (int)((arr[i + 1] - arr[i]) / dist);
+        }
+        
+        return required;
+    }
+
+    /*
+       Optimal approach using binary search to guess the maximum distance
+       and validate it against our allowed station capacity
+    */
+    long double minimiseMaxDistance(vector&lt;int&gt; &amp;arr, int k) {
+        long double low = 0;
+        long double high = 0;
+        
+        // Find the absolute maximum gap to act as the upper search boundary
+        for (int i = 0; i &lt; arr.size() - 1; i++) {
+            high = max(high, (long double)(arr[i + 1] - arr[i]));
+        }
+        
+        // Loop runs until the search boundaries are precise to 6 decimal places
+        while (high - low &gt; 1e-6) {
+            // Guess the middle distance
+            long double mid = low + (high - low) / 2.0;
+            
+            // Validate if the guessed distance fits within our allowed k stations
+            if (numberOfGasStationsRequired(arr, mid) &gt; k) {
+                // Too many stations needed, distance is too strict
+                low = mid;
+            } else {
+                // Feasible distance, attempt to restrict it further
+                high = mid;
+            }
+        }
+        
+        // Return the precise finalized upper bound
+        return high;
+    }
+};
+
+// Driver code starts here
+int main() {
+    Solution obj;
+    vector&lt;int&gt; arr = {1, 2, 3, 4, 5};
+    int k = 4;
+    long double ans = obj.minimiseMaxDistance(arr, k);
+    cout &lt;&lt; fixed &lt;&lt; setprecision(6) &lt;&lt; ans &lt;&lt; endl;
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+    # Helper function to verify how many gas stations are required
+    # to enforce a specific maximum distance rule across all gaps
+    def numberOfGasStationsRequired(self, arr, dist):
+        required = 0
+        
+        # Check every existing gap between stations
+        for i in range(len(arr) - 1):
+            # Count how many sections of 'dist' length fit inside the gap
+            required += int((arr[i + 1] - arr[i]) / dist)
+            
+        return required
+
+    # Optimal approach using binary search to guess the maximum distance
+    # and validate it against our allowed station capacity
+    def minimiseMaxDistance(self, arr, k):
+        low = 0.0
+        high = 0.0
+        
+        # Find the absolute maximum gap to act as the upper search boundary
+        for i in range(len(arr) - 1):
+            high = max(high, float(arr[i + 1] - arr[i]))
+            
+        # Loop runs until the search boundaries are precise to 6 decimal places
+        while high - low &gt; 1e-6:
+            # Guess the middle distance
+            mid = low + (high - low) / 2.0
+            
+            # Validate if the guessed distance fits within our allowed k stations
+            if self.numberOfGasStationsRequired(arr, mid) &gt; k:
+                # Too many stations needed, distance is too strict
+                low = mid
+            else:
+                # Feasible distance, attempt to restrict it further
+                high = mid
+                
+        # Return the precise finalized upper bound
+        return high
+
+# Driver code starts here
+if __name__ == "__main__":
+    obj = Solution()
+    arr = [1, 2, 3, 4, 5]
+    k = 4
+    ans = obj.minimiseMaxDistance(arr, k)
+    print(f"{ans:.6f}")</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    /*
+       Helper function to verify how many gas stations are required
+       to enforce a specific maximum distance rule across all gaps
+    */
+    public int numberOfGasStationsRequired(int[] arr, double dist) {
+        int required = 0;
+        
+        // Check every existing gap between stations
+        for (int i = 0; i &lt; arr.length - 1; i++) {
+            // Count how many sections of 'dist' length fit inside the gap
+            required += (int)((arr[i + 1] - arr[i]) / dist);
+        }
+        
+        return required;
+    }
+
+    /*
+       Optimal approach using binary search to guess the maximum distance
+       and validate it against our allowed station capacity
+    */
+    public double minimiseMaxDistance(int[] arr, int k) {
+        double low = 0;
+        double high = 0;
+        
+        // Find the absolute maximum gap to act as the upper search boundary
+        for (int i = 0; i &lt; arr.length - 1; i++) {
+            high = Math.max(high, (double)(arr[i + 1] - arr[i]));
+        }
+        
+        // Loop runs until the search boundaries are precise to 6 decimal places
+        while (high - low &gt; 1e-6) {
+            // Guess the middle distance
+            double mid = low + (high - low) / 2.0;
+            
+            // Validate if the guessed distance fits within our allowed k stations
+            if (numberOfGasStationsRequired(arr, mid) &gt; k) {
+                // Too many stations needed, distance is too strict
+                low = mid;
+            } else {
+                // Feasible distance, attempt to restrict it further
+                high = mid;
+            }
+        }
+        
+        // Return the precise finalized upper bound
+        return high;
+    }
+}
+
+// Driver code starts here
+class Main {
+    public static void main(String[] args) {
+        Solution obj = new Solution();
+        int[] arr = {1, 2, 3, 4, 5};
+        int k = 4;
+        double ans = obj.minimiseMaxDistance(arr, k);
+        System.out.printf("%.6f\n", ans);
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    /*
+       Helper function to verify how many gas stations are required
+       to enforce a specific maximum distance rule across all gaps
+    */
+    numberOfGasStationsRequired(arr, dist) {
+        let required = 0;
+        
+        // Check every existing gap between stations
+        for (let i = 0; i &lt; arr.length - 1; i++) {
+            // Count how many sections of 'dist' length fit inside the gap
+            required += Math.floor((arr[i + 1] - arr[i]) / dist);
+        }
+        
+        return required;
+    }
+
+    /*
+       Optimal approach using binary search to guess the maximum distance
+       and validate it against our allowed station capacity
+    */
+    minimiseMaxDistance(arr, k) {
+        let low = 0;
+        let high = 0;
+        
+        // Find the absolute maximum gap to act as the upper search boundary
+        for (let i = 0; i &lt; arr.length - 1; i++) {
+            high = Math.max(high, arr[i + 1] - arr[i]);
+        }
+        
+        // Loop runs until the search boundaries are precise to 6 decimal places
+        while (high - low &gt; 1e-6) {
+            // Guess the middle distance
+            let mid = low + (high - low) / 2.0;
+            
+            // Validate if the guessed distance fits within our allowed k stations
+            if (this.numberOfGasStationsRequired(arr, mid) &gt; k) {
+                // Too many stations needed, distance is too strict
+                low = mid;
+            } else {
+                // Feasible distance, attempt to restrict it further
+                high = mid;
+            }
+        }
+        
+        // Return the precise finalized upper bound
+        return high;
+    }
+}
+
+// Driver code starts here
+const obj = new Solution();
+const arr = [1, 2, 3, 4, 5];
+const k = 4;
+const ans = obj.minimiseMaxDistance(arr, k);
+console.log(ans.toFixed(6));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-11"><h3 id="blog-toc-complexity-analysis-3">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(N x log<sub>2</sub>(Max / 1e<sup>-6</sup>)), where N is the length of the array and Max is the highest starting distance gap. The binary search halves the precision bracket logarithmically, and traversing the array occurs inside each precision step.</p><p><strong>Space Complexity:</strong> O(1), no extra structures or arrays are created. The process runs perfectly using basic numeric pointers and basic math variables.</p></div><div><section aria-label="Interview follow-up Questions" class="BlogDetail-module__HEfJva__faqSection" id="blog-toc-faqs"><h2 class="BlogDetail-module__HEfJva__faqHeading">Interview follow-up Questions</h2><div class="flex w-full flex-col BlogDetail-module__HEfJva__faqList" data-orientation="vertical" data-slot="accordion"><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="open"><h3 class="flex" data-orientation="vertical" data-state="open"></h3><div aria-labelledby="radix-_R_1lcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="open" id="radix-_R_9lcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"><div class="h-auto pt-0 pb-2.5 [&amp;_a]:underline [&amp;_a]:underline-offset-3 [&amp;_a]:hover:text-foreground [&amp;_p:not(:last-child)]:mb-4 BlogDetail-module__HEfJva__faqAnswer"><p>The problem requests exact floating-point answers instead of typical whole integers. Because decimals never cross cleanly like integers do in standard logic bounds, we force the loop to stop when the search bracket squeezes down to a size of 0.000001, providing the mathematically required accuracy.</p></div></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_2lcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_alcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_3lcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_blcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_4lcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_clcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div></div></section></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div>
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

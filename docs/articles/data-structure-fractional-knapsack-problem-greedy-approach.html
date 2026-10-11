@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Fractional Knapsack Problem : Greedy Approach</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Fractional Knapsack Problem : Greedy Approach</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/fractional-knapsack-problem-greedy-approach/</code></div>
+  <p><strong>Problem Statement: </strong>
+The weight of N items and their corresponding values are given. We have to put these items in a knapsack of weight W such that the total value obtained is maximized.
+<br/><br/>
+<strong>Note:</strong> We can either take the item as a whole or break it into smaller units.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>  
+<strong>Input:</strong> val = [60, 100, 120], wt = [10, 20, 30], capacity = 50  
+<strong>Output:</strong> 240.000000  
+<strong>Explanation:</strong>  
+- Take item 0 (w = 10, v = 60)  
+- Take item 1 (w = 20, v = 100)  
+- Take 2⁄3 of item 2 (w = 20, v = 80)  
+Total value = 60 + 100 + 80 = 240
+
+<strong>Example 2:</strong>  
+<strong>Input:</strong> val = [60, 100], wt = [10, 20], capacity = 50  
+<strong>Output:</strong> 160.000000  
+<strong>Explanation:</strong>  
+Both items fit entirely since total weight 10 + 20 = 30 ≤ 50.  
+Total value = 60 + 100 = 160</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>It's highly recommend trying to solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>The greedy approach to maximize the answer is to prioritize items with higher values.</li>
+<li>Since items can be broken into smaller units, we focus on selecting items with the highest value-to-weight ratio first.</li>
+<li>To achieve this, sort the items in decreasing order based on their value-to-weight ratio.</li>
+<li>Once sorted, iterate through the items and pick those whose weight is less than or equal to the current capacity of the knapsack.</li>
+<li>If an item's weight exceeds the remaining capacity, break the item into smaller units, calculate its value according to the remaining capacity, and add this value to the total.</li>
+</ul>
+<p><img height="457" loading="lazy" src="../assets/img/a43c1e05cd29618c.png" width="481"/></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Struct to represent an item with value and weight
+struct Item {
+    int value;
+    int weight;
+};
+
+class Solution {
+public:
+    // Comparator function to sort items by value/weight ratio
+    bool static comp(Item a, Item b) {
+        double r1 = (double) a.value / (double) a.weight;
+        double r2 = (double) b.value / (double) b.weight;
+        return r1 &gt; r2;  // Return true if the ratio of item a is greater than item b
+    }
+
+    // Function to calculate the maximum value we can get with fractional knapsack
+    double fractionalKnapsack(int W, Item arr[], int n) {
+        
+        // Sort items based on the value/weight ratio
+        sort(arr, arr + n, comp);
+
+        int curWeight = 0;  // Current weight of knapsack
+        double finalvalue = 0.0;  // Final value we can achieve
+
+        // Iterate through the sorted items
+        for (int i = 0; i &lt; n; i++) {
+
+            // If the current item can be fully added to the knapsack
+            if (curWeight + arr[i].weight &lt;= W) {
+                curWeight += arr[i].weight;
+                finalvalue += arr[i].value;  // Add the full value of the item
+            } else {
+                // If the current item can't be fully added, take the fractional part
+                int remain = W - curWeight;
+                finalvalue += (arr[i].value / (double) arr[i].weight) * (double) remain;
+                break;  // Break as we have filled the knapsack
+            }
+        }
+
+        return finalvalue;  // Return the maximum value that can be carried
+    }
+};
+
+int main() {
+    int n = 3, weight = 50;  // Number of items and capacity of knapsack
+    // Item values and weights
+    Item arr[n] = { {100,20},{60,10},{120,30} };
+    Solution obj;
+
+    // Calculate the maximum value we can get with the fractional knapsack
+    double ans = obj.fractionalKnapsack(weight, arr, n);
+    
+    // Output the result
+    cout &lt;&lt; "The maximum value is " &lt;&lt; setprecision(2) &lt;&lt; fixed &lt;&lt; ans;
+    
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+
+    // Comparator function to sort items by value/weight ratio
+    static class ItemComparator implements Comparator&lt;Item&gt; {
+        public int compare(Item a, Item b) {
+            double r1 = (double) a.value / (double) a.weight;
+            double r2 = (double) b.value / (double) b.weight;
+            return Double.compare(r2, r1);  // Return comparison based on value/weight ratio
+        }
+    }
+
+    // Method to calculate the maximum value we can get with fractional knapsack
+    public double fractionalKnapsack(int W, Item[] arr, int n) {
+
+        // Sort items based on the value/weight ratio
+        Arrays.sort(arr, new ItemComparator());
+
+        int curWeight = 0;  // Current weight of knapsack
+        double finalvalue = 0.0;  // Final value we can achieve
+
+        // Iterate through the sorted items
+        for (int i = 0; i &lt; n; i++) {
+
+            // If the current item can be fully added to the knapsack
+            if (curWeight + arr[i].weight &lt;= W) {
+                curWeight += arr[i].weight;
+                finalvalue += arr[i].value;  // Add the full value of the item
+            } else {
+                // If the current item can't be fully added, take the fractional part
+                int remain = W - curWeight;
+                finalvalue += (arr[i].value / (double) arr[i].weight) * (double) remain;
+                break;  // Break as we have filled the knapsack
+            }
+        }
+
+        return finalvalue;  // Return the maximum value that can be carried
+    }
+
+    // Class to represent an item with value and weight
+    static class Item {
+        int value;
+        int weight;
+
+        Item(int value, int weight) {
+            this.value = value;
+            this.weight = weight;
+        }
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+        
+        // Input data
+        int n = 3, weight = 50;  // Number of items and capacity of knapsack
+        Item[] arr = { new Item(100, 20), new Item(60, 10), new Item(120, 30) };
+
+        // Create an object of the Solution class
+        Solution obj = new Solution();
+
+        // Calculate the maximum value we can get with the fractional knapsack
+        double ans = obj.fractionalKnapsack(weight, arr, n);
+
+        // Output the result
+        System.out.println("The maximum value is: " + String.format("%.2f", ans));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Class to represent an item with value and weight
+class Item:
+    def __init__(self, value, weight):
+        self.value = value
+        self.weight = weight
+
+# Function to calculate the maximum value we can get with fractional knapsack
+def fractionalKnapsack(W, arr, n):
+
+    # Sort items based on the value/weight ratio in descending order
+    arr.sort(key=lambda x: (x.value / x.weight), reverse=True)
+
+    curWeight = 0  # Current weight of knapsack
+    finalvalue = 0.0  # Final value we can achieve
+
+    # Iterate through the sorted items
+    for i in range(n):
+
+        # If the current item can be fully added to the knapsack
+        if curWeight + arr[i].weight &lt;= W:
+            curWeight += arr[i].weight
+            finalvalue += arr[i].value  # Add the full value of the item
+        else:
+            # If the current item can't be fully added, take the fractional part
+            remain = W - curWeight
+            finalvalue += (arr[i].value / arr[i].weight) * remain
+            break  # Break as we have filled the knapsack
+
+    return finalvalue  # Return the maximum value that can be carried
+
+# Main function
+def main():
+    # Input data
+    n = 3
+    weight = 50  # Capacity of knapsack
+    arr = [Item(100, 20), Item(60, 10), Item(120, 30)]
+
+    # Calculate the maximum value we can get with the fractional knapsack
+    ans = fractionalKnapsack(weight, arr, n)
+
+    # Output the result
+    print(f"The maximum value is: {ans:.2f}")
+
+# Call the main function
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Class to represent an item with value and weight
+class Item {
+    constructor(value, weight) {
+        this.value = value;
+        this.weight = weight;
+    }
+}
+
+// Function to calculate the maximum value we can get with fractional knapsack
+function fractionalKnapsack(W, arr, n) {
+
+    // Sort items based on the value/weight ratio in descending order
+    arr.sort((a, b) =&gt; (b.value / b.weight) - (a.value / a.weight));
+
+    let curWeight = 0;  // Current weight of knapsack
+    let finalvalue = 0.0;  // Final value we can achieve
+
+    // Iterate through the sorted items
+    for (let i = 0; i &lt; n; i++) {
+
+        // If the current item can be fully added to the knapsack
+        if (curWeight + arr[i].weight &lt;= W) {
+            curWeight += arr[i].weight;
+            finalvalue += arr[i].value;  // Add the full value of the item
+        } else {
+            // If the current item can't be fully added, take the fractional part
+            let remain = W - curWeight;
+            finalvalue += (arr[i].value / arr[i].weight) * remain;
+            break;  // Break as we have filled the knapsack
+        }
+    }
+
+    return finalvalue;  // Return the maximum value that can be carried
+}
+
+// Main function
+function main() {
+    // Input data
+    let n = 3;
+    let weight = 50;  // Capacity of knapsack
+    let arr = [new Item(100, 20), new Item(60, 10), new Item(120, 30)];
+
+    // Calculate the maximum value we can get with the fractional knapsack
+    let ans = fractionalKnapsack(weight, arr, n);
+
+    // Output the result
+    console.log(`The maximum value is: ${ans.toFixed(2)}`);
+}
+
+// Call the main function
+main();</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(n log n + n)</strong>. O(n log n) to sort the items and O(n) to iterate through all the items for calculating the answer.<br/><br/>Space Complexity: O(1), no additional data structure has been used.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

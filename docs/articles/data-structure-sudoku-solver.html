@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Sudoku Solver</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Sudoku Solver</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/sudoku-solver/</code></div>
+  <p><strong>Problem Statement: </strong>Create a program that fills in the blank cells in a Sudoku puzzle to solve it.
+
+
+
+Every sudoku solution needs to follow to these guidelines:
+
+
+<br/>
+1) In every row, the numbers 1 through 9 must appear exactly once.
+<br/>
+2) In every column, the numbers 1 through 9 must appear exactly once.
+<br/>
+3) In each of the grid's nine 3x3 sub-boxes, the numbers 1 through 9 must appear exactly once.
+
+
+<br/>
+Empty cells are indicated by the '.' character. .</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p><strong>Input : </strong>
+</p><p><img height="457" loading="lazy" src="../assets/img/c3987a4de01fbb14.png" width="481"/></p>
+<strong>Output : </strong>
+<p><img height="457" loading="lazy" src="../assets/img/3974274a0cd81e90.png" width="481"/></p>
+<strong>Explanation : </strong> The output is a valid Sudoku solution that fills in all empty cells such that each number 1 through 9 appears exactly once in every row, column, and 3x3 sub-box.<br/>
+<strong>Input : </strong>
+<p><img height="457" loading="lazy" src="../assets/img/5f1bad904df7d144.png" width="481"/></p>
+<strong>Output : </strong> 
+<p><img height="457" loading="lazy" src="../assets/img/cc65328784d26c98.png" width="481"/></p>
+<strong>Explanation : </strong> The output is one of the possible valid Sudoku solutions that fills all empty cells following the Sudoku rules.</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/sudoko-solver" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+
+Since we have to fill the empty cells with available possible numbers and we can also have multiple solutions, the main intuition is to try every possible way of filling the empty cells. And the more correct way to try all possible solutions is to use recursion. In each call to the recursive function, we just try all the possible numbers for a particular cell and transfer the updated board to the next recursive call.
+<ul><li>Let’s see the step by step approach. Our main recursive function(solve()) is going to just do a plain matrix traversal of the sudoku board. When we find an empty cell, we pause and try to put all available numbers(1 - 9) in that particular empty cell.</li><li> We need another loop to do that. But wait, we forgot one thing - the board has to satisfy all the conditions, right? So, for that we have another function(isValid()) which will check whether the number we have inserted into that empty cell will not violate any conditions.</li><li> If it is violating, we try with the next number. If it is not, we call the same function recursively, but this time with the updated state of the board. Now, as usual it tries to fill the remaining cells in the board in the same way.</li><li>Now we'll come to the returning values. If at any point we cannot insert any numbers from 1 - 9 in a particular cell, it means the current state of the board is wrong and we need to backtrack. An important point to follow is, we need to return false to let the parent function(which is called this function) know that we cannot fill this way. This will serve as a hint to that function, that it needs to try with the next possible number. Refer to the picture below.</li></ul>
+<p><img height="584" loading="lazy" src="../assets/img/76a5199aaecf8f6d.png" width="602"/></p>
+<ul><li> If a recursive call returns true, we can assume that we found one possible way of filling and we simply do an <strong>early return</strong>.</li></ul><br/>
+<strong>Validating Board</strong>
+<ul><li><strong> </strong>Now, let's see how we are validating the sudoku board. After determining a number for a cell(at i'th row, j'th col), we try to check the validity. As we know, a valid sudoku needs to satisfy 3 conditions, we can use three loops. But we can do within a single loop itself. Let's try to understand that.</li><li>We loop from 0 to 8 and check the values - board[i][col](1st condition) and board[row][i](2nd condition), whether the number is already included. For the 3rd condition - the expression (3 * (row / 3) + i / 3) evaluates to the row numbers of that 3x3 submatrix and the expression (3 * (col / 3) + i % 3) evaluates to the column numbers.</li><li>For eg, if row= 5 and col= 3, the cells visited are</li></ul>
+<p>It covers all the cells in the sub-matrix</p>
+
+<p><img height="457" loading="lazy" src="../assets/img/0b4ed87d6528526b.png" width="481"/></p>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+
+// Function to check if placing character c at board[row][col] is valid
+bool isValid(vector&lt;vector&lt;char&gt;&gt; &amp;board, int row, int col, char c) {
+    // Check all rows in current column
+    for (int i = 0; i &lt; 9; i++) {
+        // If character already exists in column, not valid
+        if (board[i][col] == c)
+            return false;
+    }
+
+    // Check all columns in current row
+    for (int j = 0; j &lt; 9; j++) {
+        // If character already exists in row, not valid
+        if (board[row][j] == c)
+            return false;
+    }
+
+    // Calculate start indices of the 3x3 sub-box
+    int boxRowStart = 3 * (row / 3);
+    int boxColStart = 3 * (col / 3);
+
+    // Check the 3x3 sub-box for duplicate character
+    for (int i = 0; i &lt; 3; i++) {
+        for (int j = 0; j &lt; 3; j++) {
+            // If character found in sub-box, not valid
+            if (board[boxRowStart + i][boxColStart + j] == c)
+                return false;
+        }
+    }
+
+    // If all checks passed, placement is valid
+    return true;
+}
+
+// Recursive function to solve Sudoku using backtracking
+bool solveSudoku(vector&lt;vector&lt;char&gt;&gt; &amp;board) {
+    // Traverse each cell in the board
+    for (int i = 0; i &lt; 9; i++) {
+        for (int j = 0; j &lt; 9; j++) {
+            // If current cell is empty
+            if (board[i][j] == '.') {
+                // Try all possible digits
+                for (char c = '1'; c &lt;= '9'; c++) {
+                    // Check if placing c is valid here
+                    if (isValid(board, i, j, c)) {
+                        // Place c tentatively
+                        board[i][j] = c;
+
+                        // Recur to solve rest of the board
+                        if (solveSudoku(board))
+                            return true; // If successful, return true
+
+                        // If not successful, backtrack
+                        board[i][j] = '.';
+                    }
+                }
+                // If no digit can be placed here, return false to backtrack
+                return false;
+            }
+        }
+    }
+    // If all cells are filled correctly, return true
+    return true;
+}
+};
+
+int main() {
+    // Initialize the Sudoku board with given values and '.' for blanks
+    vector&lt;vector&lt;char&gt;&gt; board {
+        {'9', '5', '7', '.', '1', '3', '.', '8', '4'},
+        {'4', '8', '3', '.', '5', '7', '1', '.', '6'},
+        {'.', '1', '2', '.', '4', '9', '5', '3', '7'},
+        {'1', '7', '.', '3', '.', '4', '9', '.', '2'},
+        {'5', '.', '4', '9', '7', '.', '3', '6', '.'},
+        {'3', '.', '9', '5', '.', '8', '7', '.', '1'},
+        {'8', '4', '5', '7', '9', '.', '6', '1', '3'},
+        {'.', '9', '1', '.', '3', '6', '.', '7', '5'},
+        {'7', '.', '6', '1', '8', '5', '4', '.', '9'}
+    };
+
+
+    Solution sol;
+    sol.solveSudoku(board);
+
+    // Print the solved Sudoku board
+    for (int i = 0; i &lt; 9; i++) {
+        for (int j = 0; j &lt; 9; j++)
+            cout &lt;&lt; board[i][j] &lt;&lt; " ";
+        cout &lt;&lt; "\n";
+    }
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to check if placing char c at board[row][col] is valid
+    public boolean isValid(char[][] board, int row, int col, char c) {
+        // Check current column for duplicates
+        for (int i = 0; i &lt; 9; i++) {
+            if (board[i][col] == c) return false;
+        }
+
+        // Check current row for duplicates
+        for (int j = 0; j &lt; 9; j++) {
+            if (board[row][j] == c) return false;
+        }
+
+        // Find start of 3x3 sub-box
+        int boxRowStart = 3 * (row / 3);
+        int boxColStart = 3 * (col / 3);
+
+        // Check 3x3 box for duplicates
+        for (int i = 0; i &lt; 3; i++) {
+            for (int j = 0; j &lt; 3; j++) {
+                if (board[boxRowStart + i][boxColStart + j] == c) return false;
+            }
+        }
+
+        // No conflicts, placement is valid
+        return true;
+    }
+
+    // Recursive backtracking to solve Sudoku
+    public boolean solveSudoku(char[][] board) {
+        // Traverse all cells
+        for (int i = 0; i &lt; 9; i++) {
+            for (int j = 0; j &lt; 9; j++) {
+                // If cell is empty
+                if (board[i][j] == '.') {
+                    // Try all digits
+                    for (char c = '1'; c &lt;= '9'; c++) {
+                        // Check if placing c is valid
+                        if (isValid(board, i, j, c)) {
+                            board[i][j] = c; // place c
+
+                            // Recurse to solve rest
+                            if (solveSudoku(board)) return true;
+
+                            // Backtrack if needed
+                            board[i][j] = '.';
+                        }
+                    }
+                    // If no number fits, backtrack
+                    return false;
+                }
+            }
+        }
+        // All cells filled correctly
+        return true;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        char[][] board = {
+            {'9', '5', '7', '.', '1', '3', '.', '8', '4'},
+            {'4', '8', '3', '.', '5', '7', '1', '.', '6'},
+            {'.', '1', '2', '.', '4', '9', '5', '3', '7'},
+            {'1', '7', '.', '3', '.', '4', '9', '.', '2'},
+            {'5', '.', '4', '9', '7', '.', '3', '6', '.'},
+            {'3', '.', '9', '5', '.', '8', '7', '.', '1'},
+            {'8', '4', '5', '7', '9', '.', '6', '1', '3'},
+            {'.', '9', '1', '.', '3', '6', '.', '7', '5'},
+            {'7', '.', '6', '1', '8', '5', '4', '.', '9'}
+        };
+
+        Solution sol = new Solution();
+        sol.solveSudoku(board);
+
+        // Print solved board
+        for (int i = 0; i &lt; 9; i++) {
+            for (int j = 0; j &lt; 9; j++) {
+                System.out.print(board[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">from typing import List
+
+class Solution:
+    # Check if placing character c at board[row][col] is valid
+    def isValid(self, board: List[List[str]], row: int, col: int, c: str) -&gt; bool:
+        # Check each row for the same character in the current column
+        for i in range(9):
+            if board[i][col] == c:
+                # Character already exists in this column - invalid placement
+                return False
+        
+        # Check each column for the same character in the current row
+        for j in range(9):
+            if board[row][j] == c:
+                # Character already exists in this row - invalid placement
+                return False
+        
+        # Calculate the starting row index of the 3x3 sub-box
+        boxRowStart = 3 * (row // 3)
+        # Calculate the starting column index of the 3x3 sub-box
+        boxColStart = 3 * (col // 3)
+        
+        # Check all cells in the 3x3 sub-box
+        for i in range(3):
+            for j in range(3):
+                if board[boxRowStart + i][boxColStart + j] == c:
+                    # Character found in the sub-box - invalid placement
+                    return False
+        
+        # If no conflicts, placement is valid
+        return True
+
+    # Recursive backtracking function to solve the Sudoku board
+    def solveSudoku(self, board: List[List[str]]) -&gt; bool:
+        # Iterate through all rows
+        for i in range(9):
+            # Iterate through all columns
+            for j in range(9):
+                # If current cell is empty (denoted by '.')
+                if board[i][j] == '.':
+                    # Try placing digits from '1' to '9' in this cell
+                    for c in map(str, range(1, 10)):
+                        # Check if placing c is valid
+                        if self.isValid(board, i, j, c):
+                            # Place c temporarily
+                            board[i][j] = c
+                            
+                            # Recursively attempt to solve rest of the board
+                            if self.solveSudoku(board):
+                                return True
+                            
+                            # If placing c doesn't lead to a solution, backtrack
+                            board[i][j] = '.'
+                    
+                    # If no digit fits here, trigger backtracking
+                    return False
+        # If all cells are filled correctly, return True to indicate success
+        return True
+
+# Driver code to test the solution
+if __name__ == "__main__":
+    board = [
+        ['9', '5', '7', '.', '1', '3', '.', '8', '4'],
+        ['4', '8', '3', '.', '5', '7', '1', '.', '6'],
+        ['.', '1', '2', '.', '4', '9', '5', '3', '7'],
+        ['1', '7', '.', '3', '.', '4', '9', '.', '2'],
+        ['5', '.', '4', '9', '7', '.', '3', '6', '.'],
+        ['3', '.', '9', '5', '.', '8', '7', '.', '1'],
+        ['8', '4', '5', '7', '9', '.', '6', '1', '3'],
+        ['.', '9', '1', '.', '3', '6', '.', '7', '5'],
+        ['7', '.', '6', '1', '8', '5', '4', '.', '9']
+    ]
+
+    sol = Solution()
+    # Solve the Sudoku board in-place
+    sol.solveSudoku(board)
+
+    # Print the solved Sudoku board row-wise
+    for row in board:
+        print(" ".join(row))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Check if placing char c at board[row][col] is valid
+    isValid(board, row, col, c) {
+        // Check all rows in current column for duplicates
+        for (let i = 0; i &lt; 9; i++) {
+            if (board[i][col] === c) {
+                // Same char found in column, invalid placement
+                return false;
+            }
+        }
+
+        // Check all columns in current row for duplicates
+        for (let j = 0; j &lt; 9; j++) {
+            if (board[row][j] === c) {
+                // Same char found in row, invalid placement
+                return false;
+            }
+        }
+
+        // Calculate starting row of 3x3 sub-box
+        const boxRowStart = 3 * Math.floor(row / 3);
+        // Calculate starting column of 3x3 sub-box
+        const boxColStart = 3 * Math.floor(col / 3);
+
+        // Check each cell in the 3x3 box for duplicate character
+        for (let i = 0; i &lt; 3; i++) {
+            for (let j = 0; j &lt; 3; j++) {
+                if (board[boxRowStart + i][boxColStart + j] === c) {
+                    // Same char found in 3x3 box, invalid placement
+                    return false;
+                }
+            }
+        }
+
+        // No conflicts found, placement is valid
+        return true;
+    }
+
+    // Recursive function to solve Sudoku using backtracking
+    solveSudoku(board) {
+        // Iterate over each row
+        for (let i = 0; i &lt; 9; i++) {
+            // Iterate over each column
+            for (let j = 0; j &lt; 9; j++) {
+                // If the cell is empty
+                if (board[i][j] === '.') {
+                    // Try all digits from '1' to '9'
+                    for (let c = 1; c &lt;= 9; c++) {
+                        let charC = c.toString();
+                        // Check if placing this digit is valid
+                        if (this.isValid(board, i, j, charC)) {
+                            // Place digit tentatively
+                            board[i][j] = charC;
+
+                            // Recursively solve rest of the board
+                            if (this.solveSudoku(board)) {
+                                return true; // Found a valid solution
+                            }
+
+                            // Backtrack if no solution found
+                            board[i][j] = '.';
+                        }
+                    }
+                    // If no digit fits, backtrack to previous cell
+                    return false;
+                }
+            }
+        }
+        // All cells filled validly
+        return true;
+    }
+}
+
+// Driver code
+const board = [
+    ['9', '5', '7', '.', '1', '3', '.', '8', '4'],
+    ['4', '8', '3', '.', '5', '7', '1', '.', '6'],
+    ['.', '1', '2', '.', '4', '9', '5', '3', '7'],
+    ['1', '7', '.', '3', '.', '4', '9', '.', '2'],
+    ['5', '.', '4', '9', '7', '.', '3', '6', '.'],
+    ['3', '.', '9', '5', '.', '8', '7', '.', '1'],
+    ['8', '4', '5', '7', '9', '.', '6', '1', '3'],
+    ['.', '9', '1', '.', '3', '6', '.', '7', '5'],
+    ['7', '.', '6', '1', '8', '5', '4', '.', '9']
+];
+
+const sol = new Solution();
+// Solve the Sudoku puzzle in-place
+sol.solveSudoku(board);
+
+// Print the solved Sudoku board
+for (let i = 0; i &lt; 9; i++) {
+    console.log(board[i].join(" "));
+}
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O(9<sup>(n ^ 2)</sup>), in the worst case, for each cell in the n<sup>2</sup> board, we have 9 possible numbers.</p>
+<p><strong>Space Complexity</strong>: O(1), since we are refilling the given board itself, there is no extra space required, so constant space complexity.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

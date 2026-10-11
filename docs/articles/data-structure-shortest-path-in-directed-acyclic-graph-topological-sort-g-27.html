@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Shortest Path in Directed Acyclic Graph Topological Sort: G-27</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Shortest Path in Directed Acyclic Graph Topological Sort: G-27</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/shortest-path-in-directed-acyclic-graph-topological-sort-g-27/</code></div>
+  <p><strong>Problem Statement: </strong>Given a Directed Acyclic Graph of N vertices from 0 to N-1 and M edges and a 2D Integer array edges, where there is a directed edge from vertex edge[i][0] to vertex edge[i][1] with a distance of edge[i][2] for all i.<br/>
+
+
+
+Find the shortest path from source vertex to all the vertices and if it is impossible to reach any vertex, then return -1 for that vertex. The source vertex is assumed to be 0.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p><strong>Input:</strong>n = 7, m = 8 ,Edges = [[0,4,2], [0,5,3], [5,4,1], [4,6,3], [4,2,1], [6,1,2], [2,3,3], [1,3,1]]
+<strong>Output:</strong>0 7 3 6 2 3 5
+<strong>Explanation:</strong>The output represents the shortest distance from the source node (0) to all other nodes.
+Dist[0] = 0
+Dist[1] = 7
+Dist[2] = 3
+Dist[3] = 6
+Dist[4] = 2
+Dist[5] = 3
+Dist[6] = 5
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-6725" loading="lazy" src="../assets/img/e32f5972a624e42f.png"/></figure><br/>
+<strong>Input:</strong>n = 6, m = 7, edges = [[0,1,2], [0,4,1], [4,5,4], [4,2,2], [1,2,3], [2,3,6], [5,3,1]]
+<strong>Output:</strong>0 2 3 6 1 5
+<strong>Explanation:</strong>The output represents the shortest distances from the source node (0) to every other node.
+Dist[0] = 0
+Dist[1] = 2
+Dist[2] = 3
+Dist[3] = 6
+Dist[4] = 1
+Dist[5] = 5
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-6724" loading="lazy" src="../assets/img/c502f90c1862a2e8.png"/></figure></p></pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/shortest-path-in-dag" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+
+Finding the shortest path to a vertex is easy if you already know the shortest paths to all the vertices that can precede it. Processing the vertices in topological order ensures that by the time you get to a vertex, you've already processed all the vertices that can precede it which reduces the computation time significantly. In this approach, we traverse the nodes sequentially according to their reachability from the source.<br/><br/>Dijkstra's algorithm is necessary for graphs that can contain cycles because they can't be topologically sorted. In other cases, the topological sort would work fine as we start from the first node, and then move on to the others in a directed manner.<br/><br/>
+We will calculate the shortest path in a directed acyclic graph by using topological sort. Topological sort can be implemented in two ways- BFS and DFS. Here, we will be implementing using the DFS technique. Depth First Search, DFS is a traversal technique where we visit a node and then continue visiting its adjacent nodes until we reach the end point, i.e., it keeps on moving in the depth of a particular node and then backtracks when no further adjacent nodes are available. <br/><br/>
+<strong>Initial configuration:</strong><br/>
+<ul><li><strong>Adjacency List:</strong> Create an adjacency list of the formed vector of pairs of size ‘N’, where each index denotes a node ‘u’ and contains a vector that consists of pairs denoting the adjacent nodes ‘v’ and the distance to that adjacent node from initial node ‘u’.</li><li>Visited Array: Create a visited array and mark all the indices as unvisited (0) initially.</li><li>Stack: Define a stack data structure to store the topological sort.</li><li>Distance Array: Initialise this array by Max integer value and then update the value for each node successively while calculating the shortest distance between the source and the current node.</li></ul><br/>
+
+The shortest path in a directed acyclic graph can be calculated by the following steps:<br/>
+<ul><li>Perform topological sort on the graph using BFS/DFS and store it in a stack. In order to get a hang of how the <strong>Topological Sort</strong> works, you can refer to <a href="https://takeuforward.org/data-structure/topological-sort-using-dfs/" rel="noopener" target="_blank">this article</a> for the same. </li><li>Now, iterate on the topo sort. We can keep the generated topo sort in the stack only, and do an iteration on it, it reduces the extra space which would have been required to store it. Make sure for the source node, we will assign dist[src] = 0. </li><li>For every node that comes out of the stack which contains our topo sort, we can traverse for all its adjacent nodes, and relax them. </li><li>In order to relax them, we simply do a simple comparison of dist[node] + wt and dist[adjNode]. Here dist[node] means the distance taken to reach the current node, and it is the edge weight between the node and the adjNode. </li><li>If (dist[node] + wt &lt; dist[adjNode]), then we will go ahead and update the distance of the dist[adjNode] to the new found better path. </li><li>Once all the nodes have been iterated, the dist[] array will store the shortest paths and we can then return it.</li></ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/28449ca61155fe69.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/0d49e5e888dbb6e9.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/28449ca61155fe69.png"/><img alt="Image 2" loading="lazy" src="../assets/img/0d49e5e888dbb6e9.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+  private:
+    // Helper function to perform DFS-based Topological Sort
+    void topoSort(int node, vector&lt;pair&lt;int, int&gt;&gt; adj[], int vis[], stack&lt;int&gt; &amp;st) {
+
+      // Mark the current node as visited
+      vis[node] = 1;
+
+      // Traverse all adjacent nodes
+      for (auto it : adj[node]) {
+
+        // Get the target node from the pair
+        int v = it.first;
+
+        // If the node is not visited, call DFS on it
+        if (!vis[v]) {
+          topoSort(v, adj, vis, st);
+        }
+      }
+
+      // Push the current node onto the stack after visiting all neighbors
+      st.push(node);
+    }
+
+  public:
+    // Function to find the shortest paths from node 0 to all other nodes
+    vector&lt;int&gt; shortestPath(int N, int M, vector&lt;vector&lt;int&gt;&gt; &amp;edges) {
+
+      // Create adjacency list for the graph
+      vector&lt;pair&lt;int, int&gt;&gt; adj[N];
+      
+      // Fill the adjacency list with edges
+      for (int i = 0; i &lt; M; i++) {
+        int u = edges[i][0];
+        int v = edges[i][1];
+        int wt = edges[i][2];
+
+        // Store (target node, weight)
+        adj[u].push_back({v, wt});
+      }
+
+      // Initialize visited array to keep track of visited nodes
+      int vis[N] = {0};
+
+      // Stack to store the topological order
+      stack&lt;int&gt; st;
+
+      // Call topoSort for all unvisited nodes
+      for (int i = 0; i &lt; N; i++) {
+        if (!vis[i]) {
+          topoSort(i, adj, vis, st);
+        }
+      }
+
+      // Initialize the distance vector with infinity
+      vector&lt;int&gt; dist(N);
+      for (int i = 0; i &lt; N; i++) {
+        dist[i] = 1e9;
+      }
+
+      // Distance to the source node (0) is 0
+      dist[0] = 0;
+
+      // Process all nodes in topological order
+      while (!st.empty()) {
+        int node = st.top();
+        st.pop();
+
+        // Relax all outgoing edges from the current node
+        for (auto it : adj[node]) {
+          int v = it.first;
+          int wt = it.second;
+
+          // Update distance if a shorter path is found
+          if (dist[node] + wt &lt; dist[v]) {
+            dist[v] = wt + dist[node];
+          }
+        }
+      }
+
+      // Replace all unreachable nodes' distances with -1
+      for (int i = 0; i &lt; N; i++) {
+        if (dist[i] == 1e9) {
+          dist[i] = -1;
+        }
+      }
+
+      // Return the final distance array
+      return dist;
+    }
+};
+
+// Driver code
+int main() {
+
+  // Number of nodes and edges
+  int N = 6, M = 7;
+
+  // Edge list input
+  vector&lt;vector&lt;int&gt;&gt; edges = {
+    {0, 1, 2},
+    {0, 4, 1},
+    {4, 5, 4},
+    {4, 2, 2},
+    {1, 2, 3},
+    {2, 3, 6},
+    {5, 3, 1}
+  };
+
+  // Create object of Solution class
+  Solution obj;
+
+  // Call shortestPath function
+  vector&lt;int&gt; ans = obj.shortestPath(N, M, edges);
+
+  // Print the resulting shortest distances
+  for (int i = 0; i &lt; ans.size(); i++) {
+    cout &lt;&lt; ans[i] &lt;&lt; " ";
+  }
+
+  return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">// Importing required classes
+import java.util.*;
+
+// Class containing method to find shortest path using Topo Sort (DAG)
+class Solution {
+
+    // Function to perform DFS and build Topological Order
+    private void topoSort(int node, List&lt;List&lt;int[]&gt;&gt; adj, boolean[] visited, Stack&lt;Integer&gt; stack) {
+        
+        // Mark the current node as visited
+        visited[node] = true;
+        
+        // Traverse all adjacent nodes
+        for (int[] neighbor : adj.get(node)) {
+            
+            // If the neighbor hasn't been visited, recurse
+            if (!visited[neighbor[0]]) {
+                topoSort(neighbor[0], adj, visited, stack);
+            }
+        }
+        
+        // After visiting all neighbors, push this node into the stack
+        stack.push(node);
+    }
+
+    // Function to compute shortest path from source node (0) in a DAG
+    public int[] shortestPath(int N, int M, int[][] edges) {
+        
+        // Create adjacency list for graph with weights
+        List&lt;List&lt;int[]&gt;&gt; adj = new ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; N; i++) {
+            adj.add(new ArrayList&lt;&gt;());
+        }
+        
+        // Fill the adjacency list from edge list
+        for (int i = 0; i &lt; M; i++) {
+            int u = edges[i][0];
+            int v = edges[i][1];
+            int wt = edges[i][2];
+            adj.get(u).add(new int[]{v, wt});
+        }
+
+        // Initialize visited array for topo sort
+        boolean[] visited = new boolean[N];
+        
+        // Stack to hold topological order
+        Stack&lt;Integer&gt; stack = new Stack&lt;&gt;();
+        
+        // Perform topo sort from unvisited nodes
+        for (int i = 0; i &lt; N; i++) {
+            if (!visited[i]) {
+                topoSort(i, adj, visited, stack);
+            }
+        }
+
+        // Initialize distance array with infinity (represented by large value)
+        int[] dist = new int[N];
+        Arrays.fill(dist, (int)1e9);
+
+        // Distance to source (0) is 0
+        dist[0] = 0;
+
+        // Process nodes in topological order
+        while (!stack.isEmpty()) {
+            int node = stack.pop();
+            
+            // If the node is reachable
+            if (dist[node] != (int)1e9) {
+                
+                // Traverse all neighbors and update their distances
+                for (int[] neighbor : adj.get(node)) {
+                    int v = neighbor[0];
+                    int wt = neighbor[1];
+                    
+                    // Relax the edge
+                    if (dist[node] + wt &lt; dist[v]) {
+                        dist[v] = dist[node] + wt;
+                    }
+                }
+            }
+        }
+
+        // Replace all unreachable nodes with -1
+        for (int i = 0; i &lt; N; i++) {
+            if (dist[i] == (int)1e9) {
+                dist[i] = -1;
+            }
+        }
+
+        // Return the final distance array
+        return dist;
+    }
+}
+
+// Driver class to run the solution
+class Main {
+    public static void main(String[] args) {
+        
+        // Number of nodes and edges
+        int N = 6, M = 7;
+        
+        // Edge list with weights
+        int[][] edges = {
+            {0,1,2}, {0,4,1}, {4,5,4},
+            {4,2,2}, {1,2,3}, {2,3,6}, {5,3,1}
+        };
+
+        // Create object of Solution class
+        Solution obj = new Solution();
+        
+        // Get shortest path from source (0)
+        int[] result = obj.shortestPath(N, M, edges);
+
+        // Print the shortest distances
+        for (int val : result) {
+            System.out.print(val + " ");
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Import required modules
+from collections import defaultdict, deque
+
+# Define the Solution class
+class Solution:
+
+    # Function to perform DFS and generate topological order
+    def topoSort(self, node, visited, stack, adj):
+        
+        # Mark the current node as visited
+        visited[node] = True
+
+        # Traverse all the neighbors of the current node
+        for neighbor, weight in adj[node]:
+            
+            # If the neighbor hasn't been visited, call DFS on it
+            if not visited[neighbor]:
+                self.topoSort(neighbor, visited, stack, adj)
+
+        # Push the current node to stack after visiting all its neighbors
+        stack.append(node)
+
+    # Function to find shortest path from source (node 0)
+    def shortestPath(self, N, M, edges):
+        
+        # Create adjacency list with weights
+        adj = defaultdict(list)
+        for u, v, wt in edges:
+            adj[u].append((v, wt))
+        
+        # Initialize visited array and stack for topological sort
+        visited = [False] * N
+        stack = []
+
+        # Call topoSort on all unvisited nodes
+        for i in range(N):
+            if not visited[i]:
+                self.topoSort(i, visited, stack, adj)
+
+        # Initialize distance array with infinity
+        dist = [float('inf')] * N
+
+        # Distance to source is zero
+        dist[0] = 0
+
+        # Process nodes in topological order
+        while stack:
+            node = stack.pop()
+
+            # Only process nodes that are reachable
+            if dist[node] != float('inf'):
+                
+                # Traverse all neighbors of the current node
+                for neighbor, weight in adj[node]:
+                    
+                    # Relax the edge if a shorter path is found
+                    if dist[node] + weight &lt; dist[neighbor]:
+                        dist[neighbor] = dist[node] + weight
+
+        # Convert unreachable distances from inf to -1
+        for i in range(N):
+            if dist[i] == float('inf'):
+                dist[i] = -1
+
+        # Return the shortest path distances
+        return dist
+
+# Driver code
+if __name__ == "__main__":
+
+    # Number of nodes and edges
+    N = 6
+    M = 7
+
+    # List of edges with weights
+    edges = [
+        [0,1,2],[0,4,1],[4,5,4],
+        [4,2,2],[1,2,3],[2,3,6],[5,3,1]
+    ]
+
+    # Create object of Solution class
+    obj = Solution()
+
+    # Call the function and store the result
+    result = obj.shortestPath(N, M, edges)
+
+    # Print the result
+    print(' '.join(map(str, result)))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Class containing shortest path logic using Topological Sort
+class Solution {
+
+    // Function to perform DFS and build topological order
+    topoSort(node, visited, stack, adj) {
+        
+        // Mark current node as visited
+        visited[node] = true;
+
+        // Traverse all neighbors
+        for (let [neighbor, weight] of adj[node]) {
+            
+            // If neighbor not visited, recurse
+            if (!visited[neighbor]) {
+                this.topoSort(neighbor, visited, stack, adj);
+            }
+        }
+
+        // Push the node after all neighbors are visited
+        stack.push(node);
+    }
+
+    // Main function to compute shortest path from source (0)
+    shortestPath(N, M, edges) {
+
+        // Initialize adjacency list
+        let adj = new Array(N).fill().map(() =&gt; []);
+
+        // Populate adjacency list with edges and weights
+        for (let [u, v, wt] of edges) {
+            adj[u].push([v, wt]);
+        }
+
+        // Initialize visited array and stack for topological sort
+        let visited = new Array(N).fill(false);
+        let stack = [];
+
+        // Perform topological sort from each unvisited node
+        for (let i = 0; i &lt; N; i++) {
+            if (!visited[i]) {
+                this.topoSort(i, visited, stack, adj);
+            }
+        }
+
+        // Initialize distance array with large number (infinity)
+        let dist = new Array(N).fill(Infinity);
+
+        // Distance to source node is 0
+        dist[0] = 0;
+
+        // Process nodes in topological order
+        while (stack.length &gt; 0) {
+            let node = stack.pop();
+
+            // Only process if node is reachable
+            if (dist[node] !== Infinity) {
+
+                // Traverse all adjacent nodes
+                for (let [neighbor, weight] of adj[node]) {
+
+                    // Relax the edge
+                    if (dist[node] + weight &lt; dist[neighbor]) {
+                        dist[neighbor] = dist[node] + weight;
+                    }
+                }
+            }
+        }
+
+        // Convert unreachable distances to -1
+        for (let i = 0; i &lt; N; i++) {
+            if (dist[i] === Infinity) {
+                dist[i] = -1;
+            }
+        }
+
+        // Return the shortest path distances
+        return dist;
+    }
+}
+
+// Driver code to test the function
+const N = 6;
+const M = 7;
+const edges = [
+    [0,1,2],[0,4,1],[4,5,4],
+    [4,2,2],[1,2,3],[2,3,6],[5,3,1]
+];
+
+// Create object of Solution class
+const obj = new Solution();
+
+// Get result by calling shortestPath
+const result = obj.shortestPath(N, M, edges);
+
+// Print the result
+console.log(result.join(' '));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+</summary>
+<p>
+</p><p><strong>Time Complexity: </strong>O(N+M) {for the topological sort} + O(N+M) {for relaxation of vertices, each node and its adjacent nodes get traversed} ~ O(N+M),where N= number of vertices and M= number of edges.</p>
+<p><strong>Space Complexity:  </strong>O(N) {for the stack storing the topological sort} + O(N) {for storing the shortest distance for each node} + O(N) {for the visited array} + O( N+2M) {for the adjacency list} ~ O(N+M) .</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

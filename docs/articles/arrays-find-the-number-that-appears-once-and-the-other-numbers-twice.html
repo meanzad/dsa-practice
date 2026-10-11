@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Find the number that appears once, and the other numbers twice</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Find the number that appears once, and the other numbers twice</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/arrays/find-the-number-that-appears-once-and-the-other-numbers-twice/</code></div>
+  <p><strong>Problem Statement:</strong> Given a non-empty array of integers arr, every element appears twice except for one. Find that single one.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input Format: arr[] = {2,2,1}
+Result: 1
+Explanation: In this array, only the element 1 appear once and so it is the answer.
+
+
+Example 2:
+Input Format: arr[] = {4,1,2,1,2}
+Result: 4
+Explanation: In this array, only element 4 appear once and the other elements appear twice. So, 4 is the answer.
+
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/single-number---i" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Brute Force
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<h2>Intuition</h2>
+For every element present in the array, we will do a linear search and count the occurrence. If for any element, the occurrence is 1, we will return it.
+<h2>Approach</h2>
+<ul>
+<li>First, we will run a loop to select the elements of the array one by one.</li>
+<li>For every element of the array, we will perform a linear search using another loop and count its occurrence.</li>
+<li>If for any element the occurrence is 1, we will return it.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find the single non-repeating element using brute force
+    int getSingleElement(vector&lt;int&gt;&amp; arr) {
+        int n = arr.size();
+
+        // Loop through every element
+        for (int i = 0; i &lt; n; i++) {
+            int num = arr[i]; // current element to check
+            int cnt = 0;
+
+            // Count occurrences of this element
+            for (int j = 0; j &lt; n; j++) {
+                if (arr[j] == num)
+                    cnt++;
+            }
+
+            // If it occurs only once, return it
+            if (cnt == 1) return num;
+        }
+
+        // This line should never be reached
+        return -1;
+    }
+};
+
+int main() {
+    vector&lt;int&gt; arr = {4, 1, 2, 1, 2};
+
+    Solution obj;
+    int ans = obj.getSingleElement(arr);
+
+    cout &lt;&lt; "The single element is: " &lt;&lt; ans &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // Function to find the single element using brute force
+    public int getSingleElement(int[] arr) {
+        int n = arr.length;
+
+        for (int i = 0; i &lt; n; i++) {
+            int num = arr[i];
+            int count = 0;
+
+            // Count how many times num occurs
+            for (int j = 0; j &lt; n; j++) {
+                if (arr[j] == num)
+                    count++;
+            }
+
+            // If only once, return it
+            if (count == 1) return num;
+        }
+
+        return -1; // fallback, won't be hit if array has a single element
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {4, 1, 2, 1, 2};
+
+        Solution obj = new Solution();
+        int ans = obj.getSingleElement(arr);
+
+        System.out.println("The single element is: " + ans);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to find the element that appears only once
+    def getSingleElement(self, arr):
+        n = len(arr)
+
+        # Check each element's count
+        for i in range(n):
+            num = arr[i]
+            count = 0
+
+            # Count how many times num appears
+            for j in range(n):
+                if arr[j] == num:
+                    count += 1
+
+            # Return if it appears exactly once
+            if count == 1:
+                return num
+
+        return -1  # fallback
+
+# Driver code
+arr = [4, 1, 2, 1, 2]
+obj = Solution()
+ans = obj.getSingleElement(arr)
+print("The single element is:", ans)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find the element that occurs once
+    getSingleElement(arr) {
+        const n = arr.length;
+
+        for (let i = 0; i &lt; n; i++) {
+            let num = arr[i];
+            let count = 0;
+
+            // Count occurrences of num
+            for (let j = 0; j &lt; n; j++) {
+                if (arr[j] === num) {
+                    count++;
+                }
+            }
+
+            // Return if only one occurrence
+            if (count === 1) return num;
+        }
+
+        return -1; // fallback
+    }
+}
+
+// Driver code
+const arr = [4, 1, 2, 1, 2];
+const obj = new Solution();
+const ans = obj.getSingleElement(arr);
+console.log("The single element is:", ans);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+</p><p>Time Complexity: O(N*N), since nested for loops are used</p>
+<p>Space Complexity: O(1). No extra space used</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="better-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Better Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<h2>Intuition</h2>
+In the previous approach, we were finding the occurrence of an element using linear search. We can optimize this using hashing technique. We can simply hash the elements along with their occurrences in the form of (key, value) pair. Thus, we can reduce the cost of finding the occurrence and hence the time complexity.
+Now, hashing can be done in two different ways and they are the following:
+<li>Array hashing(not applicable if the array contains negatives or very large numbers)</li>
+<li>Hashing using the map data structure</li>
+<h2>Approach</h2>
+<ul>
+<li>First, we will find the maximum element(say maxElement) to know the size of the hash array.</li>
+<li>Then we will declare a hash array of size maxElement+1.</li>
+<li>Now, using another loop we will store the elements of the array along with their frequency in the hash array.</li>
+<li>After that, using another loop we will iterate over the hash array, and try to find the element for which the frequency is 1, and finally, we will return that particular element.</li>
+<li>While searching for the answer finally, we can either use a loop from 0 to n(i.e. Size of the array) or use a loop from 0 to maxElement. So, the time complexity will change accordingly</li>
+</ul>
+<p><img height="457" loading="lazy" src="../assets/img/bd1ae06e08212523.png" width="481"/></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find the single non-repeating element using a hash array
+    int getSingleElement(vector&lt;int&gt;&amp; arr) {
+        int n = arr.size();
+
+        // Step 1: Find the maximum value in the array
+        int maxi = arr[0];
+        for (int i = 0; i &lt; n; i++) {
+            maxi = max(maxi, arr[i]);
+        }
+
+        // Step 2: Declare and initialize hash array of size maxi+1
+        vector&lt;int&gt; hash(maxi + 1, 0);
+
+        // Step 3: Count the frequency of each number
+        for (int i = 0; i &lt; n; i++) {
+            hash[arr[i]]++;
+        }
+
+        // Step 4: Find the element that occurs exactly once
+        for (int i = 0; i &lt; n; i++) {
+            if (hash[arr[i]] == 1)
+                return arr[i];
+        }
+
+        return -1; // fallback, shouldn't occur in valid input
+    }
+};
+
+int main() {
+    vector&lt;int&gt; arr = {4, 1, 2, 1, 2};
+
+    Solution obj;
+    int ans = obj.getSingleElement(arr);
+
+    cout &lt;&lt; "The single element is: " &lt;&lt; ans &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to find the single element using a hash array
+    public int getSingleElement(int[] arr) {
+        int n = arr.length;
+
+        // Step 1: Find maximum element
+        int maxi = arr[0];
+        for (int i = 0; i &lt; n; i++) {
+            maxi = Math.max(maxi, arr[i]);
+        }
+
+        // Step 2: Create frequency array of size maxi+1
+        int[] hash = new int[maxi + 1];
+
+        // Step 3: Count frequencies
+        for (int i = 0; i &lt; n; i++) {
+            hash[arr[i]]++;
+        }
+
+        // Step 4: Find element with frequency = 1
+        for (int i = 0; i &lt; n; i++) {
+            if (hash[arr[i]] == 1)
+                return arr[i];
+        }
+
+        return -1; // fallback
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {4, 1, 2, 1, 2};
+        Solution obj = new Solution();
+        int ans = obj.getSingleElement(arr);
+        System.out.println("The single element is: " + ans);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to find the element that appears only once using hashing
+    def getSingleElement(self, arr):
+        n = len(arr)
+
+        # Step 1: Find max value to create hash array
+        maxi = max(arr)
+
+        # Step 2: Create and initialize hash list
+        hash_arr = [0] * (maxi + 1)
+
+        # Step 3: Count frequency of each number
+        for num in arr:
+            hash_arr[num] += 1
+
+        # Step 4: Find and return the number that appears once
+        for num in arr:
+            if hash_arr[num] == 1:
+                return num
+
+        return -1  # fallback
+
+# Driver code
+arr = [4, 1, 2, 1, 2]
+obj = Solution()
+ans = obj.getSingleElement(arr)
+print("The single element is:", ans)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find the single element using a hash array
+    getSingleElement(arr) {
+        const n = arr.length;
+
+        // Step 1: Find the maximum element
+        const maxi = Math.max(...arr);
+
+        // Step 2: Create hash array and initialize to 0
+        const hash = Array(maxi + 1).fill(0);
+
+        // Step 3: Count frequency of each number
+        for (let i = 0; i &lt; n; i++) {
+            hash[arr[i]]++;
+        }
+
+        // Step 4: Find and return the number with frequency = 1
+        for (let i = 0; i &lt; n; i++) {
+            if (hash[arr[i]] === 1) {
+                return arr[i];
+            }
+        }
+
+        return -1; // fallback
+    }
+}
+
+// Driver code
+const arr = [4, 1, 2, 1, 2];
+const obj = new Solution();
+const ans = obj.getSingleElement(arr);
+console.log("The single element is:", ans);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+</p><p>Time Complexity: O(N)+O(N)+O(N), where N = size of the array. One O(N) is for finding the maximum, the second one is to hash the elements and the third one is to search the single element in the array.</p>
+<p>Space Complexity: O(maxElement+1) where maxElement = the maximum element of the array.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimised Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<h2>Intuition</h2>
+Two important properties of XOR are the following:
+<li>XOR of two same numbers is always 0 i.e. a ^ a = 0. ←Property 1.</li>
+<li>XOR of a number with 0 will result in the number itself i.e. 0 ^ a = a.  ←Property 2</li>
+<h2>Approach</h2>
+<li>We will just perform the XOR of all elements of the array using a loop and the final XOR will be the answer.</li>
+<p><img height="457" loading="lazy" src="../assets/img/a45ad6fa480fcedb.png" width="481"/></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find the single non-repeating element using XOR
+    int getSingleElement(vector&lt;int&gt;&amp; arr) {
+        int n = arr.size();
+        int xorr = 0;
+
+        // XOR all elements. Duplicates cancel out, leaving the single element.
+        for (int i = 0; i &lt; n; i++) {
+            xorr = xorr ^ arr[i];
+        }
+
+        return xorr;
+    }
+};
+
+int main() {
+    vector&lt;int&gt; arr = {4, 1, 2, 1, 2};
+
+    Solution obj;
+    int ans = obj.getSingleElement(arr);
+
+    cout &lt;&lt; "The single element is: " &lt;&lt; ans &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // Function to find the element that appears once using XOR
+    public int getSingleElement(int[] arr) {
+        int xorr = 0;
+
+        // XOR all elements — duplicates cancel each other out
+        for (int num : arr) {
+            xorr ^= num;
+        }
+
+        return xorr;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {4, 1, 2, 1, 2};
+
+        Solution obj = new Solution();
+        int ans = obj.getSingleElement(arr);
+        System.out.println("The single element is: " + ans);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to find the single non-repeating element using XOR
+    def getSingleElement(self, arr):
+        xorr = 0
+
+        # XOR all elements — duplicates cancel out
+        for num in arr:
+            xorr ^= num
+
+        return xorr
+
+# Driver code
+arr = [4, 1, 2, 1, 2]
+obj = Solution()
+ans = obj.getSingleElement(arr)
+print("The single element is:", ans)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find the unique element using XOR
+    getSingleElement(arr) {
+        let xorr = 0;
+
+        // XOR all elements — duplicates cancel out
+        for (let num of arr) {
+            xorr ^= num;
+        }
+
+        return xorr;
+    }
+}
+
+// Driver code
+const arr = [4, 1, 2, 1, 2];
+const obj = new Solution();
+const ans = obj.getSingleElement(arr);
+console.log("The single element is:", ans);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+</p><p>Time Complexity: O(N). Where N is the size of the array</p>
+<p>Space Complexity: O(1). No extra space used</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

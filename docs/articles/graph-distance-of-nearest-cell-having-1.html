@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Distance of Nearest Cell having 1</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Distance of Nearest Cell having 1</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/graph/distance-of-nearest-cell-having-1/</code></div>
+  <p><strong>Problem Statement: </strong>Given a binary grid of N*M. Find the distance of the nearest 1 in the grid for each cell.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input:
+<p><img height="457" loading="lazy" src="../assets/img/4ef4c4ddcbe418a2.png" width="481"/></p>
+Output:
+<p><img height="457" loading="lazy" src="../assets/img/f37db08681b1bbe0.png" width="481"/></p>
+
+Example 2:
+Input:
+<p><img height="457" loading="lazy" src="../assets/img/522812cbb54ee294.png" width="481"/></p>
+Output:
+<p><img height="457" loading="lazy" src="../assets/img/05cc999689264fec.png" width="481"/></p>
+</pre></div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/distance-of-nearest-cell-having-one" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+<h3>Intuition</h3>
+<p>Breadth First Search, BFS, is a traversal technique where we visit the nodes level-wise, i.e., it visits the same level nodes simultaneously, and then moves to the next level. </p>
+<p>The intuition is that BFS will take a step from cells containing 1 and will reach out to all zeros that are at a distance of one. Apparently, we can say that the nearest 1 to the 0s is at a distance of one. Again if we take another step, we will reach the next set of zeros, for these zeros 1 is at a distance of two. If we continue the same, till we can go, we can reach all the 0’s possible. </p>
+<h3>Algorithm</h3>
+<ul>
+<li>Queue: Define a queue and insert the pair of starting nodes’ coordinates along with the steps (<coordinates step="">). For example, ((2, 1), 2) means cell (2, 1) is the source node and the nearest 1 can be found at a distance of 2 from the node.</coordinates></li>
+<li>Visited array: an array initialized to 0 indicating unvisited nodes.</li>
+<li>Distance matrix: stores the distance of the nearest cell having 1 for every particular cell.</li>
+<li>Push the pair of starting points and its steps (<coordinates stept="">) in the queue, and mark the cell as visited.</coordinates></li>
+<li>Start the BFS traversal, pop out an element from the queue every time, and travel to all its unvisited neighbors having 0.</li>
+<li>For every neighboring unvisited 0, we can mark the distance to be +1 of the current node distance and store it in the distance 2D array, and at the same time insert &lt;{row, col}, steps+1&gt; into the queue.</li>
+<li>Repeat the steps until the queue becomes empty and then return the distance matrix where we have stored the steps.</li>
+</ul>
+<h3>Dry Run</h3>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/36d46225f4b8a40a.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/085548655d30b454.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/2b3eaa37cec3bdd4.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/29f623d9671cd548.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/9db3e0fa09885526.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/670c0324e4ce2fd2.png"/></div><div class="carousel-image"><img alt="Image 7" loading="lazy" src="../assets/img/4a3354d146cfd4c6.png"/></div><div class="carousel-image"><img alt="Image 8" loading="lazy" src="../assets/img/4b93a63618cf1315.png"/></div><div class="carousel-image"><img alt="Image 9" loading="lazy" src="../assets/img/c6bb8b94b6add1be.png"/></div><div class="carousel-image"><img alt="Image 10" loading="lazy" src="../assets/img/391d1d3b5afe484b.png"/></div><div class="carousel-image"><img alt="Image 11" loading="lazy" src="../assets/img/044ebeb65edee260.png"/></div><div class="carousel-image"><img alt="Image 12" loading="lazy" src="../assets/img/2c02f54885465ae8.png"/></div><div class="carousel-image"><img alt="Image 13" loading="lazy" src="../assets/img/186c4136a6c7fa60.png"/></div><div class="carousel-image"><img alt="Image 14" loading="lazy" src="../assets/img/00e6321876ea105d.png"/></div><div class="carousel-image"><img alt="Image 15" loading="lazy" src="../assets/img/e61e0cd67d19d78e.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/36d46225f4b8a40a.png"/><img alt="Image 2" loading="lazy" src="../assets/img/085548655d30b454.png"/><img alt="Image 3" loading="lazy" src="../assets/img/2b3eaa37cec3bdd4.png"/><img alt="Image 4" loading="lazy" src="../assets/img/29f623d9671cd548.png"/><img alt="Image 5" loading="lazy" src="../assets/img/9db3e0fa09885526.png"/><img alt="Image 6" loading="lazy" src="../assets/img/670c0324e4ce2fd2.png"/><img alt="Image 7" loading="lazy" src="../assets/img/4a3354d146cfd4c6.png"/><img alt="Image 8" loading="lazy" src="../assets/img/4b93a63618cf1315.png"/><img alt="Image 9" loading="lazy" src="../assets/img/c6bb8b94b6add1be.png"/><img alt="Image 10" loading="lazy" src="../assets/img/391d1d3b5afe484b.png"/><img alt="Image 11" loading="lazy" src="../assets/img/044ebeb65edee260.png"/><img alt="Image 12" loading="lazy" src="../assets/img/2c02f54885465ae8.png"/><img alt="Image 13" loading="lazy" src="../assets/img/186c4136a6c7fa60.png"/><img alt="Image 14" loading="lazy" src="../assets/img/00e6321876ea105d.png"/><img alt="Image 15" loading="lazy" src="../assets/img/e61e0cd67d19d78e.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution 
+{
+    public:
+    //Function to find the distance of nearest 1 in the grid for each cell.
+	vector&lt;vector&lt;int&gt;&gt;nearest(vector&lt;vector&lt;int&gt;&gt;grid)
+	{
+	    int n = grid.size(); 
+	    int m = grid[0].size(); 
+	    // visited and distance matrix
+	    vector&lt;vector&lt;int&gt;&gt; vis(n, vector&lt;int&gt;(m, 0)); 
+	    vector&lt;vector&lt;int&gt;&gt; dist(n, vector&lt;int&gt;(m, 0)); 
+	    // &lt;coordinates, steps&gt;
+	    queue&lt;pair&lt;pair&lt;int,int&gt;, int&gt;&gt; q; 
+	    // traverse the matrix
+	    for(int i = 0;i&lt;n;i++) {
+	        for(int j = 0;j&lt;m;j++) {
+	            // start BFS if cell contains 1
+	            if(grid[i][j] == 1) {
+	                q.push({{i,j}, 0}); 
+	                vis[i][j] = 1; 
+	            }
+	            else {
+	                // mark unvisited 
+	                vis[i][j] = 0; 
+	            }
+	        }
+	    }
+	    
+	    int delrow[] = {-1, 0, +1, 0}; 
+	    int delcol[] = {0, +1, 0, -1}; 
+	    
+	    // traverse till queue becomes empty
+	    while(!q.empty()) {
+	        int row = q.front().first.first; 
+	        int col = q.front().first.second; 
+	        int steps = q.front().second; 
+	        q.pop(); 
+	        dist[row][col] = steps; 
+	        // for all 4 neighbours
+	        for(int i = 0;i&lt;4;i++) {
+	            int nrow = row + delrow[i]; 
+	            int ncol = col + delcol[i]; 
+	            // check for valid unvisited cell
+	            if(nrow &gt;= 0 &amp;&amp; nrow &lt; n &amp;&amp; ncol &gt;= 0 &amp;&amp; ncol &lt; m 
+	            &amp;&amp; vis[nrow][ncol] == 0) {
+	                vis[nrow][ncol] = 1; 
+	                q.push({{nrow, ncol}, steps+1});  
+	            }
+	        }
+	    }
+	    // return distance matrix
+	    return dist; 
+	}
+};
+
+int main(){
+    vector&lt;vector&lt;int&gt;&gt;grid{
+        {0,1,1,0},
+        {1,1,0,0},
+        {0,0,1,1}
+    };
+	
+	Solution obj;
+	vector&lt;vector&lt;int&gt;&gt; ans = obj.nearest(grid);
+		
+	for(auto i: ans){
+		for(auto j: i)
+			cout &lt;&lt; j &lt;&lt; " ";
+		cout &lt;&lt; "\n";
+	}
+	
+	return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Class to find the distance of the nearest '1' for each cell in a grid
+class Solution {
+    // Method to compute the nearest 1 for each cell
+    public int[][] nearest(int[][] grid) {
+        int n = grid.length;       // Number of rows
+        int m = grid[0].length;    // Number of columns
+
+        // Visited matrix to track visited cells
+        int[][] vis = new int[n][m];
+        // Distance matrix to store the result
+        int[][] dist = new int[n][m];
+
+        // Queue to perform BFS: stores coordinates and steps
+        Queue&lt;int[]&gt; q = new LinkedList&lt;&gt;();
+
+        // Initialize queue with all cells containing 1
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = 0; j &lt; m; j++) {
+                if (grid[i][j] == 1) {
+                    q.add(new int[]{i, j, 0}); // {row, col, distance}
+                    vis[i][j] = 1; // Mark as visited
+                } else {
+                    vis[i][j] = 0; // Mark unvisited
+                }
+            }
+        }
+
+        // Directions: Up, Right, Down, Left
+        int[] delRow = {-1, 0, 1, 0};
+        int[] delCol = {0, 1, 0, -1};
+
+        // BFS traversal
+        while (!q.isEmpty()) {
+            int[] cell = q.poll();
+            int row = cell[0];
+            int col = cell[1];
+            int steps = cell[2];
+
+            dist[row][col] = steps; // Assign distance for the current cell
+
+            // Explore all 4 directions
+            for (int i = 0; i &lt; 4; i++) {
+                int nrow = row + delRow[i];
+                int ncol = col + delCol[i];
+
+                // Check boundaries and unvisited cells
+                if (nrow &gt;= 0 &amp;&amp; nrow &lt; n &amp;&amp; ncol &gt;= 0 &amp;&amp; ncol &lt; m &amp;&amp; vis[nrow][ncol] == 0) {
+                    vis[nrow][ncol] = 1; // Mark as visited
+                    q.add(new int[]{nrow, ncol, steps + 1}); // Push into queue with incremented distance
+                }
+            }
+        }
+        return dist;
+    }
+
+    // Driver code
+    public static void main(String[] args) {
+        int[][] grid = {
+            {0, 1, 1, 0},
+            {1, 1, 0, 0},
+            {0, 0, 1, 1}
+        };
+
+        Solution obj = new Solution();
+        int[][] ans = obj.nearest(grid);
+
+        // Print result matrix
+        for (int[] row : ans) {
+            for (int val : row) {
+                System.out.print(val + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">from collections import deque
+
+class Solution:
+    # Function to find the distance of nearest 1 in the grid for each cell
+    def nearest(self, grid):
+        n = len(grid)       # Number of rows
+        m = len(grid[0])    # Number of columns
+
+        # Visited matrix to track visited cells
+        vis = [[0] * m for _ in range(n)]
+        # Distance matrix to store result
+        dist = [[0] * m for _ in range(n)]
+
+        # Queue to perform BFS: stores (row, col, steps)
+        q = deque()
+
+        # Initialize queue with all cells containing 1
+        for i in range(n):
+            for j in range(m):
+                if grid[i][j] == 1:
+                    q.append((i, j, 0))  # (row, col, distance)
+                    vis[i][j] = 1       # Mark as visited
+                else:
+                    vis[i][j] = 0       # Mark as unvisited
+
+        # Directions: Up, Right, Down, Left
+        del_row = [-1, 0, 1, 0]
+        del_col = [0, 1, 0, -1]
+
+        # BFS traversal
+        while q:
+            row, col, steps = q.popleft()
+            dist[row][col] = steps  # Assign distance
+
+            # Explore all 4 directions
+            for i in range(4):
+                nrow = row + del_row[i]
+                ncol = col + del_col[i]
+
+                # Check for valid and unvisited cell
+                if 0 &lt;= nrow &lt; n and 0 &lt;= ncol &lt; m and vis[nrow][ncol] == 0:
+                    vis[nrow][ncol] = 1  # Mark visited
+                    q.append((nrow, ncol, steps + 1))  # Add with incremented distance
+
+        return dist
+
+# Driver code
+if __name__ == "__main__":
+    grid = [
+        [0, 1, 1, 0],
+        [1, 1, 0, 0],
+        [0, 0, 1, 1]
+    ]
+
+    obj = Solution()
+    ans = obj.nearest(grid)
+
+    # Print result matrix
+    for row in ans:
+        print(*row)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find the distance of nearest 1 in the grid for each cell
+    nearest(grid) {
+        const n = grid.length;      // Number of rows
+        const m = grid[0].length;   // Number of columns
+
+        // Visited matrix
+        const vis = Array.from({ length: n }, () =&gt; Array(m).fill(0));
+        // Distance matrix
+        const dist = Array.from({ length: n }, () =&gt; Array(m).fill(0));
+
+        // Queue for BFS (will store [row, col, steps])
+        const q = [];
+
+        // Initialize queue with cells containing 1
+        for (let i = 0; i &lt; n; i++) {
+            for (let j = 0; j &lt; m; j++) {
+                if (grid[i][j] === 1) {
+                    q.push([i, j, 0]); // Push initial positions with 0 distance
+                    vis[i][j] = 1;     // Mark as visited
+                }
+            }
+        }
+
+        // Directions: Up, Right, Down, Left
+        const delRow = [-1, 0, 1, 0];
+        const delCol = [0, 1, 0, -1];
+
+        // BFS traversal
+        while (q.length &gt; 0) {
+            const [row, col, steps] = q.shift(); // Dequeue
+            dist[row][col] = steps; // Set distance for this cell
+
+            // Explore all 4 directions
+            for (let i = 0; i &lt; 4; i++) {
+                const nrow = row + delRow[i];
+                const ncol = col + delCol[i];
+
+                // Check if the next cell is valid and unvisited
+                if (nrow &gt;= 0 &amp;&amp; nrow &lt; n &amp;&amp; ncol &gt;= 0 &amp;&amp; ncol &lt; m &amp;&amp; vis[nrow][ncol] === 0) {
+                    vis[nrow][ncol] = 1; // Mark as visited
+                    q.push([nrow, ncol, steps + 1]); // Enqueue with updated steps
+                }
+            }
+        }
+
+        return dist;
+    }
+}
+
+// Driver code
+const grid = [
+    [0, 1, 1, 0],
+    [1, 1, 0, 0],
+    [0, 0, 1, 1]
+];
+
+const obj = new Solution();
+const ans = obj.nearest(grid);
+
+// Print result matrix
+for (const row of ans) {
+    console.log(row.join(" "));
+}
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Complexity Analysis
+                    </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p>Time Complexity: O(NxM + NxMx4) ~ O(N x M), the BFS function will be called for (N x M) nodes, and for every node, we are traversing for 4 neighbors, so it will take O(N x M x 4) time.</p>
+<p>Space Complexity: O(N x M) + O(N x M) + O(N x M) ~ O(N x M), for the visited array, distance matrix, and queue space takes up N x M locations at max. </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

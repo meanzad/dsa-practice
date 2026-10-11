@@ -12,7 +12,7 @@ from requests.adapters import HTTPAdapter
 ROOT = Path(__file__).resolve().parent.parent
 CACHE = ROOT / ".cache"
 DATA = ROOT / "data"
-SITE = ROOT / "site"
+SITE = ROOT / "docs"
 
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " \
      "(KHTML, like Gecko) Chrome/125.0 Safari/537.36"

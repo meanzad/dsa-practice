@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Minimum Number of Coins</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Minimum Number of Coins</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/blogs/data-structure-and-algorithm/minimum-number-of-coins</code></div>
+  <div class="ArticleParser-module__R__VNG__article" data-article-segment="html-0"><p>You are given an array of integers representing standard currency denominations . You are also given an integer <code>V</code> representing a target amount of money.</p><p>Assuming you have an infinite supply of each coin denomination, find and return the minimum number of coins required to make exactly the amount <code>V</code>.</p></div><div><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 1</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>coins = [1, 2, 5]</code>, <code>amount = 11</code></p><p><strong>Output:</strong> <code>3</code></p><p><strong>Explanation:</strong> The amount <code>11</code> can be made as <code>5 + 5 + 1</code>, so the minimum number of coins is <code>3</code>.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 2</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>coins = [2, 6]</code>, <code>amount = 7</code></p><p><strong>Output:</strong> <code>-1</code></p><p><strong>Explanation:</strong> There is no way to make exactly <code>7</code> using only coins <code>2</code> and <code>6</code>.</p></div></div></section></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-1"><h2 id="blog-toc-brute-force-approach">Brute Force Approach</h2><p>The most direct idea is to try every coin that can fit into the current amount.</p><p>If the amount is <code>43</code>, one possible first coin is <code>20</code>. Then the remaining amount becomes <code>23</code>. Another possible first coin is <code>10</code>. Then the remaining amount becomes <code>33</code>. The recursive approach explores all such choices. For every coin picked, it says: <code>answer = 1 + minimum coins needed for the remaining amount</code></p><p>After trying all possible coins, the smallest answer is chosen. This is easy to understand, but it does a lot of repeated work. The same remaining amounts are solved again and again.</p><h3 id="blog-toc-algorithm">Algorithm</h3><ul><li><p>If the amount becomes <code>0</code>, return <code>0</code> because no more coins are needed.</p></li><li><p>Keep a large value as the current best answer. This helps track the minimum among all choices.</p></li><li><p>Try every coin one by one. This is done because any coin may be the first coin in the best answer.</p></li><li><p>If the coin is not greater than the current amount, recursively solve the remaining amount.</p></li><li><p>If the recursive answer is valid, add <code>1</code> for the coin just picked and update the minimum answer.</p></li><li><p>If no coin can form the amount, return <code>-1</code>.</p></li></ul><h3 id="blog-toc-dry-run">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Maximum Number of Coins Brute Dry Run" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/9d04d6a0c68fa50e.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Maximum Number of Coins Brute Dry Run</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-2"><h3 id="blog-toc-solution">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    int minCoins(vector&lt;int&gt;&amp; coins, int V) {
+        // Base case: no more coins needed
+        if (V == 0) return 0;
+        
+        int result = INT_MAX;
+        
+        // Try every single coin
+        for (int i = 0; i &lt; coins.size(); i++) {
+            if (coins[i] &lt;= V) {
+                int sub_res = minCoins(coins, V - coins[i]);
+                
+                // If the path is valid, add 1 for the current coin
+                if (sub_res != INT_MAX &amp;&amp; sub_res + 1 &lt; result) {
+                    result = sub_res + 1;
+                }
+            }
+        }
+        return result;
+    }
+};
+
+//Driver Code starts
+
+int main() {
+    Solution sol;
+    vector&lt;int&gt; coins = {1, 2, 5};
+    int V = 11;
+    cout &lt;&lt; "Minimum coins required: " &lt;&lt; sol.minCoins(coins, V) &lt;&lt; endl;
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">import sys
+
+class Solution:
+    def min_coins(self, coins: list[int], V: int) -&gt; int:
+        # Base case: no more coins needed
+        if V == 0:
+            return 0
+            
+        result = sys.maxsize
+        
+        # Try every single coin
+        for coin in coins:
+            if coin &lt;= V:
+                sub_res = self.min_coins(coins, V - coin)
+                
+                # If the path is valid, add 1 for the current coin
+                if sub_res != sys.maxsize and sub_res + 1 &lt; result:
+                    result = sub_res + 1
+                    
+        return result
+
+# Driver Code starts
+if __name__ == "__main__":
+    sol = Solution()
+    coins = [1, 2, 5]
+    V = 11
+    print(f"Minimum coins required: {sol.min_coins(coins, V)}")</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">class Solution {
+    public int minCoins(int[] coins, int V) {
+        // Base case: no more coins needed
+        if (V == 0) return 0;
+        
+        int result = Integer.MAX_VALUE;
+        
+        // Try every single coin
+        for (int i = 0; i &lt; coins.length; i++) {
+            if (coins[i] &lt;= V) {
+                int sub_res = minCoins(coins, V - coins[i]);
+                
+                // If the path is valid, add 1 for the current coin
+                if (sub_res != Integer.MAX_VALUE &amp;&amp; sub_res + 1 &lt; result) {
+                    result = sub_res + 1;
+                }
+            }
+        }
+        return result;
+    }
+}
+
+// Driver Code starts
+
+public class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        int[] coins = {1, 2, 5};
+        int V = 11;
+        System.out.println("Minimum coins required: " + sol.minCoins(coins, V));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    minCoins(coins, V) {
+        // Base case: no more coins needed
+        if (V === 0) return 0;
+        
+        let result = Infinity;
+        
+        // Try every single coin
+        for (let i = 0; i &lt; coins.length; i++) {
+            if (coins[i] &lt;= V) {
+                let sub_res = this.minCoins(coins, V - coins[i]);
+                
+                // If the path is valid, add 1 for the current coin
+                if (sub_res !== Infinity &amp;&amp; sub_res + 1 &lt; result) {
+                    result = sub_res + 1;
+                }
+            }
+        }
+        return result;
+    }
+}
+
+// Driver Code starts
+
+const sol = new Solution();
+const coins = [1, 2, 5];
+const V = 11;
+console.log("Minimum coins required:", sol.minCoins(coins, V));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-3"><h3 id="blog-toc-complexity-analysis">Complexity Analysis</h3><p><strong>Time Complexity:</strong> Exponential, because many coin combinations are explored repeatedly.</p></div><div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-4"><p><strong>Space Complexity:</strong> <code>O(V)</code> in the worst case because the recursion depth can go up to the amount.</p><p></p><p></p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-5"><h2 id="blog-toc-optimal-approach">Optimal Approach</h2><p>The improvement is simple: for standard currency systems, there is no need to test every combination. Always take the largest coin that does not exceed the remaining amount. If the amount is <code>43</code>, first take <code>20</code>. The remaining amount becomes <code>23</code>. Take another <code>20</code>. The remaining amount becomes <code>3</code>. Now take <code>2</code>, then take <code>1</code>.</p><p>So the answer becomes: <code>20 + 20 + 2 + 1</code></p><p>That uses only <code>4</code> coins. This is the greedy pattern: make the best local choice right now and move forward without looking back.</p><h3 id="blog-toc-algorithm-2">Algorithm</h3><ul><li><p>Sort the coins in decreasing order. This lets the largest useful coin be checked first.</p></li><li><p>Start from the largest coin and check how many times it can fit into the remaining amount.</p></li><li><p>Add that count to the answer because those coins are now used.</p></li><li><p>Reduce the amount using the remainder after taking that coin.</p></li><li><p>Continue until the amount becomes <code>0</code>.</p></li><li><p>If some amount is still left, return <code>-1</code>. This handles cases where the given coins cannot form the exact amount.</p></li></ul><h3 id="blog-toc-dry-run-2">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Maximum Number of Coins Optimal Dry Run" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/a1a0a5de7509acef.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Maximum Number of Coins Optimal Dry Run</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-6"><h3 id="blog-toc-solution-2">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    /*
+       Recursively tries every valid coin choice
+       and returns the minimum number of coins.
+    */
+    int solveRecursive(vector&lt;int&gt;&amp; coins, int amount) {
+        // If amount is 0, no more coins are needed.
+        if (amount == 0) {
+            return 0;
+        }
+
+        // This stores the best answer found so far.
+        int best = INT_MAX;
+
+        for (int coin : coins) {
+            // A coin can be picked only if it does not
+            // exceed the remaining amount.
+            if (coin &lt;= amount) {
+                int nextAnswer = solveRecursive(coins, amount - coin);
+
+                // Update the answer only when the remaining
+                // amount can be formed.
+                if (nextAnswer != -1) {
+                    best = min(best, 1 + nextAnswer);
+                }
+            }
+        }
+
+        // If best was never updated, this amount is impossible.
+        if (best == INT_MAX) {
+            return -1;
+        }
+
+        return best;
+    }
+
+    /*
+       Uses the largest possible coin first
+       for standard currency systems.
+    */
+    int minCoinsGreedy(vector&lt;int&gt; coins, int amount) {
+        sort(coins.rbegin(), coins.rend());
+
+        // This stores the total number of coins used.
+        int count = 0;
+
+        for (int coin : coins) {
+            // Use this coin only if it can fit
+            // into the remaining amount.
+            if (coin &lt;= amount) {
+                count += amount / coin;
+                amount %= coin;
+            }
+        }
+
+        // If amount is still left, exact change is impossible.
+        if (amount != 0) {
+            return -1;
+        }
+
+        return count;
+    }
+};
+
+int main() {
+    // Driver code starts
+    vector&lt;int&gt; coins = {1, 2, 5, 10, 20, 50, 100, 500, 1000};
+    int amount = 43;
+
+    Solution obj;
+    cout &lt;&lt; obj.solveRecursive(coins, amount) &lt;&lt; endl;
+    cout &lt;&lt; obj.minCoinsGreedy(coins, amount);
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">from typing import List
+
+class Solution:
+    """
+    Recursively tries every valid coin choice
+    and returns the minimum number of coins.
+    """
+    def solveRecursive(self, coins: List[int], amount: int) -&gt; int:
+        # If amount is 0, no more coins are needed.
+        if amount == 0:
+            return 0
+
+        # This stores the best answer found so far.
+        best = float("inf")
+
+        for coin in coins:
+            # A coin can be picked only if it does not
+            # exceed the remaining amount.
+            if coin &lt;= amount:
+                next_answer = self.solveRecursive(coins, amount - coin)
+
+                # Update the answer only when the remaining
+                # amount can be formed.
+                if next_answer != -1:
+                    best = min(best, 1 + next_answer)
+
+        # If best was never updated, this amount is impossible.
+        if best == float("inf"):
+            return -1
+
+        return best
+
+    """
+    Uses the largest possible coin first
+    for standard currency systems.
+    """
+    def minCoinsGreedy(self, coins: List[int], amount: int) -&gt; int:
+        coins.sort(reverse=True)
+
+        # This stores the total number of coins used.
+        count = 0
+
+        for coin in coins:
+            # Use this coin only if it can fit
+            # into the remaining amount.
+            if coin &lt;= amount:
+                count += amount // coin
+                amount %= coin
+
+        # If amount is still left, exact change is impossible.
+        if amount != 0:
+            return -1
+
+        return count
+
+
+def main() -&gt; None:
+    # Driver code starts
+    coins = [1, 2, 5, 10, 20, 50, 100, 500, 1000]
+    amount = 43
+
+    obj = Solution()
+    print(obj.solveRecursive(coins, amount))
+    print(obj.minCoinsGreedy(coins, amount))
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.Arrays;
+import java.util.Collections;
+
+class Solution {
+    /*
+       Recursively tries every valid coin choice
+       and returns the minimum number of coins.
+    */
+    public int solveRecursive(Integer[] coins, int amount) {
+        // If amount is 0, no more coins are needed.
+        if (amount == 0) {
+            return 0;
+        }
+
+        // This stores the best answer found so far.
+        int best = Integer.MAX_VALUE;
+
+        for (int coin : coins) {
+            // A coin can be picked only if it does not
+            // exceed the remaining amount.
+            if (coin &lt;= amount) {
+                int nextAnswer = solveRecursive(coins, amount - coin);
+
+                // Update the answer only when the remaining
+                // amount can be formed.
+                if (nextAnswer != -1) {
+                    best = Math.min(best, 1 + nextAnswer);
+                }
+            }
+        }
+
+        // If best was never updated, this amount is impossible.
+        if (best == Integer.MAX_VALUE) {
+            return -1;
+        }
+
+        return best;
+    }
+
+    /*
+       Uses the largest possible coin first
+       for standard currency systems.
+    */
+    public int minCoinsGreedy(Integer[] coins, int amount) {
+        Arrays.sort(coins, Collections.reverseOrder());
+
+        // This stores the total number of coins used.
+        int count = 0;
+
+        for (int coin : coins) {
+            // Use this coin only if it can fit
+            // into the remaining amount.
+            if (coin &lt;= amount) {
+                count += amount / coin;
+                amount %= coin;
+            }
+        }
+
+        // If amount is still left, exact change is impossible.
+        if (amount != 0) {
+            return -1;
+        }
+
+        return count;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        // Driver code starts
+        Integer[] coins = {1, 2, 5, 10, 20, 50, 100, 500, 1000};
+        int amount = 43;
+
+        Solution obj = new Solution();
+        System.out.println(obj.solveRecursive(coins, amount));
+        System.out.println(obj.minCoinsGreedy(coins, amount));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    /*
+       Recursively tries every valid coin choice
+       and returns the minimum number of coins.
+    */
+    solveRecursive(coins, amount) {
+        // If amount is 0, no more coins are needed.
+        if (amount === 0) {
+            return 0;
+        }
+
+        // This stores the best answer found so far.
+        let best = Infinity;
+
+        for (const coin of coins) {
+            // A coin can be picked only if it does not
+            // exceed the remaining amount.
+            if (coin &lt;= amount) {
+                const nextAnswer = this.solveRecursive(coins, amount - coin);
+
+                // Update the answer only when the remaining
+                // amount can be formed.
+                if (nextAnswer !== -1) {
+                    best = Math.min(best, 1 + nextAnswer);
+                }
+            }
+        }
+
+        // If best was never updated, this amount is impossible.
+        if (best === Infinity) {
+            return -1;
+        }
+
+        return best;
+    }
+
+    /*
+       Uses the largest possible coin first
+       for standard currency systems.
+    */
+    minCoinsGreedy(coins, amount) {
+        coins.sort((a, b) =&gt; b - a);
+
+        // This stores the total number of coins used.
+        let count = 0;
+
+        for (const coin of coins) {
+            // Use this coin only if it can fit
+            // into the remaining amount.
+            if (coin &lt;= amount) {
+                count += Math.floor(amount / coin);
+                amount %= coin;
+            }
+        }
+
+        // If amount is still left, exact change is impossible.
+        if (amount !== 0) {
+            return -1;
+        }
+
+        return count;
+    }
+}
+
+function main() {
+    // Driver code starts
+    const coins = [1, 2, 5, 10, 20, 50, 100, 500, 1000];
+    const amount = 43;
+
+    const obj = new Solution();
+    console.log(obj.solveRecursive(coins, amount));
+    console.log(obj.minCoinsGreedy(coins, amount));
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-7"><h3 id="blog-toc-complexity-analysis-2">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(n log n)</code> because the coins are sorted first.</p><p><strong>Space Complexity:</strong> <code>O(1)</code> apart from sorting, because constant extra space is used.</p><p></p><p></p></div><div><section aria-label="Interview follow-up Questions" class="BlogDetail-module__HEfJva__faqSection" id="blog-toc-faqs"><h2 class="BlogDetail-module__HEfJva__faqHeading">Interview follow-up Questions</h2><div class="flex w-full flex-col BlogDetail-module__HEfJva__faqList" data-orientation="vertical" data-slot="accordion"><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="open"><h3 class="flex" data-orientation="vertical" data-state="open"></h3><div aria-labelledby="radix-_R_1k4qnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="open" id="radix-_R_5k4qnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"><div class="h-auto pt-0 pb-2.5 [&amp;_a]:underline [&amp;_a]:underline-offset-3 [&amp;_a]:hover:text-foreground [&amp;_p:not(:last-child)]:mb-4 BlogDetail-module__HEfJva__faqAnswer"><p>No! The greedy approach only works perfectly on standard currency systems (like US Dollars or Indian Rupees) because the denominations are specifically engineered so that larger notes cleanly dominate smaller combinations. However, if you had an arbitrary coin system like [1, 3, 4] and needed to make 6, the greedy algorithm would incorrectly pick 4, 1, 1 (3 coins). The true optimal answer is 3, 3 (2 coins). For random coin systems, you must abandon greedy logic. If you want to understand this in detail, check our guide on Dynamic Programming.</p></div></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_2k4qnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_6k4qnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_3k4qnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_7k4qnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div></div></section></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div>
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

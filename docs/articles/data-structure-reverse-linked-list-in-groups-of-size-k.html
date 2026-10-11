@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Reverse Linked List in groups of Size K</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Reverse Linked List in groups of Size K</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/reverse-linked-list-in-groups-of-size-k/</code></div>
+  <p><strong>Problem Statement: </strong> Given the head of a singly linked list containing integers, reverse the nodes of the list in groups of k and return the head of the modified list. If the number of nodes is not a multiple of k, then the remaining nodes at the end should be kept as is and not reversed.
+
+
+<br/>
+Do not change the values of the nodes, only change the links between nodes.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p><strong>Input :</strong> head -&gt; 1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5, k = 2
+<strong>Output :</strong>head -&gt; 2 -&gt; 1 -&gt; 4 -&gt; 3 -&gt; 5
+<strong>Explanation :</strong>The groups 1 -&gt; 2 and 3 -&gt; 4 were reversed as 2 -&gt; 1 and 4 -&gt; 3.<br/>
+<strong>Input :</strong>head -&gt; 1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5, k = 3
+<strong>Output :</strong>head -&gt; 3 -&gt; 2 -&gt; 1 -&gt; 4 -&gt; 5
+<strong>Explanation :</strong>The groups 1 -&gt; 2 -&gt; 3 were reversed as 3 -&gt; 2 -&gt; 1.
+Note that 4 -&gt; 5 was not reversed.</p></pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/reverse-ll-in-group-of-given-size-k" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+
+For reversing nodes in a linked list in groups of size k. Instead of flipping the whole list, we break it into groups of k nodes and reverse each group separately. If any group at the end has fewer than k nodes, we just leave it as is.
+
+To make this easier to understand and implement, we break the process into 3 helper functions:<br/><br/>
+<strong>reverseLinkedList:</strong>
+Reverses a linked list segment using the basic 3-pointer method (prev, curr, next). You reverse pointers one by one until the whole segment is flipped.<br/>
+<strong>getKthNode:</strong>
+Given a starting node, it walks forward k steps and returns the k-th node. If fewer than k nodes exist, it returns null. This helps us slice the list into group of size k.<br/>
+<strong>kReverse:</strong>
+The main function that keeps calling getKthNode to find valid k-sized segments, reverses them using reverseLinkedList, and connects everything back together.
+<ul>
+<li>Start with a <strong>dummy</strong> node pointing to the <strong>head</strong> of the list to simplify edge cases.</li>
+<li>Set a pointer <strong>groupPrev</strong> to <strong>dummy</strong> (this keeps track of the end of the previous reversed group).</li>
+<li>While there are at least <strong>k</strong> nodes remaining:</li>
+<ul>
+<li>Use <strong>getKthNode</strong> from <strong>groupPrev</strong> to find the end of the current <strong>k</strong>-sized group.</li>
+<li>If <strong>getKthNode</strong> returns <strong>null</strong> (less than <strong>k</strong> nodes left), break the loop.</li>
+<li>Keep track of the next group’s start using <strong>kth.next</strong>.</li>
+<li>Temporarily break the link after the <strong>k</strong>-th node so we can reverse this segment cleanly.</li>
+<li>Call <strong>reverseLinkedList</strong> on the current group’s <strong>head</strong> to reverse this <strong>k</strong>-segment.</li>
+<li>Connect the previous group’s tail (<strong>groupPrev</strong>) to the <strong>head</strong> of the reversed segment.</li>
+<li>Connect the tail of the reversed segment to the start of the next group.</li>
+<li>Update <strong>groupPrev</strong> to point to the tail of the reversed segment.</li>
+</ul>
+<li>Once done, return the new <strong>head</strong> of the list (i.e., <strong>dummy.next</strong>).</li>
+</ul>
+
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/2011cb8691852118.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/8e5527806bcdc47e.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/e44307fa0847e9e3.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/ee5d81e15025d236.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/2011cb8691852118.png"/><img alt="Image 2" loading="lazy" src="../assets/img/8e5527806bcdc47e.png"/><img alt="Image 3" loading="lazy" src="../assets/img/e44307fa0847e9e3.png"/><img alt="Image 4" loading="lazy" src="../assets/img/ee5d81e15025d236.png"/></div></div>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Definition of singly-linked list node
+class ListNode {
+public:
+    int val;
+    ListNode* next;
+    ListNode(int x) {
+        val = x;
+        next = NULL;
+    }
+};
+
+class Solution {
+public:
+    // Function to reverse nodes in groups of k
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        // Creating a dummy node to handle edge cases easily
+        ListNode* dummy = new ListNode(0);
+        dummy-&gt;next = head;
+
+        // Pointer to keep track of the previous group's tail
+        ListNode* groupPrev = dummy;
+
+        while (true) {
+            // Finding the k-th node from the groupPrev
+            ListNode* kth = getKthNode(groupPrev, k);
+            if (!kth) break;
+
+            // Store the next group's head
+            ListNode* groupNext = kth-&gt;next;
+
+            // Break the chain to reverse current k-group cleanly
+            ListNode* prev = groupNext;
+            ListNode* curr = groupPrev-&gt;next;
+
+            // Reversing k nodes
+            for (int i = 0; i &lt; k; i++) {
+                ListNode* temp = curr-&gt;next;
+                curr-&gt;next = prev;
+                prev = curr;
+                curr = temp;
+            }
+
+            // Connecting previous group to the reversed group
+            ListNode* temp = groupPrev-&gt;next;
+            groupPrev-&gt;next = kth;
+            groupPrev = temp;
+        }
+
+        // Returning the new head
+        return dummy-&gt;next;
+    }
+
+    // Helper function to find the k-th node from the current node
+    ListNode* getKthNode(ListNode* curr, int k) {
+        while (curr &amp;&amp; k &gt; 0) {
+            curr = curr-&gt;next;
+            k--;
+        }
+        return curr;
+    }
+};
+
+// Driver code
+int main() {
+    Solution obj;
+
+    // Creating the linked list: 1-&gt;2-&gt;3-&gt;4-&gt;5
+    ListNode* head = new ListNode(1);
+    head-&gt;next = new ListNode(2);
+    head-&gt;next-&gt;next = new ListNode(3);
+    head-&gt;next-&gt;next-&gt;next = new ListNode(4);
+    head-&gt;next-&gt;next-&gt;next-&gt;next = new ListNode(5);
+
+    int k = 2;
+
+    // Reversing in groups of k
+    ListNode* result = obj.reverseKGroup(head, k);
+
+    // Printing the reversed list
+    while (result != NULL) {
+        cout &lt;&lt; result-&gt;val &lt;&lt; " ";
+        result = result-&gt;next;
+    }
+    cout &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import.java.util.*;
+// Definition for singly-linked list node
+class ListNode {
+    int val;
+    ListNode next;
+    ListNode(int x) {
+        val = x;
+        next = null;
+    }
+}
+
+class Solution {
+    // Function to reverse nodes in groups of k
+    public ListNode reverseKGroup(ListNode head, int k) {
+        // Create a dummy node to handle edge cases
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+
+        // Pointer to the tail of the last reversed group
+        ListNode groupPrev = dummy;
+
+        while (true) {
+            // Get the k-th node in the current group
+            ListNode kth = getKthNode(groupPrev, k);
+            if (kth == null) break;
+
+            // Store the next group’s head
+            ListNode groupNext = kth.next;
+
+            // Reverse the current k-group
+            ListNode prev = groupNext;
+            ListNode curr = groupPrev.next;
+
+            for (int i = 0; i &lt; k; i++) {
+                ListNode temp = curr.next;
+                curr.next = prev;
+                prev = curr;
+                curr = temp;
+            }
+
+            // Connect the previous group to the reversed group
+            ListNode temp = groupPrev.next;
+            groupPrev.next = kth;
+            groupPrev = temp;
+        }
+
+        // Return the new head
+        return dummy.next;
+    }
+
+    // Helper function to get the k-th node from the current node
+    private ListNode getKthNode(ListNode curr, int k) {
+        while (curr != null &amp;&amp; k &gt; 0) {
+            curr = curr.next;
+            k--;
+        }
+        return curr;
+    }
+}
+
+// Driver class
+class Main {
+    public static void main(String[] args) {
+        Solution obj = new Solution();
+
+        // Creating the linked list: 1-&gt;2-&gt;3-&gt;4-&gt;5
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(3);
+        head.next.next.next = new ListNode(4);
+        head.next.next.next.next = new ListNode(5);
+
+        int k = 2;
+
+        // Reversing in groups of k
+        ListNode result = obj.reverseKGroup(head, k);
+
+        // Printing the final list
+        while (result != null) {
+            System.out.print(result.val + " ");
+            result = result.next;
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Definition for singly-linked list node
+class ListNode:
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+
+class Solution:
+    # Function to reverse nodes in k-sized groups
+    def reverseKGroup(self, head, k):
+        # Creating a dummy node
+        dummy = ListNode(0)
+        dummy.next = head
+
+        # Pointer to the tail of the last reversed group
+        groupPrev = dummy
+
+        while True:
+            # Get the k-th node in the group
+            kth = self.getKthNode(groupPrev, k)
+            if not kth:
+                break
+
+            # Store the next group’s start
+            groupNext = kth.next
+
+            # Reverse the current k nodes
+            prev = groupNext
+            curr = groupPrev.next
+
+            for _ in range(k):
+                temp = curr.next
+                curr.next = prev
+                prev = curr
+                curr = temp
+
+            # Connect the reversed group to the previous part
+            temp = groupPrev.next
+            groupPrev.next = kth
+            groupPrev = temp
+
+        # Return new head
+        return dummy.next
+
+    # Helper function to find the k-th node from current
+    def getKthNode(self, curr, k):
+        while curr and k &gt; 0:
+            curr = curr.next
+            k -= 1
+        return curr
+
+# Driver code
+def printList(node):
+    while node:
+        print(node.val, end=" ")
+        node = node.next
+
+# Creating linked list: 1-&gt;2-&gt;3-&gt;4-&gt;5
+head = ListNode(1)
+head.next = ListNode(2)
+head.next.next = ListNode(3)
+head.next.next.next = ListNode(4)
+head.next.next.next.next = ListNode(5)
+
+k = 2
+sol = Solution()
+result = sol.reverseKGroup(head, k)
+printList(result)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Definition for singly-linked list node
+class ListNode {
+    constructor(val) {
+        this.val = val;
+        this.next = null;
+    }
+}
+
+class Solution {
+    // Function to reverse nodes in groups of k
+    reverseKGroup(head, k) {
+        // Create a dummy node
+        let dummy = new ListNode(0);
+        dummy.next = head;
+
+        // Pointer to track the previous group's end
+        let groupPrev = dummy;
+
+        while (true) {
+            // Get the k-th node in the current group
+            let kth = this.getKthNode(groupPrev, k);
+            if (!kth) break;
+
+            // Store the next group's head
+            let groupNext = kth.next;
+
+            // Reverse k nodes
+            let prev = groupNext;
+            let curr = groupPrev.next;
+
+            for (let i = 0; i &lt; k; i++) {
+                let temp = curr.next;
+                curr.next = prev;
+                prev = curr;
+                curr = temp;
+            }
+
+            // Connect the previous group to the reversed one
+            let temp = groupPrev.next;
+            groupPrev.next = kth;
+            groupPrev = temp;
+        }
+
+        // Return the new head
+        return dummy.next;
+    }
+
+    // Helper function to find k-th node
+    getKthNode(curr, k) {
+        while (curr &amp;&amp; k &gt; 0) {
+            curr = curr.next;
+            k--;
+        }
+        return curr;
+    }
+}
+
+// Driver code to test
+function printList(head) {
+    let current = head;
+    while (current) {
+        process.stdout.write(current.val + " ");
+        current = current.next;
+    }
+}
+
+// Create linked list: 1-&gt;2-&gt;3-&gt;4-&gt;5
+let head = new ListNode(1);
+head.next = new ListNode(2);
+head.next.next = new ListNode(3);
+head.next.next.next = new ListNode(4);
+head.next.next.next.next = new ListNode(5);
+
+let k = 2;
+let sol = new Solution();
+let result = sol.reverseKGroup(head, k);
+printList(result);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O(N),We visit each node exactly once during reversal and during group detection (getKthNode). So the total operations are linear with respect to the number of nodes in the list.</p> <p><strong>Space Complexity:</strong> O(1),The algorithm uses a constant amount of extra memory for pointers and dummy node. No additional data structures like arrays or stacks are used.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

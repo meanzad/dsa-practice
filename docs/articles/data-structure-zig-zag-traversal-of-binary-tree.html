@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Zig Zag Traversal Of Binary Tree</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Zig Zag Traversal Of Binary Tree</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/zig-zag-traversal-of-binary-tree/</code></div>
+  <p><strong>Problem Statement: </strong> Given a Binary Tree, print the zigzag traversal of the Binary Tree.
+Zigzag traversal of a binary tree is a way of visiting the nodes of the tree in a zigzag pattern, alternating between left-to-right and right-to-left at each level. 
+</p>
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p>
+<strong>Input:</strong>Binary Tree: 1 2 3 4 5 -1 6
+<img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/92838046494bc3cb.png" width="439"/>
+<strong>Output:</strong> [[1],[3, 2],[4, 5, 6]]
+<strong>Explanation: </strong></p><ol><li>Level 1 (Root): Visit the root node 1 from left to right. Zigzag Traversal: [1]</li><li>Level 2: Visit nodes at this level in a right-to-left order. Zigzag Traversal:  [1], [3, 2]</li><li>Level 3: Visit nodes at this level in a left-to-right order. Zigzag Traversal:  [1], [3, 2], [4, 5, 6]</li></ol>
+<img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/b73acf0f06e6d7c0.png" width="439"/>
+<strong>Input:</strong>Binary Tree: 1 2 -1 4 5 -1 -1 7 8
+<img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/fb79737395ec1de7.png" width="439"/>
+<strong>Output :</strong> [[1], [2], [4, 5], [8, 7]]
+<strong>Explanation: </strong><ol><li>Level 1 (Root): Visit the root node 1 from left to right. Zigzag Traversal: [1]</li><li>Level 2: Visit nodes at this level in a right-to-left order. Zigzag Traversal:  [1], [2]</li><li>Level 3: Visit nodes at this level in a left-to-right order. Zigzag Traversal:  [1], [3, 2], [4, 5]</li><li>Level 4: Visit nodes at this level in a right-to-left order. Zigzag Traversal:  [1], [3, 2], [4, 5], [8, 7]</li></ol>
+<img alt="" class="wp-image-8107" height="286" loading="lazy" src="../assets/img/34c196446d8ccbe7.png" width="439"/></pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Don’t jump directly to the solution, try it out
+        yourself first. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                 Approach 
+            </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Algorithm
+                    </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<p>Zigzag traversal is a modification of the traditional <a href="https://takeuforward.org/data-structure/level-order-traversal-of-a-binary-tree/" rel="noopener" target="_blank"> level order traversal </a> in a binary tree.
+                    Level Order Traversal explores does at each level from left or right but zigzag traversal adds a twist by alternating the direction of exploration.<br/><br/>
+                    At odd levels, we proceed from left to right but for even levels the order is reversed, from right to left. This is achieved by introducing a `leftToRight` flag which controls the order in which nodes are processed at each level.<br/><br/>
+                    When `leftToRight` is true, nodes are inserted into the level vector from left to right and when its false, nodes are inserted right to left. </p>
+
+<ol>
+<li> Initialise an empty queue data structure to store the nodes during traversal. Create a 2D array or a vector of a vector to store the level order traversal. If the tree is empty, return this empty 2D vector.</li>
+<li>Create a `leftToRight` flag to keep track of the direction of traversal. When `leftToRight` is true, nodes are inserted into the level vector from left to right and when its false, nodes are inserted right to left.
+                    
+</li><li> Enqueue the root node ie. Add the root node of the binary tree to the queue.</li>
+<li>Iterate until the queue is empty:
+                    <ol><li>Get the current size of the queue. This size indicates the number of nodes at the current level.</li><li>Create a vector ‘level’ to store the nodes at the current level.</li></ol></li>
+<li>Iterate through ‘size’ number of nodes at the current level:
+                    <ol><li>Pop the front node from the queue.</li><li>Store the node’s value in the level vector. Determine the index to insert the node’s value based on the traversal direction ‘leftToRight’.</li>
+<li>	If ‘leftToRight’ is true, the index is set to ‘i’ which means the node’s value will be inserted form left to right.</li>
+<li>If ‘rightToLeft’ is false, the index is set to size - 1 - i, meaning the node’s value will be inserted from right to left</li>
+</ol>
+</li><li> Enqueue the left and right child nodes of the current node (if they exist) into the queue.
+                    
+</li><li>After processing all the nodes at the current level, add the ‘level’ vector to the ‘ans’ 2D vector, representing the current level.</li>
+<li> Reverse the direction of traversal for the next level by updating the ‘leftToRight’ flag to its opposite value. This toggling ensures that the nodes at the next level will be processed in the opposite direction, alternating between left-to-right and right-to-left.</li>
+<li>Once the traversal loop completes ie. all levels have been processed, return the ‘ans’ 2D vector containing the level-order traversal.</li>
+</ol>
+</div>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/f170e8b7b3a65806.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/d014acd3432d792e.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/9c24627cc354c800.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/3f52b410f3732e7a.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/e53d62b79c31d55f.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/f170e8b7b3a65806.png"/><img alt="Image 2" loading="lazy" src="../assets/img/d014acd3432d792e.png"/><img alt="Image 3" loading="lazy" src="../assets/img/9c24627cc354c800.png"/><img alt="Image 4" loading="lazy" src="../assets/img/3f52b410f3732e7a.png"/><img alt="Image 5" loading="lazy" src="../assets/img/e53d62b79c31d55f.png"/></div></div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Structure to represent a binary tree node
+struct TreeNode {
+    int val;                // Value of the node
+    TreeNode* left;         // Pointer to left child
+    TreeNode* right;        // Pointer to right child
+    // Constructor to initialize node with a given value
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+class Solution {
+public:
+    // Function to perform zigzag (spiral) level order traversal of a binary tree
+    vector&lt;vector&lt;int&gt;&gt; zigzagLevelOrder(TreeNode* root) {
+        // Vector to store the final zigzag traversal result
+        vector&lt;vector&lt;int&gt;&gt; result;
+        // If the tree is empty, return an empty result
+        if (!root) return result;
+
+        // Queue to store nodes level by level (BFS)
+        queue&lt;TreeNode*&gt; q;
+        q.push(root);
+
+        // Boolean flag to control traversal direction: true for left-to-right, false for right-to-left
+        bool leftToRight = true;
+
+        // Loop until all levels are processed
+        while (!q.empty()) {
+            // Get the number of nodes at the current level
+            int size = q.size();
+
+            // Temporary vector to store the current level's values in correct zigzag order
+            vector&lt;int&gt; level(size);
+
+            // Process each node in the current level
+            for (int i = 0; i &lt; size; i++) {
+                // Get the front node from the queue
+                TreeNode* node = q.front();
+                q.pop();
+
+                // Determine index where this node's value should be placed based on traversal direction
+                int index = leftToRight ? i : size - 1 - i;
+                level[index] = node-&gt;val;
+
+                // If left child exists, add it to the queue
+                if (node-&gt;left) q.push(node-&gt;left);
+                // If right child exists, add it to the queue
+                if (node-&gt;right) q.push(node-&gt;right);
+            }
+
+            // After finishing this level, toggle the direction for the next level
+            leftToRight = !leftToRight;
+
+            // Add this level's data to the final result
+            result.push_back(level);
+        }
+
+        // Return the zigzag traversal result
+        return result;
+    }
+};
+
+int main() {
+    // Create binary tree:
+    //        1
+    //      /   \
+    //     2     3
+    //    / \     \
+    //   4   5     6
+    TreeNode* root = new TreeNode(1);
+    root-&gt;left = new TreeNode(2);
+    root-&gt;right = new TreeNode(3);
+    root-&gt;left-&gt;left = new TreeNode(4);
+    root-&gt;left-&gt;right = new TreeNode(5);
+    root-&gt;right-&gt;right = new TreeNode(6);
+
+    // Create Solution object
+    Solution sol;
+
+    // Get zigzag traversal result
+    vector&lt;vector&lt;int&gt;&gt; ans = sol.zigzagLevelOrder(root);
+
+    // Print result in desired format
+    cout &lt;&lt; "[";
+    for (auto &amp;level : ans) {
+        cout &lt;&lt; "[";
+        for (int i = 0; i &lt; level.size(); i++) {
+            cout &lt;&lt; level[i];
+            if (i != level.size() - 1) cout &lt;&lt; ", ";
+        }
+        cout &lt;&lt; "]";
+    }
+    cout &lt;&lt; "]" &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Class to represent a binary tree node
+class TreeNode {
+    int val;              // Value of the node
+    TreeNode left;        // Pointer to left child
+    TreeNode right;       // Pointer to right child
+
+    // Constructor to initialize node with a given value
+    TreeNode(int x) {
+        val = x;
+        left = null;
+        right = null;
+    }
+}
+
+class Solution {
+    // Function to perform zigzag (spiral) level order traversal of a binary tree
+    public List&lt;List&lt;Integer&gt;&gt; zigzagLevelOrder(TreeNode root) {
+        // List to store the final zigzag traversal result
+        List&lt;List&lt;Integer&gt;&gt; result = new ArrayList&lt;&gt;();
+
+        // If the tree is empty, return an empty list
+        if (root == null) return result;
+
+        // Queue to store nodes for BFS (level order traversal)
+        Queue&lt;TreeNode&gt; q = new LinkedList&lt;&gt;();
+        q.offer(root);
+
+        // Boolean flag to control traversal direction
+        boolean leftToRight = true;
+
+        // Loop until all levels are processed
+        while (!q.isEmpty()) {
+            // Get the number of nodes at the current level
+            int size = q.size();
+
+            // Temporary array to store current level's values in zigzag order
+            Integer[] level = new Integer[size];
+
+            // Process each node in the current level
+            for (int i = 0; i &lt; size; i++) {
+                // Get the front node from the queue
+                TreeNode node = q.poll();
+
+                // Determine index where this value should be stored
+                int index = leftToRight ? i : size - 1 - i;
+                level[index] = node.val;
+
+                // Add left child to queue if it exists
+                if (node.left != null) q.offer(node.left);
+                // Add right child to queue if it exists
+                if (node.right != null) q.offer(node.right);
+            }
+
+            // Flip traversal direction for the next level
+            leftToRight = !leftToRight;
+
+            // Add current level to the final result
+            result.add(Arrays.asList(level));
+        }
+
+        // Return the zigzag traversal result
+        return result;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Create binary tree:
+        //        1
+        //      /   \
+        //     2     3
+        //    / \     \
+        //   4   5     6
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        root.right.right = new TreeNode(6);
+
+        // Create solution object
+        Solution sol = new Solution();
+
+        // Get zigzag traversal
+        List&lt;List&lt;Integer&gt;&gt; ans = sol.zigzagLevelOrder(root);
+
+        // Print result
+        System.out.println(ans);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">from collections import deque
+
+# Class to represent a binary tree node
+class TreeNode:
+    def __init__(self, x):
+        self.val = x          # Value of the node
+        self.left = None      # Pointer to left child
+        self.right = None     # Pointer to right child
+
+class Solution:
+    # Function to perform zigzag (spiral) level order traversal
+    def zigzagLevelOrder(self, root):
+        # List to store the final zigzag traversal result
+        result = []
+
+        # If tree is empty, return empty list
+        if not root:
+            return result
+
+        # Queue for BFS traversal
+        q = deque([root])
+
+        # Boolean flag to control traversal direction
+        leftToRight = True
+
+        # Loop until all levels are processed
+        while q:
+            # Get the number of nodes at the current level
+            size = len(q)
+
+            # Temporary list to store current level's values
+            level = [0] * size
+
+            # Process each node in the current level
+            for i in range(size):
+                # Get the front node from queue
+                node = q.popleft()
+
+                # Determine index where this value should be stored
+                index = i if leftToRight else size - 1 - i
+                level[index] = node.val
+
+                # Add left child to queue if it exists
+                if node.left:
+                    q.append(node.left)
+                # Add right child to queue if it exists
+                if node.right:
+                    q.append(node.right)
+
+            # Flip direction for the next level
+            leftToRight = not leftToRight
+
+            # Add current level to result
+            result.append(level)
+
+        # Return zigzag traversal result
+        return result
+
+# Driver code
+if __name__ == "__main__":
+    # Create binary tree:
+    #        1
+    #      /   \
+    #     2     3
+    #    / \     \
+    #   4   5     6
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.right = TreeNode(3)
+    root.left.left = TreeNode(4)
+    root.left.right = TreeNode(5)
+    root.right.right = TreeNode(6)
+
+    # Create solution object
+    sol = Solution()
+
+    # Get zigzag traversal
+    ans = sol.zigzagLevelOrder(root)
+
+    # Print result
+    print(ans)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Class to represent a binary tree node
+class TreeNode {
+    constructor(x) {
+        this.val = x;        // Value of the node
+        this.left = null;    // Pointer to left child
+        this.right = null;   // Pointer to right child
+    }
+}
+
+class Solution {
+    // Function to perform zigzag (spiral) level order traversal
+    zigzagLevelOrder(root) {
+        // Array to store the final zigzag traversal result
+        const result = [];
+
+        // If tree is empty, return empty array
+        if (!root) return result;
+
+        // Queue for BFS traversal
+        const q = [root];
+
+        // Boolean flag to control traversal direction
+        let leftToRight = true;
+
+        // Loop until all levels are processed
+        while (q.length &gt; 0) {
+            // Get the number of nodes at the current level
+            const size = q.length;
+
+            // Temporary array to store current level's values
+            const level = new Array(size);
+
+            // Process each node in the current level
+            for (let i = 0; i &lt; size; i++) {
+                // Remove first node from queue
+                const node = q.shift();
+
+                // Determine index where this value should be stored
+                const index = leftToRight ? i : size - 1 - i;
+                level[index] = node.val;
+
+                // Add left child to queue if it exists
+                if (node.left) q.push(node.left);
+                // Add right child to queue if it exists
+                if (node.right) q.push(node.right);
+            }
+
+            // Flip traversal direction for next level
+            leftToRight = !leftToRight;
+
+            // Add current level to final result
+            result.push(level);
+        }
+
+        // Return zigzag traversal result
+        return result;
+    }
+}
+
+// Driver code
+function main() {
+    // Create binary tree:
+    //        1
+    //      /   \
+    //     2     3
+    //    / \     \
+    //   4   5     6
+    let root = new TreeNode(1);
+    root.left = new TreeNode(2);
+    root.right = new TreeNode(3);
+    root.left.left = new TreeNode(4);
+    root.left.right = new TreeNode(5);
+    root.right.right = new TreeNode(6);
+
+    // Create solution object
+    let sol = new Solution();
+
+    // Get zigzag traversal
+    let ans = sol.zigzagLevelOrder(root);
+
+    // Print result
+    console.log(ans);
+}
+
+main();
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Complexity Analysis
+                    </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity: O(N)</strong> where N is the number of nodes in the binary tree. Each node of the binary tree is enqueued and dequeued exactly once, hence all nodes need to be processed and visited. Processing each node takes constant time operations which contributes to the overall linear time complexity.</p>
+<p><strong>Space Complexity: O(N)</strong> where N is the number of nodes in the binary tree. In the worst case, the queue has to hold all the nodes of the last level of the binary tree, the last level could at most hold N/2 nodes hence the space complexity of the queue is proportional to O(N). The resultant vector answer also stores the values of the nodes level by level and hence contains all the nodes of the tree contributing to O(N) space as well. </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

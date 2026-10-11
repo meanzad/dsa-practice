@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Check if two trees are identical</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Check if two trees are identical</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/check-if-two-trees-are-identical/</code></div>
+  <p><strong>Problem Statement: </strong> Given two Binary Trees, return if true if the two trees are identical, otherwise
+    return false..</p>
+<p>Two trees are said to be identical if these three conditions are met for every pair of nodes :</p>
+<ul>
+<li>Value of a node in the first tree is equal to the value of the corresponding node in the second tree.</li>
+<li>Left subtree of this node is identical to the left subtree of the corresponding node.</li>
+<li>Right subtree of this node is identical to the right subtree of the corresponding node.</li>
+</ul>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input:Binary Tree 1: 1 2 3 -1 -1 4 5, Binary Tree 2: 1 2 3 -1 -1 4 5
+<p><img height="457" loading="lazy" src="../assets/img/2ea4fda16f97e077.png" width="481"/></p>
+Output: True, these trees are identical.
+
+Example 2:
+Input:Binary Tree 1: 1 2 3 -1 -1 4 5, Binary Tree 2: 1 2 3 -1 -1 4
+<p><img height="457" loading="lazy" src="../assets/img/a3621bab7183a521.png" width="481"/></p>
+Output :  False, these trees are not identical.
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/check-if-two-trees-are-identical-or-not" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                Approach
+            </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Algorithm
+                    </span>
+</summary>
+<div class="approach-algorithm">
+<p>To determine if two binary trees are identical, we can follow a recursive approach. We traverse
+                        both trees in the <strong>preorder</strong> manner, meaning that the current node's value is
+                        checked before recursively traversing its left and right subtrees.</p>
+<p>The idea is to traverse both trees simultaneously, comparing the values of corresponding nodes at
+                        each step. We need to ensure that the left subtree of each node in the first tree is identical
+                        to the left subtree of the corresponding node in the second tree, and similarly for the right
+                        subtrees.</p>
+<ul>
+<li><strong>Base Case:</strong> The base case for recursion is reached when both nodes are null,
+                            indicating the end of the subtree. In this case, return <code>true</code>.</li>
+<li>If only one of the nodes is null while the other is not, return <code>false</code> since
+                            they cannot be identical.</li>
+</ul>
+<p><strong>Recursive Function:</strong></p>
+<ol>
+<li>Check if the values of the current nodes in both trees are equal. If not, return
+                            <code>false</code>.
+                        </li>
+<li>Recursively check if the left subtree of both the trees is identical.</li>
+<li>Recursively check if the right subtree of both the trees is identical.</li>
+<li>If all recursive calls return <code>true</code>, the trees are identical.</li>
+</ol>
+<p><strong>Algorithm:</strong></p>
+<ol>
+<li>Start at the root node of both trees (node1 and node2).</li>
+<li>Check if the values of the current nodes in both trees are equal. If not, return
+                            <code>false</code>.
+                        </li>
+<li>Recursively check the left subtree and then the right subtree of both trees.</li>
+<li>If all recursive checks return <code>true</code>, the trees are identical; otherwise, they
+                            are not.</li>
+</ol>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/1b43e75ae5f6d846.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/ff5fa0a0d58e791c.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/6a269e83f566a06c.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/83f7c2f2183c156e.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/d25cf1b3c5bc5890.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/1b43e75ae5f6d846.png"/><img alt="Image 2" loading="lazy" src="../assets/img/ff5fa0a0d58e791c.png"/><img alt="Image 3" loading="lazy" src="../assets/img/6a269e83f566a06c.png"/><img alt="Image 4" loading="lazy" src="../assets/img/83f7c2f2183c156e.png"/><img alt="Image 5" loading="lazy" src="../assets/img/d25cf1b3c5bc5890.png"/></div></div> <br/>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div>
+<div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Node structure for the binary tree
+struct Node {
+    int data;       // Data stored in the node
+    Node* left;     // Pointer to the left child
+    Node* right;    // Pointer to the right child
+
+    // Constructor to initialize the node with a value
+    Node(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+
+class Solution {
+public:
+    // Function to check if two binary trees are identical
+    bool isIdentical(Node* node1, Node* node2) {
+        // Case 1: If both nodes are NULL, they are identical
+        if (node1 == NULL &amp;&amp; node2 == NULL) {
+            return true;
+        }
+        
+        // Case 2: If only one of the nodes is NULL, they are not identical
+        if (node1 == NULL || node2 == NULL) {
+            return false;
+        }
+
+        // Check if the current nodes have the same data value
+        // and recursively check their left and right subtrees
+        return ((node1-&gt;data == node2-&gt;data)
+                &amp;&amp; isIdentical(node1-&gt;left, node2-&gt;left)
+                &amp;&amp; isIdentical(node1-&gt;right, node2-&gt;right));
+    }
+};
+
+int main() {
+    // Creating the first binary tree (Node1)
+    Node* root1 = new Node(1);
+    root1-&gt;left = new Node(2);
+    root1-&gt;right = new Node(3);
+    root1-&gt;left-&gt;left = new Node(4);
+
+    // Creating the second binary tree (Node2)
+    Node* root2 = new Node(1);
+    root2-&gt;left = new Node(2);
+    root2-&gt;right = new Node(3);
+    root2-&gt;left-&gt;left = new Node(4);
+
+    // Creating an instance of the Solution class
+    Solution solution;
+
+    // Check if the two binary trees are identical and output the result
+    if (solution.isIdentical(root1, root2)) {
+        cout &lt;&lt; "The binary trees are identical." &lt;&lt; endl;
+    } else {
+        cout &lt;&lt; "The binary trees are not identical." &lt;&lt; endl;
+    }
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">// Solution class to check if two binary trees are identical
+class Solution {
+    // Function to check if two binary trees are identical
+    public boolean isIdentical(Node node1, Node node2) {
+        // Case 1: If both nodes are NULL, they are identical
+        if (node1 == null &amp;&amp; node2 == null) {
+            return true;
+        }
+
+        // Case 2: If only one of the nodes is NULL, they are not identical
+        if (node1 == null || node2 == null) {
+            return false;
+        }
+
+        // Check if the current nodes have the same data value
+        // and recursively check their left and right subtrees
+        return (node1.data == node2.data) &amp;&amp;
+               isIdentical(node1.left, node2.left) &amp;&amp;
+               isIdentical(node1.right, node2.right);
+    }
+}
+
+// Node class for the binary tree
+class Node {
+    int data;       // Data stored in the node
+    Node left;      // Pointer to the left child
+    Node right;     // Pointer to the right child
+
+    // Constructor to initialize the node with a value
+    Node(int val) {
+        data = val;
+        left = null;
+        right = null;
+    }
+}
+
+// Main class to test the Solution class
+public class Main {
+    public static void main(String[] args) {
+        // Creating the first binary tree (Node1)
+        Node root1 = new Node(1);
+        root1.left = new Node(2);
+        root1.right = new Node(3);
+        root1.left.left = new Node(4);
+
+        // Creating the second binary tree (Node2)
+        Node root2 = new Node(1);
+        root2.left = new Node(2);
+        root2.right = new Node(3);
+        root2.left.left = new Node(4);
+
+        // Creating an instance of the Solution class
+        Solution solution = new Solution();
+
+        // Check if the two binary trees are identical and output the result
+        if (solution.isIdentical(root1, root2)) {
+            System.out.println("The binary trees are identical.");
+        } else {
+            System.out.println("The binary trees are not identical.");
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Node class for the binary tree
+class Node:
+    def __init__(self, val):
+        self.data = val  # Data stored in the node
+        self.left = None  # Pointer to the left child
+        self.right = None  # Pointer to the right child
+
+class Solution:
+    # Function to check if two binary trees are identical
+    def isIdentical(self, node1, node2):
+        # Case 1: If both nodes are NULL, they are identical
+        if node1 is None and node2 is None:
+            return True
+
+        # Case 2: If only one of the nodes is NULL, they are not identical
+        if node1 is None or node2 is None:
+            return False
+
+        # Check if the current nodes have the same data value
+        # and recursively check their left and right subtrees
+        return (node1.data == node2.data) and \
+               self.isIdentical(node1.left, node2.left) and \
+               self.isIdentical(node1.right, node2.right)
+
+# Driver code
+if __name__ == "__main__":
+    # Creating the first binary tree (Node1)
+    root1 = Node(1)
+    root1.left = Node(2)
+    root1.right = Node(3)
+    root1.left.left = Node(4)
+
+    # Creating the second binary tree (Node2)
+    root2 = Node(1)
+    root2.left = Node(2)
+    root2.right = Node(3)
+    root2.left.left = Node(4)
+
+    # Creating an instance of the Solution class
+    solution = Solution()
+
+    # Check if the two binary trees are identical and output the result
+    if solution.isIdentical(root1, root2):
+        print("The binary trees are identical.")
+    else:
+        print("The binary trees are not identical.")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Node class for the binary tree
+class Node {
+    constructor(val) {
+        this.data = val;  // Data stored in the node
+        this.left = null;  // Pointer to the left child
+        this.right = null;  // Pointer to the right child
+    }
+}
+
+// Solution class to check if two binary trees are identical
+class Solution {
+    // Function to check if two binary trees are identical
+    isIdentical(node1, node2) {
+        // Case 1: If both nodes are NULL, they are identical
+        if (node1 === null &amp;&amp; node2 === null) {
+            return true;
+        }
+
+        // Case 2: If only one of the nodes is NULL, they are not identical
+        if (node1 === null || node2 === null) {
+            return false;
+        }
+
+        // Check if the current nodes have the same data value
+        // and recursively check their left and right subtrees
+        return (node1.data === node2.data) &amp;&amp;
+               this.isIdentical(node1.left, node2.left) &amp;&amp;
+               this.isIdentical(node1.right, node2.right);
+    }
+}
+
+// Driver function
+const root1 = new Node(1);
+root1.left = new Node(2);
+root1.right = new Node(3);
+root1.left.left = new Node(4);
+
+const root2 = new Node(1);
+root2.left = new Node(2);
+root2.right = new Node(3);
+root2.left.left = new Node(4);
+
+// Creating an instance of the Solution class
+const solution = new Solution();
+
+// Check if the two binary trees are identical and output the result
+if (solution.isIdentical(root1, root2)) {
+    console.log("The binary trees are identical.");
+} else {
+    console.log("The binary trees are not identical.");
+}
+</code></pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Complexity Analysis
+                    </span>
+</summary>
+<p>
+</p><p><strong>Time Complexity:</strong> O(N + M) where N is the number of nodes in the first Binary Tree
+                    and M is the number of nodes in the second Binary Tree. This complexity arises from visiting each
+                    node of both trees during their comparison.</p>
+<p><strong>Space Complexity:</strong> O(1) as no additional space or data structures are created that
+                    are proportional to the input size of the tree.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

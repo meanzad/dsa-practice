@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Count Maximum Consecutive One&#x27;s in the array</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Count Maximum Consecutive One&#x27;s in the array</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/count-maximum-consecutive-ones-in-the-array/</code></div>
+  <p><strong>Problem Statement: </strong> Given an array that contains only 1 and 0 return the count of maximum
+    consecutive ones in the array..</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input: prices = {1, 1, 0, 1, 1, 1}
+Output: 3
+Explanation: There are two consecutive 1’s and three consecutive 1’s in the array out of which maximum is 3.
+
+Example 2:
+Input: prices = {1, 0, 1, 1, 0, 1} 
+Output: 2
+Explanation: There are two consecutive 1's in the array. 
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/maximum-consecutive-ones" rel="noopener" target="_blank">practice link</a>
+        to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+<p>
+                            We need to find the longest streak of consecutive 1’s in a binary array.
+                            A simple idea is to traverse the array while maintaining a counter.
+                            Every time we encounter a 1, we increase the counter.
+                            If we encounter a 0, the streak breaks, so we reset the counter to 0.
+                            At each step, we track the maximum streak length seen so far.
+                        </p>
+<ul>
+<li>Initialize two variables:
+                                <ul>
+<li><code>cnt</code> → counts the current streak of 1’s.</li>
+<li><code>maxi</code> → stores the maximum streak found so far.</li>
+</ul>
+</li>
+<li>Traverse through the array:
+                                <ul>
+<li>If <code>nums[i] == 1</code>, increment <code>cnt</code>.</li>
+<li>If <code>nums[i] == 0</code>, reset <code>cnt</code> to 0.</li>
+<li>Update <code>maxi = max(maxi, cnt)</code> at each step.</li>
+</ul>
+</li>
+<li>Finally, return <code>maxi</code>, which contains the length of the longest consecutive
+                                1’s.</li>
+</ul>
+<p><strong><img height="585.8834965229034" loading="lazy" src="../assets/img/c9246514f9f76c65.png" width="641.1355476379395"/></strong></p>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div>
+<div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find maximum consecutive 1's in an array
+    int findMaxConsecutiveOnes(vector&lt;int&gt; &amp;nums) {
+        // Variable to store current count of consecutive 1's
+        int cnt = 0;
+        // Variable to store maximum consecutive 1's
+        int maxi = 0;
+
+        // Traverse the array
+        for (int i = 0; i &lt; nums.size(); i++) {
+            // If current element is 1, increment count
+            if (nums[i] == 1) {
+                cnt++;
+            } else {
+                // If element is 0, reset count
+                cnt = 0;
+            }
+
+            // Update maximum if current count is greater
+            maxi = max(maxi, cnt);
+        }
+
+        // Return maximum consecutive 1's
+        return maxi;
+    }
+};
+
+int main() {
+    // Input array
+    vector&lt;int&gt; nums = {1, 1, 0, 1, 1, 1};
+
+    // Create Solution object
+    Solution obj;
+
+    // Get answer
+    int ans = obj.findMaxConsecutiveOnes(nums);
+
+    // Print result
+    cout &lt;&lt; "The maximum consecutive 1's are " &lt;&lt; ans;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to find maximum consecutive 1's in an array
+    public int findMaxConsecutiveOnes(int[] nums) {
+        // Variable to store current count of consecutive 1's
+        int cnt = 0;
+        // Variable to store maximum consecutive 1's
+        int maxi = 0;
+
+        // Traverse the array
+        for (int i = 0; i &lt; nums.length; i++) {
+            // If current element is 1, increment count
+            if (nums[i] == 1) {
+                cnt++;
+            } else {
+                // If element is 0, reset count
+                cnt = 0;
+            }
+
+            // Update maximum if current count is greater
+            maxi = Math.max(maxi, cnt);
+        }
+
+        // Return maximum consecutive 1's
+        return maxi;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Input array
+        int[] nums = {1, 1, 0, 1, 1, 1};
+
+        // Create Solution object
+        Solution obj = new Solution();
+
+        // Get answer
+        int ans = obj.findMaxConsecutiveOnes(nums);
+
+        // Print result
+        System.out.println("The maximum consecutive 1's are " + ans);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to find maximum consecutive 1's in an array
+    def findMaxConsecutiveOnes(self, nums):
+        # Variable to store current count of consecutive 1's
+        cnt = 0
+        # Variable to store maximum consecutive 1's
+        maxi = 0
+
+        # Traverse the array
+        for i in range(len(nums)):
+            # If current element is 1, increment count
+            if nums[i] == 1:
+                cnt += 1
+            else:
+                # If element is 0, reset count
+                cnt = 0
+
+            # Update maximum if current count is greater
+            maxi = max(maxi, cnt)
+
+        # Return maximum consecutive 1's
+        return maxi
+
+# Input array
+nums = [1, 1, 0, 1, 1, 1]
+
+# Create Solution object
+obj = Solution()
+
+# Get answer
+ans = obj.findMaxConsecutiveOnes(nums)
+
+# Print result
+print("The maximum consecutive 1's are", ans)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find maximum consecutive 1's in an array
+    findMaxConsecutiveOnes(nums) {
+        // Variable to store current count of consecutive 1's
+        let cnt = 0;
+        // Variable to store maximum consecutive 1's
+        let maxi = 0;
+
+        // Traverse the array
+        for (let i = 0; i &lt; nums.length; i++) {
+            // If current element is 1, increment count
+            if (nums[i] === 1) {
+                cnt++;
+            } else {
+                // If element is 0, reset count
+                cnt = 0;
+            }
+
+            // Update maximum if current count is greater
+            maxi = Math.max(maxi, cnt);
+        }
+
+        // Return maximum consecutive 1's
+        return maxi;
+    }
+}
+
+// Input array
+let nums = [1, 1, 0, 1, 1, 1];
+
+// Create Solution object
+let obj = new Solution();
+
+// Get answer
+let ans = obj.findMaxConsecutiveOnes(nums);
+
+// Print result
+console.log("The maximum consecutive 1's are", ans);
+</code></pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+</summary>
+<p>
+</p><p><strong>Time Complexity:</strong> O(N), since we scan the array once.</p>
+<p><strong>Space Complexity:</strong> O(1), as only constant extra variables are used.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

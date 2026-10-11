@@ -1,0 +1,966 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Partition Equal Subset Sum (DP- 15)</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Partition Equal Subset Sum (DP- 15)</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/partition-equal-subset-sum-dp-15/</code></div>
+  <p><strong>Problem Description: </strong>Given an array arr of n integers, return true if the array can be partitioned into two subsets such that the sum of elements in both subsets is equal else return false.
+</p>
+
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: nums = [2, 3, 3, 3, 4, 5]</span>
+<span>Output: True</span>
+<span>Explanation: Nums can be partitioned into two subsets of sum 10.</span>
+
+<p><img height="457" loading="lazy" src="../assets/img/2bd6091a7e35760d.png" width="481"/></p>
+<span>Input: nums = [1, 2, 3, 5]</span>
+<span>Output: False </span>
+<span>Explanation: The array cannot be partitioned into equal sum subsets.</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/partition-equal-subset-sum" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better.
+            It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                   Memoization 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+This question is a slight modification of the problem discussed in  <a href="https://takeuforward.org/data-structure/subset-sum-equal-to-target-dp-14/" rel="noopener" target="_blank" title="Subset sum equal to target"><strong>Subset-sum equal to target</strong></a>. We need to partition the array into two subsets such that the sum of two subests is equal.<br/><br/>
+
+In other words, we can say that we need to find a subset in array which has sum equal to half of the sum of all the elements of the array. This is because, if any subset has half the sum of the array, then the remaining elements will also have the rest half of the sum of array, making the sum of both the subsets equal.
+<ul>
+<li>Calculate the total sum; if it is odd, return false.</li>
+<li>Set the target as half of the total sum.</li>
+<li>Use recursion to check if a subset can reach the target by including or skipping each element.</li>
+<li>At each step, branch into two choices: include the current element (subtract its value from the remaining sum) or skip the current element (keep the remaining sum unchanged).</li>
+<li>Memoize results using the current index and remaining sum to avoid recomputation.</li>
+<li>If remaining sum becomes zero, return true; if it becomes negative or index exceeds bounds, return false.</li>
+<li>Start from index 0 with target sum and return the stored or computed result.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Function to check if it's possible to partition the array into two subsets with equal sum
+bool subsetSumUtil(int ind, int target, vector&lt;int&gt;&amp; arr, vector&lt;vector&lt;int&gt;&gt;&amp; dp) {
+    // Base case: If the target sum is 0, we found a valid partition
+    if (target == 0)
+        return true;
+
+    // Base case: If we have considered all elements and the target is still not 0, return false
+    if (ind == 0)
+        return arr[0] == target;
+
+    // If the result for this state is already calculated, return it
+    if (dp[ind][target] != -1)
+        return dp[ind][target];
+
+    // Recursive cases
+    // 1. Exclude the current element
+    bool notTaken = subsetSumUtil(ind - 1, target, arr, dp);
+
+    // 2. Include the current element if it doesn't exceed the target
+    bool taken = false;
+    if (arr[ind] &lt;= target)
+        taken = subsetSumUtil(ind - 1, target - arr[ind], arr, dp);
+
+    // Store the result in the DP table and return
+    return dp[ind][target] = notTaken || taken;
+}
+
+// Function to check if the array can be partitioned into two equal subsets
+bool canPartition(int n, vector&lt;int&gt;&amp; arr) {
+    int totSum = 0;
+
+    // Calculate the total sum of the array
+    for (int i = 0; i &lt; n; i++) {
+        totSum += arr[i];
+    }
+
+    // If the total sum is odd, it cannot be partitioned into two equal subsets
+    if (totSum % 2 == 1)
+        return false;
+    else {
+        int k = totSum / 2;
+
+        // Create a DP table with dimensions n x k+1 and initialize with -1
+        vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(k + 1, -1));
+
+        // Call the subsetSumUtil function to check if it's possible to partition
+        return subsetSumUtil(n - 1, k, arr, dp);
+    }
+}
+
+int main() {
+    vector&lt;int&gt; arr = {2, 3, 3, 3, 4, 5};
+    int n = arr.size();
+
+    if (canPartition(n, arr))
+        cout &lt;&lt; "The Array can be partitioned into two equal subsets";
+    else
+        cout &lt;&lt; "The Array cannot be partitioned into two equal subsets";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Helper method to check if subset with target sum exists
+    private boolean subsetSumUtil(int ind, int target, int[] arr, int[][] dp) {
+        // Base case: target sum reached
+        if (target == 0)
+            return true;
+
+        // Base case: first element check
+        if (ind == 0)
+            return arr[0] == target;
+
+        // If already computed, return stored result
+        if (dp[ind][target] != -1)
+            return dp[ind][target] == 1;
+
+        // Choice 1: exclude current element
+        boolean notTaken = subsetSumUtil(ind - 1, target, arr, dp);
+
+        // Choice 2: include current element if possible
+        boolean taken = false;
+        if (arr[ind] &lt;= target)
+            taken = subsetSumUtil(ind - 1, target - arr[ind], arr, dp);
+
+        // Store result in dp table
+        dp[ind][target] = (notTaken || taken) ? 1 : 0;
+        return notTaken || taken;
+    }
+
+    // Main function to check if array can be partitioned into two equal subsets
+    public boolean canPartition(int[] arr) {
+        // Find array size
+        int n = arr.length;
+
+        // Calculate total sum
+        int totSum = 0;
+        for (int num : arr)
+            totSum += num;
+
+        // If sum is odd, partition not possible
+        if (totSum % 2 == 1)
+            return false;
+
+        // Target sum for each subset
+        int k = totSum / 2;
+
+        // DP table initialization
+        int[][] dp = new int[n][k + 1];
+        for (int[] row : dp)
+            Arrays.fill(row, -1);
+
+        // Check possibility using recursion + memoization
+        return subsetSumUtil(n - 1, k, arr, dp);
+    }
+}
+
+// Separate Main class to run the program
+public class Main {
+    public static void main(String[] args) {
+        // Example array
+        int[] arr = {2, 3, 3, 3, 4, 5};
+
+        // Create object of Solution class
+        Solution obj = new Solution();
+
+        // Output result
+        if (obj.canPartition(arr))
+            System.out.println("The Array can be partitioned into two equal subsets");
+        else
+            System.out.println("The Array cannot be partitioned into two equal subsets");
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Helper function to check if subset with target sum exists
+    def subsetSumUtil(self, ind, target, arr, dp):
+        # Base case: target sum reached
+        if target == 0:
+            return True
+
+        # Base case: first element check
+        if ind == 0:
+            return arr[0] == target
+
+        # If already computed, return stored result
+        if dp[ind][target] != -1:
+            return dp[ind][target] == 1
+
+        # Choice 1: exclude current element
+        notTaken = self.subsetSumUtil(ind - 1, target, arr, dp)
+
+        # Choice 2: include current element if possible
+        taken = False
+        if arr[ind] &lt;= target:
+            taken = self.subsetSumUtil(ind - 1, target - arr[ind], arr, dp)
+
+        # Store result in dp table
+        dp[ind][target] = 1 if (notTaken or taken) else 0
+        return notTaken or taken
+
+    # Main function to check if array can be partitioned into two equal subsets
+    def canPartition(self, arr):
+        # Find array size
+        n = len(arr)
+
+        # Calculate total sum
+        totSum = sum(arr)
+
+        # If sum is odd, partition not possible
+        if totSum % 2 == 1:
+            return False
+
+        # Target sum for each subset
+        k = totSum // 2
+
+        # DP table initialization
+        dp = [[-1] * (k + 1) for _ in range(n)]
+
+        # Check possibility using recursion + memoization
+        return self.subsetSumUtil(n - 1, k, arr, dp)
+
+
+if __name__ == "__main__":
+    # Example array
+    arr = [2, 3, 3, 3, 4, 5]
+
+    # Create object
+    obj = Solution()
+
+    # Output result
+    if obj.canPartition(arr):
+        print("The Array can be partitioned into two equal subsets")
+    else:
+        print("The Array cannot be partitioned into two equal subsets")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Helper method to check if subset with target sum exists
+    subsetSumUtil(ind, target, arr, dp) {
+        // Base case: target sum reached
+        if (target === 0) return true;
+
+        // Base case: first element check
+        if (ind === 0) return arr[0] === target;
+
+        // If already computed, return stored result
+        if (dp[ind][target] !== -1) return dp[ind][target] === 1;
+
+        // Choice 1: exclude current element
+        let notTaken = this.subsetSumUtil(ind - 1, target, arr, dp);
+
+        // Choice 2: include current element if possible
+        let taken = false;
+        if (arr[ind] &lt;= target) {
+            taken = this.subsetSumUtil(ind - 1, target - arr[ind], arr, dp);
+        }
+
+        // Store result in dp table
+        dp[ind][target] = (notTaken || taken) ? 1 : 0;
+        return notTaken || taken;
+    }
+
+    // Main function to check if array can be partitioned into two equal subsets
+    canPartition(arr) {
+        // Find array size
+        const n = arr.length;
+
+        // Calculate total sum
+        let totSum = arr.reduce((a, b) =&gt; a + b, 0);
+
+        // If sum is odd, partition not possible
+        if (totSum % 2 === 1) return false;
+
+        // Target sum for each subset
+        const k = Math.floor(totSum / 2);
+
+        // DP table initialization
+        let dp = Array.from({ length: n }, () =&gt; Array(k + 1).fill(-1));
+
+        // Check possibility using recursion + memoization
+        return this.subsetSumUtil(n - 1, k, arr, dp);
+    }
+}
+
+// Example usage
+const arr = [2, 3, 3, 3, 4, 5];
+const obj = new Solution();
+
+if (obj.canPartition(arr))
+    console.log("The Array can be partitioned into two equal subsets");
+else
+    console.log("The Array cannot be partitioned into two equal subsets");
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N*K)</strong>, there are total N*K states, where N is the length of array and K is the target sum i.e. Half of the sum of all elements of the array.<br/>
+<strong>Space Complexity: O(N*K) + O(N)</strong>, we use a memo table to avoid recomputation. Extra auxiliary stack space is used for recursion.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                   Tabulation 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+In order to avoid extra recursive stack space used in memoization approach, we can simply convert our solution into tabulation approach. We can follow these steps in order to form our tabulation solution:
+<ul>
+<li>Create a 2D table of boolean values with dimensions matching the memoization approach, initially setting all entries to false.</li>
+<li>Initialize the first column to true, since achieving a target sum of zero is always possible regardless of the number of elements considered.</li>
+<li>For the first row, mark as true only the position corresponding to the first element’s value, if it does not exceed the target.</li>
+<li>Use nested loops to fill the table row by row, applying the same inclusion–exclusion logic from the recursive solution but replacing recursive calls with table lookups.</li>
+<li>Continue filling the table until all states are computed.</li>
+<li>The answer will be found at the position in the table corresponding to using all elements to achieve the required target sum.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Determines if the given array can be split into two subsets
+    // whose sums are equal using a tabulation DP approach
+    bool canPartition(int n, vector&lt;int&gt;&amp; arr) {
+        
+        // Step 1: Calculate the total sum
+        int totalSum = 0;
+        for (int i = 0; i &lt; n; i++) {
+            totalSum += arr[i];
+        }
+
+        // Step 2: If total sum is odd, partition is impossible
+        if (totalSum % 2 != 0) {
+            return false;
+        }
+
+        // Step 3: Determine the target sum for each subset
+        int targetSum = totalSum / 2;
+
+        // Step 4: Create DP table and initialize
+        vector&lt;vector&lt;bool&gt;&gt; dp(n, vector&lt;bool&gt;(targetSum + 1, false));
+
+        // Step 5: Base case: sum 0 is always possible
+        for (int i = 0; i &lt; n; i++) {
+            dp[i][0] = true;
+        }
+
+        // Step 6: Initialize first row
+        if (arr[0] &lt;= targetSum) {
+            dp[0][arr[0]] = true;
+        }
+
+        // Step 7: Fill DP table
+        for (int index = 1; index &lt; n; index++) {
+            for (int target = 1; target &lt;= targetSum; target++) {
+                bool notTaken = dp[index - 1][target];
+                bool taken = false;
+                if (arr[index] &lt;= target) {
+                    taken = dp[index - 1][target - arr[index]];
+                }
+                dp[index][target] = notTaken || taken;
+            }
+        }
+
+        // Step 8: Return result
+        return dp[n - 1][targetSum];
+    }
+};
+
+int main() {
+    vector&lt;int&gt; arr = {2, 3, 3, 3, 4, 5};
+    int n = arr.size();
+    Solution solver;
+
+    if (solver.canPartition(n, arr)) {
+        cout &lt;&lt; "The array can be partitioned into two equal subsets";
+    } else {
+        cout &lt;&lt; "The array cannot be partitioned into two equal subsets";
+    }
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // Determines if the given array can be split into two subsets
+    // whose sums are equal using a tabulation DP approach
+    public boolean canPartition(int[] arr) {
+        int n = arr.length;
+
+        // Step 1: Calculate total sum
+        int totalSum = 0;
+        for (int num : arr) totalSum += num;
+
+        // Step 2: If total sum is odd, partition is impossible
+        if (totalSum % 2 != 0) return false;
+
+        // Step 3: Target sum for each subset
+        int targetSum = totalSum / 2;
+
+        // Step 4: Create DP table and initialize
+        boolean[][] dp = new boolean[n][targetSum + 1];
+
+        // Step 5: Base case: sum 0 is always possible
+        for (int i = 0; i &lt; n; i++) dp[i][0] = true;
+
+        // Step 6: Initialize first row
+        if (arr[0] &lt;= targetSum) dp[0][arr[0]] = true;
+
+        // Step 7: Fill DP table
+        for (int index = 1; index &lt; n; index++) {
+            for (int target = 1; target &lt;= targetSum; target++) {
+                boolean notTaken = dp[index - 1][target];
+                boolean taken = false;
+                if (arr[index] &lt;= target) {
+                    taken = dp[index - 1][target - arr[index]];
+                }
+                dp[index][target] = notTaken || taken;
+            }
+        }
+
+        // Step 8: Return result
+        return dp[n - 1][targetSum];
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {2, 3, 3, 3, 4, 5};
+        Solution solver = new Solution();
+
+        if (solver.canPartition(arr))
+            System.out.println("The array can be partitioned into two equal subsets");
+        else
+            System.out.println("The array cannot be partitioned into two equal subsets");
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Determines if the given array can be split into two subsets
+    # whose sums are equal using a tabulation DP approach
+    def canPartition(self, arr):
+        n = len(arr)
+
+        # Step 1: Calculate total sum
+        totalSum = sum(arr)
+
+        # Step 2: If total sum is odd, partition is impossible
+        if totalSum % 2 != 0:
+            return False
+
+        # Step 3: Target sum for each subset
+        targetSum = totalSum // 2
+
+        # Step 4: Create DP table and initialize
+        dp = [[False] * (targetSum + 1) for _ in range(n)]
+
+        # Step 5: Base case: sum 0 is always possible
+        for i in range(n):
+            dp[i][0] = True
+
+        # Step 6: Initialize first row
+        if arr[0] &lt;= targetSum:
+            dp[0][arr[0]] = True
+
+        # Step 7: Fill DP table
+        for index in range(1, n):
+            for target in range(1, targetSum + 1):
+                notTaken = dp[index - 1][target]
+                taken = False
+                if arr[index] &lt;= target:
+                    taken = dp[index - 1][target - arr[index]]
+                dp[index][target] = notTaken or taken
+
+        # Step 8: Return result
+        return dp[n - 1][targetSum]
+
+
+# Example usage
+arr = [2, 3, 3, 3, 4, 5]
+solver = Solution()
+if solver.canPartition(arr):
+    print("The array can be partitioned into two equal subsets")
+else:
+    print("The array cannot be partitioned into two equal subsets")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Determines if the given array can be split into two subsets
+// whose sums are equal using a tabulation DP approach
+function canPartition(arr) {
+    const n = arr.length;
+
+    // Step 1: Calculate total sum
+    let totalSum = arr.reduce((a, b) =&gt; a + b, 0);
+
+    // Step 2: If total sum is odd, partition is impossible
+    if (totalSum % 2 !== 0) return false;
+
+    // Step 3: Target sum for each subset
+    const targetSum = Math.floor(totalSum / 2);
+
+    // Step 4: Create DP table and initialize
+    const dp = Array.from({ length: n }, () =&gt; Array(targetSum + 1).fill(false));
+
+    // Step 5: Base case: sum 0 is always possible
+    for (let i = 0; i &lt; n; i++) dp[i][0] = true;
+
+    // Step 6: Initialize first row
+    if (arr[0] &lt;= targetSum) dp[0][arr[0]] = true;
+
+    // Step 7: Fill DP table
+    for (let index = 1; index &lt; n; index++) {
+        for (let target = 1; target &lt;= targetSum; target++) {
+            let notTaken = dp[index - 1][target];
+            let taken = false;
+            if (arr[index] &lt;= target) {
+                taken = dp[index - 1][target - arr[index]];
+            }
+            dp[index][target] = notTaken || taken;
+        }
+    }
+
+    // Step 8: Return result
+    return dp[n - 1][targetSum];
+}
+
+// Example usage
+const arr = [2, 3, 3, 3, 4, 5];
+if (canPartition(arr))
+    console.log("The array can be partitioned into two equal subsets");
+else
+    console.log("The array cannot be partitioned into two equal subsets");
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N*K)</strong>, there are total N*K states, where N is the length of array and K is the target sum i.e. Half of the sum of all elements of the array.<br/>
+<strong>Space Complexity: O(N*K) </strong>, we use a 2D DP array to avoid recomputation. 
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                   Space Optimization 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+If we closely look the relation,
+
+dp[ind][target] =  dp[ind-1][target] || dp[ind-1][target-arr[ind]]<br/>
+
+We see that to calculate a value of a cell of the dp array, we need only the previous row values<br/><br/>
+
+This means we do not need to store the entire 2D table, and instead can maintain just two 1D arrays, one representing the previous row and one for the current row. We initialize the first element of both arrays to true, as a sum of zero is always possible. For each new element in the array, we create and fill the current row based on the previous row’s values, then replace the previous row with the current one. After processing all elements, the answer will be found in the last updated previous row at the index equal to the target sum.<p></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Function to check if it's possible to partition the array into two subsets with equal sum
+bool canPartition(int n, vector&lt;int&gt;&amp; arr) {
+    int totSum = 0;
+
+    // Calculate the total sum of the array
+    for (int i = 0; i &lt; n; i++) {
+        totSum += arr[i];
+    }
+
+    // If the total sum is odd, it cannot be partitioned into two equal subsets
+    if (totSum % 2 == 1)
+        return false;
+    else {
+        int k = totSum / 2;
+
+        // Create a vector to represent the previous row of the DP table
+        vector&lt;bool&gt; prev(k + 1, false);
+
+        // Base case: If the target sum is 0, it can be achieved by not selecting any elements
+        prev[0] = true;
+
+        // Initialize the first row based on the first element of the array
+        if (arr[0] &lt;= k)
+            prev[arr[0]] = true;
+
+        // Fill in the DP table using a bottom-up approach
+        for (int ind = 1; ind &lt; n; ind++) {
+            // Create a vector to represent the current row of the DP table
+            vector&lt;bool&gt; cur(k + 1, false);
+            cur[0] = true;
+
+            for (int target = 1; target &lt;= k; target++) {
+                // Exclude the current element
+                bool notTaken = prev[target];
+
+                // Include the current element if it doesn't exceed the target
+                bool taken = false;
+                if (arr[ind] &lt;= target)
+                    taken = prev[target - arr[ind]];
+
+                // Update the current row of the DP table
+                cur[target] = notTaken || taken;
+            }
+
+            // Set the current row as the previous row for the next iteration
+            prev = cur;
+        }
+
+        // The final result is in the last cell of the previous row of the DP table
+        return prev[k];
+    }
+}
+
+int main() {
+    vector&lt;int&gt; arr = {2, 3, 3, 3, 4, 5};
+    int n = arr.size();
+
+    if (canPartition(n, arr))
+        cout &lt;&lt; "The Array can be partitioned into two equal subsets";
+    else
+        cout &lt;&lt; "The Array cannot be partitioned into two equal subsets";
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // Checks if the given array can be partitioned into two subsets
+    // such that the sum of elements in both subsets is equal
+    public boolean canPartition(int[] arr) {
+        int n = arr.length;
+
+        // Calculate total sum of the array
+        int totalSum = 0;
+        for (int num : arr) totalSum += num;
+
+        // If the sum is odd, partition into equal subsets is impossible
+        if (totalSum % 2 != 0)
+            return false;
+
+        int target = totalSum / 2;
+
+        // prev[sum] indicates if a subset with 'sum' is possible so far
+        boolean[] prev = new boolean[target + 1];
+        prev[0] = true; // sum = 0 is always possible
+
+        // Initialize with the first element
+        if (arr[0] &lt;= target)
+            prev[arr[0]] = true;
+
+        // Iterate over all remaining elements
+        for (int i = 1; i &lt; n; i++) {
+            // cur[sum] will store possibilities for current element
+            boolean[] cur = new boolean[target + 1];
+            cur[0] = true; // sum 0 always possible
+
+            for (int sum = 1; sum &lt;= target; sum++) {
+                // Option 1: Do not take current element
+                boolean notTaken = prev[sum];
+
+                // Option 2: Take current element if it fits
+                boolean taken = false;
+                if (arr[i] &lt;= sum)
+                    taken = prev[sum - arr[i]];
+
+                // Current sum possible if either option is true
+                cur[sum] = notTaken || taken;
+            }
+
+            // Move to the next element
+            prev = cur;
+        }
+
+        // Final answer is whether target sum is possible
+        return prev[target];
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {2, 3, 3, 3, 4, 5};
+        Solution obj = new Solution();
+        if (obj.canPartition(arr))
+            System.out.println("The Array can be partitioned into two equal subsets");
+        else
+            System.out.println("The Array cannot be partitioned into two equal subsets");
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Checks if the given array can be partitioned into two subsets
+    # such that the sum of elements in both subsets is equal
+    def canPartition(self, arr):
+        n = len(arr)
+
+        # Calculate total sum of the array
+        totalSum = sum(arr)
+
+        # If the sum is odd, partition into equal subsets is impossible
+        if totalSum % 2 != 0:
+            return False
+
+        target = totalSum // 2
+
+        # prev[sum] indicates if a subset with 'sum' is possible so far
+        prev = [False] * (target + 1)
+        prev[0] = True  # sum = 0 is always possible
+
+        # Initialize with the first element
+        if arr[0] &lt;= target:
+            prev[arr[0]] = True
+
+        # Iterate over all remaining elements
+        for i in range(1, n):
+            # cur[sum] will store possibilities for current element
+            cur = [False] * (target + 1)
+            cur[0] = True  # sum 0 always possible
+
+            # Check all possible target sums
+            for s in range(1, target + 1):
+                # Option 1: Do not take current element
+                notTaken = prev[s]
+
+                # Option 2: Take current element if it fits
+                taken = False
+                if arr[i] &lt;= s:
+                    taken = prev[s - arr[i]]
+
+                # Current sum possible if either option is true
+                cur[s] = notTaken or taken
+
+            # Move to the next element
+            prev = cur
+
+        # Final answer is whether target sum is possible
+        return prev[target]
+
+
+# Example usage
+arr = [2, 3, 3, 3, 4, 5]
+obj = Solution()
+if obj.canPartition(arr):
+    print("The Array can be partitioned into two equal subsets")
+else:
+    print("The Array cannot be partitioned into two equal subsets")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Checks if the given array can be partitioned into two subsets
+// such that the sum of elements in both subsets is equal
+function canPartition(arr) {
+    const n = arr.length;
+
+    // Calculate total sum of the array
+    let totalSum = arr.reduce((a, b) =&gt; a + b, 0);
+
+    // If the sum is odd, partition into equal subsets is impossible
+    if (totalSum % 2 !== 0) return false;
+
+    const target = totalSum / 2;
+
+    // prev[sum] indicates if a subset with 'sum' is possible so far
+    let prev = Array(target + 1).fill(false);
+    prev[0] = true; // sum = 0 is always possible
+
+    // Initialize with the first element
+    if (arr[0] &lt;= target) prev[arr[0]] = true;
+
+    // Iterate over all remaining elements
+    for (let i = 1; i &lt; n; i++) {
+        let cur = Array(target + 1).fill(false);
+        cur[0] = true; // sum 0 always possible
+
+        for (let sum = 1; sum &lt;= target; sum++) {
+            // Option 1: Do not take current element
+            let notTaken = prev[sum];
+
+            // Option 2: Take current element if it fits
+            let taken = false;
+            if (arr[i] &lt;= sum) taken = prev[sum - arr[i]];
+
+            // Current sum possible if either option is true
+            cur[sum] = notTaken || taken;
+        }
+
+        // Move to the next element
+        prev = cur;
+    }
+
+    // Final answer is whether target sum is possible
+    return prev[target];
+}
+
+// Example usage
+let arr = [2, 3, 3, 3, 4, 5];
+if (canPartition(arr))
+    console.log("The Array can be partitioned into two equal subsets");
+else
+    console.log("The Array cannot be partitioned into two equal subsets");
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N*K)</strong>, there are total N*K states, where N is the length of array and K is the target sum i.e. Half of the sum of all elements of the array.<br/>
+<strong>Space Complexity: O(N)</strong>, we use two 1D arrays to store value of previous row and current row.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

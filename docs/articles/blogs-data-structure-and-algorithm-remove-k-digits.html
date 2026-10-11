@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Remove K Digits to Form the Smallest Number</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Remove K Digits to Form the Smallest Number</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/blogs/data-structure-and-algorithm/remove-k-digits</code></div>
+  <div class="ArticleParser-module__R__VNG__article" data-article-segment="html-0"><p>Given a string <code>num</code> representing a non-negative integer and an integer <code>k</code>, remove exactly <code>k</code> digits. Return the smallest possible integer as a string. Remove leading zeroes from the result. Return <code>"0"</code> when no digit remains or every retained digit is zero.</p></div><div><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 1</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>num = "1432219", k = 3</code><br/><strong>Output:</strong> <code>"1219"</code><br/><strong>Explanation:</strong> Removing <code>4</code>, <code>3</code>, and the first available <code>2</code> before <code>1</code> produces the smallest retained sequence, <code>1219</code>.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 2</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>num = "10", k = 2</code><br/><strong>Output:</strong> <code>"0"</code><br/><strong>Explanation:</strong> Removing both digits leaves an empty string, so the required result is <code>"0"</code>.</p></div></div></section></div><div><div class="BlogDetail-module__HEfJva__practiceCallout"><a class="BlogDetail-module__HEfJva__practiceLink" data-mobile-prefetch="normal" href="https://takeuforward.org/practice/dsa/remove-k-digits" rel="noopener" target="_blank"><span>Practice it by yourself before moving onto the solution</span><span class="BlogDetail-module__HEfJva__practiceAction">Try now</span></a></div></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-3"><h2 id="blog-toc-brute-force-approach">Brute Force Approach</h2><p>Digits on the left have a greater effect on the number. Therefore, removing the first digit that is larger than the next digit gives the smallest possible result for one deletion, because a smaller digit moves into an earlier position.</p><p>If no such pair exists, the digits are already in non-decreasing order. In that case, removing the last digit gives the smallest result. Repeating this process <code>k</code> times provides a simple direct solution, although repeated scanning can be slow.</p><h3 id="blog-toc-algorithm">Algorithm</h3><ul><li><p>Store <code>num</code> in a working string called <code>current</code>, because every deletion changes the active number.</p></li><li><p>Repeat the deletion process exactly <code>k</code> times, because exactly <code>k</code> digits must be removed.</p></li><li><p>Scan adjacent digits from left to right to find the first position where the current digit is greater than the next digit.</p></li><li><p>Remove the larger left digit from that pair, because reducing the earliest possible position creates a smaller number.</p></li><li><p>If no decreasing pair is found, remove the last digit, because the digits are already in non-decreasing order.</p></li><li><p>After all deletions, skip leading zeroes because unnecessary zeroes should not appear in the final answer.</p></li><li><p>Return the remaining part of the string, or return <code>"0"</code> when no non-zero digit remains.</p></li></ul><h3 id="blog-toc-dry-run">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Remove K Digits Brute" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/92cddaa53d019a87.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Remove K Digits Brute</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-4"><h3 id="blog-toc-solution">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Returns the smallest number after k removals
+    string removeKdigits(string num, int k) {
+        // Store the changing number
+        string current = num;
+
+        // Perform every required deletion
+        for (int removal = 0; removal &lt; k; removal++) {
+            // Default to last index if no valid removal index is found.
+            int removeIndex = current.size() - 1;
+
+            // Find the earliest decreasing pair
+            for (int index = 0; index + 1 &lt; current.size(); index++) {
+                // An earlier smaller digit lowers the result
+                if (current[index] &gt; current[index + 1]) {
+                    removeIndex = index;
+                    break;
+                }
+            }
+
+            // Delete the selected digit
+            current.erase(removeIndex, 1);
+        }
+
+        int start = 0;
+        // Skip zeroes invalid at the front
+        while (start &lt; current.size() &amp;&amp; current[start] == '0') {
+            start++;
+        }
+
+        // An empty suffix represents zero
+        if (start == current.size()) {
+            return "0";
+        }
+
+        // Return the valid suffix
+        return current.substr(start);
+    }
+};
+
+// Driver code
+int main() {
+    string num = "1432219";
+    int k = 3;
+    Solution obj;
+    cout &lt;&lt; obj.removeKdigits(num, k);
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+    # Returns the smallest number after k removals
+    def removeKdigits(self, num: str, k: int) -&gt; str:
+        # Store the changing number
+        current = num
+
+        # Perform every required deletion
+        for _ in range(k):
+            # Default to last index if no valid removal index is found.
+            remove_index = len(current) - 1
+
+            # Find the earliest decreasing pair
+            for index in range(len(current) - 1):
+                # An earlier smaller digit lowers the result
+                if current[index] &gt; current[index + 1]:
+                    remove_index = index
+                    break
+
+            # Delete the selected digit
+            current = current[:remove_index] + current[remove_index + 1:]
+
+        start = 0
+        # Skip zeroes invalid at the front
+        while start &lt; len(current) and current[start] == "0":
+            start += 1
+
+        # An empty suffix represents zero
+        if start == len(current):
+            return "0"
+
+        # Return the valid suffix
+        return current[start:]
+
+
+# Driver code
+def main() -&gt; None:
+    num = "1432219"
+    k = 3
+    obj = Solution()
+    print(obj.removeKdigits(num, k))
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Returns the smallest number after k removals
+    public String removeKdigits(String num, int k) {
+        // Store the changing number
+        String current = num;
+
+        // Perform every required deletion
+        for (int removal = 0; removal &lt; k; removal++) {
+            // Default to last index if no valid removal index is found.
+            int removeIndex = current.length() - 1;
+
+            // Find the earliest decreasing pair
+            for (int index = 0; index + 1 &lt; current.length(); index++) {
+                // An earlier smaller digit lowers the result
+                if (current.charAt(index) &gt; current.charAt(index + 1)) {
+                    removeIndex = index;
+                    break;
+                }
+            }
+
+            // Delete the selected digit
+            current = current.substring(0, removeIndex)
+                    + current.substring(removeIndex + 1);
+        }
+
+        int start = 0;
+        // Skip zeroes invalid at the front
+        while (start &lt; current.length() &amp;&amp; current.charAt(start) == '0') {
+            start++;
+        }
+
+        // An empty suffix represents zero
+        if (start == current.length()) {
+            return "0";
+        }
+
+        // Return the valid suffix
+        return current.substring(start);
+    }
+}
+
+// Driver code
+public class Main {
+    public static void main(String[] args) {
+        String num = "1432219";
+        int k = 3;
+        Solution obj = new Solution();
+        System.out.println(obj.removeKdigits(num, k));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Returns the smallest number after k removals
+    removeKdigits(num, k) {
+        // Store the changing number
+        let current = num;
+
+        // Perform every required deletion
+        for (let removal = 0; removal &lt; k; removal++) {
+            // Default to last index if no valid removal index is found.
+            let removeIndex = current.length - 1;
+
+            // Find the earliest decreasing pair
+            for (let index = 0; index + 1 &lt; current.length; index++) {
+                // An earlier smaller digit lowers the result
+                if (current[index] &gt; current[index + 1]) {
+                    removeIndex = index;
+                    break;
+                }
+            }
+
+            // Delete the selected digit
+            const left = current.slice(0, removeIndex);
+            const right = current.slice(removeIndex + 1);
+            current = left + right;
+        }
+
+        let start = 0;
+        // Skip zeroes invalid at the front
+        while (start &lt; current.length &amp;&amp; current[start] === "0") {
+            start++;
+        }
+
+        // An empty suffix represents zero
+        if (start === current.length) {
+            return "0";
+        }
+
+        // Return the valid suffix
+        return current.slice(start);
+    }
+}
+
+// Driver code
+function main() {
+    const num = "1432219";
+    const k = 3;
+    const obj = new Solution();
+    console.log(obj.removeKdigits(num, k));
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-5"><h3 id="blog-toc-complexity-analysis">Complexity Analysis</h3><p>Time Complexity: <code>O(N </code><span style="color:rgb(250, 250, 250)">×</span><code> k)</code>, because every deletion can scan and rebuild a string containing up to <code>N</code> digits.</p></div><div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-6"><p>Space Complexity: <code>O(N)</code>, because immutable-string languages create a rebuilt string and the active result can contain up to <code>N</code> digits.</p></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-7"><h2 id="blog-toc-optimal-approach">Optimal Approach</h2><p>Repeatedly scanning the number checks the same digits many times. A monotonic stack avoids this by storing the useful digits in their original order and keeping the latest retained digit at the top.</p><p>When the current digit is smaller than the stack top, removing the larger top places a smaller digit in an earlier position and reduces the number. After the full scan, any remaining deletions are made from the end because the retained digits are already in non-decreasing order.</p><h3 id="blog-toc-algorithm-2">Algorithm</h3><ul><li><p>Create an empty stack and set <code>remaining = k</code> to track how many digits still need to be removed.</p></li><li><p>Traverse every digit from left to right, so the order of the retained digits remains unchanged.</p></li><li><p>While <code>remaining &gt; 0</code> and the stack top is greater than the current digit:</p><ul><li><p>Remove the stack top because deleting an earlier larger digit creates a smaller number.</p></li><li><p>Decrement <code>remaining</code> because one allowed deletion has been used.</p></li></ul></li><li><p>Push the current digit after all useful removals, so the digit can be compared with future digits.</p></li><li><p>After traversal, remove digits from the stack end while <code>remaining &gt; 0</code>, because a non-decreasing sequence becomes smallest by deleting trailing digits.</p></li><li><p>Remove leading zeroes only after completing all <code>k</code> deletions, so zero removal does not affect the deletion choices.</p></li><li><p>Return the remaining number, or return <code>"0"</code> when no digit remains.</p></li></ul><h3 id="blog-toc-dry-run-2">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Remove K Digits Optimal" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/abe7cbf7e3ff8f51.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Remove K Digits Optimal</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-8"><h3 id="blog-toc-solution-2">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Returns the smallest number after k removals.
+    string removeKdigits(string num, int k) {
+        stack&lt;char&gt; digits;
+        int remaining = k;
+
+        // Process every digit from left to right.
+        for (char digit : num) {
+            // Remove larger previous digits to make the number smaller.
+            while (remaining &gt; 0 &amp;&amp; !digits.empty() &amp;&amp;
+                   digits.top() &gt; digit) {
+                digits.pop();
+                remaining--;
+            }
+
+            // Retain the current digit for future comparisons.
+            digits.push(digit);
+        }
+
+        // A non-decreasing sequence needs removals from the end.
+        while (remaining &gt; 0 &amp;&amp; !digits.empty()) {
+            digits.pop();
+            remaining--;
+        }
+
+        string result;
+
+        // Stack order is reversed, so collect digits first.
+        while (!digits.empty()) {
+            result.push_back(digits.top());
+            digits.pop();
+        }
+
+        reverse(result.begin(), result.end());
+
+        int start = 0;
+
+        // Skip leading zeroes from the final number.
+        while (start &lt; result.size() &amp;&amp; result[start] == '0') {
+            start++;
+        }
+
+        // No remaining digit represents zero.
+        if (start == result.size()) {
+            return "0";
+        }
+
+        return result.substr(start);
+    }
+};
+
+// Driver code
+int main() {
+    string num = "1432219";
+    int k = 3;
+
+    Solution obj;
+    cout &lt;&lt; obj.removeKdigits(num, k);
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+    # Returns the smallest number after k removals.
+    def removeKdigits(self, num: str, k: int) -&gt; str:
+        digits = []
+        remaining = k
+
+        # Process every digit from left to right.
+        for digit in num:
+            # Remove larger previous digits to make the number smaller.
+            while (
+                remaining &gt; 0
+                and digits
+                and digits[-1] &gt; digit
+            ):
+                digits.pop()
+                remaining -= 1
+
+            # Retain the current digit for future comparisons.
+            digits.append(digit)
+
+        # A non-decreasing sequence needs removals from the end.
+        while remaining &gt; 0 and digits:
+            digits.pop()
+            remaining -= 1
+
+        result = "".join(digits)
+
+        start = 0
+
+        # Skip leading zeroes from the final number.
+        while start &lt; len(result) and result[start] == "0":
+            start += 1
+
+        # No remaining digit represents zero.
+        if start == len(result):
+            return "0"
+
+        return result[start:]
+
+
+# Driver code
+def main():
+    num = "1432219"
+    k = 3
+
+    obj = Solution()
+    print(obj.removeKdigits(num, k))
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Returns the smallest number after k removals.
+    public String removeKdigits(String num, int k) {
+        Stack&lt;Character&gt; digits = new Stack&lt;&gt;();
+        int remaining = k;
+
+        // Process every digit from left to right.
+        for (char digit : num.toCharArray()) {
+            // Remove larger previous digits to make the number smaller.
+            while (remaining &gt; 0 &amp;&amp; !digits.isEmpty()
+                    &amp;&amp; digits.peek() &gt; digit) {
+                digits.pop();
+                remaining--;
+            }
+
+            // Retain the current digit for future comparisons.
+            digits.push(digit);
+        }
+
+        // A non-decreasing sequence needs removals from the end.
+        while (remaining &gt; 0 &amp;&amp; !digits.isEmpty()) {
+            digits.pop();
+            remaining--;
+        }
+
+        StringBuilder result = new StringBuilder();
+
+        // Stack order is reversed, so collect digits first.
+        while (!digits.isEmpty()) {
+            result.append(digits.pop());
+        }
+
+        result.reverse();
+
+        int start = 0;
+
+        // Skip leading zeroes from the final number.
+        while (start &lt; result.length()
+                &amp;&amp; result.charAt(start) == '0') {
+            start++;
+        }
+
+        // No remaining digit represents zero.
+        if (start == result.length()) {
+            return "0";
+        }
+
+        return result.substring(start);
+    }
+}
+
+// Driver code
+public class Main {
+    public static void main(String[] args) {
+        String num = "1432219";
+        int k = 3;
+
+        Solution obj = new Solution();
+        System.out.println(obj.removeKdigits(num, k));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Returns the smallest number after k removals.
+    removeKdigits(num, k) {
+        const digits = [];
+        let remaining = k;
+
+        // Process every digit from left to right.
+        for (const digit of num) {
+            // Remove larger previous digits to make the number smaller.
+            while (
+                remaining &gt; 0 &amp;&amp;
+                digits.length &gt; 0 &amp;&amp;
+                digits[digits.length - 1] &gt; digit
+            ) {
+                digits.pop();
+                remaining--;
+            }
+
+            // Retain the current digit for future comparisons.
+            digits.push(digit);
+        }
+
+        // A non-decreasing sequence needs removals from the end.
+        while (remaining &gt; 0 &amp;&amp; digits.length &gt; 0) {
+            digits.pop();
+            remaining--;
+        }
+
+        const result = digits.join("");
+
+        let start = 0;
+
+        // Skip leading zeroes from the final number.
+        while (
+            start &lt; result.length &amp;&amp;
+            result[start] === "0"
+        ) {
+            start++;
+        }
+
+        // No remaining digit represents zero.
+        if (start === result.length) {
+            return "0";
+        }
+
+        return result.slice(start);
+    }
+}
+
+// Driver code
+function main() {
+    const num = "1432219";
+    const k = 3;
+
+    const obj = new Solution();
+    console.log(obj.removeKdigits(num, k));
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-9"><h3 id="blog-toc-complexity-analysis-2">Complexity Analysis</h3><p>Time Complexity: <code>O(N)</code>, because every digit is pushed once and popped at most once across the complete scan.</p><p>Space Complexity: <code>O(N)</code>, because the character stack can retain up to <code>N</code> digits.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div><section aria-label="Interview follow-up Questions" class="BlogDetail-module__HEfJva__faqSection" id="blog-toc-faqs"><h2 class="BlogDetail-module__HEfJva__faqHeading">Interview follow-up Questions</h2><div class="flex w-full flex-col BlogDetail-module__HEfJva__faqList" data-orientation="vertical" data-slot="accordion"><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="open"><h3 class="flex" data-orientation="vertical" data-state="open"></h3><div aria-labelledby="radix-_R_1kkqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="open" id="radix-_R_9kkqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"><div class="h-auto pt-0 pb-2.5 [&amp;_a]:underline [&amp;_a]:underline-offset-3 [&amp;_a]:hover:text-foreground [&amp;_p:not(:last-child)]:mb-4 BlogDetail-module__HEfJva__faqAnswer"><p>A larger digit in an earlier position has a greater effect on the final number. Removing the larger previous digit allows the smaller current digit to move into a more significant position, producing a smaller result.</p></div></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_2kkqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_akkqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_3kkqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_bkkqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_4kkqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_ckkqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_5kkqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_dkkqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_6kkqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_ekkqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div></div></section></div>
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

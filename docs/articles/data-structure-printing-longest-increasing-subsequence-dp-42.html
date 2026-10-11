@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Printing Longest Increasing Subsequence | (DP-42)</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Printing Longest Increasing Subsequence | (DP-42)</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/printing-longest-increasing-subsequence-dp-42/</code></div>
+  <p>Put your HTML text here</p><p><strong>Problem Description: </strong>Given an array of n integers arr, return the Longest Increasing Subsequence (LIS) that is index-wise lexicographically smallest.<br/><br/>The Longest Increasing Subsequence (LIS) is the longest subsequence where all elements are in strictly increasing order.
+
+A subsequence A1 is index-wise lexicographically smaller than another subsequence A2 if, at the first position where A1 and A2 differ, the element in A1 appears earlier in the array than corresponding element in A2.
+</p>
+
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: arr = [10, 22, 9, 33, 21, 50, 41, 60, 80]</span>
+<span>Output: [10, 22, 33, 50, 60, 80]</span>
+<span>Explanation: The LIS is [10, 22, 33, 50, 60, 80] and it is the lexicographically smallest.</span>
+<p></p>
+<span>Input: arr = [1, 3, 2, 4, 6, 5]</span>
+<span>Output: [1, 3, 4, 6] </span>
+<span>Explanation: Possible LIS sequences are [1, 3, 4, 6] and [1, 2, 4, 6]. Since [1, 3, 4, 6] is index-wise lexicographically smaller, it is the result.</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/print-longest-increasing-subsequence" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better.
+            It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                   Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+To find the Longest Increasing Subsequence (LIS), we use a 1D DP array where each element at position i stores the length of the LIS ending at index i of the array.<br/><br/>
+To make this DP array we can follow any of the approach that we learned while finding the length of the <a href="https://takeuforward.org/data-structure/longest-increasing-subsequence-dp-41/" rel="noopener" target="_blank">Longest Increasing Subsequence</a>.
+
+<ul>
+<li>After computing the length of the Longest Increasing Subsequence (LIS) for each element using dynamic programming, start from the element with the maximum LIS value.</li>
+<li>Initialize an empty list or string to store the LIS elements in reverse order.</li>
+<li>From the element with the maximum LIS, move backward through the array to find elements that can form the LIS:
+    <ul>
+<li>For the current element, look for a previous element that is smaller and whose LIS value is exactly one less than the current element's LIS.</li>
+<li>Add that previous element to the LIS list and continue the process from that element.</li>
+</ul>
+</li>
+<li>Repeat this process until you reach the start of the LIS (where LIS value is 1).</li>
+<li>Reverse the collected elements since they were collected backwards to get the actual LIS.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/655e0e50265129c2.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/0e12e496a8044376.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/231bb0589201fdf8.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/485a5975aadff8b5.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/655e0e50265129c2.png"/><img alt="Image 2" loading="lazy" src="../assets/img/0e12e496a8044376.png"/><img alt="Image 3" loading="lazy" src="../assets/img/231bb0589201fdf8.png"/><img alt="Image 4" loading="lazy" src="../assets/img/485a5975aadff8b5.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Solution class for LIS with reconstruction using DP
+class Solution {
+public:
+    // Function to return the LIS as a sequence (vector)
+    vector&lt;int&gt; longestIncreasingSubsequence(vector&lt;int&gt; &amp;nums) {
+        int n = nums.size();
+
+        // DP array to store length of LIS ending at each index
+        vector&lt;int&gt; dp(n, 1);
+
+        // Array to store previous index of LIS element for reconstruction
+        vector&lt;int&gt; prev(n, -1);
+
+        // Compute LIS length for each index
+        for (int i = 1; i &lt; n; i++) {
+            for (int j = 0; j &lt; i; j++) {
+                if (nums[j] &lt; nums[i] &amp;&amp; dp[j] + 1 &gt; dp[i]) {
+                    // Update dp[i] and store previous index
+                    dp[i] = dp[j] + 1;
+                    prev[i] = j;
+                }
+            }
+        }
+
+        // Find the index of maximum LIS length
+        int maxLen = 0, maxIndex = 0;
+        for (int i = 0; i &lt; n; i++) {
+            if (dp[i] &gt; maxLen) {
+                maxLen = dp[i];
+                maxIndex = i;
+            }
+        }
+
+        // Reconstruct LIS sequence
+        vector&lt;int&gt; lisSeq;
+        int curr = maxIndex;
+        while (curr != -1) {
+            lisSeq.push_back(nums[curr]);
+            curr = prev[curr];
+        }
+
+        // Reverse sequence as it was built backwards
+        reverse(lisSeq.begin(), lisSeq.end());
+
+        return lisSeq;
+    }
+};
+
+int main() {
+    vector&lt;int&gt; nums = {10, 9, 2, 5, 3, 7, 101, 18};
+
+    Solution sol;
+    vector&lt;int&gt; lis = sol.longestIncreasingSubsequence(nums);
+
+    cout &lt;&lt; "LIS: ";
+    for (int x : lis) cout &lt;&lt; x &lt;&lt; " ";
+    cout &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to return the LIS as a list
+    public List&lt;Integer&gt; longestIncreasingSubsequence(int[] nums) {
+        int n = nums.length;
+
+        // DP array to store length of LIS ending at each index
+        int[] dp = new int[n];
+
+        // Array to store previous index of LIS element for reconstruction
+        int[] prev = new int[n];
+
+        Arrays.fill(dp, 1);
+        Arrays.fill(prev, -1);
+
+        // Compute LIS length for each index
+        for (int i = 1; i &lt; n; i++) {
+            for (int j = 0; j &lt; i; j++) {
+                if (nums[j] &lt; nums[i] &amp;&amp; dp[j] + 1 &gt; dp[i]) {
+                    // Update dp[i] and store previous index
+                    dp[i] = dp[j] + 1;
+                    prev[i] = j;
+                }
+            }
+        }
+
+        // Find the index of maximum LIS length
+        int maxLen = 0, maxIndex = 0;
+        for (int i = 0; i &lt; n; i++) {
+            if (dp[i] &gt; maxLen) {
+                maxLen = dp[i];
+                maxIndex = i;
+            }
+        }
+
+        // Reconstruct LIS sequence
+        List&lt;Integer&gt; lisSeq = new ArrayList&lt;&gt;();
+        int curr = maxIndex;
+        while (curr != -1) {
+            lisSeq.add(nums[curr]);
+            curr = prev[curr];
+        }
+
+        // Reverse sequence as it was built backwards
+        Collections.reverse(lisSeq);
+
+        return lisSeq;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[] nums = {10, 9, 2, 5, 3, 7, 101, 18};
+
+        Solution sol = new Solution();
+        List&lt;Integer&gt; lis = sol.longestIncreasingSubsequence(nums);
+
+        System.out.print("LIS: ");
+        for (int x : lis) System.out.print(x + " ");
+        System.out.println();
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">from typing import List
+
+class Solution:
+    # Function to return the LIS as a list
+    def longestIncreasingSubsequence(self, nums: List[int]) -&gt; List[int]:
+        n = len(nums)
+        
+        # DP array to store length of LIS ending at each index
+        dp = [1] * n
+        
+        # Array to store previous index of LIS element for reconstruction
+        prev = [-1] * n
+        
+        # Compute LIS length for each index
+        for i in range(1, n):
+            for j in range(i):
+                if nums[j] &lt; nums[i] and dp[j] + 1 &gt; dp[i]:
+                    # Update dp[i] and store previous index
+                    dp[i] = dp[j] + 1
+                    prev[i] = j
+        
+        # Find the index of maximum LIS length
+        max_len = 0
+        max_index = 0
+        for i in range(n):
+            if dp[i] &gt; max_len:
+                max_len = dp[i]
+                max_index = i
+        
+        # Reconstruct LIS sequence
+        lis_seq = []
+        curr = max_index
+        while curr != -1:
+            lis_seq.append(nums[curr])
+            curr = prev[curr]
+        
+        # Reverse sequence as it was built backwards
+        lis_seq.reverse()
+        return lis_seq
+
+if __name__ == "__main__":
+    nums = [10, 9, 2, 5, 3, 7, 101, 18]
+    sol = Solution()
+    lis = sol.longestIncreasingSubsequence(nums)
+    print("LIS:", *lis)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to return the LIS as an array
+    longestIncreasingSubsequence(nums) {
+        const n = nums.length;
+
+        // DP array to store length of LIS ending at each index
+        const dp = new Array(n).fill(1);
+
+        // Array to store previous index of LIS element for reconstruction
+        const prev = new Array(n).fill(-1);
+
+        // Compute LIS length for each index
+        for (let i = 1; i &lt; n; i++) {
+            for (let j = 0; j &lt; i; j++) {
+                if (nums[j] &lt; nums[i] &amp;&amp; dp[j] + 1 &gt; dp[i]) {
+                    // Update dp[i] and store previous index
+                    dp[i] = dp[j] + 1;
+                    prev[i] = j;
+                }
+            }
+        }
+
+        // Find the index of maximum LIS length
+        let maxLen = 0;
+        let maxIndex = 0;
+        for (let i = 0; i &lt; n; i++) {
+            if (dp[i] &gt; maxLen) {
+                maxLen = dp[i];
+                maxIndex = i;
+            }
+        }
+
+        // Reconstruct LIS sequence
+        let lisSeq = [];
+        let curr = maxIndex;
+        while (curr !== -1) {
+            lisSeq.push(nums[curr]);
+            curr = prev[curr];
+        }
+
+        // Reverse sequence as it was built backwards
+        lisSeq.reverse();
+        return lisSeq;
+    }
+}
+
+// Driver code
+const nums = [10, 9, 2, 5, 3, 7, 101, 18];
+
+const sol = new Solution();
+const lis = sol.longestIncreasingSubsequence(nums);
+console.log("LIS:", lis.join(" "));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N^2)</strong>, nested loops are used to compute dp array and prev array.<br/>
+<strong>Space Complexity: O(N)</strong>, space used to store DP array and previous array.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

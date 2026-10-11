@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Check if a number is Palindrome or Not</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Check if a number is Palindrome or Not</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/check-if-a-number-is-palindrome-or-not/</code></div>
+  <p><strong>Problem Statement: </strong>Given an integer N, return true if it is a palindrome else return false.</p>
+<p>
+    A palindrome is a number that reads the same backward as forward. For example, 121, 1331, and 4554 are palindromes
+    because they remain the same when their digits are reversed.
+
+
+</p>
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input:N = 4554
+Output:Palindrome Number
+Explanation: The reverse of 4554 is 4554 and therefore it is palindrome number
+                                        
+Example 2:
+Input:N = 7789          
+Output: Not Palindrome
+Explanation: The reverse of number 7789 is 9877 and therefore it is not palindrome
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/palindrome-number" rel="noopener" target="_blank">practice link</a> to
+        help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                Approach
+            </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Algorithm / Intuition
+                    </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<p>To check if a number is a palindrome, we can use the algorithm created in <a href="https://takeuforward.org/maths/extract-digits-from-a-given-number" rel="noopener" target="_blank">Extract Digits</a>
+                        as now we extract the digits of the number to create a reversed number.</p>
+<p>We then compare the reversed number with the original number. If they are equal, the original
+                        number is a palindrome. If they are not equal the original number is not a palindrome.</p>
+<h4>Algorithm </h4>
+<ol>
+<li>Initialise an integer revNum to 0. This variable will store the reverse
+                        of the number.</li>
+<li> Make a duplicate of the original number and store it in an integer dup
+                        for later comparison.</li>
+<li>
+                        Run a while loop with the condition n&gt;0 to reverse the number and at each iteration</li>
+<li>Get the last digit of n by using the modulus operator % with 10 and store it in a temporary
+                            variable ld.</li>
+<li>Update the revNum by multiplying it by 10 and adding the last digit ld.</li>
+<li>Update n by integer division with 10 effectively removing the last digit.</li>
+<li> After the loop, check if the original number dup is equal to the
+                        reversed number revNum.</li>
+<li>If they are equal, return true indicating the number is a palindrome.</li>
+<li>If they are not equal, return false indicating that the number is not a palindrome.</li>
+</ol>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div>
+<div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;iostream&gt;
+using namespace std;
+
+// Function to check if a given integer is a palindrome
+bool palindrome(int n) {
+    int revNum = 0; // Initialize a variable to store the reverse of the number
+    int dup = n; // Create a duplicate variable to store the original number
+
+    // Iterate through each digit of the number until it becomes 0
+    while (n &gt; 0) {
+        int ld = n % 10; // Extract the last digit of the number
+        revNum = (revNum * 10) + ld; // Build the reverse number by appending the last digit
+        n = n / 10; // Remove the last digit from the original number
+    }
+
+    // Check if the original number is equal to its reverse
+    if (dup == revNum) {
+        return true; // If equal, return true indicating it's a palindrome
+    } else {
+        return false; // If not equal, return false indicating it's not a palindrome
+    }
+}
+
+int main() {
+    int number = 4554; // Example number
+
+    if (palindrome(number)) { // Check if the number is a palindrome
+        cout &lt;&lt; number &lt;&lt; " is a palindrome." &lt;&lt; endl;
+    } else {
+        cout &lt;&lt; number &lt;&lt; " is not a palindrome." &lt;&lt; endl;
+    }
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // Function to check if a given integer is a palindrome
+    public boolean palindrome(int n) {
+        int revNum = 0; // Initialize a variable to store the reverse of the number
+        int dup = n; // Create a duplicate variable to store the original number
+
+        // Iterate through each digit of the number until it becomes 0
+        while (n &gt; 0) {
+            int ld = n % 10; // Extract the last digit of the number
+            revNum = (revNum * 10) + ld; // Build the reverse number by appending the last digit
+            n = n / 10; // Remove the last digit from the original number
+        }
+
+        // Check if the original number is equal to its reverse
+        return dup == revNum; // Return true if they are equal, otherwise false
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int number = 4554; // Example number
+        Solution obj = new Solution();
+        if (obj.palindrome(number)) { // Check if the number is a palindrome
+            System.out.println(number + " is a palindrome.");
+        } else {
+            System.out.println(number + " is not a palindrome.");
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Function to check if a given integer is a palindrome
+def palindrome(n):
+    revNum = 0  # Initialize a variable to store the reverse of the number
+    dup = n  # Create a duplicate variable to store the original number
+
+    # Iterate through each digit of the number until it becomes 0
+    while n &gt; 0:
+        ld = n % 10  # Extract the last digit of the number
+        revNum = (revNum * 10) + ld  # Build the reverse number by appending the last digit
+        n //= 10  # Remove the last digit from the original number
+
+    # Check if the original number is equal to its reverse
+    return dup == revNum  # Return True if they are equal, otherwise False
+
+# Driver code
+number = 4554  # Example number
+if palindrome(number):  # Check if the number is a palindrome
+    print(f"{number} is a palindrome.")
+else:
+    print(f"{number} is not a palindrome.")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to check if a given integer is a palindrome
+    palindrome(n) {
+        let revNum = 0; // Initialize a variable to store the reverse of the number
+        let dup = n; // Create a duplicate variable to store the original number
+
+        // Iterate through each digit of the number until it becomes 0
+        while (n &gt; 0) {
+            let ld = n % 10; // Extract the last digit of the number
+            revNum = (revNum * 10) + ld; // Build the reverse number by appending the last digit
+            n = Math.floor(n / 10); // Remove the last digit from the original number
+        }
+
+        // Check if the original number is equal to its reverse
+        return dup === revNum; // Return true if they are equal, otherwise false
+    }
+}
+
+// Driver code
+let number = 4554; // Example number
+let obj = new Solution();
+if (obj.palindrome(number)) {  // Check if the number is a palindrome
+    console.log(`${number} is a palindrome.`);
+} else {
+    console.log(`${number} is not a palindrome.`);
+}
+</code></pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Complexity Analysis
+                    </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity: O(log<sub>10</sub>N + 1)</strong>, as in the worst case when N is a multiple
+                    of 10 the number of digits in N is log<sub>10</sub> N + 1. In the while loop we divide N by 10 until
+                    it becomes 0 which takes log10N iterations. In each iteration of the while loop we perform constant
+                    time operations like modulus and division and pushing elements into the vector.</p>
+<p><strong>Space Complexity: O(1)</strong>, as only a constant amount of additional memory for the
+                    reversed number regardless of size of the input number.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

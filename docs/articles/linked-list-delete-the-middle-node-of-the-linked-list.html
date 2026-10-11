@@ -1,0 +1,881 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Delete the Middle Node of the Linked List</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Delete the Middle Node of the Linked List</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/linked-list/delete-the-middle-node-of-the-linked-list</code></div>
+  <p><strong>Problem Statement: </strong>Given the head of a linked list of integers, delete the middle node of the linked list and return the modified head. However, if the linked list has an even number of nodes, delete the second middle node.<br/>
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: 1-&gt;2-&gt;3-&gt;4-&gt;5 </span>
+<figure class="wp-block-image size-large is-resized"><img alt="" class="wp-image-13038" height="159" loading="lazy" src="../assets/img/1deba92a13d56f95.png" width="768"/></figure>
+<span>Output: 1-&gt;2-&gt;4-&gt;5</span>
+<figure class="wp-block-image size-large is-resized"><img alt="" class="wp-image-13039" height="156" loading="lazy" src="../assets/img/9836e27e33fe0102.png" width="768"/></figure>
+<span>Explanation: Node with value 3 is at the middle node and deleted.</span>
+<p></p>
+<span>Input: 1-&gt;2-&gt;3-&gt;4</span>
+<figure class="wp-block-image size-large is-resized"><img alt="" class="wp-image-13040" height="175" loading="lazy" src="../assets/img/db211e0e3e281731.png" width="768"/></figure>
+<span>Output: 1-&gt;2-&gt;4</span>
+<figure class="wp-block-image size-large is-resized"><img alt="" class="wp-image-13041" height="177" loading="lazy" src="../assets/img/e09c82e6b8966755.png" width="768"/></figure>
+<span>Explanation: The linked list has an even number of nodes hence we delete the second middle node which is 3.</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+
+
+    It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Brute Force Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+      Using the brute force approach, the middle node of a linked list can be determined by traversing the entire linked list initially to find the total number of nodes, denoted as n. Then we reset the temporary node temp to the head of the linked list and proceed to traverse to the node positioned at index [n/2], which represents either the middle node in an odd-lengthed list or the node just before the middle node in an even-lengthed linked list.
+<ul>
+<li>Traverse the linked list to count the number of nodes and store the length as n. Calculate the index of the middle node by dividing the total number of nodes by 2.</li>
+<figure class="wp-block-image size-large is-resized"><img alt="" class="wp-image-13042" height="184" loading="lazy" src="../assets/img/e73657a8ac40456d.png" width="768"/></figure>
+<li>Traverse the linked list again while keeping track of the node count to reach the middle node. </li>
+<figure class="wp-block-image size-large is-resized"><img alt="" class="wp-image-13044" height="205" loading="lazy" src="../assets/img/7fca279340d65592.png" width="768"/></figure>
+<li>Once reaching the middle node, delete it by setting the next pointer of the previous node directly to the node after the middle node. </li>
+<figure class="wp-block-image size-large is-resized"><img alt="" class="wp-image-13045" height="487" loading="lazy" src="../assets/img/5112d7b25385cba4.png" width="768"/></figure>
+<li>Free the memory allocated to the middle node.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Node class represents a node in a linked list
+class Node {
+public:
+    // Data stored in the node
+    int data;  
+    
+    // Pointer to the next node in the list
+    Node* next;     
+    
+    // Constructor with both data and next node as parameters
+    Node(int data1, Node* next1) {
+        data = data1;
+        next = next1;
+    }
+
+    // Constructor with only data as a parameter, sets next to nullptr
+    Node(int data1) {
+        data = data1;
+        next = nullptr;
+    }
+};
+
+// Solution class containing the delete function
+class Solution {
+public:
+    // Function to delete the middle node of a linked list
+    Node* deleteMiddle(Node* head) {
+        // Initialize a temporary node to traverse the linked list
+        Node* temp = head;
+        
+        // Variable to hold the number of nodes in the linked list
+        int n = 0;
+        
+        // Loop to count the number of nodes in the linked list
+        while (temp != NULL) {
+            n++;
+            temp = temp-&gt;next;
+        }
+        
+        // Calculate the index of the middle node
+        int res = n / 2;
+        
+        // Reset the temporary node to the beginning of the linked list
+        temp = head;
+        
+        // Loop to find the middle node to delete
+        while (temp != NULL) {
+            res--;
+            
+            // If the middle node is found
+            if (res == 0) {
+                // Create a pointer to the middle node
+                Node* middle = temp-&gt;next;
+                
+                // Adjust pointers to skip the middle node
+                temp-&gt;next = temp-&gt;next-&gt;next;
+                
+                // Free the memory allocated to the middle node
+                free(middle);
+                
+                // Exit the loop after deleting the middle node
+                break;
+            }
+            
+            // Move to the next node in the linked list
+            temp = temp-&gt;next;
+        }
+        
+        // Return the head of the modified linked list
+        return head;
+    }
+};
+
+// Function to print the linked list
+void printLL(Node* head) {
+    // Initialize a temporary pointer
+    Node* temp = head;
+    
+    // Traverse the linked list and print data
+    while (temp != NULL) {
+        cout &lt;&lt; temp-&gt;data &lt;&lt; " ";
+        temp = temp-&gt;next;
+    }
+    
+    // Print a newline after the list
+    cout &lt;&lt; endl;
+}
+
+// Driver function
+int main() {
+    // Creating a sample linked list
+    Node* head = new Node(1);
+    head-&gt;next = new Node(2);
+    head-&gt;next-&gt;next = new Node(3);
+    head-&gt;next-&gt;next-&gt;next = new Node(4);
+    head-&gt;next-&gt;next-&gt;next-&gt;next = new Node(5);
+    
+    // Display the original linked list
+    cout &lt;&lt; "Original Linked List: ";
+    printLL(head);
+
+    // Create a Solution object
+    Solution obj;
+    
+    // Deleting the middle node
+    head = obj.deleteMiddle(head);
+
+    // Displaying the updated linked list
+    cout &lt;&lt; "Updated Linked List: ";
+    printLL(head);
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">// Node class represents a node in a linked list
+class Node {
+    // Data stored in the node
+    int data;
+    // Pointer to the next node in the list
+    Node next;
+
+    // Constructor with both data and next node as parameters
+    Node(int data1, Node next1) {
+        data = data1;
+        next = next1;
+    }
+
+    // Constructor with only data as a parameter, sets next to null
+    Node(int data1) {
+        data = data1;
+        next = null;
+    }
+}
+
+// Solution class containing the delete function
+class Solution {
+    // Function to delete the middle node of a linked list
+    Node deleteMiddle(Node head) {
+        // Initialize a temporary node to traverse the linked list
+        Node temp = head;
+        // Variable to hold the number of nodes in the linked list
+        int n = 0;
+        // Loop to count the number of nodes in the linked list
+        while (temp != null) {
+            n++;
+            temp = temp.next;
+        }
+        // Calculate the index of the middle node
+        int res = n / 2;
+        // Reset the temporary node to the beginning of the linked list
+        temp = head;
+        // Loop to find the middle node to delete
+        while (temp != null) {
+            res--;
+            // If the middle node is found
+            if (res == 0) {
+                // Create a pointer to the middle node
+                Node middle = temp.next;
+                // Adjust pointers to skip the middle node
+                temp.next = temp.next.next;
+                // Exit the loop after deleting the middle node
+                break;
+            }
+            // Move to the next node in the linked list
+            temp = temp.next;
+        }
+        // Return the head of the modified linked list
+        return head;
+    }
+}
+
+// Driver class
+public class Main {
+    // Function to print the linked list
+    public static void printLL(Node head) {
+        // Initialize a temporary pointer
+        Node temp = head;
+        // Traverse the linked list and print data
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+        // Print a newline after the list
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        // Creating a sample linked list
+        Node head = new Node(1);
+        head.next = new Node(2);
+        head.next.next = new Node(3);
+        head.next.next.next = new Node(4);
+        head.next.next.next.next = new Node(5);
+
+        // Display the original linked list
+        System.out.print("Original Linked List: ");
+        printLL(head);
+
+        // Create a Solution object
+        Solution obj = new Solution();
+        // Deleting the middle node
+        head = obj.deleteMiddle(head);
+
+        // Displaying the updated linked list
+        System.out.print("Updated Linked List: ");
+        printLL(head);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Node class represents a node in a linked list
+class Node:
+    # Constructor with data and optional next node
+    def __init__(self, data1, next1=None):
+        # Data stored in the node
+        self.data = data1
+        # Pointer to the next node in the list
+        self.next = next1
+
+# Solution class containing the delete function
+class Solution:
+    # Function to delete the middle node of a linked list
+    def deleteMiddle(self, head):
+        # Initialize a temporary node to traverse the linked list
+        temp = head
+        # Variable to hold the number of nodes in the linked list
+        n = 0
+        # Loop to count the number of nodes in the linked list
+        while temp is not None:
+            n += 1
+            temp = temp.next
+        # Calculate the index of the middle node
+        res = n // 2
+        # Reset the temporary node to the beginning of the linked list
+        temp = head
+        # Loop to find the middle node to delete
+        while temp is not None:
+            res -= 1
+            # If the middle node is found
+            if res == 0:
+                # Create a pointer to the middle node
+                middle = temp.next
+                # Adjust pointers to skip the middle node
+                temp.next = temp.next.next
+                # Exit the loop after deleting the middle node
+                break
+            # Move to the next node in the linked list
+            temp = temp.next
+        # Return the head of the modified linked list
+        return head
+
+# Function to print the linked list
+def printLL(head):
+    # Initialize a temporary pointer
+    temp = head
+    # Traverse the linked list and print data
+    while temp is not None:
+        print(temp.data, end=" ")
+        temp = temp.next
+    # Print a newline after the list
+    print()
+
+# Driver code
+if __name__ == "__main__":
+    # Creating a sample linked list
+    head = Node(1)
+    head.next = Node(2)
+    head.next.next = Node(3)
+    head.next.next.next = Node(4)
+    head.next.next.next.next = Node(5)
+
+    # Display the original linked list
+    print("Original Linked List:", end=" ")
+    printLL(head)
+
+    # Create a Solution object
+    obj = Solution()
+    # Deleting the middle node
+    head = obj.deleteMiddle(head)
+
+    # Displaying the updated linked list
+    print("Updated Linked List:", end=" ")
+    printLL(head)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Node class represents a node in a linked list
+class Node {
+    // Constructor with data and optional next node
+    constructor(data1, next1 = null) {
+        // Data stored in the node
+        this.data = data1;
+        // Pointer to the next node in the list
+        this.next = next1;
+    }
+}
+
+// Solution class containing the delete function
+class Solution {
+    // Function to delete the middle node of a linked list
+    deleteMiddle(head) {
+        // Initialize a temporary node to traverse the linked list
+        let temp = head;
+        // Variable to hold the number of nodes in the linked list
+        let n = 0;
+        // Loop to count the number of nodes in the linked list
+        while (temp !== null) {
+            n++;
+            temp = temp.next;
+        }
+        // Calculate the index of the middle node
+        let res = Math.floor(n / 2);
+        // Reset the temporary node to the beginning of the linked list
+        temp = head;
+        // Loop to find the middle node to delete
+        while (temp !== null) {
+            res--;
+            // If the middle node is found
+            if (res === 0) {
+                // Create a pointer to the middle node
+                let middle = temp.next;
+                // Adjust pointers to skip the middle node
+                temp.next = temp.next.next;
+                // Exit the loop after deleting the middle node
+                break;
+            }
+            // Move to the next node in the linked list
+            temp = temp.next;
+        }
+        // Return the head of the modified linked list
+        return head;
+    }
+}
+
+// Function to print the linked list
+function printLL(head) {
+    // Initialize a temporary pointer
+    let temp = head;
+    // Traverse the linked list and print data
+    let output = "";
+    while (temp !== null) {
+        output += temp.data + " ";
+        temp = temp.next;
+    }
+    // Print the linked list
+    console.log(output.trim());
+}
+
+// Driver code
+// Creating a sample linked list
+let head = new Node(1);
+head.next = new Node(2);
+head.next.next = new Node(3);
+head.next.next.next = new Node(4);
+head.next.next.next.next = new Node(5);
+
+// Display the original linked list
+process.stdout.write("Original Linked List: ");
+printLL(head);
+
+// Create a Solution object
+let obj = new Solution();
+// Deleting the middle node
+head = obj.deleteMiddle(head);
+
+// Displaying the updated linked list
+process.stdout.write("Updated Linked List: ");
+printLL(head);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+<strong>Time Complexity: O(N + N/2)</strong>, we traverse the entire linked list once to count the number of nodes and then traverse again to delete the middle node.<br/>
+<strong>Space Complexity: O(1) </strong>, we have fixed number of pointers and variables to delete the Kth node.<br/>
+<p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+      The previous method requires the traversal of the linked list twice. To enhance efficiency, the Tortoise and Hare Algorithm is introduced as an optimization where the middle node can be found in just one traversal.
+
+The 'slow' pointer advances one node at a time while the 'fast' pointer moves two nodes at a time. By doing so, when the 'fast' pointer reaches the end of the list, the 'slow' pointer will be at the middle node.
+<br/><br/>
+Since we require `slow` to reach the node before the middle node, we give `fast` a head start!
+<ul>
+<li>Check if the list is empty or contains only one node. If so, no middle node exists to delete, return NULL. Initialise 'slow' and 'fast' pointers at the head of the list.</li>
+<figure class="wp-block-image size-large is-resized"><img alt="" class="wp-image-13042" height="184" loading="lazy" src="../assets/img/e0ef7a48fd2b0cd2.png" width="768"/></figure>
+<li>Move ‘fast’ two nodes ahead for the initial position as we have to reach the node previous to the middle node via slow.</li>
+<li>Move the 'fast' pointer two nodes ahead and the 'slow' pointer one node ahead in each iteration. Continue this process until the 'fast' pointer reaches the end of the list.</li>
+<figure class="wp-block-image size-large is-resized"><img alt="" class="wp-image-13046" height="280" loading="lazy" src="../assets/img/4f20b0a30b134d8f.png" width="768"/></figure>
+<li>Once the 'fast' pointer reaches the end, the 'slow' pointer will be at the middle node. Delete the middle node by skipping it from the linked list. </li>
+<figure class="wp-block-image size-large is-resized"><img alt="" class="wp-image-13047" height="351" loading="lazy" src="../assets/img/29cd9ef696375749.png" width="768"/></figure>
+<li>Return the head of the modified linked list.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Node class represents a node in the linked list
+class Node {
+public:
+    // Data stored in the node
+    int data;
+
+    // Pointer to the next node
+    Node* next;
+
+    // Constructor with data and next pointer
+    Node(int data1, Node* next1) {
+        data = data1;
+        next = next1;
+    }
+
+    // Constructor with only data
+    Node(int data1) {
+        data = data1;
+        next = nullptr;
+    }
+};
+
+// Function to delete the middle node using slow and fast pointer
+Node* deleteMiddle(Node* head) {
+    // If list has only one node, delete it
+    if (head == nullptr || head-&gt;next == nullptr) {
+        delete head;
+        return nullptr;
+    }
+
+    // Initialize slow pointer to head
+    Node* slow = head;
+
+    // Initialize fast pointer two steps ahead
+    Node* fast = head-&gt;next-&gt;next;
+
+    // Traverse until fast reaches end
+    while (fast != nullptr &amp;&amp; fast-&gt;next != nullptr) {
+        slow = slow-&gt;next;
+        fast = fast-&gt;next-&gt;next;
+    }
+
+    // Pointer to middle node
+    Node* middle = slow-&gt;next;
+
+    // Bypass the middle node
+    slow-&gt;next = slow-&gt;next-&gt;next;
+
+    // Delete middle node
+    delete middle;
+
+    // Return head of updated list
+    return head;
+}
+
+// Function to print linked list
+void printLL(Node* head) {
+    Node* temp = head;
+    while (temp != nullptr) {
+        cout &lt;&lt; temp-&gt;data &lt;&lt; " ";
+        temp = temp-&gt;next;
+    }
+    cout &lt;&lt; endl;
+}
+
+// Driver function
+int main() {
+    // Creating linked list 1-&gt;2-&gt;3-&gt;4-&gt;5
+    Node* head = new Node(1);
+    head-&gt;next = new Node(2);
+    head-&gt;next-&gt;next = new Node(3);
+    head-&gt;next-&gt;next-&gt;next = new Node(4);
+    head-&gt;next-&gt;next-&gt;next-&gt;next = new Node(5);
+
+    // Printing original list
+    cout &lt;&lt; "Original Linked List: ";
+    printLL(head);
+
+    // Deleting middle node
+    head = deleteMiddle(head);
+
+    // Printing updated list
+    cout &lt;&lt; "Updated Linked List: ";
+    printLL(head);
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">// Node class represents a node in the linked list
+class Node {
+    // Data stored in the node
+    int data;
+
+    // Pointer to the next node
+    Node next;
+
+    // Constructor with data and next pointer
+    Node(int data1, Node next1) {
+        data = data1;
+        next = next1;
+    }
+
+    // Constructor with only data
+    Node(int data1) {
+        data = data1;
+        next = null;
+    }
+}
+
+// Solution class contains method to delete middle node
+class Solution {
+    // Function to delete the middle node
+    public Node deleteMiddle(Node head) {
+        // If list has only one node, delete it
+        if (head == null || head.next == null) {
+            return null;
+        }
+
+        // Initialize slow pointer to head
+        Node slow = head;
+
+        // Initialize fast pointer two steps ahead
+        Node fast = head.next.next;
+
+        // Traverse until fast reaches end
+        while (fast != null &amp;&amp; fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // Bypass the middle node
+        slow.next = slow.next.next;
+
+        // Return head of updated list
+        return head;
+    }
+}
+
+// Main class for driver code
+public class Main {
+    // Function to print linked list
+    public static void printLL(Node head) {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+
+    // Driver function
+    public static void main(String[] args) {
+        // Creating linked list 1-&gt;2-&gt;3-&gt;4-&gt;5
+        Node head = new Node(1);
+        head.next = new Node(2);
+        head.next.next = new Node(3);
+        head.next.next.next = new Node(4);
+        head.next.next.next.next = new Node(5);
+
+        // Printing original list
+        System.out.print("Original Linked List: ");
+        printLL(head);
+
+        // Deleting middle node
+        Solution obj = new Solution();
+        head = obj.deleteMiddle(head);
+
+        // Printing updated list
+        System.out.print("Updated Linked List: ");
+        printLL(head);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Node class represents a node in the linked list
+class Node:
+    # Constructor with data and next pointer
+    def __init__(self, data1, next1=None):
+        self.data = data1
+        self.next = next1
+
+# Solution class contains method to delete middle node
+class Solution:
+    # Function to delete the middle node
+    def deleteMiddle(self, head):
+        # If list has only one node, delete it
+        if head is None or head.next is None:
+            return None
+
+        # Initialize slow pointer to head
+        slow = head
+
+        # Initialize fast pointer two steps ahead
+        fast = head.next.next
+
+        # Traverse until fast reaches end
+        while fast is not None and fast.next is not None:
+            slow = slow.next
+            fast = fast.next.next
+
+        # Bypass the middle node
+        slow.next = slow.next.next
+
+        # Return head of updated list
+        return head
+
+# Function to print linked list
+def printLL(head):
+    temp = head
+    while temp is not None:
+        print(temp.data, end=" ")
+        temp = temp.next
+    print()
+
+# Driver function
+if __name__ == "__main__":
+    # Creating linked list 1-&gt;2-&gt;3-&gt;4-&gt;5
+    head = Node(1)
+    head.next = Node(2)
+    head.next.next = Node(3)
+    head.next.next.next = Node(4)
+    head.next.next.next.next = Node(5)
+
+    # Printing original list
+    print("Original Linked List:", end=" ")
+    printLL(head)
+
+    # Deleting middle node
+    obj = Solution()
+    head = obj.deleteMiddle(head)
+
+    # Printing updated list
+    print("Updated Linked List:", end=" ")
+    printLL(head)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Node class represents a node in the linked list
+class Node {
+    // Constructor with data and next pointer
+    constructor(data1, next1 = null) {
+        this.data = data1;
+        this.next = next1;
+    }
+}
+
+// Solution class contains method to delete middle node
+class Solution {
+    // Function to delete the middle node
+    deleteMiddle(head) {
+        // If list has only one node, delete it
+        if (head === null || head.next === null) {
+            return null;
+        }
+
+        // Initialize slow pointer to head
+        let slow = head;
+
+        // Initialize fast pointer two steps ahead
+        let fast = head.next.next;
+
+        // Traverse until fast reaches end
+        while (fast !== null &amp;&amp; fast.next !== null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // Bypass the middle node
+        slow.next = slow.next.next;
+
+        // Return head of updated list
+        return head;
+    }
+}
+
+// Function to print linked list
+function printLL(head) {
+    let temp = head;
+    while (temp !== null) {
+        process.stdout.write(temp.data + " ");
+        temp = temp.next;
+    }
+    console.log();
+}
+
+// Driver code
+// Creating linked list 1-&gt;2-&gt;3-&gt;4-&gt;5
+let head = new Node(1);
+head.next = new Node(2);
+head.next.next = new Node(3);
+head.next.next.next = new Node(4);
+head.next.next.next.next = new Node(5);
+
+// Printing original list
+process.stdout.write("Original Linked List: ");
+printLL(head);
+
+// Deleting middle node
+let obj = new Solution();
+head = obj.deleteMiddle(head);
+
+// Printing updated list
+process.stdout.write("Updated Linked List: ");
+printLL(head);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+<strong>Time Complexity: O(N/2)</strong>, we traverse the entire linked list using slow and fast pointers, effectively covering about half the list before reaching the midpoint.<br/>
+<strong>Space Complexity: O(1) </strong>, we have fixed number of pointers and variables to delete the Kth node.<br/>
+<p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

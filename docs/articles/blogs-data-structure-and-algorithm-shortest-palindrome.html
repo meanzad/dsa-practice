@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Shortest Palindrome</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Shortest Palindrome</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/blogs/data-structure-and-algorithm/shortest-palindrome</code></div>
+  <div class="ArticleParser-module__R__VNG__article" data-article-segment="html-0"><p>Given a string <code>s</code>, add characters in front of it so that the final string becomes a palindrome. Return the shortest palindrome that can be formed.</p></div><div><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 1</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>s = "aacecaaa"</code></p><p><strong>Output:</strong> <code>"aaacecaaa"</code></p><p><strong>Explanation: </strong>The prefix <code>"aacecaa"</code> is already a palindrome.</p><p>Only the leftover suffix <code>"a"</code> is not part of that palindromic prefix. Reverse this suffix and add it in front.</p><p>So the answer becomes <code>"a" + "aacecaaa" = "aaacecaaa"</code>.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 2</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>s = "abcd"</code></p><p><strong>Output:</strong> <code>"dcbabcd"</code></p><p><strong>Explanation: </strong>Only the first character <code>"a"</code> is a palindromic prefix.</p><p>The remaining suffix is <code>"bcd"</code>. Reverse it to get <code>"dcb"</code> and add it in front.</p><p>So the answer becomes <code>"dcb" + "abcd" = "dcbabcd"</code>.</p></div></div></section></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-2"><h2 id="blog-toc-approach">Approach</h2><p>Since characters can be added only in front, the original string <code>s</code> must stay at the end of the answer. That means the best possible answer depends on how much of the beginning of <code>s</code> is already useful.</p><p>For example: s = "aacecaaa" The prefix <code>"aacecaa"</code> is already a palindrome.</p><p>So there is no need to disturb this part. Only the leftover suffix <code>"a"</code> needs help. If the leftover suffix is reversed and placed in front, it mirrors the end of the string and completes the palindrome.</p><p>So the real goal is: Find the longest prefix of s that is already a palindrome.</p><p>If that longest palindromic prefix has length <code>L</code>, then: leftover suffix = s[L...n-1] answer = reverse(leftover suffix) + s</p><p>Now the question becomes: how can the longest palindromic prefix be found quickly? A prefix is palindromic if it matches its own reverse. So create:</p><pre><code>combined = s + "#" + reverse(s)</code></pre><p>The separator <code>"#"</code> is placed between the two strings so that matches do not accidentally cross from <code>s</code> into <code>reverse(s)</code>.</p><p>Now use the KMP LPS array on this combined string.</p><p>The last value of the LPS array tells the length of the longest prefix of <code>combined</code> that is also a suffix of <code>combined</code>. Because the combined string starts with <code>s</code> and ends with <code>reverse(s)</code>, this value becomes the length of the longest prefix of <code>s</code> that matches a suffix of <code>reverse(s)</code>.</p><p>That is exactly the longest palindromic prefix of <code>s</code>.</p><p>Once that length is known, the remaining suffix is reversed and added in front.</p></div><div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-3"><h3 id="blog-toc-algorithm">Algorithm</h3><ul><li><p>Reverse the original string. This helps compare the beginning of <code>s</code> with the mirrored version of itself.</p></li><li><p>Build <code>combined = s + "#" + reverse(s)</code>. The separator is needed so that the LPS calculation does not create a match by mixing characters across the boundary.</p></li><li><p>Compute the LPS array for <code>combined</code>. For every index, <code>lps[i]</code> stores the length of the longest proper prefix that is also a suffix ending at that index.</p></li><li><p>Take the last value of the LPS array. This value gives the length of the longest palindromic prefix of <code>s</code>, because it represents the largest match between the start of <code>s</code> and the end of <code>reverse(s)</code>.</p></li><li><p>Take the part of <code>s</code> after this palindromic prefix. This suffix is the only part that is not already mirrored correctly.</p></li><li><p>Reverse that suffix and add it in front of <code>s</code>. This creates the shortest palindrome because only the unmatched part is added.</p></li></ul><h3 id="blog-toc-dry-run">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Shortest Palindromic Sequence Dry Run" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/4166214ffd1c8fde.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Shortest Palindromic Sequence Dry Run</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-4"><h3 id="blog-toc-solution">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+private:
+    /*
+     * Builds the LPS array used by KMP to store
+     * the longest prefix-suffix length at each index.
+     */
+    vector&lt;int&gt; buildLPS(string pattern) {
+        int n = pattern.size();
+
+        // lps[i] stores the longest proper prefix
+        // that is also a suffix ending at index i.
+        vector&lt;int&gt; lps(n, 0);
+
+        // This stores the current matched prefix length.
+        int length = 0;
+
+        // Start from index 1 because lps[0] is always 0.
+        int i = 1;
+
+        while (i &lt; n) {
+            // If characters match, the current prefix match
+            // can be extended by one character.
+            if (pattern[i] == pattern[length]) {
+                length++;
+                lps[i] = length;
+                i++;
+            }
+            // If there is a mismatch after some matched characters,
+            // fall back to the previous possible prefix length.
+            else if (length != 0) {
+                length = lps[length - 1];
+            }
+            // If there is no matched prefix left, this index
+            // cannot extend any prefix-suffix match.
+            else {
+                lps[i] = 0;
+                i++;
+            }
+        }
+
+        return lps;
+    }
+
+public:
+    /*
+     * Returns the shortest palindrome that can be made
+     * by adding characters only in front of the string.
+     */
+    string shortestPalindrome(string s) {
+        // An empty string or a single character
+        // is already a palindrome.
+        if (s.size() &lt;= 1) {
+            return s;
+        }
+
+        // Reverse the string so the prefix of s
+        // can be matched with its mirrored form.
+        string reversed = s;
+        reverse(reversed.begin(), reversed.end());
+
+        // The separator prevents false matches
+        // from crossing between the two strings.
+        string combined = s + "#" + reversed;
+
+        vector&lt;int&gt; lps = buildLPS(combined);
+
+        // This is the length of the longest prefix
+        // of s that is already a palindrome.
+        int palindromicPrefixLength = lps.back();
+
+        // Only the suffix after the palindromic prefix
+        // must be mirrored and added in front.
+        string suffixToAdd = s.substr(palindromicPrefixLength);
+        reverse(suffixToAdd.begin(), suffixToAdd.end());
+
+        return suffixToAdd + s;
+    }
+};
+
+// Driver code starts
+// Runs a hard-coded example to show the result.
+int main() {
+    string s = "aacecaaa";
+
+    Solution sol;
+    cout &lt;&lt; sol.shortestPalindrome(s) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">from typing import List
+
+class Solution:
+    # Builds the LPS array used by KMP to store
+    # the longest prefix-suffix length at each index.
+    def build_lps(self, pattern: str) -&gt; List[int]:
+        n: int = len(pattern)
+
+        # lps[i] stores the longest proper prefix
+        # that is also a suffix ending at index i.
+        lps: List[int] = [0] * n
+
+        # This stores the current matched prefix length.
+        length: int = 0
+
+        # Start from index 1 because lps[0] is always 0.
+        i: int = 1
+
+        while i &lt; n:
+            # If characters match, the current prefix match
+            # can be extended by one character.
+            if pattern[i] == pattern[length]:
+                length += 1
+                lps[i] = length
+                i += 1
+            # If there is a mismatch after some matched characters,
+            # fall back to the previous possible prefix length.
+            elif length != 0:
+                length = lps[length - 1]
+            # If there is no matched prefix left, this index
+            # cannot extend any prefix-suffix match.
+            else:
+                lps[i] = 0
+                i += 1
+
+        return lps
+
+    # Returns the shortest palindrome that can be made
+    # by adding characters only in front of the string.
+    def shortest_palindrome(self, s: str) -&gt; str:
+        # An empty string or a single character
+        # is already a palindrome.
+        if len(s) &lt;= 1:
+            return s
+
+        # Reverse the string so the prefix of s
+        # can be matched with its mirrored form.
+        reversed_s: str = s[::-1]
+
+        # The separator prevents false matches
+        # from crossing between the two strings.
+        combined: str = s + "#" + reversed_s
+
+        lps: List[int] = self.build_lps(combined)
+
+        # This is the length of the longest prefix
+        # of s that is already a palindrome.
+        palindromic_prefix_length: int = lps[-1]
+
+        # Only the suffix after the palindromic prefix
+        # must be mirrored and added in front.
+        suffix_to_add: str = s[palindromic_prefix_length:]
+
+        return suffix_to_add[::-1] + s
+
+
+# Driver code starts
+# Runs a hard-coded example to show the result.
+def main() -&gt; None:
+    s: str = "aacecaaa"
+
+    sol = Solution()
+    print(sol.shortest_palindrome(s))
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">class Solution {
+    /*
+     * Builds the LPS array used by KMP to store
+     * the longest prefix-suffix length at each index.
+     */
+    private int[] buildLPS(String pattern) {
+        int n = pattern.length();
+
+        // lps[i] stores the longest proper prefix
+        // that is also a suffix ending at index i.
+        int[] lps = new int[n];
+
+        // This stores the current matched prefix length.
+        int length = 0;
+
+        // Start from index 1 because lps[0] is always 0.
+        int i = 1;
+
+        while (i &lt; n) {
+            // If characters match, the current prefix match
+            // can be extended by one character.
+            if (pattern.charAt(i) == pattern.charAt(length)) {
+                length++;
+                lps[i] = length;
+                i++;
+            }
+            // If there is a mismatch after some matched characters,
+            // fall back to the previous possible prefix length.
+            else if (length != 0) {
+                length = lps[length - 1];
+            }
+            // If there is no matched prefix left, this index
+            // cannot extend any prefix-suffix match.
+            else {
+                lps[i] = 0;
+                i++;
+            }
+        }
+
+        return lps;
+    }
+
+    /*
+     * Returns the shortest palindrome that can be made
+     * by adding characters only in front of the string.
+     */
+    public String shortestPalindrome(String s) {
+        // An empty string or a single character
+        // is already a palindrome.
+        if (s.length() &lt;= 1) {
+            return s;
+        }
+
+        // Reverse the string so the prefix of s
+        // can be matched with its mirrored form.
+        String reversed = new StringBuilder(s).reverse().toString();
+
+        // The separator prevents false matches
+        // from crossing between the two strings.
+        String combined = s + "#" + reversed;
+
+        int[] lps = buildLPS(combined);
+
+        // This is the length of the longest prefix
+        // of s that is already a palindrome.
+        int palindromicPrefixLength = lps[lps.length - 1];
+
+        // Only the suffix after the palindromic prefix
+        // must be mirrored and added in front.
+        String suffixToAdd = s.substring(palindromicPrefixLength);
+        String reversedSuffix = new StringBuilder(suffixToAdd).reverse().toString();
+
+        return reversedSuffix + s;
+    }
+}
+
+class Main {
+    // Driver code starts
+    // Runs a hard-coded example to show the result.
+    public static void main(String[] args) {
+        String s = "aacecaaa";
+
+        Solution sol = new Solution();
+        System.out.println(sol.shortestPalindrome(s));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    /*
+     * Builds the LPS array used by KMP to store
+     * the longest prefix-suffix length at each index.
+     */
+    buildLPS(pattern) {
+        const n = pattern.length;
+
+        // lps[i] stores the longest proper prefix
+        // that is also a suffix ending at index i.
+        const lps = new Array(n).fill(0);
+
+        // This stores the current matched prefix length.
+        let length = 0;
+
+        // Start from index 1 because lps[0] is always 0.
+        let i = 1;
+
+        while (i &lt; n) {
+            // If characters match, the current prefix match
+            // can be extended by one character.
+            if (pattern[i] === pattern[length]) {
+                length++;
+                lps[i] = length;
+                i++;
+            }
+            // If there is a mismatch after some matched characters,
+            // fall back to the previous possible prefix length.
+            else if (length !== 0) {
+                length = lps[length - 1];
+            }
+            // If there is no matched prefix left, this index
+            // cannot extend any prefix-suffix match.
+            else {
+                lps[i] = 0;
+                i++;
+            }
+        }
+
+        return lps;
+    }
+
+    /*
+     * Returns the shortest palindrome that can be made
+     * by adding characters only in front of the string.
+     */
+    shortestPalindrome(s) {
+        // An empty string or a single character
+        // is already a palindrome.
+        if (s.length &lt;= 1) {
+            return s;
+        }
+
+        // Reverse the string so the prefix of s
+        // can be matched with its mirrored form.
+        const reversed = s.split("").reverse().join("");
+
+        // The separator prevents false matches
+        // from crossing between the two strings.
+        const combined = s + "#" + reversed;
+
+        const lps = this.buildLPS(combined);
+
+        // This is the length of the longest prefix
+        // of s that is already a palindrome.
+        const palindromicPrefixLength = lps[lps.length - 1];
+
+        // Only the suffix after the palindromic prefix
+        // must be mirrored and added in front.
+        const suffixToAdd = s.slice(palindromicPrefixLength);
+        const reversedSuffix = suffixToAdd.split("").reverse().join("");
+
+        return reversedSuffix + s;
+    }
+}
+
+// Driver code starts
+// Runs a hard-coded example to show the result.
+function main() {
+    const s = "aacecaaa";
+
+    const sol = new Solution();
+    console.log(sol.shortestPalindrome(s));
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-5"><h3 id="blog-toc-complexity-analysis">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(n)</code>, where <code>n</code> is the length of the string. Reversing the string, building the combined string, computing the LPS array, and building the answer all take linear time.</p><p><strong>Space Complexity:</strong> <code>O(n)</code>, because the reversed string, combined string, and LPS array are stored.</p></div><div><section aria-label="Interview follow-up Questions" class="BlogDetail-module__HEfJva__faqSection" id="blog-toc-faqs"><h2 class="BlogDetail-module__HEfJva__faqHeading">Interview follow-up Questions</h2><div class="flex w-full flex-col BlogDetail-module__HEfJva__faqList" data-orientation="vertical" data-slot="accordion"><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="open"><h3 class="flex" data-orientation="vertical" data-state="open"></h3><div aria-labelledby="radix-_R_qsqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="open" id="radix-_R_2qsqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"><div class="h-auto pt-0 pb-2.5 [&amp;_a]:underline [&amp;_a]:underline-offset-3 [&amp;_a]:hover:text-foreground [&amp;_p:not(:last-child)]:mb-4 BlogDetail-module__HEfJva__faqAnswer"><p>Because characters can be added only at the front. The part of the string that already forms a palindrome from the beginning can stay untouched. Only the remaining suffix needs to be mirrored and added before the string.</p></div></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_1asqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_3asqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_1qsqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_3qsqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div></div></section></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div>
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

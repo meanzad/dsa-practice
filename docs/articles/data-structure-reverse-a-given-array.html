@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Reverse a given Array</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Reverse a given Array</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/reverse-a-given-array/</code></div>
+  <p><strong>Problem Statement: </strong>You are given an array. The task is to reverse the array and print it.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p><strong>Input:</strong> N = 5, arr[] = {5,4,3,2,1}
+<strong>Output:</strong> {1,2,3,4,5}
+<strong>Explanation:</strong> Since the order of elements gets reversed the first element will occupy the fifth position, the second element occupies the fourth position and so on.<br/>
+<strong>Input:</strong> N=6 arr[] = {10,20,30,40}
+<strong>Output:</strong> {40,30,20,10}
+<strong>Explanation:</strong> Since the order of elements gets reversed the first element will occupy the fifth position, the second element occupies the fourth position and so on.</p> </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/reverse-an-array" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Brute Force Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+                        We want to reverse the elements of an array, so the first element becomes last and the last becomes first. A straightforward way is to create a new array and start placing the original array's elements from the back into the front of the new array. This way, we preserve the original and get the reversed version separately.
+
+<ul> <li>Initialize an empty array of the same size as the original array.</li> <li>Start a loop from the last index of the original array and go backward.</li> <li>For each element while going backward, insert it at the current forward index of the new array.</li> <li>Continue until all elements are copied in reverse order.</li> <li>Return or print the reversed array.</li> </ul>
+
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/00b7d88a251a276f.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/3e49e804e7da26c8.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/26c777b534b4f29d.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/82328dfda40a3082.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/b93365f8c9f1de69.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/00b7d88a251a276f.png"/><img alt="Image 2" loading="lazy" src="../assets/img/3e49e804e7da26c8.png"/><img alt="Image 3" loading="lazy" src="../assets/img/26c777b534b4f29d.png"/><img alt="Image 4" loading="lazy" src="../assets/img/82328dfda40a3082.png"/><img alt="Image 5" loading="lazy" src="../assets/img/b93365f8c9f1de69.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to reverse an array
+    vector&lt;int&gt; reverseArray(vector&lt;int&gt;&amp; arr) {
+        // Get the size of the array
+        int n = arr.size();
+
+        // Create a new vector to store the reversed array
+        vector&lt;int&gt; ans(n);
+
+        // Loop through the array from start to end
+        for (int i = 0; i &lt; n; i++) {
+            // Place the element from end of arr into beginning of ans
+            ans[i] = arr[n - 1 - i];
+        }
+
+        // Return the reversed array
+        return ans;
+    }
+};
+
+// Driver code
+int main() {
+    // Input array
+    vector&lt;int&gt; arr = {1, 2, 3, 4, 5};
+
+    // Create object of Solution class
+    Solution obj;
+
+    // Call the reverseArray function
+    vector&lt;int&gt; result = obj.reverseArray(arr);
+
+    // Print the reversed array
+    cout &lt;&lt; "Reversed Array: ";
+    for (int num : result) {
+        cout &lt;&lt; num &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+class Solution {
+    // Function to reverse an array
+    public int[] reverseArray(int[] arr) {
+        // Get the length of the input array
+        int n = arr.length;
+
+        // Create a new array of same size to store reversed elements
+        int[] ans = new int[n];
+
+        // Loop to fill ans[] from the back of arr[]
+        for (int i = 0; i &lt; n; i++) {
+            // Place elements from the end of arr into the start of ans
+            ans[i] = arr[n - 1 - i];
+        }
+
+        // Return the reversed array
+        return ans;
+    }
+}
+
+// Driver class
+public class Main {
+    public static void main(String[] args) {
+        // Input array
+        int[] arr = {1, 2, 3, 4, 5};
+
+        // Create object of Solution class
+        Solution obj = new Solution();
+
+        // Call the reverseArray function
+        int[] result = obj.reverseArray(arr);
+
+        // Print the reversed array
+        System.out.print("Reversed Array: ");
+        for (int num : result) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    #  Function to reverse an array
+    def reverseArray(self, arr):
+        # Get the length of the input array
+        n = len(arr)
+
+        # Create a new array of same size to store reversed elements
+        ans = [0] * n
+
+        # Start a loop to fill ans[] from the back of arr[]
+        for i in range(n):
+            # Place elements from the end of arr into the start of ans
+            ans[i] = arr[n - 1 - i]
+
+        # Return the reversed array
+        return ans
+
+# Driver code
+if __name__ == "__main__":
+    # Create an object of the Solution class
+    obj = Solution()
+
+    # Input array
+    arr = [1, 2, 3, 4, 5]
+
+    # Call the reverseArray function
+    result = obj.reverseArray(arr)
+
+    # Print the result
+    print("Reversed Array:", result)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+     // Function to reverse an array
+    reverseArray(arr) {
+        // Get the length of the array
+        const n = arr.length;
+
+        // Create a new array of same size to store reversed elements
+        const ans = new Array(n);
+
+        // Loop to fill the ans array in reverse order
+        for (let i = 0; i &lt; n; i++) {
+            // Place element from the end of arr into the front of ans
+            ans[i] = arr[n - 1 - i];
+        }
+
+        // Return the reversed array
+        return ans;
+    }
+}
+
+// Driver code
+const obj = new Solution();
+
+// Input array
+const arr = [1, 2, 3, 4, 5];
+
+// Call the reverseArray function
+const result = obj.reverseArray(arr);
+
+// Print the result
+console.log("Reversed Array:", result);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O(n) Each element is visited once in a loop, where n is the number of elements in the input array.</p> <p><strong>Space Complexity:</strong> O(n) An additional array of the same size is used to store the reversed elements.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="better-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Better Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+
+
+This approach improves on the previous one by reversing the array in-place, avoiding the need for extra space. It uses two pointers to simultaneously traverse the array from both ends, swapping the elements until the center is reached. This way, we avoid creating a new array and perform the reverse operation efficiently using constant space.
+<ul>
+<li>Initialize a pointer p1 at the start of the array (index 0).</li>
+<li>Initialize another pointer p2 at the end of the array (index n - 1).</li>
+<li>While p1 is less than p2, do the following:
+    <ul>
+<li>Swap the elements at positions p1 and p2.</li>
+<li>Increment p1 by 1.</li>
+<li>Decrement p2 by 1.</li>
+</ul>
+</li>
+<li>Continue this process for only the first n/2 elements of the array.</li>
+</ul>
+<p><strong>Note:</strong> Swapping all n elements instead of just n/2 would result in the array being reversed twice, which brings it back to its original form.</p>
+
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/82f0afddefd06541.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/6ba26c59c25c5c75.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/42c66d67a910f291.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/e575f461ede5615d.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/82f0afddefd06541.png"/><img alt="Image 2" loading="lazy" src="../assets/img/6ba26c59c25c5c75.png"/><img alt="Image 3" loading="lazy" src="../assets/img/42c66d67a910f291.png"/><img alt="Image 4" loading="lazy" src="../assets/img/e575f461ede5615d.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to reverse the array in-place
+    void reverseArray(vector&lt;int&gt;&amp; arr) {
+        // Initialize pointer to the beginning of the array
+        int p1 = 0;
+
+        // Initialize pointer to the end of the array
+        int p2 = arr.size() - 1;
+
+        // Loop until the two pointers meet in the middle
+        while (p1 &lt; p2) {
+            // Swap the elements at p1 and p2
+            swap(arr[p1], arr[p2]);
+
+            // Move the left pointer one step to the right
+            p1++;
+
+            // Move the right pointer one step to the left
+            p2--;
+        }
+    }
+};
+
+// Driver code
+int main() {
+    // Create a Solution object
+    Solution sol;
+
+    // Input array
+    vector&lt;int&gt; arr = {1, 2, 3, 4, 5};
+
+    // Call the reverse function
+    sol.reverseArray(arr);
+
+    // Print the reversed array
+    for (int num : arr) {
+        cout &lt;&lt; num &lt;&lt; " ";
+    }
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to reverse the array in-place
+    public void reverseArray(int[] arr) {
+        // Initialize pointer to the beginning of the array
+        int p1 = 0;
+
+        // Initialize pointer to the end of the array
+        int p2 = arr.length - 1;
+
+        // Loop until the two pointers meet in the middle
+        while (p1 &lt; p2) {
+            // Swap the elements at p1 and p2
+            int temp = arr[p1];
+            arr[p1] = arr[p2];
+            arr[p2] = temp;
+
+            // Move the left pointer one step to the right
+            p1++;
+
+            // Move the right pointer one step to the left
+            p2--;
+        }
+    }
+}
+
+// Driver code
+class Main {
+    public static void main(String[] args) {
+        // Create a Solution object
+        Solution sol = new Solution();
+
+        // Input array
+        int[] arr = {1, 2, 3, 4, 5};
+
+        // Call the reverse function
+        sol.reverseArray(arr);
+
+        // Print the reversed array
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to reverse the array in-place
+    def reverseArray(self, arr):
+        # Initialize pointer to the beginning of the array
+        p1 = 0
+
+        # Initialize pointer to the end of the array
+        p2 = len(arr) - 1
+
+        # Loop until the two pointers meet in the middle
+        while p1 &lt; p2:
+            # Swap the elements at p1 and p2
+            arr[p1], arr[p2] = arr[p2], arr[p1]
+
+            # Move the left pointer one step to the right
+            p1 += 1
+
+            # Move the right pointer one step to the left
+            p2 -= 1
+
+# Driver code
+if __name__ == "__main__":
+    # Create a Solution object
+    sol = Solution()
+
+    # Input array
+    arr = [1, 2, 3, 4, 5]
+
+    # Call the reverse function
+    sol.reverseArray(arr)
+
+    # Print the reversed array
+    print(" ".join(map(str, arr)))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to reverse the array in-place
+    reverseArray(arr) {
+        // Initialize pointer to the beginning of the array
+        let p1 = 0;
+
+        // Initialize pointer to the end of the array
+        let p2 = arr.length - 1;
+
+        // Loop until the two pointers meet in the middle
+        while (p1 &lt; p2) {
+            // Swap the elements at p1 and p2
+            let temp = arr[p1];
+            arr[p1] = arr[p2];
+            arr[p2] = temp;
+
+            // Move the left pointer one step to the right
+            p1++;
+
+            // Move the right pointer one step to the left
+            p2--;
+        }
+    }
+}
+
+// Driver code
+const sol = new Solution();
+
+// Input array
+let arr = [1, 2, 3, 4, 5];
+
+// Call the reverse function
+sol.reverseArray(arr);
+
+// Print the reversed array
+console.log(arr.join(" "));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O(n) Where n is the number of elements in the array. Each element is visited at most once due to the two-pointer approach.</p> <p><strong>Space Complexity:</strong> O(1) No extra space is used other than a few pointers and variables. The array is reversed in-place.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach-1">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Built-in Library Function Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<p><strong>C++ (using std::reverse from STL):</strong> The Standard Template Library provides a built-in reverse() function in &lt;algorithm &gt;, which reverses the contents of a container in-place. It uses two pointers internally to swap elements from both ends toward the center, making the solution efficient and concise.</p><p>
+<strong>Java (using Collections.reverse()):</strong> In Java, the Collections.reverse() method can be used to reverse a list in-place. Arrays need to be converted to a list first, as the Collections utility works with List types, not primitive arrays.</p><p>
+<strong>Python (using slicing [::-1]): </strong>In Python, array slicing with a step of -1 creates a reversed copy of the array. It doesn’t reverse in-place unless you explicitly overwrite the original array with the result.</p><p>
+<strong>JavaScript (using array.reverse()):</strong> JavaScript arrays come with a built-in reverse() method which modifies the array in-place by swapping elements from front to back.</p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to reverse the array using STL reverse function
+    void reverseArray(vector&lt;int&gt;&amp; arr) {
+        // Use STL reverse to reverse array in-place
+        reverse(arr.begin(), arr.end());
+    }
+};
+
+// Driver code
+int main() {
+    // Input array
+    vector&lt;int&gt; arr = {1, 2, 3, 4, 5};
+
+    // Create Solution object
+    Solution obj;
+
+    // Call function to reverse the array
+    obj.reverseArray(arr);
+
+    // Output the reversed array
+    for (int num : arr) {
+        cout &lt;&lt; num &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to reverse the array using Collections.reverse
+    public void reverseArray(List&lt;Integer&gt; arr) {
+        // Call Collections.reverse to reverse list in-place
+        Collections.reverse(arr);
+    }
+}
+
+// Driver code
+public class Main {
+    public static void main(String[] args) {
+        // Input array as List
+        List&lt;Integer&gt; arr = new ArrayList&lt;&gt;(Arrays.asList(1, 2, 3, 4, 5));
+
+        // Create Solution object
+        Solution obj = new Solution();
+
+        // Call reverse method
+        obj.reverseArray(arr);
+
+        // Output the reversed array
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to reverse the array using slicing
+    def reverseArray(self, arr):
+        # Reassign the array with reversed version using slicing
+        arr[:] = arr[::-1]
+
+# Driver code
+if __name__ == "__main__":
+    # Input array
+    arr = [1, 2, 3, 4, 5]
+
+    # Create Solution object
+    obj = Solution()
+
+    # Call reverse function
+    obj.reverseArray(arr)
+
+    # Output the reversed array
+    print(" ".join(map(str, arr)))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to reverse the array using built-in reverse
+    reverseArray(arr) {
+        // Call reverse to reverse array in-place
+        arr.reverse();
+    }
+}
+
+// Driver code
+const arr = [1, 2, 3, 4, 5];
+
+// Create Solution object
+const obj = new Solution();
+
+// Call the reverse function
+obj.reverseArray(arr);
+
+// Output the reversed array
+console.log(arr.join(" "));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+</p><p><strong>Time Complexity: O(n)</strong>, because each element is visited once and possibly swapped once with its mirror index.</p> <p><strong>Space Complexity: O(1)</strong> for C++, Java, and JavaScript (in-place), but <strong>O(n)</strong> for Python slicing since it creates a new list and then assigns back (unless using two pointers).</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

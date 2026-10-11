@@ -1,0 +1,1138 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Wildcard Matching | (DP-34)</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Wildcard Matching | (DP-34)</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/wildcard-matching-dp-34/</code></div>
+  <p><strong>Problem Statement: </strong>We are given two strings ‘S1’ and ‘S2’. String S1 can have the following two special characters.</p>
+<ol><li>‘?’ can be matched to a single character of S2.</li><li>‘*’ can be matched to any sequence of characters of S2. (sequence can be of length zero or more).</li></ol>
+<p>We need to check whether strings S1 and S2 match or not.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p>
+<strong>Input:</strong> S1 = "ab*cd", S2 = "abdefcd"
+<strong>Output:</strong> true
+<strong>Explanation:</strong> "ab" matches "ab", '*' matches "def", "cd" matches "cd". The strings match.<br/>
+<strong>Input:</strong> S1 = "*a*b", S2 = "aaab"
+<strong>Output:</strong> true
+<strong>Explanation:</strong> First '*' matches "aa", 'a' matches 'a', second '*' matches empty string, 'b' matches 'b'. The strings match. </p></pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/wildcard-matching" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                   Memoization Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+                         
+For every index of string S1, we have different options to match that index with string S2. We can think in terms of string matching paths, as in earlier problems:
+<ul>
+<li>Either the characters match already.</li>
+<li>Or, if there is a ?, we can explicitly match a single character.</li>
+<li>For a *, it can match zero or more characters.</li>
+</ul>
+
+As there is no uniformity in data, the only way is to try all possible ways, which means using recursion.<br/><br/>
+<strong>Steps to form the recursive solution</strong>
+<ul>
+<li><strong>Compare positions in both strings</strong><br/>
+      Treat one string as the pattern (letters, '?' or '*') and the other as the text. Start from the end and move backwards.
+  </li>
+<li><strong>Handle current characters</strong>
+<ul>
+<li><strong>Characters match</strong>: move back in both strings.</li>
+<li><strong>'?'</strong> → matches exactly one character: move back in both.</li>
+<li><strong>'*'</strong> → 
+        <ul>
+<li>Match empty sequence , move back in pattern.</li>
+<li>Match one or more characters,move back in text.</li>
+</ul>
+</li>
+<li><strong>Different letters</strong>: no match.</li>
+</ul>
+</li>
+<li><strong>Combine results</strong>: If any option leads to a match, the strings match.</li>
+<li><strong>Base cases</strong>
+<ul>
+<li>Both strings finished : match.</li>
+<li>Pattern finished but text left: no match.</li>
+<li>Text finished but pattern left : match only if all remaining are '*'.</li>
+</ul>
+</li>
+</ul>
+<strong>Steps to memoize a recursive solution:</strong><br/><br/>
+If we draw the recursion tree, we will see that there are overlapping subproblems. In order to convert a recursive solution the following steps will be taken:
+<ol><li>Create a dp array of size [n][m]. The size of S1 and S2 are n and m respectively, so the variable i will always lie between ‘0’ and ‘n-1’ and the variable j between ‘0’ and ‘m-1’.</li><li>We initialize the dp array to -1.</li><li>Whenever we want to find the answer to particular parameters (say f(i,j)), we first check whether the answer is already calculated using the dp array(i.e dp[i][j]!= -1 ). If yes, simply return the value from the dp array.</li><li>If not, then we are finding the answer for the given value for the first time, we will use the recursive relation as usual but before returning from the function, we will set dp[i][j] to the solution we get.</li></ol>
+
+<p><img height="457" loading="lazy" src="../assets/img/1630b8eef5eba75b.png" width="481"/></p>
+
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to check if the substring S1[0..i] contains only '*'
+    bool isAllStars(string &amp;S1, int i) {
+        // Loop from 0 to i to verify all characters are '*'
+        for (int j = 0; j &lt;= i; j++) {
+            if (S1[j] != '*')
+                return false;
+        }
+        return true;
+    }
+
+    // Recursive function with memoization to check wildcard matching
+    bool wildcardMatchingUtil(string &amp;S1, string &amp;S2, int i, int j, vector&lt;vector&lt;int&gt;&gt; &amp;dp) {
+        // Base Case 1: Both strings are exhausted
+        if (i &lt; 0 &amp;&amp; j &lt; 0)
+            return true;
+
+        // Base Case 2: Pattern exhausted but text remains
+        if (i &lt; 0 &amp;&amp; j &gt;= 0)
+            return false;
+
+        // Base Case 3: Text exhausted but pattern may still have '*'
+        if (j &lt; 0 &amp;&amp; i &gt;= 0)
+            return isAllStars(S1, i);
+
+        // If already computed, return stored value
+        if (dp[i][j] != -1)
+            return dp[i][j];
+
+        // If characters match or pattern has '?'
+        if (S1[i] == S2[j] || S1[i] == '?')
+            return dp[i][j] = wildcardMatchingUtil(S1, S2, i - 1, j - 1, dp);
+
+        // If pattern has '*', we have two choices:
+        // 1. Treat '*' as matching empty sequence -&gt; move pattern index i-1
+        // 2. Treat '*' as matching one or more characters -&gt; move text index j-1
+        if (S1[i] == '*')
+            return dp[i][j] = wildcardMatchingUtil(S1, S2, i - 1, j, dp) ||
+                               wildcardMatchingUtil(S1, S2, i, j - 1, dp);
+
+        // If no match
+        return dp[i][j] = false;
+    }
+
+    // Main function to be called from driver code
+    bool wildcardMatching(string &amp;S1, string &amp;S2) {
+        int n = S1.size();
+        int m = S2.size();
+
+        // DP array initialized to -1 to indicate uncomputed states
+        vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(m, -1));
+
+        // Call the recursive utility function starting from the last indices
+        return wildcardMatchingUtil(S1, S2, n - 1, m - 1, dp);
+    }
+};
+
+// Driver Code
+int main() {
+    // Example pattern and text
+    string S1 = "ab*cd";
+    string S2 = "abdefcd";
+
+    // Create a Solution object
+    Solution obj;
+
+    // Call the matching function and display the result
+    if (obj.wildcardMatching(S1, S2))
+        cout &lt;&lt; "String S1 and S2 do match";
+    else
+        cout &lt;&lt; "String S1 and S2 do not match";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+
+    // Function to check if substring S1[0..i] contains only '*'
+    public boolean isAllStars(String S1, int i) {
+        for (int j = 0; j &lt;= i; j++) {
+            if (S1.charAt(j) != '*')
+                return false;
+        }
+        return true;
+    }
+
+    // Recursive function with memoization to check wildcard matching
+    public boolean wildcardMatchingUtil(String S1, String S2, int i, int j, int[][] dp) {
+        // Base Case 1: Both pattern and text are fully matched
+        if (i &lt; 0 &amp;&amp; j &lt; 0) return true;
+
+        // Base Case 2: Pattern exhausted but text still remains
+        if (i &lt; 0 &amp;&amp; j &gt;= 0) return false;
+
+        // Base Case 3: Text exhausted but pattern may have '*' left
+        if (j &lt; 0 &amp;&amp; i &gt;= 0) return isAllStars(S1, i);
+
+        // If already computed, return stored result
+        if (dp[i][j] != -1) return dp[i][j] == 1;
+
+        // If characters match or pattern has '?'
+        if (S1.charAt(i) == S2.charAt(j) || S1.charAt(i) == '?')
+            dp[i][j] = wildcardMatchingUtil(S1, S2, i - 1, j - 1, dp) ? 1 : 0;
+
+        // If pattern has '*', check both possibilities
+        else if (S1.charAt(i) == '*')
+            dp[i][j] = (wildcardMatchingUtil(S1, S2, i - 1, j, dp) ||
+                        wildcardMatchingUtil(S1, S2, i, j - 1, dp)) ? 1 : 0;
+
+        // If characters don't match
+        else
+            dp[i][j] = 0;
+
+        return dp[i][j] == 1;
+    }
+
+    // Main function to start the matching process
+    public boolean wildcardMatching(String S1, String S2) {
+        int n = S1.length();
+        int m = S2.length();
+
+        // DP array initialized to -1 (uncomputed)
+        int[][] dp = new int[n][m];
+        for (int[] row : dp) Arrays.fill(row, -1);
+
+        return wildcardMatchingUtil(S1, S2, n - 1, m - 1, dp);
+    }
+}
+
+// Driver code
+public class Main {
+    public static void main(String[] args) {
+        String S1 = "ab*cd";
+        String S2 = "abdefcd";
+
+        Solution obj = new Solution();
+
+        if (obj.wildcardMatching(S1, S2))
+            System.out.println("String S1 and S2 do match");
+        else
+            System.out.println("String S1 and S2 do not match");
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to check if substring S1[0..i] contains only '*'
+    def isAllStars(self, S1, i):
+        for j in range(i + 1):
+            if S1[j] != '*':
+                return False
+        return True
+
+    # Recursive function with memoization
+    def wildcardMatchingUtil(self, S1, S2, i, j, dp):
+        # Base Case 1: Both pattern and text fully matched
+        if i &lt; 0 and j &lt; 0:
+            return True
+
+        # Base Case 2: Pattern exhausted but text remains
+        if i &lt; 0 and j &gt;= 0:
+            return False
+
+        # Base Case 3: Text exhausted but pattern may have '*'
+        if j &lt; 0 and i &gt;= 0:
+            return self.isAllStars(S1, i)
+
+        # If already computed, return stored result
+        if dp[i][j] != -1:
+            return dp[i][j] == 1
+
+        # If characters match or pattern has '?'
+        if S1[i] == S2[j] or S1[i] == '?':
+            dp[i][j] = 1 if self.wildcardMatchingUtil(S1, S2, i - 1, j - 1, dp) else 0
+
+        # If pattern has '*', try both possibilities
+        elif S1[i] == '*':
+            dp[i][j] = 1 if (self.wildcardMatchingUtil(S1, S2, i - 1, j, dp) or
+                              self.wildcardMatchingUtil(S1, S2, i, j - 1, dp)) else 0
+
+        # If characters don't match
+        else:
+            dp[i][j] = 0
+
+        return dp[i][j] == 1
+
+    # Main function to start matching
+    def wildcardMatching(self, S1, S2):
+        n = len(S1)
+        m = len(S2)
+
+        # DP array initialized to -1
+        dp = [[-1 for _ in range(m)] for _ in range(n)]
+
+        return self.wildcardMatchingUtil(S1, S2, n - 1, m - 1, dp)
+
+
+# Driver code
+if __name__ == "__main__":
+    S1 = "ab*cd"
+    S2 = "abdefcd"
+
+    obj = Solution()
+
+    if obj.wildcardMatching(S1, S2):
+        print("String S1 and S2 do match")
+    else:
+        print("String S1 and S2 do not match")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to check if substring S1[0..i] contains only '*'
+    isAllStars(S1, i) {
+        for (let j = 0; j &lt;= i; j++) {
+            if (S1[j] !== '*') return false;
+        }
+        return true;
+    }
+
+    // Recursive function with memoization
+    wildcardMatchingUtil(S1, S2, i, j, dp) {
+        // Base Case 1: Both pattern and text matched
+        if (i &lt; 0 &amp;&amp; j &lt; 0) return true;
+
+        // Base Case 2: Pattern exhausted but text remains
+        if (i &lt; 0 &amp;&amp; j &gt;= 0) return false;
+
+        // Base Case 3: Text exhausted but pattern may have '*'
+        if (j &lt; 0 &amp;&amp; i &gt;= 0) return this.isAllStars(S1, i);
+
+        // If already computed, return stored value
+        if (dp[i][j] !== -1) return dp[i][j] === 1;
+
+        // If characters match or pattern has '?'
+        if (S1[i] === S2[j] || S1[i] === '?') {
+            dp[i][j] = this.wildcardMatchingUtil(S1, S2, i - 1, j - 1, dp) ? 1 : 0;
+        }
+        // If pattern has '*', try both options
+        else if (S1[i] === '*') {
+            dp[i][j] = (this.wildcardMatchingUtil(S1, S2, i - 1, j, dp) ||
+                        this.wildcardMatchingUtil(S1, S2, i, j - 1, dp)) ? 1 : 0;
+        }
+        // If characters don't match
+        else {
+            dp[i][j] = 0;
+        }
+
+        return dp[i][j] === 1;
+    }
+
+    // Main function
+    wildcardMatching(S1, S2) {
+        const n = S1.length;
+        const m = S2.length;
+
+        // Initialize DP array with -1
+        const dp = Array.from({ length: n }, () =&gt; Array(m).fill(-1));
+
+        return this.wildcardMatchingUtil(S1, S2, n - 1, m - 1, dp);
+    }
+}
+
+// Driver code
+const S1 = "ab*cd";
+const S2 = "abdefcd";
+
+const obj = new Solution();
+
+if (obj.wildcardMatching(S1, S2))
+    console.log("String S1 and S2 do match");
+else
+    console.log("String S1 and S2 do not match");
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+</p><p><strong>Time Complexity: O(N*M)</strong>,There are N*M states therefore at max ‘N*M’ new problems will be solved.</p>
+<p><strong>Space Complexity: O(N*M) + O(N+M)</strong>, We are using a recursion stack space(O(N+M)) and a 2D array ( O(N*M)).</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="better-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                   Tabulation Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<p>In the recursive logic, we set the base case too if(i&lt;0 ) and if(j&lt;0) but we can’t set the dp array’s index to -1. Therefore a hack for this issue is to shift every index by 1 towards the right.</p>
+
+<p><img height="457" loading="lazy" src="../assets/img/2b825f5780059822.png" width="481"/></p>
+<ul><li>First we initialise the dp array of size [n+1][m+1] as zero.</li><li>Next, we set the base condition (keep in mind 1-based indexing), we set the top-left cell as ‘true’, then we set the first column’s value as ‘false’; and for the first row, we will run isAllStars() for every cell value.</li><li>Similarly, we will implement the recursive code by keeping in mind the shifting of indexes, therefore S1[i] will be converted to S1[i-1]. Same for S2.</li><li>At last we will print dp[n][m] as our answer.</li></ul>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Helper function to check if all first i characters in the pattern are '*'
+    // This is important for the base case: '*' can match an empty string
+    bool isAllStars(string &amp;S1, int i) {
+        // Loop from first character up to i-th character
+        for (int j = 1; j &lt;= i; j++) {
+            // If any character is not '*', return false
+            if (S1[j - 1] != '*')
+                return false;
+        }
+        // All characters were '*', so return true
+        return true;
+    }
+
+    // Function to perform wildcard pattern matching using tabulation DP
+    bool wildcardMatching(string &amp;S1, string &amp;S2) {
+        // n = length of pattern
+        int n = S1.size();
+        // m = length of text
+        int m = S2.size();
+
+        // Create a DP table of size (n+1) x (m+1)
+        // dp[i][j] = true if pattern[0...i-1] matches text[0...j-1]
+        vector&lt;vector&lt;bool&gt;&gt; dp(n + 1, vector&lt;bool&gt;(m + 1, false));
+
+        // Base case: empty pattern matches empty string
+        dp[0][0] = true;
+
+        // Base case: empty pattern cannot match a non-empty string
+        for (int j = 1; j &lt;= m; j++) {
+            dp[0][j] = false;
+        }
+
+        // Base case: pattern can match empty string only if it is made of all '*'
+        for (int i = 1; i &lt;= n; i++) {
+            dp[i][0] = isAllStars(S1, i);
+        }
+
+        // Fill DP table row by row
+        for (int i = 1; i &lt;= n; i++) {
+            for (int j = 1; j &lt;= m; j++) {
+
+                // Case 1: Exact match or '?', which matches any single character
+                if (S1[i - 1] == S2[j - 1] || S1[i - 1] == '?') {
+                    // Take value from the diagonal cell
+                    dp[i][j] = dp[i - 1][j - 1];
+                }
+
+                // Case 2: '*' can match zero or more characters
+                else if (S1[i - 1] == '*') {
+                    // Match zero characters → take value from above
+                    // Match one or more characters → take value from left
+                    dp[i][j] = dp[i - 1][j] || dp[i][j - 1];
+                }
+
+                // Case 3: No match
+                else {
+                    dp[i][j] = false;
+                }
+            }
+        }
+
+        // Final result is stored in dp[n][m]
+        return dp[n][m];
+    }
+};
+
+int main() {
+    // Create an object of Solution class
+    Solution sol;
+
+    // Define the pattern string (S1) and text string (S2)
+    string S1 = "ab*cd";
+    string S2 = "abdefcd";
+
+    // Call the function and check if pattern matches text
+    bool result = sol.wildcardMatching(S1, S2);
+
+    // Output the result
+    if (result)
+        cout &lt;&lt; "String S1 and S2 do match";
+    else
+        cout &lt;&lt; "String S1 and S2 do not match";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">
+import java.util.*;
+
+class Solution {
+
+    // Helper function to check if the first i characters of the pattern are all '*'
+    public boolean isAllStars(String S1, int i) {
+        // Loop through the first i characters
+        for (int j = 1; j &lt;= i; j++) {
+            // If any character is not '*', return false
+            if (S1.charAt(j - 1) != '*')
+                return false;
+        }
+        // All were '*', so return true
+        return true;
+    }
+
+    // Function to check if the pattern S1 matches the string S2
+    public boolean wildcardMatching(String S1, String S2) {
+        // Get lengths of pattern and text
+        int n = S1.length();
+        int m = S2.length();
+
+        // Create a DP table where dp[i][j] tells if pattern[0...i-1] matches text[0...j-1]
+        boolean[][] dp = new boolean[n + 1][m + 1];
+
+        // Base case: empty pattern matches empty string
+        dp[0][0] = true;
+
+        // Base case: empty pattern cannot match non-empty string
+        for (int j = 1; j &lt;= m; j++) {
+            dp[0][j] = false;
+        }
+
+        // Base case: pattern can match empty string only if it contains all '*'
+        for (int i = 1; i &lt;= n; i++) {
+            dp[i][0] = isAllStars(S1, i);
+        }
+
+        // Fill the DP table row by row
+        for (int i = 1; i &lt;= n; i++) {
+            for (int j = 1; j &lt;= m; j++) {
+
+                // Case 1: Characters match exactly or pattern has '?'
+                if (S1.charAt(i - 1) == S2.charAt(j - 1) || S1.charAt(i - 1) == '?') {
+                    dp[i][j] = dp[i - 1][j - 1];
+                }
+
+                // Case 2: Pattern has '*'
+                else if (S1.charAt(i - 1) == '*') {
+                    // '*' matches zero characters (dp[i-1][j]) OR
+                    // '*' matches one/more characters (dp[i][j-1])
+                    dp[i][j] = dp[i - 1][j] || dp[i][j - 1];
+                }
+
+                // Case 3: No match
+                else {
+                    dp[i][j] = false;
+                }
+            }
+        }
+
+        // Final answer is stored at dp[n][m]
+        return dp[n][m];
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Create Solution object
+        Solution sol = new Solution();
+
+        // Define pattern and text
+        String S1 = "ab*cd";
+        String S2 = "abdefcd";
+
+        // Check match
+        boolean result = sol.wildcardMatching(S1, S2);
+
+        // Print result
+        if (result)
+            System.out.println("String S1 and S2 do match");
+        else
+            System.out.println("String S1 and S2 do not match");
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Helper function to check if first i characters are all '*'
+    def isAllStars(self, S1, i):
+        # Loop from index 0 to i-1
+        for j in range(1, i + 1):
+            # If any character is not '*', return False
+            if S1[j - 1] != '*':
+                return False
+        # All were '*', so return True
+        return True
+
+    # Function to check if S1 matches S2
+    def wildcardMatching(self, S1, S2):
+        # Lengths of pattern and text
+        n = len(S1)
+        m = len(S2)
+
+        # Create DP table with default False
+        dp = [[False] * (m + 1) for _ in range(n + 1)]
+
+        # Base case: empty pattern matches empty string
+        dp[0][0] = True
+
+        # Base case: empty pattern cannot match non-empty string
+        for j in range(1, m + 1):
+            dp[0][j] = False
+
+        # Base case: pattern can match empty string if it has all '*'
+        for i in range(1, n + 1):
+            dp[i][0] = self.isAllStars(S1, i)
+
+        # Fill DP table
+        for i in range(1, n + 1):
+            for j in range(1, m + 1):
+
+                # Case 1: Exact match or '?'
+                if S1[i - 1] == S2[j - 1] or S1[i - 1] == '?':
+                    dp[i][j] = dp[i - 1][j - 1]
+
+                # Case 2: '*'
+                elif S1[i - 1] == '*':
+                    # Zero characters OR one/more characters
+                    dp[i][j] = dp[i - 1][j] or dp[i][j - 1]
+
+                # Case 3: No match
+                else:
+                    dp[i][j] = False
+
+        # Return final answer
+        return dp[n][m]
+
+
+# Driver code
+if __name__ == "__main__":
+    sol = Solution()
+    S1 = "ab*cd"
+    S2 = "abdefcd"
+
+    result = sol.wildcardMatching(S1, S2)
+    if result:
+        print("String S1 and S2 do match")
+    else:
+        print("String S1 and S2 do not match")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Helper function to check if first i characters are all '*'
+    isAllStars(S1, i) {
+        for (let j = 1; j &lt;= i; j++) {
+            if (S1[j - 1] !== '*') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Function to check if S1 matches S2
+    wildcardMatching(S1, S2) {
+        const n = S1.length;
+        const m = S2.length;
+
+        // Create 2D array filled with false
+        const dp = Array.from({ length: n + 1 }, () =&gt; Array(m + 1).fill(false));
+
+        // Base case: empty pattern matches empty string
+        dp[0][0] = true;
+
+        // Base case: empty pattern cannot match non-empty string
+        for (let j = 1; j &lt;= m; j++) {
+            dp[0][j] = false;
+        }
+
+        // Base case: pattern matches empty string if it has all '*'
+        for (let i = 1; i &lt;= n; i++) {
+            dp[i][0] = this.isAllStars(S1, i);
+        }
+
+        // Fill DP table
+        for (let i = 1; i &lt;= n; i++) {
+            for (let j = 1; j &lt;= m; j++) {
+
+                // Case 1: Exact match or '?'
+                if (S1[i - 1] === S2[j - 1] || S1[i - 1] === '?') {
+                    dp[i][j] = dp[i - 1][j - 1];
+                }
+
+                // Case 2: '*'
+                else if (S1[i - 1] === '*') {
+                    dp[i][j] = dp[i - 1][j] || dp[i][j - 1];
+                }
+
+                // Case 3: No match
+                else {
+                    dp[i][j] = false;
+                }
+            }
+        }
+
+        // Return final result
+        return dp[n][m];
+    }
+}
+
+// Driver code
+const sol = new Solution();
+const S1 = "ab*cd";
+const S2 = "abdefcd";
+
+const result = sol.wildcardMatching(S1, S2);
+if (result) {
+    console.log("String S1 and S2 do match");
+} else {
+    console.log("String S1 and S2 do not match");
+}
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity: O(N*M)</strong>,There are two nested loops</p>
+<p><strong>Space Complexity: O(N*M)</strong>,We are using an external array of size ‘N*M’. Stack Space is eliminated.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                   Space Optimization Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+If we closely look the relation,
+<p><strong>dp[i][j] =  dp[i-1][j-1], dp[i][j] = dp[i-1][j] ||dp[i][j-1] </strong></p>
+We see that to calculate a value of a cell of the dp array, we need only the previous row values (say prev) and current row’s previous columns values. So, we don’t need to store an entire array. Hence we can space optimise it.
+<ul><li>We take two rows ‘prev’ and ‘cur’.</li><li>We initialize it to the base condition. We first initialize the prev row. Its first value needs to be true. Rest all the values of the prev row meeds to be false.</li><li>Moreover, the cur variable whenever declared should have its first cell’s value given by isAllStarts() function.</li><li>Next, we implement the memoization logic. We replace dp[i-1] with prev and dp[i] by cur.</li><li>After every inner loop execution, we set prev=cur, for the next iteration.</li><li>At last, we return prev[m] as our answer.</li></ul>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Class containing the logic for wildcard pattern matching
+class Solution {
+public:
+
+    // Function to check if all characters in the substring of S1 (up to index i) are '*'
+    bool isAllStars(string &amp;S1, int i) {
+        // Loop through each character from index 0 to i-1
+        for (int j = 1; j &lt;= i; j++) {
+            // If any character is not '*', return false
+            if (S1[j - 1] != '*')
+                return false;
+        }
+        // If loop finishes, it means all characters were '*'
+        return true;
+    }
+
+    // Function to perform wildcard pattern matching between S1 (pattern) and S2 (text)
+    bool wildcardMatching(string &amp;S1, string &amp;S2) {
+        // Store lengths of both strings
+        int n = S1.size();
+        int m = S2.size();
+
+        // Create two boolean arrays to store the matching results of the previous and current rows
+        vector&lt;bool&gt; prev(m + 1, false);
+        vector&lt;bool&gt; cur(m + 1, false);
+
+        // Empty pattern matches with empty string
+        prev[0] = true;
+
+        // Iterate through pattern characters
+        for (int i = 1; i &lt;= n; i++) {
+            // For the first column, check if the pattern till i-th character is all '*'
+            cur[0] = isAllStars(S1, i);
+
+            // Iterate through text characters
+            for (int j = 1; j &lt;= m; j++) {
+                // If characters match or pattern has '?', take diagonal value from DP table
+                if (S1[i - 1] == S2[j - 1] || S1[i - 1] == '?') {
+                    cur[j] = prev[j - 1];
+                }
+                // If pattern has '*', it can represent empty sequence or any character
+                else if (S1[i - 1] == '*') {
+                    cur[j] = prev[j] || cur[j - 1];
+                }
+                // If characters don't match and no wildcard present
+                else {
+                    cur[j] = false;
+                }
+            }
+
+            // Move current row to previous row for next iteration
+            prev = cur;
+        }
+
+        // Final answer is whether the whole pattern matches the whole text
+        return prev[m];
+    }
+};
+
+// Driver code
+int main() {
+    // Create object of Solution class
+    Solution obj;
+
+    // Example pattern with wildcard characters
+    string S1 = "ab*cd";
+
+    // Example text to match
+    string S2 = "abdefcd";
+
+    // Call the wildcardMatching function
+    bool result = obj.wildcardMatching(S1, S2);
+
+    // Print the result based on matching outcome
+    if (result)
+        cout &lt;&lt; "String S1 and S2 do match";
+    else
+        cout &lt;&lt; "String S1 and S2 do not match";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Class containing the logic for wildcard pattern matching
+class Solution {
+
+    // Helper function to check if all characters in S1[0...i-1] are '*'
+    public boolean isAllStars(String S1, int i) {
+        for (int j = 1; j &lt;= i; j++) {
+            if (S1.charAt(j - 1) != '*') return false;
+        }
+        return true;
+    }
+
+    // Function to perform wildcard matching
+    public boolean wildcardMatching(String S1, String S2) {
+        int n = S1.length();
+        int m = S2.length();
+
+        // Previous row results
+        boolean[] prev = new boolean[m + 1];
+        // Current row results
+        boolean[] cur = new boolean[m + 1];
+
+        // Empty pattern matches empty string
+        prev[0] = true;
+
+        // Iterate over each character of pattern
+        for (int i = 1; i &lt;= n; i++) {
+            // Check if first column should be true
+            cur[0] = isAllStars(S1, i);
+
+            // Iterate over each character of text
+            for (int j = 1; j &lt;= m; j++) {
+                char pChar = S1.charAt(i - 1);
+                char tChar = S2.charAt(j - 1);
+
+                if (pChar == tChar || pChar == '?') {
+                    cur[j] = prev[j - 1];
+                } else if (pChar == '*') {
+                    cur[j] = prev[j] || cur[j - 1];
+                } else {
+                    cur[j] = false;
+                }
+            }
+
+            // Move current row to previous
+            prev = Arrays.copyOf(cur, m + 1);
+        }
+
+        return prev[m];
+    }
+}
+
+// Driver code
+public class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        String S1 = "ab*cd";
+        String S2 = "abdefcd";
+
+        if (sol.wildcardMatching(S1, S2))
+            System.out.println("String S1 and S2 do match");
+        else
+            System.out.println("String S1 and S2 do not match");
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Helper function to check if all characters in S1[0...i-1] are '*'
+    # This matters because '*' can match an empty sequence
+    def isAllStars(self, S1, i):
+        # Loop through the first i characters
+        for j in range(1, i + 1):
+            # If any character is NOT '*', return False
+            if S1[j - 1] != '*':
+                return False
+        # If all are '*', return True
+        return True
+
+    # Main function to perform wildcard pattern matching
+    def wildcardMatching(self, S1, S2):
+        # Length of pattern
+        n = len(S1)
+        # Length of text
+        m = len(S2)
+
+        # prev[j] → stores result of matching pattern[0...i-1] with text[0...j-1] for previous row
+        prev = [False] * (m + 1)
+        # cur[j] → stores result for current row
+        cur = [False] * (m + 1)
+
+        # Base case: Empty pattern matches empty string
+        prev[0] = True
+
+        # Outer loop → iterate over each character in the pattern
+        for i in range(1, n + 1):
+            # For first column (j = 0), match is possible only if pattern so far is all '*'
+            cur[0] = self.isAllStars(S1, i)
+
+            # Inner loop → iterate over each character in the text
+            for j in range(1, m + 1):
+                pChar = S1[i - 1]  # Current pattern character
+                tChar = S2[j - 1]  # Current text character
+
+                # Case 1: Characters match OR '?' wildcard matches exactly one character
+                if pChar == tChar or pChar == '?':
+                    cur[j] = prev[j - 1]  # Take diagonal value
+
+                # Case 2: '*' wildcard can match:
+                #    - Zero characters → take value from prev[j]
+                #    - One or more characters → take value from cur[j - 1]
+                elif pChar == '*':
+                    cur[j] = prev[j] or cur[j - 1]
+
+                # Case 3: Characters don't match and not a wildcard
+                else:
+                    cur[j] = False
+
+            # Move current row into prev for next iteration
+            prev = cur[:]
+
+        # Answer is stored in prev[m]
+        return prev[m]
+
+
+# Driver code to test
+if __name__ == "__main__":
+    sol = Solution()
+    S1 = "ab*cd"       # Pattern containing wildcard '*'
+    S2 = "abdefcd"     # Text to match
+
+    # Call matching function and print result
+    if sol.wildcardMatching(S1, S2):
+        print("String S1 and S2 do match")
+    else:
+        print("String S1 and S2 do not match")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Helper function: Check if all first i characters in pattern are '*'
+    // '*' can match empty string, so this is important for base cases
+    isAllStars(S1, i) {
+        for (let j = 1; j &lt;= i; j++) {
+            if (S1[j - 1] !== '*') return false; // Found a non-* char → return false
+        }
+        return true; // All chars are '*'
+    }
+
+    // Main function: Wildcard pattern matching
+    wildcardMatching(S1, S2) {
+        const n = S1.length; // Length of pattern
+        const m = S2.length; // Length of text
+
+        // prev[j] → previous row DP state
+        let prev = new Array(m + 1).fill(false);
+        // cur[j] → current row DP state
+        let cur = new Array(m + 1).fill(false);
+
+        // Base case: Empty pattern matches empty text
+        prev[0] = true;
+
+        // Outer loop → iterate over each pattern character
+        for (let i = 1; i &lt;= n; i++) {
+            // First column case → true only if pattern so far is all '*'
+            cur[0] = this.isAllStars(S1, i);
+
+            // Inner loop → iterate over each text character
+            for (let j = 1; j &lt;= m; j++) {
+                let pChar = S1[i - 1]; // Current pattern char
+                let tChar = S2[j - 1]; // Current text char
+
+                // Case 1: Exact match or '?' wildcard (matches one character)
+                if (pChar === tChar || pChar === '?') {
+                    cur[j] = prev[j - 1]; // Take diagonal DP state
+                }
+                // Case 2: '*' wildcard
+                // '*' can represent:
+                // - zero characters (prev[j])
+                // - one or more characters (cur[j - 1])
+                else if (pChar === '*') {
+                    cur[j] = prev[j] || cur[j - 1];
+                }
+                // Case 3: No match
+                else {
+                    cur[j] = false;
+                }
+            }
+
+            // Copy current row into prev for next iteration
+            prev = [...cur];
+        }
+
+        // Final result is in prev[m]
+        return prev[m];
+    }
+}
+
+// Driver code to test
+const sol = new Solution();
+const S1 = "ab*cd";     // Pattern
+const S2 = "abdefcd";   // Text
+
+// Call function and print result
+if (sol.wildcardMatching(S1, S2)) {
+    console.log("String S1 and S2 do match");
+} else {
+    console.log("String S1 and S2 do not match");
+}
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity: O(N*M)</strong>,There are two nested loops.</p>
+<p><strong>Space Complexity: O(M)</strong>,We are using an external array of size ‘M+1’ to store two rows.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

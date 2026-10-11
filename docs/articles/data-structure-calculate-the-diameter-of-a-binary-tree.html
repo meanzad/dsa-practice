@@ -1,0 +1,852 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Calculate the Diameter of a Binary Tree</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Calculate the Diameter of a Binary Tree</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/calculate-the-diameter-of-a-binary-tree/</code></div>
+  <p><strong>Problem Statement: </strong> Given the root of the Binary Tree, return the length of its diameter.
+The Diameter of a Binary Tree is the longest distance between any two nodes of that tree. This path may or may not pass through the root.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span><strong>Example 1:</strong></span>
+<span><strong>Input:</strong></span>
+
+<p><img height="457" loading="lazy" src="../assets/img/91da852a4e160826.png" width="481"/></p>
+<span><strong>Output:</strong> 4</span>
+<span><strong>Explanation: </strong>The distance between the leftmost node 4 and the rightmost node 3 is 4, since this is the longest horizontal distance of the binary tree, hence its diameter.</span>
+
+<p><img height="457" loading="lazy" src="../assets/img/ab252c8cfe39c519.png" width="481"/></p>
+<span><strong>Example 2:</strong></span>
+<span><strong>Input:</strong>
+</span>
+
+<p><img height="457" loading="lazy" src="../assets/img/a3588ff3f052fb79.png" width="481"/></p>
+<span><strong>Output :</strong> 7</span>
+<span><strong>Explanation: </strong>The distance between the leftmost node 4 and the rightmost node 3 is 4, since this is the longest horizontal distance of the binary tree, hence its diameter.</span>
+
+<p><img height="457" loading="lazy" src="../assets/img/066872c5a7ffdb80.png" width="481"/></p>
+            </pre>
+</div>
+</details>
+</div>
+
+<div class="practice">
+<span><strong>Practice: </strong></span>
+<div class="problem-buttons">
+<span>Solve Problem</span>
+<img alt="code-studio" loading="lazy" src="../assets/img/98557c190adb0bc0.png"/>
+</div>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Don’t jump directly to the solution, try it out yourself first. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                   Brute Force Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<p>To understand how wide a binary tree can be, imagine each point (node) in the tree as a possible <strong>turning point</strong> for the longest path. This turning point is where the path bends and includes the highest levels going left and right.</p>
+
+
+
+<p><img height="457" loading="lazy" src="../assets/img/711713298ca482e0.png" width="481"/></p>
+<li>At every turning point, the total width is found by adding how deep the left side goes and how deep the right side goes, plus one for the turning point itself.</li>
+<li>Total Width = 1 + Depth of Left Side + Depth of Right Side</li>
+<li>To find the widest path, we can go through the tree from top to bottom, checking each point as a turning point. At each one, we measure the left and right depth and calculate the width. The widest one we find during this process is the final answer.</li>
+<li>Keep a note of the largest width found so far. At every step, compare the current width with what we've stored, and always keep the bigger one.</li>
+<h2>Dry Run</h2>
+
+
+
+
+<p>After checking all points, the largest width we recorded is the final result.</p>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/4c82b815172d92ff.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/47369a80023d7d0b.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/84393814b85161b6.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/5010763d7b064af4.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/2354064133a72c3a.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/2c8e625cf9671930.png"/></div><div class="carousel-image"><img alt="Image 7" loading="lazy" src="../assets/img/43f55bfda2c73c67.png"/></div><div class="carousel-image"><img alt="Image 8" loading="lazy" src="../assets/img/44af3b6776f2ed5d.png"/></div><div class="carousel-image"><img alt="Image 9" loading="lazy" src="../assets/img/1bd70470af78d87e.png"/></div><div class="carousel-image"><img alt="Image 10" loading="lazy" src="../assets/img/7ab9ac615f422f9f.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/4c82b815172d92ff.png"/><img alt="Image 2" loading="lazy" src="../assets/img/47369a80023d7d0b.png"/><img alt="Image 3" loading="lazy" src="../assets/img/84393814b85161b6.png"/><img alt="Image 4" loading="lazy" src="../assets/img/5010763d7b064af4.png"/><img alt="Image 5" loading="lazy" src="../assets/img/2354064133a72c3a.png"/><img alt="Image 6" loading="lazy" src="../assets/img/2c8e625cf9671930.png"/><img alt="Image 7" loading="lazy" src="../assets/img/43f55bfda2c73c67.png"/><img alt="Image 8" loading="lazy" src="../assets/img/44af3b6776f2ed5d.png"/><img alt="Image 9" loading="lazy" src="../assets/img/1bd70470af78d87e.png"/><img alt="Image 10" loading="lazy" src="../assets/img/7ab9ac615f422f9f.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Code
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<button class="code-tab dsa_article_code_active" data-lang="cpp">C++</button>
+<button class="code-tab" data-lang="java">Java</button>
+<button class="code-tab" data-lang="python">Python</button>
+<button class="code-tab" data-lang="javascript">JavaScript</button>
+<svg class="copy-btn" fill="none" height="20" viewbox="0 0 17 20" width="17" xmlns="http://www.w3.org/2000/svg">
+<path d="M2 20C1.45 20 0.979002 19.804 0.587002 19.412C0.195002 19.02 -0.000664969 18.5493 1.69779e-06 18V4H2V18H13V20H2ZM6 16C5.45 16 4.979 15.804 4.587 15.412C4.195 15.02 3.99934 14.5493 4 14V2C4 1.45 4.196 0.979002 4.588 0.587002C4.98 0.195002 5.45067 -0.000664969 6 1.69779e-06H15C15.55 1.69779e-06 16.021 0.196002 16.413 0.588002C16.805 0.980002 17.0007 1.45067 17 2V14C17 14.55 16.804 15.021 16.412 15.413C16.02 15.805 15.5493 16.0007 15 16H6ZM6 14H15V2H6V14Z">
+</path>
+</svg>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0">
+                                <code class="language-cpp" lang="cpp">
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+// Node structure for
+// the binary tree
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+    // Constructor to initialize
+    // the node with a value
+    Node(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+
+class Solution {
+public:
+    // Global variable to
+    // store the diameter
+    int diameter = 0;  
+
+    // Function to calculate
+    // the height of a subtree
+    int calculateHeight(Node* node) {
+        if (node == nullptr) {
+            return 0;
+        }
+
+        // Recursively calculate the
+        // height of left and right subtrees
+        int leftHeight = calculateHeight(node-&gt;left);
+        int rightHeight = calculateHeight(node-&gt;right);
+
+        // Calculate the diameter at the current
+        // node and update the global variable
+        diameter = max(diameter, leftHeight + rightHeight);
+
+        // Return the height
+        // of the current subtree
+        return 1 + max(leftHeight, rightHeight);
+    }
+
+    // Function to find the
+    // diameter of a binary tree
+    int diameterOfBinaryTree(Node* root) {
+        // Start the recursive
+        // traversal from the root
+        calculateHeight(root);
+
+        // Return the maximum diameter
+        // found during traversal
+        return diameter;
+    }
+};
+
+
+
+// Main function
+int main() {
+    // Creating a sample binary tree
+    Node* root = new Node(1);
+    root-&gt;left = new Node(2);
+    root-&gt;right = new Node(3);
+    root-&gt;left-&gt;left = new Node(4);
+    root-&gt;left-&gt;right = new Node(5);
+    root-&gt;left-&gt;right-&gt;right = new Node(6);
+    root-&gt;left-&gt;right-&gt;right-&gt;right = new Node(7);
+
+    // Creating an instance of the Solution class
+    Solution solution;
+
+    // Calculate the diameter of the binary tree
+    int diameter = solution.diameterOfBinaryTree(root);
+
+    cout &lt;&lt; "The diameter of the binary tree is: " &lt;&lt; diameter &lt;&lt; endl;
+
+    return 0;
+}
+                                </code>
+                            </pre><pre class="wp-block-code hidden" data-i="1">
+                                <code class="language-java" lang="java">
+// Importing necessary packages
+import java.util.*;
+
+// Node class for the binary tree
+class Node {
+    int data;
+    Node left;
+    Node right;
+
+    // Constructor to initialize
+    // the node with a value
+    Node(int val) {
+        data = val;
+        left = null;
+        right = null;
+    }
+}
+
+// Solution class
+class Solution {
+    // Global variable to
+    // store the diameter
+    int diameter = 0;
+
+    // Function to calculate
+    // the height of a subtree
+    int calculateHeight(Node node) {
+        if (node == null) {
+            return 0;
+        }
+
+        // Recursively calculate the
+        // height of left and right subtrees
+        int leftHeight = calculateHeight(node.left);
+        int rightHeight = calculateHeight(node.right);
+
+        // Calculate the diameter at the current
+        // node and update the global variable
+        diameter = Math.max(diameter, leftHeight + rightHeight);
+
+        // Return the height
+        // of the current subtree
+        return 1 + Math.max(leftHeight, rightHeight);
+    }
+
+    // Function to find the
+    // diameter of a binary tree
+    int diameterOfBinaryTree(Node root) {
+        // Start the recursive
+        // traversal from the root
+        calculateHeight(root);
+
+        // Return the maximum diameter
+        // found during traversal
+        return diameter;
+    }
+}
+
+// Main class
+public class Main {
+    // Main method
+    public static void main(String[] args) {
+        // Creating a sample binary tree
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+        root.left.right.right = new Node(6);
+        root.left.right.right.right = new Node(7);
+
+        // Creating an instance of the Solution class
+        Solution solution = new Solution();
+
+        // Calculate the diameter of the binary tree
+        int diameter = solution.diameterOfBinaryTree(root);
+
+        System.out.println("The diameter of the binary tree is: " + diameter);
+    }
+}
+
+                                </code>
+                            </pre><pre class="wp-block-code hidden" data-i="2">
+                                <code class="language-python" lang="python">
+# Node structure for
+# the binary tree
+class Node:
+    def __init__(self, val):
+        self.data = val
+        self.left = None
+        self.right = None
+
+class Solution:
+    def __init__(self):
+        # Global variable to
+        # store the diameter
+        self.diameter = 0  
+
+    # Function to calculate
+    # the height of a subtree
+    def calculateHeight(self, node):
+        if node is None:
+            return 0
+
+        # Recursively calculate the
+        # height of left and right subtrees
+        left_height = self.calculateHeight(node.left)
+        right_height = self.calculateHeight(node.right)
+
+        # Calculate the diameter at the current
+        # node and update the global variable
+        self.diameter = max(self.diameter, left_height + right_height)
+
+        # Return the height
+        # of the current subtree
+        return 1 + max(left_height, right_height)
+
+    # Function to find the
+    # diameter of a binary tree
+    def diameterOfBinaryTree(self, root):
+        # Start the recursive
+        # traversal from the root
+        self.calculateHeight(root)
+
+        # Return the maximum diameter
+        # found during traversal
+        return self.diameter
+
+# Main function
+if __name__ == "__main__":
+    # Creating a sample binary tree
+    root = Node(1)
+    root.left = Node(2)
+    root.right = Node(3)
+    root.left.left = Node(4)
+    root.left.right = Node(5)
+    root.left.right.right = Node(6)
+    root.left.right.right.right = Node(7)
+
+    # Creating an instance of the Solution class
+    solution = Solution()
+
+    # Calculate the diameter of the binary tree
+    diameter = solution.diameterOfBinaryTree(root)
+
+    print("The diameter of the binary tree is:", diameter)
+
+                                </code>
+                            </pre><pre class="wp-block-code hidden" data-i="3">
+                            <code class="language-javascript" lang="javascript">
+// Node structure for
+// the binary tree
+class Node {
+    constructor(val) {
+        this.data = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class Solution {
+    constructor() {
+        // Global variable to
+        // store the diameter
+        this.diameter = 0;
+    }
+
+    // Function to calculate
+    // the height of a subtree
+    calculateHeight(node) {
+        if (node === null) {
+            return 0;
+        }
+
+        // Recursively calculate the
+        // height of left and right subtrees
+        const leftHeight = this.calculateHeight(node.left);
+        const rightHeight = this.calculateHeight(node.right);
+
+        // Calculate the diameter at the current
+        // node and update the global variable
+        this.diameter = Math.max(this.diameter, leftHeight + rightHeight);
+
+        // Return the height
+        // of the current subtree
+        return 1 + Math.max(leftHeight, rightHeight);
+    }
+
+    // Function to find the
+    // diameter of a binary tree
+    diameterOfBinaryTree(root) {
+        // Start the recursive
+        // traversal from the root
+        this.calculateHeight(root);
+
+        // Return the maximum diameter
+        // found during traversal
+        return this.diameter;
+    }
+}
+
+// Main function
+function main() {
+    // Creating a sample binary tree
+    const root = new Node(1);
+    root.left = new Node(2);
+    root.right = new Node(3);
+    root.left.left = new Node(4);
+    root.left.right = new Node(5);
+    root.left.right.right = new Node(6);
+    root.left.right.right.right = new Node(7);
+
+    // Creating an instance of the Solution class
+    const solution = new Solution();
+
+    // Calculate the diameter of the binary tree
+    const diameter = solution.diameterOfBinaryTree(root);
+
+    console.log("The diameter of the binary tree is: " + diameter);
+}
+
+// Run the main function
+main();
+
+                            </code>
+                        </pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+</p><p><strong>Time Complexity: O(N*N)</strong> where N is the number of nodes in the Binary Tree. 
+                        </p><p><strong>Space Complexity : O(1)</strong> as no additional data structures or memory is allocated.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<p>The earlier method took extra time because it kept recalculating the depth of subtrees again and again. This repetition made the solution slower, especially for larger trees. To make it faster, we can work from the bottom of the tree upwards, calculating heights only once.</p>
+
+
+
+<p><img height="457" loading="lazy" src="../assets/img/c4e970b70d678336.png" width="481"/></p>
+<li>Using a bottom-up approach called postorder traversal, we first finish work on the lower parts (left and right branches) before looking at the top (parent). This lets us measure the depth of each part and also check the diameter while going up the tree, all in one go.</li>
+<li>Start by keeping a place to store the largest diameter found. Make a function that, for each point, does the following:</li>
+<li>If the point doesn't exist, say the depth is zero.</li>
+<p>Otherwise, do the following:</p>
+<ol>
+<li>Measure how deep the left part goes, then do the same for the right part.</li>
+<li>Add the two depths and 1 (for the current point) to get the width at this point.</li>
+<li>Compare this width with the largest one we've seen so far and update it if it's bigger.</li>
+</ol>
+<h3>Dry Run</h3>
+
+
+
+<p><img height="457" loading="lazy" src="../assets/img/568167ecf04a4db0.png" width="481"/></p>
+<p>When we've gone through all parts of the tree, the largest width recorded is the final diameter.</p>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Code
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<button class="code-tab dsa_article_code_active" data-lang="cpp">C++</button>
+<button class="code-tab" data-lang="java">Java</button>
+<button class="code-tab" data-lang="python">Python</button>
+<button class="code-tab" data-lang="javascript">JavaScript</button>
+<svg class="copy-btn" fill="none" height="20" viewbox="0 0 17 20" width="17" xmlns="http://www.w3.org/2000/svg">
+<path d="M2 20C1.45 20 0.979002 19.804 0.587002 19.412C0.195002 19.02 -0.000664969 18.5493 1.69779e-06 18V4H2V18H13V20H2ZM6 16C5.45 16 4.979 15.804 4.587 15.412C4.195 15.02 3.99934 14.5493 4 14V2C4 1.45 4.196 0.979002 4.588 0.587002C4.98 0.195002 5.45067 -0.000664969 6 1.69779e-06H15C15.55 1.69779e-06 16.021 0.196002 16.413 0.588002C16.805 0.980002 17.0007 1.45067 17 2V14C17 14.55 16.804 15.021 16.412 15.413C16.02 15.805 15.5493 16.0007 15 16H6ZM6 14H15V2H6V14Z">
+</path>
+</svg>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0">
+                                <code class="language-cpp" lang="cpp">
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+// Node structure for the binary tree
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+    // Constructor to initialize
+    // the node with a value
+    Node(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+
+class Solution {
+public:
+    // Function to find the
+    // diameter of a binary tree
+    int diameterOfBinaryTree(Node* root) {
+        // Initialize the variable to
+        // store the diameter of the tree
+        int diameter = 0;
+        // Call the height function to traverse
+        // the tree and calculate diameter
+        height(root, diameter);
+        // Return the calculated diameter
+        return diameter;
+    }
+
+private:
+    // Function to calculate the height of
+    // the tree and update the diameter
+    int height(Node* node, int&amp; diameter) {
+        // Base case: If the node is null,
+        // return 0 indicating the
+        // height of an empty tree
+        if (!node) {
+            return 0;
+        }
+
+        // Recursively calculate the
+        // height of left and right subtrees
+        int lh = height(node-&gt;left, diameter);
+        int rh = height(node-&gt;right, diameter);
+
+        // Update the diameter with the maximum
+        // of current diameter or sum of
+        // left and right heights
+        diameter = max(diameter, lh + rh);
+
+        // Return the height of
+        // the current node's subtree
+        return 1 + max(lh, rh);
+    }
+};
+
+
+// Main function
+int main() {
+    // Creating a sample binary tree
+    Node* root = new Node(1);
+    root-&gt;left = new Node(2);
+    root-&gt;right = new Node(3);
+    root-&gt;left-&gt;left = new Node(4);
+    root-&gt;left-&gt;right = new Node(5);
+    root-&gt;left-&gt;right-&gt;right = new Node(6);
+    root-&gt;left-&gt;right-&gt;right-&gt;right = new Node(7);
+
+    // Creating an instance of the Solution class
+    Solution solution;
+
+    // Calculate the diameter of the binary tree
+    int diameter = solution.diameterOfBinaryTree(root);
+
+    cout &lt;&lt; "The diameter of the binary tree is: " &lt;&lt; diameter &lt;&lt; endl;
+
+    return 0;
+}
+                                </code>
+                            </pre><pre class="wp-block-code hidden" data-i="1">
+                                <code class="language-java" lang="java">
+// Node class for the binary tree
+class Node {
+    int data;
+    Node left;
+    Node right;
+
+    // Constructor to initialize
+    // the node with a value
+    Node(int val) {
+        data = val;
+        left = null;
+        right = null;
+    }
+}
+
+class Solution {
+    // Function to find the
+    // diameter of a binary tree
+    public int diameterOfBinaryTree(Node root) {
+        // Initialize the variable to
+        // store the diameter of the tree
+        int[] diameter = new int[1];
+        diameter[0] = 0;
+        // Call the height function to traverse
+        // the tree and calculate diameter
+        height(root, diameter);
+        // Return the calculated diameter
+        return diameter[0];
+    }
+
+    // Function to calculate the height of
+    // the tree and update the diameter
+    private int height(Node node, int[] diameter) {
+        // Base case: If the node is null,
+        // return 0 indicating the
+        // height of an empty tree
+        if (node == null) {
+            return 0;
+        }
+
+        // Recursively calculate the
+        // height of left and right subtrees
+        int[] lh = new int[1];
+        int[] rh = new int[1];
+        lh[0] = height(node.left, diameter);
+        rh[0] = height(node.right, diameter);
+
+        // Update the diameter with the maximum
+        // of current diameter or sum of
+        // left and right heights
+        diameter[0] = Math.max(diameter[0], lh[0] + rh[0]);
+
+        // Return the height of
+        // the current node's subtree
+        return 1 + Math.max(lh[0], rh[0]);
+    }
+}
+
+// Main class
+public class Main {
+    // Main function
+    public static void main(String[] args) {
+        // Creating a sample binary tree
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+        root.left.right.right = new Node(6);
+        root.left.right.right.right = new Node(7);
+
+        // Creating an instance of the Solution class
+        Solution solution = new Solution();
+
+        // Calculate the diameter of the binary tree
+        int diameter = solution.diameterOfBinaryTree(root);
+
+        System.out.println("The diameter of the binary tree is: " + diameter);
+    }
+}                                  
+
+                                </code>
+                            </pre><pre class="wp-block-code hidden" data-i="2">
+                                <code class="language-python" lang="python">
+                     
+# Node class for the binary tree
+class Node:
+    def __init__(self, val):
+        self.data = val
+        self.left = None
+        self.right = None
+
+# Solution class to find the diameter of the binary tree
+class Solution:
+    def diameterOfBinaryTree(self, root):
+        # Initialize the variable to store the diameter of the tree
+        diameter = [0]
+        # Call the height function to traverse the tree and calculate diameter
+        self.height(root, diameter)
+        # Return the calculated diameter
+        return diameter[0]
+
+    # Function to calculate the height of the tree and update the diameter
+    def height(self, node, diameter):
+        # Base case: If the node is None, return 0 indicating the height of an empty tree
+        if not node:
+            return 0
+
+        # Recursively calculate the height of left and right subtrees
+        lh = self.height(node.left, diameter)
+        rh = self.height(node.right, diameter)
+
+        # Update the diameter with the maximum of current diameter or sum of left and right heights
+        diameter[0] = max(diameter[0], lh + rh)
+
+        # Return the height of the current node's subtree
+        return 1 + max(lh, rh)
+
+
+# Main function
+if __name__ == "__main__":
+    # Creating a sample binary tree
+    root = Node(1)
+    root.left = Node(2)
+    root.right = Node(3)
+    root.left.left = Node(4)
+    root.left.right = Node(5)
+    root.left.right.right = Node(6)
+    root.left.right.right.right = Node(7)
+
+    # Creating an instance of the Solution class
+    solution = Solution()
+
+    # Calculate the diameter of the binary tree
+    diameter = solution.diameterOfBinaryTree(root)
+
+    print("The diameter of the binary tree is:", diameter)
+                                </code>
+                            </pre><pre class="wp-block-code hidden" data-i="3">
+                            <code class="language-javascript" lang="javascript">
+// Node structure for the binary tree
+class Node {
+    constructor(val) {
+        this.data = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class Solution {
+    // Function to find the
+    // diameter of a binary tree
+    diameterOfBinaryTree(root) {
+        // Initialize the variable to
+        // store the diameter of the tree
+        let diameter = 0;
+        // Call the height function to traverse
+        // the tree and calculate diameter
+        this.height(root, diameter);
+        // Return the calculated diameter
+        return diameter;
+    }
+
+    // Function to calculate the height of
+    // the tree and update the diameter
+    height(node, diameter) {
+        // Base case: If the node is null,
+        // return 0 indicating the
+        // height of an empty tree
+        if (!node) {
+            return 0;
+        }
+
+        // Recursively calculate the
+        // height of left and right subtrees
+        let lh = this.height(node.left, diameter);
+        let rh = this.height(node.right, diameter);
+
+        // Update the diameter with the maximum
+        // of current diameter or sum of
+        // left and right heights
+        diameter = Math.max(diameter, lh + rh);
+
+        // Return the height of
+        // the current node's subtree
+        return 1 + Math.max(lh, rh);
+    }
+}
+
+// Creating a sample binary tree
+let root = new Node(1);
+root.left = new Node(2);
+root.right = new Node(3);
+root.left.left = new Node(4);
+root.left.right = new Node(5);
+root.left.right.right = new Node(6);
+root.left.right.right.right = new Node(7);
+
+// Creating an instance of the Solution class
+let solution = new Solution();
+
+// Calculate the diameter of the binary tree
+let diameter = solution.diameterOfBinaryTree(root);
+
+console.log("The diameter of the binary tree is: " + diameter);
+                    
+                            </code>
+                        </pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+</p><p><strong>Time Complexity: O(N)</strong> where N is the number of nodes in the Binary Tree. This complexity arises from visiting each node exactly once during the postorder traversal.</p>
+<p><strong>Space Complexity : O(1)</strong> as no additional space or data structures is created that is proportional to the input size of the tree. </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

@@ -1,4 +1,4 @@
-"""Generate the static site from data/ into site/."""
+"""Generate the static site from data/ into docs/ (GitHub Pages serves /docs)."""
 import html as htmllib
 import json
 import re
@@ -27,6 +27,8 @@ INDEX_TMPL = """<!doctype html>
   <span class="sub">offline archive &middot; %(narticles)d articles</span>
   <span class="spacer"></span>
   <button class="btn" id="expand">Expand / collapse all</button>
+  <button class="btn" id="sync">Sync</button>
+  <span class="sync-state" id="sync-state">off</span>
   <button class="btn" id="export">Export progress</button>
   <button class="btn" id="import">Import</button>
   <input type="file" id="file" accept="application/json" style="display:none">
@@ -55,16 +57,18 @@ INDEX_TMPL = """<!doctype html>
       <option value="unsolved">Unsolved</option>
       <option value="solved">Solved</option>
       <option value="revision">Marked for revision</option>
+      <option value="noted">Has notes</option>
     </select>
   </div>
 
   <div id="sections"></div>
   <footer>
     Personal offline archive of takeuforward.org content, rebuilt from the Wayback Machine.<br>
-    Progress is stored in this browser only. Export it to keep a backup.
+    Progress and notes are stored in this browser, and synced to a private gist when Sync is on.
   </footer>
 </div>
 <script>window.__V="%(ver)s";</script>
+<script src="sync.js?v=%(ver)s"></script>
 <script src="app.js?v=%(ver)s"></script>
 </body></html>
 """

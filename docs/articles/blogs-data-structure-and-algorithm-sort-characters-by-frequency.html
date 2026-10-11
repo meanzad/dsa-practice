@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Sort Characters By Frequency</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Sort Characters By Frequency</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/blogs/data-structure-and-algorithm/sort-characters-by-frequency</code></div>
+  <div class="ArticleParser-module__R__VNG__article" data-article-segment="html-0"><p>Given a string <code>s</code> containing <code>N</code> characters, rearrange all characters in decreasing order of frequency.</p><p>All occurrences of the same character must appear inside one contiguous block. Character blocks having the same frequency may appear in any order.</p><p>Character matching is case-sensitive. Return any valid rearranged string.</p></div><div><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 1</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>s = "tree"</code></p><p><strong>Output:</strong> <code>"eert"</code></p><p><strong>Explanation:</strong></p><p>Character <code>'e'</code> appears twice, while <code>'r'</code> and <code>'t'</code> appear once.</p><p>The <code>'e'</code> block must appear before both frequency-<code>1</code> blocks. <code>"eetr"</code> is also a valid output.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 2</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>s = "cccaaa"</code></p><p><strong>Output:</strong> <code>"aaaccc"</code></p><p><strong>Explanation:</strong></p><p>Characters <code>'a'</code> and <code>'c'</code> both appear three times, so either block may appear first.</p><p>Both <code>"aaaccc"</code> and <code>"cccaaa"</code> are valid. <code>"cacaca"</code> is invalid because equal characters do not form contiguous blocks.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 3</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>s = "Aabb"</code></p><p><strong>Output:</strong> <code>"bbAa"</code></p><p><strong>Explanation:</strong></p><p>Character <code>'b'</code> appears twice. Characters <code>'A'</code> and <code>'a'</code> appear once each.</p><p>Uppercase <code>'A'</code> and lowercase <code>'a'</code> are treated as different characters.</p></div></div></section></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-1"><p></p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-2"><h2 id="blog-toc-brute-force-approach">Brute Force Approach</h2><p>Frequency order cannot be decided from a single occurrence because complete occurrence counts are required first. A Hash Map stores the total frequency of every distinct character.</p><p>A direct implementation sorts all <code>N</code> character positions using the stored frequencies. Higher-frequency characters receive greater priority. A secondary character comparison groups equal-frequency occurrences of the same character and provides a deterministic order.</p><p>Sorting all positions remains simple, but repeated copies of one character participate separately in the sorting process.</p><h3 id="blog-toc-algorithm">Algorithm</h3><ul><li><p>Return an empty string when <code>s</code> is empty.</p></li><li><p>Initialize a Hash Map <code>frequency</code> to store the occurrence count of every character.</p></li><li><p>Traverse <code>s</code> and increment the count associated with every processed character.</p></li><li><p>Create a sortable character list containing all <code>N</code> positions from <code>s</code>.</p></li><li><p>Sort the character list using the following priority:</p><ul><li><p>Place a character with a higher frequency before a character with a lower frequency.</p></li><li><p>Place characters with equal frequencies according to character value, keeping identical characters together.</p></li></ul></li><li><p>Join all sorted characters and return the resulting string.</p></li></ul><h3 id="blog-toc-dry-run">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="k" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/957d947887311e4e.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">k</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-3"><h3 id="blog-toc-solution">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    /* Sorts all character positions by frequency. */
+    string frequencySort(string s) {
+        unordered_map&lt;char, int&gt; frequency;
+
+        // Count every character occurrence.
+        for (char character : s) {
+            frequency[character]++;
+        }
+
+        // Keep higher-frequency characters first.
+        sort(
+            s.begin(),
+            s.end(),
+            [&amp;](char first, char second) {
+                if (
+                    frequency[first] !=
+                    frequency[second]
+                ) {
+                    return frequency[first] &gt;
+                           frequency[second];
+                }
+
+                // Group equal-frequency characters by value.
+                return first &lt; second;
+            }
+        );
+
+        return s;
+    }
+};
+
+// Driver code to execute the solution.
+int main() {
+    string s = "tree";
+
+    Solution solution;
+    string answer = solution.frequencySort(s);
+
+    cout &lt;&lt; answer &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+    # Sorts all character positions by frequency.
+    def frequencySort(self, s: str) -&gt; str:
+        frequency: dict[str, int] = {}
+
+        # Count every character occurrence.
+        for character in s:
+            frequency[character] = (
+                frequency.get(character, 0) + 1
+            )
+
+        # Keep higher-frequency characters first.
+        characters = sorted(
+            s,
+            key=lambda character: (
+                -frequency[character],
+                character
+            )
+        )
+
+        return "".join(characters)
+
+
+# Driver code to execute the solution.
+def main() -&gt; None:
+    s = "tree"
+
+    solution = Solution()
+    answer = solution.frequencySort(s)
+
+    print(answer)
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+class Solution {
+    /* Sorts all character positions by frequency. */
+    public String frequencySort(String s) {
+        Map&lt;Character, Integer&gt; frequency =
+            new HashMap&lt;&gt;();
+
+        // Count every character occurrence.
+        for (char character : s.toCharArray()) {
+            frequency.put(
+                character,
+                frequency.getOrDefault(character, 0) + 1
+            );
+        }
+
+        Character[] characters =
+            new Character[s.length()];
+
+        // Copy characters into a sortable object array.
+        for (int i = 0; i &lt; s.length(); i++) {
+            characters[i] = s.charAt(i);
+        }
+
+        // Keep higher-frequency characters first.
+        Arrays.sort(
+            characters,
+            (first, second) -&gt; {
+                int frequencyOrder = Integer.compare(
+                    frequency.get(second),
+                    frequency.get(first)
+                );
+
+                if (frequencyOrder != 0) {
+                    return frequencyOrder;
+                }
+
+                // Group equal-frequency characters by value.
+                return Character.compare(first, second);
+            }
+        );
+
+        StringBuilder result =
+            new StringBuilder(s.length());
+
+        // Build the reordered string.
+        for (char character : characters) {
+            result.append(character);
+        }
+
+        return result.toString();
+    }
+}
+
+// Driver code to execute the solution.
+public class Main {
+    public static void main(String[] args) {
+        String s = "tree";
+
+        Solution solution = new Solution();
+        String answer = solution.frequencySort(s);
+
+        System.out.println(answer);
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    /* Sorts all character positions by frequency. */
+    frequencySort(s) {
+        const frequency = new Map();
+
+        // Count every character occurrence.
+        for (const character of s) {
+            frequency.set(
+                character,
+                (frequency.get(character) ?? 0) + 1
+            );
+        }
+
+        const characters = Array.from(s);
+
+        // Keep higher-frequency characters first.
+        characters.sort((first, second) =&gt; {
+            const frequencyOrder =
+                frequency.get(second) -
+                frequency.get(first);
+
+            if (frequencyOrder !== 0) {
+                return frequencyOrder;
+            }
+
+            // Group equal-frequency characters by value.
+            return first.codePointAt(0) -
+                   second.codePointAt(0);
+        });
+
+        return characters.join("");
+    }
+}
+
+// Driver code to execute the solution.
+function main() {
+    const s = "tree";
+
+    const solution = new Solution();
+    const answer = solution.frequencySort(s);
+
+    console.log(answer);
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-4"><h3 id="blog-toc-complexity-analysis">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(N log N)</code> on average, where <code>N</code> represents the number of characters in <code>s</code>. Frequency counting requires <code>O(N)</code> average time, while sorting all <code>N</code> character positions requires <code>O(N log N)</code> time.</p><p><strong>Space Complexity:</strong> <code>O(N + U)</code>, simplified to <code>O(N)</code>, where <code>U</code> represents the number of distinct characters. The frequency map stores at most <code>U</code> entries, while the sortable character container and returned string contain <code>N</code> characters.</p><p></p></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-5"><h2 id="blog-toc-better-approach">Better Approach</h2><p>Sorting all <code>N</code> positions repeats work because every copy of the same character carries the same frequency. Only distinct characters need ordering.</p><p>Let <code>U</code> represent the number of distinct characters. A first-appearance list stores every distinct character once. Stable sorting arranges the <code>U</code> characters by decreasing frequency while preserving first-appearance order for equal frequencies.</p><p>After sorting, repeating every distinct character according to the stored frequency rebuilds the complete result. Sorting work decreases from <code>N</code> items to <code>U</code> items.</p><h3 id="blog-toc-algorithm-2">Algorithm</h3><ul><li><p>Return an empty string when <code>s</code> is empty.</p></li><li><p>Initialize a Hash Map <code>frequency</code> to store character frequencies.</p></li><li><p>Initialize a list <code>uniqueCharacters</code> to preserve the first appearance of every distinct character.</p></li><li><p>Traverse every character in <code>s</code>.</p><ul><li><p>Append a character to <code>uniqueCharacters</code> when no previous occurrence exists.</p></li><li><p>Increment the corresponding frequency inside <code>frequency</code>.</p></li></ul></li><li><p>Stable-sort <code>uniqueCharacters</code> in decreasing order of frequency.</p></li><li><p>Preserve first-appearance order when two distinct characters have equal frequencies.</p></li><li><p>Initialize an empty result string.</p></li><li><p>Traverse the sorted distinct-character list and append every character <code>frequency[character]</code> times.</p></li><li><p>Return the completed result string.</p></li></ul><h3 id="blog-toc-dry-run-2">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="g" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/4db1bc62ba2d1f09.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">g</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-6"><h3 id="blog-toc-solution-2">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    /* Sorts distinct characters by frequency. */
+    string frequencySort(const string&amp; s) {
+        unordered_map&lt;char, int&gt; frequency;
+        vector&lt;char&gt; uniqueCharacters;
+
+        // Count frequencies and preserve first appearances.
+        for (char character : s) {
+            if (
+                frequency.find(character) ==
+                frequency.end()
+            ) {
+                uniqueCharacters.push_back(character);
+            }
+
+            frequency[character]++;
+        }
+
+        // Preserve first-appearance order on frequency ties.
+        stable_sort(
+            uniqueCharacters.begin(),
+            uniqueCharacters.end(),
+            [&amp;](char first, char second) {
+                return frequency[first] &gt;
+                       frequency[second];
+            }
+        );
+
+        string result;
+        result.reserve(s.length());
+
+        // Expand every distinct character by frequency.
+        for (char character : uniqueCharacters) {
+            result.append(
+                frequency[character],
+                character
+            );
+        }
+
+        return result;
+    }
+};
+
+// Driver code to execute the solution.
+int main() {
+    string s = "tree";
+
+    Solution solution;
+    string answer = solution.frequencySort(s);
+
+    cout &lt;&lt; answer &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+    # Sorts distinct characters by frequency.
+    def frequencySort(self, s: str) -&gt; str:
+        frequency: dict[str, int] = {}
+        unique_characters: list[str] = []
+
+        # Count frequencies and preserve first appearances.
+        for character in s:
+            if character not in frequency:
+                unique_characters.append(character)
+
+            frequency[character] = (
+                frequency.get(character, 0) + 1
+            )
+
+        # Preserve first-appearance order on frequency ties.
+        unique_characters.sort(
+            key=lambda character: -frequency[character]
+        )
+
+        # Expand every distinct character by frequency.
+        parts = [
+            character * frequency[character]
+            for character in unique_characters
+        ]
+
+        return "".join(parts)
+
+
+# Driver code to execute the solution.
+def main() -&gt; None:
+    s = "tree"
+
+    solution = Solution()
+    answer = solution.frequencySort(s)
+
+    print(answer)
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+class Solution {
+    /* Sorts distinct characters by frequency. */
+    public String frequencySort(String s) {
+        Map&lt;Character, Integer&gt; frequency =
+            new HashMap&lt;&gt;();
+
+        List&lt;Character&gt; uniqueCharacters =
+            new ArrayList&lt;&gt;();
+
+        // Count frequencies and preserve first appearances.
+        for (char character : s.toCharArray()) {
+            if (!frequency.containsKey(character)) {
+                uniqueCharacters.add(character);
+            }
+
+            frequency.put(
+                character,
+                frequency.getOrDefault(character, 0) + 1
+            );
+        }
+
+        // Preserve first-appearance order on frequency ties.
+        uniqueCharacters.sort(
+            (first, second) -&gt; Integer.compare(
+                frequency.get(second),
+                frequency.get(first)
+            )
+        );
+
+        StringBuilder result =
+            new StringBuilder(s.length());
+
+        // Expand every distinct character by frequency.
+        for (char character : uniqueCharacters) {
+            int count = frequency.get(character);
+
+            for (
+                int occurrence = 0;
+                occurrence &lt; count;
+                occurrence++
+            ) {
+                result.append(character);
+            }
+        }
+
+        return result.toString();
+    }
+}
+
+// Driver code to execute the solution.
+public class Main {
+    public static void main(String[] args) {
+        String s = "tree";
+
+        Solution solution = new Solution();
+        String answer = solution.frequencySort(s);
+
+        System.out.println(answer);
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    /* Sorts distinct characters by frequency. */
+    frequencySort(s) {
+        const frequency = new Map();
+        const uniqueCharacters = [];
+
+        // Count frequencies and preserve first appearances.
+        for (const character of s) {
+            if (!frequency.has(character)) {
+                uniqueCharacters.push(character);
+            }
+
+            frequency.set(
+                character,
+                (frequency.get(character) ?? 0) + 1
+            );
+        }
+
+        // Preserve first-appearance order on frequency ties.
+        uniqueCharacters.sort(
+            (first, second) =&gt;
+                frequency.get(second) -
+                frequency.get(first)
+        );
+
+        const parts = [];
+
+        // Expand every distinct character by frequency.
+        for (const character of uniqueCharacters) {
+            parts.push(
+                character.repeat(
+                    frequency.get(character)
+                )
+            );
+        }
+
+        return parts.join("");
+    }
+}
+
+// Driver code to execute the solution.
+function main() {
+    const s = "tree";
+
+    const solution = new Solution();
+    const answer = solution.frequencySort(s);
+
+    console.log(answer);
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-7"><h3 id="blog-toc-complexity-analysis-2">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(N + U log U)</code> on average, where <code>N</code> represents the number of characters and <code>U</code> represents the number of distinct characters. Frequency counting and result construction require <code>O(N)</code> time, while stable sorting requires <code>O(U log U)</code> time. The worst case becomes <code>O(N log N)</code> when every character is distinct.</p></div><div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-8"><p><strong>Space Complexity:</strong> <code>O(N + U)</code>, simplified to <code>O(N)</code>, including the returned string. The frequency map, distinct-character list, and stable-sorting storage require <code>O(U)</code> auxiliary space.</p><p></p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-9"><h2 id="blog-toc-optimal-approach">Optimal Approach</h2><p>Sorting only distinct characters reduces unnecessary comparisons, but comparison-based sorting still requires <code>O(U log U)</code> time.</p><p>Every character frequency lies between <code>1</code> and <code>N</code>. Frequency therefore provides a bounded integer index suitable for Bucket Sort. An array containing <code>N + 1</code> buckets can store every distinct character inside the bucket matching the corresponding frequency.</p><p>Reverse bucket traversal automatically processes larger frequencies first. Every distinct character enters one bucket only once, while repeated output copies are created during final string construction.</p><h3 id="blog-toc-algorithm-3">Algorithm</h3><ul><li><p>Return an empty string when <code>s</code> is empty.</p></li><li><p>Initialize a Hash Map <code>frequency</code> and a list <code>uniqueCharacters</code>.</p></li><li><p>Traverse <code>s</code> to count every character and preserve distinct characters in first-appearance order.</p></li><li><p>Create <code>N + 1</code> buckets because possible frequencies range from <code>0</code> to <code>N</code>.</p></li><li><p>Traverse <code>uniqueCharacters</code> and place every distinct character once inside <code>buckets[frequency[character]]</code>.</p></li><li><p>Initialize an empty result string.</p></li><li><p>Traverse bucket indices from <code>N</code> down to <code>1</code>.</p></li><li><p>For every character inside bucket <code>count</code>, append the character exactly <code>count</code> times.</p></li><li><p>Return the completed result string.</p></li></ul><h3 id="blog-toc-dry-run-3">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="k" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/9bb4430f9f3321a7.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">k</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-10"><h3 id="blog-toc-solution-3">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    /* Groups distinct characters by frequency buckets. */
+    string frequencySort(const string&amp; s) {
+        int n = s.length();
+
+        unordered_map&lt;char, int&gt; frequency;
+        vector&lt;char&gt; uniqueCharacters;
+
+        // Count frequencies and preserve first appearances.
+        for (char character : s) {
+            if (
+                frequency.find(character) ==
+                frequency.end()
+            ) {
+                uniqueCharacters.push_back(character);
+            }
+
+            frequency[character]++;
+        }
+
+        // Store each distinct character in one bucket.
+        vector&lt;vector&lt;char&gt;&gt; buckets(n + 1);
+
+        for (char character : uniqueCharacters) {
+            buckets[frequency[character]].push_back(
+                character
+            );
+        }
+
+        string result;
+        result.reserve(n);
+
+        // Read buckets from highest frequency to lowest.
+        for (int count = n; count &gt;= 1; count--) {
+            for (char character : buckets[count]) {
+                result.append(count, character);
+            }
+        }
+
+        return result;
+    }
+};
+
+// Driver code to execute the solution.
+int main() {
+    string s = "tree";
+
+    Solution solution;
+    string answer = solution.frequencySort(s);
+
+    cout &lt;&lt; answer &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+    # Groups distinct characters by frequency buckets.
+    def frequencySort(self, s: str) -&gt; str:
+        n = len(s)
+
+        frequency: dict[str, int] = {}
+        unique_characters: list[str] = []
+
+        # Count frequencies and preserve first appearances.
+        for character in s:
+            if character not in frequency:
+                unique_characters.append(character)
+
+            frequency[character] = (
+                frequency.get(character, 0) + 1
+            )
+
+        # Store each distinct character in one bucket.
+        buckets: list[list[str]] = [
+            [] for _ in range(n + 1)
+        ]
+
+        for character in unique_characters:
+            buckets[frequency[character]].append(
+                character
+            )
+
+        parts: list[str] = []
+
+        # Read buckets from highest frequency to lowest.
+        for count in range(n, 0, -1):
+            for character in buckets[count]:
+                parts.append(character * count)
+
+        return "".join(parts)
+
+
+# Driver code to execute the solution.
+def main() -&gt; None:
+    s = "tree"
+
+    solution = Solution()
+    answer = solution.frequencySort(s)
+
+    print(answer)
+
+
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+class Solution {
+    /* Groups distinct characters by frequency buckets. */
+    public String frequencySort(String s) {
+        int n = s.length();
+
+        Map&lt;Character, Integer&gt; frequency =
+            new HashMap&lt;&gt;();
+
+        List&lt;Character&gt; uniqueCharacters =
+            new ArrayList&lt;&gt;();
+
+        // Count frequencies and preserve first appearances.
+        for (char character : s.toCharArray()) {
+            if (!frequency.containsKey(character)) {
+                uniqueCharacters.add(character);
+            }
+
+            frequency.put(
+                character,
+                frequency.getOrDefault(character, 0) + 1
+            );
+        }
+
+        List&lt;List&lt;Character&gt;&gt; buckets =
+            new ArrayList&lt;&gt;(n + 1);
+
+        // Create one bucket for every possible frequency.
+        for (int count = 0; count &lt;= n; count++) {
+            buckets.add(new ArrayList&lt;&gt;());
+        }
+
+        // Store each distinct character in one bucket.
+        for (char character : uniqueCharacters) {
+            int count = frequency.get(character);
+
+            buckets.get(count).add(character);
+        }
+
+        StringBuilder result =
+            new StringBuilder(n);
+
+        // Read buckets from highest frequency to lowest.
+        for (int count = n; count &gt;= 1; count--) {
+            for (char character : buckets.get(count)) {
+                for (
+                    int occurrence = 0;
+                    occurrence &lt; count;
+                    occurrence++
+                ) {
+                    result.append(character);
+                }
+            }
+        }
+
+        return result.toString();
+    }
+}
+
+// Driver code to execute the solution.
+public class Main {
+    public static void main(String[] args) {
+        String s = "tree";
+
+        Solution solution = new Solution();
+        String answer = solution.frequencySort(s);
+
+        System.out.println(answer);
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    /* Groups distinct characters by frequency buckets. */
+    frequencySort(s) {
+        const n = Array.from(s).length;
+
+        const frequency = new Map();
+        const uniqueCharacters = [];
+
+        // Count frequencies and preserve first appearances.
+        for (const character of s) {
+            if (!frequency.has(character)) {
+                uniqueCharacters.push(character);
+            }
+
+            frequency.set(
+                character,
+                (frequency.get(character) ?? 0) + 1
+            );
+        }
+
+        // Create one bucket for every possible frequency.
+        const buckets = Array.from(
+            { length: n + 1 },
+            () =&gt; []
+        );
+
+        // Store each distinct character in one bucket.
+        for (const character of uniqueCharacters) {
+            buckets[frequency.get(character)].push(
+                character
+            );
+        }
+
+        const parts = [];
+
+        // Read buckets from highest frequency to lowest.
+        for (let count = n; count &gt;= 1; count--) {
+            for (const character of buckets[count]) {
+                parts.push(character.repeat(count));
+            }
+        }
+
+        return parts.join("");
+    }
+}
+
+// Driver code to execute the solution.
+function main() {
+    const s = "tree";
+
+    const solution = new Solution();
+    const answer = solution.frequencySort(s);
+
+    console.log(answer);
+}
+
+main();</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-11"><h3 id="blog-toc-complexity-analysis-3">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(N)</code> on average, where <code>N</code> represents the number of characters in <code>s</code>. Frequency counting requires <code>O(N)</code> time, bucket placement requires <code>O(U)</code> time, reverse bucket traversal requires <code>O(N)</code> time, and result construction appends exactly <code>N</code> characters.</p><p><strong>Space Complexity:</strong> <code>O(N + U)</code>, simplified to <code>O(N)</code>. The Hash Map stores at most <code>U</code> frequencies, while the bucket array contains <code>N + 1</code> positions. The returned result stores <code>N</code> characters.</p><h2 id="blog-toc-faqs-about-sort-characters-by-frequency">FAQs about Sort Characters By Frequency</h2><h5>1. Does the order of equal-frequency character blocks matter?</h5><p>No. Any order remains valid when all blocks follow non-increasing frequency order.</p><p>For <code>s = "cccaaa"</code>, both <code>"cccaaa"</code> and <code>"aaaccc"</code> are valid.</p><h5>2. Why does the Brute Force comparator need a tie-breaker?</h5><p>A frequency-only comparator treats different equal-frequency characters as equivalent. Sorting all character positions without a tie-breaker can leave equal-frequency characters interleaved.</p><p>A secondary character comparison keeps all occurrences of one character contiguous.</p><h5>3. Why does the Better Approach sort only distinct characters?</h5><p>Every occurrence of the same character has the same frequency. Sorting repeated copies performs redundant comparisons.</p><p>Sorting one entry per distinct character reduces the sortable collection from <code>N</code> entries to <code>U</code> entries.</p><h5>4. Is stable sorting required for correctness?</h5><h5>No. Equal-frequency blocks may appear in any order.</h5><p>Stable sorting provides deterministic tie handling by preserving first-appearance order. A separate tie-breaker can provide another valid deterministic order.</p><h5>5. Why are <code>N + 1</code> buckets required?</h5><p>A character can appear as many as <code>N</code> times. Bucket index <code>N</code> must therefore exist.</p><p>Bucket index <code>0</code> remains unused because no stored distinct character has zero frequency.</p><h5>6. Why is every distinct character stored only once inside a bucket?</h5><p>The bucket index already represents the complete frequency. Storing a character once avoids duplicating all output copies before result construction.</p><h5>7. Can a priority queue solve the problem?</h5><p>Yes. A max heap can store distinct character-frequency pairs.</p><p>The resulting time complexity becomes <code>O(N + U log U)</code>, and auxiliary space becomes <code>O(U)</code> excluding the returned string.</p><h5>8. Can a fixed frequency array replace the Hash Map?</h5><p>Yes, when the character set is bounded and known in advance.</p><p>For example, an ASCII-only input can use a fixed-size frequency array. A Hash Map keeps the solution suitable for a broader character set.</p><h5>9. Does Hash Map access always take <code>O(1)</code> time?</h5><p>Hash Map insertion and lookup take <code>O(1)</code> average time. Severe hash collisions can produce slower worst-case behaviour.</p></div>
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

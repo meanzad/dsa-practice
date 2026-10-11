@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Trapping Rainwater</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Trapping Rainwater</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/trapping-rainwater/</code></div>
+  <p><strong>Problem Statement: </strong> Given an array of non-negative integers representation elevation of ground. Your task is to find the water that can be trapped after rain .</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p>
+<strong>Input :</strong> height = [0,1,0,2,1,0,1,3,2,1,2,1]
+<strong>Output :</strong> 6
+<strong>Explanation :</strong> Water is trapped in the dips between bars. The total trapped water units add up to 6 (1+1+2+1+1).<br/>
+<strong>Input :</strong> height = [4,2,0,3,2,5]
+<strong>Output :</strong> 9
+<strong>Explanation :</strong> The elevation map traps 9 units of water in total, as water fills the spaces between higher bars on both sides.</p></pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Don’t jump directly to the solution, try it out yourself first. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Brute Force Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+To find how much water can be trapped on top of each bar, you need to know the highest bar on the left and the highest bar on the right of that position. The water trapped depends on the smaller of these two heights minus the height of the current bar. If the current bar is taller than both sides, no water can be trapped there. This needs to be done for every bar in the array.
+
+
+<ul> <li>For each bar in the array, find the maximum height bar on its left.</li> <li>Find the maximum height bar on its right.</li> <li>Calculate the trapped water on the current bar as min(maxLeft, maxRight) - current height.</li> <li>Sum all trapped water from each bar to get the total amount of trapped water.</li> </ul>
+</div>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/2ebba2a65b2aa9e2.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/8e57269649b17f77.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/a064c60317fbcd45.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/c780ee7ba567f5be.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/10dbc76861643685.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/91ecaf4ce4051d36.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/2ebba2a65b2aa9e2.png"/><img alt="Image 2" loading="lazy" src="../assets/img/8e57269649b17f77.png"/><img alt="Image 3" loading="lazy" src="../assets/img/a064c60317fbcd45.png"/><img alt="Image 4" loading="lazy" src="../assets/img/c780ee7ba567f5be.png"/><img alt="Image 5" loading="lazy" src="../assets/img/10dbc76861643685.png"/><img alt="Image 6" loading="lazy" src="../assets/img/91ecaf4ce4051d36.png"/></div></div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to calculate trapped rainwater using brute force approach
+    int trap(vector&lt;int&gt;&amp; height) {
+        int n = height.size();
+        
+        // Variable to store total trapped water
+        int totalWater = 0;
+        
+        // Iterate over each bar in the elevation map
+        for (int i = 0; i &lt; n; i++) {
+            // Initialize max heights to the left and right of current bar
+            int maxLeft = 0;
+            int maxRight = 0;
+            
+            // Find maximum height to the left of current bar
+            for (int j = 0; j &lt;= i; j++) {
+                if (height[j] &gt; maxLeft) {
+                    maxLeft = height[j];
+                }
+            }
+            
+            // Find maximum height to the right of current bar
+            for (int j = i; j &lt; n; j++) {
+                if (height[j] &gt; maxRight) {
+                    maxRight = height[j];
+                }
+            }
+            
+            // Water trapped on current bar is min of maxLeft and maxRight minus current height
+            totalWater += min(maxLeft, maxRight) - height[i];
+        }
+        
+        // Return total trapped water
+        return totalWater;
+    }
+};
+
+// Driver code
+int main() {
+    // Input elevation map
+    vector&lt;int&gt; height = {0,1,0,2,1,0,1,3,2,1,2,1};
+    
+    // Create Solution object
+    Solution sol;
+    
+    // Calculate trapped water
+    int result = sol.trap(height);
+    
+    // Print the result
+    cout &lt;&lt; "Trapped Rainwater: " &lt;&lt; result &lt;&lt; endl;
+    
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to calculate trapped rainwater using brute force approach
+    public int trap(int[] height) {
+        int n = height.length;
+        
+        // Variable to store total trapped water
+        int totalWater = 0;
+        
+        // Iterate over each bar in the elevation map
+        for (int i = 0; i &lt; n; i++) {
+            // Initialize max heights to the left and right of current bar
+            int maxLeft = 0;
+            int maxRight = 0;
+            
+            // Find maximum height to the left of current bar
+            for (int j = 0; j &lt;= i; j++) {
+                if (height[j] &gt; maxLeft) {
+                    maxLeft = height[j];
+                }
+            }
+            
+            // Find maximum height to the right of current bar
+            for (int j = i; j &lt; n; j++) {
+                if (height[j] &gt; maxRight) {
+                    maxRight = height[j];
+                }
+            }
+            
+            // Water trapped on current bar is min of maxLeft and maxRight minus current height
+            totalWater += Math.min(maxLeft, maxRight) - height[i];
+        }
+        
+        // Return total trapped water
+        return totalWater;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Input elevation map
+        int[] height = {0,1,0,2,1,0,1,3,2,1,2,1};
+        
+        // Create Solution object
+        Solution sol = new Solution();
+        
+        // Calculate trapped water
+        int result = sol.trap(height);
+        
+        // Print the result
+        System.out.println("Trapped Rainwater: " + result);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to calculate trapped rainwater using brute force approach
+    def trap(self, height):
+        n = len(height)
+        
+        # Variable to store total trapped water
+        total_water = 0
+        
+        # Iterate over each bar in the elevation map
+        for i in range(n):
+            # Initialize max heights to the left and right of current bar
+            max_left = 0
+            max_right = 0
+            
+            # Find maximum height to the left of current bar
+            for j in range(i + 1):
+                if height[j] &gt; max_left:
+                    max_left = height[j]
+            
+            # Find maximum height to the right of current bar
+            for j in range(i, n):
+                if height[j] &gt; max_right:
+                    max_right = height[j]
+            
+            # Water trapped on current bar is min of max_left and max_right minus current height
+            total_water += min(max_left, max_right) - height[i]
+        
+        # Return total trapped water
+        return total_water
+
+# Driver code
+if __name__ == "__main__":
+    # Input elevation map
+    height = [0,1,0,2,1,0,1,3,2,1,2,1]
+    
+    # Create Solution object
+    sol = Solution()
+    
+    # Calculate trapped water
+    result = sol.trap(height)
+    
+    # Print the result
+    print("Trapped Rainwater:", result)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to calculate trapped rainwater using brute force approach
+    trap(height) {
+        const n = height.length;
+        
+        // Variable to store total trapped water
+        let totalWater = 0;
+        
+        // Iterate over each bar in the elevation map
+        for (let i = 0; i &lt; n; i++) {
+            // Initialize max heights to the left and right of current bar
+            let maxLeft = 0;
+            let maxRight = 0;
+            
+            // Find maximum height to the left of current bar
+            for (let j = 0; j &lt;= i; j++) {
+                if (height[j] &gt; maxLeft) {
+                    maxLeft = height[j];
+                }
+            }
+            
+            // Find maximum height to the right of current bar
+            for (let j = i; j &lt; n; j++) {
+                if (height[j] &gt; maxRight) {
+                    maxRight = height[j];
+                }
+            }
+            
+            // Water trapped on current bar is min of maxLeft and maxRight minus current height
+            totalWater += Math.min(maxLeft, maxRight) - height[i];
+        }
+        
+        // Return total trapped water
+        return totalWater;
+    }
+}
+
+// Driver code
+const height = [0,1,0,2,1,0,1,3,2,1,2,1];
+
+// Create Solution object
+const sol = new Solution();
+
+// Calculate trapped water
+const result = sol.trap(height);
+
+// Print the result
+console.log("Trapped Rainwater:", result);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O(n²) because for each bar, we scan all bars to its left and right to find the maximum height, resulting in nested loops.</p> <p><strong>Space Complexity:</strong> O(1) as no additional data structures are used proportional to input size, only variables to track max heights and total water.</p>
+</details>
+</div>
+</details>
+
+</div>
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+The optimal approach uses two pointers to efficiently calculate the trapped water without extra space for arrays. The key insight is that the amount of water trapped at any position depends on the tallest bars to the left and right of that position. By maintaining two pointers starting from both ends of the elevation array and tracking the maximum heights encountered so far from both sides, we can determine the trapped water at each step. If the left height is smaller or equal to the right height, the trapped water depends on the left side's maximum; otherwise, it depends on the right side's maximum. This two-pointer technique lets us compute trapped water in one pass while using constant extra space.
+
+
+
+<ul> <li>Initialize two pointers: one at the start (left) and one at the end (right) of the array.</li> <li>Initialize two variables to track the maximum height encountered so far from the left (maxLeft) and from the right (maxRight).</li> <li>Initialize a variable to store the total trapped water (totalWater).</li> <li>While the left pointer is less than or equal to the right pointer:</li> <ul> <li>If the height at the left pointer is less than or equal to the height at the right pointer:</li> <ul> <li>If the height at left is greater than or equal to maxLeft, update maxLeft.</li> <li>Else, add the difference between maxLeft and the current height at left to totalWater.</li> <li>Move the left pointer one step right.</li> </ul> <li>Otherwise (height at right is smaller):</li> <ul> <li>If the height at right is greater than or equal to maxRight, update maxRight.</li> <li>Else, add the difference between maxRight and the current height at right to totalWater.</li> <li>Move the right pointer one step left.</li> </ul> </ul> <li>Return totalWater as the total trapped rainwater.</li> </ul>
+</div>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/6ab73a0e66ad6e60.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/4c9443e04f2e7848.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/cbd4f17738a3ef5f.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/e45bb22a8cd33536.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/72f84c277462243c.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/de8e01a4674e4935.png"/></div><div class="carousel-image"><img alt="Image 7" loading="lazy" src="../assets/img/407ba23004b821d7.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/6ab73a0e66ad6e60.png"/><img alt="Image 2" loading="lazy" src="../assets/img/4c9443e04f2e7848.png"/><img alt="Image 3" loading="lazy" src="../assets/img/cbd4f17738a3ef5f.png"/><img alt="Image 4" loading="lazy" src="../assets/img/e45bb22a8cd33536.png"/><img alt="Image 5" loading="lazy" src="../assets/img/72f84c277462243c.png"/><img alt="Image 6" loading="lazy" src="../assets/img/de8e01a4674e4935.png"/><img alt="Image 7" loading="lazy" src="../assets/img/407ba23004b821d7.png"/></div></div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to calculate trapped rainwater using the optimal two-pointer approach
+    int trap(vector&lt;int&gt;&amp; height) {
+        int n = height.size();
+        
+        // Initialize two pointers at both ends of the array
+        int left = 0;
+        int right = n - 1;
+        
+        // Variables to track the maximum height to the left and right
+        int maxLeft = 0;
+        int maxRight = 0;
+        
+        // Variable to store total trapped water
+        int totalWater = 0;
+        
+        // Iterate until left pointer meets right pointer
+        while (left &lt;= right) {
+            // If left bar is smaller or equal to right bar
+            if (height[left] &lt;= height[right]) {
+                // If current left bar is higher than maxLeft, update maxLeft
+                if (height[left] &gt;= maxLeft) {
+                    maxLeft = height[left];
+                } else {
+                    // Water trapped on left is difference between maxLeft and current height
+                    totalWater += maxLeft - height[left];
+                }
+                left++; // Move left pointer to the right
+            } else {
+                // If current right bar is higher than maxRight, update maxRight
+                if (height[right] &gt;= maxRight) {
+                    maxRight = height[right];
+                } else {
+                    // Water trapped on right is difference between maxRight and current height
+                    totalWater += maxRight - height[right];
+                }
+                right--; // Move right pointer to the left
+            }
+        }
+        
+        // Return total trapped water
+        return totalWater;
+    }
+};
+
+// Driver code
+int main() {
+    // Input elevation map
+    vector&lt;int&gt; height = {0,1,0,2,1,0,1,3,2,1,2,1};
+    
+    // Create Solution object
+    Solution sol;
+    
+    // Calculate trapped water
+    int result = sol.trap(height);
+    
+    // Print the result
+    cout &lt;&lt; "Trapped Rainwater: " &lt;&lt; result &lt;&lt; endl;
+    
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to calculate trapped rainwater using the optimal two-pointer approach
+    public int trap(int[] height) {
+        int n = height.length;
+        
+        // Initialize two pointers at both ends of the array
+        int left = 0;
+        int right = n - 1;
+        
+        // Variables to track the maximum height to the left and right
+        int maxLeft = 0;
+        int maxRight = 0;
+        
+        // Variable to store total trapped water
+        int totalWater = 0;
+        
+        // Iterate until left pointer meets right pointer
+        while (left &lt;= right) {
+            // If left bar is smaller or equal to right bar
+            if (height[left] &lt;= height[right]) {
+                // If current left bar is higher than maxLeft, update maxLeft
+                if (height[left] &gt;= maxLeft) {
+                    maxLeft = height[left];
+                } else {
+                    // Water trapped on left is difference between maxLeft and current height
+                    totalWater += maxLeft - height[left];
+                }
+                left++; // Move left pointer to the right
+            } else {
+                // If current right bar is higher than maxRight, update maxRight
+                if (height[right] &gt;= maxRight) {
+                    maxRight = height[right];
+                } else {
+                    // Water trapped on right is difference between maxRight and current height
+                    totalWater += maxRight - height[right];
+                }
+                right--; // Move right pointer to the left
+            }
+        }
+        
+        // Return total trapped water
+        return totalWater;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Input elevation map
+        int[] height = {0,1,0,2,1,0,1,3,2,1,2,1};
+        
+        // Create Solution object
+        Solution sol = new Solution();
+        
+        // Calculate trapped water
+        int result = sol.trap(height);
+        
+        // Print the result
+        System.out.println("Trapped Rainwater: " + result);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to calculate trapped rainwater using the optimal two-pointer approach
+    def trap(self, height):
+        n = len(height)
+        
+        # Initialize two pointers at both ends of the list
+        left, right = 0, n - 1
+        
+        # Variables to track the maximum height to the left and right
+        max_left = 0
+        max_right = 0
+        
+        # Variable to store total trapped water
+        total_water = 0
+        
+        # Iterate until left pointer meets right pointer
+        while left &lt;= right:
+            # If left bar is smaller or equal to right bar
+            if height[left] &lt;= height[right]:
+                # If current left bar is higher than max_left, update max_left
+                if height[left] &gt;= max_left:
+                    max_left = height[left]
+                else:
+                    # Water trapped on left is difference between max_left and current height
+                    total_water += max_left - height[left]
+                left += 1  # Move left pointer to the right
+            else:
+                # If current right bar is higher than max_right, update max_right
+                if height[right] &gt;= max_right:
+                    max_right = height[right]
+                else:
+                    # Water trapped on right is difference between max_right and current height
+                    total_water += max_right - height[right]
+                right -= 1  # Move right pointer to the left
+        
+        # Return total trapped water
+        return total_water
+
+# Driver code
+if __name__ == "__main__":
+    # Input elevation map
+    height = [0,1,0,2,1,0,1,3,2,1,2,1]
+    
+    # Create Solution object
+    sol = Solution()
+    
+    # Calculate trapped water
+    result = sol.trap(height)
+    
+    # Print the result
+    print("Trapped Rainwater:", result)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to calculate trapped rainwater using the optimal two-pointer approach
+    trap(height) {
+        const n = height.length;
+        
+        // Initialize two pointers at both ends of the array
+        let left = 0;
+        let right = n - 1;
+        
+        // Variables to track the maximum height to the left and right
+        let maxLeft = 0;
+        let maxRight = 0;
+        
+        // Variable to store total trapped water
+        let totalWater = 0;
+        
+        // Iterate until left pointer meets right pointer
+        while (left &lt;= right) {
+            // If left bar is smaller or equal to right bar
+            if (height[left] &lt;= height[right]) {
+                // If current left bar is higher than maxLeft, update maxLeft
+                if (height[left] &gt;= maxLeft) {
+                    maxLeft = height[left];
+                } else {
+                    // Water trapped on left is difference between maxLeft and current height
+                    totalWater += maxLeft - height[left];
+                }
+                left++; // Move left pointer to the right
+            } else {
+                // If current right bar is higher than maxRight, update maxRight
+                if (height[right] &gt;= maxRight) {
+                    maxRight = height[right];
+                } else {
+                    // Water trapped on right is difference between maxRight and current height
+                    totalWater += maxRight - height[right];
+                }
+                right--; // Move right pointer to the left
+            }
+        }
+        
+        // Return total trapped water
+        return totalWater;
+    }
+}
+
+// Driver code
+const height = [0,1,0,2,1,0,1,3,2,1,2,1];
+
+// Create Solution object
+const sol = new Solution();
+
+// Calculate trapped water
+const result = sol.trap(height);
+
+// Print the result
+console.log("Trapped Rainwater:", result);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O(n) because the two pointers traverse the array only once, each pointer moving inward and covering the entire array in total linear time.</p> <p><strong>Space Complexity:</strong> O(1) as only constant extra space is used for pointers and variables, regardless of input size.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

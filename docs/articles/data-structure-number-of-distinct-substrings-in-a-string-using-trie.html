@@ -1,0 +1,888 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Number of Distinct Substrings in a String Using Trie</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Number of Distinct Substrings in a String Using Trie</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/number-of-distinct-substrings-in-a-string-using-trie/</code></div>
+  <p><strong>Problem Description: </strong>Implement a program that takes a string 'S' as input and returns the number of distinct substrings of the given string, including the empty substring. Use a trie data structure to accomplish this.<br/><br/>
+<strong>Note:</strong><br/> 1. A string ‘B’ is considered a substring of a string ‘A’ if ‘B’ can be obtained by deleting zero or more characters from the start and end of ‘A’. <br/>
+2. Two strings ‘X’ and ‘Y’ are considered different if either their length is different or there is at least one index ‘i’ such that the character of ‘X’ at index ‘i’ is different from the character of ‘Y’ at index ‘i’ (i.e., X[i] != Y[i]).
+</p>
+
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: s = "aba"</span>
+<span>Output: 6</span>
+<span>Explanation: The distinct substrings are "a", "ab", "ba", "b", "aba", "".</span>
+<p></p>
+<span>Input: s = "abc"</span>
+<span>Output: 7</span>
+<span>Explanation: The distinct substrings are "a", "ab", "abc", "b", "bc", "c", "".</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/number-of-distinct-substrings-in-a-string" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better.
+            It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                  Brute-Force Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+To find all the distinct substrings of a given string we iterate through the string and construct substrings starting from each character. Add each substring created to a set to only store the unique substrings.
+<ul>
+<li>Initialise an empty set to store distinct substrings.</li>
+<li>Iterate through each character of the string. Start from the first character and iterate through each subsequent character.</li>
+<li>For each starting character, construct all possible starting from that character using nested loops.</li>
+<li>The outer loop iterates over each character, acting as the starting point of the substring. The inner loop iterates over the subsequent characters to construct the substring.</li>
+<li>Add each constructed substring to the set. Return the set containing all distinct substrings of the given string.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Solution class to find all distinct substrings of a string
+class Solution {
+public:
+    // Function to count all distinct
+    // substrings of a given string
+    set&lt;string&gt; countDistinctSubstrings(const string&amp; s) {
+        // Set to store
+        // distinct substrings
+        set&lt;string&gt; st;
+
+        // Length of the
+        // input string
+        int n = s.length();
+
+        // Iterate over each
+        // character in the string
+        for (int i = 0; i &lt; n; i++) {
+            // Initialize an empty string
+            // to store the current substring
+            string str = "";
+
+            // Iterate over the remaining characters 
+            // in the string starting from index i
+            for (int j = i; j &lt; n; j++) {
+                // Append the current
+                // character to the substring
+                str += s[j];
+
+                // Insert the current
+                // substring into the set
+                st.insert(str);
+            }
+        }
+
+        // Return the set containing
+        // all distinct substrings
+        return st;
+    }
+};
+
+int main() {
+    string s = "striver";
+    cout &lt;&lt; "Given String: " &lt;&lt; s &lt;&lt; endl;
+
+    Solution sol;
+
+    // Call the function to
+    // count distinct substrings
+    set&lt;string&gt; substrings = sol.countDistinctSubstrings(s);
+
+    int count = 0;
+
+    // Print the distinct substrings
+    cout &lt;&lt; "Distinct Substrings:" &lt;&lt; endl;
+    for (const auto&amp; substr : substrings) {
+        cout &lt;&lt; substr &lt;&lt; endl;
+        count++;
+    }
+
+    // Count + 1 as we have to count
+    // the empty string as well
+    cout &lt;&lt; "Number of distinct substrings: " &lt;&lt; count + 1 &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Solution class to find all distinct substrings of a string
+class Solution {
+    // Function to count all distinct
+    // substrings of a given string
+    public Set&lt;String&gt; countDistinctSubstrings(String s) {
+        // Set to store
+        // distinct substrings
+        Set&lt;String&gt; st = new HashSet&lt;&gt;();
+
+        // Length of the
+        // input string
+        int n = s.length();
+
+        // Iterate over each
+        // character in the string
+        for (int i = 0; i &lt; n; i++) {
+            // Initialize an empty string
+            // to store the current substring
+            StringBuilder str = new StringBuilder();
+
+            // Iterate over the remaining characters 
+            // in the string starting from index i
+            for (int j = i; j &lt; n; j++) {
+                // Append the current
+                // character to the substring
+                str.append(s.charAt(j));
+
+                // Insert the current
+                // substring into the set
+                st.add(str.toString());
+            }
+        }
+
+        // Return the set containing
+        // all distinct substrings
+        return st;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        String s = "striver";
+        System.out.println("Given String: " + s);
+
+        Solution sol = new Solution();
+
+        // Call the function to
+        // count distinct substrings
+        Set&lt;String&gt; substrings = sol.countDistinctSubstrings(s);
+
+        int count = 0;
+
+        // Print the distinct substrings
+        System.out.println("Distinct Substrings:");
+        for (String substr : substrings) {
+            System.out.println(substr);
+            count++;
+        }
+
+        // Count + 1 as we have to count
+        // the empty string as well
+        System.out.println("Number of distinct substrings: " + (count + 1));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Solution class to find all distinct substrings of a string
+class Solution:
+    # Function to count all distinct
+    # substrings of a given string
+    def countDistinctSubstrings(self, s: str) -&gt; set:
+        # Set to store
+        # distinct substrings
+        st = set()
+
+        # Length of the
+        # input string
+        n = len(s)
+
+        # Iterate over each
+        # character in the string
+        for i in range(n):
+            # Initialize an empty string
+            # to store the current substring
+            str_ = ""
+
+            # Iterate over the remaining characters 
+            # in the string starting from index i
+            for j in range(i, n):
+                # Append the current
+                # character to the substring
+                str_ += s[j]
+
+                # Insert the current
+                # substring into the set
+                st.add(str_)
+
+        # Return the set containing
+        # all distinct substrings
+        return st
+
+if __name__ == "__main__":
+    s = "striver"
+    print("Given String:", s)
+
+    sol = Solution()
+
+    # Call the function to
+    # count distinct substrings
+    substrings = sol.countDistinctSubstrings(s)
+
+    count = 0
+
+    # Print the distinct substrings
+    print("Distinct Substrings:")
+    for substr in substrings:
+        print(substr)
+        count += 1
+
+    # Count + 1 as we have to count
+    # the empty string as well
+    print("Number of distinct substrings:", count + 1)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Solution class to find all distinct substrings of a string
+class Solution {
+    // Function to count all distinct
+    // substrings of a given string
+    countDistinctSubstrings(s) {
+        // Set to store
+        // distinct substrings
+        const st = new Set();
+
+        // Length of the
+        // input string
+        const n = s.length;
+
+        // Iterate over each
+        // character in the string
+        for (let i = 0; i &lt; n; i++) {
+            // Initialize an empty string
+            // to store the current substring
+            let str = "";
+
+            // Iterate over the remaining characters 
+            // in the string starting from index i
+            for (let j = i; j &lt; n; j++) {
+                // Append the current
+                // character to the substring
+                str += s[j];
+
+                // Insert the current
+                // substring into the set
+                st.add(str);
+            }
+        }
+
+        // Return the set containing
+        // all distinct substrings
+        return st;
+    }
+}
+
+// Driver code
+const s = "striver";
+console.log("Given String:", s);
+
+const sol = new Solution();
+
+// Call the function to
+// count distinct substrings
+const substrings = sol.countDistinctSubstrings(s);
+
+let count = 0;
+
+// Print the distinct substrings
+console.log("Distinct Substrings:");
+for (const substr of substrings) {
+    console.log(substr);
+    count++;
+}
+
+// Count + 1 as we have to count
+// the empty string as well
+console.log("Number of distinct substrings:", count + 1);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N*N).</strong>, we generate all possible substrings starting from all possible indices. <br/>
+<strong>Space Complexity: O(N*N)</strong>, maximum number of substrings that the set can hold.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                  Optimal Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+Instead of using the nested loops for the previous approach, using a Trie data structure significantly reduces the number of comparisons needed as we traverse the substring, resulting in better performance.<br/><br/>
+The Trie also uses memory efficiently by storing only the necessary information and avoids redundancy by sharing common prefixes among substrings for better space utilisation especially for long strings with many repeated substrings. Read more about the Implementation of a Trie here:<a href="https://takeuforward.org/data-structure/implement-trie-1/" rel="noopener" target="_blank"> Implement Trie | Search | Insert | Startswith</a>
+<ul>
+<li>Initialise a root node for the Trie. Iterate through the input string and for each character: Traverse the trie, creating new nodes as necessary to represent the substrings formed by the characters seen so far.</li>
+
+<li>Initialise a counter to keep track of the number of the number of distinct substrings.</li>
+<li>Iterate through all possible starting positions ‘i’ of the substring. Start from the ‘root’ node for each substring. For each character at index ‘j’ in the substring starting from position ‘i’:
+    <ul>
+<li>Check if the current node has a child node corresponding to the character at index j.</li>
+<li>If not, insert a new child node for character at index j and increment the counter since a new substring is found.</li>
+<li>Move to the child node corresponding to the character at index i.</li>
+</ul>
+</li>
+<li>Repeat this process for all substrings starting from position ‘i’.</li>
+
+<li>Return the total count of distinct substrings + 1 added to account for the input string itself.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/44abcd14323df6cb.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/e10467ef7b8b648f.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/44abcd14323df6cb.png"/><img alt="Image 2" loading="lazy" src="../assets/img/e10467ef7b8b648f.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;  
+using namespace std;  
+
+// Node structure representing
+// each node in the trie
+struct Node {
+    Node* links[26];  
+    // Array of pointers to child nodes,
+    // each corresponding to a letter
+    // of the alphabet
+    bool flag = false;  
+    // Flag indicating if the current
+    // node represents the end of a substring
+
+    // Method to check if a specific character key
+    // exists in the children of the current node
+    bool containsKey(char ch) {  
+        // Check if the current node has a child node
+        // corresponding to character 'ch'
+        return (links[ch - 'a'] != NULL);
+    }
+
+    // Method to get the child node corresponding
+    // to a specific character key
+    Node* get(char ch) {  
+        // Get the child node
+        // corresponding to character 'ch'
+        return links[ch - 'a'];
+    }
+
+    // Method to insert a new child
+    // node with a specific character key
+    void put(char ch, Node* node) {  
+        // Insert a new child
+        // node for character 'ch'
+        links[ch - 'a'] = node;
+    }
+
+    // Method to mark the current
+    // node as the end of a substring
+    void setEnd() {  
+        // Mark the current node
+        // as the end of a substring
+        flag = true;
+    }
+
+    // Method to check if the current
+    // node marks the end of a substring
+    bool isEnd() {  
+        // Check if the current node
+        // marks the end of a substring
+        return flag;
+    }
+};
+
+// Solution class to count distinct substrings using Trie
+class Solution {
+public:
+    // Function to count the number of
+    // distinct substrings in the given string
+    int countDistinctSubstrings(string &amp;s) {  
+        // Function to count distinct
+        // substrings in the input string 's'
+        Node* root = new Node();  
+        // Creating the root
+        // node of the trie
+        int cnt = 0;  
+        // Counter to keep track
+        // of distinct substrings
+        int n = s.size();  
+        // Length of the input string
+
+        // Nested loops to iterate through all
+        // possible substrings of the input string
+        for (int i = 0; i &lt; n; i++) {  
+            // Iterate through each
+            // starting position of the substring
+            Node* node = root;  
+            // Start from the root for each substring
+            for (int j = i; j &lt; n; j++) {  
+                // Iterate through each character of the substring
+                // If the current character is not a child
+                // of the current node, insert it as a new child node
+                if (!node-&gt;containsKey(s[j])) {
+                    node-&gt;put(s[j], new Node());  
+                    // Insert a new child
+                    // node for character s[j]
+                    cnt++;  
+                    // Increment the counter
+                    // since a new substring is found
+                }
+                node = node-&gt;get(s[j]);  
+                // Move to the child node
+                // corresponding to character s[j]
+            }
+        }
+         // Return the total count of distinct substrings
+         // (+1 to account for the input string itself)
+        return cnt + 1;  
+    }
+};
+
+int main() {  
+    // Main function to test the
+    // countDistinctSubstrings function
+    string s = "striver";  
+    cout &lt;&lt; "Current String: " &lt;&lt; s &lt;&lt; endl;
+    Solution sol;
+    // Input string
+    cout &lt;&lt; "Number of distinct substrings: " &lt;&lt; sol.countDistinctSubstrings(s) &lt;&lt; endl;  
+    return 0;  
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Node class representing
+// each node in the trie
+class Node {
+    Node[] links = new Node[26];
+    // Array of pointers to child nodes,
+    // each corresponding to a letter
+    // of the alphabet
+    boolean flag = false;
+    // Flag indicating if the current
+    // node represents the end of a substring
+
+    // Method to check if a specific character key
+    // exists in the children of the current node
+    public boolean containsKey(char ch) {
+        // Check if the current node has a child node
+        // corresponding to character 'ch'
+        return links[ch - 'a'] != null;
+    }
+
+    // Method to get the child node corresponding
+    // to a specific character key
+    public Node get(char ch) {
+        // Get the child node
+        // corresponding to character 'ch'
+        return links[ch - 'a'];
+    }
+
+    // Method to insert a new child
+    // node with a specific character key
+    public void put(char ch, Node node) {
+        // Insert a new child
+        // node for character 'ch'
+        links[ch - 'a'] = node;
+    }
+
+    // Method to mark the current
+    // node as the end of a substring
+    public void setEnd() {
+        // Mark the current node
+        // as the end of a substring
+        flag = true;
+    }
+
+    // Method to check if the current
+    // node marks the end of a substring
+    public boolean isEnd() {
+        // Check if the current node
+        // marks the end of a substring
+        return flag;
+    }
+}
+
+// Solution class to count distinct substrings using Trie
+class Solution {
+    // Function to count the number of
+    // distinct substrings in the given string
+    public int countDistinctSubstrings(String s) {
+        // Function to count distinct
+        // substrings in the input string 's'
+        Node root = new Node();
+        // Creating the root
+        // node of the trie
+        int cnt = 0;
+        // Counter to keep track
+        // of distinct substrings
+        int n = s.length();
+        // Length of the input string
+
+        // Nested loops to iterate through all
+        // possible substrings of the input string
+        for (int i = 0; i &lt; n; i++) {
+            // Iterate through each
+            // starting position of the substring
+            Node node = root;
+            // Start from the root for each substring
+            for (int j = i; j &lt; n; j++) {
+                // Iterate through each character of the substring
+                // If the current character is not a child
+                // of the current node, insert it as a new child node
+                if (!node.containsKey(s.charAt(j))) {
+                    node.put(s.charAt(j), new Node());
+                    // Insert a new child
+                    // node for character s[j]
+                    cnt++;
+                    // Increment the counter
+                    // since a new substring is found
+                }
+                node = node.get(s.charAt(j));
+                // Move to the child node
+                // corresponding to character s[j]
+            }
+        }
+        // Return the total count of distinct substrings
+        // (+1 to account for the input string itself)
+        return cnt + 1;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        String s = "striver";
+        System.out.println("Current String: " + s);
+
+        Solution sol = new Solution();
+        // Input string
+        System.out.println("Number of distinct substrings: " + sol.countDistinctSubstrings(s));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Node class representing
+# each node in the trie
+class Node:
+    def __init__(self):
+        self.links = [None] * 26
+        # Array of pointers to child nodes,
+        # each corresponding to a letter
+        # of the alphabet
+        self.flag = False
+        # Flag indicating if the current
+        # node represents the end of a substring
+
+    # Method to check if a specific character key
+    # exists in the children of the current node
+    def containsKey(self, ch):
+        # Check if the current node has a child node
+        # corresponding to character 'ch'
+        return self.links[ord(ch) - ord('a')] is not None
+
+    # Method to get the child node corresponding
+    # to a specific character key
+    def get(self, ch):
+        # Get the child node
+        # corresponding to character 'ch'
+        return self.links[ord(ch) - ord('a')]
+
+    # Method to insert a new child
+    # node with a specific character key
+    def put(self, ch, node):
+        # Insert a new child
+        # node for character 'ch'
+        self.links[ord(ch) - ord('a')] = node
+
+    # Method to mark the current
+    # node as the end of a substring
+    def setEnd(self):
+        # Mark the current node
+        # as the end of a substring
+        self.flag = True
+
+    # Method to check if the current
+    # node marks the end of a substring
+    def isEnd(self):
+        # Check if the current node
+        # marks the end of a substring
+        return self.flag
+
+# Solution class to count distinct substrings using Trie
+class Solution:
+    # Function to count the number of
+    # distinct substrings in the given string
+    def countDistinctSubstrings(self, s: str) -&gt; int:
+        # Function to count distinct
+        # substrings in the input string 's'
+        root = Node()
+        # Creating the root
+        # node of the trie
+        cnt = 0
+        # Counter to keep track
+        # of distinct substrings
+        n = len(s)
+        # Length of the input string
+
+        # Nested loops to iterate through all
+        # possible substrings of the input string
+        for i in range(n):
+            # Iterate through each
+            # starting position of the substring
+            node = root
+            # Start from the root for each substring
+            for j in range(i, n):
+                # Iterate through each character of the substring
+                # If the current character is not a child
+                # of the current node, insert it as a new child node
+                if not node.containsKey(s[j]):
+                    node.put(s[j], Node())
+                    # Insert a new child
+                    # node for character s[j]
+                    cnt += 1
+                    # Increment the counter
+                    # since a new substring is found
+                node = node.get(s[j])
+                # Move to the child node
+                # corresponding to character s[j]
+        # Return the total count of distinct substrings
+        # (+1 to account for the input string itself)
+        return cnt + 1
+
+if __name__ == "__main__":
+    s = "striver"
+    print("Current String:", s)
+
+    sol = Solution()
+    # Input string
+    print("Number of distinct substrings:", sol.countDistinctSubstrings(s))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Node class representing
+// each node in the trie
+class Node {
+    constructor() {
+        this.links = new Array(26).fill(null);
+        // Array of pointers to child nodes,
+        // each corresponding to a letter
+        // of the alphabet
+        this.flag = false;
+        // Flag indicating if the current
+        // node represents the end of a substring
+    }
+
+    // Method to check if a specific character key
+    // exists in the children of the current node
+    containsKey(ch) {
+        // Check if the current node has a child node
+        // corresponding to character 'ch'
+        return this.links[ch.charCodeAt(0) - 'a'.charCodeAt(0)] !== null;
+    }
+
+    // Method to get the child node corresponding
+    // to a specific character key
+    get(ch) {
+        // Get the child node
+        // corresponding to character 'ch'
+        return this.links[ch.charCodeAt(0) - 'a'.charCodeAt(0)];
+    }
+
+    // Method to insert a new child
+    // node with a specific character key
+    put(ch, node) {
+        // Insert a new child
+        // node for character 'ch'
+        this.links[ch.charCodeAt(0) - 'a'.charCodeAt(0)] = node;
+    }
+
+    // Method to mark the current
+    // node as the end of a substring
+    setEnd() {
+        // Mark the current node
+        // as the end of a substring
+        this.flag = true;
+    }
+
+    // Method to check if the current
+    // node marks the end of a substring
+    isEnd() {
+        // Check if the current node
+        // marks the end of a substring
+        return this.flag;
+    }
+}
+
+// Solution class to count distinct substrings using Trie
+class Solution {
+    // Function to count the number of
+    // distinct substrings in the given string
+    countDistinctSubstrings(s) {
+        // Function to count distinct
+        // substrings in the input string 's'
+        const root = new Node();
+        // Creating the root
+        // node of the trie
+        let cnt = 0;
+        // Counter to keep track
+        // of distinct substrings
+        const n = s.length;
+        // Length of the input string
+
+        // Nested loops to iterate through all
+        // possible substrings of the input string
+        for (let i = 0; i &lt; n; i++) {
+            // Iterate through each
+            // starting position of the substring
+            let node = root;
+            // Start from the root for each substring
+            for (let j = i; j &lt; n; j++) {
+                // Iterate through each character of the substring
+                // If the current character is not a child
+                // of the current node, insert it as a new child node
+                if (!node.containsKey(s[j])) {
+                    node.put(s[j], new Node());
+                    // Insert a new child
+                    // node for character s[j]
+                    cnt++;
+                    // Increment the counter
+                    // since a new substring is found
+                }
+                node = node.get(s[j]);
+                // Move to the child node
+                // corresponding to character s[j]
+            }
+        }
+        // Return the total count of distinct substrings
+        // (+1 to account for the input string itself)
+        return cnt + 1;
+    }
+}
+
+// Driver code
+const s = "striver";
+console.log("Current String:", s);
+
+const sol = new Solution();
+// Input string
+console.log("Number of distinct substrings:", sol.countDistinctSubstrings(s));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N^2)</strong>, We consider all substrings of a string with length n. For each substring, inserting characters into the Trie takes up to O(n) in the worst case.<br/>
+<strong>Space Complexity: O(N^2)</strong>, additional space used for storing total number of substring in the trie.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

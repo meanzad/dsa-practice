@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Flood Fill Algorithm</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Flood Fill Algorithm</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/blogs/data-structure-and-algorithm/flood-fill-algorithm</code></div>
+  <div class="ArticleParser-module__R__VNG__article" data-article-segment="html-0"><p>Given a 2D image represented by a matrix of integers, a starting cell <code>(sr, sc)</code> in the grid, and a new color, recolor the entire connected region containing the starting cell.</p><p>A cell belongs to the connected region if it has the <strong>same original color as the starting cell</strong> and can be reached from <code>(sr, sc)</code> by moving <strong>up, down, left, or right</strong>. Diagonal movement is not allowed.</p><p>Here, <code>sr</code> represents the starting row and <code>sc</code> represents the starting column of the cell in the grid.</p></div><div><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 1</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>image = [[1,1,1],[1,1,0],[1,0,1]], sr = 1, sc = 1, color = 2</code></p><p><strong>Output:</strong> <code>[[2,2,2],[2,2,0],[2,0,1]]</code></p><p><strong>Explanation:</strong> The starting cell has color <code>1</code>. All horizontally or vertically connected cells with color <code>1</code> are recolored to <code>2</code>.</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 2</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p><strong>Input:</strong> <code>image = [[0,0,0],[0,0,0]], sr = 0, sc = 0, color = 2</code></p><p><strong>Output:</strong> <code>[[2,2,2],[2,2,2]]</code></p><p><strong>Explanation:</strong> Every cell belongs to the same connected region, so every cell becomes <code>2</code>.</p></div></div></section></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-2"><h2 id="blog-toc-approach-1">Approach 1</h2><p>Depth First Search begins from the given cell and recursively explores adjacent cells in the four directions. A neighboring cell belongs to the connected region only when the cell lies within the matrix boundaries and contains the original color.</p><p>Recoloring a cell before visiting neighboring cells also marks the cell as processed. An early return when <code>oldColor == newColor</code> prevents repeated recursive visits because recoloring would otherwise produce no visible state change.</p><h3 id="blog-toc-algorithm">Algorithm</h3><ul><li><p>Store the color of the starting cell in <code>oldColor</code>, allowing every connected cell with the original color to be identified.</p></li><li><p>Compare <code>oldColor</code> with <code>newColor</code>. Equal values require no modification, so return the original image and avoid unnecessary recursive traversal.</p></li><li><p>Start DFS from the given row and column to explore the connected region containing the starting cell.</p></li><li><p>End the current DFS call when the row or column lies outside the matrix or when the current cell does not contain <code>oldColor</code>, since such a cell cannot belong to the required region.</p></li><li><p>Change the current cell to <code>newColor</code> before exploring adjacent cells. Early recoloring marks the cell as processed and prevents repeated visits.</p></li><li><p>Continue DFS in the upward, downward, left, and right directions to recolor every connected cell containing <code>oldColor</code>.</p></li><li><p>Return the modified image after the DFS traversal finishes.</p></li></ul><h3 id="blog-toc-dry-run">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="flood-fill-dfs-code-corrected" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/a9b8c73208bb688f.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">flood-fill-dfs-code-corrected</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-3"><h3 id="blog-toc-solution">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+private:
+    // Recolors all connected cells having the original color.
+    void dfs(int row, int col, vector&lt;vector&lt;int&gt;&gt;&amp; image, int oldColor, int newColor) {
+        int rows = image.size();
+        int cols = image[0].size();
+
+        // Base case: stop if the cell is outside the image.
+        if (row &lt; 0 || row &gt;= rows || col &lt; 0 || col &gt;= cols) {
+            return;
+        }
+
+        // Base case: stop if the cell does not have the old color.
+        if (image[row][col] != oldColor) {
+            return;
+        }
+
+        // Recolor the current cell.
+        image[row][col] = newColor;
+
+        // Move to the upper cell.
+        dfs(row - 1, col, image, oldColor, newColor);
+
+        // Move to the lower cell.
+        dfs(row + 1, col, image, oldColor, newColor);
+
+        // Move to the left cell.
+        dfs(row, col - 1, image, oldColor, newColor);
+
+        // Move to the right cell.
+        dfs(row, col + 1, image, oldColor, newColor);
+    }
+
+public:
+    // Applies flood fill starting from the given cell.
+    vector&lt;vector&lt;int&gt;&gt; floodFill(vector&lt;vector&lt;int&gt;&gt;&amp; image, int sr, int sc, int color) {
+        int oldColor = image[sr][sc];
+
+        // If the new color is the same, no change is needed.
+        if (oldColor == color) {
+            return image;
+        }
+
+        // Start DFS from the given cell.
+        dfs(sr, sc, image, oldColor, color);
+
+        // Return the updated image.
+        return image;
+    }
+};
+
+// Driver code.
+int main() {
+    vector&lt;vector&lt;int&gt;&gt; image = {
+        {1, 1, 1},
+        {1, 1, 0},
+        {1, 0, 1}
+    };
+
+    int sr = 1;
+    int sc = 1;
+    int color = 2;
+
+    Solution sol;
+
+    vector&lt;vector&lt;int&gt;&gt; result = sol.floodFill(image, sr, sc, color);
+
+    // Print the updated image.
+    for (vector&lt;int&gt;&amp; row : result) {
+        for (int value : row) {
+            cout &lt;&lt; value &lt;&lt; " ";
+        }
+
+        cout &lt;&lt; "\n";
+    }
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">from typing import List
+
+class Solution:
+    # Recolors all connected cells having the original color.
+    def dfs(self, row: int, col: int, image: List[List[int]], oldColor: int, newColor: int) -&gt; None:
+        rows = len(image)
+        cols = len(image[0])
+
+        # Base case: stop if the cell is outside the image.
+        if row &lt; 0 or row &gt;= rows or col &lt; 0 or col &gt;= cols:
+            return
+
+        # Base case: stop if the cell does not have the old color.
+        if image[row][col] != oldColor:
+            return
+
+        # Recolor the current cell.
+        image[row][col] = newColor
+
+        # Move to the upper cell.
+        self.dfs(row - 1, col, image, oldColor, newColor)
+
+        # Move to the lower cell.
+        self.dfs(row + 1, col, image, oldColor, newColor)
+
+        # Move to the left cell.
+        self.dfs(row, col - 1, image, oldColor, newColor)
+
+        # Move to the right cell.
+        self.dfs(row, col + 1, image, oldColor, newColor)
+
+    # Applies flood fill starting from the given cell.
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -&gt; List[List[int]]:
+        oldColor = image[sr][sc]
+
+        # If the new color is the same, no change is needed.
+        if oldColor == color:
+            return image
+
+        # Start DFS from the given cell.
+        self.dfs(sr, sc, image, oldColor, color)
+
+        # Return the updated image.
+        return image
+
+
+# Driver code.
+if __name__ == "__main__":
+    image = [
+        [1, 1, 1],
+        [1, 1, 0],
+        [1, 0, 1]
+    ]
+
+    sr = 1
+    sc = 1
+    color = 2
+
+    sol = Solution()
+
+    result = sol.floodFill(image, sr, sc, color)
+
+    # Print the updated image.
+    for row in result:
+        print(*row)</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Recolors all connected cells having the original color.
+    private void dfs(int row, int col, int[][] image, int oldColor, int newColor) {
+        int rows = image.length;
+        int cols = image[0].length;
+
+        // Base case: stop if the cell is outside the image.
+        if (row &lt; 0 || row &gt;= rows || col &lt; 0 || col &gt;= cols) {
+            return;
+        }
+
+        // Base case: stop if the cell does not have the old color.
+        if (image[row][col] != oldColor) {
+            return;
+        }
+
+        // Recolor the current cell.
+        image[row][col] = newColor;
+
+        // Move to the upper cell.
+        dfs(row - 1, col, image, oldColor, newColor);
+
+        // Move to the lower cell.
+        dfs(row + 1, col, image, oldColor, newColor);
+
+        // Move to the left cell.
+        dfs(row, col - 1, image, oldColor, newColor);
+
+        // Move to the right cell.
+        dfs(row, col + 1, image, oldColor, newColor);
+    }
+
+    // Applies flood fill starting from the given cell.
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+        int oldColor = image[sr][sc];
+
+        // If the new color is the same, no change is needed.
+        if (oldColor == color) {
+            return image;
+        }
+
+        // Start DFS from the given cell.
+        dfs(sr, sc, image, oldColor, color);
+
+        // Return the updated image.
+        return image;
+    }
+}
+
+class Main {
+    // Driver code.
+    public static void main(String[] args) {
+        int[][] image = {
+            {1, 1, 1},
+            {1, 1, 0},
+            {1, 0, 1}
+        };
+
+        int sr = 1;
+        int sc = 1;
+        int color = 2;
+
+        Solution sol = new Solution();
+
+        int[][] result = sol.floodFill(image, sr, sc, color);
+
+        // Print the updated image.
+        for (int[] row : result) {
+            for (int value : row) {
+                System.out.print(value + " ");
+            }
+
+            System.out.println();
+        }
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Recolors all connected cells having the original color.
+    dfs(row, col, image, oldColor, newColor) {
+        const rows = image.length;
+        const cols = image[0].length;
+
+        // Base case: stop if the cell is outside the image.
+        if (row &lt; 0 || row &gt;= rows || col &lt; 0 || col &gt;= cols) {
+            return;
+        }
+
+        // Base case: stop if the cell does not have the old color.
+        if (image[row][col] !== oldColor) {
+            return;
+        }
+
+        // Recolor the current cell.
+        image[row][col] = newColor;
+
+        // Move to the upper cell.
+        this.dfs(row - 1, col, image, oldColor, newColor);
+
+        // Move to the lower cell.
+        this.dfs(row + 1, col, image, oldColor, newColor);
+
+        // Move to the left cell.
+        this.dfs(row, col - 1, image, oldColor, newColor);
+
+        // Move to the right cell.
+        this.dfs(row, col + 1, image, oldColor, newColor);
+    }
+
+    // Applies flood fill starting from the given cell.
+    floodFill(image, sr, sc, color) {
+        const oldColor = image[sr][sc];
+
+        // If the new color is the same, no change is needed.
+        if (oldColor === color) {
+            return image;
+        }
+
+        // Start DFS from the given cell.
+        this.dfs(sr, sc, image, oldColor, color);
+
+        // Return the updated image.
+        return image;
+    }
+}
+
+// Driver code.
+const image = [
+    [1, 1, 1],
+    [1, 1, 0],
+    [1, 0, 1]
+];
+
+const sr = 1;
+const sc = 1;
+const color = 2;
+
+const sol = new Solution();
+
+const result = sol.floodFill(image, sr, sc, color);
+
+// Print the updated image.
+for (const row of result) {
+    console.log(row.join(" "));
+}</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-4"><h3 id="blog-toc-complexity-analysis">Complexity Analysis</h3></div><div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-5"><p><strong>Time Complexity:</strong> <code>O(R×C)</code>, where <code>R</code> and <code>C</code> are the numbers of rows and columns; every matrix cell is visited at most once.</p><p><strong>Space Complexity:</strong> <code>O(R×C)</code>, where the recursive DFS stack can contain up to <code>R×C</code> cells in the worst case.</p></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-6"><h2 id="blog-toc-approach-2">Approach 2</h2><p>Breadth First Search expands the connected region iteratively using a queue. The starting cell enters the queue first, followed by every valid neighboring cell containing the original color.</p><p>Recoloring each eligible cell before queue insertion prevents duplicate entries. An early return when <code>oldColor == newColor</code> avoids repeated processing when recoloring cannot mark cells as visited.</p><h3 id="blog-toc-algorithm-2">Algorithm</h3><ul><li><p>Store the color of the starting cell in <code>oldColor</code>, allowing connected cells belonging to the original region to be recognized.</p></li><li><p>Compare <code>oldColor</code> with <code>newColor</code>. Equal values require no modification, so return the original image and avoid unnecessary queue processing.</p></li><li><p>Recolor the starting cell and add the corresponding coordinates to a queue. Recoloring before insertion marks the cell as processed.</p></li><li><p>Continue processing while the queue contains cells, ensuring that the complete connected region is explored.</p></li><li><p>Remove the front cell and examine the neighboring cells in the upward, downward, left, and right directions.</p></li><li><p>For every in-bounds neighbor containing <code>oldColor</code>, change the color to <code>newColor</code> before adding the coordinates to the queue. Early recoloring prevents duplicate queue entries.</p></li><li><p>Return the modified image after the queue becomes empty.</p></li></ul><h3 id="blog-toc-dry-run-2">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="flood-fill-bfs-code-corrected" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/f0779a544aba2e5c.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">flood-fill-bfs-code-corrected</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-7"><h3 id="blog-toc-solution-2">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Applies flood fill starting from the given cell using BFS.
+    vector&lt;vector&lt;int&gt;&gt; floodFill(vector&lt;vector&lt;int&gt;&gt;&amp; image, int sr, int sc, int color) {
+        int rows = image.size();
+        int cols = image[0].size();
+        int oldColor = image[sr][sc];
+
+        // If the new color is the same, no change is needed.
+        if (oldColor == color) {
+            return image;
+        }
+
+        vector&lt;int&gt; deltaRow = {-1, 1, 0, 0};
+        vector&lt;int&gt; deltaCol = {0, 0, -1, 1};
+        queue&lt;pair&lt;int, int&gt;&gt; q;
+
+        // Recolor the starting cell.
+        image[sr][sc] = color;
+
+        // Push the starting cell into the queue.
+        q.push({sr, sc});
+
+        // Recolor all connected cells having the original color.
+        while (!q.empty()) {
+            pair&lt;int, int&gt; cell = q.front();
+            q.pop();
+
+            // Explore all four adjacent directions.
+            for (int dir = 0; dir &lt; 4; dir++) {
+                int nextRow = cell.first + deltaRow[dir];
+                int nextCol = cell.second + deltaCol[dir];
+
+                // Check if the next cell is inside the image.
+                if (nextRow &gt;= 0 &amp;&amp; nextRow &lt; rows &amp;&amp; nextCol &gt;= 0 &amp;&amp; nextCol &lt; cols) {
+                    // Recolor only cells that have the old color.
+                    if (image[nextRow][nextCol] == oldColor) {
+                        image[nextRow][nextCol] = color;
+                        q.push({nextRow, nextCol});
+                    }
+                }
+            }
+        }
+
+        // Return the updated image.
+        return image;
+    }
+};
+
+// Driver code.
+int main() {
+    vector&lt;vector&lt;int&gt;&gt; image = {
+        {0, 0, 0},
+        {0, 0, 0}
+    };
+
+    int sr = 0;
+    int sc = 0;
+    int color = 2;
+
+    Solution sol;
+
+    vector&lt;vector&lt;int&gt;&gt; result = sol.floodFill(image, sr, sc, color);
+
+    // Print the updated image.
+    for (vector&lt;int&gt;&amp; row : result) {
+        for (int value : row) {
+            cout &lt;&lt; value &lt;&lt; " ";
+        }
+
+        cout &lt;&lt; "\n";
+    }
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">from typing import List
+from collections import deque
+
+class Solution:
+    # Applies flood fill starting from the given cell using BFS.
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -&gt; List[List[int]]:
+        rows = len(image)
+        cols = len(image[0])
+        oldColor = image[sr][sc]
+
+        # If the new color is the same, no change is needed.
+        if oldColor == color:
+            return image
+
+        deltaRow = [-1, 1, 0, 0]
+        deltaCol = [0, 0, -1, 1]
+        q = deque()
+
+        # Recolor the starting cell.
+        image[sr][sc] = color
+
+        # Push the starting cell into the queue.
+        q.append((sr, sc))
+
+        # Recolor all connected cells having the original color.
+        while q:
+            row, col = q.popleft()
+
+            # Explore all four adjacent directions.
+            for direction in range(4):
+                nextRow = row + deltaRow[direction]
+                nextCol = col + deltaCol[direction]
+
+                # Check if the next cell is inside the image.
+                if 0 &lt;= nextRow &lt; rows and 0 &lt;= nextCol &lt; cols:
+                    # Recolor only cells that have the old color.
+                    if image[nextRow][nextCol] == oldColor:
+                        image[nextRow][nextCol] = color
+                        q.append((nextRow, nextCol))
+
+        # Return the updated image.
+        return image
+
+
+# Driver code.
+if __name__ == "__main__":
+    image = [
+        [0, 0, 0],
+        [0, 0, 0]
+    ]
+
+    sr = 0
+    sc = 0
+    color = 2
+
+    sol = Solution()
+
+    result = sol.floodFill(image, sr, sc, color)
+
+    # Print the updated image.
+    for row in result:
+        print(*row)</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Applies flood fill starting from the given cell using BFS.
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+        int rows = image.length;
+        int cols = image[0].length;
+        int oldColor = image[sr][sc];
+
+        // If the new color is the same, no change is needed.
+        if (oldColor == color) {
+            return image;
+        }
+
+        int[] deltaRow = {-1, 1, 0, 0};
+        int[] deltaCol = {0, 0, -1, 1};
+        Queue&lt;int[]&gt; q = new LinkedList&lt;&gt;();
+
+        // Recolor the starting cell.
+        image[sr][sc] = color;
+
+        // Push the starting cell into the queue.
+        q.offer(new int[]{sr, sc});
+
+        // Recolor all connected cells having the original color.
+        while (!q.isEmpty()) {
+            int[] cell = q.poll();
+
+            // Explore all four adjacent directions.
+            for (int dir = 0; dir &lt; 4; dir++) {
+                int nextRow = cell[0] + deltaRow[dir];
+                int nextCol = cell[1] + deltaCol[dir];
+
+                // Check if the next cell is inside the image.
+                if (nextRow &gt;= 0 &amp;&amp; nextRow &lt; rows &amp;&amp; nextCol &gt;= 0 &amp;&amp; nextCol &lt; cols) {
+                    // Recolor only cells that have the old color.
+                    if (image[nextRow][nextCol] == oldColor) {
+                        image[nextRow][nextCol] = color;
+                        q.offer(new int[]{nextRow, nextCol});
+                    }
+                }
+            }
+        }
+
+        // Return the updated image.
+        return image;
+    }
+}
+
+class Main {
+    // Driver code.
+    public static void main(String[] args) {
+        int[][] image = {
+            {0, 0, 0},
+            {0, 0, 0}
+        };
+
+        int sr = 0;
+        int sc = 0;
+        int color = 2;
+
+        Solution sol = new Solution();
+
+        int[][] result = sol.floodFill(image, sr, sc, color);
+
+        // Print the updated image.
+        for (int[] row : result) {
+            for (int value : row) {
+                System.out.print(value + " ");
+            }
+
+            System.out.println();
+        }
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Applies flood fill starting from the given cell using BFS.
+    floodFill(image, sr, sc, color) {
+        const rows = image.length;
+        const cols = image[0].length;
+        const oldColor = image[sr][sc];
+
+        // If the new color is the same, no change is needed.
+        if (oldColor === color) {
+            return image;
+        }
+
+        const deltaRow = [-1, 1, 0, 0];
+        const deltaCol = [0, 0, -1, 1];
+        const q = [];
+
+        // Recolor the starting cell.
+        image[sr][sc] = color;
+
+        // Push the starting cell into the queue.
+        q.push([sr, sc]);
+
+        let front = 0;
+
+        // Recolor all connected cells having the original color.
+        while (front &lt; q.length) {
+            const [row, col] = q[front];
+            front++;
+
+            // Explore all four adjacent directions.
+            for (let dir = 0; dir &lt; 4; dir++) {
+                const nextRow = row + deltaRow[dir];
+                const nextCol = col + deltaCol[dir];
+
+                // Check if the next cell is inside the image.
+                if (nextRow &gt;= 0 &amp;&amp; nextRow &lt; rows &amp;&amp; nextCol &gt;= 0 &amp;&amp; nextCol &lt; cols) {
+                    // Recolor only cells that have the old color.
+                    if (image[nextRow][nextCol] === oldColor) {
+                        image[nextRow][nextCol] = color;
+                        q.push([nextRow, nextCol]);
+                    }
+                }
+            }
+        }
+
+        // Return the updated image.
+        return image;
+    }
+}
+
+// Driver code.
+const image = [
+    [0, 0, 0],
+    [0, 0, 0]
+];
+
+const sr = 0;
+const sc = 0;
+const color = 2;
+
+const sol = new Solution();
+
+const result = sol.floodFill(image, sr, sc, color);
+
+// Print the updated image.
+for (const row of result) {
+    console.log(row.join(" "));
+}</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-8"><h3 id="blog-toc-complexity-analysis-2">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(R×C)</code>, where <code>R</code> and <code>C</code> are the numbers of rows and columns; every matrix cell enters the queue at most once.</p><p><strong>Space Complexity:</strong> <code>O(R×C)</code>, where the queue can store up to <code>R×C</code> cell coordinates in the worst case.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div><div><section aria-label="Interview follow-up Questions" class="BlogDetail-module__HEfJva__faqSection" id="blog-toc-faqs"><h2 class="BlogDetail-module__HEfJva__faqHeading">Interview follow-up Questions</h2><div class="flex w-full flex-col BlogDetail-module__HEfJva__faqList" data-orientation="vertical" data-slot="accordion"><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="open"><h3 class="flex" data-orientation="vertical" data-state="open"></h3><div aria-labelledby="radix-_R_1kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="open" id="radix-_R_9kcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"><div class="h-auto pt-0 pb-2.5 [&amp;_a]:underline [&amp;_a]:underline-offset-3 [&amp;_a]:hover:text-foreground [&amp;_p:not(:last-child)]:mb-4 BlogDetail-module__HEfJva__faqAnswer"><p>Standard flood fill uses horizontal and vertical movement only, unless a problem explicitly allows eight-direction movement.</p></div></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_2kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_akcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_3kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_bkcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div><div class="not-last:border-b BlogDetail-module__HEfJva__faqItem" data-orientation="vertical" data-slot="accordion-item" data-state="closed"><h3 class="flex" data-orientation="vertical" data-state="closed"></h3><div aria-labelledby="radix-_R_4kcqnpfiv5ubralpfijb_" class="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up" data-orientation="vertical" data-slot="accordion-content" data-state="closed" hidden="" id="radix-_R_ckcqnpfiv5ubralpfijb_" role="region" style="--radix-accordion-content-height:var(--radix-collapsible-content-height);--radix-accordion-content-width:var(--radix-collapsible-content-width)"></div></div></div></section></div>
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

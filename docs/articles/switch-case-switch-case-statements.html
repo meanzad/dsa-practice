@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Switch Case Statements</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Switch Case Statements</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/switch-case/switch-case-statements/</code></div>
+  <p>If-else statements are like the Swiss Army knife of decision-making. They offer flexibility and can handle a wide range of conditions and branching logic. You can use them when you need to <strong>evaluate complex conditions</strong> or when <strong>conditions aren't based on simple equality checks</strong>. If-else statements are often the preferred choice for scenarios where the <strong>conditions are not easily enumerable </strong>or where you need to execute different blocks of code based on various conditions.<br/>On the other hand, <strong>switch statements shine when you have a single variable to compare against multiple distinct values</strong>. They are concise, making the code cleaner and more structured. So, if-else statements and switch statements can complement each other, with if-else statements handling complex conditions and switch statements simplifying cases with multiple exact matches.</p>
+
+
+<p><strong>The ‘Switch’ Statement</strong></p>
+
+
+<p><img height="457" loading="lazy" src="../assets/img/4e9564feeaed9144.png" width="481"/></p>
+
+
+<p>To illustrate the switch statement, let's consider a common problem: given a number between 1 and 7, print the corresponding day of the week. Here's how we can use the switch statement for this task:</p>
+
+
+<p><strong>Code:</strong></p>
+
+
+<div class="code-section secondary-details">
+<div class="code-tabs">
+<button class="code-tab dsa_article_code_active" data-lang="cpp">C++</button>
+<button class="code-tab" data-lang="java">Java</button>
+<button class="code-tab" data-lang="python">Python</button>
+<button class="code-tab" data-lang="javascript">Javascript</button>
+<svg class="copy-btn" fill="none" height="20" viewbox="0 0 17 20" width="17" xmlns="http://www.w3.org/2000/svg">
+<path d="M2 20C1.45 20 0.979002 19.804 0.587002 19.412C0.195002 19.02 -0.000664969 18.5493 1.69779e-06 18V4H2V18H13V20H2ZM6 16C5.45 16 4.979 15.804 4.587 15.412C4.195 15.02 3.99934 14.5493 4 14V2C4 1.45 4.196 0.979002 4.588 0.587002C4.98 0.195002 5.45067 -0.000664969 6 1.69779e-06H15C15.55 1.69779e-06 16.021 0.196002 16.413 0.588002C16.805 0.980002 17.0007 1.45067 17 2V14C17 14.55 16.804 15.021 16.412 15.413C16.02 15.805 15.5493 16.0007 15 16H6ZM6 14H15V2H6V14Z">
+</path>
+</svg>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int day;
+
+    // Prompt user to enter a number between 1 and 7
+    cout &lt;&lt; "Enter a number (1-7): ";
+    cin &gt;&gt; day;
+
+    // Switch statement to determine the day
+    switch (day) {
+        case 1:
+            cout &lt;&lt; "Monday" &lt;&lt; endl;
+            break; // Exit switch after matching case
+        case 2:
+            cout &lt;&lt; "Tuesday" &lt;&lt; endl;
+            break;
+        case 3:
+            cout &lt;&lt; "Wednesday" &lt;&lt; endl;
+            break;
+        case 4:
+            cout &lt;&lt; "Thursday" &lt;&lt; endl;
+            break;
+        case 5:
+            cout &lt;&lt; "Friday" &lt;&lt; endl;
+            break;
+        case 6:
+            cout &lt;&lt; "Saturday" &lt;&lt; endl;
+            break;
+        case 7:
+            cout &lt;&lt; "Sunday" &lt;&lt; endl;
+            break;
+        default:
+            // Executed if input is not between 1 and 7
+            cout &lt;&lt; "Invalid" &lt;&lt; endl;
+    }
+
+    return 0; // End program
+}
+
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        int day;
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter a number (1-7): ");
+        day = scanner.nextInt();
+
+        switch (day) {
+            case 1:
+                System.out.println("Monday");
+                break;
+            case 2:
+                System.out.println("Tuesday");
+                break;
+            case 3:
+                System.out.println("Wednesday");
+                break;
+            case 4:
+                System.out.println("Thursday");
+                break;
+            case 5:
+                System.out.println("Friday");
+                break;
+            case 6:
+                System.out.println("Saturday");
+                break;
+            case 7:
+                System.out.println("Sunday");
+                break;
+            default:
+                System.out.println("Invalid");
+        }
+
+        scanner.close();
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="Python">
+day = int(input("Enter a number (1-7): "))
+
+# Match-case (Python 3.10+ feature) to act like a switch
+match day:
+    case 1:
+        print("Monday")
+    case 2:
+        print("Tuesday")
+    case 3:
+        print("Wednesday")
+    case 4:
+        print("Thursday")
+    case 5:
+        print("Friday")
+    case 6:
+        print("Saturday")
+    case 7:
+        print("Sunday")
+    case _:
+        # Default case if no match
+        print("Invalid")
+
+</code></pre></div>
+
+</div>
+
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-javascript" lang="javascript">
+// Prompt user to enter a number between 1 and 7
+const day = parseInt(prompt("Enter a number (1-7):"));
+
+// Switch statement to determine the day
+switch (day) {
+    case 1:
+        console.log("Monday");
+        break; // Exit switch after matching case
+    case 2:
+        console.log("Tuesday");
+        break;
+    case 3:
+        console.log("Wednesday");
+        break;
+    case 4:
+        console.log("Thursday");
+        break;
+    case 5:
+        console.log("Friday");
+        break;
+    case 6:
+        console.log("Saturday");
+        break;
+    case 7:
+        console.log("Sunday");
+        break;
+    default:
+        // Executed if input is not between 1 and 7
+        console.log("Invalid");
+}
+</code></pre></div>
+</div>
+</div>
+
+
+<p>In this example, if you set the <strong>day</strong> variable to 4, it will print "<strong>Thursday</strong>" since it matches the case 4 statement. The<strong> break statement is crucial</strong>; it ensures that the switch statement exits after the matching case is executed, preventing the execution of subsequent cases.</p>
+
+
+<p><strong>The Default Case: </strong>The default case serves as a <strong>safety net</strong>. If <strong>none of the cases match </strong>the expression, the code inside the<strong> default block will execute</strong>. In our example, if you input a number outside the range of 1 to 7, it will print "Invalid."</p>
+
+
+<p>Key Considerations for Switch Case Statements:</p>
+
+
+<ul><li><strong>Requirement for a Constant Expression<br/></strong>A switch statement necessitates that its expression results in a constant value. This can include constants and arithmetic operations.</li></ul>
+
+
+<p><strong>Code:</strong></p>
+
+
+<div class="code-section secondary-details">
+<div class="code-tabs">
+<button class="code-tab dsa_article_code_active" data-lang="cpp">C++</button>
+<button class="code-tab" data-lang="java">Java</button>
+<button class="code-tab" data-lang="python">Python</button>
+<button class="code-tab" data-lang="javascript">Javascript</button>
+<svg class="copy-btn" fill="none" height="20" viewbox="0 0 17 20" width="17" xmlns="http://www.w3.org/2000/svg">
+<path d="M2 20C1.45 20 0.979002 19.804 0.587002 19.412C0.195002 19.02 -0.000664969 18.5493 1.69779e-06 18V4H2V18H13V20H2ZM6 16C5.45 16 4.979 15.804 4.587 15.412C4.195 15.02 3.99934 14.5493 4 14V2C4 1.45 4.196 0.979002 4.588 0.587002C4.98 0.195002 5.45067 -0.000664969 6 1.69779e-06H15C15.55 1.69779e-06 16.021 0.196002 16.413 0.588002C16.805 0.980002 17.0007 1.45067 17 2V14C17 14.55 16.804 15.021 16.412 15.413C16.02 15.805 15.5493 16.0007 15 16H6ZM6 14H15V2H6V14Z">
+</path>
+</svg>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    // Define two constant integers
+    const int x = 10;
+    const int y = 5;
+
+    // Evaluate the sum of x and y using a switch statement
+    switch (x + y) {
+        case 15: // If the sum equals 15
+            cout &lt;&lt; "Result is 15." &lt;&lt; endl;
+            break; // Exit the switch block
+        case 20: // If the sum equals 20
+            cout &lt;&lt; "Result is 20." &lt;&lt; endl;
+            break; // Exit the switch block
+        default: // If no case matches
+            cout &lt;&lt; "No match found." &lt;&lt; endl;
+    }
+
+    return 0; // End of program
+}
+
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">public class Main {
+    public static void main(String[] args) {
+        // Define two constant integers
+        final int x = 10;
+        final int y = 5;
+
+        // Evaluate the sum of x and y using a switch statement
+        switch (x + y) {
+            case 15: // If the sum equals 15
+                System.out.println("Result is 15.");
+                break; // Exit the switch block
+            case 20: // If the sum equals 20
+                System.out.println("Result is 20.");
+                break; // Exit the switch block
+            default: // If no case matches
+                System.out.println("No match found.");
+        }
+    }
+}
+
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">
+# Define two constant integers
+x = 10
+y = 5
+
+# Evaluate the sum of x and y using match-case (Python 3.10+)
+match x + y:
+    case 15:  # If the sum equals 15
+        print("Result is 15.")
+    case 20:  # If the sum equals 20
+        print("Result is 20.")
+    case _:   # Default case (no match)
+        print("No match found.")
+
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">
+// Define two constant integers
+const x = 10;
+const y = 5;
+
+// Evaluate the sum of x and y using a switch statement
+switch (x + y) {
+    case 15: // If the sum equals 15
+        console.log("Result is 15.");
+        break; // Exit the switch block
+    case 20: // If the sum equals 20
+        console.log("Result is 20.");
+        break; // Exit the switch block
+    default: // If no case matches
+        console.log("No match found.");
+}
+
+</code></pre></div>
+</div>
+
+
+
+</div>
+</div>
+
+
+<ul><li><strong>Limited to Integer or Character Types</strong><br/>Switch statements are exclusively designed to handle integer or character values. Ensure that the expression provides values of type int or char.</li></ul>
+
+
+<p><strong>Code:</strong></p>
+
+
+<div class="code-section secondary-details">
+<div class="code-tabs">
+<button class="code-tab dsa_article_code_active" data-lang="cpp">C++</button>
+<button class="code-tab" data-lang="java">Java</button>
+<button class="code-tab" data-lang="python">Python</button>
+<button class="code-tab" data-lang="javascript">Javascript</button>
+<svg class="copy-btn" fill="none" height="20" viewbox="0 0 17 20" width="17" xmlns="http://www.w3.org/2000/svg">
+<path d="M2 20C1.45 20 0.979002 19.804 0.587002 19.412C0.195002 19.02 -0.000664969 18.5493 1.69779e-06 18V4H2V18H13V20H2ZM6 16C5.45 16 4.979 15.804 4.587 15.412C4.195 15.02 3.99934 14.5493 4 14V2C4 1.45 4.196 0.979002 4.588 0.587002C4.98 0.195002 5.45067 -0.000664969 6 1.69779e-06H15C15.55 1.69779e-06 16.021 0.196002 16.413 0.588002C16.805 0.980002 17.0007 1.45067 17 2V14C17 14.55 16.804 15.021 16.412 15.413C16.02 15.805 15.5493 16.0007 15 16H6ZM6 14H15V2H6V14Z">
+</path>
+</svg>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    // Define a character variable representing a grade
+    char grade = 'B';
+
+    // Evaluate grade using a switch statement
+    switch (grade) {
+        case 'A': // If grade is 'A'
+            cout &lt;&lt; "Excellent!" &lt;&lt; endl;
+            break; // Exit switch after this case
+        case 'B': // If grade is 'B'
+            cout &lt;&lt; "Good!" &lt;&lt; endl;
+            break; // Exit switch after this case
+        default: // If no case matches
+            cout &lt;&lt; "Not specified." &lt;&lt; endl;
+    }
+
+    return 0; // End of program
+}
+
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">
+public class Main {
+    public static void main(String[] args) {
+        // Define a character variable representing a grade
+        char grade = 'B';
+
+        // Evaluate grade using a switch statement
+        switch (grade) {
+            case 'A': // If grade is 'A'
+                System.out.println("Excellent!");
+                break; // Exit switch after this case
+            case 'B': // If grade is 'B'
+                System.out.println("Good!");
+                break; // Exit switch after this case
+            default: // If no case matches
+                System.out.println("Not specified.");
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">
+# Define a character variable representing a grade
+grade = 'B'
+
+# Evaluate grade using match-case (Python 3.10+)
+match grade:
+    case 'A':  # If grade is 'A'
+        print("Excellent!")
+    case 'B':  # If grade is 'B'
+        print("Good!")
+    case _:    # Default case (no match)
+        print("Not specified.")
+
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">
+// Define a character variable representing a grade
+const grade = 'B';
+
+// Evaluate grade using a switch statement
+switch (grade) {
+    case 'A': // If grade is 'A'
+        console.log("Excellent!");
+        break; // Exit switch after this case
+    case 'B': // If grade is 'B'
+        console.log("Good!");
+        break; // Exit switch after this case
+    default: // If no case matches
+        console.log("Not specified.");
+}
+
+</code></pre></div>
+
+</div>
+
+
+
+</div>
+</div>
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

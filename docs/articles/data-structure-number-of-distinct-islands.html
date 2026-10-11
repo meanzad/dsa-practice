@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Number of Distinct Islands</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Number of Distinct Islands</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/number-of-distinct-islands/</code></div>
+  <p><strong>Problem Statement: </strong> Given a boolean 2D matrix grid of size N x M. You have to find the number of distinct islands where a group of connected 1s (horizontally or vertically) forms an island. Two islands are considered to be distinct if and only if one island is equal to another (not rotated or reflected).
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: </span>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-6618" height="400;" loading="lazy" src="../assets/img/588c778023fc7b60.png" width="400"/></figure>
+<span>Output: 1</span>
+<span>Explanation: Island at the top left corner is the same as the island at the bottom right corner.</span>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-6619" height="400;" loading="lazy" src="../assets/img/6dbd6d67e6be390d.png" width="400"/></figure>
+<p></p>
+<span>Input :</span>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-6620" height="400;" loading="lazy" src="../assets/img/d637fab8a3ffcb9f.png" width="400"/></figure>
+<span>Output: 3</span>
+<span>Explanation : Island at the top right corner is the same as the island at the bottom left corner.</span>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-6621" height="400;" loading="lazy" src="../assets/img/bef0410a991ed914.png" width="400"/></figure>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/number-of-distinct-islands" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better.
+            It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+                    
+        Consider the following example, the two islands in the first figure might look identical but they are rotated so you can’t say they are the same, hence 2 distinct islands; whereas in the second figure, both islands are the same so only 1 distinct island; resulting in overall 3 distinct islands.<br/>
+        Depending on the shape of the island formed, we count the number of islands. To identify distinct islands, we must track the shape of each island. Two islands are identical if the relative structure are the same, even if they appear at different places on the grid.<br/><br/>
+        The main idea to store shape is to store the pattern of movement (or coordinates relative to starting point) in a set while doing DFS, and use that to determine if we’ve seen this shape before.
+        To figure out if the coordinates stored in the set data structure are identical, we can call one of the starting points a base, and subtract the base coordinates from the land’s coordinates (Cell Coordinates - Base coordinates). Now the list will be similar as illustrated.<p></p>
+<ul>
+<li>Traverse the entire grid using nested loops.</li>
+<li>When an unvisited land cell (1) is found, start a DFS from that cell.</li>
+<li>In the DFS, mark all connected land cells as visited.</li>
+<li>While traversing the island, record the relative position of each land cell with respect to the starting cell.</li>
+<li>Store the full list of relative positions as the island's shape.</li>
+<li>Insert this shape into a set to ensure only distinct shapes are counted.</li>
+<li>After completing the grid traversal, return the size of the set as the number of distinct islands.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/e6edd7c01e8f45c3.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/00cd2e07620ff554.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/9649f26b82a40f33.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/fc2daf01e319dfde.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/b9027bed827c36e4.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/440e05c084d4fa04.png"/></div><div class="carousel-image"><img alt="Image 7" loading="lazy" src="../assets/img/4dbc9fe732df9302.png"/></div><div class="carousel-image"><img alt="Image 8" loading="lazy" src="../assets/img/e1f9bc54ae513ee0.png"/></div><div class="carousel-image"><img alt="Image 9" loading="lazy" src="../assets/img/646c6951d46877db.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/e6edd7c01e8f45c3.png"/><img alt="Image 2" loading="lazy" src="../assets/img/00cd2e07620ff554.png"/><img alt="Image 3" loading="lazy" src="../assets/img/9649f26b82a40f33.png"/><img alt="Image 4" loading="lazy" src="../assets/img/fc2daf01e319dfde.png"/><img alt="Image 5" loading="lazy" src="../assets/img/b9027bed827c36e4.png"/><img alt="Image 6" loading="lazy" src="../assets/img/440e05c084d4fa04.png"/><img alt="Image 7" loading="lazy" src="../assets/img/4dbc9fe732df9302.png"/><img alt="Image 8" loading="lazy" src="../assets/img/e1f9bc54ae513ee0.png"/><img alt="Image 9" loading="lazy" src="../assets/img/646c6951d46877db.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std
+
+class Solution {
+public:
+    // DFS traversal
+    void dfs(int row, int col, int baseRow, int baseCol,
+             vector&lt;vector&lt;int&gt;&gt;&amp; grid, vector&lt;vector&lt;int&gt;&gt;&amp; vis,
+             vector&lt;pair&lt;int, int&gt;&gt;&amp; shape) {
+        // Mark as visited
+        vis[row][col] = 1;
+        // Store relative position
+        shape.push_back({row - baseRow, col - baseCol});
+
+        // All 4 directions
+        int drow[] = {-1, 0, 1, 0};
+        int dcol[] = {0, 1, 0, -1};
+
+        // Explore all directions
+        for (int i = 0; i &lt; 4; i++) {
+            int nrow = row + drow[i];
+            int ncol = col + dcol[i];
+
+            // Check bounds and if land and not visited
+            if (nrow &gt;= 0 &amp;&amp; nrow &lt; grid.size() &amp;&amp;
+                ncol &gt;= 0 &amp;&amp; ncol &lt; grid[0].size() &amp;&amp;
+                !vis[nrow][ncol] &amp;&amp; grid[nrow][ncol] == 1) {
+                dfs(nrow, ncol, baseRow, baseCol, grid, vis, shape);
+            }
+        }
+    }
+
+    // Main function to return number of distinct islands
+    int countDistinctIslands(vector&lt;vector&lt;int&gt;&gt;&amp; grid) {
+        int n = grid.size();
+        int m = grid[0].size();
+        vector&lt;vector&lt;int&gt;&gt; vis(n, vector&lt;int&gt;(m, 0));
+        set&lt;vector&lt;pair&lt;int, int&gt;&gt;&gt; st;
+
+        // Traverse grid
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = 0; j &lt; m; j++) {
+                // If land and not visited
+                if (grid[i][j] == 1 &amp;&amp; !vis[i][j]) {
+                    vector&lt;pair&lt;int, int&gt;&gt; shape;
+                    dfs(i, j, i, j, grid, vis, shape);
+                    st.insert(shape);
+                }
+            }
+        }
+        return st.size();
+    }
+};
+
+// Driver code
+int main() {
+    vector&lt;vector&lt;int&gt;&gt; grid = {
+        {1, 1, 0, 0},
+        {1, 0, 0, 0},
+        {0, 0, 1, 1},
+        {0, 0, 1, 1}
+    };
+    Solution obj;
+    cout &lt;&lt; obj.countDistinctIslands(grid);
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">// Class to find number of distinct islands
+class Solution {
+    // DFS function
+    public void dfs(int row, int col, int baseRow, int baseCol,
+                    int[][] grid, boolean[][] vis, List&lt;String&gt; shape) {
+        // Mark visited
+        vis[row][col] = true;
+        // Add relative position
+        shape.add((row - baseRow) + "_" + (col - baseCol));
+
+        // 4 directions
+        int[] drow = {-1, 0, 1, 0};
+        int[] dcol = {0, 1, 0, -1};
+
+        // Traverse directions
+        for (int i = 0; i &lt; 4; i++) {
+            int nrow = row + drow[i];
+            int ncol = col + dcol[i];
+
+            // Check bounds and if land and not visited
+            if (nrow &gt;= 0 &amp;&amp; nrow &lt; grid.length &amp;&amp;
+                ncol &gt;= 0 &amp;&amp; ncol &lt; grid[0].length &amp;&amp;
+                grid[nrow][ncol] == 1 &amp;&amp; !vis[nrow][ncol]) {
+                dfs(nrow, ncol, baseRow, baseCol, grid, vis, shape);
+            }
+        }
+    }
+
+    // Main function to return number of distinct islands
+    public int countDistinctIslands(int[][] grid) {
+        int n = grid.length;
+        int m = grid[0].length;
+        boolean[][] vis = new boolean[n][m];
+        Set&lt;List&lt;String&gt;&gt; set = new HashSet&lt;&gt;();
+
+        // Traverse the grid
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = 0; j &lt; m; j++) {
+                // If land and not visited
+                if (grid[i][j] == 1 &amp;&amp; !vis[i][j]) {
+                    List&lt;String&gt; shape = new ArrayList&lt;&gt;();
+                    dfs(i, j, i, j, grid, vis, shape);
+                    set.add(shape);
+                }
+            }
+        }
+        return set.size();
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+        int[][] grid = {
+            {1, 1, 0, 0},
+            {1, 0, 0, 0},
+            {0, 0, 1, 1},
+            {0, 0, 1, 1}
+        };
+        Solution obj = new Solution();
+        System.out.println(obj.countDistinctIslands(grid));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Class to find number of distinct islands
+class Solution:
+    # DFS function
+    def dfs(self, row, col, baseRow, baseCol, grid, vis, shape):
+        # Mark visited
+        vis[row][col] = True
+        # Add relative position
+        shape.append((row - baseRow, col - baseCol))
+
+        # 4 directions
+        drow = [-1, 0, 1, 0]
+        dcol = [0, 1, 0, -1]
+
+        # Explore all directions
+        for i in range(4):
+            nrow = row + drow[i]
+            ncol = col + dcol[i]
+            # Check bounds and unvisited land
+            if (0 &lt;= nrow &lt; len(grid) and 0 &lt;= ncol &lt; len(grid[0]) and
+                not vis[nrow][ncol] and grid[nrow][ncol] == 1):
+                self.dfs(nrow, ncol, baseRow, baseCol, grid, vis, shape)
+
+    # Main function to count distinct islands
+    def countDistinctIslands(self, grid):
+        n, m = len(grid), len(grid[0])
+        vis = [[False for _ in range(m)] for _ in range(n)]
+        st = set()
+
+        # Traverse grid
+        for i in range(n):
+            for j in range(m):
+                if grid[i][j] == 1 and not vis[i][j]:
+                    shape = []
+                    self.dfs(i, j, i, j, grid, vis, shape)
+                    st.add(tuple(shape))
+        return len(st)
+
+# Driver code
+grid = [
+    [1, 1, 0, 0],
+    [1, 0, 0, 0],
+    [0, 0, 1, 1],
+    [0, 0, 1, 1]
+]
+obj = Solution()
+print(obj.countDistinctIslands(grid))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Class to find number of distinct islands
+class Solution {
+    // DFS function
+    dfs(row, col, baseRow, baseCol, grid, vis, shape) {
+        // Mark visited
+        vis[row][col] = true;
+        // Store relative coordinates
+        shape.push([row - baseRow, col - baseCol]);
+
+        // Directions
+        const drow = [-1, 0, 1, 0];
+        const dcol = [0, 1, 0, -1];
+
+        // Explore directions
+        for (let i = 0; i &lt; 4; i++) {
+            const nrow = row + drow[i];
+            const ncol = col + dcol[i];
+            // Check bounds and land
+            if (nrow &gt;= 0 &amp;&amp; nrow &lt; grid.length &amp;&amp;
+                ncol &gt;= 0 &amp;&amp; ncol &lt; grid[0].length &amp;&amp;
+                grid[nrow][ncol] === 1 &amp;&amp; !vis[nrow][ncol]) {
+                this.dfs(nrow, ncol, baseRow, baseCol, grid, vis, shape);
+            }
+        }
+    }
+
+    // Main function to count distinct islands
+    countDistinctIslands(grid) {
+        const n = grid.length;
+        const m = grid[0].length;
+        const vis = Array.from({ length: n }, () =&gt; Array(m).fill(false));
+        const set = new Set();
+
+        // Traverse grid
+        for (let i = 0; i &lt; n; i++) {
+            for (let j = 0; j &lt; m; j++) {
+                if (grid[i][j] === 1 &amp;&amp; !vis[i][j]) {
+                    const shape = [];
+                    this.dfs(i, j, i, j, grid, vis, shape);
+                    set.add(JSON.stringify(shape));
+                }
+            }
+        }
+        return set.size;
+    }
+}
+
+// Driver code
+const grid = [
+    [1, 1, 0, 0],
+    [1, 0, 0, 0],
+    [0, 0, 1, 1],
+    [0, 0, 1, 1]
+];
+const obj = new Solution();
+console.log(obj.countDistinctIslands(grid));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N*M)</strong>, DFS traversal and marking visited cells dominate.<br/>
+<strong>Space Complexity: O(N*M)</strong>, or visited grid and set storing unique island shapes.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

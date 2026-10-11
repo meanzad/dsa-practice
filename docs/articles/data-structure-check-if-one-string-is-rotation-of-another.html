@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Check if one string is rotation of another</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Check if one string is rotation of another</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/check-if-one-string-is-rotation-of-another</code></div>
+  <br/><strong>Problem Statement: </strong> 
+    Given two strings s and goal, return true if and only if s can become goal after some number of shifts on s.
+    A shift on s consists of moving the leftmost character of s to the rightmost position.
+    For example, if s = "abcde", then it will be "bcdea" after one shift.
+
+
+
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+                
+<strong>Example 1:</strong>
+<strong>Input:</strong> s = "rotation", goal = "tionrota"
+<strong>Output:</strong> true
+<strong>Explanation:</strong> After multiple left shifts on "rotation", we get:
+    1st shift → "otationr"
+    2nd shift → "tationro"
+    3rd shift → "ationrot"
+    4th shift → "tionrota"
+    So the goal string can be obtained by rotating the original string.
+
+<strong>Example 2:</strong>
+<strong>Input:</strong> s = "hello", goal = "lohelx"
+<strong>Output:</strong> false
+<strong>Explanation:</strong> 
+Even after all possible rotations of "hello", we cannot form "lohelx" due to the presence of an extra character 'x'. Hence, it's not possible.
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/rotate-string" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Brute Force
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Start by generating all possible left rotations of the original string using substring slicing and concatenation.</li>
+<li>For each rotated version of the string, compare it with the target (goal) string.</li>
+<li>If a match is found at any point, return <code>true</code> immediately as the goal can be achieved.</li>
+<li>If none of the rotations match the goal string after checking all possibilities, return <code>false</code>.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/aadbc5b3016f3572.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/06ddf185cc2a68ef.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/58915c5fa235f003.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/7c1384abb877dac9.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/432316fcca3e3a7b.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/aadbc5b3016f3572.png"/><img alt="Image 2" loading="lazy" src="../assets/img/06ddf185cc2a68ef.png"/><img alt="Image 3" loading="lazy" src="../assets/img/58915c5fa235f003.png"/><img alt="Image 4" loading="lazy" src="../assets/img/7c1384abb877dac9.png"/><img alt="Image 5" loading="lazy" src="../assets/img/432316fcca3e3a7b.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Check if 'goal' is a rotation of 's'
+    bool rotateString(string&amp; s, string&amp; goal) {
+        // Strings must be same length to be rotations of each other
+        if (s.length() != goal.length()) {
+            return false;
+        }
+        // Try all possible rotations of 's'
+        for (int i = 0; i &lt; s.length(); i++) {
+            string rotated = s.substr(i) + s.substr(0, i);  
+            if (rotated == goal) {
+                return true;
+            }
+        }
+        return false;
+    }
+};
+
+int main() {
+    Solution sol;
+    string s = "rotation";
+    string goal = "tionrota";
+    
+    // Output the result
+    if (sol.rotateString(s, goal)) {
+        cout &lt;&lt; "true" &lt;&lt; endl;  
+    } else {
+        cout &lt;&lt; "false" &lt;&lt; endl;
+    }
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // Brute force approach to check if goal is a rotation of s
+    public boolean rotateString(String s, String goal) {
+        // Strings must be same length to be rotations of each other
+        if (s.length() != goal.length()) {
+            return false;
+        }
+
+        // Try all possible rotations of s
+        for (int i = 0; i &lt; s.length(); i++) {
+            String rotated = s.substring(i) + s.substring(0, i);
+            if (rotated.equals(goal)) {
+                // Return true if a match is found
+                return true;  
+            }
+        }
+
+        return false;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+
+        String s1 = "rotation";
+        String goal1 = "tionrota";
+        System.out.println(sol.rotateString(s1, goal1)); 
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    def rotateString(self, s: str, goal: str) -&gt; bool:
+        # Check if strings are of the same length
+        if len(s) != len(goal):
+            return False  
+
+        # Try all possible rotations of s
+        for i in range(len(s)):
+            # Generate a rotated version of s
+            rotated = s[i:] + s[:i]  
+            # If the rotated version matches goal, return True
+            if rotated == goal:
+                return True  
+
+        # If no rotation matches, return False
+        return False  
+
+# Test case
+sol = Solution()
+
+print(sol.rotateString("rotation", "tionrota"))</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Method to check if 'goal' is a rotation of 's'
+    rotateString(s, goal) {
+        // If lengths differ, they can't be rotations
+        if (s.length !== goal.length) {
+            return false;  
+        }
+
+        // Try all possible rotations of 's'
+        for (let i = 0; i &lt; s.length; i++) {
+            // Create rotated version by slicing and concatenating
+            let rotated = s.substring(i) + s.substring(0, i);  
+            
+            // Return true if rotated version matches goal
+            if (rotated === goal) {
+                return true;  
+            }
+        }
+
+        // If no match found, return false
+        return false;  
+    }
+}
+
+// Create instance of Solution class
+const sol = new Solution();
+
+console.log(sol.rotateString("rotation", "tionrota"));  </code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(N^2)</strong> since generating N rotations and each comparison takes O(N) time.<br/><br/>
+<strong>Space Complexity: O(N)</strong> for the space needed to store each rotated string.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Double the original string by joining it with itself, creating a new string like s + s.</li>
+<li>Look for the target string goalinside this new doubled string.</li>
+<li>If goal exists within the doubled string, then it's a valid rotation, return true.</li>
+<li>If it's not found, that means the original string cannot be rotated to match goal, return false</li>
+</ul>
+<p><img height="457" loading="lazy" src="../assets/img/834b1d9f18842618.png" width="481"/></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Check if goal is a rotation of s using string doubling method
+    bool rotateString(string&amp; s, string&amp; goal) {
+        // Strings must be the same length to be rotations of each other
+        if (s.length() != goal.length()) return false;
+        
+        // Concatenate s with itself and check if goal exists in it
+        string doubledS = s + s;
+        return doubledS.find(goal) != string::npos;
+    }
+};
+
+int main() {
+    Solution sol;
+
+    string s = "rotation";
+    string goal = "tionrota";
+    cout &lt;&lt; (sol.rotateString(s, goal) ? "true" : "false") &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // Method to check if one string is a rotation of another
+    public boolean rotateString(String s, String goal) {
+        // Check if lengths of both strings are unequal
+        if (s.length() != goal.length()) {
+            // Return false if lengths don't match
+            return false;
+        }
+        // Concatenate the string with itself
+        String doubledS = s + s;
+        // Check if the goal is a substring of the concatenated string
+        return doubledS.contains(goal);
+    }
+}
+
+// Main class to run the test cases
+public class Main {
+    public static void main(String[] args) {
+        // Create instance of Solution
+        Solution sol = new Solution();
+
+        System.out.println(sol.rotateString("rotation", "tionrota"));
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+# Strings must be of the same length to be rotations of each other
+    def rotateString(self, s: str, goal: str) -&gt; bool:
+        if len(s) != len(goal):
+            return False  
+        doubled_s = s + s  # Concatenate s with itself
+        return goal in doubled_s  # Check if goal is a substring of s + s
+        
+sol = Solution()
+print(sol.rotateString("rotation", "tionrota"))</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+ // Strings must be of the same length to be rotations of each other
+    rotateString(s, goal) {
+        if (s.length !== goal.length) {
+            return false;  
+        }
+        let doubledS = s + s;  // Concatenate s with itself
+        return doubledS.includes(goal);  // Check if goal is a substring of s + s
+    }
+}
+
+const sol = new Solution();
+console.log(sol.rotateString("rotation", "tionrota")); </code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(N)</strong>, because checking for a substring in s + s is linear in time. <br/><br/>
+<strong>Space Complexity: O(N)</strong> for the space needed to store the concatenated string s + s.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

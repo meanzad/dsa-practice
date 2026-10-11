@@ -1,0 +1,1066 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Evaluate Boolean Expression to True | Partition DP: DP 52</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Evaluate Boolean Expression to True | Partition DP: DP 52</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/evaluate-boolean-expression-to-true-partition-dp-dp-52/</code></div>
+  <p><strong>Problem Statement: </strong> Given an expression, A, with operands and operators (OR, AND, XOR), in how many
+    ways can you evaluate the expression to be true, by grouping it in different ways?.</p>
+<p>Operands are only true and false.</p>
+<p>Return the number of ways to evaluate the expression modulo 103 + 3.</p>
+<p><strong>Pre-requisite: </strong><a href="https://takeuforward.org/dynamic-programming/matrix-chain-multiplication-dp-48/" rel="noopener" target="_blank" title="">DP-48</a>, <a href="https://takeuforward.org/data-structure/matrix-chain-multiplication-tabulation-method-dp-49/" rel="noopener" target="_blank" title="">DP-49</a>, <a href="https://takeuforward.org/data-structure/minimum-cost-to-cut-the-stick-dp-50/" rel="noopener" target="_blank" title="">DP-50</a>, <a href="https://www.youtube.com/watch?v=Yz4LlDSlkns" rel="noopener" target="_blank" title="">DP-51</a></p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input: expression = “T|T&amp;F”
+Output: 1
+Explanation: The only way to get the result as true is:
+(T) | (T&amp;F) = T|F = T 
+
+Example 2:
+Input: expression = “F|T^F”
+Output: 2
+Explanation: There are 2 possible ways to get the result as true:
+		i. (F|T) ^ F = T ^ F = T
+		ii. F | (T^F) = F | T = T
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em> It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Brute Force Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+<p>
+                            The problem asks us to find the number of ways to parenthesize a boolean expression such
+                            that it evaluates to <strong>True</strong>. The expression consists of operands
+                            <code>'T'</code> (true), <code>'F'</code> (false), and operators <code>'&amp;'</code> (AND),
+                            <code>'|'</code> (OR), and <code>'^'</code> (XOR).
+                        </p>
+<p>
+                            To solve this, we realize that the result of the whole expression depends on how we split
+                            and combine smaller sub-expressions. Each operator serves as a possible partition point, and
+                            we recursively compute how many ways each sub-expression can be true or false. Depending on
+                            the operator, we combine the results in different ways to calculate the total number of ways
+                            the entire expression can evaluate to true.
+                        </p>
+<p>
+                            This is a classic example of <strong>partition DP</strong>, where we break a problem into
+                            subproblems, solve them recursively, and combine their results.
+                        </p>
+<ul>
+<li><strong>Define a recursive function</strong> <code>f(i, j, isTrue)</code> that returns
+                                the number of ways to evaluate the expression from index <code>i</code> to
+                                <code>j</code> such that the result is <code>True</code> (if <code>isTrue = 1</code>) or
+                                <code>False</code> (if <code>isTrue = 0</code>).
+                            </li>
+<li><strong>Base Cases:</strong>
+<ul>
+<li>If <code>i &gt; j</code>, return 0 (invalid sub-expression).</li>
+<li>If <code>i == j</code>, return:
+                                        <ul>
+<li><code>1</code> if the single character matches the required boolean
+                                                value.</li>
+<li><code>0</code> otherwise.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Recursive Step:</strong>
+<ul>
+<li>Try all possible partition points (operators) between <code>i</code> and
+                                        <code>j</code>.
+                                    </li>
+<li>For each operator at index <code>k</code>, divide the expression into two parts:
+                                        <code>left = f(i, k-1, true/false)</code> and
+                                        <code>right = f(k+1, j, true/false)</code>.
+                                    </li>
+<li>Combine left and right results based on the operator:
+                                        <ul>
+<li><strong>AND (&amp;):</strong> Result is true only if both sides are true.
+                                            </li>
+<li><strong>OR (|):</strong> Result is true if either side is true.</li>
+<li><strong>XOR (^):</strong> Result is true if one side is true and the
+                                                other is false.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Repeat this recursively for all sub-expressions and return the total count of valid
+                                parenthesizations that lead to <code>True</code>.</li>
+<li>Use memoization (3D DP table) to optimize overlapping subproblems.</li>
+<li>Since the result can be large, return it modulo <code>10<sup>9</sup> + 7</code>.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div>
+<div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+#define ll long long
+const int mod = 1000000007;
+
+// Function to evaluate the number of ways to parenthesize the expression to get True or False
+int f(int i, int j, int isTrue, string &amp;exp) {
+    // Base case 1: If i &gt; j, it's an invalid expression, return 0.
+    if (i &gt; j) return 0;
+    
+    // Base case 2: If i and j are the same, evaluate the single character.
+    if (i == j) {
+        if (isTrue == 1) return exp[i] == 'T' ? 1 : 0;
+        else return exp[i] == 'F' ? 1 : 0;
+    }
+    
+    ll ways = 0;
+    
+    // Iterate through the expression to divide it into left and right subexpressions
+    for (int ind = i + 1; ind &lt;= j - 1; ind += 2) {
+        // Recursively calculate the number of ways to make the left and right subexpressions true or false
+        ll lT = f(i, ind - 1, 1, exp);  // Number of ways to make the left expression true.
+        ll lF = f(i, ind - 1, 0, exp);  // Number of ways to make the left expression false.
+        ll rT = f(ind + 1, j, 1, exp);  // Number of ways to make the right expression true.
+        ll rF = f(ind + 1, j, 0, exp);  // Number of ways to make the right expression false.
+
+        // Check the operator at the current index and update ways accordingly.
+        if (exp[ind] == '&amp;') {  // AND operator
+            if (isTrue) ways = (ways + (lT * rT) % mod) % mod;
+            else ways = (ways + (lF * rT) % mod + (lT * rF) % mod + (lF * rF) % mod) % mod;
+        }
+        else if (exp[ind] == '|') {  // OR operator
+            if (isTrue) ways = (ways + (lF * rT) % mod + (lT * rF) % mod + (lT * rT) % mod) % mod;
+            else ways = (ways + (lF * rF) % mod) % mod;
+        }
+        else {  // XOR operator
+            if (isTrue) ways = (ways + (lF * rT) % mod + (lT * rF) % mod) % mod;
+            else ways = (ways + (lF * rF) % mod + (lT * rT) % mod) % mod;
+        }
+    }
+    return ways;  // Return the total number of ways to evaluate the expression
+}
+
+// Function to start evaluating the expression
+int evaluateExp(string &amp;exp) {
+    int n = exp.size();
+    return f(0, n - 1, 1, exp);  // Start evaluation with isTrue set to true.
+}
+
+int main() {
+    // Example expression
+    string exp = "F|T^F";
+    
+    // Evaluate the expression and find the number of ways to get the result as True
+    int ways = evaluateExp(exp);
+    
+    // Output the result
+    cout &lt;&lt; "The total number of ways: " &lt;&lt; ways &lt;&lt; "\n";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">// Solution class to evaluate the number of ways to parenthesize an expression
+class Solution {
+    
+    // Function to evaluate the number of ways to parenthesize the expression to get True or False
+    public static int f(int i, int j, int isTrue, String exp) {
+        // Base case 1: If i &gt; j, it's an invalid expression, return 0.
+        if (i &gt; j) return 0;
+        
+        // Base case 2: If i and j are the same, evaluate the single character.
+        if (i == j) {
+            if (isTrue == 1) return exp.charAt(i) == 'T' ? 1 : 0;
+            else return exp.charAt(i) == 'F' ? 1 : 0;
+        }
+
+        long ways = 0;
+        
+        // Iterate through the expression to divide it into left and right subexpressions
+        for (int ind = i + 1; ind &lt;= j - 1; ind += 2) {
+            // Recursively calculate the number of ways to make the left and right subexpressions true or false
+            long lT = f(i, ind - 1, 1, exp);  // Number of ways to make the left expression true.
+            long lF = f(i, ind - 1, 0, exp);  // Number of ways to make the left expression false.
+            long rT = f(ind + 1, j, 1, exp);  // Number of ways to make the right expression true.
+            long rF = f(ind + 1, j, 0, exp);  // Number of ways to make the right expression false.
+
+            // Check the operator at the current index and update ways accordingly.
+            if (exp.charAt(ind) == '&amp;') {  // AND operator
+                if (isTrue == 1) ways = (ways + (lT * rT)) % 1000000007;
+                else ways = (ways + (lF * rT) + (lT * rF) + (lF * rF)) % 1000000007;
+            }
+            else if (exp.charAt(ind) == '|') {  // OR operator
+                if (isTrue == 1) ways = (ways + (lF * rT) + (lT * rF) + (lT * rT)) % 1000000007;
+                else ways = (ways + (lF * rF)) % 1000000007;
+            }
+            else {  // XOR operator
+                if (isTrue == 1) ways = (ways + (lF * rT) + (lT * rF)) % 1000000007;
+                else ways = (ways + (lF * rF) + (lT * rT)) % 1000000007;
+            }
+        }
+        return (int) ways;  // Return the total number of ways to evaluate the expression
+    }
+
+    // Function to start evaluating the expression
+    public static int evaluateExp(String exp) {
+        return f(0, exp.length() - 1, 1, exp);  // Start evaluation with isTrue set to true.
+    }
+
+    public static void main(String[] args) {
+        String exp = "F|T^F";  // Example expression
+        
+        // Evaluate the expression and find the number of ways to get the result as True
+        int ways = evaluateExp(exp);
+        
+        // Output the result
+        System.out.println("The total number of ways: " + ways);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Function to evaluate the number of ways to parenthesize the expression
+def f(i, j, isTrue, exp):
+    # Base case 1: If i &gt; j, it's an invalid expression, return 0
+    if i &gt; j:
+        return 0
+    
+    # Base case 2: If i and j are the same, evaluate the single character
+    if i == j:
+        if isTrue == 1:
+            return 1 if exp[i] == 'T' else 0
+        else:
+            return 1 if exp[i] == 'F' else 0
+    
+    ways = 0
+    
+    # Iterate through the expression to divide it into left and right subexpressions
+    for ind in range(i + 1, j, 2):
+        # Recursively calculate the number of ways to make the left and right subexpressions true or false
+        lT = f(i, ind - 1, 1, exp)  # Number of ways to make the left expression true
+        lF = f(i, ind - 1, 0, exp)  # Number of ways to make the left expression false
+        rT = f(ind + 1, j, 1, exp)  # Number of ways to make the right expression true
+        rF = f(ind + 1, j, 0, exp)  # Number of ways to make the right expression false
+
+        # Check the operator at the current index and update ways accordingly
+        if exp[ind] == '&amp;':  # AND operator
+            if isTrue == 1:
+                ways += lT * rT
+            else:
+                ways += lF * rT + lT * rF + lF * rF
+        elif exp[ind] == '|':  # OR operator
+            if isTrue == 1:
+                ways += lF * rT + lT * rF + lT * rT
+            else:
+                ways += lF * rF
+        else:  # XOR operator
+            if isTrue == 1:
+                ways += lF * rT + lT * rF
+            else:
+                ways += lF * rF + lT * rT
+    
+    return ways % 1000000007  # Return the total number of ways modulo mod
+
+# Function to start evaluating the expression
+def evaluateExp(exp):
+    return f(0, len(exp) - 1, 1, exp)  # Start evaluation with isTrue set to true
+
+# Driver code
+if __name__ == "__main__":
+    exp = "F|T^F"  # Example expression
+    
+    # Evaluate the expression and find the number of ways to get the result as True
+    ways = evaluateExp(exp)
+    
+    # Output the result
+    print("The total number of ways:", ways)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Function to evaluate the number of ways to parenthesize the expression
+function f(i, j, isTrue, exp) {
+    // Base case 1: If i &gt; j, it's an invalid expression, return 0
+    if (i &gt; j) return 0;
+
+    // Base case 2: If i and j are the same, evaluate the single character
+    if (i === j) {
+        if (isTrue === 1) {
+            return exp[i] === 'T' ? 1 : 0;
+        } else {
+            return exp[i] === 'F' ? 1 : 0;
+        }
+    }
+
+    let ways = 0;
+
+    // Iterate through the expression to divide it into left and right subexpressions
+    for (let ind = i + 1; ind &lt;= j - 1; ind += 2) {
+        // Recursively calculate the number of ways to make the left and right subexpressions true or false
+        let lT = f(i, ind - 1, 1, exp);  // Number of ways to make the left expression true
+        let lF = f(i, ind - 1, 0, exp);  // Number of ways to make the left expression false
+        let rT = f(ind + 1, j, 1, exp);  // Number of ways to make the right expression true
+        let rF = f(ind + 1, j, 0, exp);  // Number of ways to make the right expression false
+
+        // Check the operator at the current index and update ways accordingly
+        if (exp[ind] === '&amp;') {  // AND operator
+            if (isTrue === 1) ways += lT * rT;
+            else ways += lF * rT + lT * rF + lF * rF;
+        } else if (exp[ind] === '|') {  // OR operator
+            if (isTrue === 1) ways += lF * rT + lT * rF + lT * rT;
+            else ways += lF * rF;
+        } else {  // XOR operator
+            if (isTrue === 1) ways += lF * rT + lT * rF;
+            else ways += lF * rF + lT * rT;
+        }
+    }
+
+    return ways % 1000000007;  // Return the total number of ways modulo mod
+}
+
+// Function to start evaluating the expression
+function evaluateExp(exp) {
+    return f(0, exp.length - 1, 1, exp);  // Start evaluation with isTrue set to true
+}
+
+// Driver code
+const exp = "F|T^F";  // Example expression
+
+// Evaluate the expression and find the number of ways to get the result as True
+const ways = evaluateExp(exp);
+
+// Output the result
+console.log("The total number of ways:", ways);
+</code></pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+</summary>
+<p>
+</p><p><strong>Time Complexity: O(3<sup>N</sup>)</strong>, as for each operator we recursively compute
+                        the number of ways to evaluate all possible left and right subexpressions as True or False. With
+                        approximately N/2 operators, the recursion explodes exponentially in the worst case.</p>
+<p><strong>Space Complexity: O(N)</strong>, as the recursion stack depth can go up to N in the worst
+                        case where N is the length of the expression string.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="better-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Better Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+<p><strong>Steps to memoize the recursive solution:</strong></p>
+<ul>
+<li>Create a 3D dp array of size [n][n][2]. i and j can range from 1 to n and isTrue can
+                                range from 0 to 1 so we take the size n X n X 2.</li>
+<li>We initialize the dp array to -1.</li>
+<li>Whenever we want to find the answer to particular parameters (say f(i,j, isTrue)), we
+                                first check whether the answer is already calculated using the dp array(i.e
+                                dp[i][j][isTrue] != -1 ). If yes, simply return the value from the dp array.</li>
+<li>If not, then we are finding the answer for the given value for the first time, we will
+                                use the recursive relation as usual but before returning from the function, we will set
+                                dp[i][j][isTrue] to the solution we get.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div>
+<div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+#define ll long long
+const int mod = 1000000007;
+
+// Function to evaluate the number of ways to parenthesize the expression to get True or False
+int f(int i, int j, int isTrue, string &amp;exp, vector&lt;vector&lt;vector&lt;ll&gt;&gt;&gt; &amp;dp) {
+    // Base case 1: If i &gt; j, it's an invalid expression, return 0.
+    if (i &gt; j) return 0;
+    
+    // Base case 2: If i and j are the same, evaluate the single character.
+    if (i == j) {
+        if (isTrue == 1) return exp[i] == 'T' ? 1 : 0;
+        else return exp[i] == 'F' ? 1 : 0;
+    }
+
+    // If the result for this subproblem has been computed before, return it.
+    if (dp[i][j][isTrue] != -1) return dp[i][j][isTrue];
+    
+    ll ways = 0;
+    
+    // Iterate through the expression to divide it into left and right subexpressions
+    for (int ind = i + 1; ind &lt;= j - 1; ind += 2) {
+        // Recursively calculate the number of ways to make the left and right subexpressions true or false
+        ll lT = f(i, ind - 1, 1, exp, dp);  // Number of ways to make the left expression true.
+        ll lF = f(i, ind - 1, 0, exp, dp);  // Number of ways to make the left expression false.
+        ll rT = f(ind + 1, j, 1, exp, dp);  // Number of ways to make the right expression true.
+        ll rF = f(ind + 1, j, 0, exp, dp);  // Number of ways to make the right expression false.
+
+        // Check the operator at the current index and update ways accordingly.
+        if (exp[ind] == '&amp;') {  // AND operator
+            if (isTrue) ways = (ways + (lT * rT) % mod) % mod;
+            else ways = (ways + (lF * rT) % mod + (lT * rF) % mod + (lF * rF) % mod) % mod;
+        }
+        else if (exp[ind] == '|') {  // OR operator
+            if (isTrue) ways = (ways + (lF * rT) % mod + (lT * rF) % mod + (lT * rT) % mod) % mod;
+            else ways = (ways + (lF * rF) % mod) % mod;
+        }
+        else {  // XOR operator
+            if (isTrue) ways = (ways + (lF * rT) % mod + (lT * rF) % mod) % mod;
+            else ways = (ways + (lF * rF) % mod + (lT * rT) % mod) % mod;
+        }
+    }
+    
+    // Store the result in the DP table and return it.
+    return dp[i][j][isTrue] = ways;
+}
+
+// Function to start evaluating the expression
+int evaluateExp(string &amp;exp) {
+    int n = exp.size();
+    vector&lt;vector&lt;vector&lt;ll&gt;&gt;&gt; dp(n, vector&lt;vector&lt;ll&gt;&gt;(n, vector&lt;ll&gt;(2, -1)));  // DP table initialization
+    return f(0, n - 1, 1, exp, dp);  // Start evaluation with isTrue set to true.
+}
+
+int main() {
+    string exp = "F|T^F";  // Example expression
+    
+    // Evaluate the expression and find the number of ways to get the result as True
+    int ways = evaluateExp(exp);
+    
+    // Output the result
+    cout &lt;&lt; "The total number of ways: " &lt;&lt; ways &lt;&lt; "\n";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">// Solution class to evaluate the number of ways to parenthesize an expression
+class Solution {
+
+    // Function to evaluate the number of ways to parenthesize the expression to get True or False
+    public static int f(int i, int j, int isTrue, String exp, long[][][] dp) {
+        // Base case 1: If i &gt; j, it's an invalid expression, return 0.
+        if (i &gt; j) return 0;
+        
+        // Base case 2: If i and j are the same, evaluate the single character.
+        if (i == j) {
+            if (isTrue == 1) return exp.charAt(i) == 'T' ? 1 : 0;
+            else return exp.charAt(i) == 'F' ? 1 : 0;
+        }
+
+        // If the result for this subproblem has been computed before, return it.
+        if (dp[i][j][isTrue] != -1) return (int) dp[i][j][isTrue];
+        
+        long ways = 0;
+        
+        // Iterate through the expression to divide it into left and right subexpressions
+        for (int ind = i + 1; ind &lt;= j - 1; ind += 2) {
+            // Recursively calculate the number of ways to make the left and right subexpressions true or false
+            long lT = f(i, ind - 1, 1, exp, dp);  // Number of ways to make the left expression true.
+            long lF = f(i, ind - 1, 0, exp, dp);  // Number of ways to make the left expression false.
+            long rT = f(ind + 1, j, 1, exp, dp);  // Number of ways to make the right expression true.
+            long rF = f(ind + 1, j, 0, exp, dp);  // Number of ways to make the right expression false.
+
+            // Check the operator at the current index and update ways accordingly.
+            if (exp.charAt(ind) == '&amp;') {  // AND operator
+                if (isTrue == 1) ways = (ways + (lT * rT)) % 1000000007;
+                else ways = (ways + (lF * rT) + (lT * rF) + (lF * rF)) % 1000000007;
+            }
+            else if (exp.charAt(ind) == '|') {  // OR operator
+                if (isTrue == 1) ways = (ways + (lF * rT) + (lT * rF) + (lT * rT)) % 1000000007;
+                else ways = (ways + (lF * rF)) % 1000000007;
+            }
+            else {  // XOR operator
+                if (isTrue == 1) ways = (ways + (lF * rT) + (lT * rF)) % 1000000007;
+                else ways = (ways + (lF * rF) + (lT * rT)) % 1000000007;
+            }
+        }
+        
+        // Store the result in the DP table and return it.
+        dp[i][j][isTrue] = ways;
+        return (int) ways;
+    }
+
+    // Function to start evaluating the expression
+    public static int evaluateExp(String exp) {
+        int n = exp.length();
+        long[][][] dp = new long[n][n][2];  // DP table initialization
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                for (int k = 0; k &lt; 2; k++) {
+                    dp[i][j][k] = -1;
+                }
+            }
+        }
+        return (int) f(0, n - 1, 1, exp, dp);  // Start evaluation with isTrue set to true.
+    }
+
+    public static void main(String[] args) {
+        String exp = "F|T^F";  // Example expression
+        
+        // Evaluate the expression and find the number of ways to get the result as True
+        int ways = evaluateExp(exp);
+        
+        // Output the result
+        System.out.println("The total number of ways: " + ways);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Function to evaluate the number of ways to parenthesize the expression
+def f(i, j, isTrue, exp, dp):
+    # Base case 1: If i &gt; j, it's an invalid expression, return 0
+    if i &gt; j:
+        return 0
+    
+    # Base case 2: If i and j are the same, evaluate the single character
+    if i == j:
+        if isTrue == 1:
+            return 1 if exp[i] == 'T' else 0
+        else:
+            return 1 if exp[i] == 'F' else 0
+    
+    # If the result for this subproblem has been computed before, return it
+    if dp[i][j][isTrue] != -1:
+        return dp[i][j][isTrue]
+    
+    ways = 0
+    
+    # Iterate through the expression to divide it into left and right subexpressions
+    for ind in range(i + 1, j, 2):
+        # Recursively calculate the number of ways to make the left and right subexpressions true or false
+        lT = f(i, ind - 1, 1, exp, dp)  # Number of ways to make the left expression true
+        lF = f(i, ind - 1, 0, exp, dp)  # Number of ways to make the left expression false
+        rT = f(ind + 1, j, 1, exp, dp)  # Number of ways to make the right expression true
+        rF = f(ind + 1, j, 0, exp, dp)  # Number of ways to make the right expression false
+
+        # Check the operator at the current index and update ways accordingly
+        if exp[ind] == '&amp;':  # AND operator
+            if isTrue == 1:
+                ways += lT * rT
+            else:
+                ways += lF * rT + lT * rF + lF * rF
+        elif exp[ind] == '|':  # OR operator
+            if isTrue == 1:
+                ways += lF * rT + lT * rF + lT * rT
+            else:
+                ways += lF * rF
+        else:  # XOR operator
+            if isTrue == 1:
+                ways += lF * rT + lT * rF
+            else:
+                ways += lF * rF + lT * rT
+    
+    dp[i][j][isTrue] = ways % 1000000007  # Store the result in the DP table
+    return dp[i][j][isTrue]
+
+# Function to start evaluating the expression
+def evaluateExp(exp):
+    n = len(exp)
+    dp = [[[-1 for _ in range(2)] for _ in range(n)] for _ in range(n)]  # DP table initialization
+    return f(0, n - 1, 1, exp, dp)  # Start evaluation with isTrue set to true
+
+# Driver code
+if __name__ == "__main__":
+    exp = "F|T^F"  # Example expression
+    
+    # Evaluate the expression and find the number of ways to get the result as True
+    ways = evaluateExp(exp)
+    
+    # Output the result
+    print("The total number of ways:", ways)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Function to evaluate the number of ways to parenthesize the expression
+function f(i, j, isTrue, exp, dp) {
+    // Base case 1: If i &gt; j, it's an invalid expression, return 0
+    if (i &gt; j) return 0;
+
+    // Base case 2: If i and j are the same, evaluate the single character
+    if (i === j) {
+        if (isTrue === 1) {
+            return exp[i] === 'T' ? 1 : 0;
+        } else {
+            return exp[i] === 'F' ? 1 : 0;
+        }
+    }
+
+    // If the result for this subproblem has been computed before, return it
+    if (dp[i][j][isTrue] !== -1) return dp[i][j][isTrue];
+    
+    let ways = 0;
+
+    // Iterate through the expression to divide it into left and right subexpressions
+    for (let ind = i + 1; ind &lt;= j - 1; ind += 2) {
+        // Recursively calculate the number of ways to make the left and right subexpressions true or false
+        let lT = f(i, ind - 1, 1, exp, dp);  // Number of ways to make the left expression true
+        let lF = f(i, ind - 1, 0, exp, dp);  // Number of ways to make the left expression false
+        let rT = f(ind + 1, j, 1, exp, dp);  // Number of ways to make the right expression true
+        let rF = f(ind + 1, j, 0, exp, dp);  // Number of ways to make the right expression false
+
+        // Check the operator at the current index and update ways accordingly
+        if (exp[ind] === '&amp;') {  // AND operator
+            if (isTrue === 1) ways += lT * rT;
+            else ways += lF * rT + lT * rF + lF * rF;
+        } else if (exp[ind] === '|') {  // OR operator
+            if (isTrue === 1) ways += lF * rT + lT * rF + lT * rT;
+            else ways += lF * rF;
+        } else {  // XOR operator
+            if (isTrue === 1) ways += lF * rT + lT * rF;
+            else ways += lF * rF + lT * rT;
+        }
+    }
+
+    dp[i][j][isTrue] = ways % 1000000007;  // Store the result in the DP table
+    return dp[i][j][isTrue];
+}
+
+// Function to start evaluating the expression
+function evaluateExp(exp) {
+    const n = exp.length;
+    const dp = Array.from({ length: n }, () =&gt; Array.from({ length: n }, () =&gt; [-1, -1]));  // DP table initialization
+    return f(0, n - 1, 1, exp, dp);  // Start evaluation with isTrue set to true
+}
+
+// Driver code
+const exp = "F|T^F";  // Example expression
+
+// Evaluate the expression and find the number of ways to get the result as True
+const ways = evaluateExp(exp);
+
+// Output the result
+console.log("The total number of ways:", ways);
+</code></pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+</summary>
+<p>
+</p><p><strong>Time Complexity:</strong> O(N × N × 2 × N) = O(N<sup>3</sup>), There are a total of 2 ×
+                        N<sup>2</sup> states (for each i, j, and boolean isTrue). For each state, we iterate through the
+                        partition points, which takes O(N) time.</p>
+<p><strong>Space Complexity:</strong> O(2 × N<sup>2</sup>) + O(N) auxiliary stack space, The DP
+                        array takes O(2 × N<sup>2</sup>) space, and the recursion stack (in worst case) adds O(N) more.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+
+<p><strong>Tabulation:</strong></p>
+<ol>
+<li>First of all, we handle the base case. If (i &gt; j) we return 0. To cover this case we
+                                can initialize the entire dp array with 0.</li>
+<li>Next, memoization is a top-down approach, whereas tabulation is bottom-up. Our changing
+                                parameters i and j will change in opposite directions, i.e i will change from n→1 and j
+                                will change from 1→ n. isTrue will change from 0→1.</li>
+<li>Next, we copy down the recursive logic(recurrence) inside the nested loops.</li>
+</ol>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div>
+<div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+#define ll long long
+const int mod = 1000000007;
+
+// Function to evaluate the number of ways to parenthesize the expression to get True or False
+int evaluateExp(string &amp;exp) {
+    int n = exp.size();
+    
+    // DP table to store the number of ways to evaluate the expression from i to j with isTrue (0 or 1)
+    vector&lt;vector&lt;vector&lt;ll&gt;&gt;&gt; dp(n, vector&lt;vector&lt;ll&gt;&gt;(n, vector&lt;ll&gt;(2, 0)));
+
+    // Iterate through the string from right to left for bottom-up DP
+    for (int i = n - 1; i &gt;= 0; i--) {
+        for (int j = 0; j &lt;= n - 1; j++) {
+            // Base case 1: If i &gt; j, it's an invalid expression, so continue.
+            if (i &gt; j) continue;
+
+            // Iterate through the possible values of isTrue (either 1 or 0)
+            for (int isTrue = 0; isTrue &lt;= 1; isTrue++) {
+                // Base case 2: If i == j, evaluate the single character.
+                if (i == j) {
+                    if (isTrue == 1) dp[i][j][isTrue] = exp[i] == 'T';
+                    else dp[i][j][isTrue] = exp[i] == 'F';
+                    continue;
+                }
+
+                // Recurrence logic for other subexpressions
+                ll ways = 0;
+                for (int ind = i + 1; ind &lt;= j - 1; ind += 2) {
+                    // Number of ways to make the left and right subexpressions true or false
+                    ll lT = dp[i][ind - 1][1];
+                    ll lF = dp[i][ind - 1][0];
+                    ll rT = dp[ind + 1][j][1];
+                    ll rF = dp[ind + 1][j][0];
+
+                    // Perform the operation based on the operator at the current index
+                    if (exp[ind] == '&amp;') {  // AND operator
+                        if (isTrue) ways = (ways + (lT * rT) % mod) % mod;
+                        else ways = (ways + (lF * rT) % mod + (lT * rF) % mod + (lF * rF) % mod) % mod;
+                    }
+                    else if (exp[ind] == '|') {  // OR operator
+                        if (isTrue) ways = (ways + (lF * rT) % mod + (lT * rF) % mod + (lT * rT) % mod) % mod;
+                        else ways = (ways + (lF * rF) % mod) % mod;
+                    }
+                    else {  // XOR operator
+                        if (isTrue) ways = (ways + (lF * rT) % mod + (lT * rF) % mod) % mod;
+                        else ways = (ways + (lF * rF) % mod + (lT * rT) % mod) % mod;
+                    }
+                }
+                dp[i][j][isTrue] = ways;  // Store the result in the DP table
+            }
+        }
+    }
+    return dp[0][n - 1][1];  // Return the number of ways to evaluate the entire expression as true
+}
+
+int main() {
+    string exp = "F|T^F";  // Example expression
+    
+    // Evaluate the expression and find the number of ways to get the result as True
+    int ways = evaluateExp(exp);
+    
+    // Output the result
+    cout &lt;&lt; "The total number of ways: " &lt;&lt; ways &lt;&lt; "\n";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">// Solution class to evaluate the number of ways to parenthesize an expression
+class Solution {
+
+    // Function to evaluate the number of ways to parenthesize the expression to get True or False
+    public static int f(int i, int j, int isTrue, String exp, long[][][] dp) {
+        // Base case 1: If i &gt; j, it's an invalid expression, return 0.
+        if (i &gt; j) return 0;
+        
+        // Base case 2: If i and j are the same, evaluate the single character.
+        if (i == j) {
+            if (isTrue == 1) return exp.charAt(i) == 'T' ? 1 : 0;
+            else return exp.charAt(i) == 'F' ? 1 : 0;
+        }
+
+        // If the result for this subproblem has been computed before, return it.
+        if (dp[i][j][isTrue] != -1) return (int) dp[i][j][isTrue];
+        
+        long ways = 0;
+        
+        // Iterate through the expression to divide it into left and right subexpressions
+        for (int ind = i + 1; ind &lt;= j - 1; ind += 2) {
+            // Recursively calculate the number of ways to make the left and right subexpressions true or false
+            long lT = f(i, ind - 1, 1, exp, dp);  // Number of ways to make the left expression true.
+            long lF = f(i, ind - 1, 0, exp, dp);  // Number of ways to make the left expression false.
+            long rT = f(ind + 1, j, 1, exp, dp);  // Number of ways to make the right expression true.
+            long rF = f(ind + 1, j, 0, exp, dp);  // Number of ways to make the right expression false.
+
+            // Check the operator at the current index and update ways accordingly.
+            if (exp.charAt(ind) == '&amp;') {  // AND operator
+                if (isTrue == 1) ways = (ways + (lT * rT)) % 1000000007;
+                else ways = (ways + (lF * rT) + (lT * rF) + (lF * rF)) % 1000000007;
+            }
+            else if (exp.charAt(ind) == '|') {  // OR operator
+                if (isTrue == 1) ways = (ways + (lF * rT) + (lT * rF) + (lT * rT)) % 1000000007;
+                else ways = (ways + (lF * rF)) % 1000000007;
+            }
+            else {  // XOR operator
+                if (isTrue == 1) ways = (ways + (lF * rT) + (lT * rF)) % 1000000007;
+                else ways = (ways + (lF * rF) + (lT * rT)) % 1000000007;
+            }
+        }
+        
+        dp[i][j][isTrue] = ways;
+        return (int) ways;
+    }
+
+    // Function to start evaluating the expression
+    public static int evaluateExp(String exp) {
+        int n = exp.length();
+        long[][][] dp = new long[n][n][2];  // DP table initialization
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                for (int k = 0; k &lt; 2; k++) {
+                    dp[i][j][k] = -1;
+                }
+            }
+        }
+        return (int) f(0, n - 1, 1, exp, dp);  // Start evaluation with isTrue set to true.
+    }
+
+    public static void main(String[] args) {
+        String exp = "F|T^F";  // Example expression
+        
+        // Evaluate the expression and find the number of ways to get the result as True
+        int ways = evaluateExp(exp);
+        
+        // Output the result
+        System.out.println("The total number of ways: " + ways);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Function to evaluate the number of ways to parenthesize the expression
+def f(i, j, isTrue, exp, dp):
+    # Base case 1: If i &gt; j, it's an invalid expression, return 0
+    if i &gt; j:
+        return 0
+    
+    # Base case 2: If i and j are the same, evaluate the single character
+    if i == j:
+        if isTrue == 1:
+            return 1 if exp[i] == 'T' else 0
+        else:
+            return 1 if exp[i] == 'F' else 0
+    
+    # If the result for this subproblem has been computed before, return it
+    if dp[i][j][isTrue] != -1:
+        return dp[i][j][isTrue]
+    
+    ways = 0
+    
+    # Iterate through the expression to divide it into left and right subexpressions
+    for ind in range(i + 1, j, 2):
+        # Recursively calculate the number of ways to make the left and right subexpressions true or false
+        lT = f(i, ind - 1, 1, exp, dp)  # Number of ways to make the left expression true
+        lF = f(i, ind - 1, 0, exp, dp)  # Number of ways to make the left expression false
+        rT = f(ind + 1, j, 1, exp, dp)  # Number of ways to make the right expression true
+        rF = f(ind + 1, j, 0, exp, dp)  # Number of ways to make the right expression false
+
+        # Check the operator at the current index and update ways accordingly
+        if exp[ind] == '&amp;':  # AND operator
+            if isTrue == 1:
+                ways += lT * rT
+            else:
+                ways += lF * rT + lT * rF + lF * rF
+        elif exp[ind] == '|':  # OR operator
+            if isTrue == 1:
+                ways += lF * rT + lT * rF + lT * rT
+            else:
+                ways += lF * rF
+        else:  # XOR operator
+            if isTrue == 1:
+                ways += lF * rT + lT * rF
+            else:
+                ways += lF * rF + lT * rT
+    
+    dp[i][j][isTrue] = ways % 1000000007  # Store the result in the DP table
+    return dp[i][j][isTrue]
+
+# Function to start evaluating the expression
+def evaluateExp(exp):
+    n = len(exp)
+    dp = [[[-1 for _ in range(2)] for _ in range(n)] for _ in range(n)]  # DP table initialization
+    return f(0, n - 1, 1, exp, dp)  # Start evaluation with isTrue set to true
+
+# Driver code
+if __name__ == "__main__":
+    exp = "F|T^F"  # Example expression
+    
+    # Evaluate the expression and find the number of ways to get the result as True
+    ways = evaluateExp(exp)
+    
+    # Output the result
+    print("The total number of ways:", ways)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Function to evaluate the number of ways to parenthesize the expression
+function f(i, j, isTrue, exp, dp) {
+    // Base case 1: If i &gt; j, it's an invalid expression, return 0
+    if (i &gt; j) return 0;
+
+    // Base case 2: If i and j are the same, evaluate the single character
+    if (i === j) {
+        if (isTrue === 1) {
+            return exp[i] === 'T' ? 1 : 0;
+        } else {
+            return exp[i] === 'F' ? 1 : 0;
+        }
+    }
+
+    // If the result for this subproblem has been computed before, return it
+    if (dp[i][j][isTrue] !== -1) return dp[i][j][isTrue];
+    
+    let ways = 0;
+
+    // Iterate through the expression to divide it into left and right subexpressions
+    for (let ind = i + 1; ind &lt;= j - 1; ind += 2) {
+        // Recursively calculate the number of ways to make the left and right subexpressions true or false
+        let lT = f(i, ind - 1, 1, exp, dp);  // Number of ways to make the left expression true
+        let lF = f(i, ind - 1, 0, exp, dp);  // Number of ways to make the left expression false
+        let rT = f(ind + 1, j, 1, exp, dp);  // Number of ways to make the right expression true
+        let rF = f(ind + 1, j, 0, exp, dp);  // Number of ways to make the right expression false
+
+        // Check the operator at the current index and update ways accordingly
+        if (exp[ind] === '&amp;') {  // AND operator
+            if (isTrue === 1) ways += lT * rT;
+            else ways += lF * rT + lT * rF + lF * rF;
+        } else if (exp[ind] === '|') {  // OR operator
+            if (isTrue === 1) ways += lF * rT + lT * rF + lT * rT;
+            else ways += lF * rF;
+        } else {  // XOR operator
+            if (isTrue === 1) ways += lF * rT + lT * rF;
+            else ways += lF * rF + lT * rT;
+        }
+    }
+
+    dp[i][j][isTrue] = ways % 1000000007;  // Store the result in the DP table
+    return dp[i][j][isTrue];
+}
+
+// Function to start evaluating the expression
+function evaluateExp(exp) {
+    const n = exp.length;
+    const dp = Array.from({ length: n }, () =&gt; Array.from({ length: n }, () =&gt; [-1, -1]));  // DP table initialization
+    return f(0, n - 1, 1, exp, dp);  // Start evaluation with isTrue set to true
+}
+
+// Driver code
+const exp = "F|T^F";  // Example expression
+
+// Evaluate the expression and find the number of ways to get the result as True
+const ways = evaluateExp(exp);
+
+// Output the result
+console.log("The total number of ways:", ways);
+</code></pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+</summary>
+<p>
+</p>
+<p><strong>Time Complexity: </strong>O(N*N*2 * N) ~ O(N<sup>3</sup>), There are a total of
+                        2*N<sup>2</sup> no. of states. And for each state, we are running a partitioning loop roughly
+                        for N times.</p>
+<p><strong>Space Complexity: </strong>O(2*N<sup>2</sup>), 2*N<sup>2</sup> for the dp array we are
+                        using.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

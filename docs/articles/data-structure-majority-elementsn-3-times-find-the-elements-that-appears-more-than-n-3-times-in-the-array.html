@@ -1,0 +1,976 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Majority Elements(&amp;gt;N/3 times) | Find the elements that appears more than N/3 times in the array</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Majority Elements(&amp;gt;N/3 times) | Find the elements that appears more than N/3 times in the array</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/majority-elementsn-3-times-find-the-elements-that-appears-more-than-n-3-times-in-the-array/</code></div>
+  <p><strong>Problem Statement: </strong>
+Given an integer array nums of size n. Return all elements which appear more than n/3 times in the array. The output can be returned in any order.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>  
+<strong>Input:</strong> nums = [1, 2, 1, 1, 3, 2]  
+<strong>Output:</strong> [1]  
+<strong>Explanation:</strong> Here, n / 3 = 6 / 3 = 2.  
+Therefore, the elements appearing 3 or more times are: [1].
+
+<strong>Example 2:</strong>  
+<strong>Input:</strong> nums = [1, 2, 1, 1, 3, 2, 2]  
+<strong>Output:</strong> [1, 2]  
+<strong>Explanation:</strong> Here, n / 3 = 7 / 3 = 2.  
+Therefore, the elements appearing 3 or more times are: [1, 2].</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/majority-element-ii" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Brute Force
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li><strong>Can there be more than 2 majority elements?</strong></li>
+<ul>
+<li>To understand why there can't be more than two majority elements (elements that appear more than n/3 times) in an array of size n, let's consider the following reasoning:</li>
+<ul>
+<li>A majority element must appear more than n/3 times. Let’s assume there are more than two majority elements, say A, B, and C.</li>
+<li>The combined frequency of these three elements would be: frequency of A + frequency of B + frequency of C &gt; n/3 + n/3 + n/3 = n.</li>
+<li>Since the total occurrences of all elements cannot exceed n (the size of the array), the combined frequency of any three elements each appearing more than n/3 times would exceed the total size of the array, leading to a contradiction.</li>
+<li>Therefore, it is mathematically impossible to have more than two elements that each appear more than n/3 times in the array.</li>
+</ul>
+</ul>
+<li><strong>Approach:</strong></li>
+<ul>
+<li>Iterate through the array and select each element one by one.</li>
+<li>For each unique element, run another loop to count its occurrences in the array.</li>
+<li>If any element occurs more than floor(N/3) times, include it in the result array.</li>
+<li>If a previously included element is found during traversal, skip it to avoid counting duplicates.</li>
+<li>If the result array already contains 2 elements, break out of the loop, as there can’t be more than two majority elements.</li>
+<li>Return the result array containing the majority elements or return -1 if no such element is found.</li>
+</ul>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find majority elements in an array
+    vector&lt;int&gt; majorityElementTwo(vector&lt;int&gt;&amp; nums) {
+        
+        // Size of the array
+        int n = nums.size(); 
+        
+        // List of answers
+        vector&lt;int&gt; result;
+        
+         for (int i = 0; i &lt; n; i++) {
+             
+        /*Checking if nums[i] is not 
+        already part of the answer*/
+        if (result.size() == 0 || result[0] != nums[i]) {
+            
+            int cnt = 0;
+            
+            for (int j = 0; j &lt; n; j++) {
+                // counting the frequency of nums[i]
+                if (nums[j] == nums[i]) {
+                    cnt++;
+                }
+            }
+
+            // check if frquency is greater than n/3:
+            if (cnt &gt; (n / 3))
+                result.push_back(nums[i]);
+        }
+        
+        //if result size is equal to 2 break out of loop
+        if (result.size() == 2) break;
+    }
+    
+    //return the majority elements
+    return result;
+    }
+};
+
+int main() {
+    vector&lt;int&gt; arr = {11, 33, 33, 11, 33, 11};
+    
+    // Create an instance of Solution class
+    Solution sol;
+
+    vector&lt;int&gt; ans = sol.majorityElementTwo(arr);
+    
+    // Print the majority elements found
+    cout &lt;&lt; "The majority elements are: ";
+    for (auto it : ans) {
+        cout &lt;&lt; it &lt;&lt; " ";
+    }
+    cout &lt;&lt; "\n";
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+public class Solution {
+    // Function to find majority elements in an array
+    public List&lt;Integer&gt; majorityElementTwo(int[] nums) {
+        int n = nums.length;
+        List&lt;Integer&gt; result = new ArrayList&lt;&gt;();
+
+        for (int i = 0; i &lt; n; i++) {
+            // Check if nums[i] is not already part of the result
+            if (result.size() == 0 || result.get(0) != nums[i] &amp;&amp; (result.size() &lt; 2 || result.get(1) != nums[i])) {
+                int count = 0;
+                for (int j = 0; j &lt; n; j++) {
+                    if (nums[j] == nums[i]) {
+                        count++;
+                    }
+                }
+                if (count &gt; n / 3) {
+                    result.add(nums[i]);
+                }
+            }
+
+            if (result.size() == 2) {
+                break;
+            }
+        }
+
+        return result;
+    }
+
+    // Main method
+    public static void main(String[] args) {
+        int[] arr = {11, 33, 33, 11, 33, 11};
+
+        Solution sol = new Solution();
+        List&lt;Integer&gt; ans = sol.majorityElementTwo(arr);
+
+        System.out.print("The majority elements are: ");
+        for (int it : ans) {
+            System.out.print(it + " ");
+        }
+        System.out.println();
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">from typing import List
+
+class Solution:
+    # Function to find majority elements in an array
+    def majorityElementTwo(self, nums: List[int]) -&gt; List[int]:
+        
+        # Size of the array
+        n = len(nums)
+        
+        # List of answers
+        result = []
+        
+        for i in range(n):
+            """ Checking if nums[i] is not 
+            already part of the answer """
+            if len(result) == 0 or result[0] != nums[i]:
+                
+                cnt = 0
+                
+                for j in range(n):
+                    # counting the frequency of nums[i]
+                    if nums[j] == nums[i]:
+                        cnt += 1
+                
+                # check if frequency is greater than n/3
+                if cnt &gt; (n // 3):
+                    result.append(nums[i])
+                
+            # if result size is equal to 2 break out of loop
+            if len(result) == 2:
+                break
+        
+        # return the majority elements
+        return result
+
+if __name__ == "__main__":
+    arr = [11, 33, 33, 11, 33, 11]
+    
+    # Create an instance of Solution class
+    sol = Solution()
+    
+    ans = sol.majorityElementTwo(arr)
+    
+    # Print the majority elements found
+    print("The majority elements are:", end=" ")
+    for it in ans:
+        print(it, end=" ")
+    print()</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find majority elements in an array
+    majorityElementTwo(nums) {
+        // Size of the array
+        let n = nums.length;
+        
+        // List of answers
+        let result = [];
+        
+        for (let i = 0; i &lt; n; i++) {
+            /* Checking if nums[i] is not 
+            already part of the answer */
+            if (result.length === 0 || result[0] !== nums[i]) {
+                let cnt = 0;
+                for (let j = 0; j &lt; n; j++) {
+                    // counting the frequency of nums[i]
+                    if (nums[j] === nums[i]) {
+                        cnt++;
+                    }
+                }
+                
+                // check if frequency is greater than n/3
+                if (cnt &gt; Math.floor(n / 3)) {
+                    result.push(nums[i]);
+                }
+            }
+            
+            // if result size is equal to 2 break out of loop
+            if (result.length === 2) {
+                break;
+            }
+        }
+        
+        // return the majority elements
+        return result;
+    }
+}
+
+let arr = [11, 33, 33, 11, 33, 11];
+
+// Create an instance of Solution class
+let sol = new Solution();
+
+let ans = sol.majorityElementTwo(arr);
+
+// Print the majority elements found
+console.log("The majority elements are: " + ans.join(" "));</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity:</strong> O(N^2), where N is the size of the array. This is because for each element, we are traversing the entire array to count its occurrences.
+                        <br/><br/>
+<strong>Space Complexity:</strong> O(1), as we are using a constant amount of space for the result array, which can hold at most 2 elements.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="better-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Better Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Use a hashmap (or a frequency array if the array size is small) to store the elements as key-value pairs, where the key is the element and the value is the number of times it occurs in the array.</li>
+<li>Traverse the entire array, updating the occurrences of each element in the hashmap.</li>
+<li>After the traversal, check the hashmap to see if any element's value (frequency) is greater than the floor of N/3. If it is, include the element in the answer array.</li>
+<li>If the size of the answer array reaches 2, break out of the loop, as there cannot be more than two majority elements.</li>
+<li>Finally, return the answer array containing the majority elements. If no such elements are found, return -1.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find majority elements in an array
+    vector&lt;int&gt; majorityElementTwo(vector&lt;int&gt;&amp; nums) {
+        
+        // size of the array
+        int n = nums.size(); 
+        
+        // list of answers
+        vector&lt;int&gt; result; 
+        
+        // declaring a map
+        unordered_map&lt;int, int&gt; mpp;
+        
+        // least occurrence of the majority element
+        int mini = int(n / 3) + 1;
+        
+        // storing the elements with its occurrence
+        for (int i = 0; i &lt; n; i++) {
+            mpp[nums[i]]++;
+            
+            // checking if nums[i] is the majority element
+            if (mpp[nums[i]] == mini) {
+                result.push_back(nums[i]);
+            }
+            
+            // if result size is equal to 2 break out of loop
+            if (result.size() == 2) {
+                break;
+            }
+        }
+        
+        // return the majority elements
+        return result;
+    }
+};
+
+int main() {
+    vector&lt;int&gt; arr = {11, 33, 33, 11, 33, 11};
+    
+    // Create an instance of Solution class
+    Solution sol;
+    
+    vector&lt;int&gt; ans = sol.majorityElementTwo(arr);
+    
+    // Print the majority elements found
+    cout &lt;&lt; "The majority elements are: ";
+    for (auto it : ans) {
+        cout &lt;&lt; it &lt;&lt; " ";
+    }
+    cout &lt;&lt; "\n";
+    
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to find majority elements in an array
+    public List&lt;Integer&gt; majorityElementTwo(int[] nums) {
+        int n = nums.length;
+        List&lt;Integer&gt; result = new ArrayList&lt;&gt;();
+        Map&lt;Integer, Integer&gt; mpp = new HashMap&lt;&gt;();
+        int mini = n / 3 + 1;
+
+        for (int i = 0; i &lt; n; i++) {
+            mpp.put(nums[i], mpp.getOrDefault(nums[i], 0) + 1);
+
+            // Add to result only when the count just reaches mini
+            if (mpp.get(nums[i]) == mini) {
+                result.add(nums[i]);
+            }
+
+            if (result.size() == 2) break;
+        }
+
+        return result;
+    }
+}
+
+// Separate main class
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {11, 33, 33, 11, 33, 11};
+
+        Solution sol = new Solution();
+        List&lt;Integer&gt; ans = sol.majorityElementTwo(arr);
+
+        System.out.print("The majority elements are: ");
+        for (int it : ans) {
+            System.out.print(it + " ");
+        }
+        System.out.println();
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">from collections import defaultdict
+from typing import List
+
+class Solution:
+    # Function to find majority elements in an array
+    def majorityElementTwo(self, nums: List[int]) -&gt; List[int]:
+        # Size of the array
+        n = len(nums)
+
+        # List of answers
+        result = []
+
+        # Declaring a map
+        mpp = defaultdict(int)
+
+        # Least occurrence of the majority element
+        mini = n // 3 + 1
+
+        # Storing the elements with its occurrence
+        for num in nums:
+            mpp[num] += 1
+
+            # Checking if num is the majority element
+            if mpp[num] == mini:
+                result.append(num)
+
+            # If result size is equal to 2 break out of loop
+            if len(result) == 2:
+                break
+
+        # Return the majority elements
+        return result
+
+if __name__ == "__main__":
+    arr = [11, 33, 33, 11, 33, 11]
+    
+    # Create an instance of Solution class
+    sol = Solution()
+    
+    ans = sol.majorityElementTwo(arr)
+    
+    # Print the majority elements found
+    print("The majority elements are:", *ans)</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find majority elements in an array
+    majorityElementTwo(nums) {
+        
+        // Size of the array
+        let n = nums.length;
+
+        // List of answers
+        let result = [];
+
+        // Declaring a map
+        let mpp = new Map();
+
+        // Least occurrence of the majority element
+        let mini = Math.floor(n / 3) + 1;
+
+        // Storing the elements with its occurrence
+        for (let i = 0; i &lt; n; i++) {
+            let num = nums[i];
+            if (!mpp.has(num)) {
+                mpp.set(num, 0);
+            }
+            mpp.set(num, mpp.get(num) + 1);
+
+            // Checking if num is the majority element
+            if (mpp.get(num) === mini) {
+                result.push(num);
+            }
+
+            // If result size is equal to 2 break out of loop
+            if (result.length === 2) {
+                break;
+            }
+        }
+
+        // Return the majority elements
+        return result;
+    }
+}
+
+let arr = [11, 33, 33, 11, 33, 11];
+
+// Create an instance of Solution class
+let sol = new Solution();
+
+let ans = sol.majorityElementTwo(arr);
+
+// Print the majority elements found
+console.log("The majority elements are:", ans.join(" "));</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity:</strong> O(N * logN), where N is the size of the given array. For using a map data structure, where insertion in the map takes logN time, and we are doing it for N elements. So, it results in the first term O(N * logN). On using unordered_map instead, the first term will be O(N) for the best and average case, and for the worst case, it will be O(N<sup>2</sup>).<br/><br/>
+<strong>Space Complexity:</strong> O(N) for using a map data structure. A list that stores a maximum of 2 elements is also used, but that space used is so small that it can be considered constant.
+
+                    </p>
+</details>
+</div>
+</details>
+</div>
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Initialize four variables: <code>cnt1</code> and <code>cnt2</code> for tracking the counts of elements, and <code>el1</code> and <code>el2</code> for storing the potential majority elements.</li>
+<li>Traverse through the given array:</li>
+<ul>
+<li>If <code>cnt1</code> is 0 and the current element is not equal to <code>el2</code>, set <code>el1</code> to the current element and increment <code>cnt1</code> by 1.</li>
+<li>If <code>cnt2</code> is 0 and the current element is not equal to <code>el1</code>, set <code>el2</code> to the current element and increment <code>cnt2</code> by 1.</li>
+<li>If the current element is equal to <code>el1</code>, increment <code>cnt1</code> by 1.</li>
+<li>If the current element is equal to <code>el2</code>, increment <code>cnt2</code> by 1.</li>
+<li>In all other cases, decrease <code>cnt1</code> and <code>cnt2</code> by 1.</li>
+</ul>
+<li>After processing all elements, <code>el1</code> and <code>el2</code> should be the candidate elements for majority. To confirm:</li>
+<ul>
+<li>Use another loop to manually check the counts of <code>el1</code> and <code>el2</code> in the array.</li>
+<li>If either <code>el1</code> or <code>el2</code>'s count is greater than <code>floor(N/3)</code>, it is considered a valid majority element.</li>
+</ul>
+</ul>
+<p><img height="457" loading="lazy" src="../assets/img/51c044fb382886d7.png" width="481"/></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find majority elements in an array
+    vector&lt;int&gt; majorityElementTwo(vector&lt;int&gt;&amp; nums) {
+        
+        // Size of the array
+        int n = nums.size(); 
+
+        // Counts for elements el1 and el2
+        int cnt1 = 0, cnt2 = 0;
+        
+        /*Initialize Element 1 and 
+        Element 2 with INT_MIN value*/
+        int el1 = INT_MIN, el2 = INT_MIN;
+
+        /*Find the potential candidates using
+        Boyer Moore's Voting Algorithm*/
+        for (int i = 0; i &lt; n; i++) {
+            
+            if (cnt1 == 0 &amp;&amp; el2 != nums[i]) {
+                cnt1 = 1;
+                // Initialize el1 as nums[i]
+                el1 = nums[i]; 
+            }
+            else if (cnt2 == 0 &amp;&amp; el1 != nums[i]) {
+                cnt2 = 1;
+                // Initialize el2 as nums[i]
+                el2 = nums[i]; 
+            } 
+            else if (nums[i] == el1) {
+                // Increment count for el1
+                cnt1++;
+            } 
+            else if (nums[i] == el2) {
+                // Increment count for el2
+                cnt2++; 
+            } 
+            else {
+                // Decrement count for el1
+                cnt1--; 
+                 // Decrement count for el2
+                cnt2--;
+            }
+        }
+
+        //Validate the candidates by counting occurrences in nums
+        //Reset counts for el1 and el2
+        cnt1 = 0, cnt2 = 0; 
+        
+        for (int i = 0; i &lt; n; i++) {
+            if (nums[i] == el1) {
+                // Count occurrences of el1
+                cnt1++; 
+            }
+            if (nums[i] == el2) {
+                 // Count occurrences of el2
+                cnt2++;
+            }
+        }
+
+        /* Determine the minimum count
+        required for a majority element*/
+        int mini = n / 3 + 1;
+        
+        // List of answers
+        vector&lt;int&gt; result; 
+
+        /*Add elements to the result vector
+        if they appear more than n/3 times*/
+        if (cnt1 &gt;= mini) {
+            result.push_back(el1);
+        }
+        if (cnt2 &gt;= mini &amp;&amp; el1 != el2) {
+            // Avoid adding duplicate if el1 == el2
+            result.push_back(el2); 
+        }
+
+        // Uncomment the following line if you want to sort the answer array
+        // sort(result.begin(), result.end()); // TC --&gt; O(2*log2) ~ O(1);
+
+        //return the majority elements
+        return result;
+    }
+};
+
+int main() {
+    vector&lt;int&gt; arr = {11, 33, 33, 11, 33, 11};
+    
+    // Create an instance of Solution class
+    Solution sol;
+  
+    vector&lt;int&gt; ans = sol.majorityElementTwo(arr);
+    
+    // Print the majority elements found
+    cout &lt;&lt; "The majority elements are: ";
+    for (auto it : ans) {
+        cout &lt;&lt; it &lt;&lt; " ";
+    }
+    cout &lt;&lt; "\n";
+    
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to find majority elements in an array
+    public List&lt;Integer&gt; majorityElementTwo(int[] nums) {
+        int n = nums.length;
+        int cnt1 = 0, cnt2 = 0;
+        int el1 = Integer.MIN_VALUE, el2 = Integer.MIN_VALUE;
+
+        for (int i = 0; i &lt; n; i++) {
+            if (cnt1 == 0 &amp;&amp; el2 != nums[i]) {
+                cnt1 = 1;
+                el1 = nums[i]; 
+            } else if (cnt2 == 0 &amp;&amp; el1 != nums[i]) {
+                cnt2 = 1;
+                el2 = nums[i]; 
+            } else if (nums[i] == el1) {
+                cnt1++;
+            } else if (nums[i] == el2) {
+                cnt2++; 
+            } else {
+                cnt1--; 
+                cnt2--;
+            }
+        }
+
+        cnt1 = 0; cnt2 = 0; 
+        for (int i = 0; i &lt; n; i++) {
+            if (nums[i] == el1) cnt1++; 
+            if (nums[i] == el2) cnt2++;
+        }
+
+        int mini = n / 3 + 1;
+        List&lt;Integer&gt; result = new ArrayList&lt;&gt;(); 
+        if (cnt1 &gt;= mini) result.add(el1);
+        if (cnt2 &gt;= mini &amp;&amp; el1 != el2) result.add(el2);
+
+        return result;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {11, 33, 33, 11, 33, 11};
+
+        Solution sol = new Solution();
+        List&lt;Integer&gt; ans = sol.majorityElementTwo(arr);
+
+        System.out.print("The majority elements are: ");
+        for (int it : ans) {
+            System.out.print(it + " ");
+        }
+        System.out.println();
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">from typing import List
+
+class Solution:
+    # Function to find majority elements in an array
+    def majorityElementTwo(self, nums: List[int]) -&gt; List[int]:
+        
+        # Size of the array
+        n = len(nums)
+
+        # Counts for elements el1 and el2
+        cnt1, cnt2 = 0, 0
+        
+        """Initialize Element 1 and 
+        Element 2 with INT_MIN value"""
+        el1, el2 = float('-inf'), float('-inf')
+
+        """Find the potential candidates using
+        Boyer Moore's Voting Algorithm"""
+        for num in nums:
+            if cnt1 == 0 and el2 != num:
+                cnt1 = 1
+                # Initialize el1 as num
+                el1 = num 
+            elif cnt2 == 0 and el1 != num:
+                cnt2 = 1
+                # Initialize el2 as num
+                el2 = num 
+            elif num == el1:
+                # Increment count for el1
+                cnt1 += 1
+            elif num == el2:
+                # Increment count for el2
+                cnt2 += 1 
+            else:
+                # Decrement count for el1
+                cnt1 -= 1 
+                 # Decrement count for el2
+                cnt2 -= 1
+
+        #Validate the candidates by counting occurrences in nums
+        #Reset counts for el1 and el2
+        cnt1, cnt2 = 0, 0 
+        
+        for num in nums:
+            if num == el1:
+                # Count occurrences of el1
+                cnt1 += 1 
+            if num == el2:
+                 # Count occurrences of el2
+                cnt2 += 1
+
+        """ Determine the minimum count
+        required for a majority element"""
+        mini = n // 3 + 1
+        
+        # List of answers
+        result = []
+
+        """Add elements to the result list
+        if they appear more than n/3 times"""
+        if cnt1 &gt;= mini:
+            result.append(el1)
+            
+        if cnt2 &gt;= mini and el1 != el2:
+            # Avoid adding duplicate if el1 == el2
+            result.append(el2)
+
+        # Uncomment the following line if you want to sort the answer list
+        # result.sort() # TC --&gt; O(2*log2) ~ O(1);
+
+        #return the majority elements
+        return result
+
+if __name__ == "__main__":
+    arr = [11, 33, 33, 11, 33, 11]
+    
+    # Create an instance of Solution class
+    sol = Solution()
+  
+    ans = sol.majorityElementTwo(arr)
+    
+    # Print the majority elements found
+    print("The majority elements are:", *ans)</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find majority elements in an array
+    majorityElementTwo(nums) {
+        
+        // Size of the array
+        let n = nums.length;
+
+        // Counts for elements el1 and el2
+        let cnt1 = 0, cnt2 = 0;
+        
+        /* Initialize Element 1 and 
+        Element 2 with INT_MIN value */
+        let el1 = Number.MIN_SAFE_INTEGER, el2 = Number.MIN_SAFE_INTEGER;
+
+        /* Find the potential candidates using
+        Boyer Moore's Voting Algorithm */
+        for (let i = 0; i &lt; n; i++) {
+            if (cnt1 === 0 &amp;&amp; el2 !== nums[i]) {
+                cnt1 = 1;
+                // Initialize el1 as nums[i]
+                el1 = nums[i]; 
+            } else if (cnt2 === 0 &amp;&amp; el1 !== nums[i]) {
+                cnt2 = 1;
+                // Initialize el2 as nums[i]
+                el2 = nums[i]; 
+            } else if (nums[i] === el1) {
+                // Increment count for el1
+                cnt1++;
+            } else if (nums[i] === el2) {
+                // Increment count for el2
+                cnt2++; 
+            } else {
+                // Decrement count for el1
+                cnt1--; 
+                // Decrement count for el2
+                cnt2--;
+            }
+        }
+
+        //Validate the candidates by counting occurrences in nums
+        //Reset counts for el1 and el2
+        cnt1 = 0; cnt2 = 0; 
+        
+        for (let i = 0; i &lt; n; i++) {
+            if (nums[i] === el1) {
+                // Count occurrences of el1
+                cnt1++; 
+            }
+            if (nums[i] === el2) {
+                // Count occurrences of el2
+                cnt2++;
+            }
+        }
+
+        /* Determine the minimum count
+        required for a majority element */
+        let mini = Math.floor(n / 3) + 1;
+        
+        // List of answers
+        let result = [];
+
+        /* Add elements to the result array
+        if they appear more than n/3 times */
+        if (cnt1 &gt;= mini) {
+            result.push(el1);
+        }
+        if (cnt2 &gt;= mini &amp;&amp; el1 !== el2) {
+            // Avoid adding duplicate if el1 == el2
+            result.push(el2); 
+        }
+
+        // Uncomment the following line if you want to sort the answer array
+        // result.sort((a, b) =&gt; a - b); // TC --&gt; O(2*log2) ~ O(1);
+
+        //return the majority elements
+        return result;
+    }
+}
+
+// Main function to test the solution
+let arr = [11, 33, 33, 11, 33, 11];
+
+//Create an instance of Solution class
+let sol = new Solution();
+
+let ans = sol.majorityElementTwo(arr);
+
+// Print the majority elements found
+console.log("The majority elements are:", ...ans);</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(N)</strong>, where N is the size of the input array. We traverse the array twice: once to find potential candidates and once to validate them.
+                        <br/><br/>
+<strong>Space Complexity: O(1)</strong>, as we are using a constant amount of space for the counters and candidate elements, regardless of the input size.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Minimum insertions to make string palindrome | DP-29</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Minimum insertions to make string palindrome | DP-29</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/minimum-insertions-to-make-string-palindrome-dp-29/</code></div>
+  <p><strong>Problem Statement: </strong> Given a string s, find the minimum number of insertions needed to make it a palindrome. A palindrome is a sequence that reads the same backward as forward. You can insert characters at any position in the string.
+</p>
+<p><strong>Pre-req: </strong><a href="https://takeuforward.org/data-structure/longest-common-subsequence-dp-25/" rel="noopener" target="_blank">Longest Common Subsequence</a>, <a href="https://takeuforward.org/data-structure/longest-palindromic-subsequence-dp-28/" rel="noopener" target="_blank">Longest Palindromic Subsequence</a>.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input:  s = "abcaa"</span>
+<span>Output: 2</span>
+<span>Explanation: Insert 2 characters "c", and "b" to make "abcacba", which is a palindrome.</span>
+<p></p>
+<span>Input : s = "ba"</span>
+<span>Output: 1</span>
+<span>Explanation : Insert "a" at the beginning to make "aba", which is a palindrome.</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/minimum-insertions-to-make-string-palindrome" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better.
+            It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Tabulation Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+  We need to find the minimum insertions required to make a string palindrome. Let us keep the 'minimum' criteria aside and think, how can we make any given string palindrome by inserting characters?<br/><br/>The easiest way is to add the reverse of the string at the back of the original string as shown below. This will make any string palindrome.
+  <p><img height="174" loading="lazy" src="../assets/img/b4d2038c9dfcd89c.png" width="447"/></p>
+  Here the number of characters inserted will be equal to n (length of the string). This is the maximum number of characters we can insert to make strings palindrome. To minimize the insertions, we will first try to refrain from adding those characters again which are already making the given string palindrome. For the given example, “aaa”, “aba”,”aca”, any of these are themselves palindromic components of the string. We can take any of them( as all are of equal length) and keep them intact.
+  <p><img height="179" loading="lazy" src="../assets/img/c5e957711f6bbb01.png" width="329"/></p>
+  Now, there are two characters(‘b’ and ‘c’) remaining which prevent the string from being a palindrome. We can reverse their order and add them to the string to make the entire string palindrome.
+  <p><img height="278" loading="lazy" src="../assets/img/94371ac2530047c6.png" width="454"/></p>
+  In order to minimize the insertions, we need to find the length of the longest palindromic component or in other words, the longest palindromic subsequence.<br/>
+Minimum Insertion required = n(length of the string) - length of longest palindromic subsequence.
+<p></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Define a class named Solution
+class Solution {
+public:
+
+    // Function to calculate Longest Common Subsequence
+    int lcs(string s1, string s2) {
+        
+        // Get sizes of both strings
+        int n = s1.size();
+        int m = s2.size();
+
+        // Create a dp table of size (n+1) x (m+1)
+        vector&lt;vector&lt;int&gt;&gt; dp(n + 1, vector&lt;int&gt;(m + 1, -1));
+
+        // Initialize first row as 0
+        for (int i = 0; i &lt;= n; i++) {
+            dp[i][0] = 0;
+        }
+
+        // Initialize first column as 0
+        for (int i = 0; i &lt;= m; i++) {
+            dp[0][i] = 0;
+        }
+
+        // Fill dp table using bottom-up approach
+        for (int ind1 = 1; ind1 &lt;= n; ind1++) {
+            for (int ind2 = 1; ind2 &lt;= m; ind2++) {
+
+                // If characters match, add 1 to previous diagonal
+                if (s1[ind1 - 1] == s2[ind2 - 1])
+                    dp[ind1][ind2] = 
+                        1 + dp[ind1 - 1][ind2 - 1];
+
+                // Else take max from top or left
+                else
+                    dp[ind1][ind2] = 
+                        max(dp[ind1 - 1][ind2], 
+                            dp[ind1][ind2 - 1]);
+            }
+        }
+
+        // Return bottom-right value
+        return dp[n][m];
+    }
+
+    // Function to find length of Longest Palindromic Subsequence
+    int longestPalindromeSubsequence(string s) {
+        
+        // Reverse the string
+        string t = s;
+        reverse(s.begin(), s.end());
+
+        // LCS of s and its reverse is the LPS
+        return lcs(s, t);
+    }
+
+    // Function to find min insertions to make string a palindrome
+    int minInsertion(string s) {
+        
+        // Get length of input string
+        int n = s.size();
+
+        // Get length of longest palindromic subsequence
+        int k = longestPalindromeSubsequence(s);
+
+        // Return total - palindromic length
+        return n - k;
+    }
+};
+
+// Main function
+int main() {
+    
+    // Create object of Solution class
+    Solution obj;
+
+    // Input string
+    string s = "abcaa";
+
+    // Call minInsertion and print result
+    cout &lt;&lt; "The Minimum insertions required to make string palindrome: "
+         &lt;&lt; obj.minInsertion(s);
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+
+    // Function to calculate Longest Common Subsequence
+    public int lcs(String s1, String s2) {
+
+        // Get sizes of strings
+        int n = s1.length();
+        int m = s2.length();
+
+        // Create dp array
+        int[][] dp = new int[n + 1][m + 1];
+
+        // Fill dp array
+        for (int ind1 = 1; ind1 &lt;= n; ind1++) {
+            for (int ind2 = 1; ind2 &lt;= m; ind2++) {
+
+                // If characters match
+                if (s1.charAt(ind1 - 1) == s2.charAt(ind2 - 1)) {
+                    dp[ind1][ind2] = 
+                        1 + dp[ind1 - 1][ind2 - 1];
+                }
+
+                // If they don't match
+                else {
+                    dp[ind1][ind2] = 
+                        Math.max(dp[ind1 - 1][ind2], 
+                                 dp[ind1][ind2 - 1]);
+                }
+            }
+        }
+
+        // Return bottom-right value
+        return dp[n][m];
+    }
+
+    // Function to calculate LPS
+    public int longestPalindromeSubsequence(String s) {
+        
+        // Reverse string
+        String t = new StringBuilder(s).reverse().toString();
+
+        // LCS of s and reverse
+        return lcs(s, t);
+    }
+
+    // Function to calculate minimum insertions
+    public int minInsertion(String s) {
+
+        // Get length
+        int n = s.length();
+
+        // Get LPS length
+        int k = longestPalindromeSubsequence(s);
+
+        // Return answer
+        return n - k;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        // Create object
+        Solution sol = new Solution();
+
+        // Input string
+        String s = "abcaa";
+
+        // Print result
+        System.out.println(
+            "The Minimum insertions required to make string palindrome: " + 
+            sol.minInsertion(s));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+
+    # Function to calculate LCS
+    def lcs(self, s1, s2):
+
+        # Get sizes
+        n = len(s1)
+        m = len(s2)
+
+        # Create dp array
+        dp = [[0] * (m + 1) for _ in range(n + 1)]
+
+        # Fill dp array
+        for ind1 in range(1, n + 1):
+            for ind2 in range(1, m + 1):
+
+                # If characters match
+                if s1[ind1 - 1] == s2[ind2 - 1]:
+                    dp[ind1][ind2] = 1 + dp[ind1 - 1][ind2 - 1]
+
+                # If not
+                else:
+                    dp[ind1][ind2] = max(
+                        dp[ind1 - 1][ind2], 
+                        dp[ind1][ind2 - 1]
+                    )
+
+        # Return result
+        return dp[n][m]
+
+    # Function to calculate LPS
+    def longestPalindromeSubsequence(self, s):
+        
+        # Reverse string
+        t = s[::-1]
+
+        # Return LCS of s and reverse
+        return self.lcs(s, t)
+
+    # Function to get min insertions
+    def minInsertion(self, s):
+
+        # Get LPS
+        k = self.longestPalindromeSubsequence(s)
+
+        # Return result
+        return len(s) - k
+
+
+# Main driver
+if __name__ == "__main__":
+    
+    # Create object
+    sol = Solution()
+
+    # Input string
+    s = "abcaa"
+
+    # Print result
+    print("The Minimum insertions required to make string palindrome:",
+          sol.minInsertion(s))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+
+    // Function to calculate LCS
+    lcs(s1, s2) {
+
+        // Get lengths
+        const n = s1.length;
+        const m = s2.length;
+
+        // Create dp array
+        const dp = Array.from({ length: n + 1 }, () =&gt; 
+                   Array(m + 1).fill(0));
+
+        // Fill dp array
+        for (let ind1 = 1; ind1 &lt;= n; ind1++) {
+            for (let ind2 = 1; ind2 &lt;= m; ind2++) {
+
+                // If characters match
+                if (s1[ind1 - 1] === s2[ind2 - 1]) {
+                    dp[ind1][ind2] = 
+                        1 + dp[ind1 - 1][ind2 - 1];
+                }
+
+                // If not
+                else {
+                    dp[ind1][ind2] = Math.max(
+                        dp[ind1 - 1][ind2], 
+                        dp[ind1][ind2 - 1]
+                    );
+                }
+            }
+        }
+
+        // Return final result
+        return dp[n][m];
+    }
+
+    // Function to get LPS
+    longestPalindromeSubsequence(s) {
+
+        // Reverse string
+        const t = s.split('').reverse().join('');
+
+        // Return LCS of s and reverse
+        return this.lcs(s, t);
+    }
+
+    // Function to get min insertions
+    minInsertion(s) {
+
+        // Get LPS
+        const k = this.longestPalindromeSubsequence(s);
+
+        // Return result
+        return s.length - k;
+    }
+}
+
+// Main
+const sol = new Solution();
+
+// Input
+const s = "abcaa";
+
+// Output result
+console.log("The Minimum insertions required to make string palindrome:",
+            sol.minInsertion(s));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N*N)</strong>, we fill the entire DP array of size N*N one by one.<br/>
+<strong>Space Complexity: O(N*N)</strong>, additional space used to store DP array.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Space Optimized Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+                        If we look closely, we are essentially using only two rows in our DP table: dp[ind-1][ ] and dp[ind][ ]. <br/>This means we don’t need to maintain the entire 2D array. Instead, we can optimize space by using two 1D arrays — prev and cur, where prev represents dp[ind-1] and cur represents dp[ind].<br/><br/>
+
+We can simply replace all instances of dp[ind-1] with prev, and dp[ind] with cur. After completing each inner iteration, we can update prev = cur so that the current row becomes the previous row for the next step.<p></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+
+public:
+
+    // Function to compute LCS using 2-row DP
+    int lcs(string s1, string s2) {
+
+        // Get sizes
+        int n = s1.size();
+        int m = s2.size();
+
+        // Initialize prev and cur rows
+        vector&lt;int&gt; prev(m + 1, 0), cur(m + 1, 0);
+
+        // Fill rows
+        for (int ind1 = 1; ind1 &lt;= n; ind1++) {
+            for (int ind2 = 1; ind2 &lt;= m; ind2++) {
+
+                // If characters match
+                if (s1[ind1 - 1] == s2[ind2 - 1])
+                    cur[ind2] = 1 + prev[ind2 - 1];
+
+                // Else take max from prev row or left
+                else
+                    cur[ind2] = max(prev[ind2], cur[ind2 - 1]);
+            }
+
+            // Move cur to prev
+            prev = cur;
+        }
+
+        // Return result
+        return prev[m];
+    }
+
+    // Function to compute LPS
+    int longestPalindromeSubsequence(string s) {
+        string t = s;
+        reverse(t.begin(), t.end());
+        return lcs(s, t);
+    }
+
+    // Function to compute min insertions
+    int minInsertion(string s) {
+        int n = s.size();
+        int k = longestPalindromeSubsequence(s);
+        return n - k;
+    }
+};
+
+int main() {
+    Solution sol;
+    string s = "abcaa";
+    cout &lt;&lt; "The Minimum insertions required to make string palindrome: "
+         &lt;&lt; sol.minInsertion(s) &lt;&lt; endl;
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+
+    // Function to compute LCS using 2-row DP
+    public int lcs(String s1, String s2) {
+
+        // Get sizes
+        int n = s1.length();
+        int m = s2.length();
+
+        // Initialize prev and cur rows
+        int[] prev = new int[m + 1];
+        int[] cur = new int[m + 1];
+
+        // Fill rows
+        for (int ind1 = 1; ind1 &lt;= n; ind1++) {
+            for (int ind2 = 1; ind2 &lt;= m; ind2++) {
+
+                // If characters match
+                if (s1.charAt(ind1 - 1) == s2.charAt(ind2 - 1))
+                    cur[ind2] = 1 + prev[ind2 - 1];
+
+                // Else take max from prev row or left
+                else
+                    cur[ind2] = Math.max(prev[ind2], cur[ind2 - 1]);
+            }
+
+            // Move cur to prev
+            prev = cur.clone();
+        }
+
+        // Return result
+        return prev[m];
+    }
+
+    // Function to compute LPS
+    public int longestPalindromeSubsequence(String s) {
+        StringBuilder sb = new StringBuilder(s);
+        sb.reverse();
+        String t = sb.toString();
+        return lcs(s, t);
+    }
+
+    // Function to compute min insertions
+    public int minInsertion(String s) {
+        int n = s.length();
+        int k = longestPalindromeSubsequence(s);
+        return n - k;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        String s = "abcaa";
+        System.out.println(
+            "The Minimum insertions required to make string palindrome: " 
+            + sol.minInsertion(s)
+        );
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+
+    # Function to compute LCS with space optimization
+    def lcs(self, s1, s2):
+        n, m = len(s1), len(s2)
+        prev = [0] * (m + 1)
+        cur = [0] * (m + 1)
+
+        for ind1 in range(1, n + 1):
+            for ind2 in range(1, m + 1):
+
+                # If characters match
+                if s1[ind1 - 1] == s2[ind2 - 1]:
+                    cur[ind2] = 1 + prev[ind2 - 1]
+
+                # Else take max
+                else:
+                    cur[ind2] = max(prev[ind2], cur[ind2 - 1])
+
+            # Move cur to prev
+            prev = cur[:]
+
+        return prev[m]
+
+    # Function to compute LPS
+    def longestPalindromeSubsequence(self, s):
+        t = s[::-1]
+        return self.lcs(s, t)
+
+    # Function to compute min insertions
+    def minInsertion(self, s):
+        n = len(s)
+        k = self.longestPalindromeSubsequence(s)
+        return n - k
+
+# Driver code
+if __name__ == "__main__":
+    sol = Solution()
+    s = "abcaa"
+    print("The Minimum insertions required to make string palindrome:",
+          sol.minInsertion(s))</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+
+    // Function to compute LCS with 2-row optimization
+    lcs(s1, s2) {
+        const n = s1.length;
+        const m = s2.length;
+
+        let prev = new Array(m + 1).fill(0);
+        let cur = new Array(m + 1).fill(0);
+
+        for (let ind1 = 1; ind1 &lt;= n; ind1++) {
+            for (let ind2 = 1; ind2 &lt;= m; ind2++) {
+
+                // If characters match
+                if (s1[ind1 - 1] === s2[ind2 - 1]) {
+                    cur[ind2] = 1 + prev[ind2 - 1];
+                }
+
+                // Take max
+                else {
+                    cur[ind2] = Math.max(prev[ind2], cur[ind2 - 1]);
+                }
+            }
+
+            // Move cur to prev
+            prev = [...cur];
+        }
+
+        return prev[m];
+    }
+
+    // Function to compute LPS
+    longestPalindromeSubsequence(s) {
+        const t = s.split('').reverse().join('');
+        return this.lcs(s, t);
+    }
+
+    // Function to compute min insertions
+    minInsertion(s) {
+        const k = this.longestPalindromeSubsequence(s);
+        return s.length - k;
+    }
+}
+
+// Driver code
+const sol = new Solution();
+const s = "abcaa";
+console.log("The Minimum insertions required to make string palindrome:",
+            sol.minInsertion(s));</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N*N)</strong>, we fill the entire DP array of size N*N one by one.<br/>
+<strong>Space Complexity: O(N)</strong>, we are using an external array of size ‘N+1’ to store only two rows.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

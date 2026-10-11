@@ -1,0 +1,824 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Find GCD of two numbers</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Find GCD of two numbers</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/find-gcd-of-two-numbers/</code></div>
+  <p><strong>Problem Statement: </strong> Given two integers N1 and N2, find their greatest common divisor.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input: N1 = 9, N2 = 12
+
+Output: 3
+Explanation:
+Factors of 9: 1, 3, 9
+Factors of 12: 1, 2, 3, 4, 6, 12
+Common Factors: 1, 3
+Greatest common factor: 3 (GCD)
+
+Example 2:
+Input: N1 = 20, N2 = 15
+
+Output: 5
+Explanation:
+Factors of 20: 1, 2, 4, 5, 10, 20
+Factors of 15: 1, 3, 5, 15
+Common Factors: 1, 5
+Greatest common factor: 5 (GCD)
+    </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/gcd-of-two-numbers" rel="noopener" target="_blank">practice link</a> to
+        help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Brute Force Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<h4>Intuition: </h4>
+
+<p>The GCD of two numbers is the largest number that divides both of them without leaving a
+                            remainder. We iterate through all numbers from 1 up to the minimum of the two input numbers,
+                            checking if each number is a common factor of both input numbers.</p>
+<p>If a number is a common factor, we update our gcd variable to that number. This process
+                            continues until we have iterated through all possible common factors. Finally, we return the
+                            gcd variable, which will hold the greatest common divisor of the two input numbers.</p>
+<h4>Algorithm: </h4>
+<p><strong>Step 1: </strong>Initialise a variable gcd to 1. This variable will store the
+                            greatest common divisor of the input numbers n1 and n2.</p>
+<p><strong>Step 2: </strong> Iterate from 1 to the minimum of n1 and n2.
+                        </p><ol>
+<li>We start from 1 because the GCD of any two numbers is at least 1, and it cannot be
+                                greater than the smaller of the two numbers.</li>
+</ol>
+<p><strong>Step 3: </strong>At each iteration, if i is a common factor of both n1 and n2 update
+                            the gcd variable to i. We keep updating gcd as long as we find common factors.</p>
+<p><strong>Step 4: </strong> After the iteration, the gcd variable will store the greatest
+                            common divisor of n1 and n2. Return this value as the output of the function.</p>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Code
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<button class="code-tab dsa_article_code_active" data-lang="cpp">C++</button>
+<button class="code-tab" data-lang="java">Java</button>
+<button class="code-tab" data-lang="python">Python</button>
+<button class="code-tab" data-lang="javascript">JavaScript</button>
+<svg class="copy-btn" fill="none" height="20" viewbox="0 0 17 20" width="17" xmlns="http://www.w3.org/2000/svg">
+<path d="M2 20C1.45 20 0.979002 19.804 0.587002 19.412C0.195002 19.02 -0.000664969 18.5493 1.69779e-06 18V4H2V18H13V20H2ZM6 16C5.45 16 4.979 15.804 4.587 15.412C4.195 15.02 3.99934 14.5493 4 14V2C4 1.45 4.196 0.979002 4.588 0.587002C4.98 0.195002 5.45067 -0.000664969 6 1.69779e-06H15C15.55 1.69779e-06 16.021 0.196002 16.413 0.588002C16.805 0.980002 17.0007 1.45067 17 2V14C17 14.55 16.804 15.021 16.412 15.413C16.02 15.805 15.5493 16.0007 15 16H6ZM6 14H15V2H6V14Z">
+</path>
+</svg>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0">
+                                <code class="language-cpp" lang="cpp">
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+int findGcd(int n1, int n2) {
+    // Initialize gcd to 1
+    int gcd = 1;
+
+    // Iterate from 1 up to
+    // the minimum of n1 and n2
+    for(int i = 1; i &lt;= min(n1, n2); i++) {
+        // Check if i is a common
+        // factor of both n1 and n2
+        if(n1 % i == 0 &amp;&amp; n2 % i == 0) {
+            // Update gcd to the
+            // current common factor i
+            gcd = i;
+        }
+    }
+
+    // Return the greatest
+    // common divisor (gcd)
+    return gcd;
+}
+
+
+int main() {
+    int n1 = 20, n2 = 15;
+    
+    // Find the GCD of n1 and n2
+    int gcd = findGcd(n1, n2);
+
+    cout &lt;&lt; "GCD of " &lt;&lt; n1 &lt;&lt; " and " &lt;&lt; n2 &lt;&lt; " is: " &lt;&lt; gcd &lt;&lt; endl;
+
+    return 0;
+}
+                                </code>
+                            </pre><pre class="wp-block-code hidden" data-i="1">
+                                <code class="language-java" lang="java">
+public class Main {
+    public static int findGcd(int n1, int n2) {
+        // Initialize gcd to 1
+        int gcd = 1;
+
+        // Iterate from 1 up to
+        // the minimum of n1 and n2
+        for (int i = 1; i &lt;= Math.min(n1, n2); i++) {
+            // Check if i is a common
+            // factor of both n1 and n2
+            if (n1 % i == 0 &amp;&amp; n2 % i == 0) {
+                // Update gcd to the
+                // current common factor i
+                gcd = i;
+            }
+        }
+
+        // Return the greatest
+        // common divisor (gcd)
+        return gcd;
+    }
+
+    public static void main(String[] args) {
+        int n1 = 20, n2 = 15;
+
+        // Find the GCD of n1 and n2
+        int gcd = findGcd(n1, n2);
+
+        System.out.println("GCD of " + n1 + " and " + n2 + " is: " + gcd);
+    }
+}
+                                </code>
+                            </pre><pre class="wp-block-code hidden" data-i="2">
+                                <code class="language-python" lang="python">
+def find_gcd(n1, n2):
+    # Initialize gcd to 1
+    gcd = 1
+
+    # Iterate from 1 up to
+    # the minimum of n1 and n2
+    for i in range(1, min(n1, n2) + 1):
+        # Check if i is a common
+        # factor of both n1 and n2
+        if n1 % i == 0 and n2 % i == 0:
+            # Update gcd to the
+            # current common factor i
+            gcd = i
+
+    # Return the greatest
+    # common divisor (gcd)
+    return gcd
+
+if __name__ == "__main__":
+    n1, n2 = 20, 15
+    
+    # Find the GCD of n1 and n2
+    gcd = find_gcd(n1, n2)
+
+    print("GCD of", n1, "and", n2, "is:", gcd)
+    
+                                </code>
+                            </pre><pre class="wp-block-code hidden" data-i="3">
+                            <code class="language-javascript" lang="javascript">
+function findGcd(n1, n2) {
+    // Initialize gcd to 1
+    let gcd = 1;
+
+    // Iterate from 1 up to
+    // the minimum of n1 and n2
+    for (let i = 1; i &lt;= Math.min(n1, n2); i++) {
+        // Check if i is a common
+        // factor of both n1 and n2
+        if (n1 % i === 0 &amp;&amp; n2 % i === 0) {
+            // Update gcd to the
+            // current common factor i
+            gcd = i;
+        }
+    }
+
+    // Return the greatest
+    // common divisor (gcd)
+    return gcd;
+}
+
+// Main function
+function main() {
+    let n1 = 20, n2 = 15;
+    
+    // Find the GCD of n1 and n2
+    let gcd = findGcd(n1, n2);
+
+    console.log("GCD of " + n1 + " and " + n2 + " is: " + gcd);
+}
+
+// Call the main function
+main();
+
+
+                            </code>
+                        </pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity: O(min(N<sub>1</sub>, N<sub>2</sub>))</strong> where N1 and N2 is the
+                        input number. The algorithm iterates from 1 to the minimum of N1 and N2 and each iteration
+                        checks whether both the numbers are divisible by the current number (constant time operations).
+                    </p>
+<p><strong>Space Complexity: O(1)</strong>as the space complexity remains constant and independent
+                        of the input size. Only a fixed amount of memory is required to store the integer variables.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="better-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Better Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+
+<h4>Intuition: </h4>
+<p>We can optimise the time complexity of the previous approach. In the worst case, the loop
+                            iterates from 1 up to the minimum of N1 and N2. This could potentially result in a large
+                            number of iterations, especially when one input number is significantly larger than the
+                            other.</p>
+<p>If we iterate from the minimum of N1 and N2 down to 1, we reduce the number of iterations
+                            because we start from the potentially largest common factor and work downwards.</p>
+<p>The time complexity of this approach remains O(min(N1, N2)) but in practice, it will execute
+                            fewer iterations on average.</p>
+<h4>Algorithm: </h4>
+<p><strong>Step 1: </strong>Iterate from the minimum of n1 and n2 because the greatest common
+                            divisor of two numbers cannot exceed the smaller number. </p>
+<p><strong>Step 2: </strong> For each i in the iteration, we check if it is a common factor of
+                            both n1 and n2.
+                        </p><ol>
+<li>If a common factor i is found, we return it as the gcd as we are iterating from the
+                                largest potential gcd to 1, the first common factor we encounter will be the greatest
+                                common divisor.</li>
+</ol>
+<p><strong>Step 3: </strong> If the loop completes without finding any common factors we return
+                            1. This is because 1 is always a divisor of any number any number hence is also the GCD of
+                            any pair of numbers where no other common factors exist.</p>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Code
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<button class="code-tab dsa_article_code_active" data-lang="cpp">C++</button>
+<button class="code-tab" data-lang="java">Java</button>
+<button class="code-tab" data-lang="python">Python</button>
+<button class="code-tab" data-lang="javascript">JavaScript</button>
+<svg class="copy-btn" fill="none" height="20" viewbox="0 0 17 20" width="17" xmlns="http://www.w3.org/2000/svg">
+<path d="M2 20C1.45 20 0.979002 19.804 0.587002 19.412C0.195002 19.02 -0.000664969 18.5493 1.69779e-06 18V4H2V18H13V20H2ZM6 16C5.45 16 4.979 15.804 4.587 15.412C4.195 15.02 3.99934 14.5493 4 14V2C4 1.45 4.196 0.979002 4.588 0.587002C4.98 0.195002 5.45067 -0.000664969 6 1.69779e-06H15C15.55 1.69779e-06 16.021 0.196002 16.413 0.588002C16.805 0.980002 17.0007 1.45067 17 2V14C17 14.55 16.804 15.021 16.412 15.413C16.02 15.805 15.5493 16.0007 15 16H6ZM6 14H15V2H6V14Z">
+</path>
+</svg>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0">
+                                <code class="language-cpp" lang="cpp">
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+int findGcd(int n1, int n2) {
+    // Iterate from the minimum of
+    // n1 and n2 down to 1
+    // Start from the minimum of n1 and n2
+    // because the GCD cannot
+    // exceed the smaller number
+    
+    for(int i = min(n1, n2); i &gt; 0; i--) {
+        // Check if i is a common
+        // factor of both n1 and n2
+        if(n1 % i == 0 &amp;&amp; n2 % i == 0) {
+            // If i is a common factor,
+            // return it as the GCD
+            return i;
+        }
+    }
+    // If no common factors are found,
+    // return 1 (as 1 is always a
+    // divisor of any number)
+    return 1;
+}
+
+
+int main() {
+    int n1 = 20, n2 = 15;
+    
+    // Find the GCD of n1 and n2
+    int gcd = findGcd(n1, n2);
+
+    cout &lt;&lt; "GCD of " &lt;&lt; n1 &lt;&lt; " and " &lt;&lt; n2 &lt;&lt; " is: " &lt;&lt; gcd &lt;&lt; endl;
+
+    return 0;
+}
+
+
+                                </code>
+                            </pre><pre class="wp-block-code hidden" data-i="1">
+                                <code class="language-java" lang="java">
+import java.util.*;
+
+public class Main {
+    public static int findGcd(int n1, int n2) {
+        // Iterate from the minimum of
+        // n1 and n2 down to 1
+        // Start from the minimum of n1 and n2
+        // because the GCD cannot
+        // exceed the smaller number
+        
+        for (int i = Math.min(n1, n2); i &amp;gt; 0; i--) {
+            // Check if i is a common
+            // factor of both n1 and n2
+            if (n1 % i == 0 &amp;amp;&amp;amp; n2 % i == 0) {
+                // If i is a common factor,
+                // return it as the GCD
+                return i;
+            }
+        }
+        // If no common factors are found,
+        // return 1 (as 1 is always a
+        // divisor of any number)
+        return 1;
+    }
+
+    public static void main(String[] args) {
+        int n1 = 20, n2 = 15;
+        
+        // Find the GCD of n1 and n2
+        int gcd = findGcd(n1, n2);
+
+        System.out.println(&amp;quot;GCD of &amp;quot; + n1 + &amp;quot; and &amp;quot; + n2 + &amp;quot; is: &amp;quot; + gcd);
+    }
+}
+    
+                                </code>
+                            </pre><pre class="wp-block-code hidden" data-i="2">
+                                <code class="language-python" lang="python">
+def findGcd(n1, n2):
+    # Iterate from the minimum of
+    # n1 and n2 down to 1
+    # Start from the minimum of n1 and n2
+    # because the GCD cannot
+    # exceed the smaller number
+    
+    for i in range(min(n1, n2), 0, -1):
+        # Check if i is a common
+        # factor of both n1 and n2
+        if n1 % i == 0 and n2 % i == 0:
+            # If i is a common factor,
+            # return it as the GCD
+            return i
+    # If no common factors are found,
+    # return 1 (as 1 is always a
+    # divisor of any number)
+    return 1
+
+
+def main():
+    n1 = 20
+    n2 = 15
+    
+    # Find the GCD of n1 and n2
+    gcd = findGcd(n1, n2)
+
+    print("GCD of", n1, "and", n2, "is:", gcd)
+
+
+if __name__ == "__main__":
+    main()
+    
+                                </code>
+                            </pre><pre class="wp-block-code hidden" data-i="3">
+                            <code class="language-javascript" lang="javascript">
+function findGcd(n1, n2) {
+    // Iterate from the minimum of
+    // n1 and n2 down to 1
+    // Start from the minimum of n1 and n2
+    // because the GCD cannot
+    // exceed the smaller number
+    for (let i = Math.min(n1, n2); i &gt; 0; i--) {
+        // Check if i is a common
+        // factor of both n1 and n2
+        if (n1 % i === 0 &amp;&amp; n2 % i === 0) {
+            // If i is a common factor,
+            // return it as the GCD
+            return i;
+        }
+    }
+    // If no common factors are found,
+    // return 1 (as 1 is always a
+    // divisor of any number)
+    return 1;
+}
+
+let n1 = 20, n2 = 15;
+
+// Find the GCD of n1 and n2
+let gcd = findGcd(n1, n2);
+
+console.log("GCD of " + n1 + " and " + n2 + " is: " + gcd);
+
+                            </code>
+                        </pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity: O(min(N<sub>1</sub>, N<sub>2</sub>))</strong> where N1 and N2 is the
+                        input number. The algorithm iterates from the minimum of N1 and N2 to 1 and each iteration
+                        checks whether both the numbers are divisible by the current number (constant time operations).
+                    </p>
+<p><strong>Space Complexity: O(1)</strong> as the space complexity remains constant and independent
+                        of the input size. Only a fixed amount of memory is required to store the integer variables.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<pre class="wp-block-preformatted">
+                            
+Euclidean Algorithm:
+
+The Euclidean Algorithm is a method for finding the greatest common divisor (GCD)
+of two numbers. It operates on the principle that the GCD of two numbers remains
+the same even if the smaller number is subtracted from the larger number.
+
+To find the GCD of n1 and n2 where n1 &gt; n2:
+1. Repeatedly subtract the smaller number from the larger number until one of them becomes 0.
+2. Once one becomes 0, the other is the GCD of the original numbers.
+
+Example:
+n1 = 20, n2 = 15
+
+gcd(20, 15) = gcd(20 - 15, 15) = gcd(5, 15)
+gcd(5, 15)  = gcd(15 - 5, 5)  = gcd(10, 5)
+gcd(10, 5)  = gcd(10 - 5, 5) = gcd(5, 5)
+gcd(5, 5)   = gcd(5 - 5, 5)  = gcd(0, 5)
+
+Hence, return 5 as the GCD.
+    </pre>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Code
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<button class="code-tab dsa_article_code_active" data-lang="cpp">C++</button>
+<button class="code-tab" data-lang="java">Java</button>
+<button class="code-tab" data-lang="python">Python</button>
+<button class="code-tab" data-lang="javascript">JavaScript</button>
+<svg class="copy-btn" fill="none" height="20" viewbox="0 0 17 20" width="17" xmlns="http://www.w3.org/2000/svg">
+<path d="M2 20C1.45 20 0.979002 19.804 0.587002 19.412C0.195002 19.02 -0.000664969 18.5493 1.69779e-06 18V4H2V18H13V20H2ZM6 16C5.45 16 4.979 15.804 4.587 15.412C4.195 15.02 3.99934 14.5493 4 14V2C4 1.45 4.196 0.979002 4.588 0.587002C4.98 0.195002 5.45067 -0.000664969 6 1.69779e-06H15C15.55 1.69779e-06 16.021 0.196002 16.413 0.588002C16.805 0.980002 17.0007 1.45067 17 2V14C17 14.55 16.804 15.021 16.412 15.413C16.02 15.805 15.5493 16.0007 15 16H6ZM6 14H15V2H6V14Z">
+</path>
+</svg>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0">
+                                <code class="language-cpp" lang="cpp">
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+int findGcd(int a, int b) {
+    // Continue loop as long as both
+    // a and b are greater than 0
+    while(a &gt; 0 &amp;&amp; b &gt; 0) {
+        // If a is greater than b,
+        // subtract b from a and update a
+        if(a &gt; b) {
+             // Update a to the remainder
+             // of a divided by b
+            a = a % b;
+        }
+        // If b is greater than or equal
+        // to a, subtract a from b and update b
+        else {
+            // Update b to the remainder
+            // of b divided by a
+            b = b % a; 
+        }
+    }
+    // Check if a becomes 0,
+    // if so, return b as the GCD
+    if(a == 0) {
+        return b;
+    }
+    // If a is not 0,
+    // return a as the GCD
+    return a;
+}
+
+
+
+
+int main() {
+    int n1 = 20, n2 = 15;
+    
+    // Find the GCD of n1 and n2
+    int gcd = findGcd(n1, n2);
+
+    cout &lt;&lt; "GCD of " &lt;&lt; n1 &lt;&lt; " and " &lt;&lt; n2 &lt;&lt; " is: " &lt;&lt; gcd &lt;&lt; endl;
+
+    return 0;
+}
+    
+                                </code>
+                            </pre><pre class="wp-block-code hidden" data-i="1">
+                                <code class="language-java" lang="java">
+public class Main {
+    // Continue loop as long as both
+    // a and b are greater than 0
+    public static int findGcd(int a, int b) {
+        while(a &gt; 0 &amp;&amp; b &gt; 0) {
+            // If a is greater than b,
+            // subtract b from a and update a
+            if(a &gt; b) {
+                // Update a to the remainder
+                // of a divided by b
+                a = a % b;
+            }
+            // If b is greater than or equal
+            // to a, subtract a from b and update b
+            else {
+                // Update b to the remainder
+                // of b divided by a
+                b = b % a;
+            }
+        }
+        // Check if a becomes 0,
+        // if so, return b as the GCD
+        if(a == 0) {
+            return b;
+        }
+        // If a is not 0,
+        // return a as the GCD
+        return a;
+    }
+
+    public static void main(String[] args) {
+        int n1 = 20, n2 = 15;
+
+        // Find the GCD of n1 and n2
+        int gcd = findGcd(n1, n2);
+
+        System.out.println("GCD of " + n1 + " and " + n2 + " is: " + gcd);
+    }
+}
+    
+                                </code>
+                            </pre><pre class="wp-block-code hidden" data-i="2">
+                                <code class="language-python" lang="python">
+def find_gcd(a, b):
+    # Continue loop as long as both
+    # a and b are greater than 0
+    while a &gt; 0 and b &gt; 0:
+        # If a is greater than b,
+        # subtract b from a and update a
+        if a &gt; b:
+            # Update a to the remainder
+            # of a divided by b
+            a = a % b
+        # If b is greater than or equal
+        # to a, subtract a from b and update b
+        else:
+            # Update b to the remainder
+            # of b divided by a
+            b = b % a
+    # Check if a becomes 0,
+    # if so, return b as the GCD
+    if a == 0:
+        return b
+    # If a is not 0,
+    # return a as the GCD
+    return a
+
+
+def main():
+    n1 = 20
+    n2 = 15
+
+    # Find the GCD of n1 and n2
+    gcd = find_gcd(n1, n2)
+
+    print(f"GCD of {n1} and {n2} is: {gcd}")
+
+
+if __name__ == "__main__":
+    main()
+    
+                                </code>
+                            </pre><pre class="wp-block-code hidden" data-i="3">
+                            <code class="language-javascript" lang="javascript">
+function findGcd(a, b) {
+    // Continue loop as long as both
+    // a and b are greater than 0
+    while (a &gt; 0 &amp;&amp; b &gt; 0) {
+        // If a is greater than b,
+        // subtract b from a and update a
+        if (a &gt; b) {
+            // Update a to the remainder
+            // of a divided by b
+            a = a % b;
+        }
+        // If b is greater than or equal
+        // to a, subtract a from b and update b
+        else {
+            // Update b to the remainder
+            // of b divided by a
+            b = b % a;
+        }
+    }
+    // Check if a becomes 0,
+    // if so, return b as the GCD
+    if (a === 0) {
+        return b;
+    }
+    // If a is not 0,
+    // return a as the GCD
+    return a;
+}
+
+// Set the values of n1 and n2
+let n1 = 20, n2 = 15;
+
+// Find the GCD of n1 and n2
+let gcd = findGcd(n1, n2);
+
+// Output the result
+console.log("GCD of", n1, "and", n2, "is:", gcd);
+
+                            </code>
+                        </pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity: O(min(N<sub>1</sub>, N<sub>2</sub>))</strong> where N1 and N2 is the
+                        input number. The algorithm iterates from the minimum of N1 and N2 to 1 and each iteration
+                        checks whether both the numbers are divisible by the current number (constant time operations).
+                    </p>
+<p><strong>Space Complexity: O(1)</strong> as the space complexity remains constant and independent
+                        of the input size. Only a fixed amount of memory is required to store the integer variable</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

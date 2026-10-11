@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>G-40: Number of Ways to Arrive at Destination</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>G-40: Number of Ways to Arrive at Destination</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/g-40-number-of-ways-to-arrive-at-destination/</code></div>
+  <p><strong>Problem Statement: </strong>
+You are in a city that consists of n intersections numbered from 0 to n - 1 with bi-directional roads between some intersections. The inputs are generated such that you can reach any intersection from any other intersection and that there is at most one road between any two intersections.
+<br/><br/>
+You are given an integer n and a 2D integer array ‘roads’ where roads[i] = [ui, vi, timei] means that there is a road between intersections ui and vi that takes timei minutes to travel. You want to know in how many ways you can travel from intersection 0 to intersection n - 1 in the shortest amount of time.
+<br/><br/>
+Return the number of ways you can arrive at your destination in the shortest amount of time. Since the answer may be large, return it modulo 10<sup>9</sup> + 7.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>  
+<strong>Input:</strong>  n = 7, m = 10  
+edges = [[0, 6, 7], [0, 1, 2], [1, 2, 3], [1, 3, 3], [6, 3, 3], [3, 5, 1], [6, 5, 1], [2, 5, 1], [0, 4, 5], [4, 6, 2]]  
+<strong>Output:</strong> 4  
+<strong>Explanation:</strong>  The four ways to get from city 0 to city 6 in 7 minutes (the shortest time) are:  
+- 0 → 6  
+- 0 → 4 → 6  
+- 0 → 1 → 2 → 5 → 6  
+- 0 → 1 → 3 → 5 → 6  
+
+<strong>Example 2:</strong>  
+<strong>Input:</strong>  n = 6, m = 8  
+edges = [[0, 5, 8], [0, 2, 2], [0, 1, 1], [1, 3, 3], [1, 2, 3], [2, 5, 6], [3, 4, 2], [4, 5, 2]]  
+<strong>Output:</strong> 3  
+<strong>Explanation:</strong>  The three ways to get from city 0 to city 5 in 8 minutes (the shortest time) are:  
+- 0 → 5  
+- 0 → 2 → 5  
+- 0 → 1 → 3 → 4 → 5</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/number-of-ways-to-arrive-at-destination" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Use Dijkstra’s Algorithm to find the shortest paths from the source node to all other nodes.</li>
+<li>Define a priority queue to store pairs of {dist, node}, where 'dist' represents the shortest distance from the source node to the current node.</li>
+<li>Initialize a distance array with a very large number (∞) for all nodes, indicating they are unvisited, and set the source node’s distance to 0.</li>
+<li>Define a ways array to store the number of shortest paths to each node, initialized to 0.</li>
+<li>Push the source node into the queue with a distance of 0 and ways set to 1, as there is exactly one way to reach the source.</li>
+<li>Pop the front element from the queue, examine its adjacent nodes, and check the current distance to each adjacent node.</li>
+<li>If the current distance to a node is smaller than the previously stored distance, update the distance and push the node into the queue with the new distance. Also, set the ways for that node to the same value as the source node’s ways.</li>
+<li>If the current distance equals the previously stored distance, increment the ways array at that node by 1 to account for an additional shortest path.</li>
+<li>Repeat these steps until the queue is empty or the destination node is reached.</li>
+<li>Finally, return the number of ways to reach the destination node (ways[n-1]) modulo 10^9+7 when the queue is empty.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/ff8010cc66ce011d.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/35bd3ca59087ed82.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/79c7d96b16c75d32.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/e31f72baf1e5deab.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/f258da208d6fefb7.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/ff8010cc66ce011d.png"/><img alt="Image 2" loading="lazy" src="../assets/img/35bd3ca59087ed82.png"/><img alt="Image 3" loading="lazy" src="../assets/img/79c7d96b16c75d32.png"/><img alt="Image 4" loading="lazy" src="../assets/img/e31f72baf1e5deab.png"/><img alt="Image 5" loading="lazy" src="../assets/img/f258da208d6fefb7.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    int CheapestFLight(int n, vector&lt;vector&lt;int&gt;&gt; &amp;flights, int src, int dst, int K) {
+
+        // Create the adjacency list to represent airports and flights as a graph
+        vector&lt;pair&lt;int, int&gt;&gt; adj[n];
+        for (auto it : flights) {
+            adj[it[0]].push_back({it[1], it[2]});
+            adj[it[1]].push_back({it[0], it[2]});
+        }
+
+        // Create a priority queue (min heap) for Dijkstra's algorithm
+        priority_queue&lt;pair&lt;int, int&gt;,
+                        vector&lt;pair&lt;int, int&gt;&gt;, greater&lt;pair&lt;int, int&gt;&gt;&gt; pq;
+
+        // Initialize the distance array and ways array
+        vector&lt;int&gt; dist(n, INT_MAX), ways(n, 0);
+
+        // Distance for the source node is 0
+        dist[src] = 0;
+
+        // There's 1 way to reach the source (itself)
+        ways[src] = 1;
+
+        // Push the source node with distance 0
+        pq.push({0, src});
+
+        // Define the modulo value for large numbers
+        int mod = (int)(1e9 + 7);
+
+        // Perform Dijkstra's algorithm
+        while (!pq.empty()) {
+            int dis = pq.top().first;
+            int node = pq.top().second;
+            pq.pop();
+
+            // Iterate through adjacent nodes
+            for (auto it : adj[node]) {
+
+                // Next destination node
+                int adjNode = it.first;
+
+                // Cost of the flight to the next destination
+                int edW = it.second;
+
+                // If a shorter path is found, update the distance and number of ways
+                if (dis + edW &lt; dist[adjNode]) {
+
+                    // Update the distance
+                    dist[adjNode] = dis + edW;
+
+                    // Push the new node with updated distance
+                    pq.push({dis + edW, adjNode});
+
+                    // Copy the number of ways to the new node
+                    ways[adjNode] = ways[node];
+                }
+
+                // If the same shortest path is found, update the number of ways
+                else if (dis + edW == dist[adjNode]) {
+
+                    // Increment the number of ways
+                    ways[adjNode] = (ways[adjNode] + ways[node]) % mod;
+                }
+            }
+        }
+
+        // Return the number of ways to reach the last node modulo 10^9 + 7
+        return ways[dst] % mod;
+    }
+};
+
+int main() {
+
+    // Driver Code
+    int n = 7;
+
+    // Define the edges (source, destination, weight)
+    vector&lt;vector&lt;int&gt;&gt; edges = {{0, 6, 7}, {0, 1, 2}, {1, 2, 3}, {1, 3, 3}, {6, 3, 3},
+                                {3, 5, 1}, {6, 5, 1}, {2, 5, 1}, {0, 4, 5}, {4, 6, 2}};
+
+    Solution obj;
+
+    // Call the method to count the number of shortest paths
+    int ans = obj.CheapestFLight(n, edges, 0, 3, 1);
+
+    // Output the result
+    cout &lt;&lt; ans &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+
+    // Method to calculate the number of shortest paths from node 0 to node n-1
+    public int CheapestFLight(int n, int[][] roads, int src, int dst, int K) {
+
+        // Create the adjacency list to represent airports and flights as a graph
+        List&lt;List&lt;int[]&gt;&gt; adj = new ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; n; i++) {
+            adj.add(new ArrayList&lt;&gt;());
+        }
+        for (int[] road : roads) {
+            adj.get(road[0]).add(new int[]{road[1], road[2]});
+            adj.get(road[1]).add(new int[]{road[0], road[2]});
+        }
+
+        // Create a priority queue (min heap) for Dijkstra's algorithm
+        PriorityQueue&lt;int[]&gt; pq = new PriorityQueue&lt;&gt;(Comparator.comparingInt(a -&gt; a[0]));
+
+        // Initialize the distance array and ways array
+        int[] dist = new int[n];
+        Arrays.fill(dist, Integer.MAX_VALUE);
+        int[] ways = new int[n];
+        dist[src] = 0;
+        ways[src] = 1;
+        // Push the source node with distance 0
+        pq.add(new int[]{0, src});  
+
+        // Define the modulo value for large numbers
+        int mod = (int)(1e9 + 7);
+
+        // Perform Dijkstra's algorithm
+        while (!pq.isEmpty()) {
+            int[] current = pq.poll();
+            int dis = current[0];
+            int node = current[1];
+
+            // Iterate through adjacent nodes
+            for (int[] neighbor : adj.get(node)) {
+                // Next destination node
+                int adjNode = neighbor[0]; 
+                // Cost of the flight to the next destination
+                int edW = neighbor[1];  
+
+                // If a shorter path is found, update the distance and number of ways
+                if (dis + edW &lt; dist[adjNode]) {
+                    dist[adjNode] = dis + edW;
+                    // Push the new node with updated distance
+                    pq.add(new int[]{dis + edW, adjNode});  
+                    // Copy the number of ways to the new node
+                    ways[adjNode] = ways[node];  
+                }
+                // If the same shortest path is found, update the number of ways
+                else if (dis + edW == dist[adjNode]) {
+                    // Increment the number of ways
+                    ways[adjNode] = (ways[adjNode] + ways[node]) % mod;  
+                }
+            }
+        }
+
+        // Return the number of ways to reach the last node modulo 10^9 + 7
+        return ways[dst] % mod;
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        // Driver Code
+        int n = 7; 
+
+        // Define the edges (source, destination, weight)
+        int[][] roads = {{0, 6, 7}, {0, 1, 2}, {1, 2, 3}, {1, 3, 3}, {6, 3, 3}, 
+        {3, 5, 1}, {6, 5, 1}, {2, 5, 1}, {0, 4, 5}, {4, 6, 2}};
+
+        Solution obj = new Solution();
+
+        // Call the method to count the number of shortest paths
+        int ans = obj.CheapestFLight(n, roads, 0, 3, 1);
+
+        // Output the result
+        System.out.println(ans);
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">import heapq
+
+# Method to calculate the number of shortest paths from node 0 to node n-1
+def countPaths(n, roads, src, dst, K):
+
+    # Create an adjacency list to represent airports and flights as a graph
+    adj = {i: [] for i in range(n)}
+    for road in roads:
+        adj[road[0]].append([road[1], road[2]])
+        adj[road[1]].append([road[0], road[2]])
+
+    # Create a priority queue (min heap) for Dijkstra's algorithm
+    pq = [(0, 0)]  # Push the source node with distance 0
+
+    # Initialize the distance array and ways array
+    dist = [float('inf')] * n
+    dist[src] = 0
+    ways = [0] * n
+    ways[src] = 1
+
+    # Define the modulo value for large numbers
+    mod = int(1e9 + 7)
+
+    # Perform Dijkstra's algorithm
+    while pq:
+        dis, node = heapq.heappop(pq)
+
+        # Iterate through adjacent nodes
+        for adjNode, edW in adj[node]:
+            # If a shorter path is found, update the distance and number of ways
+            if dis + edW &lt; dist[adjNode]:
+                dist[adjNode] = dis + edW
+                heapq.heappush(pq, (dis + edW, adjNode))
+                ways[adjNode] = ways[node]
+            # If the same shortest path is found, update the number of ways
+            elif dis + edW == dist[adjNode]:
+                ways[adjNode] = (ways[adjNode] + ways[node]) % mod
+
+    # Return the number of ways to reach the last node modulo 10^9 + 7
+    return ways[dst] % mod
+
+# Main function
+def main():
+    # Input data
+    n = 7
+    roads = [[0, 6, 7], [0, 1, 2], [1, 2, 3], [1, 3, 3], [6, 3, 3], 
+             [3, 5, 1], [6, 5, 1], [2, 5, 1], [0, 4, 5], [4, 6, 2]]
+
+    # Call the method to count the number of shortest paths
+    ans = countPaths(n, roads, 0, 3, 1)
+
+    # Output the result
+    print(ans)
+
+# Call the main function
+if __name__ == "__main__":
+    main()</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Method to calculate the number of shortest paths from node 0 to node n-1
+function countPaths(n, roads) {
+
+    // Create an adjacency list to represent airports and flights as a graph
+    let adj = Array.from({ length: n }, () =&gt; []);
+    for (let road of roads) {
+        adj[road[0]].push([road[1], road[2]]);
+        adj[road[1]].push([road[0], road[2]]);
+    }
+
+    // Create a priority queue (min heap) for Dijkstra's algorithm
+    let pq = [[0, 0]];  
+
+    // Initialize the distance array and ways array
+    let dist = Array(n).fill(Infinity);
+    dist[0] = 0;
+    let ways = Array(n).fill(0);
+    ways[0] = 1;
+
+    // Define the modulo value for large numbers
+    let mod = 1e9 + 7;
+
+    // Perform Dijkstra's algorithm
+    while (pq.length &gt; 0) {
+        // Sort to get the node with the minimum distance
+        pq.sort((a, b) =&gt; a[0] - b[0]);  
+        let [dis, node] = pq.shift();
+
+        // Iterate through adjacent nodes
+        for (let [adjNode, edW] of adj[node]) {
+            // If a shorter path is found, update the distance and number of ways
+            if (dis + edW &lt; dist[adjNode]) {
+                dist[adjNode] = dis + edW;
+                // Push the new node with updated distance
+                pq.push([dis + edW, adjNode]);  
+                // Copy the number of ways to the new node
+                ways[adjNode] = ways[node];  
+            }
+            // If the same shortest path is found, update the number of ways
+            else if (dis + edW === dist[adjNode]) {
+                // Increment the number of ways
+                ways[adjNode] = (ways[adjNode] + ways[node]) % mod;  
+            }
+        }
+    }
+
+    // Return the number of ways to reach the last node modulo 10^9 + 7
+    return ways[n - 1] % mod;
+}
+
+// Main function
+function main() {
+    // Input data
+    let n = 7;  // Number of nodes
+    let roads = [
+        [0, 6, 7], [0, 1, 2], [1, 2, 3], [1, 3, 3], [6, 3, 3], 
+        [3, 5, 1], [6, 5, 1], [2, 5, 1], [0, 4, 5], [4, 6, 2]
+    ];
+
+    // Call the method to count the number of shortest paths
+    let ans = countPaths(n, roads);
+
+    // Output the result
+    console.log(ans);
+}
+
+// Call the main function
+main();</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(E * log(V))</strong>, as we are using simple Dijkstra's algorithm here, the time complexity will be of the order E * log(V). Where E = Number of edges and V = Number of vertices.<br/><br/>
+<strong>Space Complexity: O(N)</strong>, for the dist array, ways array, and approximate complexity for the priority queue. Where N = Number of nodes.
+
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

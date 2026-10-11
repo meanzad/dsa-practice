@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Reverse Digits of A Number</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Reverse Digits of A Number</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/maths/reverse-digits-of-a-number</code></div>
+  <p><strong>Problem Statement: </strong>Given an integer N return the reverse of the given number.</p>
+<p>Note: If a number has trailing zeros, then its reverse will not include them. For e.g , reverse of 10400 will be 401 instead of 00401.
+
+</p>
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p><strong>Input:</strong> N = 12345
+<strong>Output:</strong>54321
+<strong>Explanation: </strong>The reverse of 12345 is 54321.<br/>
+<strong>Input:</strong> N = 7789                
+<strong>Output: </strong>9877
+<strong>Explanation: </strong>The reverse of number 7789 is 9877.</p></pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+
+ We know that extracting digits of a number can be done by repeatedly taking modulo 10 and dividing by 10. Now, instead of just extracting digits, if we build a new number by appending these digits in reverse order, we effectively reverse the number. Each new digit becomes the least significant digit of the reversed number by multiplying the current reversed value by 10 before adding the digit. <ul> <li>Initialize a variable to store the reversed number as 0.</li> <li>Loop while the original number is greater than 0.</li> <li>Extract the last digit by performing modulo 10.</li> <li>Multiply the reversed number by 10 and add the extracted digit.</li> <li>Remove the last digit from the original number using integer division by 10.</li> <li>Continue this process until the original number becomes 0.</li> <li>Return the reversed number.</li> </ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to reverse digits of a number
+    int reverseNumber(int n) {
+        // Variable to store reversed number
+        int revNum = 0;
+
+        // Loop until all digits are processed
+        while (n &gt; 0) {
+            // Get the last digit
+            int lastDigit = n % 10;
+
+            // Append it to the reversed number
+            revNum = revNum * 10 + lastDigit;
+
+            // Remove the last digit from n
+            n = n / 10;
+        }
+
+        // Return the reversed number
+        return revNum;
+    }
+};
+
+// Driver code
+int main() {
+    Solution obj;
+    int num = 12345;
+    cout &lt;&lt; obj.reverseNumber(num) &lt;&lt; endl;  // Output: 54321
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import.java.util.*;
+public class Solution {
+    // Function to reverse digits of a number
+    public int reverseNumber(int n) {
+        // Variable to store reversed number
+        int revNum = 0;
+
+        // Loop until all digits are processed
+        while (n &gt; 0) {
+            // Get the last digit
+            int lastDigit = n % 10;
+
+            // Append it to the reversed number
+            revNum = revNum * 10 + lastDigit;
+
+            // Remove the last digit from n
+            n = n / 10;
+        }
+
+        // Return the reversed number
+        return revNum;
+    }
+}
+
+// Driver code
+class Main {
+    public static void main(String[] args) {
+        Solution obj = new Solution();
+        int num = 12345;
+        System.out.println(obj.reverseNumber(num));  // Output: 54321
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to reverse digits of a number
+    def reverseNumber(self, n):
+        # Variable to store reversed number
+        revNum = 0
+
+        # Loop until all digits are processed
+        while n &gt; 0:
+            # Get the last digit
+            lastDigit = n % 10
+
+            # Append it to the reversed number
+            revNum = revNum * 10 + lastDigit
+
+            # Remove the last digit from n
+            n = n // 10
+
+        # Return the reversed number
+        return revNum
+
+# Driver code
+obj = Solution()
+num = 12345
+print(obj.reverseNumber(num))  # Output: 54321
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to reverse digits of a number
+    reverseNumber(n) {
+        // Variable to store reversed number
+        let revNum = 0;
+
+        // Loop until all digits are processed
+        while (n &gt; 0) {
+            // Get the last digit
+            let lastDigit = n % 10;
+
+            // Append it to the reversed number
+            revNum = revNum * 10 + lastDigit;
+
+            // Remove the last digit from n
+            n = Math.floor(n / 10);
+        }
+
+        // Return the reversed number
+        return revNum;
+    }
+}
+
+// Driver code
+const obj = new Solution();
+const num = 12345;
+console.log(obj.reverseNumber(num));  // Output: 54321
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+</summary>
+<p>
+</p><p><strong>Time Complexity:</strong> O(log₁₀N),The number of iterations in the loop depends on the number of digits in the number N. Since each digit is processed once using constant time operations (modulo, division, multiplication, and addition), the total time taken is proportional to the number of digits, which is log₁₀N.</p>
+<p><strong>Space Complexity:</strong> O(1),Only a constant number of variables are used regardless of the size of the input number.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

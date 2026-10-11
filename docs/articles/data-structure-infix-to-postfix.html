@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Infix to Postfix</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Infix to Postfix</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/infix-to-postfix/</code></div>
+  <p><strong>Problem Statement: </strong>
+Given an infix expression, Your task is to convert the given infix expression to a postfix expression.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>  
+<strong>Input:</strong> a + b * (c^d - e) ^ (f + g * h) - i  
+<strong>Output:</strong> abcd^e-fgh*+^*+i-  
+<strong>Explanation:</strong>  
+The infix expression "a + b * (c^d - e) ^ (f + g * h) - i" is converted to postfix form as "abcd^e-fgh*+^*+i-" by applying the rules of infix to postfix conversion.
+
+<strong>Example 2:</strong>  
+<strong>Input:</strong> (p + q) * (m - n)  
+<strong>Output:</strong> pq+mn-*  
+<strong>Explanation:</strong>  
+The infix expression "(p + q) * (m - n)" is converted to postfix form as "pq+mn-*".</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>It's highly recommend trying to solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li><strong>What is an infix expression?</strong></li>
+<ul>
+<li>The traditional way of writing mathematical expressions is called infix expressions, where the operator is placed between two operands (e.g., A + B, (A * B) / Q).</li>
+<li>Infix expressions are easy for humans to understand, but computers find them difficult to parse because they require knowledge of operator precedence, associativity rules, and parentheses.</li>
+<li>To make it easier for computers, we use postfix and prefix notations.</li>
+</ul>
+<li><strong>What is a postfix expression?</strong></li>
+<ul>
+<li>A postfix expression has the operator placed after the operands (e.g., PQ-C/). It is written as <operand><operand><operator>.</operator></operand></operand></li>
+<li>In postfix expressions, the precedence of operators is determined by the order in which they appear in the expression. The operator that appears first is applied to the operands.</li>
+<li>Postfix expressions do not require parentheses, making them easier for computers to evaluate.</li>
+</ul>
+<li><strong>Approach to Convert Infix Expression to Postfix:</strong></li>
+<ul>
+<li>Start by scanning the infix expression from left to right.</li>
+<li>If the scanned character is an operand, print it immediately.</li>
+<li>If the scanned character is an operator:</li>
+<ul>
+<li>If the precedence of the operator is greater than the operator in the stack, or the stack is empty, or the stack contains a ‘(’, push the operator into the stack.</li>
+<li>Otherwise, pop all operators from the stack with higher or equal precedence than the scanned operator, then push the scanned operator into the stack.</li>
+</ul>
+<li>If the scanned character is a ‘(’, push it into the stack.</li>
+<li>If the scanned character is a ‘)’, pop the stack and output the operators until a ‘(’ is encountered, and discard both parentheses.</li>
+<li>Repeat steps 2-5 until the entire infix expression has been scanned.</li>
+<li>Print the output.</li>
+<li>Finally, pop and print all remaining operators in the stack until it is empty.</li>
+</ul>
+</ul>
+<p><img height="457" loading="lazy" src="../assets/img/deda9626544995d3.png" width="481"/></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Function to return precedence of operators
+int prec(char c) {
+    if (c == '^')  // Exponent operator has highest precedence
+        return 3;
+    else if (c == '/' || c == '*')  // Multiplication and division have higher precedence than addition
+        return 2;
+    else if (c == '+' || c == '-')  // Addition and subtraction have lowest precedence
+        return 1;
+    else
+        return -1;
+}
+
+// The main function to convert infix expression to postfix expression
+void infixToPostfix(string s) {
+    stack&lt;char&gt; st; // Stack to hold operators and parentheses
+    string result;  // String to hold the resulting postfix expression
+
+    for (int i = 0; i &lt; s.length(); i++) {
+        char c = s[i];
+
+        // If the scanned character is an operand, add it to the result string
+        if ((c &gt;= 'a' &amp;&amp; c &lt;= 'z') || (c &gt;= 'A' &amp;&amp; c &lt;= 'Z') || (c &gt;= '0' &amp;&amp; c &lt;= '9'))
+            result += c;
+
+        // If the scanned character is an ‘(‘, push it to the stack
+        else if (c == '(')
+            st.push('(');
+
+        // If the scanned character is a ‘)’, pop from stack until an ‘(‘ is encountered
+        else if (c == ')') {
+            while (st.top() != '(') {
+                result += st.top();
+                st.pop();
+            }
+            st.pop();  // Pop the ‘(‘ from the stack
+        }
+
+        // If an operator is scanned
+        else {
+            while (!st.empty() &amp;&amp; prec(s[i]) &lt;= prec(st.top())) {
+                result += st.top();
+                st.pop();
+            }
+            st.push(c);  // Push the current operator to the stack
+        }
+    }
+
+    // Pop all the remaining elements from the stack
+    while (!st.empty()) {
+        result += st.top();
+        st.pop();
+    }
+
+    cout &lt;&lt; "Postfix expression: " &lt;&lt; result &lt;&lt; endl;  // Output the result
+}
+
+int main() {
+    string exp = "(p+q)*(m-n)";  // Infix expression
+    cout &lt;&lt; "Infix expression: " &lt;&lt; exp &lt;&lt; endl;
+    infixToPostfix(exp);  // Convert the infix expression to postfix
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+
+    // Function to return precedence of operators
+    public static int prec(char c) {
+        if (c == '^')  // Exponent operator has highest precedence
+            return 3;
+        else if (c == '/' || c == '*')  // Multiplication and division have higher precedence than addition
+            return 2;
+        else if (c == '+' || c == '-')  // Addition and subtraction have lowest precedence
+            return 1;
+        else
+            return -1;
+    }
+
+    // Function to convert infix expression to postfix expression
+    public static void infixToPostfix(String s) {
+        Stack&lt;Character&gt; st = new Stack&lt;&gt;();  // Stack to hold operators and parentheses
+        StringBuilder result = new StringBuilder();  // StringBuilder to hold the resulting postfix expression
+
+        for (int i = 0; i &lt; s.length(); i++) {
+            char c = s.charAt(i);
+
+            // If the scanned character is an operand, add it to the result string
+            if (Character.isLetterOrDigit(c)) {
+                result.append(c);
+            }
+
+            // If the scanned character is an ‘(‘, push it to the stack
+            else if (c == '(') {
+                st.push('(');
+            }
+
+            // If the scanned character is a ‘)’, pop from stack until an ‘(‘ is encountered
+            else if (c == ')') {
+                while (st.peek() != '(') {
+                    result.append(st.pop());
+                }
+                st.pop();  // Pop the ‘(‘ from the stack
+            }
+
+            // If an operator is scanned
+            else {
+                while (!st.isEmpty() &amp;&amp; prec(c) &lt;= prec(st.peek())) {
+                    result.append(st.pop());
+                }
+                st.push(c);  // Push the current operator to the stack
+            }
+        }
+
+        // Pop all the remaining elements from the stack
+        while (!st.isEmpty()) {
+            result.append(st.pop());
+        }
+
+        System.out.println("Postfix expression: " + result.toString());  // Output the result
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+        String exp = "(p+q)*(m-n)";  // Infix expression
+        System.out.println("Infix expression: " + exp);
+        Solution.infixToPostfix(exp);  // Convert the infix expression to postfix
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Function to return precedence of operators
+def prec(c):
+    if c == '^':  # Exponent operator has highest precedence
+        return 3
+    elif c == '/' or c == '*':  # Multiplication and division have higher precedence than addition
+        return 2
+    elif c == '+' or c == '-':  # Addition and subtraction have lowest precedence
+        return 1
+    else:
+        return -1
+
+# Function to convert infix expression to postfix expression
+def infixToPostfix(s):
+    stack = []  # Stack to hold operators and parentheses
+    result = ""  # String to hold the resulting postfix expression
+
+    for c in s:
+        # If the scanned character is an operand, add it to the result string
+        if c.isalnum():
+            result += c
+        # If the scanned character is an ‘(‘, push it to the stack
+        elif c == '(':
+            stack.append('(')
+        # If the scanned character is a ‘)’, pop from stack until an ‘(‘ is encountered
+        elif c == ')':
+            while stack and stack[-1] != '(':
+                result += stack.pop()
+            stack.pop()  # Pop the ‘(‘ from the stack
+        # If an operator is scanned
+        else:
+            while stack and prec(c) &lt;= prec(stack[-1]):
+                result += stack.pop()
+            stack.append(c)  # Push the current operator to the stack
+
+    # Pop all the remaining elements from the stack
+    while stack:
+        result += stack.pop()
+
+    print(f"Postfix expression: {result}")  # Output the result
+
+# Driver code
+if __name__ == "__main__":
+    exp = "(p+q)*(m-n)"  # Infix expression
+    print(f"Infix expression: {exp}")
+    infixToPostfix(exp)  # Convert the infix expression to postfix</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Function to return precedence of operators
+function prec(c) {
+    if (c === '^')  // Exponent operator has highest precedence
+        return 3;
+    else if (c === '/' || c === '*')  // Multiplication and division have higher precedence than addition
+        return 2;
+    else if (c === '+' || c === '-')  // Addition and subtraction have lowest precedence
+        return 1;
+    else
+        return -1;
+}
+
+// Function to convert infix expression to postfix expression
+function infixToPostfix(s) {
+    let stack = [];  // Stack to hold operators and parentheses
+    let result = "";  // String to hold the resulting postfix expression
+
+    for (let c of s) {
+        // If the scanned character is an operand, add it to the result string
+        if (/[a-zA-Z0-9]/.test(c)) {
+            result += c;
+        }
+        // If the scanned character is an ‘(‘, push it to the stack
+        else if (c === '(') {
+            stack.push('(');
+        }
+        // If the scanned character is a ‘)’, pop from stack until an ‘(‘ is encountered
+        else if (c === ')') {
+            while (stack.length &gt; 0 &amp;&amp; stack[stack.length - 1] !== '(') {
+                result += stack.pop();
+            }
+            stack.pop();  // Pop the ‘(‘ from the stack
+        }
+        // If an operator is scanned
+        else {
+            while (stack.length &gt; 0 &amp;&amp; prec(c) &lt;= prec(stack[stack.length - 1])) {
+                result += stack.pop();
+            }
+            stack.push(c);  // Push the current operator to the stack
+        }
+    }
+
+    // Pop all the remaining elements from the stack
+    while (stack.length &gt; 0) {
+        result += stack.pop();
+    }
+
+    console.log(`Postfix expression: ${result}`);  // Output the result
+}
+
+// Main function to handle input and output
+function main() {
+    let exp = "(p+q)*(m-n)";  // Infix expression
+    console.log(`Infix expression: ${exp}`);
+    infixToPostfix(exp);  // Convert the infix expression to postfix
+}
+
+// Call the main function
+main();</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity:</strong> O(N), where N is the length of the infix expression. Each character in the expression is processed once.
+                        <br/><br/>
+<strong>Space Complexity:</strong> O(N), where N is the length of the infix expression. The stack can hold at most N operators and parentheses in the worst case.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Count Subarrays with Exactly K Different Integers</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Count Subarrays with Exactly K Different Integers</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/blogs/data-structure-and-algorithm/subarrays-with-k-different-integers</code></div>
+  <div class="ArticleParser-module__R__VNG__article" data-article-segment="html-0"><p>Given an integer array nums and an integer k, return the number of good subarrays.</p><p>A good subarray is a continuous subarray that contains exactly k different integers.</p><p>A subarray is a continuous part of the array.</p></div><div><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 1</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p>Input: nums = [1, 2, 1, 2, 3], k = 2</p><p>Output: 7</p><p>Explanation: The good subarrays are [1, 2], [1, 2, 1], [1, 2, 1, 2], [2, 1], [2, 1, 2], [1, 2], and [2, 3].</p></div></div></section><section class="BlogDetail-module__HEfJva__exampleSection"><h3 class="BlogDetail-module__HEfJva__exampleLabel">Example 2</h3><div class="BlogDetail-module__HEfJva__exampleBody"><div aria-orientation="vertical" class="shrink-0 bg-border my-auto BlogDetail-module__HEfJva__exampleDivider" role="separator" style="width:1px;height:100%"></div><div class="BlogDetail-module__HEfJva__exampleRichText"><p>Input: nums = [1, 2, 1, 3, 4], k = 3</p><p>Output: 3</p><p>Explanation: The good subarrays are [1, 2, 1, 3], [2, 1, 3], and [1, 3, 4].</p></div></div></section></div><div><div class="BlogDetail-module__HEfJva__practiceCallout"><a class="BlogDetail-module__HEfJva__practiceLink" data-mobile-prefetch="normal" href="https://takeuforward.org/practice/dsa/subarrays-with-k-different-integers?subject=strivers-a2z-dsa-sheet" rel="noopener" target="_blank"><span>Practice it by yourself before moving onto the solution</span><span class="BlogDetail-module__HEfJva__practiceAction">Try now</span></a></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-2"><h2 id="blog-toc-brute-force-approach">Brute Force Approach</h2><p>Every possible subarray can be checked independently. For each selected range, use a set to count how many distinct values it contains.</p><p>If the set size equals <code>k</code>, that range is a good subarray. This guarantees that every possible answer is examined, but overlapping subarrays repeatedly process the same elements.</p><h3 id="blog-toc-algorithm">Algorithm</h3><ul><li><p>The size of the array is stored in n. If n is 0 or k is less than or equal to 0, 0 is returned because no non-empty good subarray can be formed in such cases.</p></li><li><p>A helper function is created to count distinct integers inside a subarray from start to end. A set is used inside this helper because a set stores only unique values.</p></li><li><p>The helper function traverses the subarray from start to end and inserts each element into the set. After the traversal ends, the size of the set gives the number of distinct integers in that subarray.</p></li><li><p>A variable count is initialized with 0. This stores the total number of good subarrays found so far.</p></li><li><p>Two loops are used to generate every possible subarray. The first loop chooses the starting index start, and the second loop chooses the ending index end.</p></li><li><p>For every subarray from start to end, the helper function is called. If the distinct count is exactly equal to k, count is increased by 1. After all subarrays are checked, count is returned.</p></li></ul><h3 id="blog-toc-dry-run">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Subarrays with K Different Integers Brute Force Dry Run .png" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/74f167d7c1dcb2b7.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Subarrays with K Different Integers Brute Force Dry Run .png</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-3"><h3 id="blog-toc-solution">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+private:
+    // Counts distinct values
+    // inside the selected range.
+    int countDistinct(
+        const vector&lt;int&gt;&amp; nums,
+        int start,
+        int end
+    ) {
+        unordered_set&lt;int&gt; distinct;
+
+        // Scan the selected subarray.
+        for (int i = start; i &lt;= end; i++) {
+            distinct.insert(nums[i]);
+        }
+
+        return distinct.size();
+    }
+
+public:
+    // Counts subarrays containing
+    // exactly k distinct integers.
+    int subarraysWithKDistinct(
+        vector&lt;int&gt;&amp; nums,
+        int k
+    ) {
+        int n = nums.size();
+
+        // No valid non-empty subarray
+        // can exist in these cases.
+        if (n == 0 || k &lt;= 0) {
+            return 0;
+        }
+
+        int count = 0;
+
+        // Try every possible start.
+        for (int start = 0; start &lt; n; start++) {
+
+            // Try every possible end
+            // for the current start.
+            for (int end = start; end &lt; n; end++) {
+                int distinctCount = countDistinct(
+                    nums,
+                    start,
+                    end
+                );
+
+                // Count ranges having
+                // exactly k distinct values.
+                if (distinctCount == k) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+};
+
+int main() {
+    vector&lt;int&gt; nums = {1, 2, 1, 2, 3};
+    int k = 2;
+
+    Solution solution;
+
+    cout &lt;&lt; solution.subarraysWithKDistinct(
+        nums,
+        k
+    ) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+
+    # Counts distinct values
+    # inside the selected range.
+    def count_distinct(
+        self,
+        nums: list[int],
+        start: int,
+        end: int
+    ) -&gt; int:
+        distinct = set()
+
+        # Scan the selected subarray.
+        for i in range(start, end + 1):
+            distinct.add(nums[i])
+
+        return len(distinct)
+
+    # Counts subarrays containing
+    # exactly k distinct integers.
+    def subarrays_with_k_distinct(
+        self,
+        nums: list[int],
+        k: int
+    ) -&gt; int:
+        n = len(nums)
+
+        # No valid non-empty subarray
+        # can exist in these cases.
+        if n == 0 or k &lt;= 0:
+            return 0
+
+        count = 0
+
+        # Try every possible start.
+        for start in range(n):
+
+            # Try every possible end
+            # for the current start.
+            for end in range(start, n):
+                distinct_count = self.count_distinct(
+                    nums,
+                    start,
+                    end
+                )
+
+                # Count ranges having
+                # exactly k distinct values.
+                if distinct_count == k:
+                    count += 1
+
+        return count
+
+
+if __name__ == "__main__":
+    nums = [1, 2, 1, 2, 3]
+    k = 2
+
+    solution = Solution()
+
+    print(
+        solution.subarrays_with_k_distinct(
+            nums,
+            k
+        )
+    )</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+
+    // Counts distinct values
+    // inside the selected range.
+    private int countDistinct(
+        int[] nums,
+        int start,
+        int end
+    ) {
+        Set&lt;Integer&gt; distinct = new HashSet&lt;&gt;();
+
+        // Scan the selected subarray.
+        for (int i = start; i &lt;= end; i++) {
+            distinct.add(nums[i]);
+        }
+
+        return distinct.size();
+    }
+
+    // Counts subarrays containing
+    // exactly k distinct integers.
+    public int subarraysWithKDistinct(
+        int[] nums,
+        int k
+    ) {
+        int n = nums.length;
+
+        // No valid non-empty subarray
+        // can exist in these cases.
+        if (n == 0 || k &lt;= 0) {
+            return 0;
+        }
+
+        int count = 0;
+
+        // Try every possible start.
+        for (int start = 0; start &lt; n; start++) {
+
+            // Try every possible end
+            // for the current start.
+            for (int end = start; end &lt; n; end++) {
+                int distinctCount = countDistinct(
+                    nums,
+                    start,
+                    end
+                );
+
+                // Count ranges having
+                // exactly k distinct values.
+                if (distinctCount == k) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[] nums = {1, 2, 1, 2, 3};
+        int k = 2;
+
+        Solution solution = new Solution();
+
+        System.out.println(
+            solution.subarraysWithKDistinct(
+                nums,
+                k
+            )
+        );
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+
+    // Counts distinct values
+    // inside the selected range.
+    countDistinct(nums, start, end) {
+        const distinct = new Set();
+
+        // Scan the selected subarray.
+        for (let i = start; i &lt;= end; i++) {
+            distinct.add(nums[i]);
+        }
+
+        return distinct.size;
+    }
+
+    // Counts subarrays containing
+    // exactly k distinct integers.
+    subarraysWithKDistinct(nums, k) {
+        const n = nums.length;
+
+        // No valid non-empty subarray
+        // can exist in these cases.
+        if (n === 0 || k &lt;= 0) {
+            return 0;
+        }
+
+        let count = 0;
+
+        // Try every possible start.
+        for (let start = 0; start &lt; n; start++) {
+
+            // Try every possible end
+            // for the current start.
+            for (let end = start; end &lt; n; end++) {
+                const distinctCount =
+                    this.countDistinct(
+                        nums,
+                        start,
+                        end
+                    );
+
+                // Count ranges having
+                // exactly k distinct values.
+                if (distinctCount === k) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+}
+
+const nums = [1, 2, 1, 2, 3];
+const k = 2;
+
+const solution = new Solution();
+
+console.log(
+    solution.subarraysWithKDistinct(
+        nums,
+        k
+    )
+);</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-4"><h3 id="blog-toc-complexity-analysis">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(N³), where N is the size of the array. There are O(N²) possible subarrays, and counting distinct integers in each subarray can take O(N) time.</p><p><strong>Space Complexity:</strong> O(N), because the set used inside the helper function may store distinct integers from the current subarray.</p><h2 id="blog-toc-better-approach">Better Approach</h2><p>Instead of rebuilding the distinct set for every range, fix <code>start</code> and expand <code>end</code> while maintaining a frequency map.</p><p>The map size directly gives the number of distinct integers. Once it becomes greater than <code>k</code>, further expansion from the same <code>start</code> cannot make it valid again because adding elements cannot reduce the distinct count.</p><h3 id="blog-toc-algorithm-2">Algorithm</h3><ul><li><p>The size of the array is stored in n. If n is 0 or k is less than or equal to 0, 0 is returned because no good subarray can exist.</p></li><li><p>A variable count is initialized with 0. This stores the number of subarrays containing exactly k distinct integers.</p></li><li><p>The array is traversed using start as the starting index. For every start, a fresh frequency map is created because a new subarray is being built from that position.</p></li><li><p>The end pointer moves from start to the end of the array. Whenever nums[end] is included in the current subarray, its frequency is increased in the map.</p></li><li><p>The size of the map tells how many distinct integers are currently present in the subarray. If the map size becomes exactly k, count is increased.</p></li><li><p>If the map size becomes greater than k, the loop stops for the current start. This is safe because adding more elements cannot decrease the number of distinct integers. After all starting positions are checked, count is returned.</p></li></ul><h3 id="blog-toc-dry-run-2">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Subarrays with K Different Integers Better Approach Dry Run.png" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/0c03fd9becabe037.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Subarrays with K Different Integers Better Approach Dry Run.png</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-5"><h3 id="blog-toc-solution-2">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Expands from every start
+    // while tracking frequencies.
+    int subarraysWithKDistinct(
+        vector&lt;int&gt;&amp; nums,
+        int k
+    ) {
+        int n = nums.size();
+
+        // No valid non-empty subarray
+        // can exist in these cases.
+        if (n == 0 || k &lt;= 0) {
+            return 0;
+        }
+
+        int count = 0;
+
+        // Try every possible start.
+        for (int start = 0; start &lt; n; start++) {
+            unordered_map&lt;int, int&gt; frequency;
+
+            // Expand the current subarray.
+            for (int end = start; end &lt; n; end++) {
+                frequency[nums[end]]++;
+
+                // Count the range when it
+                // has exactly k distinct values.
+                if (frequency.size() == k) {
+                    count++;
+                }
+
+                // Further expansion cannot
+                // reduce the distinct count.
+                if (frequency.size() &gt; k) {
+                    break;
+                }
+            }
+        }
+
+        return count;
+    }
+};
+
+int main() {
+    vector&lt;int&gt; nums = {1, 2, 1, 2, 3};
+    int k = 2;
+
+    Solution solution;
+
+    cout &lt;&lt; solution.subarraysWithKDistinct(
+        nums,
+        k
+    ) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+
+    # Expands from every start
+    # while tracking frequencies.
+    def subarrays_with_k_distinct(
+        self,
+        nums: list[int],
+        k: int
+    ) -&gt; int:
+        n = len(nums)
+
+        # No valid non-empty subarray
+        # can exist in these cases.
+        if n == 0 or k &lt;= 0:
+            return 0
+
+        count = 0
+
+        # Try every possible start.
+        for start in range(n):
+            frequency = {}
+
+            # Expand the current subarray.
+            for end in range(start, n):
+                value = nums[end]
+
+                frequency[value] = (
+                    frequency.get(value, 0) + 1
+                )
+
+                # Count the range when it
+                # has exactly k distinct values.
+                if len(frequency) == k:
+                    count += 1
+
+                # Further expansion cannot
+                # reduce the distinct count.
+                if len(frequency) &gt; k:
+                    break
+
+        return count
+
+
+if __name__ == "__main__":
+    nums = [1, 2, 1, 2, 3]
+    k = 2
+
+    solution = Solution()
+
+    print(
+        solution.subarrays_with_k_distinct(
+            nums,
+            k
+        )
+    )</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+
+    // Expands from every start
+    // while tracking frequencies.
+    public int subarraysWithKDistinct(
+        int[] nums,
+        int k
+    ) {
+        int n = nums.length;
+
+        // No valid non-empty subarray
+        // can exist in these cases.
+        if (n == 0 || k &lt;= 0) {
+            return 0;
+        }
+
+        int count = 0;
+
+        // Try every possible start.
+        for (int start = 0; start &lt; n; start++) {
+            Map&lt;Integer, Integer&gt; frequency =
+                new HashMap&lt;&gt;();
+
+            // Expand the current subarray.
+            for (int end = start; end &lt; n; end++) {
+                int value = nums[end];
+
+                frequency.put(
+                    value,
+                    frequency.getOrDefault(value, 0) + 1
+                );
+
+                // Count the range when it
+                // has exactly k distinct values.
+                if (frequency.size() == k) {
+                    count++;
+                }
+
+                // Further expansion cannot
+                // reduce the distinct count.
+                if (frequency.size() &gt; k) {
+                    break;
+                }
+            }
+        }
+
+        return count;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[] nums = {1, 2, 1, 2, 3};
+        int k = 2;
+
+        Solution solution = new Solution();
+
+        System.out.println(
+            solution.subarraysWithKDistinct(
+                nums,
+                k
+            )
+        );
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+
+    // Expands from every start
+    // while tracking frequencies.
+    subarraysWithKDistinct(nums, k) {
+        const n = nums.length;
+
+        // No valid non-empty subarray
+        // can exist in these cases.
+        if (n === 0 || k &lt;= 0) {
+            return 0;
+        }
+
+        let count = 0;
+
+        // Try every possible start.
+        for (let start = 0; start &lt; n; start++) {
+            const frequency = new Map();
+
+            // Expand the current subarray.
+            for (let end = start; end &lt; n; end++) {
+                const value = nums[end];
+
+                frequency.set(
+                    value,
+                    (frequency.get(value) || 0) + 1
+                );
+
+                // Count the range when it
+                // has exactly k distinct values.
+                if (frequency.size === k) {
+                    count++;
+                }
+
+                // Further expansion cannot
+                // reduce the distinct count.
+                if (frequency.size &gt; k) {
+                    break;
+                }
+            }
+        }
+
+        return count;
+    }
+}
+
+const nums = [1, 2, 1, 2, 3];
+const k = 2;
+
+const solution = new Solution();
+
+console.log(
+    solution.subarraysWithKDistinct(
+        nums,
+        k
+    )
+);</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-6"><h3 id="blog-toc-complexity-analysis-2">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(N²), where N is the size of the array. For every starting index, the ending index may move toward the right until the distinct count becomes greater than k.</p></div><div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-7"><p><strong>Space Complexity:</strong> O(N), because the frequency map may store distinct values from the current subarray.</p><h2 id="blog-toc-optimal-approach">Optimal Approach</h2><p>Counting exactly <code>k</code> distinct values directly is inconvenient because several starting positions may form valid subarrays for the same ending position.</p><p>Instead, count subarrays with <strong>at most </strong><code>k</code><strong> distinct integers</strong> and subtract those with <strong>at most </strong><code>k - 1</code><strong> distinct integers</strong>. Their difference leaves exactly the subarrays containing <code>k</code> distinct values.</p><p>A sliding window efficiently finds the valid left boundary for each <code>right</code>, while a frequency map ensures a value is removed from the distinct count only after its last occurrence leaves the window.</p><h3 id="blog-toc-algorithm-3">Algorithm</h3><ul><li><p>A helper function countAtMost is created to count subarrays with at most limit distinct integers. If limit is less than or equal to 0, 0 is returned because no non-empty useful subarray can have at most 0 distinct integers.</p></li><li><p>Inside the helper function, a frequency map is used to store how many times each integer appears in the current window. This is needed because an integer should be removed from the distinct count only when its frequency becomes 0.</p></li><li><p>Two variables are initialized: left is set to 0 to represent the left boundary of the window, and count is set to 0 to store the number of valid subarrays.</p></li><li><p>The right pointer moves from 0 to n - 1. At every step, nums[right] is added to the frequency map because it becomes part of the current window.</p></li><li><p>If the size of the frequency map becomes greater than limit, the window is shrunk from the left. While shrinking, the frequency of nums[left] is decreased. If its frequency becomes 0, that integer is removed from the map. Then left is moved one step forward.</p></li><li><p>Once the window contains at most limit distinct integers, every subarray ending at right and starting from any index between left and right is valid. Therefore, right - left + 1 is added to count. Finally, the answer is returned as countAtMost(k) - countAtMost(k - 1).</p></li></ul><h3 id="blog-toc-dry-run-3">Dry Run</h3></div><div><div class=""><div class="ImageSlider-module__5oY_MW__container"><div class="ImageSlider-module__5oY_MW__stage"><img alt="Subarrays with K Different Integers Optimal Appraoch Dry Run.png" class="ImageSlider-module__5oY_MW__image" data-nimg="1" decoding="async" draggable="false" height="0" loading="lazy" src="../assets/img/9c03c1cef433ff34.webp" style="color:transparent" width="0"/></div><div class="ImageSlider-module__5oY_MW__controlBar"><div class="ImageSlider-module__5oY_MW__controlIsland ImageSlider-module__5oY_MW__controlIslandGrow"><p class="ImageSlider-module__5oY_MW__controlCaption">Subarrays with K Different Integers Optimal Appraoch Dry Run.png</p></div><div class="ImageSlider-module__5oY_MW__controlIsland"><div class="ImageSlider-module__5oY_MW__controlActions"><div class="flex items-center"></div></div></div></div></div></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-8"><h3 id="blog-toc-solution-3">Solution</h3></div><div><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Python</button><button class="tab" data-i="2">Java</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+private:
+    // Counts subarrays having
+    // at most limit distinct values.
+    int countAtMost(
+        vector&lt;int&gt;&amp; nums,
+        int limit
+    ) {
+        // No non-empty subarray
+        // can satisfy this limit.
+        if (limit &lt;= 0) {
+            return 0;
+        }
+
+        unordered_map&lt;int, int&gt; frequency;
+
+        int left = 0;
+        int count = 0;
+
+        // Expand the window with right.
+        for (int right = 0; right &lt; nums.size(); right++) {
+            frequency[nums[right]]++;
+
+            // Shrink until the window
+            // has at most limit values.
+            while (frequency.size() &gt; limit) {
+                int value = nums[left];
+                frequency[value]--;
+
+                // Remove the value only
+                // after its last copy leaves.
+                if (frequency[value] == 0) {
+                    frequency.erase(value);
+                }
+
+                left++;
+            }
+
+            // Every start from left to right
+            // forms a valid subarray.
+            count += right - left + 1;
+        }
+
+        return count;
+    }
+
+public:
+    // Counts subarrays containing
+    // exactly k distinct integers.
+    int subarraysWithKDistinct(
+        vector&lt;int&gt;&amp; nums,
+        int k
+    ) {
+        // Exactly k distinct values
+        // require a positive k.
+        if (k &lt;= 0) {
+            return 0;
+        }
+
+        return countAtMost(nums, k)
+             - countAtMost(nums, k - 1);
+    }
+};
+
+int main() {
+    vector&lt;int&gt; nums = {1, 2, 1, 2, 3};
+    int k = 2;
+
+    Solution solution;
+
+    cout &lt;&lt; solution.subarraysWithKDistinct(
+        nums,
+        k
+    ) &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-python" lang="python">class Solution:
+
+    # Counts subarrays having
+    # at most limit distinct values.
+    def count_at_most(
+        self,
+        nums: list[int],
+        limit: int
+    ) -&gt; int:
+        # No non-empty subarray
+        # can satisfy this limit.
+        if limit &lt;= 0:
+            return 0
+
+        frequency = {}
+
+        left = 0
+        count = 0
+
+        # Expand the window with right.
+        for right in range(len(nums)):
+            value = nums[right]
+
+            frequency[value] = (
+                frequency.get(value, 0) + 1
+            )
+
+            # Shrink until the window
+            # has at most limit values.
+            while len(frequency) &gt; limit:
+                left_value = nums[left]
+                frequency[left_value] -= 1
+
+                # Remove the value only
+                # after its last copy leaves.
+                if frequency[left_value] == 0:
+                    del frequency[left_value]
+
+                left += 1
+
+            # Every start from left to right
+            # forms a valid subarray.
+            count += right - left + 1
+
+        return count
+
+    # Counts subarrays containing
+    # exactly k distinct integers.
+    def subarrays_with_k_distinct(
+        self,
+        nums: list[int],
+        k: int
+    ) -&gt; int:
+        # Exactly k distinct values
+        # require a positive k.
+        if k &lt;= 0:
+            return 0
+
+        return (
+            self.count_at_most(nums, k)
+            - self.count_at_most(nums, k - 1)
+        )
+
+
+if __name__ == "__main__":
+    nums = [1, 2, 1, 2, 3]
+    k = 2
+
+    solution = Solution()
+
+    print(
+        solution.subarrays_with_k_distinct(
+            nums,
+            k
+        )
+    )</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+
+    // Counts subarrays having
+    // at most limit distinct values.
+    private int countAtMost(
+        int[] nums,
+        int limit
+    ) {
+        // No non-empty subarray
+        // can satisfy this limit.
+        if (limit &lt;= 0) {
+            return 0;
+        }
+
+        Map&lt;Integer, Integer&gt; frequency =
+            new HashMap&lt;&gt;();
+
+        int left = 0;
+        int count = 0;
+
+        // Expand the window with right.
+        for (int right = 0; right &lt; nums.length; right++) {
+            int value = nums[right];
+
+            frequency.put(
+                value,
+                frequency.getOrDefault(value, 0) + 1
+            );
+
+            // Shrink until the window
+            // has at most limit values.
+            while (frequency.size() &gt; limit) {
+                int leftValue = nums[left];
+
+                frequency.put(
+                    leftValue,
+                    frequency.get(leftValue) - 1
+                );
+
+                // Remove the value only
+                // after its last copy leaves.
+                if (frequency.get(leftValue) == 0) {
+                    frequency.remove(leftValue);
+                }
+
+                left++;
+            }
+
+            // Every start from left to right
+            // forms a valid subarray.
+            count += right - left + 1;
+        }
+
+        return count;
+    }
+
+    // Counts subarrays containing
+    // exactly k distinct integers.
+    public int subarraysWithKDistinct(
+        int[] nums,
+        int k
+    ) {
+        // Exactly k distinct values
+        // require a positive k.
+        if (k &lt;= 0) {
+            return 0;
+        }
+
+        return countAtMost(nums, k)
+             - countAtMost(nums, k - 1);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[] nums = {1, 2, 1, 2, 3};
+        int k = 2;
+
+        Solution solution = new Solution();
+
+        System.out.println(
+            solution.subarraysWithKDistinct(
+                nums,
+                k
+            )
+        );
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+
+    // Counts subarrays having
+    // at most limit distinct values.
+    countAtMost(nums, limit) {
+
+        // No non-empty subarray
+        // can satisfy this limit.
+        if (limit &lt;= 0) {
+            return 0;
+        }
+
+        const frequency = new Map();
+
+        let left = 0;
+        let count = 0;
+
+        // Expand the window with right.
+        for (let right = 0; right &lt; nums.length; right++) {
+            const value = nums[right];
+
+            frequency.set(
+                value,
+                (frequency.get(value) || 0) + 1
+            );
+
+            // Shrink until the window
+            // has at most limit values.
+            while (frequency.size &gt; limit) {
+                const leftValue = nums[left];
+
+                frequency.set(
+                    leftValue,
+                    frequency.get(leftValue) - 1
+                );
+
+                // Remove the value only
+                // after its last copy leaves.
+                if (frequency.get(leftValue) === 0) {
+                    frequency.delete(leftValue);
+                }
+
+                left++;
+            }
+
+            // Every start from left to right
+            // forms a valid subarray.
+            count += right - left + 1;
+        }
+
+        return count;
+    }
+
+    // Counts subarrays containing
+    // exactly k distinct integers.
+    subarraysWithKDistinct(nums, k) {
+
+        // Exactly k distinct values
+        // require a positive k.
+        if (k &lt;= 0) {
+            return 0;
+        }
+
+        return (
+            this.countAtMost(nums, k)
+            - this.countAtMost(nums, k - 1)
+        );
+    }
+}
+
+const nums = [1, 2, 1, 2, 3];
+const k = 2;
+
+const solution = new Solution();
+
+console.log(
+    solution.subarraysWithKDistinct(
+        nums,
+        k
+    )
+);</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-9"><h3 id="blog-toc-complexity-analysis-3">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(N), where N is the size of the array. The helper function countAtMost runs in O(N), and it is called twice. So, the overall time complexity is O(2N), which simplifies to O(N).</p><p><strong>Space Complexity:</strong> O(N), because the frequency map may store distinct values from the current window.</p><p></p><h3 id="blog-toc-faqs">FAQs</h3><p>Q1. <strong>Why is this problem converted into atMost(k) - atMost(k - 1)?</strong></p><p>Subarrays with at most k distinct integers include subarrays with 1 to k distinct integers. After removing subarrays with at most k - 1 distinct integers, only subarrays with exactly k distinct integers remain.</p><p>Q2. <strong>Why is a frequency map used?</strong></p><p>A frequency map is used because the same integer can appear multiple times in the current window. It helps remove an integer from the distinct count only when its frequency becomes 0.</p><p>Q3. <strong>Why is right - left + 1 added in the optimal approach?</strong></p><p>Once the window from left to right has at most limit distinct integers, every subarray ending at right and starting from any index between left and right is also valid.</p><p>Q4. <strong>Why can the better approach stop when distinct count becomes greater than k?</strong></p><p>For a fixed starting index, extending the subarray can only keep or increase the number of distinct integers. So once it becomes greater than k, that start index cannot produce more valid subarrays.</p><p>Q5. <strong>What happens if k is 0?</strong></p><p>No non-empty subarray can contain exactly 0 distinct integers, so the answer is 0.</p><p>Q6. <strong>Is there another optimal sliding window method?</strong></p><p>Yes. A two-window method can also be used to count exactly k distinct integers directly, but the atMost(k) - atMost(k - 1) method is simpler, cleaner, and widely used.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div>
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

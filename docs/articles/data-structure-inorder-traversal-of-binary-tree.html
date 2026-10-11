@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Inorder Traversal of Binary Tree</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Inorder Traversal of Binary Tree</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/inorder-traversal-of-binary-tree/</code></div>
+  <p><strong>Problem Statement: </strong>
+Given root of binary tree, return the Inorder traversal of the binary tree.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>  
+<strong>Input:</strong> root = [1, 4, null, 4, 2]  
+<strong>Output:</strong> [4, 4, 2, 1]  
+<strong>Explanation:</strong> In this example, the preorder traversal of the binary tree produces the sequence [4, 4, 2, 1].
+
+<strong>Example 2:</strong>  
+<strong>Input:</strong> root = [1, null, 2, 3]  
+<strong>Output:</strong> [1, 3, 2]  
+<strong>Explanation:</strong> The preorder traversal of the binary tree results in the sequence [1, 3, 2].</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/inorder-traversal" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Recursive Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li><strong>Base Case:</strong> If the current node is null, it indicates we've reached the end of a subtree with no further nodes to explore, so the recursive function stops and returns from that call.</li>
+<li><strong>Recursive Function:</strong>
+<ul>
+<li><strong>Traverse Left Subtree:</strong> Recursively call the inorder function on the left child of the current node, exploring the left subtree first in a depth-first manner.</li>
+<li><strong>Process Current Node:</strong> Once the left subtree is fully explored, the current node is processed (e.g., adding its value to an array or printing it).</li>
+<li><strong>Traverse Right Subtree:</strong> After processing the current node, recursively explore the right subtree by invoking the inorder function on the right child of the current node.</li>
+</ul>
+</li>
+</ul>
+<p><img height="457" loading="lazy" src="../assets/img/f7275d7328839bc5.png" width="481"/></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// TreeNode structure for the binary tree
+struct TreeNode {
+    int data;
+    TreeNode* left;
+    TreeNode* right;
+    // Constructor to initialize
+    // the TreeNode with a value
+    TreeNode(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+
+class Solution{
+    private:
+    // Function to perform inorder traversal
+    // of the tree and store values in 'arr'
+    void recursiveInorder(TreeNode* root, vector&lt;int&gt; &amp;arr){
+        // If the current Tree is NULL
+        // (base case for recursion), return
+        if(root == nullptr){
+            return;
+        }
+        // Recursively traverse the left subtree
+        recursiveInorder(root-&gt;left, arr);
+        // Push the current TreeNode's
+        // value into the vector
+        arr.push_back(root-&gt;data);
+        // Recursively traverse 
+        // the right subtree
+        recursiveInorder(root-&gt;right, arr);
+    }
+    
+    public:
+    // Function to initiate inorder traversal
+    // and return the resulting vector
+    vector&lt;int&gt; inorder(TreeNode* root){
+        // Create an empty vector to
+        // store inorder traversal values
+        vector&lt;int&gt; arr;
+        // Call the inorder traversal function
+        recursiveInorder(root, arr);
+        // Return the resulting vector
+        // containing inorder traversal values
+        return arr;
+    }
+};
+
+// Main function
+int main()
+{
+    // Creating a sample binary tree
+    TreeNode* root = new TreeNode(1);
+    root-&gt;left = new TreeNode(2);
+    root-&gt;right = new TreeNode(3);
+    root-&gt;left-&gt;left = new TreeNode(4);
+    root-&gt;left-&gt;right = new TreeNode(5);
+    
+    Solution sol = Solution();
+    // Getting inorder traversal
+    vector&lt;int&gt; result = sol.inorder(root);
+
+    // Displaying the inorder traversal result
+    cout &lt;&lt; "Inorder Traversal: ";
+    // Output each value in the
+    // inorder traversal result
+    for(int val : result) {
+        cout &lt;&lt; val &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.ArrayList;
+import java.util.List;
+
+// TreeNode structure for the binary tree
+class TreeNode {
+    int data;
+    TreeNode left;
+    TreeNode right;
+
+    // Constructor to initialize the TreeNode with a value
+    TreeNode(int val) {
+        data = val;
+        left = null;
+        right = null;
+    }
+}
+
+class Solution {
+    private void recursiveInorder(TreeNode root, List&lt;Integer&gt; arr) {
+        if (root == null) {
+            return;
+        }
+        recursiveInorder(root.left, arr);
+        arr.add(root.data);
+        recursiveInorder(root.right, arr);
+    }
+
+    // Function to initiate inorder traversal and return the resulting list
+    public List&lt;Integer&gt; inorder(TreeNode root) {
+        List&lt;Integer&gt; arr = new ArrayList&lt;&gt;();
+        recursiveInorder(root, arr);
+        return arr;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Creating a sample binary tree
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+
+        Solution sol = new Solution();
+        List&lt;Integer&gt; result = sol.inorder(root);
+
+        // Displaying the inorder traversal result
+        System.out.print("Inorder Traversal: ");
+        for (int val : result) {
+            System.out.print(val + " ");
+        }
+        System.out.println();
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.data = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    def __init__(self):
+        pass
+
+    def recursiveInorder(self, root, arr):
+        # If the current Tree is NULL (base case for recursion), return
+        if root is None:
+            return
+        # Recursively traverse the left subtree
+        self.recursiveInorder(root.left, arr)
+        # Push the current TreeNode's value into the vector
+        arr.append(root.data)
+        # Recursively traverse the right subtree
+        self.recursiveInorder(root.right, arr)
+
+    # Function to initiate inorder traversal and return the resulting vector
+    def inorder(self, root):
+        # Create an empty vector to store inorder traversal values
+        arr = []
+        # Call the inorder traversal function
+        self.recursiveInorder(root, arr)
+        # Return the resulting vector containing inorder traversal values
+        return arr
+
+if __name__ == "__main__":
+    # Creating a sample binary tree
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.right = TreeNode(3)
+    root.left.left = TreeNode(4)
+    root.left.right = TreeNode(5)
+
+    sol = Solution()
+    # Getting inorder traversal
+    result = sol.inorder(root)
+
+    # Displaying the inorder traversal result
+    print("Inorder Traversal: ", end="")
+    # Output each value in the inorder traversal result
+    for val in result:
+        print(val, end=" ")
+    print()
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// TreeNode structure for the binary tree
+class TreeNode {
+    constructor(val) {
+        this.data = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class Solution {
+    // Function to perform inorder traversal
+    // of the tree and store values in 'arr'
+    recursiveInorder(root, arr) {
+        // If the current Tree is NULL (base case for recursion), return
+        if (root === null) {
+            return;
+        }
+        // Recursively traverse the left subtree
+        this.recursiveInorder(root.left, arr);
+        // Push the current TreeNode's value into the vector
+        arr.push(root.data);
+        // Recursively traverse the right subtree
+        this.recursiveInorder(root.right, arr);
+    }
+
+    // Function to initiate inorder traversal and return the resulting vector
+    inorder(root) {
+        // Create an empty vector to store inorder traversal values
+        const arr = [];
+        // Call the inorder traversal function
+        this.recursiveInorder(root, arr);
+        // Return the resulting vector containing inorder traversal values
+        return arr;
+    }
+}
+
+// Main function
+function main() {
+    // Creating a sample binary tree
+    const root = new TreeNode(1);
+    root.left = new TreeNode(2);
+    root.right = new TreeNode(3);
+    root.left.left = new TreeNode(4);
+    root.left.right = new TreeNode(5);
+
+    const sol = new Solution();
+    // Getting inorder traversal
+    const result = sol.inorder(root);
+
+    // Displaying the inorder traversal result
+    console.log("Inorder Traversal: ", result.join(" "));
+}
+
+main();
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(N)</strong>, where N is the number of nodes in the binary tree. Each node is visited exactly once during the traversal.
+                        <br/><br/>
+<strong>Space Complexity: O(N)</strong>, where N is the number of nodes in the binary tree. The space is used for the recursion stack and the vector to store the inorder traversal result.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Iterateive Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>Initialize an empty stack and set the current node to the root of the binary tree.</li>
+<li>Enter a loop that continues as long as there are nodes in the stack or the current node is not null.</li>
+<li>If the current node is not null, push it onto the stack and move to its left child. Continue this process until a node with no left child is reached.</li>
+<li>Once a null node is encountered, pop the top node from the stack, process it (e.g., add its value to the result array), and move to its right child.</li>
+<li>Repeat this process of pushing and popping nodes, alternating between moving left and right, until the stack is empty and the current node is null.</li>
+<li>At the end of the process, return the result array, which will contain the inorder traversal of the binary tree.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/87bfb42c06eac39a.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/cf3182e63bbf9813.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/0ee8b88874bcd8c7.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/dd9681b15ef9c75c.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/1066cdd05c28f552.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/113dc33ae65dd0dc.png"/></div><div class="carousel-image"><img alt="Image 7" loading="lazy" src="../assets/img/40c65b012552ac18.png"/></div><div class="carousel-image"><img alt="Image 8" loading="lazy" src="../assets/img/8de0d9d7d5f26f3e.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/87bfb42c06eac39a.png"/><img alt="Image 2" loading="lazy" src="../assets/img/cf3182e63bbf9813.png"/><img alt="Image 3" loading="lazy" src="../assets/img/0ee8b88874bcd8c7.png"/><img alt="Image 4" loading="lazy" src="../assets/img/dd9681b15ef9c75c.png"/><img alt="Image 5" loading="lazy" src="../assets/img/1066cdd05c28f552.png"/><img alt="Image 6" loading="lazy" src="../assets/img/113dc33ae65dd0dc.png"/><img alt="Image 7" loading="lazy" src="../assets/img/40c65b012552ac18.png"/><img alt="Image 8" loading="lazy" src="../assets/img/8de0d9d7d5f26f3e.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Define the TreeNode structure
+struct TreeNode {
+    int data;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(int x) : data(x), left(nullptr), right(nullptr) {}
+};
+
+class Solution {
+public:
+// Function to perform inorder traversal
+// of a binary tree iteratively
+vector&lt;int&gt; inorder(TreeNode* root){
+    // Initialize a stack to track nodes
+    stack&lt;TreeNode*&gt; st;
+    // Start from the root node
+    TreeNode* node = root;
+    // Initialize a vector to store
+    // inorder traversal result
+    vector&lt;int&gt; inorder;
+
+    // Start an infinite
+    // loop for traversal
+    while(true){
+        // If the current node is not NULL
+        if(node != NULL){
+            // Push the current
+            // node to the stack
+            st.push(node);
+            // Move to the left child
+            // of the current node
+            node = node-&gt;left;
+        }
+        else{
+            // If the stack is empty,
+            // break the loop
+            if(st.empty()){
+                break;
+            }
+            // Retrieve a node from the stack
+            node = st.top();
+            // Remove the node from the stack
+            st.pop();
+            // Add the node's value to
+            // the inorder traversal list
+            inorder.push_back(node-&gt;data);
+            // Move to the right child
+            // of the current node
+            node = node-&gt;right;
+        }
+    }
+    // Return the inorder
+    // traversal result
+    return inorder;
+}
+
+};
+
+int main() {
+    // Creating a binary tree
+    TreeNode* root = new TreeNode(1);
+    root-&gt;left = new TreeNode(2);
+    root-&gt;right = new TreeNode(3);
+    root-&gt;left-&gt;left = new TreeNode(4);
+    root-&gt;left-&gt;right = new TreeNode(5);
+
+    // Initializing the Solution class
+    Solution sol;
+
+    // Getting the inorder traversal
+    vector&lt;int&gt; result = sol.inorder(root);
+
+    // Displaying the inorder traversal result
+    cout &lt;&lt; "Inorder Traversal: ";
+    for (int val : result) {
+        cout &lt;&lt; val &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+
+    return 0;
+}
+
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
+// Define the TreeNode structure
+class TreeNode {
+    int data;
+    TreeNode left;
+    TreeNode right;
+    TreeNode(int x) { data = x; left = null; right = null; }
+}
+
+class Solution {
+    // Function to perform inorder traversal of a binary tree iteratively
+    public List&lt;Integer&gt; inorder(TreeNode root) {
+        Stack&lt;TreeNode&gt; st = new Stack&lt;&gt;();
+        TreeNode node = root;
+        List&lt;Integer&gt; inorder = new ArrayList&lt;&gt;();
+
+        while (true) {
+            if (node != null) {
+                st.push(node);
+                node = node.left;
+            } else {
+                if (st.isEmpty()) {
+                    break;
+                }
+                node = st.pop();
+                inorder.add(node.data);
+                node = node.right;
+            }
+        }
+        return inorder;
+    }
+}
+
+// Main class for testing
+public class Main {
+    public static void main(String[] args) {
+        // Creating a binary tree
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+
+        // Initializing the Solution class
+        Solution sol = new Solution();
+
+        // Getting the inorder traversal
+        List&lt;Integer&gt; result = sol.inorder(root);
+
+        // Displaying the inorder traversal result
+        System.out.print("Inorder Traversal: ");
+        for (int val : result) {
+            System.out.print(val + " ");
+        }
+        System.out.println();
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Define the TreeNode structure
+class TreeNode:
+    def __init__(self, x):
+        self.data = x
+        self.left = None
+        self.right = None
+
+class Solution:
+    # Function to perform inorder traversal
+    # of a binary tree iteratively
+    def inorder(self, root):
+        # Initialize a stack to track nodes
+        st = []
+        # Start from the root node
+        node = root
+        # Initialize a list to store
+        # inorder traversal result
+        inorder = []
+
+        # Start an infinite
+        # loop for traversal
+        while True:
+            # If the current node is not NULL
+            if node is not None:
+                # Push the current
+                # node to the stack
+                st.append(node)
+                # Move to the left child
+                # of the current node
+                node = node.left
+            else:
+                # If the stack is empty,
+                # break the loop
+                if not st:
+                    break
+                # Retrieve a node from the stack
+                node = st.pop()
+                # Add the node's value to
+                # the inorder traversal list
+                inorder.append(node.data)
+                # Move to the right child
+                # of the current node
+                node = node.right
+        
+        # Return the inorder
+        # traversal result
+        return inorder
+
+# Creating a binary tree
+root = TreeNode(1)
+root.left = TreeNode(2)
+root.right = TreeNode(3)
+root.left.left = TreeNode(4)
+root.left.right = TreeNode(5)
+
+# Initializing the Solution class
+sol = Solution()
+
+# Getting the inorder traversal
+result = sol.inorder(root)
+
+# Displaying the inorder traversal result
+print("Inorder Traversal:", result)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Define the TreeNode structure
+class TreeNode {
+    constructor(val) {
+        this.data = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class Solution {
+    // Function to perform inorder traversal
+    // of a binary tree iteratively
+    inorder(root) {
+        // Initialize a stack to track nodes
+        const st = [];
+        // Start from the root node
+        let node = root;
+        // Initialize an array to store
+        // inorder traversal result
+        const inorder = [];
+
+        // Start an infinite
+        // loop for traversal
+        while (true) {
+            // If the current node is not NULL
+            if (node !== null) {
+                // Push the current
+                // node to the stack
+                st.push(node);
+                // Move to the left child
+                // of the current node
+                node = node.left;
+            } else {
+                // If the stack is empty,
+                // break the loop
+                if (st.length === 0) {
+                    break;
+                }
+                // Retrieve a node from the stack
+                node = st.pop();
+                // Add the node's value to
+                // the inorder traversal list
+                inorder.push(node.data);
+                // Move to the right child
+                // of the current node
+                node = node.right;
+            }
+        }
+        // Return the inorder
+        // traversal result
+        return inorder;
+    }
+}
+
+// Creating a binary tree
+const root = new TreeNode(1);
+root.left = new TreeNode(2);
+root.right = new TreeNode(3);
+root.left.left = new TreeNode(4);
+root.left.right = new TreeNode(5);
+
+// Initializing the Solution class
+const sol = new Solution();
+
+// Getting the inorder traversal
+const result = sol.inorder(root);
+
+// Displaying the inorder traversal result
+console.log("Inorder Traversal:", result);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity:</strong> O(n), where n is the number of nodes in the binary tree. Each node is visited exactly once.
+                        <br/><br/>
+<strong>Space Complexity:</strong> O(h), where h is the height of the binary tree. This is the space required for the stack to store the nodes during traversal.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

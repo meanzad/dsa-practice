@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Insertion Sort Algorithm</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Insertion Sort Algorithm</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/insertion-sort-algorithm/</code></div>
+  <p><strong>Problem Statement: </strong>
+Given an array of integers called nums, sort the array in non-decreasing order using the insertion sort algorithm and return the sorted array.
+<br/><br/>
+A sorted array in non-decreasing order is an array where each element is greater than or equal to all preceding elements in the array.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>  
+<strong>Input:</strong>  nums = [7, 4, 1, 5, 3]  
+<strong>Output:</strong>  [1, 3, 4, 5, 7]  
+<strong>Explanation:</strong>  The array is sorted in non-decreasing order: 1 ≤ 3 ≤ 4 ≤ 5 ≤ 7.
+
+<strong>Example 2:</strong>  
+<strong>Input:</strong>  nums = [5, 4, 4, 1, 1]  
+<strong>Output:</strong>  [1, 1, 4, 4, 5]  
+<strong>Explanation:</strong>  The array is sorted in non-decreasing order: 1 ≤ 1 ≤ 4 ≤ 4 ≤ 5.</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/insertion-sorting" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li>In each iteration, select an element from the unsorted part of the array using an outer loop.</li>
+<li>Place this selected element in its correct position within the sorted part of the array.</li>
+<li>Use an inner loop to shift the remaining elements, if necessary, to accommodate the selected element. This involves shifting elements by one position until the selected element can be placed in the correct position.</li>
+<li>Continue this process until the entire array is sorted.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to sort the array using insertion sort
+    vector&lt;int&gt; insertionSort(vector&lt;int&gt;&amp; nums) {
+        int n = nums.size(); // Size of the array 
+        
+        // For every element in the array 
+        for (int i = 1; i &lt; n; i++) {
+            int key = nums[i]; // Current element as key 
+            int j = i - 1; 
+            
+            // Shift elements that are greater than key by one position
+            while (j &gt;= 0 &amp;&amp; nums[j] &gt; key) {
+                nums[j + 1] = nums[j];
+                j--;
+            }
+            
+            nums[j + 1] = key; // Insert key at correct position
+        }
+        
+        return nums;
+    }
+};
+
+
+int main() {
+    // Create an instance of solution class
+    Solution solution;
+    
+    vector&lt;int&gt; nums = {13, 46, 24, 52, 20, 9};
+    
+    cout &lt;&lt; "Before Using Insertion Sort: " &lt;&lt; endl;
+    for (int num : nums) {
+        cout &lt;&lt; num &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+
+    // Function call for insertion sort
+    nums = solution.insertionSort(nums);
+
+    cout &lt;&lt; "After Using Insertion Sort: " &lt;&lt; endl;
+    for (int num : nums) {
+        cout &lt;&lt; num &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    public int[] insertionSort(int[] nums) {
+        int n = nums.length; // Size of the array 
+        
+        // For every element in the array 
+        for (int i = 1; i &lt; n; i++) {
+            int key = nums[i]; // Current element as key 
+            int j = i - 1;
+            
+            // Shift elements that are greater than key by one position
+            while (j &gt;= 0 &amp;&amp; nums[j] &gt; key) {
+                nums[j + 1] = nums[j];
+                j--;
+            }
+            
+            nums[j + 1] = key; // Insert key at correct position
+        }
+        
+        return nums;
+    }
+}
+
+
+class Main {
+    public static void main(String[] args) {
+        // Create an instance of solution class
+        Solution solution = new Solution();
+        
+        int[] nums = {13, 46, 24, 52, 20, 9};
+        
+        System.out.println("Before Using Insertion Sort: ");
+        for (int num : nums) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+        
+        // Function call for insertion sort
+        nums = solution.insertionSort(nums);
+        
+        System.out.println("After Using Insertion Sort: ");
+        for (int num : nums) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to sort the array using insertion sort
+    def insertionSort(self, nums):
+        n = len(nums) # Size of the array 
+        
+        # For every element in the array 
+        for i in range(1, n):
+            key = nums[i] # Current element as key 
+            j = i - 1
+            
+            # Shift elements that are greater than key by one position
+            while j &gt;= 0 and nums[j] &gt; key:
+                nums[j + 1] = nums[j]
+                j -= 1
+            
+            nums[j + 1] = key # Insert key at correct position
+        
+        return nums
+
+if __name__ == "__main__":
+    # Create an instance of solution class
+    solution = Solution()
+    
+    nums = [13, 46, 24, 52, 20, 9]
+    
+    print("Before Using Insertion Sort:")
+    for num in nums:
+        print(num, end=" ")
+    print()
+    
+    # Function call for insertion sort
+    nums = solution.insertionSort(nums)
+    
+    print("After Using Insertion Sort:")
+    for num in nums:
+        print(num, end=" ")
+    print()</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to sort the array using insertion sort
+    insertionSort(nums) {
+        let n = nums.length; // Size of the array 
+        
+        // For every element in the array 
+        for (let i = 1; i &lt; n; i++) {
+            let key = nums[i]; // Current element as key 
+            let j = i - 1;
+            
+            // Shift elements that are greater than key by one position
+            while (j &gt;= 0 &amp;&amp; nums[j] &gt; key) {
+                nums[j + 1] = nums[j];
+                j--;
+            }
+            
+            nums[j + 1] = key; // Insert key at correct position
+        }
+        
+        return nums;
+    }
+}
+
+// Main function
+(function() {
+    // Create an instance of solution class
+    let solution = new Solution();
+    
+    let nums = [13, 46, 24, 52, 20, 9];
+    
+    console.log("Before Using Insertion Sort:");
+    console.log(nums.join(" "));
+    
+    // Function call for insertion sort
+    nums = solution.insertionSort(nums);
+    
+    console.log("After Using Insertion Sort:");
+    console.log(nums.join(" "));
+})();</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(n^2)</strong>, where n is the number of elements in the array. This is because, in the worst case, we may have to compare each element with all the previous elements.
+                        <br/><br/>
+<strong>Space Complexity: O(1)</strong>, as we are sorting the array in place and not using any additional data structures that grow with input size.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Nth Root of a Number using Binary Search</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Nth Root of a Number using Binary Search</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/nth-root-of-a-number-using-binary-search/</code></div>
+  <p><strong>Problem Statement: </strong> Given two numbers N and M, find the Nth root of M. The nth root of a number M is defined as a number X when raised to the power N equals M. If the 'nth root is not an integer, return -1.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: N = 3, M = 27</span>
+<span>Output: 3</span>
+<span>Explanation: The cube root of 27 is equal to 3.</span>
+<p></p>
+<span>Input : N = 4, M = 69</span>
+<span>Output: -1</span>
+<span>Explanation : The 4th root of 69 does not exist. So, the answer is -1.</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/find-nth-root-of-a-number" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better.
+            It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                Brute-Force Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+                    
+        To find the nth root of a number m, we want to find a number x such that x^n = m. The naive approach to solve this is to linearly search for every possible number.
+Using linear search, we start from 1 and gradually try increasing values, checking if raising them to the power n gets us close to or exactly equals m.
+<ul> <li>Start a loop from 1 to m for linear search.</li> <li>For each value in the loop, compute the value raised to power n.</li> <li>If the result equals m, return that value.</li> <li>If the result exceeds m, break the loop as the nth root does not exist as an integer.</li> <li>If no exact match is found, return -1 to indicate failure.</li> </ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find Nth root of M
+    int nthRoot(int n, int m) {
+        // Loop from 1 to m
+        for (int i = 1; i &lt;= m; i++) {
+            // Compute i^n
+            long long power = pow(i, n);
+
+            // If equal to m, return i
+            if (power == m) return i;
+
+            // If exceeds m, break
+            if (power &gt; m) break;
+        }
+
+        // If not found, return -1
+        return -1;
+    }
+};
+
+int main() {
+    Solution sol;
+    int n = 3, m = 27;
+
+    // Find nth root
+    cout &lt;&lt; "Nth Root: " &lt;&lt; sol.nthRoot(n, m) &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // Function to find Nth root of M
+    public int nthRoot(int n, int m) {
+        // Loop from 1 to m
+        for (int i = 1; i &lt;= m; i++) {
+            // Compute i^n
+            long power = (long) Math.pow(i, n);
+
+            // If equal to m, return i
+            if (power == m) return i;
+
+            // If exceeds m, break
+            if (power &gt; m) break;
+        }
+
+        // If not found, return -1
+        return -1;
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        int n = 3, m = 27;
+
+        // Find nth root
+        System.out.println("Nth Root: " + sol.nthRoot(n, m));
+    }
+}
+
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to find Nth root of M
+    def nthRoot(self, n, m):
+        # Loop from 1 to m
+        for i in range(1, m + 1):
+            # Compute i^n
+            power = i ** n
+
+            # If equal to m, return i
+            if power == m:
+                return i
+
+            # If exceeds m, break
+            if power &gt; m:
+                break
+
+        # If not found, return -1
+        return -1
+
+# Main execution
+sol = Solution()
+n = 3
+m = 27
+
+# Find nth root
+print("Nth Root:", sol.nthRoot(n, m))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find Nth root of M
+    nthRoot(n, m) {
+        // Loop from 1 to m
+        for (let i = 1; i &lt;= m; i++) {
+            // Compute i^n
+            let power = Math.pow(i, n);
+
+            // If equal to m, return i
+            if (power === m) return i;
+
+            // If exceeds m, break
+            if (power &gt; m) break;
+        }
+
+        // If not found, return -1
+        return -1;
+    }
+}
+
+// Main execution
+const sol = new Solution();
+let n = 3, m = 27;
+
+// Find nth root
+console.log("Nth Root:", sol.nthRoot(n, m));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(M)</strong>, we search for every possible number from 1 to M to check if it is the Nth root.<br/>
+<strong>Space Complexity: O(1)</strong>, constant additional space is used.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                Optimal Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+                    
+        To find the N-th root of a number M, instead of checking every number from 1 to M (which is inefficient), we use binary search to efficiently reduce the search space. Since the N-th root lies between 1 and M, we start with a search range from 1 to M. For each middle value in this range, we compute its N-th power by multiplying it with itself N times, without using built-in power functions (to avoid integer overflow). During this multiplication, if the result exceeds M, we stop early to save time. If the final result equals M, we’ve found the N-th root. Otherwise, we adjust our search range accordingly to continue the binary search. This method significantly speeds up the process by halving the range at each step.
+        <ul> <li>Start binary search with low as 1 and high as M.</li> <li>Find mid of the range and multiply it with itself N times to get Nth power of mid.</li> <li>If Nth power of mid equals M, return mid as the N-th root.</li> <li>If Nth power of mid is less than M, shift search to the right half.</li> <li>If Nth power of mid is greater than M, shift search to the left half.</li> <li>If no integer root is found after the loop, return -1.</li> </ul>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-7260" loading="lazy" src="../assets/img/936b6da8ad787980.png"/></figure><p></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+        
+class Solution {
+public:
+    // Function to find N-th root of M using binary search
+    int nthRoot(int n, int m) {
+        // Set low and high for binary search
+        int low = 1, high = m;
+
+        // Start binary search
+        while (low &lt;= high) {
+            // Calculate mid
+            int mid = (low + high) / 2;
+
+            // Store result of mid^n
+            long long ans = 1;
+            for (int i = 0; i &lt; n; i++) {
+                ans *= mid;
+                if (ans &gt; m) break;
+            }
+
+            // If mid^n equals m
+            if (ans == m) return mid;
+
+            // If mid^n is less than m
+            if (ans &lt; m) low = mid + 1;
+
+            // If mid^n is more than m
+            else high = mid - 1;
+        }
+
+        // Return -1 if not found
+        return -1;
+    }
+};
+
+// Main function
+int main() {
+    Solution obj;
+    int result = obj.nthRoot(3, 27);
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // Function to find N-th root of M using binary search
+    public int nthRoot(int n, int m) {
+        // Set low and high for binary search
+        int low = 1, high = m;
+
+        // Start binary search
+        while (low &lt;= high) {
+            // Calculate mid
+            int mid = (low + high) / 2;
+
+            // Store result of mid^n
+            long ans = 1;
+            for (int i = 0; i &lt; n; i++) {
+                ans *= mid;
+                if (ans &gt; m) break;
+            }
+
+            // If mid^n equals m
+            if (ans == m) return mid;
+
+            // If mid^n is less than m
+            if (ans &lt; m) low = mid + 1;
+
+            // If mid^n is more than m
+            else high = mid - 1;
+        }
+
+        // Return -1 if not found
+        return -1;
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+        Solution obj = new Solution();
+        int result = obj.nthRoot(3, 27);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to find N-th root of M using binary search
+    def nthRoot(self, n, m):
+        # Set low and high for binary search
+        low, high = 1, m
+
+        # Start binary search
+        while low &lt;= high:
+            # Calculate mid
+            mid = (low + high) // 2
+
+            # Store result of mid^n
+            ans = 1
+            for _ in range(n):
+                ans *= mid
+                if ans &gt; m:
+                    break
+
+            # If mid^n equals m
+            if ans == m:
+                return mid
+
+            # If mid^n is less than m
+            if ans &lt; m:
+                low = mid + 1
+
+            # If mid^n is more than m
+            else:
+                high = mid - 1
+
+        # Return -1 if not found
+        return -1
+
+# Driver code
+obj = Solution()
+result = obj.nthRoot(3, 27)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find N-th root of M using binary search
+    nthRoot(n, m) {
+        // Set low and high for binary search
+        let low = 1, high = m;
+
+        // Start binary search
+        while (low &lt;= high) {
+            // Calculate mid
+            let mid = Math.floor((low + high) / 2);
+
+            // Store result of mid^n
+            let ans = 1;
+            for (let i = 0; i &lt; n; i++) {
+                ans *= mid;
+                if (ans &gt; m) break;
+            }
+
+            // If mid^n equals m
+            if (ans === m) return mid;
+
+            // If mid^n is less than m
+            if (ans &lt; m) low = mid + 1;
+
+            // If mid^n is more than m
+            else high = mid - 1;
+        }
+
+        // Return -1 if not found
+        return -1;
+    }
+}
+
+// Driver code
+const obj = new Solution();
+const result = obj.nthRoot(3, 27);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(logM)</strong>, we search for every possible number from 1 to M to check if it is the Nth root.<br/>
+<strong>Space Complexity: O(1)</strong>, constant additional space is used.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

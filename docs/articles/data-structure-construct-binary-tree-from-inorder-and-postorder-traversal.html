@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Construct Binary Tree from Inorder and PostOrder Traversal</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Construct Binary Tree from Inorder and PostOrder Traversal</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/construct-binary-tree-from-inorder-and-postorder-traversal/</code></div>
+  <p><strong>Problem Statement: </strong> Given the Postorder and Inorder traversal of a Binary Tree, construct the Unique
+    Binary Tree represented by them.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example :
+Input: Inorder: [ 40, 20 , 50, 10, 60, 30], Postorder: [40, 50, 20, 60, 30, 10]
+
+<p><img height="457" loading="lazy" src="../assets/img/026059da9470b00d.png" width="481"/></p>
+Explanation:  The unique Binary Tree hence created has inorder traversal: [40, 20, 50, 10, 60, 30] and postorder traversal: [40, 50, 20, 60, 30, 10].
+                                      
+Example :
+Input: Inorder: [9, 3, 15, 20, 7], Postorder: [9, 15, 7, 20, 3]
+
+<p><img height="457" loading="lazy" src="../assets/img/4af3513d333083f8.png" width="481"/></p>
+Explanation:  The unique Binary Tree hence created has inorder traversal: [9, 3, 15, 20, 7] and postorder traversal: [9, 15, 7, 20, 3].	
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://example.com" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+<p><strong>Intuition:</strong>
+                            Building a binary tree from inorder and postorder traversals follows a recursive strategy
+                            similar to the preorder-inorder version. However, instead of taking the root from the start
+                            (as in preorder), we take it from the end of the postorder array. This root splits the
+                            inorder array into left and right subtrees. Using index boundaries avoids repeated slicing,
+                            and a hashmap is used for O(1) root lookups in the inorder traversal.
+                        </p>
+<p><strong>Approach:</strong></p>
+<ul>
+<li>Create a hashmap to store the indices of elements in the inorder array for fast lookup.
+                            </li>
+<li>Define a recursive function <code>buildTree</code> with parameters for current ranges in
+                                inorder and postorder arrays.</li>
+<li>Base case: If <code>postStart &gt; postEnd</code> or <code>inStart &gt; inEnd</code>,
+                                return <code>null</code>.</li>
+<li>The current root is <code>postorder[postEnd]</code>. Find its index in inorder using the
+                                map.</li>
+<li>Calculate <code>leftSubtreeSize</code> as <code>rootIndex - inStart</code>.</li>
+<li>Recursively build left subtree with adjusted <code>inStart to rootIndex-1</code> and
+                                <code>postStart to postStart + leftSubtreeSize - 1</code>.
+                            </li>
+<li>Recursively build right subtree with <code>inIndex+1 to inEnd</code> and
+                                <code>postStart + leftSubtreeSize to postEnd - 1</code>.
+                            </li>
+<li>Return the root node constructed from the above steps.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div>
+<div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// TreeNode structure
+struct TreeNode {
+    int val;
+    TreeNode *left, *right;
+
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+class Solution {
+public:
+    TreeNode* buildTree(vector&lt;int&gt;&amp; inorder, vector&lt;int&gt;&amp; postorder) {
+        if (inorder.size() != postorder.size()) return nullptr;
+
+        // Map each value in inorder to its index
+        map&lt;int, int&gt; hm;
+        for (int i = 0; i &lt; inorder.size(); i++) {
+            hm[inorder[i]] = i;
+        }
+
+        // Call recursive builder
+        return build(inorder, 0, inorder.size() - 1,
+                     postorder, 0, postorder.size() - 1, hm);
+    }
+
+private:
+    TreeNode* build(vector&lt;int&gt;&amp; inorder, int is, int ie,
+                    vector&lt;int&gt;&amp; postorder, int ps, int pe, map&lt;int, int&gt;&amp; hm) {
+        if (ps &gt; pe || is &gt; ie) return nullptr;
+
+        // Last element in postorder is root
+        TreeNode* root = new TreeNode(postorder[pe]);
+
+        // Find root index in inorder
+        int inRoot = hm[postorder[pe]];
+        int numsLeft = inRoot - is;
+
+        // Recursively build left and right subtrees
+        root-&gt;left = build(inorder, is, inRoot - 1,
+                           postorder, ps, ps + numsLeft - 1, hm);
+
+        root-&gt;right = build(inorder, inRoot + 1, ie,
+                            postorder, ps + numsLeft, pe - 1, hm);
+
+        return root;
+    }
+};
+
+// Inorder printer
+void printInorder(TreeNode* root) {
+    if (!root) return;
+    printInorder(root-&gt;left);
+    cout &lt;&lt; root-&gt;val &lt;&lt; " ";
+    printInorder(root-&gt;right);
+}
+
+// Driver
+int main() {
+    vector&lt;int&gt; inorder = {40, 20, 50, 10, 60, 30};
+    vector&lt;int&gt; postorder = {40, 50, 20, 60, 30, 10};
+
+    cout &lt;&lt; "Inorder Vector: ";
+    for (int x : inorder) cout &lt;&lt; x &lt;&lt; " ";
+    cout &lt;&lt; "\nPostorder Vector: ";
+    for (int x : postorder) cout &lt;&lt; x &lt;&lt; " ";
+    cout &lt;&lt; endl;
+
+    Solution sol;
+    TreeNode* root = sol.buildTree(inorder, postorder);
+
+    cout &lt;&lt; "Inorder of Unique Binary Tree Created:\n";
+    printInorder(root);
+    cout &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// TreeNode structure
+class TreeNode {
+    int val;
+    TreeNode left, right;
+
+    TreeNode(int x) {
+        val = x;
+    }
+}
+
+// Solution class
+class Solution {
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        if (inorder.length != postorder.length) return null;
+
+        Map&lt;Integer, Integer&gt; hm = new HashMap&lt;&gt;();
+        for (int i = 0; i &lt; inorder.length; i++) {
+            hm.put(inorder[i], i);
+        }
+
+        return build(inorder, 0, inorder.length - 1,
+                     postorder, 0, postorder.length - 1, hm);
+    }
+
+    private TreeNode build(int[] inorder, int is, int ie,
+                           int[] postorder, int ps, int pe,
+                           Map&lt;Integer, Integer&gt; hm) {
+
+        if (ps &gt; pe || is &gt; ie) return null;
+
+        TreeNode root = new TreeNode(postorder[pe]);
+        int inRoot = hm.get(postorder[pe]);
+        int numsLeft = inRoot - is;
+
+        root.left = build(inorder, is, inRoot - 1,
+                          postorder, ps, ps + numsLeft - 1, hm);
+        root.right = build(inorder, inRoot + 1, ie,
+                           postorder, ps + numsLeft, pe - 1, hm);
+        return root;
+    }
+}
+
+// Main class
+public class Main {
+    public static void printInorder(TreeNode root) {
+        if (root == null) return;
+        printInorder(root.left);
+        System.out.print(root.val + " ");
+        printInorder(root.right);
+    }
+
+    public static void main(String[] args) {
+        int[] inorder = {40, 20, 50, 10, 60, 30};
+        int[] postorder = {40, 50, 20, 60, 30, 10};
+
+        Solution sol = new Solution();
+        TreeNode root = sol.buildTree(inorder, postorder);
+
+        System.out.println("Inorder of Unique Binary Tree Created:");
+        printInorder(root);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
+class Solution:
+    def buildTree(self, inorder, postorder):
+        if len(inorder) != len(postorder):
+            return None
+        hm = {val: idx for idx, val in enumerate(inorder)}
+        return self._build(inorder, 0, len(inorder) - 1,
+                           postorder, 0, len(postorder) - 1, hm)
+
+    def _build(self, inorder, is_, ie, postorder, ps, pe, hm):
+        if ps &gt; pe or is_ &gt; ie:
+            return None
+        root_val = postorder[pe]
+        root = TreeNode(root_val)
+        inRoot = hm[root_val]
+        numsLeft = inRoot - is_
+        root.left = self._build(inorder, is_, inRoot - 1,
+                                postorder, ps, ps + numsLeft - 1, hm)
+        root.right = self._build(inorder, inRoot + 1, ie,
+                                 postorder, ps + numsLeft, pe - 1, hm)
+        return root
+
+def printInorder(root):
+    if not root:
+        return
+    printInorder(root.left)
+    print(root.val, end=" ")
+    printInorder(root.right)
+
+if __name__ == "__main__":
+    inorder = [40, 20, 50, 10, 60, 30]
+    postorder = [40, 50, 20, 60, 30, 10]
+    print("Inorder Vector:", inorder)
+    print("Postorder Vector:", postorder)
+
+    sol = Solution()
+    root = sol.buildTree(inorder, postorder)
+    print("Inorder of Unique Binary Tree Created:")
+    printInorder(root)
+    print()
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class TreeNode {
+  constructor(val) {
+    this.val = val;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+class Solution {
+  buildTree(inorder, postorder) {
+    if (inorder.length !== postorder.length) return null;
+
+    const hm = new Map();
+    inorder.forEach((val, idx) =&gt; hm.set(val, idx));
+
+    return this._build(inorder, 0, inorder.length - 1,
+                       postorder, 0, postorder.length - 1, hm);
+  }
+
+  _build(inorder, is, ie, postorder, ps, pe, hm) {
+    if (ps &gt; pe || is &gt; ie) return null;
+
+    const rootVal = postorder[pe];
+    const root = new TreeNode(rootVal);
+    const inRoot = hm.get(rootVal);
+    const numsLeft = inRoot - is;
+
+    root.left = this._build(inorder, is, inRoot - 1,
+                            postorder, ps, ps + numsLeft - 1, hm);
+    root.right = this._build(inorder, inRoot + 1, ie,
+                             postorder, ps + numsLeft, pe - 1, hm);
+    return root;
+  }
+}
+
+function printInorder(root) {
+  if (!root) return;
+  printInorder(root.left);
+  process.stdout.write(root.val + " ");
+  printInorder(root.right);
+}
+
+const inorder = [40, 20, 50, 10, 60, 30];
+const postorder = [40, 50, 20, 60, 30, 10];
+const sol = new Solution();
+const root = sol.buildTree(inorder, postorder);
+
+console.log("Inorder of Unique Binary Tree Created:");
+printInorder(root);
+console.log();
+</code></pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+</summary>
+<p>
+</p><p><strong>Time Complexity:</strong> O(N), Every node is visited once.</p>
+<p><strong>Space Complexity:</strong> O(N), Due to hashmap and recursion stack (up to tree height).
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

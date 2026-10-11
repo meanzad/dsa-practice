@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Count frequency of each element in the array</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Count frequency of each element in the array</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/count-frequency-of-each-element-in-the-array/</code></div>
+  <p><strong>Problem Statement: </strong> Given an array, we have found the number of occurrences of each element in the
+    array.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input: arr[] = {10,5,10,15,10,5};
+Output: 10  3
+	            5  2
+                15  1
+Explanation: 10 occurs 3 times in the array
+	      5 occurs 2 times in the array
+              15 occurs 1 time in the array
+
+Example2: 
+Input: arr[] = {2,2,3,4,4,2};
+Output: 2  3
+	           3  1
+               4  2
+Explanation: 2 occurs 3 times in the array
+	     3 occurs 1 time in the array
+             4 occurs 2 time in the array
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em> It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Brute Force Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+<p>We use a <code>visited</code> array of boolean values to keep track of which elements have
+                            already been counted. For each element in the array, if it has not been visited, we iterate
+                            over the rest of the array to count how many times it appears. After counting, we mark the
+                            duplicates as visited to avoid recounting them.</p>
+<p>The idea is simple: whenever we encounter an element, we check its frequency by scanning the
+                            rest of the array. To avoid duplicate processing, we maintain a <code>visited</code> array.
+                            This way, each element is processed only once when first encountered.</p>
+
+
+
+
+
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/8fead039498da5e1.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/241a7823b01df7cc.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/6d059ee34c67506d.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/d3258e174942f015.png"/></div><div class="carousel-image"><img alt="Image 5" loading="lazy" src="../assets/img/be13b4f01eb8c2db.png"/></div><div class="carousel-image"><img alt="Image 6" loading="lazy" src="../assets/img/55795bb02db018ba.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/8fead039498da5e1.png"/><img alt="Image 2" loading="lazy" src="../assets/img/241a7823b01df7cc.png"/><img alt="Image 3" loading="lazy" src="../assets/img/6d059ee34c67506d.png"/><img alt="Image 4" loading="lazy" src="../assets/img/d3258e174942f015.png"/><img alt="Image 5" loading="lazy" src="../assets/img/be13b4f01eb8c2db.png"/><img alt="Image 6" loading="lazy" src="../assets/img/55795bb02db018ba.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div>
+<div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Function to count frequency of each element in the array
+void countFreq(int arr[], int n) {
+    // Create a visited array to mark elements that are already processed
+    vector&lt;bool&gt; visited(n, false);
+
+    // Traverse through all elements of the array
+    for (int i = 0; i &lt; n; i++) {
+        // Skip this element if it's already processed
+        if (visited[i] == true)
+            continue;
+
+        // Count the frequency of arr[i]
+        int count = 1;
+        for (int j = i + 1; j &lt; n; j++) {
+            if (arr[i] == arr[j]) {
+                visited[j] = true; // Mark arr[j] as processed
+                count++;
+            }
+        }
+
+        // Output the element and its count
+        cout &lt;&lt; arr[i] &lt;&lt; " " &lt;&lt; count &lt;&lt; endl;
+    }
+}
+
+int main() {
+    // Input array
+    int arr[] = {10, 5, 10, 15, 10, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    // Call the function to count frequencies
+    countFreq(arr, n);
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to count frequency of each element in the array
+    public void countFreq(int[] arr, int n) {
+        // Create a visited array to mark elements that are already processed
+        boolean[] visited = new boolean[n];
+
+        // Traverse through all elements of the array
+        for (int i = 0; i &lt; n; i++) {
+            // Skip this element if it's already processed
+            if (visited[i])
+                continue;
+
+            // Count the frequency of arr[i]
+            int count = 1;
+            for (int j = i + 1; j &lt; n; j++) {
+                if (arr[i] == arr[j]) {
+                    visited[j] = true; // Mark arr[j] as processed
+                    count++;
+                }
+            }
+
+            // Output the element and its count
+            System.out.println(arr[i] + " " + count);
+        }
+    }
+
+    public static void main(String[] args) {
+        // Input array
+        int[] arr = {10, 5, 10, 15, 10, 5};
+        int n = arr.length;
+
+        // Create Solution instance
+        Solution sol = new Solution();
+
+        // Call the function to count frequencies
+        sol.countFreq(arr, n);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Function to count frequency of each element in the array
+def countFreq(arr, n):
+    # Create a visited list to mark elements that are already processed
+    visited = [False] * n
+
+    # Traverse through all elements of the array
+    for i in range(n):
+        # Skip this element if it's already processed
+        if visited[i]:
+            continue
+
+        # Count the frequency of arr[i]
+        count = 1
+        for j in range(i + 1, n):
+            if arr[i] == arr[j]:
+                visited[j] = True  # Mark arr[j] as processed
+                count += 1
+
+        # Output the element and its count
+        print(arr[i], count)
+
+if __name__ == "__main__":
+    # Input array
+    arr = [10, 5, 10, 15, 10, 5]
+    n = len(arr)
+
+    # Call the function to count frequencies
+    countFreq(arr, n)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to count frequency of each element in the array
+    countFreq(arr, n) {
+        // Create a visited array to mark elements that are already processed
+        let visited = Array(n).fill(false);
+
+        // Traverse through all elements of the array
+        for (let i = 0; i &lt; n; i++) {
+            // Skip this element if it's already processed
+            if (visited[i]) continue;
+
+            // Count the frequency of arr[i]
+            let count = 1;
+            for (let j = i + 1; j &lt; n; j++) {
+                if (arr[i] === arr[j]) {
+                    visited[j] = true; // Mark arr[j] as processed
+                    count++;
+                }
+            }
+
+            // Output the element and its count
+            console.log(arr[i], count);
+        }
+    }
+}
+
+// Driver code
+(function main() {
+    // Input array
+    const arr = [10, 5, 10, 15, 10, 5];
+    const n = arr.length;
+
+    // Create Solution instance
+    const sol = new Solution();
+
+    // Call the function to count frequencies
+    sol.countFreq(arr, n);
+})();
+</code></pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+</summary>
+<p>
+</p><p><strong>Time Complexity:</strong> O(N²), as for every element we may scan the remaining elements
+                        in the array.</p>
+<p><strong>Space Complexity:</strong> O(N), for the <code>visited</code> array of size N.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+<p>We want to count how many times each element appears in the array. Using a hash map allows us
+                            to track frequencies efficiently as we traverse the array, avoiding the need for nested
+                            loops.</p>
+<ul>
+<li>Create an unordered_map to store element-frequency pairs.</li>
+<li>Traverse the array and for each element, increment its count in the map.</li>
+<li>After processing the array, iterate through the map and print each element along with
+                                its frequency.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div>
+<div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Function to count frequency of each element in the array using unordered_map
+void Frequency(int arr[], int n) {
+    // Create an unordered_map to store frequency of each element
+    unordered_map&lt;int, int&gt; map;
+
+    // Traverse the array and count frequencies
+    for (int i = 0; i &lt; n; i++) {
+        map[arr[i]]++;
+    }
+
+    // Traverse through the unordered_map and print frequencies
+    for (auto x : map) {
+        cout &lt;&lt; x.first &lt;&lt; " " &lt;&lt; x.second &lt;&lt; endl;
+    }
+}
+
+int main() {
+    // Input array
+    int arr[] = {10, 5, 10, 15, 10, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    // Call the function to count frequencies
+    Frequency(arr, n);
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to count frequency of each element in the array using HashMap
+    public void Frequency(int[] arr, int n) {
+        // Create a HashMap to store frequency of each element
+        HashMap&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();
+
+        // Traverse the array and count frequencies
+        for (int i = 0; i &lt; n; i++) {
+            map.put(arr[i], map.getOrDefault(arr[i], 0) + 1);
+        }
+
+        // Traverse through the HashMap and print frequencies
+        for (Map.Entry&lt;Integer, Integer&gt; entry : map.entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        }
+    }
+
+    public static void main(String[] args) {
+        // Input array
+        int[] arr = {10, 5, 10, 15, 10, 5};
+        int n = arr.length;
+
+        // Create Solution instance
+        Solution sol = new Solution();
+
+        // Call the function to count frequencies
+        sol.Frequency(arr, n);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">from collections import defaultdict
+
+class Solution:
+    # Function to count frequency of each element in the array using defaultdict
+    def Frequency(self, arr, n):
+        # Create a defaultdict to store frequency of each element
+        freq_map = defaultdict(int)
+
+        # Traverse the array and count frequencies
+        for i in range(n):
+            freq_map[arr[i]] += 1
+
+        # Traverse through the defaultdict and print frequencies
+        for key, value in freq_map.items():
+            print(key, value)
+
+if __name__ == "__main__":
+    # Input array
+    arr = [10, 5, 10, 15, 10, 5]
+    n = len(arr)
+
+    # Create Solution instance
+    sol = Solution()
+
+    # Call the function to count frequencies
+    sol.Frequency(arr, n)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to count frequency of each element in the array using Map
+    Frequency(arr, n) {
+        // Create a Map to store frequency of each element
+        const map = new Map();
+
+        // Traverse the array and count frequencies
+        for (let i = 0; i &lt; n; i++) {
+            map.set(arr[i], (map.get(arr[i]) || 0) + 1);
+        }
+
+        // Traverse through the Map and print frequencies
+        map.forEach((value, key) =&gt; {
+            console.log(key, value);
+        });
+    }
+}
+
+// Driver code
+(function main() {
+    // Input array
+    const arr = [10, 5, 10, 15, 10, 5];
+    const n = arr.length;
+
+    // Create Solution instance
+    const sol = new Solution();
+
+    // Call the function to count frequencies
+    sol.Frequency(arr, n);
+})();
+</code></pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+</summary>
+<p>
+</p><p><strong>Time Complexity:</strong> O(N), where N is the number of elements in the array. Each
+                        element is processed once.</p>
+<p><strong>Space Complexity:</strong> O(N), for storing frequencies of unique elements in the
+                        unordered_map.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

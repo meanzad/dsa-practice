@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Capacity to Ship Packages within D Days</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Capacity to Ship Packages within D Days</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/arrays/capacity-to-ship-packages-within-d-days/</code></div>
+  <p><strong>Problem Statement: </strong>You are the owner of a Shipment company. You use conveyor belts to ship packages from one port to another. The packages must be shipped within 'd' days.
+The weights of the packages are given in an array 'of weights'. The packages are loaded on the conveyor belts every day in the same order as they appear in the array. The loaded weights must not exceed the maximum weight capacity of the ship.
+Find out the least-weight capacity so that you can ship all the packages within 'd' days .</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p>
+<strong>Input:</strong> N = 5, weights = [5, 4, 5, 2, 3, 4, 5, 6], d = 5
+<strong>Output:</strong> 9
+<strong>Explanation:</strong> The minimum ship capacity needed to ship all packages within 5 days is 9.<br/>
+<strong>Input:</strong> N = 3, weights = [1, 2, 3, 4, 5], d = 2
+<strong>Output:</strong> 9
+<strong>Explanation:</strong> With a capacity of 9, the packages can be shipped in 2 days as [1,2,3,4] and [5].</p></pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Don’t jump directly to the solution, try it out yourself first. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Brute Force Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+The problem asks to find the minimum capacity of the ship such that all packages can be shipped within d days. A brute force way is to check every capacity starting from the maximum single package weight (since capacity can't be less than the heaviest package) up to the sum of all package weights (which guarantees all packages shipped in one day). For each capacity, simulate the shipping process day by day. The smallest capacity that ships all packages in ≤ d days is the answer.
+
+<ul> <li>Find the maximum weight in the array (minimum capacity possible).</li> <li>Calculate the sum of all weights (maximum capacity possible).</li> <li>For each capacity from max weight to sum:</li> <li>Simulate shipping: load packages one by one until capacity is reached, then move to next day.</li> <li>If total days used is ≤ d, return that capacity.</li> </ul>
+</div>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/fe09cc660de09768.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/a617aa7f19430d60.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/8e9ed24f392eba12.png"/></div><div class="carousel-image"><img alt="Image 4" loading="lazy" src="../assets/img/32cb9df59502fb2d.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/fe09cc660de09768.png"/><img alt="Image 2" loading="lazy" src="../assets/img/a617aa7f19430d60.png"/><img alt="Image 3" loading="lazy" src="../assets/img/8e9ed24f392eba12.png"/><img alt="Image 4" loading="lazy" src="../assets/img/32cb9df59502fb2d.png"/></div></div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to check how many days needed for given capacity
+    int daysNeeded(vector&lt;int&gt;&amp; weights, int capacity) {
+        // Initialize day count to 1
+        int days = 1;
+        // Current load for the day
+        int currentLoad = 0;
+
+        // Iterate over all package weights
+        for (int w : weights) {
+            // If adding weight exceeds capacity
+            if (currentLoad + w &gt; capacity) {
+                // Increase day count and reset load
+                days++;
+                currentLoad = w;
+            } else {
+                // Otherwise, add weight to current load
+                currentLoad += w;
+            }
+        }
+        // Return total days needed
+        return days;
+    }
+
+    // Function to find minimum ship capacity to ship in d days
+    int shipWithinDays(vector&lt;int&gt;&amp; weights, int d) {
+        // Find maximum weight as minimum capacity
+        int left = *max_element(weights.begin(), weights.end());
+        // Find total sum as maximum capacity
+        int right = accumulate(weights.begin(), weights.end(), 0);
+
+        // Iterate from minimum to maximum capacity
+        for (int capacity = left; capacity &lt;= right; capacity++) {
+            // Calculate days needed for current capacity
+            int needed = daysNeeded(weights, capacity);
+            // If days needed are less than or equal to d, return capacity
+            if (needed &lt;= d) {
+                return capacity;
+            }
+        }
+        // Should never reach here given constraints
+        return right;
+    }
+};
+
+int main() {
+    // Input weights
+    vector&lt;int&gt; weights = {5,4,5,2,3,4,5,6};
+    // Days to ship
+    int d = 5;
+    // Create Solution instance
+    Solution sol;
+    // Call the function and print result
+    cout &lt;&lt; sol.shipWithinDays(weights, d) &lt;&lt; "\n";
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to check how many days needed for given capacity
+    int daysNeeded(int[] weights, int capacity) {
+        // Initialize day count to 1
+        int days = 1;
+        // Current load for the day
+        int currentLoad = 0;
+
+        // Iterate over all package weights
+        for (int w : weights) {
+            // If adding weight exceeds capacity
+            if (currentLoad + w &gt; capacity) {
+                // Increase day count and reset load
+                days++;
+                currentLoad = w;
+            } else {
+                // Otherwise, add weight to current load
+                currentLoad += w;
+            }
+        }
+        // Return total days needed
+        return days;
+    }
+
+    // Function to find minimum ship capacity to ship in d days
+    int shipWithinDays(int[] weights, int d) {
+        // Find maximum weight as minimum capacity
+        int left = Arrays.stream(weights).max().getAsInt();
+        // Find total sum as maximum capacity
+        int right = Arrays.stream(weights).sum();
+
+        // Iterate from minimum to maximum capacity
+        for (int capacity = left; capacity &lt;= right; capacity++) {
+            // Calculate days needed for current capacity
+            int needed = daysNeeded(weights, capacity);
+            // If days needed are less than or equal to d, return capacity
+            if (needed &lt;= d) {
+                return capacity;
+            }
+        }
+        // Should never reach here given constraints
+        return right;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Input weights
+        int[] weights = {5,4,5,2,3,4,5,6};
+        // Days to ship
+        int d = 5;
+        // Create Solution instance
+        Solution sol = new Solution();
+        // Call the function and print result
+        System.out.println(sol.shipWithinDays(weights, d));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to check how many days needed for given capacity
+    def daysNeeded(self, weights, capacity):
+        # Initialize day count to 1
+        days = 1
+        # Current load for the day
+        currentLoad = 0
+
+        # Iterate over all package weights
+        for w in weights:
+            # If adding weight exceeds capacity
+            if currentLoad + w &gt; capacity:
+                # Increase day count and reset load
+                days += 1
+                currentLoad = w
+            else:
+                # Otherwise, add weight to current load
+                currentLoad += w
+        # Return total days needed
+        return days
+
+    # Function to find minimum ship capacity to ship in d days
+    def shipWithinDays(self, weights, d):
+        # Find maximum weight as minimum capacity
+        left = max(weights)
+        # Find total sum as maximum capacity
+        right = sum(weights)
+
+        # Iterate from minimum to maximum capacity
+        for capacity in range(left, right + 1):
+            # Calculate days needed for current capacity
+            needed = self.daysNeeded(weights, capacity)
+            # If days needed are less than or equal to d, return capacity
+            if needed &lt;= d:
+                return capacity
+        # Should never reach here given constraints
+        return right
+
+
+if __name__ == "__main__":
+    # Input weights
+    weights = [5,4,5,2,3,4,5,6]
+    # Days to ship
+    d = 5
+    # Create Solution instance
+    sol = Solution()
+    # Call the function and print result
+    print(sol.shipWithinDays(weights, d))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to check how many days needed for given capacity
+    daysNeeded(weights, capacity) {
+        // Initialize day count to 1
+        let days = 1;
+        // Current load for the day
+        let currentLoad = 0;
+
+        // Iterate over all package weights
+        for (let w of weights) {
+            // If adding weight exceeds capacity
+            if (currentLoad + w &gt; capacity) {
+                // Increase day count and reset load
+                days++;
+                currentLoad = w;
+            } else {
+                // Otherwise, add weight to current load
+                currentLoad += w;
+            }
+        }
+        // Return total days needed
+        return days;
+    }
+
+    // Function to find minimum ship capacity to ship in d days
+    shipWithinDays(weights, d) {
+        // Find maximum weight as minimum capacity
+        let left = Math.max(...weights);
+        // Find total sum as maximum capacity
+        let right = weights.reduce((a, b) =&gt; a + b, 0);
+
+        // Iterate from minimum to maximum capacity
+        for (let capacity = left; capacity &lt;= right; capacity++) {
+            // Calculate days needed for current capacity
+            let needed = this.daysNeeded(weights, capacity);
+            // If days needed are less than or equal to d, return capacity
+            if (needed &lt;= d) {
+                return capacity;
+            }
+        }
+        // Should never reach here given constraints
+        return right;
+    }
+}
+
+// Driver code
+const weights = [5,4,5,2,3,4,5,6];
+const d = 5;
+const sol = new Solution();
+console.log(sol.shipWithinDays(weights, d));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O((sum_weights - max_weight) * N), where N is the number of packages. For each capacity between max weight and total sum, we simulate shipping over N packages.</p>
+<p><strong>Space Complexity:</strong> O(1), only constant extra space is used.</p>
+</details>
+</div>
+</details>
+
+</div>
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+We want to find the minimum ship capacity that allows shipping all packages within the given number of days. The capacity must be at least the heaviest package because you can’t split a package. At the same time, the capacity can be at most the sum of all packages (if you ship everything in one day). So the answer lies between these two extremes.
+
+Using binary search on this range lets us efficiently find the smallest capacity that works. For each candidate capacity, we check if it’s possible to ship all packages within the given days by greedily accumulating package weights until we reach capacity, then moving to the next day.
+
+<ul> <li>Set the lower bound as the maximum weight in the packages.</li> <li>Set the upper bound as the sum of all package weights.</li> <li>While the lower bound is less than or equal to the upper bound, do:</li> <ul> <li>Pick the middle value between lower and upper bounds as the candidate capacity.</li> <li>Simulate shipping with this capacity: accumulate package weights until capacity is reached, then count a day and reset accumulation.</li> <li>If the number of days used is within the allowed days, move the upper bound down to try smaller capacities.</li> <li>If the number of days exceeds the allowed days, increase the lower bound to try larger capacities.</li> </ul> <li>Return the lower bound when the search finishes as the minimum capacity needed.</li> </ul>
+</div>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/9c242694600b4e6c.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/9cd7bee87eacfaaf.png"/></div><div class="carousel-image"><img alt="Image 3" loading="lazy" src="../assets/img/9c4e2c2e64b811b4.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/9c242694600b4e6c.png"/><img alt="Image 2" loading="lazy" src="../assets/img/9cd7bee87eacfaaf.png"/><img alt="Image 3" loading="lazy" src="../assets/img/9c4e2c2e64b811b4.png"/></div></div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to calculate how many days are needed to ship packages with given capacity
+    int daysNeeded(vector&lt;int&gt;&amp; weights, int capacity) {
+        // Initialize count of days to 1 (start with day one)
+        int days = 1;
+
+        // Variable to track the current load on the ship for a day
+        int currentLoad = 0;
+
+        // Loop through each package weight in the array
+        for (int w : weights) {
+            // Check if adding current package exceeds ship capacity for the day
+            if (currentLoad + w &gt; capacity) {
+                // Need a new day to ship this package, so increment day count
+                days++;
+
+                // Start new day's load with current package weight
+                currentLoad = w;
+            } else {
+                // If capacity not exceeded, add current package weight to the day's load
+                currentLoad += w;
+            }
+        }
+
+        // Return total number of days needed with this capacity
+        return days;
+    }
+
+    // Main function to find minimum capacity to ship all packages within d days
+    int shipWithinDays(vector&lt;int&gt;&amp; weights, int d) {
+        // Find the maximum package weight as the minimum capacity (can't be less than this)
+        int left = *max_element(weights.begin(), weights.end());
+
+        // Calculate the sum of all package weights as maximum capacity (ship all at once)
+        int right = accumulate(weights.begin(), weights.end(), 0);
+
+        // Binary search loop to find optimal capacity between left and right
+        while (left &lt; right) {
+            // Calculate mid value as potential capacity to test
+            int mid = left + (right - left) / 2;
+
+            // Calculate how many days needed if ship capacity is mid
+            int needed = daysNeeded(weights, mid);
+
+            // If days needed is less or equal to allowed days,
+            // try to reduce capacity by moving right boundary
+            if (needed &lt;= d) {
+                right = mid;
+            } else {
+                // If days needed is more than allowed, increase capacity by moving left boundary
+                left = mid + 1;
+            }
+        }
+
+        // Left is now the minimum capacity that can ship packages within d days
+        return left;
+    }
+};
+
+int main() {
+    // Define the package weights
+    vector&lt;int&gt; weights = {5,4,5,2,3,4,5,6};
+
+    // Define number of days within which packages must be shipped
+    int d = 5;
+
+    // Create Solution object
+    Solution sol;
+
+    // Call the function and output the result
+    cout &lt;&lt; sol.shipWithinDays(weights, d) &lt;&lt; "\n";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to calculate how many days are needed to ship
+    // all packages with the given ship capacity
+    int daysNeeded(int[] weights, int capacity) {
+        // Initialize count of days to 1
+        int days = 1;
+        // Initialize current load on ship to 0
+        int currentLoad = 0;
+
+        // Iterate over all package weights
+        for (int w : weights) {
+            // Check if adding current package exceeds capacity
+            if (currentLoad + w &gt; capacity) {
+                // If yes, increase days count since we start a new day
+                days++;
+                // Reset current load to current package weight
+                currentLoad = w;
+            } else {
+                // Else, add current package weight to current load
+                currentLoad += w;
+            }
+        }
+        // Return total days required
+        return days;
+    }
+
+    // Function to find minimum ship capacity to ship all packages within d days
+    int shipWithinDays(int[] weights, int d) {
+        // Calculate minimum capacity as max weight in packages
+        int left = Arrays.stream(weights).max().getAsInt();
+        // Calculate maximum capacity as sum of all weights
+        int right = Arrays.stream(weights).sum();
+
+        // Binary search between left and right capacity values
+        while (left &lt; right) {
+            // Calculate mid value to test
+            int mid = left + (right - left) / 2;
+            // Calculate how many days needed for capacity mid
+            int needed = daysNeeded(weights, mid);
+
+            // If days needed is less or equal to allowed days,
+            // try to find smaller capacity on left side
+            if (needed &lt;= d) {
+                right = mid;
+            } else {
+                // Else, need more capacity, search on right side
+                left = mid + 1;
+            }
+        }
+        // Return minimum capacity found
+        return left;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Define array of package weights
+        int[] weights = {5,4,5,2,3,4,5,6};
+        // Define number of days allowed for shipping
+        int d = 5;
+        // Create Solution object
+        Solution sol = new Solution();
+        // Print minimum capacity required to ship within d days
+        System.out.println(sol.shipWithinDays(weights, d));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to calculate how many days are needed to ship
+    # all packages with the given ship capacity
+    def daysNeeded(self, weights, capacity):
+        # Initialize count of days to 1
+        days = 1
+        # Initialize current load on ship to 0
+        currentLoad = 0
+
+        # Iterate over all package weights
+        for w in weights:
+            # Check if adding current package exceeds capacity
+            if currentLoad + w &gt; capacity:
+                # If yes, increase days count since we start a new day
+                days += 1
+                # Reset current load to current package weight
+                currentLoad = w
+            else:
+                # Else, add current package weight to current load
+                currentLoad += w
+        # Return total days required
+        return days
+
+    # Function to find minimum ship capacity to ship all packages within d days
+    def shipWithinDays(self, weights, d):
+        # Calculate minimum capacity as max weight in packages
+        left = max(weights)
+        # Calculate maximum capacity as sum of all weights
+        right = sum(weights)
+
+        # Binary search between left and right capacity values
+        while left &lt; right:
+            # Calculate mid value to test
+            mid = left + (right - left) // 2
+            # Calculate how many days needed for capacity mid
+            needed = self.daysNeeded(weights, mid)
+
+            # If days needed is less or equal to allowed days,
+            # try to find smaller capacity on left side
+            if needed &lt;= d:
+                right = mid
+            else:
+                # Else, need more capacity, search on right side
+                left = mid + 1
+
+        # Return minimum capacity found
+        return left
+
+
+if __name__ == "__main__":
+    # Define array of package weights
+    weights = [5,4,5,2,3,4,5,6]
+    # Define number of days allowed for shipping
+    d = 5
+    # Create Solution object
+    sol = Solution()
+    # Print minimum capacity required to ship within d days
+    print(sol.shipWithinDays(weights, d))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to calculate how many days are needed to ship
+    // all packages with the given ship capacity
+    daysNeeded(weights, capacity) {
+        // Initialize count of days to 1
+        let days = 1;
+        // Initialize current load on ship to 0
+        let currentLoad = 0;
+
+        // Iterate over all package weights
+        for (let w of weights) {
+            // Check if adding current package exceeds capacity
+            if (currentLoad + w &gt; capacity) {
+                // If yes, increase days count since we start a new day
+                days++;
+                // Reset current load to current package weight
+                currentLoad = w;
+            } else {
+                // Else, add current package weight to current load
+                currentLoad += w;
+            }
+        }
+        // Return total days required
+        return days;
+    }
+
+    // Function to find minimum ship capacity to ship all packages within d days
+    shipWithinDays(weights, d) {
+        // Calculate minimum capacity as max weight in packages
+        let left = Math.max(...weights);
+        // Calculate maximum capacity as sum of all weights
+        let right = weights.reduce((a, b) =&gt; a + b, 0);
+
+        // Binary search between left and right capacity values
+        while (left &lt; right) {
+            // Calculate mid value to test
+            let mid = Math.floor(left + (right - left) / 2);
+            // Calculate how many days needed for capacity mid
+            let needed = this.daysNeeded(weights, mid);
+
+            // If days needed is less or equal to allowed days,
+            // try to find smaller capacity on left side
+            if (needed &lt;= d) {
+                right = mid;
+            } else {
+                // Else, need more capacity, search on right side
+                left = mid + 1;
+            }
+        }
+        // Return minimum capacity found
+        return left;
+    }
+}
+
+// Driver code
+const weights = [5,4,5,2,3,4,5,6];
+const d = 5;
+const sol = new Solution();
+// Print minimum capacity required to ship within d days
+console.log(sol.shipWithinDays(weights, d));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O(N * log(S)), where N is number of packages and S is the search space (sum_weights - max_weight). Each binary search step takes O(N), repeated O(log S) times.</p>
+<p><strong>Space Complexity:</strong> O(1), constant extra space used.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

@@ -1,0 +1,845 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Minimum path sum in Triangular Grid (DP 11)</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Minimum path sum in Triangular Grid (DP 11)</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/minimum-path-sum-in-triangular-grid-dp-11/</code></div>
+  <p><strong>Problem Statement: </strong> Given a 2D integer array named triangle with n rows. Its first row has 1 element and each succeeding row has one more element in it than the row above it. Return the minimum falling path sum from the first row to the last. <br/>Movement is allowed only to the bottom or bottom-right cell from the current cell.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: triangle = [[1], [1, 2], [1, 2, 4]]</span>
+<span>Output: 3</span>
+<span>Explanation: One possible route can be: 
+Start at 1st row -&gt; bottom -&gt; bottom.</span>
+<p></p>
+<span>Input : triangle = [[1], [4, 7], [4,10, 50], [-50, 5, 6, -100]]</span>
+<span>Output: -42</span>
+<span>Explanation : One possible route can be:
+Start at 1st row -&gt; bottom-right -&gt; bottom-right -&gt; bottom-right</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/triangle" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better.
+            It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Memoization Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+  This question is a slight modification of the question discussed in <a href="https://takeuforward.org/data-structure/minimum-path-sum-in-a-grid-dp-10/" rel="noopener" target="_blank">Minimum Path Sum in a Grid</a>. In the previous problem, we were given a rectangular matrix whereas here the matrix is in the form of a triangle. Moreover, we don’t have a fixed destination, we need to return the minimum sum path from the top cell to any cell of the bottom row.<br/><br/>
+<strong>Why a Greedy Solution doesn’t work?</strong><br/><br/>
+As we have to return the minimum path sum, the first approach that comes to our mind is to take a greedy approach and always form a path by locally choosing the cheaper option. This approach will not give us the correct answer. Let us look at this example to understand:
+
+<p><img height="457" loading="lazy" src="../assets/img/edc9e506e177e5a3.png" width="481"/></p>
+At every cell, we have two choices: to move to the bottom cell or move to the bottom-right cell. Our ultimate aim is to provide a path that provides us the least path sum. Therefore at every cell, we will make the choice to move which costs us less.
+
+<p><img height="457" loading="lazy" src="../assets/img/e499672dc0760f52.png" width="481"/></p>
+<ul><li>Figure on the left gives us a greedy solution, where we move by taking the local best choice.</li><li>Figure on the right gives us a non-greedy solution.</li></ul>
+We can clearly see the problem with the greedy solution. Whenever we are making a local choice, we may tend to choose a path that may cost us way more later.
+Therefore, the other alternative left to us is to generate all the possible paths and see which is the path with the minimum path sum. To generate all paths we will use recursion.
+<ul>
+<li>Start from the top of the triangle and move downward, making a choice at each level to go either directly down or diagonally down-right.</li>
+<li>Define a recursive function that takes the current row and column as input and returns the minimum path sum starting from that position.</li>
+<li>At each step, calculate the sum by adding the current value to the minimum of the two possible moves (down and diagonal).</li>
+<li>Use a 2D DP table to store the results of subproblems so that repeated calls to the same position return the precomputed result instead of recalculating it.</li>
+<li>Base case is when you're on the last row; return the value at that position since there's nowhere else to go.</li>
+
+<p><img height="457" loading="lazy" src="../assets/img/c4d4d8218389b300.png" width="481"/></p>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Class to solve the problem
+class Solution {
+public:
+    // Recursive function with memoization
+    int solve(int i, int j, vector&lt;vector&lt;int&gt;&gt; &amp;triangle, int n, vector&lt;vector&lt;int&gt;&gt; &amp;dp) {
+        // If value already computed
+        if (dp[i][j] != -1)
+            return dp[i][j];
+
+        // If at bottom row
+        if (i == n - 1)
+            return triangle[i][j];
+
+        // Compute both downward and diagonal moves
+        int down = triangle[i][j] + solve(i + 1, j, triangle, n, dp);
+        int diag = triangle[i][j] + solve(i + 1, j + 1, triangle, n, dp);
+
+        // Store and return min path sum
+        return dp[i][j] = min(down, diag);
+    }
+
+    // Function to start the process
+    int minimumPathSum(vector&lt;vector&lt;int&gt;&gt; &amp;triangle) {
+        int n = triangle.size();
+        vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(n, -1));
+        return solve(0, 0, triangle, n, dp);
+    }
+};
+
+// Main function
+int main() {
+    Solution obj;
+    vector&lt;vector&lt;int&gt;&gt; triangle{
+        {1},
+        {2, 3},
+        {3, 6, 7},
+        {8, 9, 6, 10}
+    };
+    cout &lt;&lt; obj.minimumPathSum(triangle);
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Recursive function with memoization
+    public int solve(int i, int j, List&lt;List&lt;Integer&gt;&gt; triangle, int n, int[][] dp) {
+        // If value already computed
+        if (dp[i][j] != -1)
+            return dp[i][j];
+
+        // If at bottom row
+        if (i == n - 1)
+            return triangle.get(i).get(j);
+
+        // Compute both downward and diagonal moves
+        int down = triangle.get(i).get(j) + solve(i + 1, j, triangle, n, dp);
+        int diag = triangle.get(i).get(j) + solve(i + 1, j + 1, triangle, n, dp);
+
+        // Store and return min path sum
+        return dp[i][j] = Math.min(down, diag);
+    }
+
+    // Function to start the process
+    public int minimumPathSum(List&lt;List&lt;Integer&gt;&gt; triangle) {
+        int n = triangle.size();
+        int[][] dp = new int[n][n];
+        for (int[] row : dp)
+            Arrays.fill(row, -1);
+        return solve(0, 0, triangle, n, dp);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Solution obj = new Solution();
+        List&lt;List&lt;Integer&gt;&gt; triangle = new ArrayList&lt;&gt;();
+        triangle.add(Arrays.asList(1));
+        triangle.add(Arrays.asList(2, 3));
+        triangle.add(Arrays.asList(3, 6, 7));
+        triangle.add(Arrays.asList(8, 9, 6, 10));
+        System.out.println(obj.minimumPathSum(triangle));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Recursive function with memoization
+    def solve(self, i, j, triangle, n, dp):
+        # If value already computed
+        if dp[i][j] != -1:
+            return dp[i][j]
+
+        # If at bottom row
+        if i == n - 1:
+            return triangle[i][j]
+
+        # Compute both downward and diagonal moves
+        down = triangle[i][j] + self.solve(i + 1, j, triangle, n, dp)
+        diag = triangle[i][j] + self.solve(i + 1, j + 1, triangle, n, dp)
+
+        # Store and return min path sum
+        dp[i][j] = min(down, diag)
+        return dp[i][j]
+
+    # Function to start the process
+    def minimumPathSum(self, triangle):
+        n = len(triangle)
+        dp = [[-1 for _ in range(n)] for _ in range(n)]
+        return self.solve(0, 0, triangle, n, dp)
+
+# Main code
+triangle = [
+    [1],
+    [2, 3],
+    [3, 6, 7],
+    [8, 9, 6, 10]
+]
+obj = Solution()
+print(obj.minimumPathSum(triangle))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Recursive function with memoization
+    solve(i, j, triangle, n, dp) {
+        // If value already computed
+        if (dp[i][j] !== -1)
+            return dp[i][j];
+
+        // If at bottom row
+        if (i === n - 1)
+            return triangle[i][j];
+
+        // Compute both downward and diagonal moves
+        let down = triangle[i][j] + this.solve(i + 1, j, triangle, n, dp);
+        let diag = triangle[i][j] + this.solve(i + 1, j + 1, triangle, n, dp);
+
+        // Store and return min path sum
+        dp[i][j] = Math.min(down, diag);
+        return dp[i][j];
+    }
+
+    // Function to start the process
+    minimumPathSum(triangle) {
+        let n = triangle.length;
+        let dp = Array.from({ length: n }, () =&gt; Array(n).fill(-1));
+        return this.solve(0, 0, triangle, n, dp);
+    }
+}
+
+// Main code
+let triangle = [
+    [1],
+    [2, 3],
+    [3, 6, 7],
+    [8, 9, 6, 10]
+];
+let obj = new Solution();
+console.log(obj.minimumPathSum(triangle));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N*N)</strong>, we fill our complete 2D DP table one by one.<br/>
+<strong>Space Complexity: O(N) + O(N*N)</strong>, additional space for recursion stack and 2D DP table.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Tabulation Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+                       Tabulation is the bottom-up approach, which means we will go from the base case to the main problem. The steps to convert to the tabular solution are given below:
+<ul>
+<li>Start by creating a 2D table with the same dimensions as the triangle to store intermediate results.</li>
+<li>Fill the last row of this table with the same values from the last row of the triangle since that's the base of the problem.</li>
+<li>Begin filling the table from the second-last row and move upwards until you reach the top row.</li>
+<li>For each cell, compute the minimum of the two possible paths, directly downward and diagonally downward and add the current triangle value.</li>
+<li>Since the table is being filled bottom-up, by the time you reach any cell, the needed values from the row below are already available.</li>
+<li>After filling the entire table, the topmost cell will hold the minimum path sum from top to bottom of the triangle.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Class to solve the triangle minimum path sum
+class Solution {
+public:
+    // Function to compute the minimum path sum using tabulation
+    int minimumPathSum(vector&lt;vector&lt;int&gt;&gt; &amp;triangle, int n) {
+        // Create a 2D dp array to store intermediate results
+        vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(n, 0));
+
+        // Initialize the last row of dp with triangle values
+        for (int j = 0; j &lt; n; j++) {
+            dp[n - 1][j] = triangle[n - 1][j];
+        }
+
+        // Traverse from second-last row to the top
+        for (int i = n - 2; i &gt;= 0; i--) {
+            for (int j = i; j &gt;= 0; j--) {
+                // Calculate sum from down and diagonal paths
+                int down = triangle[i][j] + dp[i + 1][j];
+                int diag = triangle[i][j] + dp[i + 1][j + 1];
+
+                // Store the minimum of the two paths
+                dp[i][j] = min(down, diag);
+            }
+        }
+
+        // Return the minimum path sum from top
+        return dp[0][0];
+    }
+};
+
+// Main function to run the code
+int main() {
+    // Define the triangle
+    vector&lt;vector&lt;int&gt;&gt; triangle{
+        {1},
+        {2, 3},
+        {3, 6, 7},
+        {8, 9, 6, 10}
+    };
+
+    // Get the number of rows
+    int n = triangle.size();
+
+    // Create object of the Solution class
+    Solution solver;
+
+    // Print the result
+    cout &lt;&lt; solver.minimumPathSum(triangle, n);
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to calculate minimum path sum using tabulation
+    public int minimumPathSum(List&lt;List&lt;Integer&gt;&gt; triangle, int n) {
+        // Create dp array
+        int[][] dp = new int[n][n];
+
+        // Fill last row
+        for (int j = 0; j &lt; n; j++) {
+            dp[n - 1][j] = triangle.get(n - 1).get(j);
+        }
+
+        // Fill rest of dp from bottom to top
+        for (int i = n - 2; i &gt;= 0; i--) {
+            for (int j = i; j &gt;= 0; j--) {
+                // Take min of down and diagonal
+                int down = triangle.get(i).get(j) + dp[i + 1][j];
+                int diag = triangle.get(i).get(j) + dp[i + 1][j + 1];
+                dp[i][j] = Math.min(down, diag);
+            }
+        }
+
+        // Return top element
+        return dp[0][0];
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Define triangle
+        List&lt;List&lt;Integer&gt;&gt; triangle = new ArrayList&lt;&gt;();
+        triangle.add(Arrays.asList(1));
+        triangle.add(Arrays.asList(2, 3));
+        triangle.add(Arrays.asList(3, 6, 7));
+        triangle.add(Arrays.asList(8, 9, 6, 10));
+
+        // Get size
+        int n = triangle.size();
+
+        // Create object and print result
+        Solution solver = new Solution();
+        System.out.println(solver.minimumPathSum(triangle, n));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Class to solve the problem
+class Solution:
+    # Function to calculate minimum path sum using tabulation
+    def minimumPathSum(self, triangle, n):
+        # Create dp array
+        dp = [[0 for _ in range(n)] for _ in range(n)]
+
+        # Fill last row
+        for j in range(n):
+            dp[n - 1][j] = triangle[n - 1][j]
+
+        # Fill rest of dp from bottom to top
+        for i in range(n - 2, -1, -1):
+            for j in range(i, -1, -1):
+                # Take min of down and diagonal
+                down = triangle[i][j] + dp[i + 1][j]
+                diag = triangle[i][j] + dp[i + 1][j + 1]
+                dp[i][j] = min(down, diag)
+
+        # Return top value
+        return dp[0][0]
+
+# Define triangle
+triangle = [
+    [1],
+    [2, 3],
+    [3, 6, 7],
+    [8, 9, 6, 10]
+]
+
+# Get size
+n = len(triangle)
+
+# Create object and print result
+solver = Solution()
+print(solver.minimumPathSum(triangle, n))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Class to solve the problem
+class Solution {
+    // Function to calculate minimum path sum using tabulation
+    minimumPathSum(triangle, n) {
+        // Create dp array
+        let dp = Array.from({ length: n }, () =&gt; Array(n).fill(0));
+
+        // Fill last row
+        for (let j = 0; j &lt; n; j++) {
+            dp[n - 1][j] = triangle[n - 1][j];
+        }
+
+        // Fill rest of dp from bottom to top
+        for (let i = n - 2; i &gt;= 0; i--) {
+            for (let j = i; j &gt;= 0; j--) {
+                // Take min of down and diagonal
+                let down = triangle[i][j] + dp[i + 1][j];
+                let diag = triangle[i][j] + dp[i + 1][j + 1];
+                dp[i][j] = Math.min(down, diag);
+            }
+        }
+
+        // Return top value
+        return dp[0][0];
+    }
+}
+
+// Define triangle
+let triangle = [
+    [1],
+    [2, 3],
+    [3, 6, 7],
+    [8, 9, 6, 10]
+];
+
+// Get size
+let n = triangle.length;
+
+// Create object and print result
+let solver = new Solution();
+console.log(solver.minimumPathSum(triangle, n));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N*N)</strong>, entire triangular grid is visited atleast once.<br/>
+<strong>Space Complexity: O(N*N)</strong>, space used for 2D DP array.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Space Optimization Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+                    If we closely look the relation,
+dp[i][j] = matrix[i][j] + min(dp[i+1][j] + dp[i+1][j+1]))<br/><br/>
+We see that we only need the next row, in order to calculate dp[i][j]. Therefore we can space optimize it.
+Initially we can take a dummy row (say front). We initialize this row to the triangle matrix's last row (as done in tabulation).
+Now the current row (say cur) only needs the front row’s value in order to calculate dp[i][j].<br/>
+
+<p><img height="457" loading="lazy" src="../assets/img/94e9cb8ae54c8779.png" width="481"/></p>
+At last, front [0] will give us the required answer.<p></p>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Define a class to hold the solution
+class Solution {
+public:
+    // Function to calculate the minimum path sum in triangle
+    int minimumPathSum(vector&lt;vector&lt;int&gt;&gt; &amp;triangle, int n) {
+        
+        // Create an array to store the values of the row below
+        vector&lt;int&gt; front(n, 0);
+        
+        // Create an array to store the values of the current row
+        vector&lt;int&gt; cur(n, 0);
+        
+        // Initialize front with values from the last row of the triangle
+        for (int j = 0; j &lt; n; j++) {
+            front[j] = triangle[n - 1][j];
+        }
+
+        // Traverse the triangle from bottom to top
+        for (int i = n - 2; i &gt;= 0; i--) {
+            
+            // Traverse each element in the current row
+            for (int j = i; j &gt;= 0; j--) {
+                
+                // Calculate sum when going down
+                int down = triangle[i][j] + front[j];
+                
+                // Calculate sum when going diagonal
+                int diagonal = triangle[i][j] + front[j + 1];
+                
+                // Store the minimum of the two in current row
+                cur[j] = min(down, diagonal);
+            }
+
+            // Move current row values to front for next iteration
+            front = cur;
+        }
+
+        // Return the final answer from the top of triangle
+        return front[0];
+    }
+};
+
+// Main function to test the solution
+int main() {
+    
+    // Create the triangle
+    vector&lt;vector&lt;int&gt;&gt; triangle{
+        {1},
+        {2, 3},
+        {3, 6, 7},
+        {8, 9, 6, 10}
+    };
+
+    // Get number of rows
+    int n = triangle.size();
+
+    // Create object of Solution
+    Solution obj;
+
+    // Call the function and print result
+    cout &lt;&lt; obj.minimumPathSum(triangle, n);
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to find the minimum path sum
+    public int minimumPathSum(List&lt;List&lt;Integer&gt;&gt; triangle, int n) {
+        
+        // Create an array to store the next row
+        int[] front = new int[n];
+        
+        // Create an array to store the current row
+        int[] cur = new int[n];
+
+        // Initialize front with last row of triangle
+        for (int j = 0; j &lt; n; j++) {
+            front[j] = triangle.get(n - 1).get(j);
+        }
+
+        // Traverse rows from bottom to top
+        for (int i = n - 2; i &gt;= 0; i--) {
+            
+            // Traverse elements in current row
+            for (int j = i; j &gt;= 0; j--) {
+                
+                // Calculate path going down
+                int down = triangle.get(i).get(j) + front[j];
+                
+                // Calculate path going diagonal
+                int diagonal = triangle.get(i).get(j) + front[j + 1];
+                
+                // Store minimum in current row
+                cur[j] = Math.min(down, diagonal);
+            }
+
+            // Update front row with current row
+            front = cur.clone();
+        }
+
+        // Return top element (minimum path sum)
+        return front[0];
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Define triangle
+        List&lt;List&lt;Integer&gt;&gt; triangle = new ArrayList&lt;&gt;();
+        triangle.add(Arrays.asList(1));
+        triangle.add(Arrays.asList(2, 3));
+        triangle.add(Arrays.asList(3, 6, 7));
+        triangle.add(Arrays.asList(8, 9, 6, 10));
+
+        // Get number of rows
+        int n = triangle.size();
+
+        // Create Solution object
+        Solution sol = new Solution();
+
+        // Print the result
+        System.out.println(sol.minimumPathSum(triangle, n));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to find minimum path sum
+    def minimumPathSum(self, triangle, n):
+        
+        # Create array for next row
+        front = [0] * n
+
+        # Create array for current row
+        cur = [0] * n
+
+        # Initialize front with last row
+        for j in range(n):
+            front[j] = triangle[n - 1][j]
+
+        # Traverse rows from bottom to top
+        for i in range(n - 2, -1, -1):
+            
+            # Traverse each element in row
+            for j in range(i, -1, -1):
+                
+                # Calculate down path
+                down = triangle[i][j] + front[j]
+                
+                # Calculate diagonal path
+                diagonal = triangle[i][j] + front[j + 1]
+                
+                # Store minimum in current row
+                cur[j] = min(down, diagonal)
+
+            # Update front with current row
+            front = cur[:]
+
+        # Return the top element
+        return front[0]
+
+# Define triangle
+triangle = [
+    [1],
+    [2, 3],
+    [3, 6, 7],
+    [8, 9, 6, 10]
+]
+
+# Get number of rows
+n = len(triangle)
+
+# Create object of Solution
+sol = Solution()
+
+# Print result
+print(sol.minimumPathSum(triangle, n))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find minimum path sum
+    minimumPathSum(triangle, n) {
+        
+        // Create array for next row
+        let front = new Array(n).fill(0);
+        
+        // Create array for current row
+        let cur = new Array(n).fill(0);
+
+        // Initialize front with last row
+        for (let j = 0; j &lt; n; j++) {
+            front[j] = triangle[n - 1][j];
+        }
+
+        // Traverse rows from bottom to top
+        for (let i = n - 2; i &gt;= 0; i--) {
+            
+            // Traverse each element in row
+            for (let j = i; j &gt;= 0; j--) {
+                
+                // Calculate down path
+                let down = triangle[i][j] + front[j];
+                
+                // Calculate diagonal path
+                let diagonal = triangle[i][j] + front[j + 1];
+                
+                // Store minimum in current row
+                cur[j] = Math.min(down, diagonal);
+            }
+
+            // Update front with current row
+            front = [...cur];
+        }
+
+        // Return the top element
+        return front[0];
+    }
+}
+
+// Define triangle
+const triangle = [
+    [1],
+    [2, 3],
+    [3, 6, 7],
+    [8, 9, 6, 10]
+];
+
+// Get number of rows
+const n = triangle.length;
+
+// Create object of Solution
+const sol = new Solution();
+
+// Print result
+console.log(sol.minimumPathSum(triangle, n));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N*N)</strong>, every element of triangular grid is visited atleast once.<br/>
+<strong>Space Complexity: O(N)</strong>, we only use one array for storing rows.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

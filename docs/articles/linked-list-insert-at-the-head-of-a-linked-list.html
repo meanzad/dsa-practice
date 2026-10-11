@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Insert at the head of a Linked List</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Insert at the head of a Linked List</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/linked-list/insert-at-the-head-of-a-linked-list</code></div>
+  <p><strong>Problem Statement: </strong>Given a linked list and an integer value val, insert a new node with that value at the beginning (before the head) of the list and return the updated linked list.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: 0-&gt;1-&gt;2, val = 5 </span>
+<span>Output: 5-&gt;0-&gt;1-&gt;2</span>
+<span>Explanation: We need to insert the value 5 before the head of the given Linked List.</span>
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-12907" loading="lazy" src="../assets/img/ccdf1f0aabf9a4c6.png"/></figure>
+<span>Input: 12-&gt;5-&gt;8-&gt;7, val = 4</span>
+<span>Output: 4-&gt;12-&gt;5-&gt;8-&gt;7</span>
+<span>Explanation: We need to insert the value 4 before the head of the given Linked List.</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+
+
+    It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+      To insert a new node with a value before the head of the list, create a new node with the given value and point the new node to the head. This node will be the new head of the linked list.
+<ul>
+<li> Create a new node with data as the given value and pointing to the head. This node will be our new head of the linked list.</li>
+
+<li>Now, return the new node as the head of the updated Linked List. </li>
+
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/6895cfb430176cb7.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/8e8f383c0e69f868.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/6895cfb430176cb7.png"/><img alt="Image 2" loading="lazy" src="../assets/img/8e8f383c0e69f868.png"/></div></div>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Node class to represent each node in the linked list
+class Node {
+public:
+    // Data stored in the node
+    int data;
+    // Pointer to the next node
+    Node* next;
+
+    // Constructor with data and next pointer
+    Node(int data1, Node* next1) {
+        data = data1;
+        next = next1;
+    }
+
+    // Constructor with only data
+    Node(int data1) {
+        data = data1;
+        next = nullptr;
+    }
+};
+
+// Solution class to handle linked list operations
+class Solution {
+public:
+    // Function to insert a new node at the head
+    Node* insertAtHead(Node* head, int newData) {
+        // Create a new node whose next points to current head
+        Node* newNode = new Node(newData, head);
+        // Return the new node as the head
+        return newNode;
+    }
+
+    // Function to print the linked list
+    void printList(Node* head) {
+        Node* temp = head;
+        while (temp != nullptr) {
+            cout &lt;&lt; temp-&gt;data &lt;&lt; " ";
+            temp = temp-&gt;next;
+        }
+        cout &lt;&lt; endl;
+    }
+};
+
+int main() {
+    Solution sol;
+
+    // Creating a sample linked list: 2 -&gt; 3
+    Node* head = new Node(2);
+    head-&gt;next = new Node(3);
+
+    cout &lt;&lt; "Original List: ";
+    sol.printList(head);
+
+    // Inserting new node at head
+    head = sol.insertAtHead(head, 1);
+
+    cout &lt;&lt; "After Insertion at Head: ";
+    sol.printList(head);
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">// Node class to represent each node in the linked list
+class Node {
+    int data;    
+    Node next;   
+
+    // Constructor with data and next pointer
+    Node(int data1, Node next1) {
+        data = data1;
+        next = next1;
+    }
+
+    // Constructor with only data
+    Node(int data1) {
+        data = data1;
+        next = null;
+    }
+}
+
+// Solution class to handle linked list operations
+class Solution {
+    // Function to insert a new node at the head
+    public Node insertAtHead(Node head, int newData) {
+        // Create a new node whose next points to current head
+        Node newNode = new Node(newData, head);
+        // Return the new node as the head
+        return newNode;
+    }
+
+    // Function to print the linked list
+    public void printList(Node head) {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+
+        // Creating a sample linked list: 2 -&gt; 3
+        Node head = new Node(2);
+        head.next = new Node(3);
+
+        System.out.print("Original List: ");
+        sol.printList(head);
+
+        // Inserting new node at head
+        head = sol.insertAtHead(head, 1);
+
+        System.out.print("After Insertion at Head: ");
+        sol.printList(head);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Node class to represent each node in the linked list
+class Node:
+    # Constructor with data and optional next pointer
+    def __init__(self, data1, next1=None):
+        self.data = data1
+        self.next = next1
+
+# Solution class to handle linked list operations
+class Solution:
+    # Function to insert a new node at the head
+    def insertAtHead(self, head, newData):
+        # Create a new node whose next points to current head
+        newNode = Node(newData, head)
+        # Return the new node as the head
+        return newNode
+
+    # Function to print the linked list
+    def printList(self, head):
+        temp = head
+        while temp:
+            print(temp.data, end=" ")
+            temp = temp.next
+        print()
+
+# Driver code
+if __name__ == "__main__":
+    sol = Solution()
+
+    # Creating a sample linked list: 2 -&gt; 3
+    head = Node(2)
+    head.next = Node(3)
+
+    print("Original List:", end=" ")
+    sol.printList(head)
+
+    # Inserting new node at head
+    head = sol.insertAtHead(head, 1)
+
+    print("After Insertion at Head:", end=" ")
+    sol.printList(head)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Node class to represent each node in the linked list
+class Node {
+    // Constructor with data and optional next pointer
+    constructor(data1, next1 = null) {
+        this.data = data1;
+        this.next = next1;
+    }
+}
+
+// Solution class to handle linked list operations
+class Solution {
+    // Function to insert a new node at the head
+    insertAtHead(head, newData) {
+        // Create a new node whose next points to current head
+        let newNode = new Node(newData, head);
+        // Return the new node as the head
+        return newNode;
+    }
+
+    // Function to print the linked list
+    printList(head) {
+        let temp = head;
+        let result = "";
+        while (temp) {
+            result += temp.data + " ";
+            temp = temp.next;
+        }
+        console.log(result.trim());
+    }
+}
+
+// Driver code
+let sol = new Solution();
+
+// Creating a sample linked list: 2 -&gt; 3
+let head = new Node(2);
+head.next = new Node(3);
+
+console.log("Original List: ");
+sol.printList(head);
+
+// Inserting new node at head
+head = sol.insertAtHead(head, 1);
+
+console.log("After Insertion at Head: ");
+sol.printList(head);
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+<strong>Time Complexity: O(1)</strong>, creating a new node and updating the head takes constant time.<br/>
+<strong>Space Complexity: O(1) </strong>, only one extra node is created to insert at the head of the linked list.<br/>
+<p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

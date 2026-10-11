@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Longest Substring with At Most K Distinct Characters</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Longest Substring with At Most K Distinct Characters</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/longest-substring-with-at-most-k-distinct-characters</code></div>
+  <p><strong>Problem Statement: </strong> Given a string s and an integer k.Find the length of the longest substring with at most k distinct characters</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p>
+<strong>Input :</strong>s = "aababbcaacc" , k = 2
+<strong>Output :</strong>6
+<strong>Explanation :</strong>The longest substring with at most two distinct characters is "aababb".
+The length of the string 6
+</p><p>
+<strong>Input :</strong> s = "abcddefg" , k = 3
+<strong>Output :</strong> 4
+<strong>Explanation :</strong> The longest substring with at most three distinct characters is "bcdd".
+The length of the string 4.
+</p></pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/longest-substring-with-at-most-k-distinct-characters" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Brute force Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+We can start by examining every possible substring of the input string and check whether it contains at most <code>k</code> distinct characters. If it does, we record its length and keep track of the maximum length found so far.<ul>
+<li>Loop over all possible starting indices of substrings.</li>
+<li>For each starting index, loop over all possible ending indices till the end of the string.</li>
+<li>For each such substring, track the number of distinct characters using a set or frequency map.</li>
+<li>If the number of distinct characters is less than or equal to the given limit, update the maximum length found so far.</li>
+<li>After checking all substrings, return the maximum valid length obtained.</li>
+</ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/d74e2a911a819bde.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/9e088f5d92c202d8.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/d74e2a911a819bde.png"/><img alt="Image 2" loading="lazy" src="../assets/img/9e088f5d92c202d8.png"/></div></div>
+
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find the length of the longest substring with at most K distinct characters
+    int lengthOfLongestSubstringKDistinct(string s, int k) {
+        // Store the maximum length of valid substring
+        int maxLength = 0;
+
+        // Try every possible substring
+        for (int i = 0; i &lt; s.size(); i++) {
+            // Use set/map to track distinct characters in current substring
+            unordered_map&lt;char, int&gt; freq;
+
+            for (int j = i; j &lt; s.size(); j++) {
+                // Add current character to map and update frequency
+                freq[s[j]]++;
+
+                // If number of distinct characters exceeds k, break
+                if (freq.size() &gt; k) break;
+
+                // Update maximum length if valid
+                maxLength = max(maxLength, j - i + 1);
+            }
+        }
+
+        // Return the maximum valid substring length
+        return maxLength;
+    }
+};
+
+// Driver code
+int main() {
+    Solution sol;
+    string s = "eceba";
+    int k = 2;
+
+    cout &lt;&lt; sol.lengthOfLongestSubstringKDistinct(s, k) &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to find the length of the longest substring with at most K distinct characters
+    public int lengthOfLongestSubstringKDistinct(String s, int k) {
+        // Store the maximum length of valid substring
+        int maxLength = 0;
+
+        // Try every possible starting index
+        for (int i = 0; i &lt; s.length(); i++) {
+            // Use map to store character frequencies
+            Map&lt;Character, Integer&gt; freq = new HashMap&lt;&gt;();
+
+            // Try all possible substrings starting at i
+            for (int j = i; j &lt; s.length(); j++) {
+                // Add or update frequency
+                freq.put(s.charAt(j), freq.getOrDefault(s.charAt(j), 0) + 1);
+
+                // If distinct chars exceed k, stop expanding
+                if (freq.size() &gt; k) break;
+
+                // Update maxLength
+                maxLength = Math.max(maxLength, j - i + 1);
+            }
+        }
+
+        // Return final answer
+        return maxLength;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        String s = "eceba";
+        int k = 2;
+
+        System.out.println(sol.lengthOfLongestSubstringKDistinct(s, k));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to calculate longest substring with at most K distinct characters
+    def lengthOfLongestSubstringKDistinct(self, s: str, k: int) -&gt; int:
+        # Track the maximum valid substring length
+        max_len = 0
+
+        # Try every possible starting index
+        for i in range(len(s)):
+            # Use dictionary to count frequencies of characters
+            freq = {}
+
+            # Expand the substring from index i
+            for j in range(i, len(s)):
+                # Update character frequency
+                freq[s[j]] = freq.get(s[j], 0) + 1
+
+                # If more than k distinct characters, stop expanding
+                if len(freq) &gt; k:
+                    break
+
+                # Update the maximum length
+                max_len = max(max_len, j - i + 1)
+
+        # Return the result
+        return max_len
+
+# Driver code
+if __name__ == "__main__":
+    sol = Solution()
+    s = "eceba"
+    k = 2
+    print(sol.lengthOfLongestSubstringKDistinct(s, k))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to calculate longest substring with at most K distinct characters
+    lengthOfLongestSubstringKDistinct(s, k) {
+        // Variable to store maximum length found
+        let maxLen = 0;
+
+        // Loop over all possible start indices
+        for (let i = 0; i &lt; s.length; i++) {
+            // Create a map to track character frequency
+            let freq = new Map();
+
+            // Expand the window from current start
+            for (let j = i; j &lt; s.length; j++) {
+                // Update frequency map
+                freq.set(s[j], (freq.get(s[j]) || 0) + 1);
+
+                // If distinct count exceeds k, break
+                if (freq.size &gt; k) break;
+
+                // Update max length
+                maxLen = Math.max(maxLen, j - i + 1);
+            }
+        }
+
+        // Return the result
+        return maxLen;
+    }
+}
+
+// Driver code
+const sol = new Solution();
+const s = "eceba";
+const k = 2;
+console.log(sol.lengthOfLongestSubstringKDistinct(s, k));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:O(n²)</strong> ,We are checking every possible substring which takes, and for each substring, we count distinct characters using a map/set which takes up to O(n) in the worst case. But since we break early when distinct characters exceed K, the inner loop doesn't always go to the end.Hence worst-case complexity remains O(n²).</p>
+<p><strong>Space Complexity:O(k)</strong> ,We use a hash map to store character frequencies for each substring, and in the worst case, it stores at most k distinct characters.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="better-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+Instead of checking all substrings, we can use a sliding window and maintain the count of characters in the current window using a frequency map. The idea is to expand the window to the right as long as we have at most K distinct characters. If the count exceeds K, we shrink the window from the left until we’re back within the limit. This avoids unnecessary re-checks and speeds up the solution.
+<ul> <li>Initialize two pointers to define the sliding window: one at the start and one at the end.</li> <li>Use a hashmap to track the frequency of each character within the window.</li> <li>Expand the window by moving the right pointer forward.</li> <li>If the number of distinct characters exceeds the limit, shrink the window from the left.</li> <li>At every valid window, update the maximum length found so far.</li> <li>Continue until the end of the string is reached.</li> </ul>
+<div class="image-carousel-container"><div class="carousel-container"><div class="carousel"><div class="carousel-image"><img alt="Image 1" loading="lazy" src="../assets/img/4b572018b4c28a3a.png"/></div><div class="carousel-image"><img alt="Image 2" loading="lazy" src="../assets/img/a5751642f782c1f9.png"/></div></div><div class="control-container"><div class="control-container-2"><button class="image-carousel-arrow image-carousel-left-arrow group"><svg class="lucide lucide-chevron-left" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m15 18-6-6 6-6"></path></svg></button><span class="image-number"></span><button class="image-carousel-arrow image-carousel-right-arrow group"><svg class="lucide lucide-chevron-right" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg></button></div><div class="control-buttons"><button class="image-carousel-control-button image-carousel-play-button group"><svg class="lucide lucide-play" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></button><button class="image-carousel-control-button image-carousel-pause-button group"><svg class="lucide lucide-pause" fill="none" height="20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="1" width="4" x="14" y="4"></rect><rect height="16" rx="1" width="4" x="6" y="4"></rect></svg></button><button class="image-carousel-control-button image-carousel-down-button group"><svg class="lucide lucide-external-link" fill="none" height="20" strokelinecap="round" strokelinejoin="round" strokewidth="2" viewbox="0 0 24 24" width="20"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button></div></div></div><div class="vertical-view" id="vertical-view"><img alt="Image 1" loading="lazy" src="../assets/img/4b572018b4c28a3a.png"/><img alt="Image 2" loading="lazy" src="../assets/img/a5751642f782c1f9.png"/></div></div>
+
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find longest substring with at most K distinct characters
+    int lengthOfLongestSubstringKDistinct(string s, int k) {
+        // Edge case: if k is 0 or string is empty
+        if (k == 0 || s.empty()) return 0;
+
+        // Hash map to store frequency of characters in current window
+        unordered_map&lt;char, int&gt; freq;
+
+        // Initialize left pointer of sliding window
+        int left = 0;
+
+        // Initialize variable to store maximum length
+        int maxLen = 0;
+
+        // Loop through the string using right pointer
+        for (int right = 0; right &lt; s.length(); right++) {
+            // Include current character into frequency map
+            freq[s[right]]++;
+
+            // Shrink window if number of distinct characters exceeds k
+            while (freq.size() &gt; k) {
+                freq[s[left]]--;
+
+                // If character count becomes zero, erase from map
+                if (freq[s[left]] == 0) {
+                    freq.erase(s[left]);
+                }
+
+                // Move left pointer ahead
+                left++;
+            }
+
+            // Update maxLen with current valid window size
+            maxLen = max(maxLen, right - left + 1);
+        }
+
+        // Return the final answer
+        return maxLen;
+    }
+};
+
+// Driver code
+int main() {
+    Solution sol;
+    string s = "eceba";
+    int k = 2;
+    cout &lt;&lt; sol.lengthOfLongestSubstringKDistinct(s, k) &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+    // Function to return length of longest substring with at most K distinct characters
+    public int lengthOfLongestSubstringKDistinct(String s, int k) {
+        // Edge case
+        if (k == 0 || s.length() == 0) return 0;
+
+        // Frequency map to track characters
+        Map&lt;Character, Integer&gt; freq = new HashMap&lt;&gt;();
+
+        // Initialize sliding window pointers
+        int left = 0;
+        int maxLen = 0;
+
+        // Loop through string
+        for (int right = 0; right &lt; s.length(); right++) {
+            char c = s.charAt(right);
+            freq.put(c, freq.getOrDefault(c, 0) + 1);
+
+            // Shrink window if more than k distinct chars
+            while (freq.size() &gt; k) {
+                char leftChar = s.charAt(left);
+                freq.put(leftChar, freq.get(leftChar) - 1);
+                if (freq.get(leftChar) == 0) {
+                    freq.remove(leftChar);
+                }
+                left++;
+            }
+
+            // Update maxLen
+            maxLen = Math.max(maxLen, right - left + 1);
+        }
+
+        return maxLen;
+    }
+}
+
+// Separate main class
+public class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        String s = "eceba";
+        int k = 2;
+        System.out.println(sol.lengthOfLongestSubstringKDistinct(s, k));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to return length of longest substring with at most K distinct characters
+    def lengthOfLongestSubstringKDistinct(self, s: str, k: int) -&gt; int:
+        # Edge case
+        if k == 0 or not s:
+            return 0
+
+        # Dictionary to store frequency of characters
+        freq = {}
+
+        # Initialize pointers and result
+        left = 0
+        maxLen = 0
+
+        # Iterate using right pointer
+        for right in range(len(s)):
+            # Add current char to freq map
+            freq[s[right]] = freq.get(s[right], 0) + 1
+
+            # Shrink window if needed
+            while len(freq) &gt; k:
+                freq[s[left]] -= 1
+                if freq[s[left]] == 0:
+                    del freq[s[left]]
+                left += 1
+
+            # Update maxLen
+            maxLen = max(maxLen, right - left + 1)
+
+        return maxLen
+
+# Driver code
+sol = Solution()
+s = "eceba"
+k = 2
+print(sol.lengthOfLongestSubstringKDistinct(s, k))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find length of longest substring with at most K distinct characters
+    lengthOfLongestSubstringKDistinct(s, k) {
+        // Edge case
+        if (k === 0 || s.length === 0) return 0;
+
+        // Frequency map
+        const freq = new Map();
+        let left = 0;
+        let maxLen = 0;
+
+        // Traverse the string with right pointer
+        for (let right = 0; right &lt; s.length; right++) {
+            const char = s[right];
+            freq.set(char, (freq.get(char) || 0) + 1);
+
+            // Shrink window if too many distinct characters
+            while (freq.size &gt; k) {
+                const leftChar = s[left];
+                freq.set(leftChar, freq.get(leftChar) - 1);
+                if (freq.get(leftChar) === 0) {
+                    freq.delete(leftChar);
+                }
+                left++;
+            }
+
+            // Update maxLen
+            maxLen = Math.max(maxLen, right - left + 1);
+        }
+
+        return maxLen;
+    }
+}
+
+// Driver code
+const sol = new Solution();
+const s = "eceba";
+const k = 2;
+console.log(sol.lengthOfLongestSubstringKDistinct(s, k));
+</code></pre></div></div></div></details>
+
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+</p><p><strong>Time Complexity:O(n)</strong> ,We iterate through the string once, and each character is added and removed from the map at most once. 
+So the overall time complexity is linear.</p>
+<p><strong>Space Complexity: O(k)</strong> ,We store at most k characters in the frequency map at any given time, so space used is proportional to k.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Minimum days to make M bouquets</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Minimum days to make M bouquets</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/arrays/minimum-days-to-make-m-bouquets/</code></div>
+  <p><strong>Problem Statement: </strong>  You are given 'N’ roses and you are also given an array 'arr'  where 'arr[i]'  denotes that the 'ith' rose will bloom on the 'arr[i]th' day.
+You can only pick already bloomed roses that are adjacent to make a bouquet. You are also told that you require exactly 'k' adjacent bloomed roses to make a single bouquet.
+Find the minimum number of days required to make at least ‘m' bouquets each containing 'k' roses. Return -1 if it is not possible. </p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                        Examples
+                    </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input Format: N = 8, arr[] = {7, 7, 7, 7, 13, 11, 12, 7}, m = 2, k = 3
+Result: 12
+Explanation: On the 12th the first 4 flowers and the last 3 flowers would have already bloomed. So, we can easily make 2 bouquets, one with the first 3 and another with the last 3 flowers.
+
+Example 2:
+Input Format: N = 5, arr[] = {1, 10, 3, 10, 2}, m = 3, k = 2
+Result: -1
+Explanation: If we want to make 3 bouquets of 2 flowers each, we need at least 6 flowers. But we are given only 5 flowers, so, we cannot make the bouquets.
+
+                </pre>
+</div>
+</details>
+</div>
+
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/minimum-days-to-make-m-bouquets" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+            solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Brute Force Approach 
+                    </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                                Algorithm
+                            </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<ul>
+<li>If the total number of flowers required to make all bouquets is more than the flowers available, it is not possible to make the bouquets. So, return -1.</li>
+<li>Loop through each day starting from the earliest bloom day to the latest bloom day to test all possible answers.</li>
+<li>For each day, check if it's possible to make the required number of bouquets using the flowers that have bloomed by that day. If yes, return that day as the answer.</li>
+<li>If no suitable day is found after checking all possibilities, it means it's impossible to make the bouquets. So, return -1.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Class to handle bouquet formation logic
+class RoseGarden {
+public:
+    // Function to check if we can form 'm' bouquets by 'day'
+    bool isPossible(vector&lt;int&gt;&amp; bloomDays, int day, int m, int k) {
+        int count = 0;  // consecutive flowers that bloomed by 'day'
+        int bouquets = 0;
+
+        for (int bloom : bloomDays) {
+            if (bloom &lt;= day) {
+                count++;
+                if (count == k) {
+                    bouquets++;
+                    count = 0;
+                }
+            } else {
+                count = 0;
+            }
+        }
+
+        return bouquets &gt;= m;
+    }
+
+    // Main function to find the minimum day to form 'm' bouquets
+    int minDaysToMakeBouquets(vector&lt;int&gt;&amp; bloomDays, int m, int k) {
+        long long totalFlowers = 1LL * m * k;
+        if (totalFlowers &gt; bloomDays.size()) return -1; // Not enough flowers
+
+        int low = *min_element(bloomDays.begin(), bloomDays.end());
+        int high = *max_element(bloomDays.begin(), bloomDays.end());
+
+        // Brute-force search from min to max bloom day
+        for (int day = low; day &lt;= high; ++day) {
+            if (isPossible(bloomDays, day, m, k)) {
+                return day;
+            }
+        }
+
+        return -1; // Not possible to make bouquets
+    }
+};
+
+int main() {
+    vector&lt;int&gt; bloomDays = {7, 7, 7, 7, 13, 11, 12, 7};
+    int k = 3;
+    int m = 2;
+
+    RoseGarden garden;
+    int result = garden.minDaysToMakeBouquets(bloomDays, m, k);
+
+    if (result == -1)
+        cout &lt;&lt; "We cannot make m bouquets.\n";
+    else
+        cout &lt;&lt; "We can make bouquets on day " &lt;&lt; result &lt;&lt; "\n";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+public class RoseGarden {
+
+    // Function to check if it's possible to make 'm' bouquets on 'day'
+    public boolean isPossible(int[] bloomDays, int day, int m, int k) {
+        int count = 0;  // count of consecutive bloomed flowers
+        int bouquets = 0;
+
+        for (int bloom : bloomDays) {
+            if (bloom &lt;= day) {
+                count++;
+                if (count == k) {
+                    bouquets++;
+                    count = 0;
+                }
+            } else {
+                count = 0;
+            }
+        }
+
+        return bouquets &gt;= m;
+    }
+
+    // Main function to return minimum day to make 'm' bouquets
+    public int minDaysToMakeBouquets(int[] bloomDays, int m, int k) {
+        long totalFlowers = (long) m * k;
+        if (totalFlowers &gt; bloomDays.length) return -1;
+
+        int min = Arrays.stream(bloomDays).min().getAsInt();
+        int max = Arrays.stream(bloomDays).max().getAsInt();
+
+        for (int day = min; day &lt;= max; day++) {
+            if (isPossible(bloomDays, day, m, k)) {
+                return day;
+            }
+        }
+
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        int[] bloomDays = {7, 7, 7, 7, 13, 11, 12, 7};
+        int k = 3;
+        int m = 2;
+
+        RoseGarden garden = new RoseGarden();
+        int result = garden.minDaysToMakeBouquets(bloomDays, m, k);
+
+        if (result == -1)
+            System.out.println("We cannot make m bouquets.");
+        else
+            System.out.println("We can make bouquets on day " + result);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class RoseGarden:
+    # Function to check if it's possible to make 'm' bouquets on 'day'
+    def is_possible(self, bloom_days, day, m, k):
+        count = 0  # count of consecutive bloomed flowers
+        bouquets = 0
+
+        for bloom in bloom_days:
+            if bloom &lt;= day:
+                count += 1
+                if count == k:
+                    bouquets += 1
+                    count = 0
+            else:
+                count = 0
+
+        return bouquets &gt;= m
+
+    # Main function to find the minimum day to make 'm' bouquets
+    def min_days_to_make_bouquets(self, bloom_days, m, k):
+        total_flowers = m * k
+        if total_flowers &gt; len(bloom_days):
+            return -1
+
+        low = min(bloom_days)
+        high = max(bloom_days)
+
+        for day in range(low, high + 1):
+            if self.is_possible(bloom_days, day, m, k):
+                return day
+
+        return -1
+
+
+# Example usage
+bloom_days = [7, 7, 7, 7, 13, 11, 12, 7]
+k = 3
+m = 2
+
+garden = RoseGarden()
+result = garden.min_days_to_make_bouquets(bloom_days, m, k)
+
+if result == -1:
+    print("We cannot make m bouquets.")
+else:
+    print(f"We can make bouquets on day {result}")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class RoseGarden {
+  // Function to check if it's possible to make 'm' bouquets on 'day'
+  isPossible(bloomDays, day, m, k) {
+    let count = 0;      // consecutive bloomed flowers
+    let bouquets = 0;   // number of valid bouquets
+
+    for (let bloom of bloomDays) {
+      if (bloom &lt;= day) {
+        count++;
+        if (count === k) {
+          bouquets++;
+          count = 0;
+        }
+      } else {
+        count = 0;
+      }
+    }
+
+    return bouquets &gt;= m;
+  }
+
+  // Main function to find minimum day to make 'm' bouquets
+  minDaysToMakeBouquets(bloomDays, m, k) {
+    const totalFlowers = m * k;
+    if (totalFlowers &gt; bloomDays.length) return -1;
+
+    let min = Math.min(...bloomDays);
+    let max = Math.max(...bloomDays);
+
+    for (let day = min; day &lt;= max; day++) {
+      if (this.isPossible(bloomDays, day, m, k)) {
+        return day;
+      }
+    }
+
+    return -1;
+  }
+}
+
+// Example usage
+const bloomDays = [7, 7, 7, 7, 13, 11, 12, 7];
+const k = 3;
+const m = 2;
+
+const garden = new RoseGarden();
+const result = garden.minDaysToMakeBouquets(bloomDays, m, k);
+
+if (result === -1) {
+  console.log("We cannot make m bouquets.");
+} else {
+  console.log("We can make bouquets on day " + result);
+}
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                                Complexity Analysis
+                            </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+</p><li>Time Complexity: O((max(arr[])-min(arr[])+1) * N), where {max(arr[]) -&gt; maximum element of the array, min(arr[]) -&gt; minimum element of the array, N = size of the array}.</li>
+<li>Space Complexity : O(1) as we are not using any extra space to solve this problem.</li>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                        Optimal Approach 
+                    </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                                Algorithm
+                            </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+<ul>
+<li>If m*k &gt; arr.size: This means we have insufficient flowers. So, it is impossible to make m bouquets and we will return -1.</li>
+<li>Next, we will find the maximum element i.e. max(arr[]), and the minimum element i.e. min(arr[]) in the array.</li>
+<li>Place the 2 pointers i.e. low and high: Initially, we will place the pointers. The pointer low will point to min(arr[]) and the high will point to max(arr[]).</li>
+<li>Calculate the ‘mid’: Now, inside the loop, we will calculate the value of ‘mid’ using the following formula: mid = (low+high) // 2 ( ‘//’ refers to integer division)</li>
+<li>Eliminate the halves based on the value returned by possible(): We will pass the potential answer, represented by the variable 'mid' (which corresponds to a specific day), to the 'possible()' function.</li>
+<ul>
+<li>If possible() returns true: On satisfying this condition, we can conclude that the number ‘mid’ is one of our possible answers. But we want the minimum number. So, we will eliminate the right half and consider the left half(i.e. high = mid-1).</li>
+<li>Otherwise, the value mid is smaller than the number we want. This means the numbers greater than ‘mid’ should be considered and the right half of ‘mid’ consists of such numbers. So, we will eliminate the left half and consider the right half(i.e. low = mid+1).</li>
+</ul>
+<li>Finally, outside the loop, we will return the value of low as the pointer will be pointing to the answer.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Helper function to check if it's possible to make m bouquets on or before a given day
+    bool possible(vector&lt;int&gt;&amp; arr, int day, int m, int k) {
+        int n = arr.size();         // Total number of flowers
+        int cnt = 0;                // Counter for consecutive bloomed flowers
+        int bouquets = 0;           // Count of bouquets made
+
+        for (int i = 0; i &lt; n; i++) {
+            if (arr[i] &lt;= day) {
+                // Flower bloomed, increment consecutive count
+                cnt++;
+                if (cnt == k) {
+                    // We have k consecutive bloomed flowers — make 1 bouquet
+                    bouquets++;
+                    cnt = 0; // reset for next bouquet
+                }
+            } else {
+                // Flower not bloomed, reset consecutive count
+                cnt = 0;
+            }
+        }
+
+        // Check if at least m bouquets can be made
+        return bouquets &gt;= m;
+    }
+
+    // Main function to find the minimum day to make m bouquets
+    int roseGarden(vector&lt;int&gt;&amp; arr, int k, int m) {
+        long long total = 1LL * k * m; // Total flowers required
+
+        // If total required flowers &gt; available flowers, it's impossible
+        if (total &gt; arr.size()) return -1;
+
+        // Find minimum and maximum bloom days from array
+        int mini = *min_element(arr.begin(), arr.end());
+        int maxi = *max_element(arr.begin(), arr.end());
+
+        // Apply binary search on number of days
+        int low = mini, high = maxi;
+        int result = -1;
+
+        while (low &lt;= high) {
+            int mid = (low + high) / 2;
+
+            if (possible(arr, mid, m, k)) {
+                // If it's possible to make bouquets on this day, try to find an earlier day
+                result = mid;
+                high = mid - 1;
+            } else {
+                // Otherwise, try with a later day
+                low = mid + 1;
+            }
+        }
+
+        return result;
+    }
+};
+
+int main() {
+    vector&lt;int&gt; arr = {7, 7, 7, 7, 13, 11, 12, 7};
+    int k = 3; // number of flowers needed per bouquet
+    int m = 2; // number of bouquets to make
+
+    Solution sol;
+    int ans = sol.roseGarden(arr, k, m);
+
+    if (ans == -1)
+        cout &lt;&lt; "We cannot make m bouquets.\n";
+    else
+        cout &lt;&lt; "We can make bouquets on day " &lt;&lt; ans &lt;&lt; "\n";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+public class RoseGarden {
+
+    // Function to check if it's possible to make m bouquets on or before 'day'
+    public static boolean isPossible(int[] bloomDays, int day, int m, int k) {
+        int count = 0; // counts consecutive flowers that bloomed on or before 'day'
+        int bouquets = 0; // number of bouquets made
+
+        for (int bloom : bloomDays) {
+            if (bloom &lt;= day) {
+                count++; // flower is ready
+                if (count == k) {
+                    bouquets++; // form one bouquet
+                    count = 0; // reset count for next bouquet
+                }
+            } else {
+                count = 0; // break in consecutive flowers
+            }
+        }
+
+        return bouquets &gt;= m; // check if required bouquets can be made
+    }
+
+    // Main function to find minimum day to make m bouquets
+    public static int roseGarden(int[] bloomDays, int k, int m) {
+        long required = (long) m * k;
+        if (required &gt; bloomDays.length) return -1; // not enough flowers
+
+        int minDay = Integer.MAX_VALUE;
+        int maxDay = Integer.MIN_VALUE;
+
+        // Find the minimum and maximum bloom day
+        for (int bloom : bloomDays) {
+            minDay = Math.min(minDay, bloom);
+            maxDay = Math.max(maxDay, bloom);
+        }
+
+        // Binary search between minDay and maxDay
+        int low = minDay, high = maxDay, result = -1;
+
+        while (low &lt;= high) {
+            int mid = (low + high) / 2;
+            if (isPossible(bloomDays, mid, m, k)) {
+                result = mid; // possible to form bouquets, try earlier
+                high = mid - 1;
+            } else {
+                low = mid + 1; // need more days
+            }
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] bloomDays = {7, 7, 7, 7, 13, 11, 12, 7};
+        int k = 3;
+        int m = 2;
+        int result = roseGarden(bloomDays, k, m);
+        if (result == -1)
+            System.out.println("We cannot make m bouquets.");
+        else
+            System.out.println("We can make bouquets on day " + result);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class RoseGarden:
+
+    # Function to check if we can form m bouquets by 'day'
+    def is_possible(self, bloom_days, day, m, k):
+        count = 0  # count of consecutive bloomed flowers
+        bouquets = 0  # number of bouquets formed
+
+        for bloom in bloom_days:
+            if bloom &lt;= day:
+                count += 1
+                if count == k:
+                    bouquets += 1  # one bouquet formed
+                    count = 0
+            else:
+                count = 0  # reset if a flower is not ready
+
+        return bouquets &gt;= m
+
+    # Main function to find the minimum day to make m bouquets
+    def rose_garden(self, bloom_days, k, m):
+        if m * k &gt; len(bloom_days):
+            return -1  # not enough flowers
+
+        low = min(bloom_days)
+        high = max(bloom_days)
+        answer = -1
+
+        while low &lt;= high:
+            mid = (low + high) // 2
+            if self.is_possible(bloom_days, mid, m, k):
+                answer = mid  # try to find smaller day
+                high = mid - 1
+            else:
+                low = mid + 1  # need more days
+
+        return answer
+
+
+# Driver code
+garden = RoseGarden()
+bloom_days = [7, 7, 7, 7, 13, 11, 12, 7]
+k = 3
+m = 2
+result = garden.rose_garden(bloom_days, k, m)
+if result == -1:
+    print("We cannot make m bouquets.")
+else:
+    print(f"We can make bouquets on day {result}")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class RoseGarden {
+    // Function to check if it's possible to make m bouquets on or before 'day'
+    isPossible(bloomDays, day, m, k) {
+        let count = 0; // consecutive bloomed flowers
+        let bouquets = 0; // number of bouquets made
+
+        for (let bloom of bloomDays) {
+            if (bloom &lt;= day) {
+                count++;
+                if (count === k) {
+                    bouquets++; // one bouquet is formed
+                    count = 0;   // reset for next bouquet
+                }
+            } else {
+                count = 0; // reset on break
+            }
+        }
+
+        return bouquets &gt;= m;
+    }
+
+    // Main function to get the minimum day to form m bouquets
+    roseGarden(bloomDays, k, m) {
+        if (m * k &gt; bloomDays.length) return -1; // not enough flowers
+
+        let minDay = Math.min(...bloomDays);
+        let maxDay = Math.max(...bloomDays);
+        let result = -1;
+
+        // Binary search between minDay and maxDay
+        while (minDay &lt;= maxDay) {
+            let mid = Math.floor((minDay + maxDay) / 2);
+            if (this.isPossible(bloomDays, mid, m, k)) {
+                result = mid;       // try smaller days
+                maxDay = mid - 1;
+            } else {
+                minDay = mid + 1;   // need more days
+            }
+        }
+
+        return result;
+    }
+}
+
+// Example usage:
+const garden = new RoseGarden();
+const bloomDays = [7, 7, 7, 7, 13, 11, 12, 7];
+const k = 3;
+const m = 2;
+
+const result = garden.roseGarden(bloomDays, k, m);
+if (result === -1) {
+    console.log("We cannot make m bouquets.");
+} else {
+    console.log("We can make bouquets on day " + result);
+}
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                                Complexity Analysis
+                            </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+</p><p><strong>Time Complexity: O(1)</strong> O(log(max(arr[])-min(arr[])+1) * N), where {max(arr[]) -&gt; maximum element of the array, min(arr[]) -&gt; minimum element of the array, N = size of the array}.</p>
+<p><strong>Space Complexity : O(h)</strong>O(1) as we are not using any extra space to solve this problem.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

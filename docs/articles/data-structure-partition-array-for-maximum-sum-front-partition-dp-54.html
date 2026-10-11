@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Partition Array for Maximum Sum | Front Partition : DP 54</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Partition Array for Maximum Sum | Front Partition : DP 54</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/partition-array-for-maximum-sum-front-partition-dp-54/</code></div>
+  <p><strong>Problem Description: </strong>Given an integer array arr with length n, and an integer k, you may partition arr into one or more contiguous sub-arrays, where each sub-array has length in the range [1, k] (both inclusive).<br/>
+After you pick a partition, replace every element in each sub-array with the maximum value found in that sub-array. The array is modified in-place for the purpose of computing the total. Return the largest possible sum of the entire array after performing exactly one such partition-and-replace operation.
+</p>
+
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+<span>Input: arr = [1,15,7,9,2,5,10], k = 3</span>
+<span>Output: 84</span>
+<span>Explanation: The partition will be the following to get the largest sum: [1, 15, 7 | 9 | 2, 5, 10]. 
+After replacing the elements of each subarray with its maximum, the array will look like this: [15,15,15,9,10,10,10] and the sum will be 84.</span>
+<p></p>
+<span>Input: arr = [2,2,2,2], k = 2</span>
+<span>Output: 8</span>
+<span>Explanation: Partition as [2,2 | 2,2]; each sub-array’s max is 2. The array stays [2,2,2,2] and the sum is 8.</span>
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>
+    Here is the <a href="https://takeuforward.org/plus/dsa/problems/partition-array-for-maximum-sum" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better.
+            It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                   Memoization 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+The problem asks us to partition the array into contiguous sub-arrays, each of length at most k, and then replace all elements in each sub-array with the maximum element of that sub-array to maximize the total sum. Since every partitioned sub-array affects the total sum by its maximum value multiplied by the length of that sub-array, the key insight is to explore all valid partitions while keeping track of the maximum values and sums. This can be effectively done using dynamic programming by considering every possible sub-array ending at each index and choosing the best partition to maximize the sum so far.<br/><br/>
+
+We want to partition the array into contiguous sub-arrays of length at most k to maximize the sum after replacing each sub-array with its maximum element. A natural way to think about this is recursively: starting from the beginning of the array, try all possible sub-array lengths up to k. For each choice, find the maximum value in that sub-array, calculate the sum contributed by replacing all its elements with that max, then recursively solve the problem for the rest of the array. By caching results for each starting index, we avoid redundant calculations and optimize the recursion.
+
+
+<p><img height="457" loading="lazy" src="../assets/img/54c8f8a99ece9c4d.png" width="481"/></p>
+<ul>
+<li>Define a recursive function that takes the current start index as a parameter.</li>
+<li>If the start index reaches the end of the array, return 0 since no elements remain.</li>
+<li>Use a memo array to store and reuse results for each start index to avoid recomputation.</li>
+<li>Initialize variables to track the maximum sum for the current start index and the max element in the current sub-array.</li>
+<li>Iterate over all possible sub-array lengths from 1 to k (ensuring not to exceed array bounds).</li>
+<li>Update the max element for the current sub-array as you iterate.</li>
+<li>Calculate the sum contributed by the current sub-array as product of max element and length plus the recursive call result for the next start index.</li>
+<li>Store the maximum sum found in the memo for the current start index and return it.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+private:
+    // Recursive helper function to find max sum from 'start' index
+    int helper(const vector&lt;int&gt;&amp; arr, int k, int start, vector&lt;int&gt;&amp; memo) {
+        int n = (int)arr.size();
+
+        // Base case: if start reached end, no elements left to partition
+        if (start == n) return 0;
+
+        // Return cached result if already computed for this start index
+        if (memo[start] != -1) return memo[start];
+
+        int maxSum = 0;    
+        int maxElem = 0;   
+
+        // Try partitions of length 1 to k starting at 'start'
+        for (int length = 1; length &lt;= k &amp;&amp; start + length &lt;= n; length++) {
+            // Update max element for this partition length
+            maxElem = max(maxElem, arr[start + length - 1]);
+
+            // Calculate current sum: maxElem * length + recursive result for remaining array
+            int currentSum = maxElem * length + helper(arr, k, start + length, memo);
+
+            // Update maxSum if current partition leads to higher sum
+            maxSum = max(maxSum, currentSum);
+        }
+
+        // Memoize and return the best max sum for this start index
+        return memo[start] = maxSum;
+    }
+
+public:
+    // Public function to initiate recursive memoization
+    int maxSumAfterPartitioning(vector&lt;int&gt;&amp; arr, int k) {
+        int n = (int)arr.size();
+
+        // Initialize memo array with -1 to indicate unvisited states
+        vector&lt;int&gt; memo(n, -1);
+
+        // Start recursion from index 0
+        return helper(arr, k, 0, memo);
+    }
+};
+
+int main() {
+    vector&lt;int&gt; arr = {1, 15, 7, 9, 2, 5, 10};
+    int k = 3;
+
+    Solution sol;
+    cout &lt;&lt; "Maximum sum after partitioning: " &lt;&lt; sol.maxSumAfterPartitioning(arr, k) &lt;&lt; "\n";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // Recursive helper function to find max sum from 'start' index
+    private int helper(int[] arr, int k, int start, int[] memo) {
+        int n = arr.length;
+
+        // Base case: if start reached end, no elements left to partition
+        if (start == n) return 0;
+
+        // Return cached result if already computed for this start index
+        if (memo[start] != -1) return memo[start];
+
+        int maxSum = 0;    
+        int maxElem = 0;   
+
+        // Try partitions of length 1 to k starting at 'start'
+        for (int length = 1; length &lt;= k &amp;&amp; start + length &lt;= n; length++) {
+            // Update max element for this partition length
+            maxElem = Math.max(maxElem, arr[start + length - 1]);
+
+            // Calculate current sum: maxElem * length + recursive result for remaining array
+            int currentSum = maxElem * length + helper(arr, k, start + length, memo);
+
+            // Update maxSum if current partition leads to higher sum
+            maxSum = Math.max(maxSum, currentSum);
+        }
+
+        // Memoize and return the best max sum for this start index
+        return memo[start] = maxSum;
+    }
+
+    // Public method to start the recursion with memoization
+    public int maxSumAfterPartitioning(int[] arr, int k) {
+        int n = arr.length;
+
+        // Initialize memo array with -1 to indicate unvisited states
+        int[] memo = new int[n];
+        java.util.Arrays.fill(memo, -1);
+
+        // Start recursion from index 0
+        return helper(arr, k, 0, memo);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {1, 15, 7, 9, 2, 5, 10};
+        int k = 3;
+
+        Solution sol = new Solution();
+        System.out.println("Maximum sum after partitioning: " + sol.maxSumAfterPartitioning(arr, k));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Recursive helper function to find max sum from 'start' index
+    def helper(self, arr, k, start, memo):
+        n = len(arr)
+
+        # Base case: if start reached end, no elements left to partition
+        if start == n:
+            return 0
+
+        # Return cached result if already computed for this start index
+        if memo[start] != -1:
+            return memo[start]
+
+        maxSum = 0     
+        maxElem = 0    
+
+        # Try partitions of length 1 to k starting at 'start'
+        for length in range(1, k + 1):
+            if start + length &gt; n:
+                break
+
+            # Update max element for this partition length
+            maxElem = max(maxElem, arr[start + length - 1])
+
+            # Calculate current sum: maxElem * length + recursive result for remaining array
+            currentSum = maxElem * length + self.helper(arr, k, start + length, memo)
+
+            # Update maxSum if current partition leads to higher sum
+            maxSum = max(maxSum, currentSum)
+
+        # Memoize and return the best max sum for this start index
+        memo[start] = maxSum
+        return maxSum
+
+    # Public method to start the recursion with memoization
+    def maxSumAfterPartitioning(self, arr, k):
+        n = len(arr)
+
+        # Initialize memo list with -1 to indicate unvisited states
+        memo = [-1] * n
+
+        # Start recursion from index 0
+        return self.helper(arr, k, 0, memo)
+
+
+if __name__ == "__main__":
+    arr = [1, 15, 7, 9, 2, 5, 10]
+    k = 3
+
+    sol = Solution()
+    print("Maximum sum after partitioning:", sol.maxSumAfterPartitioning(arr, k))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Recursive helper function to find max sum from 'start' index
+    helper(arr, k, start, memo) {
+        const n = arr.length;
+
+        // Base case: if start reached end, no elements left to partition
+        if (start === n) return 0;
+
+        // Return cached result if already computed for this start index
+        if (memo[start] !== -1) return memo[start];
+
+        let maxSum = 0;   
+        let maxElem = 0;  
+
+        // Try partitions of length 1 to k starting at 'start'
+        for (let length = 1; length &lt;= k &amp;&amp; start + length &lt;= n; length++) {
+            // Update max element for this partition length
+            maxElem = Math.max(maxElem, arr[start + length - 1]);
+
+            // Calculate current sum: maxElem * length + recursive result for remaining array
+            let currentSum = maxElem * length + this.helper(arr, k, start + length, memo);
+
+            // Update maxSum if current partition leads to higher sum
+            maxSum = Math.max(maxSum, currentSum);
+        }
+
+        // Memoize and return the best max sum for this start index
+        memo[start] = maxSum;
+        return maxSum;
+    }
+
+    // Public method to start the recursion with memoization
+    maxSumAfterPartitioning(arr, k) {
+        const n = arr.length;
+
+        // Initialize memo array with -1 to indicate unvisited states
+        const memo = new Array(n).fill(-1);
+
+        // Start recursion from index 0
+        return this.helper(arr, k, 0, memo);
+    }
+}
+
+// Driver code
+const arr = [1, 15, 7, 9, 2, 5, 10];
+const k = 3;
+const sol = new Solution();
+
+console.log("Maximum sum after partitioning:", sol.maxSumAfterPartitioning(arr, k));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N*K)</strong>, there are total N states, where N is the length of array and for every state we check all subarrays of length K.<br/>
+<strong>Space Complexity: O(N) + O(N)</strong>, we use a DP array to avoid recomputation. Extra auxiliary stack space is used for recursion.
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                   Tabulation 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+In order to avoid extra recursive stack space used in memoization approach, we can simply convert our solution into tabulation approach. We can follow these steps in order to form our tabulation solution:
+<ul>
+<li>Identify the state variable used in memoization (start index of the array).</li>
+<li>Create a DP array where dp[i] stores the maximum sum achievable from index i to the end.</li>
+<li>Initialize dp array with base case: dp[n] = 0 (when start index is at the array's end).</li>
+<li>Fill the dp array from the end (index n-1) towards the start (index 0).</li>
+<li>For each index i, consider all sub-arrays of length 1 to k starting at i.</li>
+<li>For each sub-array, find the maximum element, then update dp[i] with the maximum of current dp[i] and max_element * sub-array_length + dp[next_start].</li>
+<li>After filling dp, the answer will be dp[0], representing the maximum sum after partitioning the whole array.</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to find maximum sum after partitioning
+    int maxSumAfterPartitioning(vector&lt;int&gt;&amp; arr, int k) {
+        int n = (int)arr.size();
+
+        // DP array to store max sum from index i to end
+        vector&lt;int&gt; dp(n + 1, 0); 
+
+        // Iterate from right to left over the array
+        for (int i = n - 1; i &gt;= 0; i--) {
+            int maxElem = 0;
+            int maxSum = 0;
+
+            // Check all partitions of length 1 to k starting at i
+            for (int length = 1; length &lt;= k &amp;&amp; i + length &lt;= n; length++) {
+                // Update maximum element for current partition
+                maxElem = max(maxElem, arr[i + length - 1]);
+
+                // Calculate sum if partition ends here
+                int currentSum = maxElem * length + dp[i + length];
+
+                // Update maxSum if currentSum is greater
+                maxSum = max(maxSum, currentSum);
+            }
+
+            // Store maximum sum for subarray starting at i
+            dp[i] = maxSum;
+        }
+
+        // Return max sum achievable starting at index 0
+        return dp[0];
+    }
+};
+
+int main() {
+    vector&lt;int&gt; arr = {1, 15, 7, 9, 2, 5, 10};
+    int k = 3;
+
+    Solution sol;
+    cout &lt;&lt; "Maximum sum after partitioning: " &lt;&lt; sol.maxSumAfterPartitioning(arr, k) &lt;&lt; "\n";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // Function to find maximum sum after partitioning
+    public int maxSumAfterPartitioning(int[] arr, int k) {
+        int n = arr.length;
+
+        // DP array to store max sum from index i to end
+        int[] dp = new int[n + 1]; 
+
+        // Iterate from right to left over the array
+        for (int i = n - 1; i &gt;= 0; i--) {
+            int maxElem = 0;
+            int maxSum = 0;
+
+            // Check all partitions of length 1 to k starting at i
+            for (int length = 1; length &lt;= k &amp;&amp; i + length &lt;= n; length++) {
+                // Update maximum element for current partition
+                maxElem = Math.max(maxElem, arr[i + length - 1]);
+
+                // Calculate sum if partition ends here
+                int currentSum = maxElem * length + dp[i + length];
+
+                // Update maxSum if currentSum is greater
+                maxSum = Math.max(maxSum, currentSum);
+            }
+
+            // Store maximum sum for subarray starting at i
+            dp[i] = maxSum;
+        }
+
+        // Return max sum achievable starting at index 0
+        return dp[0];
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {1, 15, 7, 9, 2, 5, 10};
+        int k = 3;
+
+        Solution sol = new Solution();
+        System.out.println("Maximum sum after partitioning: " + sol.maxSumAfterPartitioning(arr, k));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to find maximum sum after partitioning
+    def maxSumAfterPartitioning(self, arr, k):
+        n = len(arr)
+
+        # DP array to store max sum from index i to end
+        dp = [0] * (n + 1)  
+
+        # Iterate from right to left over the array
+        for i in range(n - 1, -1, -1):
+            maxElem = 0
+            maxSum = 0
+
+            # Check all partitions of length 1 to k starting at i
+            for length in range(1, k + 1):
+                if i + length &gt; n:
+                    break
+
+                # Update maximum element for current partition
+                maxElem = max(maxElem, arr[i + length - 1])
+
+                # Calculate sum if partition ends here
+                currentSum = maxElem * length + dp[i + length]
+
+                # Update maxSum if currentSum is greater
+                maxSum = max(maxSum, currentSum)
+
+            # Store maximum sum for subarray starting at i
+            dp[i] = maxSum
+
+        # Return max sum achievable starting at index 0
+        return dp[0]
+
+
+if __name__ == "__main__":
+    arr = [1, 15, 7, 9, 2, 5, 10]
+    k = 3
+
+    sol = Solution()
+    print("Maximum sum after partitioning:", sol.maxSumAfterPartitioning(arr, k))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to find maximum sum after partitioning
+    maxSumAfterPartitioning(arr, k) {
+        const n = arr.length;
+
+        // DP array to store max sum from index i to end
+        const dp = new Array(n + 1).fill(0); 
+
+        // Iterate from right to left over the array
+        for (let i = n - 1; i &gt;= 0; i--) {
+            let maxElem = 0;
+            let maxSum = 0;
+
+            // Check all partitions of length 1 to k starting at i
+            for (let length = 1; length &lt;= k &amp;&amp; i + length &lt;= n; length++) {
+                // Update maximum element for current partition
+                maxElem = Math.max(maxElem, arr[i + length - 1]);
+
+                // Calculate sum if partition ends here
+                let currentSum = maxElem * length + dp[i + length];
+
+                // Update maxSum if currentSum is greater
+                maxSum = Math.max(maxSum, currentSum);
+            }
+
+            // Store maximum sum for subarray starting at i
+            dp[i] = maxSum;
+        }
+
+        // Return max sum achievable starting at index 0
+        return dp[0];
+    }
+}
+
+// Driver code
+const arr = [1, 15, 7, 9, 2, 5, 10];
+const k = 3;
+const sol = new Solution();
+
+console.log("Maximum sum after partitioning:", sol.maxSumAfterPartitioning(arr, k));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<span>
+
+<strong>Time Complexity: O(N*K)</strong>, there are total N states and for every state we check all subarrays of length K.<br/>
+<strong>Space Complexity: O(N) </strong>, we use a DP array to store previously calculated results and avoid recomputation. 
+                            <p></p>
+</span>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

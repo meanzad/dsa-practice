@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Stock Buy And Sell</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Stock Buy And Sell</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/stock-buy-and-sell/</code></div>
+  <p><strong>Problem Statement: </strong> You are given an array of prices where prices[i] is the price of a given stock on an ith day.
+
+You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock. Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p><strong>Input:</strong> prices = [7,1,5,3,6,4]
+<strong>Output:</strong> 5
+<strong>Explanation:</strong> Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+<strong>Note</strong>: That buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.<br/>
+<strong>Input:</strong> prices = [7,6,4,3,1]
+<strong>Output:</strong> 0
+<strong>Explanation:</strong> In this case, no transactions are done and the max profit = 0.</p></pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/data-structure/stock-buy-and-sell" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Brute Force Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+We try every possible pair of days (buy day and sell day after buy) and calculate the profit. The maximum profit among all these pairs is our answer. If no profit is possible, return 0.
+
+<ul> <li>Loop through all days to consider each as a possible buy day.</li> <li>For each buy day, loop through all future days to consider them as sell days.</li> <li>Calculate the profit for each (buy, sell) pair.</li> <li>Track the maximum profit seen.</li> </ul>
+<img height="615" loading="lazy" src="../assets/img/83824536ed18edc8.png" width="624"/>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to calculate max profit using brute force
+    int stockbuySell(vector&lt;int&gt;&amp; prices) {
+        // Initialize max profit to 0
+        int maxProfit = 0;
+
+        // Loop through each day as a potential buy day
+        for(int i = 0; i &lt; prices.size(); i++) {
+            // Loop through each future day as a potential sell day
+            for(int j = i + 1; j &lt; prices.size(); j++) {
+                // Calculate the profit
+                int profit = prices[j] - prices[i];
+
+                // Update max profit if this is higher
+                maxProfit = max(maxProfit, profit);
+            }
+        }
+
+        // Return the maximum profit
+        return maxProfit;
+    }
+};
+
+// Driver code
+int main() {
+    Solution sol;
+    vector&lt;int&gt; prices = {7, 1, 5, 3, 6, 4};
+    cout &lt;&lt; "Max Profit: " &lt;&lt; sol.stockbuySell(prices) &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">class Solution {
+    // Function to calculate max profit using brute force
+    public int stockbuySell(int[] prices) {
+        // Initialize max profit to 0
+        int maxProfit = 0;
+
+        // Loop through each day as a potential buy day
+        for (int i = 0; i &lt; prices.length; i++) {
+            // Loop through each future day as a potential sell day
+            for (int j = i + 1; j &lt; prices.length; j++) {
+                // Calculate profit
+                int profit = prices[j] - prices[i];
+
+                // Update max profit if higher
+                maxProfit = Math.max(maxProfit, profit);
+            }
+        }
+
+        // Return the maximum profit
+        return maxProfit;
+    }
+}
+
+// Driver class
+class Main {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        int[] prices = {7, 1, 5, 3, 6, 4};
+        System.out.println("Max Profit: " + sol.stockbuySell(prices));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to calculate max profit using brute force
+    def stockbuySell(self, prices):
+        # Initialize max profit to 0
+        maxProfit = 0
+
+        # Loop through each day as potential buy day
+        for i in range(len(prices)):
+            # Loop through future days as potential sell day
+            for j in range(i + 1, len(prices)):
+                # Calculate profit
+                profit = prices[j] - prices[i]
+
+                # Update max profit if higher
+                maxProfit = max(maxProfit, profit)
+
+        # Return the maximum profit
+        return maxProfit
+
+# Driver code
+sol = Solution()
+prices = [7, 1, 5, 3, 6, 4]
+print("Max Profit:", sol.stockbuySell(prices))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to calculate max profit using brute force
+    stockbuySell(prices) {
+        // Initialize max profit to 0
+        let maxProfit = 0;
+
+        // Loop through each day as potential buy day
+        for (let i = 0; i &lt; prices.length; i++) {
+            // Loop through each future day as sell day
+            for (let j = i + 1; j &lt; prices.length; j++) {
+                // Calculate profit
+                let profit = prices[j] - prices[i];
+
+                // Update max profit if higher
+                maxProfit = Math.max(maxProfit, profit);
+            }
+        }
+
+        // Return the max profit
+        return maxProfit;
+    }
+}
+
+// Driver code
+const sol = new Solution();
+const prices = [7, 1, 5, 3, 6, 4];
+console.log("Max Profit:", sol.stockbuySell(prices));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O(n²) Because for each element, we are checking every future element  nested loops.</p> <p><strong>Space Complexity:</strong> O(1) No extra space used, only variables for storing max profit.</p>
+</details>
+</div>
+</details>
+
+</div>
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+                        The idea is to track the minimum price so far while traversing the array and calculate the profit if we sold today. This way, we can constantly update the maximum profit without using nested loops.
+                        We’re basically simulating:
+                        <ul>
+<li>What’s the lowest price we’ve seen so far?</li>
+<li>What’s the profit if we sold today?</li>
+<li>Is it better than our best so far?</li>
+</ul>
+<ul> <li>Initialize a variable to store the minimum price so far, set it to a very large value initially.</li> <li>Initialize a variable to store the maximum profit seen so far, set it to 0 initially.</li> <li>Loop through each price in the array.</li> <li>Update the minimum price if the current price is smaller.</li> <li>Calculate the profit if the stock were bought at the minimum price and sold at the current price.</li> <li>Update the maximum profit if this new profit is higher.</li> <li>Return the maximum profit after the loop ends.</li> </ul>
+<img height="633" loading="lazy" src="../assets/img/6a52c1370275990b.png" width="624"/>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to calculate maximum profit using single pass
+    int stockbuySell(vector&lt;int&gt;&amp; prices) {
+        // Initialize the minimum price to a large number
+        int minPrice = INT_MAX;
+
+        // Initialize the maximum profit to 0
+        int maxProfit = 0;
+
+        // Traverse each price in the array
+        for (int price : prices) {
+            // If current price is less than minPrice, update minPrice
+            if (price &lt; minPrice) {
+                minPrice = price;
+            }
+            // Else calculate profit and update maxProfit if it's greater
+            else {
+                maxProfit = max(maxProfit, price - minPrice);
+            }
+        }
+
+        // Return the maximum profit found
+        return maxProfit;
+    }
+};
+
+// Driver code
+int main() {
+    Solution obj;
+    vector&lt;int&gt; prices = {7, 1, 5, 3, 6, 4};
+
+    cout &lt;&lt; obj.stockbuySell(prices) &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import.java.util.*;
+class Solution {
+    // Function to calculate maximum profit using single pass
+    public int stockbuySell(int[] prices) {
+        // Initialize the minimum price to a large number
+        int minPrice = Integer.MAX_VALUE;
+
+        // Initialize the maximum profit to 0
+        int maxProfit = 0;
+
+        // Traverse each price in the array
+        for (int price : prices) {
+            // If current price is less than minPrice, update minPrice
+            if (price &lt; minPrice) {
+                minPrice = price;
+            }
+            // Else calculate profit and update maxProfit if it's greater
+            else {
+                maxProfit = Math.max(maxProfit, price - minPrice);
+            }
+        }
+
+        // Return the maximum profit found
+        return maxProfit;
+    }
+}
+
+// Driver code
+class Main {
+    public static void main(String[] args) {
+        Solution obj = new Solution();
+        int[] prices = {7, 1, 5, 3, 6, 4};
+
+        System.out.println(obj.stockbuySell(prices));
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to calculate maximum profit using single pass
+    def stockbuySell(self, prices):
+        # Initialize the minimum price to a large number
+        min_price = float('inf')
+
+        # Initialize the maximum profit to 0
+        max_profit = 0
+
+        # Traverse each price in the array
+        for price in prices:
+            # If current price is less than min_price, update min_price
+            if price &lt; min_price:
+                min_price = price
+            # Else calculate profit and update max_profit if it's greater
+            else:
+                max_profit = max(max_profit, price - min_price)
+
+        # Return the maximum profit found
+        return max_profit
+
+# Driver code
+obj = Solution()
+prices = [7, 1, 5, 3, 6, 4]
+print(obj.stockbuySell(prices))
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to calculate maximum profit using single pass
+    stockbuySell(prices) {
+        // Initialize the minimum price to a large number
+        let minPrice = Infinity;
+
+        // Initialize the maximum profit to 0
+        let maxProfit = 0;
+
+        // Traverse each price in the array
+        for (let price of prices) {
+            // If current price is less than minPrice, update minPrice
+            if (price &lt; minPrice) {
+                minPrice = price;
+            }
+            // Else calculate profit and update maxProfit if it's greater
+            else {
+                maxProfit = Math.max(maxProfit, price - minPrice);
+            }
+        }
+
+        // Return the maximum profit found
+        return maxProfit;
+    }
+}
+
+// Driver code
+const obj = new Solution();
+const prices = [7, 1, 5, 3, 6, 4];
+console.log(obj.stockbuySell(prices));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O(n),This is because we are iterating through the array of prices exactly once. There are no nested loops or recursive calls.</p> <p><strong>Space Complexity:</strong> O(1),Only two variables are used to store the minimum price and maximum profit, regardless of the input size.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

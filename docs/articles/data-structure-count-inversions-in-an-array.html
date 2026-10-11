@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Count inversions in an array</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Count inversions in an array</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/count-inversions-in-an-array</code></div>
+  <p><strong>Problem Statement: </strong> Given an array of N integers, count the inversion of the array (using
+    merge-sort).</p>
+<p>Inversion of an array: for all i &amp; j &lt; size of array, if i &lt; j then you have to find pair (A[i],A[j]) such that A[j]
+        &lt; A[i].</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                            Examples
+                        </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input Format: N = 5, array[] = {1,2,3,4,5}
+Result: 0
+Explanation: we have a sorted array and the sorted array has 0 inversions as for i &lt; j you will never find a pair such that A[j] &lt; A[i]. More clear example: 2 has index 1 and 5 has index 4 now 1 &lt; 5 but 2 &lt; 5 so this is not an inversion.
+
+Example 2:
+Input Format: N = 5, array[] = {5,4,3,2,1}
+Result: 10
+Explanation: we have a reverse sorted array and we will get the maximum inversions as for i &lt; j we will always find a pair such that A[j] &lt; A[i]. Example: 5 has index 0 and 3 has index 2 now (5,3) pair is inversion as 0 &lt; 2 and 5 &gt; 3 which will satisfy out conditions and for reverse sorted array we will get maximum inversions and that is (n)*(n-1) / 2.For above given array there is 4 + 3 + 2 + 1 = 10 inversions.
+
+Example 3:
+Input Format: N = 5, array[] = {5,3,2,1,4}
+Result: 7
+Explanation: There are 7 pairs (5,1), (5,3), (5,2), (5,4),(3,2), (3,1), (2,1) and we have left 2 pairs (2,4) and (1,4) as both are not satisfy our condition.
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/count-inversions" rel="noopener" target="_blank">practice link</a>
+                to help you assess your knowledge better. It's highly recommend trying to
+                solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                            Brute Force Approach
+                        </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                                    Algorithm
+                                </span>
+</summary>
+<div class="approach-algorithm">
+<p>
+                                    An inversion in an array is defined as a pair of indices <code>(i, j)</code> such
+                                    that
+                                    <code>i &lt; j</code> and <code>a[i] &gt; a[j]</code>.
+                                    This measures how far the array is from being sorted.
+                                    To count inversions, the brute force way is to compare every element with all
+                                    elements to its right
+                                    and increment the counter whenever we find an inversion.
+                                </p>
+<ul>
+<li>Initialize a counter <code>cnt = 0</code>.</li>
+<li>Use two nested loops:
+                                        <ul>
+<li>Outer loop runs for each element <code>a[i]</code>.</li>
+<li>Inner loop checks all elements <code>a[j]</code> where
+                                                <code>j &gt; i</code>.
+                                            </li>
+<li>If <code>a[i] &gt; a[j]</code>, increment <code>cnt</code>.</li>
+</ul>
+</li>
+<li>After traversing all pairs, return <code>cnt</code> as the number of inversions.
+                                    </li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div>
+<div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Function to count the number of inversions in an array
+// An inversion is a pair (i, j) such that i &lt; j and arr[i] &gt; arr[j]
+int numberOfInversions(vector&lt;int&gt;&amp; a, int n) {
+    int cnt = 0; // Initialize inversion count
+    // Check all pairs
+    for (int i = 0; i &lt; n; i++) {
+        for (int j = i + 1; j &lt; n; j++) {
+            if (a[i] &gt; a[j]) cnt++; // Increment count if inversion found
+        }
+    }
+    return cnt; // Return total inversions
+}
+
+int main() {
+    vector&lt;int&gt; a = {5, 4, 3, 2, 1};
+    int n = a.size();
+    int cnt = numberOfInversions(a, n);
+    cout &lt;&lt; "The number of inversions is: " &lt;&lt; cnt &lt;&lt; endl;
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+public class Main {
+    // Function to count inversions
+    static int numberOfInversions(int[] arr) {
+        int cnt = 0; // Initialize count
+        int n = arr.length;
+        // Check all pairs
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = i + 1; j &lt; n; j++) {
+                if (arr[i] &gt; arr[j]) cnt++; // Increment if inversion found
+            }
+        }
+        return cnt; // Return total inversions
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {5, 4, 3, 2, 1};
+        int inversions = numberOfInversions(arr);
+        System.out.println("The number of inversions is: " + inversions);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Function to count inversions in an array
+# An inversion is a pair (i, j) such that i &lt; j and arr[i] &gt; arr[j]
+def number_of_inversions(arr):
+    cnt = 0 # Initialize inversion count
+    n = len(arr)
+    for i in range(n):
+        for j in range(i+1, n):
+            if arr[i] &gt; arr[j]:
+                cnt += 1 # Increment if inversion found
+    return cnt
+
+# Driver code
+arr = [5, 4, 3, 2, 1]
+inversions = number_of_inversions(arr)
+print("The number of inversions is:", inversions)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Function to count inversions in an array
+// An inversion is a pair (i, j) such that i &lt; j and arr[i] &gt; arr[j]
+function numberOfInversions(arr) {
+    let cnt = 0; // Initialize inversion count
+    let n = arr.length;
+    for (let i = 0; i &lt; n; i++) {
+        for (let j = i + 1; j &lt; n; j++) {
+            if (arr[i] &gt; arr[j]) cnt++; // Increment if inversion found
+        }
+    }
+    return cnt;
+}
+
+// Driver code
+let arr = [5, 4, 3, 2, 1];
+let inversions = numberOfInversions(arr);
+console.log("The number of inversions is:", inversions);
+</code></pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                                    Complexity Analysis
+                                </span>
+</summary>
+<p>
+</p><p><strong>Time Complexity:</strong> O(N<sup>2</sup>), as every pair is checked.</p>
+<p><strong>Space Complexity:</strong> O(1), since no extra space is used apart from
+                                variables.</p>
+</details>
+</div>
+</details>
+</div>
+
+
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                Optimal Approach
+            </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Algorithm
+                    </span>
+</summary>
+<div class="approach-algorithm">
+<p>
+                        The brute force approach compares all pairs, but that takes O(N<sup>2</sup>) time.
+                        We can optimize this using the <b>merge sort</b> algorithm.
+                        While merging two sorted halves, if an element in the left half is greater than an element in
+                        the right half,
+                        then all remaining elements in the left half will also be greater than that right element.
+                        This allows us to count multiple inversions in one step, instead of checking each pair
+                        individually.
+                    </p>
+<ul>
+<li>Apply <b>merge sort</b> recursively to divide the array into two halves.</li>
+<li>During the merge step:
+                            <ul>
+<li>If <code>arr[left] &lt;= arr[right]</code>, place <code>arr[left]</code> into the
+                                    temp array and move <code>left++</code>.</li>
+<li>Otherwise, place <code>arr[right]</code> into the temp array.
+                                    Since <code>arr[left] &gt; arr[right]</code>, all elements from
+                                    <code>arr[left]</code> to <code>arr[mid]</code> form inversions with
+                                    <code>arr[right]</code>.
+                                    So add <code>(mid - left + 1)</code> to the inversion count.</li>
+</ul>
+</li>
+<li>Copy the merged elements back into the original array.</li>
+<li>The total inversion count is the sum of:
+                            <ul>
+<li>Inversions in the left half</li>
+<li>Inversions in the right half</li>
+<li>Inversions across the halves (counted during merge)</li>
+</ul>
+</li>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div>
+<div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Function to merge two halves and count inversions
+int merge(vector&lt;int&gt; &amp;arr, int low, int mid, int high) {
+    // Temporary array to store merged elements
+    vector&lt;int&gt; temp;
+
+    // Starting index of left half
+    int left = low;
+    // Starting index of right half
+    int right = mid + 1;
+
+    // Variable to count inversions
+    int cnt = 0;
+
+    // Merge elements in sorted order and count inversions
+    while (left &lt;= mid &amp;&amp; right &lt;= high) {
+        if (arr[left] &lt;= arr[right]) {
+            temp.push_back(arr[left]);
+            left++;
+        } else {
+            temp.push_back(arr[right]);
+            cnt += (mid - left + 1); // All remaining left elements are inversions
+            right++;
+        }
+    }
+
+    // If left half still has elements
+    while (left &lt;= mid) {
+        temp.push_back(arr[left]);
+        left++;
+    }
+
+    // If right half still has elements
+    while (right &lt;= high) {
+        temp.push_back(arr[right]);
+        right++;
+    }
+
+    // Copy back to original array
+    for (int i = low; i &lt;= high; i++) {
+        arr[i] = temp[i - low];
+    }
+
+    // Return inversion count
+    return cnt;
+}
+
+// Merge sort function that counts inversions
+int mergeSort(vector&lt;int&gt; &amp;arr, int low, int high) {
+    // Variable to store inversion count
+    int cnt = 0;
+
+    // Base case
+    if (low &gt;= high) return cnt;
+
+    int mid = (low + high) / 2;
+
+    // Count inversions in left half
+    cnt += mergeSort(arr, low, mid);
+    // Count inversions in right half
+    cnt += mergeSort(arr, mid + 1, high);
+    // Count inversions during merge
+    cnt += merge(arr, low, mid, high);
+
+    return cnt;
+}
+
+// Function to get number of inversions
+int numberOfInversions(vector&lt;int&gt;&amp; a, int n) {
+    return mergeSort(a, 0, n - 1);
+}
+
+int main() {
+    // Input array
+    vector&lt;int&gt; a = {5, 4, 3, 2, 1};
+    int n = a.size();
+
+    // Count inversions
+    int cnt = numberOfInversions(a, n);
+
+    cout &lt;&lt; "The number of inversions are: " &lt;&lt; cnt &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+class Solution {
+
+    // Function to merge two halves and count inversions
+    public int merge(int[] arr, int low, int mid, int high) {
+        // Temporary array
+        int[] temp = new int[high - low + 1];
+
+        // Starting indices of left and right halves
+        int left = low;
+        int right = mid + 1;
+        int k = 0;
+
+        // Variable to count inversions
+        int cnt = 0;
+
+        // Merge elements in sorted order
+        while (left &lt;= mid &amp;&amp; right &lt;= high) {
+            if (arr[left] &lt;= arr[right]) {
+                temp[k++] = arr[left++];
+            } else {
+                temp[k++] = arr[right++];
+                cnt += (mid - left + 1); // Count inversions
+            }
+        }
+
+        // Copy remaining elements of left half
+        while (left &lt;= mid) {
+            temp[k++] = arr[left++];
+        }
+
+        // Copy remaining elements of right half
+        while (right &lt;= high) {
+            temp[k++] = arr[right++];
+        }
+
+        // Copy back to original array
+        for (int i = low; i &lt;= high; i++) {
+            arr[i] = temp[i - low];
+        }
+
+        return cnt;
+    }
+
+    // Merge sort function
+    public int mergeSort(int[] arr, int low, int high) {
+        int cnt = 0;
+
+        if (low &gt;= high) return cnt;
+
+        int mid = (low + high) / 2;
+
+        // Count inversions in left half
+        cnt += mergeSort(arr, low, mid);
+        // Count inversions in right half
+        cnt += mergeSort(arr, mid + 1, high);
+        // Count inversions during merge
+        cnt += merge(arr, low, mid, high);
+
+        return cnt;
+    }
+
+    // Function to get number of inversions
+    public int numberOfInversions(int[] arr) {
+        return mergeSort(arr, 0, arr.length - 1);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Input array
+        int[] a = {5, 4, 3, 2, 1};
+
+        // Create Solution object
+        Solution obj = new Solution();
+
+        // Count inversions
+        int cnt = obj.numberOfInversions(a);
+
+        System.out.println("The number of inversions are: " + cnt);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">def merge(arr, low, mid, high):
+    # Temporary array
+    temp = []
+
+    # Starting indices of left and right halves
+    left = low
+    right = mid + 1
+
+    # Variable to count inversions
+    cnt = 0
+
+    # Merge elements in sorted order
+    while left &lt;= mid and right &lt;= high:
+        if arr[left] &lt;= arr[right]:
+            temp.append(arr[left])
+            left += 1
+        else:
+            temp.append(arr[right])
+            cnt += (mid - left + 1)  # Count inversions
+            right += 1
+
+    # Copy remaining elements of left half
+    while left &lt;= mid:
+        temp.append(arr[left])
+        left += 1
+
+    # Copy remaining elements of right half
+    while right &lt;= high:
+        temp.append(arr[right])
+        right += 1
+
+    # Copy back to original array
+    for i in range(low, high + 1):
+        arr[i] = temp[i - low]
+
+    return cnt
+
+def mergeSort(arr, low, high):
+    # Variable to count inversions
+    cnt = 0
+
+    if low &gt;= high:
+        return cnt
+
+    mid = (low + high) // 2
+
+    # Count inversions in left half
+    cnt += mergeSort(arr, low, mid)
+    # Count inversions in right half
+    cnt += mergeSort(arr, mid + 1, high)
+    # Count inversions during merge
+    cnt += merge(arr, low, mid, high)
+
+    return cnt
+
+def numberOfInversions(arr):
+    return mergeSort(arr, 0, len(arr) - 1)
+
+# Input array
+a = [5, 4, 3, 2, 1]
+
+# Count inversions
+cnt = numberOfInversions(a)
+print("The number of inversions are:", cnt)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">function merge(arr, low, mid, high) {
+    // Temporary array
+    let temp = [];
+
+    // Starting indices of left and right halves
+    let left = low;
+    let right = mid + 1;
+
+    // Variable to count inversions
+    let cnt = 0;
+
+    // Merge elements in sorted order
+    while (left &lt;= mid &amp;&amp; right &lt;= high) {
+        if (arr[left] &lt;= arr[right]) {
+            temp.push(arr[left]);
+            left++;
+        } else {
+            temp.push(arr[right]);
+            cnt += (mid - left + 1); // Count inversions
+            right++;
+        }
+    }
+
+    // Copy remaining elements of left half
+    while (left &lt;= mid) {
+        temp.push(arr[left]);
+        left++;
+    }
+
+    // Copy remaining elements of right half
+    while (right &lt;= high) {
+        temp.push(arr[right]);
+        right++;
+    }
+
+    // Copy back to original array
+    for (let i = low; i &lt;= high; i++) {
+        arr[i] = temp[i - low];
+    }
+
+    return cnt;
+}
+
+function mergeSort(arr, low, high) {
+    // Variable to count inversions
+    let cnt = 0;
+
+    if (low &gt;= high) return cnt;
+
+    let mid = Math.floor((low + high) / 2);
+
+    // Count inversions in left half
+    cnt += mergeSort(arr, low, mid);
+    // Count inversions in right half
+    cnt += mergeSort(arr, mid + 1, high);
+    // Count inversions during merge
+    cnt += merge(arr, low, mid, high);
+
+    return cnt;
+}
+
+function numberOfInversions(arr) {
+    return mergeSort(arr, 0, arr.length - 1);
+}
+
+// Input array
+let a = [5, 4, 3, 2, 1];
+
+// Count inversions
+let cnt = numberOfInversions(a);
+console.log("The number of inversions are:", cnt);
+</code></pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                        Complexity Analysis
+                    </span>
+</summary>
+<p>
+</p><p><strong>Time Complexity:</strong> O(N log N), since it is based on merge sort.</p>
+<p><strong>Space Complexity:</strong> O(N), for the temporary array used during merging.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

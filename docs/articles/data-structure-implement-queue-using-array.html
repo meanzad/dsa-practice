@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Implement Queue Using Array</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Implement Queue Using Array</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/implement-queue-using-array/</code></div>
+  <p><strong>Problem Statement: </strong>
+Implement a First-In-First-Out (FIFO) queue using an array. The implemented queue should support the following operations: push, dequeue, pop, and isEmpty.
+<br/><br/>
+Implement the ArrayQueue class:
+<br/><br/>
+void push(int x): Adds element x to the end of the queue.
+<br/>
+int pop(): Removes and returns the front element of the queue.
+<br/>
+int peek(): Returns the front element of the queue without removing it.
+<br/>
+boolean isEmpty(): Returns true if the queue is empty, false otherwise.
+</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><strong>Example 1:</strong>  
+<strong>Input:</strong> 
+["ArrayQueue", "push", "push", "peek", "pop", "isEmpty"]  
+[[], [5], [10], [], [], []]  
+<strong>Output:</strong> [null, null, null, 5, 5, false]  
+<strong>Explanation:</strong>  
+ArrayQueue queue = new ArrayQueue();  
+- queue.push(5);  
+- queue.push(10);  
+- queue.peek(); // returns 5  
+- queue.pop(); // returns 5  
+- queue.isEmpty(); // returns false  
+
+<strong>Example 2:</strong>  
+<strong>Input:</strong>  
+["ArrayQueue", "isEmpty"]  
+[[]]  
+<strong>Output:</strong> [null, true]  
+
+<strong>Explanation:</strong>  
+ArrayQueue queue = new ArrayQueue();  
+- queue.isEmpty(); // returns true</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/implement-queue-using-arrays" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm 
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+<ul>
+<li><strong>Declare an Array of a Particular Size:</strong> Declare an array to store the elements of the queue. The size of this array is determined when the queue is initialized.</li>
+<li><strong>Define Variables:</strong></li>
+<ul>
+<li><code>start</code>: Tracks the index of the front element.</li>
+<li><code>end</code>: Tracks the index of the last element.</li>
+<li><code>size</code>: Keeps the current number of elements in the queue.</li>
+<li><code>capacity</code>: The maximum number of elements the queue can hold.</li>
+</ul>
+<li><strong>Push Operation (<code>push(int x)</code>):</strong></li>
+<ul>
+<li>Check if the queue is full by comparing <code>size</code> with <code>capacity</code>. If not full:</li>
+<ul>
+<li>Increment the <code>end</code> using modular arithmetic to wrap around if necessary.</li>
+<li>Insert the element at the rear index.</li>
+<li>Increment the <code>size</code>.</li>
+</ul>
+</ul>
+<li><strong>Pop Operation (<code>pop()</code>):</strong></li>
+<ul>
+<li>Check if the queue is empty by comparing <code>size</code> with 0. If not empty:</li>
+<ul>
+<li>Return the element at the front index.</li>
+<li>Increment the <code>start</code> using modular arithmetic to wrap around if necessary.</li>
+<li>Decrement the <code>size</code>.</li>
+</ul>
+</ul>
+<li><strong>Peek Operation (<code>peek()</code>):</strong></li>
+<ul>
+<li>Check if the queue is empty. If not empty, return the element at the front index.</li>
+</ul>
+<li><strong>IsEmpty Operation (<code>isEmpty()</code>):</strong></li>
+<ul>
+<li>Check if <code>size</code> is 0 to determine if the queue is empty.</li>
+</ul>
+</ul>
+</div>
+</details>
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Class implementing Queue using Arrays
+class ArrayQueue {
+    // Array to store queue elements
+    int* arr;
+    // Indices for start and end of the queue
+    int start, end;
+    // Current size and maximum size of the queue
+    int currSize, maxSize;
+
+public:
+    // Constructor
+    ArrayQueue() {
+        arr = new int[10];
+        start = -1;
+        end = -1;
+        currSize = 0;
+        maxSize = 10;
+    }
+
+    // Method to push an element into the queue
+    void push(int x) {
+        // Check if the queue is full
+        if (currSize == maxSize) {
+            cout &lt;&lt; "Queue is full\nExiting..." &lt;&lt; endl;
+            exit(1);
+        }
+        
+        // If the queue is empty, initialize start and end
+        if (end == -1) {
+            start = 0;
+            end = 0;
+        } 
+        else {
+            // Circular increment of end
+            end = (end + 1) % maxSize;
+        }
+            
+        arr[end] = x;
+        currSize++;
+    }
+
+    // Method to pop an element from the queue
+    int pop() {
+        // Check if the queue is empty
+        if (start == -1) {
+            cout &lt;&lt; "Queue Empty\nExiting..." &lt;&lt; endl;
+            exit(1);
+        }
+        int popped = arr[start];
+        
+        // If the queue has only one element, reset start and end
+        if (currSize == 1) {
+            start = -1;
+            end = -1;
+        }
+        else {
+            // Circular increment of start
+            start = (start + 1) % maxSize;
+        }
+        
+        currSize--;
+        return popped;
+    }
+
+    // Method to get the front element of the queue
+    int peek() {
+        // Check if the queue is empty
+        if (start == -1) {
+            cout &lt;&lt; "Queue is Empty" &lt;&lt; endl;
+            exit(1);
+        }
+        return arr[start];
+    }
+
+    // Method to determine whether the queue is empty
+    bool isEmpty() {
+        return (currSize == 0);
+    }
+};
+
+int main() {
+    ArrayQueue queue;
+    vector&lt;string&gt; commands = {"ArrayQueue", "push", "push", 
+                               "peek", "pop", "isEmpty"};
+    vector&lt;vector&lt;int&gt;&gt; inputs = {{}, {5}, {10}, {}, {}, {}};
+
+    for (int i = 0; i &lt; commands.size(); ++i) {
+        if (commands[i] == "push") {
+            queue.push(inputs[i][0]);
+            cout &lt;&lt; "null ";
+        } else if (commands[i] == "pop") {
+            cout &lt;&lt; queue.pop() &lt;&lt; " ";
+        } else if (commands[i] == "peek") {
+            cout &lt;&lt; queue.peek() &lt;&lt; " ";
+        } else if (commands[i] == "isEmpty") {
+            cout &lt;&lt; (queue.isEmpty() ? "true" : "false") &lt;&lt; " ";
+        } else if (commands[i] == "ArrayQueue") {
+            cout &lt;&lt; "null ";
+        }
+    }
+
+    return 0;
+}</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import java.util.*;
+
+// Class implementing Queue using Arrays
+class ArrayQueue {
+    // Array to store queue elements
+    int[] arr;
+    // Indices for start and end of the queue
+    int start, end;
+    // Current size and maximum size of the queue
+    int currSize, maxSize;
+
+    // Constructor
+    public ArrayQueue() {
+        arr = new int[10];
+        start = -1;
+        end = -1;
+        currSize = 0;
+        maxSize = 10;
+    }
+
+    // Method to push an element into the queue
+    public void push(int x) {
+        // Check if the queue is full
+        if (currSize == maxSize) {
+            System.out.println("Queue is full\nExiting...");
+            System.exit(1);
+        }
+
+        // If the queue is empty, initialize start and end
+        if (end == -1) {
+            start = 0;
+            end = 0;
+        } 
+        else {
+            // Circular increment of end
+            end = (end + 1) % maxSize;
+        }
+
+        arr[end] = x;
+        currSize++;
+    }
+
+    // Method to pop an element from the queue
+    public int pop() {
+        // Check if the queue is empty
+        if (start == -1) {
+            System.out.println("Queue Empty\nExiting...");
+            System.exit(1);
+        }
+        int popped = arr[start];
+
+        // If the queue has only one element, reset start and end
+        if (currSize == 1) {
+            start = -1;
+            end = -1;
+        } 
+        else {
+            // Circular increment of start
+            start = (start + 1) % maxSize;
+        }
+
+        currSize--;
+        return popped;
+    }
+
+    // Method to get the front element of the queue
+    public int peek() {
+        // Check if the queue is empty
+        if (start == -1) {
+            System.out.println("Queue is Empty");
+            System.exit(1);
+        }
+        return arr[start];
+    }
+
+    // Method to determine whether the queue is empty
+    public boolean isEmpty() {
+        return (currSize == 0);
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        ArrayQueue queue = new ArrayQueue();
+
+        String[] commands = {"ArrayQueue", "push", "push", 
+                             "peek", "pop", "isEmpty"};
+        int[][] inputs = {{}, {5}, {10}, {}, {}, {}};
+
+        for (int i = 0; i &lt; commands.length; ++i) {
+            switch (commands[i]) {
+                case "push":
+                    queue.push(inputs[i][0]);
+                    System.out.print("null ");
+                    break;
+                case "pop":
+                    System.out.print(queue.pop() + " ");
+                    break;
+                case "peek":
+                    System.out.print(queue.peek() + " ");
+                    break;
+                case "isEmpty":
+                    System.out.print(queue.isEmpty() ? "true " : "false ");
+                    break;
+                case "ArrayQueue":
+                    System.out.print("null ");
+                    break;
+            }
+        }
+    }
+}</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Class implementing Queue using Arrays
+class ArrayQueue:
+    # Constructor
+    def __init__(self):
+        # Array to store queue elements
+        self.arr = [0] * 10
+        # Indices for start and end of the queue
+        self.start = -1
+        self.end = -1
+        # Current size and maximum size of the queue
+        self.currSize = 0
+        self.maxSize = 10
+
+    # Method to push an element into the queue
+    def push(self, x):
+        # Check if the queue is full
+        if self.currSize == self.maxSize:
+            print("Queue is full\nExiting...")
+            exit(1)
+
+        # If the queue is empty, initialize start and end
+        if self.end == -1:
+            self.start = 0
+            self.end = 0
+        else:
+            # Circular increment of end
+            self.end = (self.end + 1) % self.maxSize
+
+        self.arr[self.end] = x
+        self.currSize += 1
+
+    # Method to pop an element from the queue
+    def pop(self):
+        # Check if the queue is empty
+        if self.start == -1:
+            print("Queue Empty\nExiting...")
+            exit(1)
+        popped = self.arr[self.start]
+
+        # If the queue has only one element, reset start and end
+        if self.currSize == 1:
+            self.start = -1
+            self.end = -1
+        else:
+            # Circular increment of start
+            self.start = (self.start + 1) % self.maxSize
+
+        self.currSize -= 1
+        return popped
+
+    # Method to get the front element of the queue
+    def peek(self):
+        # Check if the queue is empty
+        if self.start == -1:
+            print("Queue is Empty")
+            exit(1)
+        return self.arr[self.start]
+
+    # Method to determine whether the queue is empty
+    def isEmpty(self):
+        return self.currSize == 0
+
+
+if __name__ == "__main__":
+    queue = ArrayQueue()
+    commands = ["ArrayQueue", "push", "push", "peek", "pop", "isEmpty"]
+    inputs = [[], [5], [10], [], [], []]
+
+    for i in range(len(commands)):
+        if commands[i] == "push":
+            queue.push(inputs[i][0])
+            print("null", end=" ")
+        elif commands[i] == "pop":
+            print(queue.pop(), end=" ")
+        elif commands[i] == "peek":
+            print(queue.peek(), end=" ")
+        elif commands[i] == "isEmpty":
+            print("true" if queue.isEmpty() else "false", end=" ")
+        elif commands[i] == "ArrayQueue":
+            print("null", end=" ")</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Class implementing Queue using Arrays
+class ArrayQueue {
+    // Constructor
+    constructor() {
+        // Array to store queue elements
+        this.arr = new Array(10);
+        // Indices for start and end of the queue
+        this.start = -1;
+        this.end = -1;
+        // Current size and maximum size of the queue
+        this.currSize = 0;
+        this.maxSize = 10;
+    }
+
+    // Method to push an element into the queue
+    push(x) {
+        // Check if the queue is full
+        if (this.currSize === this.maxSize) {
+            console.log("Queue is full\nExiting...");
+            process.exit(1);
+        }
+
+        // If the queue is empty, initialize start and end
+        if (this.end === -1) {
+            this.start = 0;
+            this.end = 0;
+        } 
+        else {
+            // Circular increment of end
+            this.end = (this.end + 1) % this.maxSize;
+        }
+
+        this.arr[this.end] = x;
+        this.currSize++;
+    }
+
+    // Method to pop an element from the queue
+    pop() {
+        // Check if the queue is empty
+        if (this.start === -1) {
+            console.log("Queue Empty\nExiting...");
+            process.exit(1);
+        }
+        let popped = this.arr[this.start];
+
+        // If the queue has only one element, reset start and end
+        if (this.currSize === 1) {
+            this.start = -1;
+            this.end = -1;
+        } 
+        else {
+            // Circular increment of start
+            this.start = (this.start + 1) % this.maxSize;
+        }
+
+        this.currSize--;
+        return popped;
+    }
+
+    // Method to get the front element of the queue
+    peek() {
+        // Check if the queue is empty
+        if (this.start === -1) {
+            console.log("Queue is Empty");
+            process.exit(1);
+        }
+        return this.arr[this.start];
+    }
+
+    // Method to determine whether the queue is empty
+    isEmpty() {
+        return this.currSize === 0;
+    }
+}
+
+const queue = new ArrayQueue();
+const commands = ["ArrayQueue", "push", "push", "peek", "pop", "isEmpty"];
+const inputs = [[], [5], [10], [], [], []];
+
+for (let i = 0; i &lt; commands.length; ++i) {
+    if (commands[i] === "push") {
+        queue.push(inputs[i][0]);
+        console.log("null ");
+    } else if (commands[i] === "pop") {
+        console.log(queue.pop() + " ");
+    } else if (commands[i] === "peek") {
+        console.log(queue.peek() + " ");
+    } else if (commands[i] === "isEmpty") {
+        console.log(queue.isEmpty() ? "true " : "false ");
+    } else if (commands[i] === "ArrayQueue") {
+        console.log("null ");
+    }
+}</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+<strong>Time Complexity: O(1)</strong> for all operations (push, pop, peek, isEmpty) since they involve simple index manipulations and array accesses.
+                        <br/><br/>
+<strong>Space Complexity: O(1)</strong> since we are using a fixed-size array and a few variables.
+                    </p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

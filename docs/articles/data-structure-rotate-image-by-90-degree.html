@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Rotate Image by 90 degree</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Rotate Image by 90 degree</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/rotate-image-by-90-degree/</code></div>
+  <p><strong>Problem Statement: </strong>Given an N * N 2D integer matrix, rotate the matrix by 90 degrees clockwise.
+
+
+
+The rotation must be done in place, meaning the input 2D matrix must be modified directly..</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted"><p><strong>Input :</strong>matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+            </p><p><img height="457" loading="lazy" src="../assets/img/246b22e399b8a116.png" width="481"/></p>
+<strong>Output :</strong>matrix = [[7, 4, 1], [8, 5, 2], [9, 6, 3]]
+<p><img height="457" loading="lazy" src="../assets/img/dc0769c0c46dea72.png" width="481"/></p>
+<strong>Explanation :</strong>First, we transpose the matrix: rows become columns. Then, we reverse each row to simulate 90° clockwise rotation. So element at (0,0) goes to (0,2), (0,1) goes to (1,2), and so on, achieving the rotated layout.<br/>
+<strong>Input :</strong>matrix = [[0, 1, 1, 2], [2, 0, 3, 1], [4, 5, 0, 5], [5, 6, 7, 0]]
+<p><img height="457" loading="lazy" src="../assets/img/a1c92d0ed91369b3.png" width="481"/></p>
+<strong>Output :</strong>matrix = [[5, 4, 2, 0], [6, 5, 0, 1], [7, 0, 3, 1], [0, 5, 1, 2]]
+<p><img height="457" loading="lazy" src="../assets/img/3af6efa693bc6fa4.png" width="481"/></p>
+<strong>Explanation :</strong>First, the matrix is transposed: rows become columns. Then, each row is reversed. This moves the last column to the first row, the second last column to the second row, and so on. The original position of each element is rotated 90° clockwise into its new location.</pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/rotate-matrix-by-90-degrees" rel="noopener" target="_blank">practice link</a> to help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+
+<div class="dsa_article_dropdown_approachs">
+
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+
+                    Brute Force Approach
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+In a 90-degree clockwise rotation, each element in the matrix moves from its original position to a new position based on a specific pattern.
+
+The first column becomes the first row (in reverse order) and second column becomes the second row, and so on.
+<br/>
+We can simulate this movement by using a new matrix. For each element at position (i, j) in the original matrix, we calculate its new position in the rotated matrix as (j, n - i - 1) where n is the size of the matrix.
+
+<ul> <li>Initialize an empty matrix of the same size (n x n).</li> <li>Loop through every element of the original matrix using two nested loops.</li> <li>For each element at position (i, j), place it in the new matrix at position (j, n - i - 1).</li> <li>After completing the placement for all elements, return or copy the new matrix.</li> </ul>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to rotate the matrix 90 degrees clockwise using extra space
+    vector&lt;vector&lt;int&gt;&gt; rotateClockwise(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) {
+        // Get the size of the square matrix
+        int n = matrix.size();
+
+        // Create a new matrix of same size to store rotated result
+        vector&lt;vector&lt;int&gt;&gt; rotated(n, vector&lt;int&gt;(n));
+
+        // Traverse each element of original matrix
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                // Place the element at its new rotated position
+                rotated[j][n - i - 1] = matrix[i][j];
+            }
+        }
+
+        // Return the rotated matrix
+        return rotated;
+    }
+};
+
+// Driver code
+int main() {
+    vector&lt;vector&lt;int&gt;&gt; mat = {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    };
+
+    Solution obj;
+    vector&lt;vector&lt;int&gt;&gt; rotated = obj.rotateClockwise(mat);
+
+    // Print the rotated matrix
+    for (auto row : rotated) {
+        for (int val : row) cout &lt;&lt; val &lt;&lt; " ";
+        cout &lt;&lt; endl;
+    }
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import.java.util.*;
+class Solution {
+    // Function to rotate the matrix 90 degrees clockwise using extra space
+    public int[][] rotateClockwise(int[][] matrix) {
+        // Get the size of the square matrix
+        int n = matrix.length;
+
+        // Create a new matrix of same size to store rotated result
+        int[][] rotated = new int[n][n];
+
+        // Traverse each element of original matrix
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                // Place the element at its new rotated position
+                rotated[j][n - i - 1] = matrix[i][j];
+            }
+        }
+
+        // Return the rotated matrix
+        return rotated;
+    }
+}
+
+// Driver class
+class Main {
+    public static void main(String[] args) {
+        int[][] mat = {
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}
+        };
+
+        Solution obj = new Solution();
+        int[][] rotated = obj.rotateClockwise(mat);
+
+        // Print the rotated matrix
+        for (int[] row : rotated) {
+            for (int val : row)
+                System.out.print(val + " ");
+            System.out.println();
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to rotate the matrix 90 degrees clockwise using extra space
+    def rotateClockwise(self, matrix):
+        # Get the size of the square matrix
+        n = len(matrix)
+
+        # Create a new matrix of same size to store rotated result
+        rotated = [[0] * n for _ in range(n)]
+
+        # Traverse each element of original matrix
+        for i in range(n):
+            for j in range(n):
+                # Place the element at its new rotated position
+                rotated[j][n - i - 1] = matrix[i][j]
+
+        # Return the rotated matrix
+        return rotated
+
+# Driver code
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+obj = Solution()
+rotated = obj.rotateClockwise(matrix)
+
+# Print the rotated matrix
+for row in rotated:
+    print(*row)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to rotate the matrix 90 degrees clockwise using extra space
+    rotateClockwise(matrix) {
+        // Get the size of the square matrix
+        const n = matrix.length;
+
+        // Create a new matrix of same size to store rotated result
+        const rotated = Array.from({ length: n }, () =&gt; Array(n).fill(0));
+
+        // Traverse each element of original matrix
+        for (let i = 0; i &lt; n; i++) {
+            for (let j = 0; j &lt; n; j++) {
+                // Place the element at its new rotated position
+                rotated[j][n - i - 1] = matrix[i][j];
+            }
+        }
+
+        // Return the rotated matrix
+        return rotated;
+    }
+}
+
+// Driver code
+const mat = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+];
+
+const obj = new Solution();
+const rotated = obj.rotateClockwise(mat);
+
+// Print the rotated matrix
+rotated.forEach(row =&gt; console.log(row.join(" ")));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O(N²),Each element of the matrix is visited exactly once and placed into a new matrix, so the time taken is proportional to the total number of elements.</p>
+<p><strong>Space Complexity:</strong> O(N²),We use an additional matrix of the same size to store the rotated result, leading to O(N²) extra space.</p>
+</details>
+</div>
+</details>
+
+</div>
+<div id="optimal-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Optimal Approach 
+                </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="approach-algorithm">
+
+To rotate a matrix 90 degrees clockwise in-place (without using extra space), we use two key matrix operations:
+
+<ul> <li><strong>Step 1: Transpose the matrix</strong>: swap elements across the diagonal. This converts rows into columns.</li> <li><strong>Step 2: Reverse each row</strong>: this turns the new columns into the final rotated rows.</li> </ul><br/>
+This works because:
+
+<ul> <li>Transposing moves elements from (i, j) to (j, i), effectively rotating across the diagonal.</li> <li>Reversing the rows repositions the elements in each row, finalizing the clockwise rotation.</li> </ul>
+<ul> <li>Get the size of the square matrix (number of rows or columns).</li> <li>Start the first phase: <strong>Transpose the matrix</strong> <ul> <li>For each row starting from the top to bottom:</li> <li>For each column starting from the diagonal element (excluding already visited elements):</li> <li>Swap the current element with the element that is diagonally opposite across the main diagonal.</li> <li>This effectively flips the matrix over its top-left to bottom-right diagonal, converting rows into columns.</li> </ul> </li> <li>Move to the second phase: <strong>Reverse each row</strong> <ul> <li>For every row in the matrix:</li> <li>Reverse the order of the elements in that row (first element becomes last, second becomes second last, and so on).</li> <li>This realigns the columns to their correct position for the clockwise rotation.</li> </ul> </li> <li>Once both phases are done, the matrix will have been rotated 90 degrees clockwise in-place.</li> </ul>
+<p><img height="457" loading="lazy" src="../assets/img/4b0b078ddec23620.png" width="481"/></p>
+</div>
+</details>
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+class Solution {
+public:
+    // Function to rotate matrix 90 degrees clockwise in-place
+    void rotateClockwise(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) {
+        int n = matrix.size();
+
+        // Step 1: Transpose the matrix
+        for (int i = 0; i &lt; n; ++i) {
+            for (int j = i + 1; j &lt; n; ++j) {
+                // Swap element at (i, j) with (j, i) to transpose
+                swap(matrix[i][j], matrix[j][i]);
+            }
+        }
+
+        // Step 2: Reverse each row
+        for (int i = 0; i &lt; n; ++i) {
+            // Reverse the current row to complete clockwise rotation
+            reverse(matrix[i].begin(), matrix[i].end());
+        }
+    }
+};
+
+// Driver code
+int main() {
+    vector&lt;vector&lt;int&gt;&gt; matrix = {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    };
+
+    Solution obj;
+    obj.rotateClockwise(matrix);
+
+    // Print rotated matrix
+    for (auto row : matrix) {
+        for (int val : row) {
+            cout &lt;&lt; val &lt;&lt; " ";
+        }
+        cout &lt;&lt; endl;
+    }
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">import.java.util.*;
+class Solution {
+    // Function to rotate matrix 90 degrees clockwise in-place
+    public void rotateClockwise(int[][] matrix) {
+        int n = matrix.length;
+
+        // Step 1: Transpose the matrix
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = i + 1; j &lt; n; j++) {
+                // Swap element at (i, j) with (j, i)
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+
+        // Step 2: Reverse each row
+        for (int i = 0; i &lt; n; i++) {
+            int left = 0, right = n - 1;
+
+            // Swap elements from both ends moving toward center
+            while (left &lt; right) {
+                int temp = matrix[i][left];
+                matrix[i][left] = matrix[i][right];
+                matrix[i][right] = temp;
+                left++;
+                right--;
+            }
+        }
+    }
+}
+
+// Driver class
+class Main {
+    public static void main(String[] args) {
+        int[][] matrix = {
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}
+        };
+
+        Solution obj = new Solution();
+        obj.rotateClockwise(matrix);
+
+        // Print rotated matrix
+        for (int[] row : matrix) {
+            for (int val : row)
+                System.out.print(val + " ");
+            System.out.println();
+        }
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+    # Function to rotate matrix 90 degrees clockwise in-place
+    def rotateClockwise(self, matrix):
+        n = len(matrix)
+
+        # Step 1: Transpose the matrix
+        for i in range(n):
+            for j in range(i + 1, n):
+                # Swap element at (i, j) with (j, i)
+                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+
+        # Step 2: Reverse each row
+        for i in range(n):
+            # Reverse the current row to simulate clockwise rotation
+            matrix[i].reverse()
+
+# Driver code
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+obj = Solution()
+obj.rotateClockwise(matrix)
+
+# Print rotated matrix
+for row in matrix:
+    print(*row)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+    // Function to rotate matrix 90 degrees clockwise in-place
+    rotateClockwise(matrix) {
+        const n = matrix.length;
+
+        // Step 1: Transpose the matrix
+        for (let i = 0; i &lt; n; i++) {
+            for (let j = i + 1; j &lt; n; j++) {
+                // Swap element at (i, j) with (j, i)
+                [matrix[i][j], matrix[j][i]] = [matrix[j][i], matrix[i][j]];
+            }
+        }
+
+        // Step 2: Reverse each row
+        for (let i = 0; i &lt; n; i++) {
+            // Reverse the current row to simulate clockwise rotation
+            matrix[i].reverse();
+        }
+    }
+}
+
+// Driver code
+const matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+];
+
+const obj = new Solution();
+obj.rotateClockwise(matrix);
+
+// Print rotated matrix
+matrix.forEach(row =&gt; console.log(row.join(" ")));
+</code></pre></div></div></div></details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<p>
+
+</p><p><strong>Time Complexity:</strong> O(N²),We traverse every element once during transposition and again during reversal of each row, resulting in a total of O(N²) time.</p>
+<p><strong>Space Complexity:</strong> O(1),All operations are done in-place using only temporary variables. No extra matrix is used.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Linked List : Introduction</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Linked List : Introduction</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/linked-list/linked-list-introduction</code></div>
+  <h3>What is a Linked List?</h3>
+
+
+<p>Imagine you are given a task where you have to maintain a data entry of cars entering a parking lot. Since the number of cars entering will be different and may change daily, constructing a <strong>fixed-sized data structure</strong> like an array might not be helpful. This is when linked lists come into the picture, which allows us to add and remove cars easily. Linked List is a linear data structure that can be visualized as a chain with different nodes connected, where each node represents a different element. The difference between arrays and linked lists is that, unlike arrays, the elements are not stored at a contiguous location.</p>
+
+
+<p>For any element to be added in an array, we need the exact next memory location to be empty and it is impossible to guarantee that it is possible. Hence adding elements to an array is not possible after the initial assignment of size.</p>
+
+
+<figure class="wp-block-image size-full is-resized"><img alt="" class="wp-image-12844" loading="lazy" src="../assets/img/21099446c0db8a5e.png"/></figure>
+
+
+<p>A linked list is a data structure containing two crucial pieces of information, the first being the <strong>data</strong> and the other being <strong>the pointer to the next element</strong>. The <strong>‘head’</strong> is the <strong>first node</strong>, and the <strong>‘tail’</strong> is the<strong> last node</strong> in a linked list.</p>
+
+
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-12845" height="240" loading="lazy" src="../assets/img/c912b2be70f4502e.png" width="761"/></figure>
+
+<br/>
+<hr/>
+
+<h3><strong>Creating a Linked List</strong></h3>
+
+
+<p>There are two information sets to store at every node, thus there is a need to create a self-defined data type to handle them. Therefore, we will use the help of <strong>structs</strong> and <strong>classes</strong>. To learn about <a href="https://takeuforward.org/structure/classes-and-structures-in-c/" rel="noopener" target="_blank" title="">structs and classes</a>, you can refer to this article.</p>
+
+
+<details class="code-section secondary-details" open=""><summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path>
+</svg>
+</summary><div class="code-tabs"><div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div><div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div></div><div class="code-content"><div class="code-block dsa_article_code_active" data-lang="cpp"><div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Node class represents a node in the linked list
+class Node {
+public:
+    int data;     // Data value
+    Node* next;   // Pointer to next node
+
+    // Constructor with data and next
+    Node(int data1, Node* next1) {
+        data = data1;
+        next = next1;
+    }
+
+    // Constructor with only data
+    Node(int data1) {
+        data = data1;
+        next = nullptr;
+    }
+};
+
+int main() {
+    // Create an array
+    vector&lt;int&gt; arr = {2, 5, 8, 7};
+
+    // Create first node
+    Node* y = new Node(arr[0]);
+
+    // Print memory location of node
+    cout &lt;&lt; y &lt;&lt; '\n';
+
+    // Print data stored in node
+    cout &lt;&lt; y-&gt;data &lt;&lt; '\n';
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">// Node class represents a node in the linked list
+class Node {
+    int data;      // Data value
+    Node next;     // Pointer to next node
+
+    // Constructor with data and next
+    Node(int data1, Node next1) {
+        data = data1;
+        next = next1;
+    }
+
+    // Constructor with only data
+    Node(int data1) {
+        data = data1;
+        next = null;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Create an array
+        int[] arr = {2, 5, 8, 7};
+
+        // Create first node
+        Node y = new Node(arr[0]);
+
+        // Print memory reference of node
+        System.out.println(y);
+
+        // Print data stored in node
+        System.out.println(y.data);
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python"># Node class represents a node in the linked list
+class Node:
+    def __init__(self, data, next=None):
+        self.data = data      # Data value
+        self.next = next      # Pointer to next node
+
+# Driver code
+if __name__ == "__main__":
+    # Create an array
+    arr = [2, 5, 8, 7]
+
+    # Create first node
+    y = Node(arr[0])
+
+    # Print memory reference of node
+    print(y)
+
+    # Print data stored in node
+    print(y.data)
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">// Node class represents a node in the linked list
+class Node {
+    // Constructor with data and next
+    constructor(data, next = null) {
+        this.data = data;   // Data value
+        this.next = next;   // Pointer to next node
+    }
+}
+
+// Driver code
+function main() {
+    // Create an array
+    let arr = [2, 5, 8, 7];
+
+    // Create first node
+    let y = new Node(arr[0]);
+
+    // Print memory reference of node
+    console.log(y);
+
+    // Print data stored in node
+    console.log(y.data);
+}
+
+main();
+</code></pre></div></div></div></details>
+
+
+<p>Let's break this example to understand how it works:</p>
+
+
+<ol><li>The class has two data types: <strong>data</strong> which contains the value of the node and a <strong>pointer next</strong>, which points to the next node in the list.</li><li>There is a <strong>constructor</strong> which assigns the values to a new node.</li><li>A <strong>new</strong> keyword is used to dynamically allocate memory to a node with data as arr[0].</li></ol>
+
+<br/><hr/>
+
+<h3><strong>Understanding Pointers</strong></h3>
+
+
+<p>A <strong>pointer</strong> is a variable that <strong>stores the memory address</strong> of another variable. In simpler terms, it "points" to the location in memory where data is stored. This allows you to indirectly access and manipulate data by referring to its <strong>memory address.</strong></p>
+
+
+<p>Java does not explicitly use pointers or take the address of variables as you do in C++. Instead, we have <strong>reference variables</strong>. These reference variables do not directly contain memory addresses like pointers in languages such as C or C++. Instead, they <strong>hold references</strong> to objects <strong>in memory.</strong></p>
+
+
+<p><strong>Understanding the difference between Node and Node*:</strong> A <strong>node</strong> refers to the <strong>structure</strong> that contains data and the pointer to the next node. In contrast, Node*<strong> (Node pointer)</strong> specifically denotes a pointer variable that stores the <strong>address of the Node</strong> it is pointing to.</p>
+
+
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-12846" loading="lazy" src="../assets/img/ff239f59d9084cc1.png"/></figure>
+
+<br/><hr/>
+
+<h3><strong>Memory Space</strong>: </h3>
+
+
+<p>Let’s talk about assuming the data stored is integer. Another main difference between an array and a linked list is the memory used. In the case of an array, we are storing integers that consume 4 Bytes for every int, whereas in a linked list, we are <strong>storing data</strong> and <strong>a pointer at every node</strong>, so the memory used up will depend on the configuration of the system. </p>
+
+
+<figure class="wp-block-table"><table><tbody><tr><td class="has-text-align-center" data-align="center"><strong>32 Bit System</strong></td><td class="has-text-align-center" data-align="center"><strong>64 Bit System</strong></td></tr><tr><td class="has-text-align-center" data-align="center">Int - 4 Bytes</td><td class="has-text-align-center" data-align="center">Int - 4 Bytes</td></tr><tr><td class="has-text-align-center" data-align="center">Pointer - 4 Bytes</td><td class="has-text-align-center" data-align="center">Pointer - 8 Bytes</td></tr><tr><td class="has-text-align-center" data-align="center">Overall - 8 Bytes</td><td class="has-text-align-center" data-align="center">Overall - 12 Bytes</td></tr></tbody></table></figure>
+
+
+<p>Therefore, in the case of a 64 Bit system, it occupies or consumes more space than a 32 Bit system.</p>
+
+<hr/>
+
+<h3>Applications of Linked Lists:</h3>
+
+
+<ol><li><strong>Creating Data Structures</strong>: Linked lists serve as the foundation for building other dynamic data structures, such as stacks and queues.</li><li><strong>Dynamic Memory Allocation</strong>: Dynamic memory allocation relies on linked lists to manage and allocate memory blocks efficiently.</li><li><strong>Web Browser</strong> is one important application of Linked List.</li></ol>
+
+<br/><hr/>
+
+<h3><strong>Types of Linked Lists:</strong></h3>
+
+
+<ul><li><strong>Singly Linked Lists</strong>: In a singly linked list, each node points to the next node in the sequence. Traversal is straightforward but limited to moving in one direction, from the head to the tail.</li></ul>
+
+
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-12847" loading="lazy" src="../assets/img/bc7a89dcc2bb1898.png"/></figure>
+
+
+<ul><li><strong>Doubly Linked Lists:</strong> In this each node points to both the next node and the previous node, thus allowing it for bidirectional connectivity.</li></ul>
+
+
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-12848" loading="lazy" src="../assets/img/1f0caae18ca53628.png"/></figure>
+
+
+<ul><li><strong>Circular Linked Lists</strong>: In a circular linked list, the last node points back to the head node, forming a closed loop.</li></ul>
+
+
+<figure class="wp-block-image size-full"><img alt="" class="wp-image-12849" loading="lazy" src="../assets/img/2c02f33d06b10e59.png"/></figure>
+
+<br/><hr/>
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>

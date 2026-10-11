@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Combination Sum II - Find all unique combinations</title>
+<link rel="stylesheet" href="../style.css?v=1791731531">
+</head><body>
+<header><div class="wrap hd">
+  <a class="btn" href="../index.html">&larr; Back to sheet</a>
+  <span class="spacer"></span>
+  <span class="sub">archived copy</span>
+</div></header>
+<article class="article">
+  <h1>Combination Sum II - Find all unique combinations</h1>
+  <div class="meta">Archived from <code>https://takeuforward.org/data-structure/combination-sum-ii-find-all-unique-combinations/</code></div>
+  <p><strong>Problem Statement: </strong> Given a collection of candidate numbers (candidates) and a target number
+    (target), find all unique combinations in candidates where the candidate numbers sum to target. Each number in
+    candidates may only be used once in the combination..</p>
+
+<div id="article_examples">
+<details class="article_example_details" open="">
+<summary class="article_example_summary">
+<span><strong>
+                    Examples
+                </strong>
+</span>
+</summary>
+<div class="atricle_example_content">
+<pre class="wp-block-preformatted">
+Example 1:
+Input: candidates = [10,1,2,7,6,1,5], target = 8
+Output: 
+[
+[1,1,6],
+[1,2,5],
+[1,7],
+[2,6]]
+Explanation: These are the unique combinations whose sum is equal to target.
+ 
+Example 2:
+Input: candidates = [2,5,2,1,2], target = 5
+Output: [[1,2,2],[5]]
+Explanation: These are the unique combinations whose sum is equal to target.
+            </pre>
+</div>
+</details>
+</div>
+<p class="new-disclaimer"><strong><em>Disclaimer</em></strong>: <em>Here is the <a href="https://takeuforward.org/plus/dsa/problems/combination-sum-ii" rel="noopener" target="_blank">practice link</a> to
+        help you assess your knowledge better. It's highly recommend trying to
+        solve it before looking at the solution. </em></p>
+<div class="dsa_article_dropdown_approachs">
+<div id="brute-force-approach">
+<details open="">
+<summary class="main-summary">
+<span>
+                    Approach
+                </span>
+</summary>
+<div class="common-drops">
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Algorithm
+                        </span>
+</summary>
+<div class="approach-algorithm">
+<ul>
+<li>Sort the array before starting recursion to ensure combinations are in sorted order and
+                                to avoid duplicates.</li>
+<li>Begin recursion from index 0 and explore each element for inclusion in the current
+                                combination.</li>
+<li>If the current element is suitable (≤ target), add it to the combination and move to the
+                                next index.</li>
+<li>Skip over duplicate elements to avoid generating the same combination again.</li>
+<li>After the recursive call, backtrack by removing the last added element from the
+                                combination.</li>
+<li>Terminate early if the current element exceeds the target, as further elements (being
+                                sorted) will only be larger.</li>
+</ul>
+
+
+
+<p><img height="457" loading="lazy" src="../assets/img/49b96d2057f82089.png" width="481"/></p>
+</div>
+</details>
+<details class="code-section secondary-details" open="">
+<summary class="secondary-summary">
+<span>Code</span>
+<svg class="arrow-svg opacity-75" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z">
+</path>
+</svg>
+</summary>
+<div class="code-tabs">
+<div><button class="code-tab dsa_article_code_active" data-lang="cpp">Cpp</button><button class="code-tab" data-lang="java">Java</button><button class="code-tab" data-lang="python">Python</button><button class="code-tab" data-lang="javascript">Javascript</button></div>
+<div class="copy-btn"><svg fill="none" height="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" rx="1" ry="1" width="8" x="8" y="2"></rect>
+<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+</svg></div>
+</div>
+<div class="code-content">
+<div class="code-block dsa_article_code_active" data-lang="cpp">
+
+<div class="codewrap"><div class="tabs"><button class="tab on" data-i="0">C++</button><button class="tab" data-i="1">Java</button><button class="tab" data-i="2">Python</button><button class="tab" data-i="3">JavaScript</button><button class="copy">Copy</button></div><pre class="wp-block-code" data-i="0"><code class="language-cpp" lang="cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+
+// Function to find all combinations of numbers that sum up to the target
+void findCombination(int ind, int target, vector&lt;int&gt;&amp; arr, vector&lt;vector&lt;int&gt;&gt;&amp; ans, vector&lt;int&gt;&amp; ds) {
+    // Base case: If the target becomes 0, we found a valid combination
+    if (target == 0) {
+        ans.push_back(ds);  // Add the current combination to the result
+        return;
+    }
+
+    // Loop through the elements starting from index 'ind'
+    for (int i = ind; i &lt; arr.size(); i++) {
+        // Skip duplicates to avoid repeating combinations
+        if (i &gt; ind &amp;&amp; arr[i] == arr[i - 1]) continue;
+
+        // If the current element is greater than the remaining target, break the loop
+        if (arr[i] &gt; target) break;
+
+        // Include the current element in the combination
+        ds.push_back(arr[i]);
+
+        // Recur with the updated target and next index (i + 1 to avoid repetition)
+        findCombination(i + 1, target - arr[i], arr, ans, ds);
+
+        // Backtrack by removing the last added element
+        ds.pop_back();
+    }
+}
+
+// Function to calculate all unique combinations that sum up to the target
+vector&lt;vector&lt;int&gt;&gt; combinationSum2(vector&lt;int&gt;&amp; candidates, int target) {
+    sort(candidates.begin(), candidates.end());  // Sort the candidates to handle duplicates
+    vector&lt;vector&lt;int&gt;&gt; ans;  // To store the final answer
+    vector&lt;int&gt; ds;  // To store the current combination
+    findCombination(0, target, candidates, ans, ds);  // Call the helper function
+    return ans;  // Return all valid combinations
+}
+
+int main() {
+    // Example input
+    vector&lt;int&gt; v{10, 1, 2, 7, 6, 1, 5};
+
+    // Get all combinations that sum up to 8
+    vector&lt;vector&lt;int&gt;&gt; comb = combinationSum2(v, 8);
+
+    // Output the combinations
+    cout &lt;&lt; "[ ";
+    for (int i = 0; i &lt; comb.size(); i++) {
+        cout &lt;&lt; "[ ";
+        for (int j = 0; j &lt; comb[i].size(); j++) {
+            cout &lt;&lt; comb[i][j] &lt;&lt; " ";
+        }
+        cout &lt;&lt; "]";
+    }
+    cout &lt;&lt; " ]";
+
+    return 0;
+}
+</code></pre><pre class="wp-block-code hidden" data-i="1"><code class="language-java" lang="java">// Solution class for managing combinations
+import java.util.*;
+
+class Solution {
+
+    // Function to find all combinations of numbers that sum up to the target
+    public void findCombination(int ind, int target, int[] arr, List&lt;List&lt;Integer&gt;&gt; ans, List&lt;Integer&gt; ds) {
+        // Base case: If the target becomes 0, we found a valid combination
+        if (target == 0) {
+            ans.add(new ArrayList&lt;&gt;(ds));  // Add the current combination to the result
+            return;
+        }
+
+        // Loop through the elements starting from index 'ind'
+        for (int i = ind; i &lt; arr.length; i++) {
+            // Skip duplicates to avoid repeating combinations
+            if (i &gt; ind &amp;&amp; arr[i] == arr[i - 1]) continue;
+
+            // If the current element is greater than the remaining target, break the loop
+            if (arr[i] &gt; target) break;
+
+            // Include the current element in the combination
+            ds.add(arr[i]);
+
+            // Recur with the updated target and next index (i + 1 to avoid repetition)
+            findCombination(i + 1, target - arr[i], arr, ans, ds);
+
+            // Backtrack by removing the last added element
+            ds.remove(ds.size() - 1);
+        }
+    }
+
+    // Function to calculate all unique combinations that sum up to the target
+    public List&lt;List&lt;Integer&gt;&gt; combinationSum2(int[] candidates, int target) {
+        Arrays.sort(candidates);  // Sort the candidates to handle duplicates
+        List&lt;List&lt;Integer&gt;&gt; ans = new ArrayList&lt;&gt;();  // To store the final answer
+        List&lt;Integer&gt; ds = new ArrayList&lt;&gt;();  // To store the current combination
+        findCombination(0, target, candidates, ans, ds);  // Call the helper function
+        return ans;  // Return all valid combinations
+    }
+
+    public static void main(String[] args) {
+        Solution obj = new Solution();
+        int[] v = {10, 1, 2, 7, 6, 1, 5};  // Example input
+        int target = 8;  // Target sum
+
+        // Get all combinations that sum up to 8
+        List&lt;List&lt;Integer&gt;&gt; comb = obj.combinationSum2(v, target);
+
+        // Output the combinations
+        System.out.print("[ ");
+        for (List&lt;Integer&gt; combination : comb) {
+            System.out.print("[ ");
+            for (int num : combination) {
+                System.out.print(num + " ");
+            }
+            System.out.print("]");
+        }
+        System.out.println(" ]");
+    }
+}
+</code></pre><pre class="wp-block-code hidden" data-i="2"><code class="language-python" lang="python">class Solution:
+
+    # Function to find all combinations of numbers that sum up to the target
+    def findCombination(self, ind, target, arr, ans, ds):
+        # Base case: If the target becomes 0, we found a valid combination
+        if target == 0:
+            ans.append(list(ds))  # Add the current combination to the result
+            return
+
+        # Loop through the elements starting from index 'ind'
+        for i in range(ind, len(arr)):
+            # Skip duplicates to avoid repeating combinations
+            if i &gt; ind and arr[i] == arr[i - 1]:
+                continue
+
+            # If the current element is greater than the remaining target, break the loop
+            if arr[i] &gt; target:
+                break
+
+            # Include the current element in the combination
+            ds.append(arr[i])
+
+            # Recur with the updated target and next index (i + 1 to avoid repetition)
+            self.findCombination(i + 1, target - arr[i], arr, ans, ds)
+
+            # Backtrack by removing the last added element
+            ds.pop()
+
+    # Function to calculate all unique combinations that sum up to the target
+    def combinationSum2(self, candidates, target):
+        candidates.sort()  # Sort the candidates to handle duplicates
+        ans = []  # To store the result
+        ds = []  # To store a current combination
+        self.findCombination(0, target, candidates, ans, ds)  # Start the recursive search
+        return ans  # Return all valid combinations
+
+# Driver code
+if __name__ == "__main__":
+    obj = Solution()
+    v = [10, 1, 2, 7, 6, 1, 5]  # Example input
+    target = 8  # Target sum
+
+    # Get all combinations that sum up to 8
+    comb = obj.combinationSum2(v, target)
+
+    # Output the combinations
+    print("[", end=" ")
+    for combination in comb:
+        print("[", end=" ")
+        print(" ".join(map(str, combination)), end=" ")
+        print("]", end=" ")
+    print("]")
+</code></pre><pre class="wp-block-code hidden" data-i="3"><code class="language-javascript" lang="javascript">class Solution {
+
+    // Function to find all combinations of numbers that sum up to the target
+    findCombination(ind, target, arr, ans, ds) {
+        // Base case: If the target becomes 0, we found a valid combination
+        if (target === 0) {
+            ans.push([...ds]);  // Add the current combination to the result
+            return;
+        }
+
+        // Loop through the elements starting from index 'ind'
+        for (let i = ind; i &lt; arr.length; i++) {
+            // Skip duplicates to avoid repeating combinations
+            if (i &gt; ind &amp;&amp; arr[i] === arr[i - 1]) continue;
+
+            // If the current element is greater than the remaining target, break the loop
+            if (arr[i] &gt; target) break;
+
+            // Include the current element in the combination
+            ds.push(arr[i]);
+
+            // Recur with the updated target and next index (i + 1 to avoid repetition)
+            this.findCombination(i + 1, target - arr[i], arr, ans, ds);
+
+            // Backtrack by removing the last added element
+            ds.pop();
+        }
+    }
+
+    // Function to calculate all unique combinations that sum up to the target
+    combinationSum2(candidates, target) {
+        candidates.sort();  // Sort the candidates to handle duplicates
+        const ans = [];  // To store the result
+        const ds = [];  // To store a current combination
+        this.findCombination(0, target, candidates, ans, ds);  // Start the recursive search
+        return ans;  // Return all valid combinations
+    }
+}
+
+// Driver code
+const obj = new Solution();
+const v = [10, 1, 2, 7, 6, 1, 5];  // Example input
+const target = 8;  // Target sum
+
+// Get all combinations that sum up to 8
+const comb = obj.combinationSum2(v, target);
+
+// Output the combinations
+console.log("[", end=" ");
+comb.forEach(combination =&gt; {
+    process.stdout.write("[ ");
+    console.log(combination.join(" "), end=" ");
+    console.log("]", end=" ");
+});
+console.log("]");
+</code></pre></div>
+</div>
+
+
+
+</div>
+</details>
+<details class="secondary-details" open="">
+<summary class="secondary-summary">
+<span>
+                            Complexity Analysis
+                        </span>
+</summary>
+<p>
+</p><p><strong>Time Complexity:</strong> O(2<sup>n</sup> * k), For each of the 2<sup>n</sup>
+                        subsequences, storing takes O(k) time where k is the average length of each combination.</p>
+<p><strong>Space Complexity:</strong> O(k * x), To store all x valid combinations, each of average
+                        length k.</p>
+</details>
+</div>
+</details>
+</div>
+</div>
+
+
+</article>
+<script src="../article.js?v=1791731531"></script>
+</body></html>
