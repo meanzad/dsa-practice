@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Remove Duplicates from a Sorted Array In Place</title>
-<link rel="stylesheet" href="../style.css?v=1791731531">
+<link rel="stylesheet" href="../style.css?v=1792253299">
 </head><body>
 <header><div class="wrap hd">
   <a class="btn" href="../index.html">&larr; Back to sheet</a>
@@ -513,5 +513,5 @@ const k = solution.removeDuplicates(nums);
 console.log("k =", k);
 console.log(nums.slice(0, k).join(" "));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-9"><h3 id="blog-toc-complexity-analysis-3">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(N)</code>, where <code>N</code> represents the array size. The <code>current</code> pointer visits every position once.</p><p><strong>Space Complexity:</strong> <code>O(1)</code>, because only the two pointer variables require auxiliary storage.</p><h3 id="blog-toc-faqs">FAQs</h3><p><strong>Q1. Why does the method return </strong><code>k</code><strong> instead of returning a resized array?</strong></p><p>The array is modified in place. The returned value <code>k</code> identifies the valid front portion containing the unique sequence.</p><p><strong>Q2. Why can the values after index </strong><code>k - 1</code><strong> be ignored?</strong></p><p>The problem evaluates only the first <code>k</code> positions. Values after that portion are outside the required result.</p><p><strong>Q3. Why is sorted order important for the Optimal Approach?</strong></p><p>Sorting places equal values next to one another. Therefore, comparing with the latest stored unique value is sufficient to detect duplicates.</p><p><strong>Q4. Why does </strong><code>uniquePosition</code><strong> begin at </strong><code>1</code><strong>?</strong></p><p>For a non-empty array, <code>nums[0]</code> already occupies the first position of the unique sequence. Index <code>1</code> is therefore the next available writing position.</p><p><strong>Q5. Why compare with </strong><code>nums[uniquePosition - 1]</code><strong> instead of </strong><code>nums[current - 1]</code><strong>?</strong></p><p><code>nums[uniquePosition - 1]</code> always stores the latest confirmed unique value. This directly compares the current candidate with the final unique sequence being constructed.</p><p><strong>Q6. What happens when all values are equal?</strong></p><p><code>uniquePosition</code> remains <code>1</code>, so the method returns <code>k = 1</code>, and the first position contains the only unique value.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div>
 </article>
-<script src="../article.js?v=1791731531"></script>
+<script src="../article.js?v=1792253299"></script>
 </body></html>

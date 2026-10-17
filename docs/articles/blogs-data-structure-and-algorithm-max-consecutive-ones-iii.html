@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Max Consecutive Ones III: Flip at Most K Zeros</title>
-<link rel="stylesheet" href="../style.css?v=1791731531">
+<link rel="stylesheet" href="../style.css?v=1792253299">
 </head><body>
 <header><div class="wrap hd">
   <a class="btn" href="../index.html">&larr; Back to sheet</a>
@@ -633,5 +633,5 @@ const solution = new Solution();
 
 console.log(solution.longestOnes(nums, k));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-9"><h3 id="blog-toc-complexity-analysis-3">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(N), where N represents the array size. Pointer right processes every element once, while pointer left only moves forward across the array.</p><p><strong>Space Complexity:</strong> O(1), because only two pointers, zeroCount, and maxLength require auxiliary storage.</p><h3 id="blog-toc-faqs">FAQS</h3><p><strong>Q1. Why does the solution count zeroes instead of ones?</strong></p><p>The flip limit applies only to zeroes. A subarray containing at most k zeroes can be converted completely into 1s.</p><p><strong>Q2. Why can Brute Force expansion stop after zeroCount exceeds k?</strong></p><p>Every longer subarray from the same start still contains all previously counted zeroes. Additional elements cannot reduce the required flip count.</p><p><strong>Q3. Why can binary search find the farthest valid end?</strong></p><p>For a fixed start, the number of zeroes never decreases as end moves right. Valid endings therefore appear before invalid endings, creating a monotonic search range.</p><p><strong>Q4. Why must the sliding window shrink after zeroCount exceeds k?</strong></p><p>A window containing more than k zeroes cannot become all 1s under the available flip limit. Removing elements from the left restores validity.</p><p><strong>Q5. Does k = 0 require a separate algorithm?</strong></p><p>No. The same sliding window automatically restricts every valid window to ranges containing no zeroes.</p><p><strong>Q6. What happens when k is at least the total number of zeroes?</strong></p><p>Every zero can be flipped, so the complete array becomes a valid window and the answer equals N.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div>
 </article>
-<script src="../article.js?v=1791731531"></script>
+<script src="../article.js?v=1792253299"></script>
 </body></html>

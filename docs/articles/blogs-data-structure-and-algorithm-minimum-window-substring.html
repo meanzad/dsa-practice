@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Minimum Window Substring</title>
-<link rel="stylesheet" href="../style.css?v=1791731531">
+<link rel="stylesheet" href="../style.css?v=1792253299">
 </head><body>
 <header><div class="wrap hd">
   <a class="btn" href="../index.html">&larr; Back to sheet</a>
@@ -916,5 +916,5 @@ const solution = new Solution();
 
 console.log(solution.minWindow(s, t));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-8"><h3 id="blog-toc-complexity-analysis-3">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(N + M), where N is the length of s and M is the length of t. The string t is processed once, and every character of s enters and leaves the sliding window at most once.</p><p><strong>Space Complexity:</strong> O(1), because fixed-size frequency arrays are used for ASCII characters.</p><h3 id="blog-toc-faqs">FAQs</h3><p><strong>Q1. Why do we need frequency counts in this problem?</strong></p><p>Frequency counts are needed because t may contain duplicate characters. A window must contain every character of t with the same required frequency.</p><p><strong>Q2. Why is checking only character presence not enough?</strong></p><p>If t = "AABC", then a valid window must contain two A characters. A window with only one A is not valid, even if it contains B and C.</p><p><strong>Q3. Why do we increase matched only when window frequency is not greater than required frequency?</strong></p><p>Extra copies of a character do not help satisfy t further. For example, if only one A is required, the second extra A should not increase matched.</p><p><strong>Q4. Why does the Optimal Approach shrink the window while it remains valid?</strong></p><p>The first valid window for a right boundary may contain unnecessary characters on the left. Repeated shrinking removes them and finds the smallest valid window ending at that <code>right</code> position.</p><p><strong>Q5. Why is matched decreased only when a frequency falls below need?</strong></p><p>Removing an extra copy does not make the window invalid. <code>matched</code> should decrease only when one of the required copies is actually lost.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div>
 </article>
-<script src="../article.js?v=1791731531"></script>
+<script src="../article.js?v=1792253299"></script>
 </body></html>

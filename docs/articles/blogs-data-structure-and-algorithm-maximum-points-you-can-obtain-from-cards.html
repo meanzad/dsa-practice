@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Maximum Points You Can Obtain from Cards</title>
-<link rel="stylesheet" href="../style.css?v=1791731531">
+<link rel="stylesheet" href="../style.css?v=1792253299">
 </head><body>
 <header><div class="wrap hd">
   <a class="btn" href="../index.html">&larr; Back to sheet</a>
@@ -742,5 +742,5 @@ const solution = new Solution();
 
 console.log(solution.maxScore(cardPoints, k));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-9"><h3 id="blog-toc-complexity-analysis-3">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(K), because the first K cards require one summation and K replacements generate all remaining splits.</p><p><strong>Space Complexity:</strong> O(1), because only score variables and index variables require auxiliary storage.</p><h3 id="blog-toc-faqs">FAQS</h3><p><strong>Q1. Why does every valid selection correspond to a left-right split?</strong></p><p>Card removal is allowed only from either end. After exactly K removals, selected cards must contain a prefix, a suffix, or a combination of both.</p><p><strong>Q2. Why does the Brute Force Approach require O(K²) time?</strong></p><p>Every one of the K + 1 splits recalculates up to K selected values.</p><p><strong>Q3. Why do prefix and suffix sums improve the Better Approach?</strong></p><p>Precomputed sums provide every split score through two array accesses and one addition.</p><p><strong>Q4. Why does the Optimal Approach begin with the first K cards?</strong></p><p>Starting with the first <code>K</code> cards is only one convenient choice. We can also begin with the last <code>K</code> cards and gradually replace cards from the right selection with cards from the beginning. Both directions generate all <code>K + 1</code> possible left-right splits and give the same <code>O(K)</code> time and <code>O(1)</code> auxiliary space.</p><p><strong>Q5. Why does every replacement preserve exactly K selected cards?</strong></p><p>One selected left card leaves the score while one right card enters the score during the same step.</p><p><strong>Q6. Does the method support negative card values?</strong></p><p>Yes. Initializing maxScore from a valid selection prevents an incorrect default score of 0 when every valid score is negative.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div>
 </article>
-<script src="../article.js?v=1791731531"></script>
+<script src="../article.js?v=1792253299"></script>
 </body></html>

@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Count Nice Subarrays with Exactly K Odd Numbers</title>
-<link rel="stylesheet" href="../style.css?v=1791731531">
+<link rel="stylesheet" href="../style.css?v=1792253299">
 </head><body>
 <header><div class="wrap hd">
   <a class="btn" href="../index.html">&larr; Back to sheet</a>
@@ -682,5 +682,5 @@ const solution = new Solution();
 
 console.log(solution.numberOfSubarrays(nums, k));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-9"><h3 id="blog-toc-complexity-analysis-3">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(N), where N is the size of the array. The helper function countAtMost runs in O(N), and it is called twice. So, the overall time complexity is O(2N), which simplifies to O(N).</p><p><strong>Space Complexity:</strong> O(1), because only a few variables are used.</p><h3 id="blog-toc-faqs">FAQs</h3><p><strong>Q1. Why does the better approach stop when oddCount becomes greater than k?</strong></p><p>Adding more elements can only keep the odd count same or increase it. It can never reduce the odd count, so the current start cannot give any more nice subarrays.</p><p><strong>Q2. Why do we use countAtMost(k) - countAtMost(k - 1)?</strong></p><p>countAtMost(k) includes subarrays with 0 to k odd numbers. countAtMost(k - 1) removes all subarrays with fewer than k odd numbers. The remaining subarrays have exactly k odd numbers.</p><p><strong>Q3. Why does sliding window work inside countAtMost?</strong></p><p>When the right pointer expands, the odd count can only stay the same or increase. If it becomes too large, moving the left pointer forward can reduce it.</p><p><strong>Q4. Why do we add right - left + 1 in countAtMost?</strong></p><p>After the window becomes valid, every subarray ending at right and starting from any index between left and right has at most limit odd numbers.</p><p><strong>Q5. What happens if there are no odd numbers?</strong></p><p>If k is greater than 0, the answer is 0 because no subarray can contain exactly k odd numbers.</p><p><strong>Q6. What happens if k is 0?</strong></p><p>Then the task becomes counting subarrays that contain no odd numbers, which means subarrays made only of even numbers.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div>
 </article>
-<script src="../article.js?v=1791731531"></script>
+<script src="../article.js?v=1792253299"></script>
 </body></html>

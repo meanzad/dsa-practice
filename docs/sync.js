@@ -40,16 +40,21 @@ window.A2ZSync = (() => {
     return r.json();
   }
 
-  /** Verify the token and find (or create) the gist holding our state. */
-  async function connect(newToken) {
-    set(TOKEN_KEY, newToken.trim());
-    // Look for an existing gist from a previous machine before making one.
+  /** Find the gist holding our state, without creating anything. */
+  async function findGist() {
     const gists = await api('/gists?per_page=100');
     const found = gists.find(g => g.files && g.files[FILENAME]);
-    if (found) {
-      set(GIST_KEY, found.id);
-      return { created: false, id: found.id };
-    }
+    return found ? found.id : null;
+  }
+
+  /** Attach to a specific gist id, verifying it exists and is reachable. */
+  async function useGist(id) {
+    const g = await api('/gists/' + String(id).trim());
+    set(GIST_KEY, g.id);
+    return g.id;
+  }
+
+  async function createGist() {
     const made = await api('/gists', {
       method: 'POST',
       body: JSON.stringify({
@@ -59,8 +64,12 @@ window.A2ZSync = (() => {
       }),
     });
     set(GIST_KEY, made.id);
-    return { created: true, id: made.id };
+    return made.id;
   }
+
+  /** Store the token only. The caller decides which gist to attach to, so a
+   *  failed lookup can never silently split progress across two gists. */
+  function setToken(newToken) { set(TOKEN_KEY, (newToken || '').trim()); }
 
   function disconnect() { set(TOKEN_KEY, null); set(GIST_KEY, null); }
 
@@ -105,6 +114,6 @@ window.A2ZSync = (() => {
     return out;
   }
 
-  return { connect, disconnect, configured, gistId, pull, push, merge, emptyState,
-           tokenPresent: configured };
+  return { setToken, findGist, useGist, createGist, disconnect, configured,
+           gistId, pull, push, merge, emptyState };
 })();

@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Count Substrings Containing All Three Characters a, b and c</title>
-<link rel="stylesheet" href="../style.css?v=1791731531">
+<link rel="stylesheet" href="../style.css?v=1792253299">
 </head><body>
 <header><div class="wrap hd">
   <a class="btn" href="../index.html">&larr; Back to sheet</a>
@@ -616,5 +616,5 @@ const solution = new Solution();
 
 console.log(solution.numberOfSubstrings(s));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-9"><h3 id="blog-toc-complexity-analysis-3">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(N), where N is the length of the string. Every character is added once by the right pointer and removed at most once by the left pointer.</p><p><strong>Space Complexity:</strong> O(1), because only a fixed-size frequency array of size 3 is used.[div-id:tuf-plus-ad-4]</p><h3 id="blog-toc-faqs">FAQs</h3><p><strong>Q1. Why do we add n - end in the better approach?</strong></p><p>Once a substring from start to end contains all three characters, every longer substring starting from the same start will also contain all three characters. So, all of them can be counted together.</p><p><strong>Q2. Why do we add n - right in the optimal approach?</strong></p><p>If the current window from left to right is valid, then all substrings starting at left and ending at right or after right are valid. There are n - right such substrings.</p><p><strong>Q3. Why is a map not required?</strong></p><p>The string contains only three possible characters: 'a', 'b', and 'c'. So, a fixed-size array of size 3 is enough.</p><p><strong>Q4. Why does the Optimal Approach keep shrinking after finding a valid window?</strong></p><p>A smaller left boundary shift may still leave all three characters inside the window. Each such valid starting position represents another group of <code>n - right</code> valid substrings.</p><p><strong>Q5. Why can all </strong><code>n - right</code><strong> substrings be counted together?</strong></p><p>Once <code>[left...right]</code> contains <code>a</code>, <code>b</code>, and <code>c</code>, extending its right boundary cannot remove any of them. Therefore, every ending position from <code>right</code> through <code>n - 1</code> forms a valid substring.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div>
 </article>
-<script src="../article.js?v=1791731531"></script>
+<script src="../article.js?v=1792253299"></script>
 </body></html>

@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Count Subarrays with Exactly K Different Integers</title>
-<link rel="stylesheet" href="../style.css?v=1791731531">
+<link rel="stylesheet" href="../style.css?v=1792253299">
 </head><body>
 <header><div class="wrap hd">
   <a class="btn" href="../index.html">&larr; Back to sheet</a>
@@ -852,5 +852,5 @@ console.log(
     )
 );</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-9"><h3 id="blog-toc-complexity-analysis-3">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(N), where N is the size of the array. The helper function countAtMost runs in O(N), and it is called twice. So, the overall time complexity is O(2N), which simplifies to O(N).</p><p><strong>Space Complexity:</strong> O(N), because the frequency map may store distinct values from the current window.</p><p></p><h3 id="blog-toc-faqs">FAQs</h3><p>Q1. <strong>Why is this problem converted into atMost(k) - atMost(k - 1)?</strong></p><p>Subarrays with at most k distinct integers include subarrays with 1 to k distinct integers. After removing subarrays with at most k - 1 distinct integers, only subarrays with exactly k distinct integers remain.</p><p>Q2. <strong>Why is a frequency map used?</strong></p><p>A frequency map is used because the same integer can appear multiple times in the current window. It helps remove an integer from the distinct count only when its frequency becomes 0.</p><p>Q3. <strong>Why is right - left + 1 added in the optimal approach?</strong></p><p>Once the window from left to right has at most limit distinct integers, every subarray ending at right and starting from any index between left and right is also valid.</p><p>Q4. <strong>Why can the better approach stop when distinct count becomes greater than k?</strong></p><p>For a fixed starting index, extending the subarray can only keep or increase the number of distinct integers. So once it becomes greater than k, that start index cannot produce more valid subarrays.</p><p>Q5. <strong>What happens if k is 0?</strong></p><p>No non-empty subarray can contain exactly 0 distinct integers, so the answer is 0.</p><p>Q6. <strong>Is there another optimal sliding window method?</strong></p><p>Yes. A two-window method can also be used to count exactly k distinct integers directly, but the atMost(k) - atMost(k - 1) method is simpler, cleaner, and widely used.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div>
 </article>
-<script src="../article.js?v=1791731531"></script>
+<script src="../article.js?v=1792253299"></script>
 </body></html>

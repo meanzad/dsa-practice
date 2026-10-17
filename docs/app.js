@@ -286,7 +286,8 @@
 
   async function openSync() {
     if (A2ZSync.configured()) {
-      if (confirm('Sync is on for this browser.\n\nOK = sync now,  Cancel = disconnect.')) {
+      if (confirm('Sync is on for this browser.\n\nGist ID: ' + (A2ZSync.gistId() || '—')
+          + '\n\nOK = sync now,  Cancel = disconnect.')) {
         await syncNow();
       } else {
         A2ZSync.disconnect();
@@ -295,17 +296,38 @@
       return;
     }
     const t = prompt(
-      'Paste a GitHub fine-grained token with Gist access.\n\n'
+      'Paste a GitHub fine-grained token with Gist access (write).\n\n'
       + 'It is stored only in this browser and sent only to api.github.com.\n'
       + 'Never commit it to the repo.');
     if (!t) return;
     syncStatus('connecting…', 'busy');
+    A2ZSync.setToken(t);
     try {
-      const res = await A2ZSync.connect(t);
+      let id = null, made = false;
+      try {
+        id = await A2ZSync.findGist();
+      } catch (e) {
+        // Lookup failed (often a token without gist read). Do NOT fall through
+        // to creating one - that is how a second machine ends up on its own
+        // gist with progress silently split in two.
+        const manual = prompt(
+          'Could not list your gists (' + e.message + ').\n\n'
+          + 'If you already set up sync on another machine, paste that gist ID '
+          + '(Sync shows it there). Leave blank to cancel.');
+        if (!manual) throw e;
+        id = await A2ZSync.useGist(manual);
+      }
+      if (!id) {
+        const manual = prompt(
+          'No existing progress gist found on this account.\n\n'
+          + 'If you already set one up on another machine, paste its gist ID.\n'
+          + 'Leave blank to create a NEW one (do this on your first machine only).');
+        if (manual) id = await A2ZSync.useGist(manual);
+        else { id = await A2ZSync.createGist(); made = true; }
+      }
       await syncNow();
-      alert(res.created
-        ? 'Connected. Created a new private gist for your progress.'
-        : 'Connected to your existing progress gist.');
+      alert((made ? 'Created a new private gist.\n\n' : 'Connected to your gist.\n\n')
+        + 'Gist ID: ' + id + '\n\nUse this same ID on your other machine.');
     } catch (e) {
       A2ZSync.disconnect();
       syncStatus('off', '');

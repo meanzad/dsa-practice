@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Fruit Into Baskets: Longest Subarray with Two Fruit Types</title>
-<link rel="stylesheet" href="../style.css?v=1791731531">
+<link rel="stylesheet" href="../style.css?v=1792253299">
 </head><body>
 <header><div class="wrap hd">
   <a class="btn" href="../index.html">&larr; Back to sheet</a>
@@ -570,5 +570,5 @@ const solution = new Solution();
 
 console.log(solution.totalFruit(fruits));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-9"><h3 id="blog-toc-complexity-analysis-3">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(N), where N represents the array size. The right pointer processes every fruit once, while the left pointer moves only forward.</p><p><strong>Space Complexity:</strong> O(N) in the worst case for the single-<code>if</code> variant. Temporary invalid windows may retain more than two fruit types inside the frequency map. A standard <code>while</code>-based shrink keeps the map bounded by the basket limit and uses O(1) auxiliary space for two baskets.</p><h3 id="blog-toc-faqs">FAQS</h3><p><strong>Q1. How does the solution change when K baskets are available?</strong></p><p>Replace the limit of two distinct fruit types with K. Every valid window must contain at most K distinct types.</p><p><strong>Q2. Why does the Brute Force Approach require O(N³) time?</strong></p><p>O(N²) continuous sections exist, and a separate scan may require O(N) time for validating one selected section.</p><p><strong>Q3. Why can Better Approach expansion stop after a third type appears?</strong></p><p>Every longer section from the same start retains all three existing fruit types, so no later extension can become valid.</p><p><strong>Q4. Why is a frequency map required in the Optimal Approach?</strong></p><p>Fruit frequencies determine whether a fruit type still remains after left-boundary removal. A zero frequency allows complete removal of the corresponding map entry.</p><p><strong>Q5. Why is a single </strong><code>if</code><strong> condition safe for the answer?</strong></p><p>An invalid iteration adds one fruit and removes one fruit, so invalid window length cannot increase. maxFruits receives updates only from valid windows.</p><p><strong>Q6. What result is produced for an empty fruits array?</strong></p><p>No tree exists, so the maximum collectable fruit count equals 0.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div>
 </article>
-<script src="../article.js?v=1791731531"></script>
+<script src="../article.js?v=1792253299"></script>
 </body></html>

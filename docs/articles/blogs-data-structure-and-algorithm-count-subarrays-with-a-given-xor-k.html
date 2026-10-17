@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Count Subarrays with a Given XOR K</title>
-<link rel="stylesheet" href="../style.css?v=1791731531">
+<link rel="stylesheet" href="../style.css?v=1792253299">
 </head><body>
 <header><div class="wrap hd">
   <a class="btn" href="../index.html">&larr; Back to sheet</a>
@@ -504,5 +504,5 @@ const k = 6;
 const solution = new Solution();
 console.log(solution.countSubarraysWithXor(nums, k));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-9"><h3 id="blog-toc-complexity-analysis-3">Complexity Analysis</h3><p><strong>Time Complexity:</strong> <code>O(N)</code> on average, where <code>N</code> represents the array size. Every element requires one hash-map lookup and one frequency update.</p><p><strong>Space Complexity:</strong> <code>O(N)</code>, because the hash map may store up to <code>N + 1</code> distinct prefix XOR values.</p><h3 id="blog-toc-faqs">FAQs</h3><p><strong>Q1. Why does </strong><code>prefixXor XOR neededXor</code><strong> produce the XOR of a subarray?</strong></p><p>Values appearing in both prefix XORs cancel because <code>x XOR x = 0</code>. Only the elements between the two prefix positions remain.</p><p><strong>Q2. Why is </strong><code>neededXor</code><strong> calculated as </strong><code>prefixXor XOR k</code><strong>?</strong></p><p>The required earlier prefix must satisfy <code>prefixXor XOR earlierPrefix = k</code>. Rearranging the XOR relation gives <code>earlierPrefix = prefixXor XOR k</code>.</p><p><strong>Q3. Why is </strong><code>prefixCount</code><strong> initialized with </strong><code>{0: 1}</code><strong>?</strong></p><p>The initial zero represents the empty prefix before index <code>0</code>. It allows a subarray starting at index <code>0</code> to be counted when its XOR directly equals <code>k</code>.</p><p><strong>Q4. Why are prefix XOR frequencies stored instead of only their presence?</strong></p><p>The same prefix XOR may occur at multiple earlier positions. Every occurrence creates a different valid subarray ending at the current index.</p><p><strong>Q5. Why is the current prefix XOR stored after checking </strong><code>neededXor</code><strong>?</strong></p><p>Only earlier prefixes should form subarrays ending at the current position. Updating afterward preserves that order.</p><p><strong>Q6. Can a sliding-window approach solve this problem?</strong></p><p>No general sliding-window rule exists because XOR does not increase or decrease predictably when elements enter or leave the window.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div>
 </article>
-<script src="../article.js?v=1791731531"></script>
+<script src="../article.js?v=1792253299"></script>
 </body></html>

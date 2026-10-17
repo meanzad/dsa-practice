@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Longest Repeating Character Replacement</title>
-<link rel="stylesheet" href="../style.css?v=1791731531">
+<link rel="stylesheet" href="../style.css?v=1792253299">
 </head><body>
 <header><div class="wrap hd">
   <a class="btn" href="../index.html">&larr; Back to sheet</a>
@@ -855,5 +855,5 @@ const solution = new Solution();
 
 console.log(solution.characterReplacement(s, k));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-9"><h3 id="blog-toc-complexity-analysis-3">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(N), where N is the length of the string. Each character is processed once by the right pointer, and the left pointer only moves forward.</p><p><strong>Space Complexity:</strong> O(1), because the frequency array stores counts for only 26 uppercase English letters.</p><h3 id="blog-toc-faqs">FAQs</h3><p><strong>Q1. Why do we use maximum frequency in this problem?</strong></p><p>The character with the maximum frequency is the best character to keep unchanged. To make the whole substring contain one repeating character, all other characters need to be replaced.</p><p><strong>Q2. Why is replacementsNeeded equal to window length - maximum frequency?</strong></p><p>The most frequent character is kept as it is. Every other character in the window must be changed to that character. So, the number of replacements needed is total characters minus the count of the most frequent character.</p><p><strong>Q3. Why can we stop expanding in the better approach when replacementsNeeded becomes greater than k?</strong></p><p>For the same starting index, adding more characters cannot reduce replacementsNeeded. It can either stay the same or increase. So, once the substring becomes invalid, further expansion is not useful.</p><p><strong>Q4. Why do we not recompute maxFrequency while shrinking?</strong></p><p>Recomputing maxFrequency after every shrink is unnecessary. Even if maxFrequency is slightly old, it does not make us miss the best answer. It helps us maintain the largest possible window size in O(N) time.</p><p><strong>Q5. What happens if k is 0?</strong></p><p>No replacement is allowed. So, the answer becomes the length of the longest substring that already contains the same repeating character.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div>
 </article>
-<script src="../article.js?v=1791731531"></script>
+<script src="../article.js?v=1792253299"></script>
 </body></html>

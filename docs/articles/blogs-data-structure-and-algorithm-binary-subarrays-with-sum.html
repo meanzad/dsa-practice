@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Binary Subarrays with a Given Sum: Count All Matches</title>
-<link rel="stylesheet" href="../style.css?v=1791731531">
+<link rel="stylesheet" href="../style.css?v=1792253299">
 </head><body>
 <header><div class="wrap hd">
   <a class="btn" href="../index.html">&larr; Back to sheet</a>
@@ -569,5 +569,5 @@ const solution = new Solution();
 
 console.log(solution.numSubarraysWithSum(nums, goal));</code></pre></div></div><div class="ArticleParser-module__R__VNG__article" data-article-segment="html-9"><h3 id="blog-toc-complexity-analysis-3">Complexity Analysis</h3><p><strong>Time Complexity:</strong> O(N), where N is the size of the array. The helper function countAtMost runs in O(N), and it is called twice. So, the overall time complexity is O(2N), which simplifies to O(N).</p><p><strong>Space Complexity:</strong> O(1), because only a few variables are used and no extra data structure is required.</p><h3 id="blog-toc-faqs">FAQs</h3><p><strong>Q1. Why do we use countAtMost(goal) - countAtMost(goal - 1)?</strong></p><p>countAtMost(goal) includes subarrays with sum 0, 1, 2, ..., goal. countAtMost(goal - 1) removes all subarrays with sum less than goal. The remaining subarrays have sum exactly equal to goal.</p><p><strong>Q2. Why do we add right - left + 1 in countAtMost?</strong></p><p>After the window becomes valid, every subarray ending at right and starting from any index between left and right has sum at most limit. There are right - left + 1 such subarrays.</p><p><strong>Q3. Why does countAtMost return 0 when limit is negative?</strong></p><p>A binary subarray cannot have a negative sum. So, when limit is negative, no valid subarray exists.</p><p><strong>Q4. Does this approach handle goal equal to 0?</strong></p><p>Yes. The answer becomes countAtMost(0) - countAtMost(-1). Since countAtMost(-1) returns 0, only subarrays with sum exactly 0 are counted.</p></div><div><div class="HorizontalGAd-module__ae2lDG__root" data-g-ad="horizontal"><ins class="adsbygoogle HorizontalGAd-module__ae2lDG__unit" data-ad-client="ca-pub-3309814370188972" data-ad-slot="4666303589" style="display:block;width:100%;max-width:970px;height:90px"></ins></div></div>
 </article>
-<script src="../article.js?v=1791731531"></script>
+<script src="../article.js?v=1792253299"></script>
 </body></html>
